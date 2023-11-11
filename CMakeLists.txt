@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(TextAdventure LANGUAGES CXX)
+project(UrzasQuest LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(TEXTADVENTURE_SOURCES
+set(URZAS_QUEST_SOURCES
     main.cpp
 
     console.h console.cpp
@@ -100,24 +100,24 @@ set(TEXTADVENTURE_SOURCES
 
 )
 
-add_executable(TextAdventure ${TEXTADVENTURE_SOURCES})
+add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
 
 
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR})
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/companion)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/items)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/items/equipment)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/enemies)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/rooms)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/rooms/town)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/tasks)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/encounters)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/dungeons)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/dungeons/rooms)
-target_include_directories(TextAdventure PRIVATE ${CMAKE_SOURCE_DIR}/modules)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/companion)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items/equipment)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/enemies)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/rooms)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/rooms/town)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/tasks)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/encounters)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/dungeons)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/dungeons/rooms)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/modules)
 
 include(GNUInstallDirs)
-install(TARGETS TextAdventure
+install(TARGETS UrzasQuest
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
