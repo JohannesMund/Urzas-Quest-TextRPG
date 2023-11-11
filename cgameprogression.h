@@ -21,8 +21,9 @@ public:
     EGameStage currentGameStage() const;
 
     void progress();
-
     void reportModuleFinished(const std::string_view& moduleName);
+
+    void increaseBodyCount();
 
 private:
     bool isModuleFinished(const std::string_view& moduleName);
@@ -35,4 +36,5 @@ private:
 
     std::vector<std::string> _finishedModules;
     EGameStage _currentStage;
+    unsigned int _bodyCount = 0;
 };

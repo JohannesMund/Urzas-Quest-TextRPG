@@ -62,6 +62,11 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
+void CGameProgression::increaseBodyCount()
+{
+    _bodyCount++;
+}
+
 bool CGameProgression::isModuleFinished(const std::string_view& moduleName)
 {
     return std::find(_finishedModules.begin(), _finishedModules.end(), moduleName) != _finishedModules.end();
@@ -72,21 +77,18 @@ bool CGameProgression::canProgress()
     switch (_currentStage)
     {
     case EGameStage::eStart:
-        if (!isModuleFinished(BardRessources::moduleName()))
+        if (isModuleFinished(BardRessources::moduleName()) && _bodyCount > 10)
         {
-            return false;
+            return true;
         }
-        return true;
+        return false;
+
     case EGameStage::eProvenAsHero:
-        if (!isModuleFinished(CaveRessources::moduleName()))
+        if (isModuleFinished(CaveRessources::moduleName()) && isModuleFinished(RatFarmRessources::moduleName()))
         {
-            return false;
+            return true;
         }
-        if (!isModuleFinished(RatFarmRessources::moduleName()))
-        {
-            return false;
-        }
-        return true;
+        return false;
     case EGameStage::eLearnedAboutCult:
     default:
         return false;
