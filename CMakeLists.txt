@@ -15,6 +15,7 @@ set(URZAS_QUEST_SOURCES
     randomizer.h randomizer.cpp
 
     cgamemanagement.h cgamemanagement.cpp
+    cgameprogression.h cgameprogression.cpp
     cplayer.h cplayer.cpp
     cmap.h cmap.cpp
     cbattle.h cbattle.cpp
@@ -65,7 +66,7 @@ set(URZAS_QUEST_SOURCES
     items/cheartcontainer.h items/cheartcontainer.cpp    
     items/cbomb.h items/cbomb.cpp
 
-    encounters/encounterregister.h
+
     encounters/cencounter.h encounters/cencounter.cpp
     encounters/cbattleencounter.h encounters/cbattleencounter.cpp
     encounters/cdeadhero.h encounters/cdeadhero.cpp

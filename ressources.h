@@ -43,6 +43,10 @@ std::string getRandomRumor();
 
 namespace Items
 {
+
+std::string sock();
+std::string otherSock();
+
 std::pair<std::string, std::string> getRandomJunkItems();
 
 } // namespace Items

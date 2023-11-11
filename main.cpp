@@ -12,7 +12,7 @@ int main()
     Console::cls(false);
 
     Console::hr();
-    Console::printLn("D E A T H   B Y   S N U   S N U", Console::EAlignment::eCenter);
+    Console::printLn("T H E   Q U E S T   O F   U R Z A", Console::EAlignment::eCenter);
     Console::printLn("~or~", Console::EAlignment::eCenter);
     Console::printLn(Ressources::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
     Console::hr();

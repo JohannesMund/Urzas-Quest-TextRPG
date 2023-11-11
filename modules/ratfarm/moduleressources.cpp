@@ -1,6 +1,7 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "colorconsole.h"
+#include "cratfarmencounter.h"
 #include "cratfarmturnip.h"
 #include "randomizer.h"
 
@@ -39,4 +40,14 @@ void RatFarmRessources::TurnipFactory::addTurnips(unsigned int cnt)
 std::string RatFarmRessources::moduleName()
 {
     return "RatFarm";
+}
+
+void RatFarmRessources::initModule()
+{
+    CGameManagement::getInstance()->registerEncounter(new CRatFarmEncounter());
+}
+
+void RatFarmRessources::deInitModule()
+{
+    CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
 }

@@ -6,8 +6,8 @@
 #include "console.h"
 #include "cratfarmrat.h"
 #include "cratfarmratboss.h"
-#include "randomizer.h"
 #include "moduleressources.h"
+#include "randomizer.h"
 
 #include <format>
 
@@ -17,7 +17,6 @@ CRatFarmTask::CRatFarmTask()
 
 void CRatFarmTask::execute()
 {
-
     Console::printLn(
         std::format("Here you are, the {0} farm, with the {0} house of lady {0}. you are a little hungry, maybe ome "
                     "{0}s would help now, but all of a sudden, you realize, that {0}s are not a thing for lady {0}.",
@@ -26,6 +25,7 @@ void CRatFarmTask::execute()
         "But this is not what matters now, the {} farm is rat-infected, and you have the job to solve this.",
         RatFarmRessources::getTurnip()));
     Console::printLn("Ready for the battle?");
+
     if (CMenu::yes(CMenu::executeYesNoMenu()))
     {
         battle();
@@ -68,8 +68,14 @@ void CRatFarmTask::battle()
     Console::printLn(std::format("You are pondering what is worse, the rats, or the {0}s. You decide, not to think "
                                  "about this any more, and get away, as long you are able to carry all those {0}s",
                                  RatFarmRessources::getTurnip()));
+    Console::printLn(std::format("\"My {} bless you!\", is the last thing you hear from lady {}.",
+                                 RatFarmRessources::getCarrot(),
+                                 Ressources::urza()));
+    Console::printLn(std::format("Again, this {} dude. {}??? well you will have to find out.",
+                                 Ressources::urza(),
+                                 Ressources::whoTheFuckIsUrza()));
 
     RatFarmRessources::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 7);
-
+    CGameManagement::getInstance()->reportModuleFinished(RatFarmRessources::moduleName());
     _isFinished = true;
 }

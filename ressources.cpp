@@ -2,6 +2,8 @@
 #include "colorconsole.h"
 #include "randomizer.h"
 
+#include "bard/moduleressources.h"
+
 #include <algorithm>
 #include <format>
 #include <map>
@@ -9,8 +11,8 @@
 std::string Ressources::Rooms::getRandomDescription()
 {
     std::vector<std::string> _roomDescriptions = {
-        "A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you "
-        "like sheep? I like sheep. There is one.",
+        "A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you like "
+        "sheep? I like sheep. There is one.",
 
         "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a "
         "forest "
@@ -29,16 +31,10 @@ std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
          {"A stick, just a stick. Maybe magical? There is no label stating \"Godly Magic Stick of the "
           "Whale\". On the "
           "other hand, there no label stating, that this stick is not a \"Godly Magic Stick of the Whale\"."}},
-        {{std::format("{}S{}o{}c{}k{}", CC::fgRed(), CC::fgYellow(), CC::fgRed(), CC::fgYellow(), CC::ccReset())},
+        {{sock()},
          {"A single sock. A single dirty sock. Useless without the other one. Who on earth throws away a "
           "single Sock??"}},
-        {{std::format("{}The other {}S{}o{}c{}k{}",
-                      CC::fgRed(),
-                      CC::fgYellow(),
-                      CC::fgRed(),
-                      CC::fgYellow(),
-                      CC::fgRed(),
-                      CC::ccReset())},
+        {{otherSock()},
          {"There it is, the other sock. A single dirty sock. Now you have both but who on earth throws away two single "
           "Socks seperately??"}},
         {{std::format("{}Rock{}", CC::fgCyan(), CC::ccReset())},
@@ -201,4 +197,19 @@ std::string Ressources::urza()
 std::string Ressources::urzaWhoTheFuckIsUrza()
 {
     return std::format("{}{}", urza(), whoTheFuckIsUrza());
+}
+
+std::string Ressources::Items::sock()
+{
+    return std::format("{}S{}o{}c{}k{}", CC::fgRed(), CC::fgYellow(), CC::fgRed(), CC::fgYellow(), CC::ccReset());
+}
+std::string Ressources::Items::otherSock()
+{
+    return std::format("{}The other {}S{}o{}c{}k{}",
+                       CC::fgRed(),
+                       CC::fgYellow(),
+                       CC::fgRed(),
+                       CC::fgYellow(),
+                       CC::fgRed(),
+                       CC::ccReset());
 }

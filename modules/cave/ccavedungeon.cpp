@@ -1,6 +1,8 @@
 #include "ccavedungeon.h"
+#include "ccavebattleencounter.h"
 #include "ccavebosstask.h"
 #include "ccavedungeonmap.h"
+#include "cgamemanagement.h"
 #include "console.h"
 
 CCaveDungeon::CCaveDungeon() : CDungeon()
@@ -9,8 +11,10 @@ CCaveDungeon::CCaveDungeon() : CDungeon()
 
 void CCaveDungeon::execute()
 {
-
+    CCaveBattleEncounter* encounter = new CCaveBattleEncounter();
+    CGameManagement::getInstance()->registerEncounter(encounter);
     dungeonLoop();
+    CGameManagement::getInstance()->unregisterEncounterByModuleName(encounter->moduleName());
 }
 
 void CCaveDungeon::loopHook()

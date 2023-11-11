@@ -39,3 +39,8 @@ std::string CCaveBattleEncounter::name() const
 {
     return "Battle";
 }
+
+std::string CCaveBattleEncounter::moduleName() const
+{
+    return CaveRessources::moduleName();
+}

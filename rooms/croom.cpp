@@ -6,8 +6,6 @@
 #include "ctask.h"
 #include "ressources.h"
 
-using namespace std;
-
 CRoom::CRoom()
 {
     _description = Ressources::Rooms::getRandomDescription();

@@ -13,9 +13,14 @@ void CEncounter::execute(const std::string_view&)
     Console::br();
 }
 
-std::function<bool(const CEncounter*)> CEncounter::nameFilter(const std::string& name)
+std::string CEncounter::moduleName() const
 {
-    return [&name](const CEncounter* encounter) { return encounter->name().compare(name) == 0; };
+    return {};
+}
+
+std::function<bool(const CEncounter*)> CEncounter::moduleNameFilter(const std::string_view& name)
+{
+    return [&name](const CEncounter* encounter) { return encounter->moduleName().compare(name) == 0; };
 }
 
 bool CEncounter::canBeExecuted(const EEncounterType& type) const

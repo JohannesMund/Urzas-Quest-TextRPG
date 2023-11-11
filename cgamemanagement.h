@@ -2,6 +2,7 @@
 
 #include "ccompanion.h"
 #include "cencounter.h"
+#include "cgameprogression.h"
 #include "cinventory.h"
 #include "cmap.h"
 #include "cplayer.h"
@@ -21,7 +22,8 @@ public:
 
     void executeRandomEncounter(const CEncounter::EEncounterType type, const std::string& moduleName = {}) const;
     void registerEncounter(CEncounter* encounter);
-    void unregisterEncounterByName(const std::string& name);
+    void unregisterEncounterByModuleName(const std::string_view& name);
+    void reportModuleFinished(const std::string_view& moduleName);
 
     CRoom* currentRoom() const;
 
@@ -33,6 +35,8 @@ private:
     CMap _map;
     CPlayer _player;
     CInventory _inventory;
+    CGameProgression _progression;
+
     CCompanion* _companion;
 
     std::vector<CEncounter*> _encounters;

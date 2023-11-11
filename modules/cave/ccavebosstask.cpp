@@ -1,6 +1,7 @@
 #include "ccavebosstask.h"
 #include "cbattle.h"
 #include "ccaveboss.h"
+#include "cgamemanagement.h"
 #include "console.h"
 #include "moduleressources.h"
 
@@ -29,5 +30,6 @@ void CCaveBossTask::execute()
 
         *_bossDefeated = true;
         _isFinished = true;
+        CGameManagement::getInstance()->reportModuleFinished(CaveRessources::moduleName());
     }
 }

@@ -6,6 +6,9 @@
 namespace CaveRessources
 {
 
+void initModule();
+void deInitModule();
+
 std::string moduleName();
 
 static const unsigned int fightChance = 15;

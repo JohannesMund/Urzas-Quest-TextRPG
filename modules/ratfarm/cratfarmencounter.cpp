@@ -56,3 +56,8 @@ std::string CRatFarmEncounter::name() const
 {
     return std::format("Lady {}", RatFarmRessources::getCarrot());
 }
+
+std::string CRatFarmEncounter::moduleName() const
+{
+    return RatFarmRessources::moduleName();
+}

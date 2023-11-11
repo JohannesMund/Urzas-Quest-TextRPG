@@ -56,11 +56,18 @@ public:
     virtual std::string name() const = 0;
 
     /**
+     * @brief moduleName
+     * name of the module, the encounter belongs to (if any)
+     * @return the name of the module
+     */
+    virtual std::string moduleName() const;
+
+    /**
      * @brief nameFilter
      * @param name
      * @return a name filter function to be used in std containers
      */
-    static std::function<bool(const CEncounter*)> nameFilter(const std::string& name);
+    static std::function<bool(const CEncounter*)> moduleNameFilter(const std::string_view& name);
 
 protected:
     /**
