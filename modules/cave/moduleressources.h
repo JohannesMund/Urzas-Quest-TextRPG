@@ -25,7 +25,7 @@ std::string getWellEffect(const int i);
 
 std::string getMapRoomDescription();
 
-std::string getColoredBosString();
+std::string getColoredBossString();
 std::string getBossWeapon();
 
 } // namespace CaveRessources

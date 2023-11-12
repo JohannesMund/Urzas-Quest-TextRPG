@@ -109,7 +109,7 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     Console::printLn(std::format("As you apporach the {}, you see, something is different this time. The old man "
                                  "stands at the gate and looks at you.",
                                  ancientShrine()));
-    Console::printLn("As you come closer, he asks, if you have any questions");
+    Console::printLn("As you come closer, he asks, if you have any questions.");
     Console::printLn("What should you ask him?");
     Console::br();
 
@@ -146,12 +146,12 @@ void CShrineOfTheAncients::stats() const
     int i = 0;
     while (i < progress)
     {
-        progressString.append("=");
+        progressString.append("#");
         i += 2;
     }
     while (i < 100)
     {
-        progressString.append("-");
+        progressString.append(".");
         i += 2;
     }
 

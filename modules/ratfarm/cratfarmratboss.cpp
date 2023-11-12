@@ -3,18 +3,14 @@
 #include "colorconsole.h"
 #include "console.h"
 #include "cratfarmturnip.h"
-#include "randomizer.h"
 #include "moduleressources.h"
+#include "randomizer.h"
 
 #include <format>
 
 CRatFarmRatBoss::CRatFarmRatBoss()
 {
-    _name = std::format("{0}Go{1}d-M{2}ot{1}he{2}r o{0}f a{1}ll {0}Ra{2}ts{3}",
-                        CC::fgYellow(),
-                        CC::fgLightRed(),
-                        CC::fgLightYellow(),
-                        CC::ccReset());
+    _name = RatFarmRessources::getColoredBossString();
 
     _weapon = std::format("{}Still teeth, but yellow{}", CC::fgYellow(), CC::ccReset());
     _extendedWeaponChoice = true;
