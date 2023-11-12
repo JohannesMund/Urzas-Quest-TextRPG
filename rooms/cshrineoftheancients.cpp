@@ -1,4 +1,5 @@
 #include "cshrineoftheancients.h"
+#include "cequipment.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorconsole.h"
@@ -8,6 +9,8 @@
 #include <format>
 CShrineOfTheAncients::CShrineOfTheAncients()
 {
+    _description = "";
+
     _encounterPossible = false;
     _taskPossible = false;
 
@@ -16,13 +19,14 @@ CShrineOfTheAncients::CShrineOfTheAncients()
 
 void CShrineOfTheAncients::execute()
 {
+    CField::execute();
+
     if (_seenDuringPhase != CGameManagement::getProgressionInstance()->currentGameStage())
     {
         firstVisit();
         return;
     }
     visit();
-    CField::execute();
 }
 
 std::string CShrineOfTheAncients::mapSymbol() const
@@ -49,13 +53,22 @@ void CShrineOfTheAncients::visit()
         break;
     }
     Console::br();
+
+    CMenu menu;
+
+    menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exitAction()});
+
+    if (CMenu::exit(menu.execute()))
+    {
+        return;
+    }
+    stats();
 }
 
 void CShrineOfTheAncients::firstVisit()
 {
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
-
     case CGameProgression::EGameStage::eNone:
     case CGameProgression::EGameStage::eStart:
         firstVisitStart();
@@ -98,6 +111,7 @@ void CShrineOfTheAncients::firstVisitSeenBard()
                                  ancientShrine()));
     Console::printLn("As you come closer, he asks, if you have any questions");
     Console::printLn("What should you ask him?");
+    Console::br();
 
     CMenu menu;
     CMenu::Action askAboutUrza = menu.createAction(Ressources::whoTheFuckIsUrza(), 'w');
@@ -106,7 +120,7 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     {
         Console::printLn("\"No, not this time\", you think to yourself, and leave.");
     }
-
+    Console::br();
     Console::printLn(std::format("You ask the question, that is lurkin around your head for so long now: {}?",
                                  Ressources::whoTheFuckIsUrza()));
     Console::printLn(
@@ -118,6 +132,41 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     Console::printLn("But your wanted to become a hero anyway, so you will have to come back later.");
     CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
+}
+
+void CShrineOfTheAncients::stats() const
+{
+    Console::cls();
+    Console::printLn("You take some time to think about yourself:");
+    Console::br();
+
+    auto progress = CGameManagement::getProgressionInstance()->getProgress();
+    std::string progressString = "|";
+
+    int i = 0;
+    while (i < progress)
+    {
+        progressString.append("=");
+        i += 2;
+    }
+    while (i < 100)
+    {
+        progressString.append("-");
+        i += 2;
+    }
+
+    progressString.append("|");
+
+    Console::printLnWithSpacer("Progress:", progressString);
+    Console::printLnWithSpacer("BodyCount:",
+                               std::format("{}", CGameManagement::getProgressionInstance()->getBodyCount()));
+    Console::br();
+    auto equipment = CGameManagement::getInventoryInstance()->getEquipment();
+    for (auto e : equipment)
+    {
+        Console::printLnWithSpacer(e->typeName(), std::format("{} Level {}", e->name(), e->level()));
+    }
+    Console::confirmToContinue();
 }
 
 std::string CShrineOfTheAncients::ancientShrine() const

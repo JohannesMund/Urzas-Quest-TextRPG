@@ -10,13 +10,22 @@
 #include "console.h"
 
 #include <algorithm>
+#include <cmath>
 #include <format>
+#include <ranges>
+#include <utility>
 
 void CGameProgression::initEncounters()
 {
     CGameManagement::getInstance()->registerEncounter(new CMysteriousChest());
     CGameManagement::getInstance()->registerEncounter(new CDeadHero());
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
+
+    registerModule(BardRessources::moduleName(), EGameStage::eStart);
+
+    registerModule(RatFarmRessources::moduleName(), EGameStage::eSeenBard);
+    registerModule(CaveRessources::moduleName(), EGameStage::eSeenBard);
+    registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eSeenBard);
 
     BardRessources::initModule();
 
@@ -42,17 +51,13 @@ void CGameProgression::progress()
     switch (_currentStage)
     {
     case EGameStage::eStart:
-        BardRessources::deInitModule();
         progressToStage(EGameStage::eSeenBard);
-        RatFarmRessources::initModule();
-        CaveRessources::initModule();
         return;
     case EGameStage::eSeenBard:
-        RatFarmRessources::deInitModule();
-        CaveRessources::deInitModule();
         progressToStage(EGameStage::eProvenAsHero);
         return;
     case EGameStage::eProvenAsHero:
+        progressToStage(EGameStage::eLearnedAboutCult);
     case EGameStage::eLearnedAboutCult:
     default:
         return;
@@ -74,6 +79,16 @@ void CGameProgression::increaseBodyCount()
     _bodyCount++;
 }
 
+unsigned int CGameProgression::getProgress() const
+{
+    return std::ceil((_finishedModules.size() * 100) / _modulesForStage.size());
+}
+
+unsigned int CGameProgression::getBodyCount() const
+{
+    return _bodyCount;
+}
+
 bool CGameProgression::isModuleFinished(const std::string_view& moduleName)
 {
     return std::find(_finishedModules.begin(), _finishedModules.end(), moduleName) != _finishedModules.end();
@@ -88,35 +103,75 @@ void CGameProgression::unFinishModule(const std::string_view& moduleName)
     }
 }
 
+void CGameProgression::initModuleByName(const std::string_view& moduleName)
+{
+    auto is = [&moduleName](const std::string_view& s) { return moduleName.compare(s) == 0; };
+
+    if (is(BardRessources::moduleName()))
+    {
+        BardRessources::initModule();
+        return;
+    }
+    if (is(CaveRessources::moduleName()))
+    {
+        CaveRessources::initModule();
+        return;
+    }
+    if (is(RatFarmRessources::moduleName()))
+    {
+        RatFarmRessources::initModule();
+        return;
+    }
+}
+
+void CGameProgression::deInitModuleByName(const std::string_view& moduleName)
+{
+    auto is = [&moduleName](const std::string_view& s) { return moduleName.compare(s) == 0; };
+
+    if (is(BardRessources::moduleName()))
+    {
+        BardRessources::deInitModule();
+        return;
+    }
+    if (is(CaveRessources::moduleName()))
+    {
+        CaveRessources::deInitModule();
+        return;
+    }
+    if (is(RatFarmRessources::moduleName()))
+    {
+        RatFarmRessources::deInitModule();
+        return;
+    }
+}
+
 bool CGameProgression::canProgress()
 {
-    switch (_currentStage)
-    {
-    case EGameStage::eStart:
-        if (isModuleFinished(BardRessources::moduleName()) &&
-            isModuleFinished(Ressources::Game::ShrineRessources::moduleName()) && _bodyCount > 10)
-        {
-            return true;
-        }
-        return false;
 
-    case EGameStage::eProvenAsHero:
-        if (isModuleFinished(CaveRessources::moduleName()) && isModuleFinished(RatFarmRessources::moduleName()) &&
-            isModuleFinished(Ressources::Game::ShrineRessources::moduleName()))
+    for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
+    {
+        if (!isModuleFinished(module.first))
         {
-            return true;
+            return false;
         }
-        return false;
-    case EGameStage::eLearnedAboutCult:
-    default:
-        return false;
     }
+    return true;
 }
 
 void CGameProgression::progressToStage(EGameStage stage)
 {
+    for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
+    {
+        deInitModuleByName(module.first);
+    }
+
     _currentStage = stage;
-    unFinishModule(Ressources::Game::ShrineRessources::moduleName());
+    reRegisterModule(Ressources::Game::ShrineRessources::moduleName(), _currentStage);
+
+    for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
+    {
+        initModuleByName(module.first);
+    }
 
     Console::cls();
 
@@ -144,4 +199,35 @@ void CGameProgression::progressToStage(EGameStage stage)
         break;
     }
     Console::confirmToContinue();
+}
+
+void CGameProgression::reRegisterModule(const std::string_view& name, const EGameStage neededForStage)
+{
+    unFinishModule(name);
+    registerModule(name, neededForStage);
+}
+
+void CGameProgression::registerModule(const std::string_view& name, const EGameStage neededForStage)
+{
+    auto it = std::find_if(_modulesForStage.begin(), _modulesForStage.end(), modPairNameFilter(name));
+    if (it != _modulesForStage.cend())
+    {
+        (*it).second = neededForStage;
+    }
+    else
+    {
+        _modulesForStage.push_back(std::make_pair(std::string(name), neededForStage));
+    }
+}
+
+std::function<bool(const std::pair<std::string, CGameProgression::EGameStage>&)> CGameProgression::modPairNameFilter(
+    const std::string_view& name)
+{
+    return [&name](const auto modPair) { return modPair.first.compare(name) == 0; };
+}
+
+std::function<bool(const std::pair<std::string, CGameProgression::EGameStage>&)> CGameProgression::modPairStageFilter(
+    const EGameStage& stage)
+{
+    return [&stage](auto module) { return module.second == stage; };
 }

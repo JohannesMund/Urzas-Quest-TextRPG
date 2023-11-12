@@ -21,5 +21,7 @@ private:
     void firstVisitStart();
     void firstVisitSeenBard();
 
+    void stats() const;
+
     std::string ancientShrine() const;
 };
