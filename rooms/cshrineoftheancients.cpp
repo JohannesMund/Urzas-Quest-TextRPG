@@ -47,7 +47,7 @@ void CShrineOfTheAncients::visit()
     case CGameProgression::EGameStage::eSeenBard:
         Console::printLn("This time, the old man stands directly next to the entry, and smiles at you. Obviousely, "
                          "your are still no hero.");
-
+        break;
     case CGameProgression::EGameStage::eProvenAsHero:
     case CGameProgression::EGameStage::eLearnedAboutCult:
         break;
@@ -77,6 +77,8 @@ void CShrineOfTheAncients::firstVisit()
         firstVisitSeenBard();
         break;
     case CGameProgression::EGameStage::eProvenAsHero:
+        firstVisitProvenAsHero();
+        break;
     case CGameProgression::EGameStage::eLearnedAboutCult:
         break;
     }
@@ -130,6 +132,31 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     Console::printLn("This was the most underwhelming answer you have ever heard in your live, since you asked the "
                      "beautiful farmers daughter to go for the dance when you was 8 years old.");
     Console::printLn("But your wanted to become a hero anyway, so you will have to come back later.");
+    CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
+    _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
+}
+
+void CShrineOfTheAncients::firstVisitProvenAsHero()
+{
+    Console::printLn(
+        std::format("Back to the {}. This time, the old man seems to await you and smiles at you.", ancientShrine()));
+    Console::printLn("As you come closer, he asks, if you have any questions.");
+    Console::printLn("And you have only one question in you mind?");
+    Console::br();
+
+    CMenu menu;
+    CMenu::Action askAboutUrza = menu.createAction(Ressources::urzaWhoTheFuckIsUrza(), 'w');
+    menu.addMenuGroup({askAboutUrza}, {menu.createAction("Nothing")});
+    if (menu.execute().key != 'w')
+    {
+        Console::printLn("Maybe, proven to be a hero is enough.");
+    }
+    Console::br();
+    Console::printLn(std::format("The old man smiles wisely, and replies: \"{0} was important, and {0} is important!",
+                                 Ressources::urza()));
+    Console::printLn("Find the people, who still believe in Urza!\"");
+    Console::printLn("And again, you are not much smarter than before, but you know what to look for.");
+
     CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
 }
