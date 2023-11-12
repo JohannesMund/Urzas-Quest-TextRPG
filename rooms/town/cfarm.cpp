@@ -34,19 +34,18 @@ void CFarm::execute()
                             CGameManagement::getCompanionInstance()->name(),
                             getTrainingCost()));
 
-            CMenu::Action trainingAction = menu.createAction(std::format("Train ({} Gold)", getTrainingCost()));
-
             if (getTrainingCost() <= CGameManagement::getPlayerInstance()->gold())
             {
                 Console::printLn("This sounds like a bargain!");
+                ;
+                menu.addMenuGroup({menu.createAction(std::format("Train ({} Gold)", getTrainingCost()))},
+                                  {CMenu::exitAction()});
             }
             else
             {
                 Console::printLn("This is too much! a little running around with you should do the same.");
-                trainingAction.key = 0;
+                menu.addMenuGroup({}, {CMenu::exitAction()});
             }
-
-            menu.addMenuGroup({trainingAction}, {CMenu::exitAction()});
         }
         else
         {
