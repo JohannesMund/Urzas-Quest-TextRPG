@@ -49,7 +49,7 @@ unsigned int CRatFarmEncounter::encounterChance(const EEncounterType& tp, const 
     {
         return 0;
     }
-    return 15;
+    return 5;
 }
 
 std::string CRatFarmEncounter::name() const
