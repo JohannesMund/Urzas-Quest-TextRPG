@@ -8,6 +8,7 @@ class CGameProgression
 public:
     enum class EGameStage
     {
+        eNone,
         eStart,
         eSeenBard,
         eProvenAsHero,
@@ -27,6 +28,7 @@ public:
 
 private:
     bool isModuleFinished(const std::string_view& moduleName);
+    void unFinishModule(const std::string_view& moduleName);
 
     bool canProgress();
 
@@ -35,6 +37,6 @@ private:
     void progressToStage(EGameStage stage);
 
     std::vector<std::string> _finishedModules;
-    EGameStage _currentStage;
+    EGameStage _currentStage = EGameStage::eNone;
     unsigned int _bodyCount = 0;
 };

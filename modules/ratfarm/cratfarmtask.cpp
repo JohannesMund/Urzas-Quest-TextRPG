@@ -76,6 +76,6 @@ void CRatFarmTask::battle()
                                  Ressources::whoTheFuckIsUrza()));
 
     RatFarmRessources::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 7);
-    CGameManagement::getInstance()->reportModuleFinished(RatFarmRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(RatFarmRessources::moduleName());
     _isFinished = true;
 }

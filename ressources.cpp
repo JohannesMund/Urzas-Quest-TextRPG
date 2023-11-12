@@ -213,3 +213,8 @@ std::string Ressources::Items::otherSock()
                        CC::fgRed(),
                        CC::ccReset());
 }
+
+std::string Ressources::Game::ShrineRessources::moduleName()
+{
+    return "ShrineOfTheAncients";
+}

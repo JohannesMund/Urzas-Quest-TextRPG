@@ -19,6 +19,8 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
 
     BardRessources::initModule();
+
+    _currentStage = EGameStage::eStart;
 }
 
 CGameProgression::CGameProgression()
@@ -59,6 +61,11 @@ void CGameProgression::progress()
 
 void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
 {
+    if (isModuleFinished(moduleName))
+    {
+        return;
+    }
+
     _finishedModules.push_back(std::string(moduleName));
 }
 
@@ -72,19 +79,30 @@ bool CGameProgression::isModuleFinished(const std::string_view& moduleName)
     return std::find(_finishedModules.begin(), _finishedModules.end(), moduleName) != _finishedModules.end();
 }
 
+void CGameProgression::unFinishModule(const std::string_view& moduleName)
+{
+    auto it = std::find(_finishedModules.begin(), _finishedModules.end(), moduleName);
+    if (it != _finishedModules.end())
+    {
+        _finishedModules.erase(it);
+    }
+}
+
 bool CGameProgression::canProgress()
 {
     switch (_currentStage)
     {
     case EGameStage::eStart:
-        if (isModuleFinished(BardRessources::moduleName()) && _bodyCount > 10)
+        if (isModuleFinished(BardRessources::moduleName()) &&
+            isModuleFinished(Ressources::Game::ShrineRessources::moduleName()) && _bodyCount > 10)
         {
             return true;
         }
         return false;
 
     case EGameStage::eProvenAsHero:
-        if (isModuleFinished(CaveRessources::moduleName()) && isModuleFinished(RatFarmRessources::moduleName()))
+        if (isModuleFinished(CaveRessources::moduleName()) && isModuleFinished(RatFarmRessources::moduleName()) &&
+            isModuleFinished(Ressources::Game::ShrineRessources::moduleName()))
         {
             return true;
         }
@@ -98,6 +116,8 @@ bool CGameProgression::canProgress()
 void CGameProgression::progressToStage(EGameStage stage)
 {
     _currentStage = stage;
+    unFinishModule(Ressources::Game::ShrineRessources::moduleName());
+
     Console::cls();
 
     switch (_currentStage)

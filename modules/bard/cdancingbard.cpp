@@ -57,7 +57,7 @@ void CDancingBard::execute(const std::string_view& moduleName)
                                  CC::ccReset()));
 
     CGameManagement::getPlayerInstance()->addXp(Randomizer::getRandom(5) + 1);
-    CGameManagement::getInstance()->reportModuleFinished(BardRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(BardRessources::moduleName());
 }
 
 unsigned int CDancingBard::encounterChance(const EEncounterType& tp, const std::string_view&) const

@@ -17,13 +17,13 @@ public:
     static CPlayer* getPlayerInstance();
     static CInventory* getInventoryInstance();
     static CCompanion* getCompanionInstance();
+    static CGameProgression* getProgressionInstance();
 
     void placeTask(CTask* task);
 
     void executeRandomEncounter(const CEncounter::EEncounterType type, const std::string& moduleName = {}) const;
     void registerEncounter(CEncounter* encounter);
     void unregisterEncounterByModuleName(const std::string_view& name);
-    void reportModuleFinished(const std::string_view& moduleName);
 
     CRoom* currentRoom() const;
 
@@ -55,6 +55,7 @@ private:
     CPlayer* getPlayer();
     CInventory* getInventory();
     CCompanion* getCompanion();
+    CGameProgression* getProgression();
 
     CGameManagement();
     ~CGameManagement();

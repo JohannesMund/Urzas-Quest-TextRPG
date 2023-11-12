@@ -32,6 +32,7 @@ set(URZAS_QUEST_SOURCES
     rooms/cfield.h rooms/cfield.cpp
     rooms/cstartingroom.h rooms/cstartingroom.cpp
     rooms/cinjuredpet.h rooms/cinjuredpet.cpp
+    rooms/cshrineoftheancients.h rooms/cshrineoftheancients.cpp
 
     rooms/town/ctown.h rooms/town/ctown.cpp
     rooms/town/ctownmodule.h rooms/town/ctownmodule.cpp

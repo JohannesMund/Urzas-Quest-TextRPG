@@ -46,6 +46,11 @@ CCompanion* CGameManagement::getCompanionInstance()
     return getInstance()->getCompanion();
 }
 
+CGameProgression* CGameManagement::getProgressionInstance()
+{
+    return getInstance()->getProgression();
+}
+
 void CGameManagement::placeTask(CTask* task)
 {
     _map.setTaskToRandomRoom(task);
@@ -106,11 +111,6 @@ void CGameManagement::unregisterEncounterByModuleName(const std::string_view& na
     delete *it;
 }
 
-void CGameManagement::reportModuleFinished(const std::string_view& moduleName)
-{
-    _progression.reportModuleFinished(moduleName);
-}
-
 CRoom* CGameManagement::currentRoom() const
 {
     return _map.currentRoom();
@@ -129,6 +129,11 @@ CInventory* CGameManagement::getInventory()
 CCompanion* CGameManagement::getCompanion()
 {
     return _companion;
+}
+
+CGameProgression* CGameManagement::getProgression()
+{
+    return &_progression;
 }
 
 void CGameManagement::printHUD()
