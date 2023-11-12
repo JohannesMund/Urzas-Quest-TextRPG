@@ -61,7 +61,7 @@ void CLakeOfTearsTask::execute()
 
     Console::confirmToContinue();
 
-    if (_steps + Randomizer::getRandom(5) > 0)
+    if (_steps + Randomizer::getRandom(5) > 9)
     {
         CGameManagement::getInstance()->placeTask(new CLakeOfTearsBossTask());
     }
