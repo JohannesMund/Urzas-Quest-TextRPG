@@ -51,6 +51,12 @@ void CRatFarmTask::battle()
         }
     }
 
+    Console::printLn("After defeating the swarm of rats, the boss of the rats appear.");
+    Console::br();
+    Console::printLn(RatFarmRessources::getColoredBossString(), Console::EAlignment::eCenter);
+    Console::br();
+    Console::confirmToContinue();
+
     CRatFarmRatBoss ratBoss;
     CBattle battle(&ratBoss);
     battle.fight();

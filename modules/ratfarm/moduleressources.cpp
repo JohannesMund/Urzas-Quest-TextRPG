@@ -51,3 +51,12 @@ void RatFarmRessources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
 }
+
+std::string RatFarmRessources::getColoredBossString()
+{
+    std::format("{0}Go{1}d-M{2}ot{1}he{2}r o{0}f a{1}ll {0}Ra{2}ts{3}",
+                CC::fgYellow(),
+                CC::fgLightRed(),
+                CC::fgLightYellow(),
+                CC::ccReset());
+}

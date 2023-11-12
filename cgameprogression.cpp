@@ -1,5 +1,6 @@
 #include "bard/moduleressources.h"
 #include "cave/moduleressources.h"
+#include "lakeoftears/moduleressources.h"
 #include "ratfarm/moduleressources.h"
 
 #include "cbattleencounter.h"
@@ -27,9 +28,9 @@ void CGameProgression::initEncounters()
     registerModule(CaveRessources::moduleName(), EGameStage::eSeenBard);
     registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eSeenBard);
 
-    BardRessources::initModule();
+    registerModule(LakeTearsRessources::moduleName(), EGameStage::eProvenAsHero);
 
-    _currentStage = EGameStage::eStart;
+    progressToStage(EGameStage::eStart);
 }
 
 CGameProgression::CGameProgression()
@@ -122,6 +123,11 @@ void CGameProgression::initModuleByName(const std::string_view& moduleName)
         RatFarmRessources::initModule();
         return;
     }
+    if (is(LakeTearsRessources::moduleName()))
+    {
+        LakeTearsRessources::initModule();
+        return;
+    }
 }
 
 void CGameProgression::deInitModuleByName(const std::string_view& moduleName)
@@ -143,11 +149,15 @@ void CGameProgression::deInitModuleByName(const std::string_view& moduleName)
         RatFarmRessources::deInitModule();
         return;
     }
+    if (is(LakeTearsRessources::moduleName()))
+    {
+        LakeTearsRessources::deInitModule();
+        return;
+    }
 }
 
 bool CGameProgression::canProgress()
 {
-
     for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
     {
         if (!isModuleFinished(module.first))
@@ -178,6 +188,7 @@ void CGameProgression::progressToStage(EGameStage stage)
     switch (_currentStage)
     {
     case EGameStage::eStart:
+        return;
     case EGameStage::eSeenBard:
         Console::printLn("Chapter 1", Console::EAlignment::eCenter);
         Console::br();

@@ -13,7 +13,7 @@ void CCaveBossTask::execute()
 {
     Console::printLn("There he is, you encounter the boss of this cave");
     Console::br();
-    Console::printLn(CaveRessources::getColoredBosString(), Console::EAlignment::eCenter);
+    Console::printLn(CaveRessources::getColoredBossString(), Console::EAlignment::eCenter);
     Console::br();
     Console::confirmToContinue();
 

@@ -98,7 +98,7 @@ std::string CaveRessources::getBossWeapon()
     return "The biggest club you have ever seen";
 }
 
-std::string CaveRessources::getColoredBosString()
+std::string CaveRessources::getColoredBossString()
 {
     return std::format("{}The {}Great {}Unclean {}One{}",
                        CC::fgLightGreen(),

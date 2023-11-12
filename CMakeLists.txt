@@ -100,9 +100,15 @@ set(URZAS_QUEST_SOURCES
     modules/bard/moduleressources.h modules/bard/moduleressources.cpp
     modules/bard/cdancingbard.h modules/bard/cdancingbard.cpp
 
+    modules/lakeoftears/moduleressources.h modules/lakeoftears/moduleressources.cpp
+    modules/lakeoftears/clakeoftearstask.h modules/lakeoftears/clakeoftearstask.cpp
+    modules/lakeoftears/clakeoftearsbosstask.h modules/lakeoftears/clakeoftearsbosstask.cpp
+    modules/lakeoftears/clakeoftearsencounter.h modules/lakeoftears/clakeoftearsencounter.cpp
+    modules/lakeoftears/clakeoftearsboss.h modules/lakeoftears/clakeoftearsboss.cpp
 )
 
-add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
+add_executable(UrzasQuest ${URZAS_QUEST_SOURCES}
+    )
 
 
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})

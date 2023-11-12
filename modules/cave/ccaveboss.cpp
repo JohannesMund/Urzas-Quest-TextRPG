@@ -7,7 +7,7 @@
 
 CCaveBoss::CCaveBoss() : CEnemy()
 {
-    _name = CaveRessources::getColoredBosString();
+    _name = CaveRessources::getColoredBossString();
     _weapon = CaveRessources::getBossWeapon();
     _extendedWeaponChoice = true;
 
