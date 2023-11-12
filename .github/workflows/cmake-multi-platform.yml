@@ -76,4 +76,4 @@ jobs:
       uses: actions/upload-artifact@v3.1.3
       with:
         name: UrzasQuest
-        path: ${{ github.workspace }}/build/build/Release/UrzasQuest.exe
+        path: ${{ github.workspace }}/build/Release/UrzasQuest.exe
