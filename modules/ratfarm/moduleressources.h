@@ -5,6 +5,10 @@
 
 namespace RatFarmRessources
 {
+
+void initModule();
+void deInitModule();
+
 std::string moduleName();
 
 const unsigned int ratCount = 15;

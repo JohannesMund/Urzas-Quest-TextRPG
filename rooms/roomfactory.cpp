@@ -3,6 +3,7 @@
 #include "cfield.h"
 #include "cinjuredpet.h"
 #include "croom.h"
+#include "cshrineoftheancients.h"
 #include "ctown.h"
 
 CRoom* RoomFactory::makeRoom()
@@ -23,4 +24,9 @@ CInjuredPet* RoomFactory::makeInjuredPet()
 CCave* RoomFactory::makeCave()
 {
     return new CCave();
+}
+
+CShrineOfTheAncients* RoomFactory::makeShrine()
+{
+    return new CShrineOfTheAncients();
 }

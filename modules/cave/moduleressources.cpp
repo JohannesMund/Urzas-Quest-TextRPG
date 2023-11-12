@@ -112,3 +112,11 @@ std::string CaveRessources::moduleName()
 {
     return "Cave";
 }
+
+void CaveRessources::initModule()
+{
+}
+
+void CaveRessources::deInitModule()
+{
+}

@@ -4,6 +4,7 @@
 #include "colorconsole.h"
 #include "console.h"
 #include "croom.h"
+#include "cshrineoftheancients.h"
 #include "cstartingroom.h"
 #include "ctask.h"
 #include "ctown.h"
@@ -56,6 +57,7 @@ void CMap::init()
 
     rooms.push_back(RoomFactory::makeInjuredPet());
     rooms.push_back(RoomFactory::makeCave());
+    rooms.push_back(RoomFactory::makeShrine());
 
     for (int i = 0; i < Ressources::Config::numberOfTowns; i++)
     {

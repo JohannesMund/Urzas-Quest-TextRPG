@@ -34,6 +34,14 @@ static const unsigned int initiative = 5;
 
 } // namespace Config
 
+namespace Game
+{
+namespace ShrineRessources
+{
+std::string moduleName();
+}
+} // namespace Game
+
 namespace Rooms
 {
 std::string getRandomDescription();
@@ -43,6 +51,10 @@ std::string getRandomRumor();
 
 namespace Items
 {
+
+std::string sock();
+std::string otherSock();
+
 std::pair<std::string, std::string> getRandomJunkItems();
 
 } // namespace Items

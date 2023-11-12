@@ -2,13 +2,13 @@
 #include "cbattleencounter.h"
 #include "cdeadhero.h"
 #include "cencounter.h"
+#include "cgameprogression.h"
 #include "cmenu.h"
 #include "cmysteriouschest.h"
 #include "companionfactory.h"
 #include "console.h"
 #include "croom.h"
 #include "ctask.h"
-#include "encounterregister.h"
 #include "itemfactory.h"
 #include "randomizer.h"
 
@@ -44,6 +44,11 @@ CInventory* CGameManagement::getInventoryInstance()
 CCompanion* CGameManagement::getCompanionInstance()
 {
     return getInstance()->getCompanion();
+}
+
+CGameProgression* CGameManagement::getProgressionInstance()
+{
+    return getInstance()->getProgression();
 }
 
 void CGameManagement::placeTask(CTask* task)
@@ -99,9 +104,9 @@ void CGameManagement::registerEncounter(CEncounter* encounter)
     _encounters.push_back(encounter);
 }
 
-void CGameManagement::unregisterEncounterByName(const std::string& name)
+void CGameManagement::unregisterEncounterByModuleName(const std::string_view& name)
 {
-    auto it = std::remove_if(_encounters.begin(), _encounters.end(), CEncounter::nameFilter(name));
+    auto it = std::remove_if(_encounters.begin(), _encounters.end(), CEncounter::moduleNameFilter(name));
     _encounters.erase(it);
     delete *it;
 }
@@ -124,6 +129,11 @@ CInventory* CGameManagement::getInventory()
 CCompanion* CGameManagement::getCompanion()
 {
     return _companion;
+}
+
+CGameProgression* CGameManagement::getProgression()
+{
+    return &_progression;
 }
 
 void CGameManagement::printHUD()
@@ -257,7 +267,8 @@ void CGameManagement::init()
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eUrzasGlasses));
 
-    EncounterRegister::encounterRegister();
+    _progression.initEncounters();
+
     _map.setStartingPosition({3, 5});
     _map.init();
 }
@@ -266,6 +277,7 @@ void CGameManagement::gameLoop()
 {
     while (!_isGameOver)
     {
+        _progression.progress();
         Console::cls();
         executeTurn();
         handlePlayerDeath();

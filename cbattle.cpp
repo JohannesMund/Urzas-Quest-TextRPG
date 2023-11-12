@@ -62,6 +62,7 @@ void CBattle::fight()
     {
         Console::printLn("You are victorious!");
         _enemy->spoilsOfWar();
+        CGameManagement::getProgressionInstance()->increaseBodyCount();
     }
 }
 
