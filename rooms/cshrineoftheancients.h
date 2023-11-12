@@ -20,6 +20,7 @@ private:
 
     void firstVisitStart();
     void firstVisitSeenBard();
+    void firstVisitProvenAsHero();
 
     void stats() const;
 

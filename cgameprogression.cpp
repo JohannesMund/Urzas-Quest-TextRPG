@@ -205,6 +205,17 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn("You will have to find out.");
         break;
     case EGameStage::eProvenAsHero:
+        Console::printLn("Chapter 2", Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.");
+        Console::printLn(
+            std::format("But also know, that {} is a huge thing here, which brings you back, to your question:",
+                        Ressources::urza()));
+        Console::br();
+        Console::printLn(Ressources::whoTheFuckIsUrza());
+        Console::br();
+        Console::printLn("Well, you are getting closer.");
+        break;
     case EGameStage::eLearnedAboutCult:
     default:
         break;
