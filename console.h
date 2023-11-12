@@ -85,5 +85,5 @@ char getAcceptableInput(std::string_view accepableChars);
  * @param max the maximum
  * @return if a acceptable number was pressed, the number
  */
-std::optional<int> getNumberInputWithEcho(const int min = 0, const int max = __INT_MAX__);
+std::optional<int> getNumberInputWithEcho(const int min = 0, const int max = 99);
 } // namespace Console
