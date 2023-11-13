@@ -27,11 +27,6 @@ unsigned int CCaveBattleEncounter::encounterChance(const EEncounterType& tp, con
     {
         return 0;
     }
-
-    if (!canBeExecuted(tp))
-    {
-        return 0;
-    }
     return CaveRessources::fightChance;
 }
 
