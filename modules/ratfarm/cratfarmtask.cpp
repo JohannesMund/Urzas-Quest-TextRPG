@@ -49,15 +49,18 @@ void CRatFarmTask::battle()
         {
             return;
         }
+
+        Console::printLn(std::format("This was rat number {}, but there are more rats to go.", i));
+        Console::confirmToContinue();
     }
 
+    Console::cls();
+    CRatFarmRatBoss ratBoss;
+    ratBoss.printBossBattleHeader();
     Console::printLn("After defeating the swarm of rats, the boss of the rats appear.");
-    Console::br();
-    Console::printLn(RatFarmRessources::getColoredBossString(), Console::EAlignment::eCenter);
     Console::br();
     Console::confirmToContinue();
 
-    CRatFarmRatBoss ratBoss;
     CBattle battle(&ratBoss);
     battle.fight();
 

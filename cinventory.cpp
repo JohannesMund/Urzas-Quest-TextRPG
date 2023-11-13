@@ -314,6 +314,10 @@ void CInventory::printUsableItems(const Scope& scope)
         Console::hr();
         Console::printLn(std::format("You decide to use: {}", (*item)->name()));
         (*item)->useFromInventory();
+        if ((*item)->isConsumable())
+        {
+            removeItem(*item);
+        }
     }
 }
 
