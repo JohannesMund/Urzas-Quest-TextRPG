@@ -112,6 +112,14 @@ std::optional<CBattle::EWeapons> CEnemy::peek()
     return _battleDecision;
 }
 
+void CEnemy::printBossBattleHeader() const
+{
+    Console::cls();
+    Console::printLn("Boss Battle", Console::EAlignment::eCenter);
+    Console::printLn(_name, Console::EAlignment::eCenter);
+    Console::br();
+}
+
 unsigned int CEnemy::basicXP(const unsigned int level)
 {
     return Randomizer::getRandom(level * 75) + level * 75;

@@ -45,13 +45,14 @@ void CLakeOfTearsBossTask::execute()
                     "can do\". You start to understand. You understand everything. You have the whole picture. Ok, all "
                     "but the {0} thing.",
                     Ressources::urza()));
+
+    Console::confirmToContinue();
+    CLakeOfTearsBoss boss;
+    boss.printBossBattleHeader();
     Console::printLn("\"Do you want a reason to cry?\" You do not wait for an answer, and attack:");
-    Console::br();
-    Console::printLn(LakeTearsRessources::getColoredBossString(), Console::EAlignment::eCenter);
     Console::br();
     Console::confirmToContinue();
 
-    CLakeOfTearsBoss boss;
     CBattle battle(&boss);
     battle.fight();
 

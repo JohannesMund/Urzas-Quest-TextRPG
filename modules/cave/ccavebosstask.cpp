@@ -11,13 +11,12 @@ CCaveBossTask::CCaveBossTask(bool* bossDefeated) : CTask(), _bossDefeated(bossDe
 
 void CCaveBossTask::execute()
 {
+    CCaveBoss boss;
+    boss.printBossBattleHeader();
     Console::printLn("There he is, you encounter the boss of this cave");
-    Console::br();
-    Console::printLn(CaveRessources::getColoredBossString(), Console::EAlignment::eCenter);
     Console::br();
     Console::confirmToContinue();
 
-    CCaveBoss boss;
     CBattle battle(&boss);
     battle.fight();
 

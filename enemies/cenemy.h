@@ -36,6 +36,8 @@ public:
 
     std::optional<CBattle::EWeapons> peek();
 
+    void printBossBattleHeader() const;
+
 protected:
     unsigned int _level;
     int _hp;
