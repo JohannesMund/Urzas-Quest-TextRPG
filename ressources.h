@@ -52,8 +52,27 @@ std::string getRandomRumor();
 namespace Items
 {
 
+enum class EType
+{
+    eSword,
+    eShield,
+    eArmor,
+    eOther
+};
+
+enum class EQuality
+{
+    eJunk,
+    eFair,
+    eGood,
+    eAwesomne
+};
+
 std::string sock();
 std::string otherSock();
+
+std::pair<std::vector<std::string>, std::string> getRandomEquipmentNamesAndDescription(const EType type,
+                                                                                       const EQuality quality);
 
 std::pair<std::string, std::string> getRandomJunkItems();
 

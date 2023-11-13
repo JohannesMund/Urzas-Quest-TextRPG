@@ -107,7 +107,7 @@ public:
      * @brief value
      * @return the value of the item
      */
-    unsigned int value() const;
+    virtual unsigned int value() const;
 
     /**
      * @brief value

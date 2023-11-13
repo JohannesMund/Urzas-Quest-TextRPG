@@ -1,5 +1,7 @@
 #include "itemfactory.h"
+#include "carmor.h"
 #include "cbomb.h"
+#include "cequipment.h"
 #include "chealingpotion.h"
 #include "cheartcontainer.h"
 #include "cjunkitem.h"
@@ -93,4 +95,18 @@ CItem* ItemFactory::makeAwesomneItem()
 
     std::shuffle(items.begin(), items.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
     return makeItem(items.at(0));
+}
+
+CItem* ItemFactory::makeEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality)
+{
+    switch (type)
+    {
+    case Ressources::Items::EType::eSword:
+    default:
+        return new CSword(quality);
+    case Ressources::Items::EType::eShield:
+        return new CShield(quality);
+    case Ressources::Items::EType::eArmor:
+        return new CArmor(quality);
+    }
 }
