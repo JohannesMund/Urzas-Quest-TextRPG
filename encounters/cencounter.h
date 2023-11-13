@@ -69,7 +69,6 @@ public:
      */
     static std::function<bool(const CEncounter*)> moduleNameFilter(const std::string_view& name);
 
-protected:
     /**
      * @brief canBeExecuted
      * @return true if the encounter can be executed
@@ -77,6 +76,7 @@ protected:
      */
     virtual bool canBeExecuted(const EEncounterType& tp) const;
 
+protected:
     /**
      * @brief _isSingleExecution
      * Set to true, if the encounter shall be executed only once

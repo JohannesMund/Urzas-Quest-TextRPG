@@ -1,11 +1,11 @@
-#include "csword.h"
+#include "cweapon.h"
 #include "cenemy.h"
 #include "console.h"
 #include "randomizer.h"
 
 #include <format>
 
-CSword::CSword(const Ressources::Items::EQuality quality) : CEquipment(Ressources::Items::EType::eSword, quality)
+CSword::CSword(const Ressources::Items::EQuality quality) : CEquipment(Ressources::Items::EType::eWeapon, quality)
 {
     _hasBattleEffect = true;
     _hasBattleBuff = true;
@@ -28,7 +28,7 @@ void CSword::battleBuff(CEnemy* enemy, bool& endRound)
 
 std::string CSword::typeName() const
 {
-    return "Sword";
+    return "Weapon";
 }
 
 std::function<bool(const CItem*)> CSword::equipmentTypeFilter() const

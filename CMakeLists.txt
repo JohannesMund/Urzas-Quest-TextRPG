@@ -52,7 +52,7 @@ set(URZAS_QUEST_SOURCES
 
     cinventory.h cinventory.cpp
     items/equipment/cequipment.h items/equipment/cequipment.cpp
-    items/equipment/csword.h items/equipment/csword.cpp
+    items/equipment/cweapon.h items/equipment/cweapon.cpp
     items/equipment/cshield.h items/equipment/cshield.cpp
     items/equipment/carmor.h items/equipment/carmor.cpp
 
@@ -64,11 +64,11 @@ set(URZAS_QUEST_SOURCES
     items/cheartcontainer.h items/cheartcontainer.cpp    
     items/cbomb.h items/cbomb.cpp
 
-
     encounters/cencounter.h encounters/cencounter.cpp
     encounters/cbattleencounter.h encounters/cbattleencounter.cpp
     encounters/cdeadhero.h encounters/cdeadhero.cpp
     encounters/cmysteriouschest.h encounters/cmysteriouschest.cpp
+    encounters/cequipmentdealer.h encounters/cequipmentdealer.cpp
 
     dungeons/cdungeon.h dungeons/cdungeon.cpp
     dungeons/cdungeonmap.h dungeons/cdungeonmap.cpp

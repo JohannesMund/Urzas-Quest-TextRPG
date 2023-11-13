@@ -45,10 +45,6 @@ void CRatFarmEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CRatFarmEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
 {
-    if (!canBeExecuted(tp))
-    {
-        return 0;
-    }
     return 5;
 }
 

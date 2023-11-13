@@ -1,7 +1,8 @@
 #pragma once
 
-#include "citem.h"
 #include "ressources.h"
+
+class CItem;
 
 namespace ItemFactory
 {
@@ -26,9 +27,10 @@ enum class EItemType
 };
 
 CItem* makeItem(const EItemType tp);
-CItem* makeShopItem();
+CItem* makeShopEquipment(const unsigned int playerLevel);
 CItem* makeAwesomneItem();
 
+CItem* makeShopItem();
 CItem* makeEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality);
 
 } // namespace ItemFactory

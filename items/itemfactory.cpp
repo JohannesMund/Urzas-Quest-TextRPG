@@ -4,10 +4,11 @@
 #include "cequipment.h"
 #include "chealingpotion.h"
 #include "cheartcontainer.h"
+#include "citem.h"
 #include "cjunkitem.h"
 #include "cphoenixfeather.h"
 #include "cshield.h"
-#include "csword.h"
+#include "cweapon.h"
 #include "forest/curzasglasses.h"
 #include "randomizer.h"
 
@@ -101,7 +102,7 @@ CItem* ItemFactory::makeEquipment(const Ressources::Items::EType type, const Res
 {
     switch (type)
     {
-    case Ressources::Items::EType::eSword:
+    case Ressources::Items::EType::eWeapon:
     default:
         return new CSword(quality);
     case Ressources::Items::EType::eShield:
@@ -109,4 +110,41 @@ CItem* ItemFactory::makeEquipment(const Ressources::Items::EType type, const Res
     case Ressources::Items::EType::eArmor:
         return new CArmor(quality);
     }
+}
+
+CItem* ItemFactory::makeShopEquipment(const unsigned int playerLevel)
+{
+    unsigned int levelModifier = playerLevel;
+    if (levelModifier > 15)
+    {
+        levelModifier = 15;
+    }
+
+    Ressources::Items::EType type;
+    Ressources::Items::EQuality quality;
+
+    switch (Randomizer::getRandom(3))
+    {
+    case 0:
+    default:
+        type = Ressources::Items::EType::eArmor;
+        break;
+    case 1:
+        type = Ressources::Items::EType::eShield;
+        break;
+    case 2:
+        type = Ressources::Items::EType::eWeapon;
+        break;
+    }
+
+    if (Randomizer::getRandom(10) + levelModifier >= 20)
+    {
+        quality = Ressources::Items::EQuality::eGood;
+    }
+    else
+    {
+        quality = Ressources::Items::EQuality::eFair;
+    }
+
+    return makeEquipment(type, quality);
 }

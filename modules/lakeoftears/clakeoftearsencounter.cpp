@@ -51,10 +51,6 @@ void CLakeOfTearsEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CLakeOfTearsEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
 {
-    if (!canBeExecuted(tp))
-    {
-        return 0;
-    }
     return 5;
 }
 

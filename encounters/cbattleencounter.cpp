@@ -17,10 +17,6 @@ void CBattleEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CBattleEncounter::encounterChance(const EEncounterType& tp, const std::string_view&) const
 {
-    if (!canBeExecuted(tp))
-    {
-        return 0;
-    }
     return Ressources::Config::fightChance;
 }
 

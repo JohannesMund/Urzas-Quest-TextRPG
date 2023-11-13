@@ -100,5 +100,5 @@ unsigned int CItem::value() const
 
 unsigned int CItem::buyValue() const
 {
-    return std::floor(_value * 1.5);
+    return std::floor(value() * 1.5);
 }

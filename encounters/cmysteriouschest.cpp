@@ -82,10 +82,6 @@ void CMysteriousChest::execute(const std::string_view& moduleName)
 
 unsigned int CMysteriousChest::encounterChance(const EEncounterType& tp, const std::string_view&) const
 {
-    if (!canBeExecuted(tp))
-    {
-        return 0;
-    }
     return 3;
 }
 
