@@ -19,3 +19,8 @@ unsigned int Randomizer::getRandomEngineSeed()
 {
     return std::chrono::system_clock::now().time_since_epoch().count();
 }
+
+std::string Randomizer::getRandomStringFromVector(const std::vector<std::string>& vector)
+{
+    return vector.at(getRandom(vector.size()));
+}

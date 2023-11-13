@@ -1,7 +1,9 @@
 #pragma once
 
 #include "itemfactory.h"
+
 #include <random>
+#include <string>
 #include <vector>
 
 class CRoom;
@@ -12,5 +14,7 @@ void init();
 unsigned int getRandom(const unsigned int max);
 
 unsigned int getRandomEngineSeed();
+
+std::string getRandomStringFromVector(const std::vector<std::string>& vector);
 
 } // namespace Randomizer

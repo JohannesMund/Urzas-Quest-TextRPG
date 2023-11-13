@@ -10,18 +10,19 @@
 
 std::string Ressources::Rooms::getRandomDescription()
 {
-    std::vector<std::string> _roomDescriptions = {
-        "A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you like "
-        "sheep? I like sheep. There is one.",
+    return Randomizer::getRandomStringFromVector(
+        {"A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you "
+         "like "
+         "sheep? I like sheep. There is one.",
 
-        "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a "
-        "forest "
-        "fairy? In this case, her name is probably \"Holla\".",
+         "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a "
+         "forest "
+         "fairy? In this case, her name is probably \"Holla\".",
 
-        "The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is just "
-        "a "
-        "lake. On second glance, not even a big one."};
-    return _roomDescriptions.at(Randomizer::getRandom(_roomDescriptions.size()));
+         "The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is "
+         "just "
+         "a "
+         "lake. On second glance, not even a big one."});
 }
 
 std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
@@ -61,30 +62,28 @@ unsigned int Ressources::Config::getXpForLevel(const unsigned int level)
 
 std::string Ressources::Enemies::getRandomEnemyName()
 {
-    std::vector<std::string> names = {"Bob, the Cowboy",
-                                      "Eddie, the Cowboy",
-                                      "Angry Rat",
-                                      "Stinky Bat",
-                                      "Greedy Vulture",
-                                      "Huge Barbarian",
-                                      "Pussy, the Octopus",
-                                      "Tentacool",
-                                      "Tentacruel",
-                                      "Kang",
-                                      "Kodos"};
-    return names.at(Randomizer::getRandom(names.size()));
+    return Randomizer::getRandomStringFromVector({"Bob, the Cowboy",
+                                                  "Eddie, the Cowboy",
+                                                  "Angry Rat",
+                                                  "Stinky Bat",
+                                                  "Greedy Vulture",
+                                                  "Huge Barbarian",
+                                                  "Pussy, the Octopus",
+                                                  "Tentacool",
+                                                  "Tentacruel",
+                                                  "Kang",
+                                                  "Kodos"});
 }
 
 std::string Ressources::Enemies::getRandomEnemyWeapon()
 {
-    std::vector<std::string> weapons = {"shabby board with a rusty nail hammered through",
-                                        "sharp teeth",
-                                        "sheer muscle power",
-                                        "a club with spikes",
-                                        "a Nokia 3210",
-                                        "tantacles",
-                                        "laser gun"};
-    return weapons.at(Randomizer::getRandom(weapons.size()));
+    return Randomizer::getRandomStringFromVector({"shabby board with a rusty nail hammered through",
+                                                  "sharp teeth",
+                                                  "sheer muscle power",
+                                                  "a club with spikes",
+                                                  "a Nokia 3210",
+                                                  "tantacles",
+                                                  "laser gun"});
 }
 
 std::pair<std::string, std::string> Ressources::Rooms::getRandomTown()
@@ -171,10 +170,9 @@ std::pair<std::string, std::string> Ressources::Enemies::getRandomBountyName()
 
 std::string Ressources::Rooms::getRandomRumor()
 {
-    std::vector<std::string> rumors = {"The king has stupid ears.",
-                                       "There is a huge treasure hidden beneath the mountain.",
-                                       "The mayor of this town has an affair with a donkey."};
-    return rumors.at(Randomizer::getRandom(rumors.size()));
+    return Randomizer::getRandomStringFromVector({"The king has stupid ears.",
+                                                  "There is a huge treasure hidden beneath the mountain.",
+                                                  "The mayor of this town has an affair with a donkey."});
 }
 
 std::string Ressources::whoTheFuckIsUrza()

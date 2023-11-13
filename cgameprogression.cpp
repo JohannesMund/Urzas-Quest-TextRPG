@@ -2,6 +2,7 @@
 #include "cave/moduleressources.h"
 #include "lakeoftears/moduleressources.h"
 #include "ratfarm/moduleressources.h"
+#include "sewer/moduleressources.h"
 
 #include "cbattleencounter.h"
 #include "cdeadhero.h"
@@ -32,6 +33,7 @@ void CGameProgression::initEncounters()
     registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eSeenBard);
 
     registerModule(LakeTearsRessources::moduleName(), EGameStage::eProvenAsHero);
+    registerModule(SewerRessources::moduleName(), EGameStage::eProvenAsHero);
 
     progressToStage(EGameStage::eStart);
 }
@@ -131,6 +133,11 @@ void CGameProgression::initModuleByName(const std::string_view& moduleName)
         LakeTearsRessources::initModule();
         return;
     }
+    if (is(SewerRessources::moduleName()))
+    {
+        SewerRessources::initModule();
+        return;
+    }
 }
 
 void CGameProgression::deInitModuleByName(const std::string_view& moduleName)
@@ -155,6 +162,11 @@ void CGameProgression::deInitModuleByName(const std::string_view& moduleName)
     if (is(LakeTearsRessources::moduleName()))
     {
         LakeTearsRessources::deInitModule();
+        return;
+    }
+    if (is(SewerRessources::moduleName()))
+    {
+        SewerRessources::deInitModule();
         return;
     }
 }

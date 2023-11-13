@@ -2,7 +2,6 @@
 
 #include "cdungeon.h"
 
-class CCaveBossTask;
 class CCaveDungeon : public CDungeon
 {
 public:
