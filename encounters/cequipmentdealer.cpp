@@ -1,0 +1,96 @@
+#include "cequipmentdealer.h"
+#include "cgamemanagement.h"
+#include "cmenu.h"
+#include "colorconsole.h"
+#include "console.h"
+#include "itemfactory.h"
+
+#include <format>
+
+CEquipmentDealer::CEquipmentDealer()
+{
+    _isSingleExecution = false;
+    _type = CEncounter::eField;
+}
+
+void CEquipmentDealer::execute(const std::string_view& moduleName)
+{
+    CEncounter::execute();
+    _hasBeenExecuted = true;
+
+    Console::printLn(std::format(
+        "Walking through some woods, you hear a whisper from behind a tree: {0}\"Hey, you!\"{1} you look in the "
+        "direction of the voice and ask \"What me?\" the whispering voice replys: {0}\"Pscht! Yeah, you, "
+        "exactly! Want to buy something? I have a great offer, exactly for you!\"{1}",
+        CC::fgDarkGray(),
+        CC::ccReset()));
+    Console::printLn("This sounds totally trustworthy. Do you want to see what he has to offer?");
+    Console::br();
+
+    if (CMenu::reject(CMenu::executeAcceptRejectMenu()))
+    {
+        Console::printLn(
+            "Well... A shaday dealer in the middle of nowhere. You might not be the brightest of them all, but...");
+        return;
+    }
+
+    Console::printLn("Well... A shaday dealer in the middle of nowhere. What could possibly go wrong?");
+    Console::printLn(
+        std::format("You follow the whispering voice and find the {}shady {}dealer{} and look through offers.",
+                    CC::fgLightGray(),
+                    CC::fgDarkGray(),
+                    CC::ccReset()));
+    Console::br();
+
+    std::vector<CItem*> buyableItems;
+    for (int i = 0; i < 3; i++)
+    {
+        auto item = ItemFactory::makeShopEquipment(CGameManagement::getPlayerInstance()->level());
+
+        if (item->buyValue() <= CGameManagement::getPlayerInstance()->gold())
+        {
+            buyableItems.push_back(item);
+            Console::printLn(std::format("[{:3}] {} ({} Gold)", buyableItems.size(), item->name(), item->buyValue()));
+        }
+        else
+        {
+            Console::printLn(std::format("[   ] {} ({} Gold)", item->name(), item->buyValue()));
+        }
+    }
+
+    Console::br();
+
+    if (buyableItems.size())
+    {
+        auto input = Console::getNumberInputWithEcho(1, buyableItems.size());
+        if (input.has_value())
+        {
+            auto item = buyableItems.at(*input);
+            CGameManagement::getInventoryInstance()->addItem(item);
+            CGameManagement::getPlayerInstance()->addGold(item->buyValue() * -1);
+        }
+    }
+    else
+    {
+        Console::printLn("Looks like, you cannot afford anything, this guy has to offer");
+    }
+}
+
+unsigned int CEquipmentDealer::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+{
+    return 1;
+}
+
+std::string CEquipmentDealer::name() const
+{
+    return "Shady Dealer";
+}
+
+bool CEquipmentDealer::canBeExecuted(const EEncounterType& tp) const
+{
+    if (CGameManagement::getPlayerInstance()->level() < 5)
+    {
+        return false;
+    }
+    return CEncounter::canBeExecuted(tp);
+}

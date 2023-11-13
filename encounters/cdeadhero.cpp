@@ -21,7 +21,7 @@ void CDeadHero::execute(const std::string_view& moduleName)
     Console::printLn(std::format(
         "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, "
         "just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you.",
-        Ressources::Items::getRandomEquipmentNamesAndDescription(Ressources::Items::EType::eSword,
+        Ressources::Items::getRandomEquipmentNamesAndDescription(Ressources::Items::EType::eWeapon,
                                                                  Ressources::Items::EQuality::eJunk)
             .first.at(0),
         Ressources::Items::getRandomEquipmentNamesAndDescription(Ressources::Items::EType::eShield,

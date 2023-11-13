@@ -464,7 +464,7 @@ std::pair<std::vector<std::string>, std::string> Ressources::Items::getRandomEqu
     const EType type, const EQuality quality)
 {
 
-    if (type == EType::eSword)
+    if (type == EType::eWeapon)
     {
         return getRandomSwordNamesAndDescription(quality);
     }

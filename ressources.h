@@ -54,7 +54,7 @@ namespace Items
 
 enum class EType
 {
-    eSword,
+    eWeapon,
     eShield,
     eArmor,
     eOther

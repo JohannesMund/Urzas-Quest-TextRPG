@@ -5,9 +5,11 @@
 
 #include "cbattleencounter.h"
 #include "cdeadhero.h"
+#include "cequipmentdealer.h"
+#include "cmysteriouschest.h"
+
 #include "cgamemanagement.h"
 #include "cgameprogression.h"
-#include "cmysteriouschest.h"
 #include "console.h"
 
 #include <algorithm>
@@ -21,6 +23,7 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CMysteriousChest());
     CGameManagement::getInstance()->registerEncounter(new CDeadHero());
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
+    CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
 
     registerModule(BardRessources::moduleName(), EGameStage::eStart);
 

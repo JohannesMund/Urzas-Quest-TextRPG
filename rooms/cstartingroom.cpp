@@ -22,7 +22,7 @@ void CStartingRoom::execute()
         return;
     }
 
-    auto sword = ItemFactory::makeEquipment(Ressources::Items::EType::eSword, Ressources::Items::EQuality::eJunk);
+    auto sword = ItemFactory::makeEquipment(Ressources::Items::EType::eWeapon, Ressources::Items::EQuality::eJunk);
 
     CMenu menu;
     menu.addMenuGroup({menu.createAction("Take it"), menu.createAction("Leave it")});
