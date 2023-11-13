@@ -31,7 +31,7 @@ void CShrineOfTheAncients::execute()
 
 std::string CShrineOfTheAncients::mapSymbol() const
 {
-    return "§";
+    return "#";
 }
 
 void CShrineOfTheAncients::visit()
@@ -42,10 +42,12 @@ void CShrineOfTheAncients::visit()
     {
     case CGameProgression::EGameStage::eNone:
     case CGameProgression::EGameStage::eStart:
-        Console::printLn("And as before, the old man does not even realize, that you are there.");
+        Console::printLn("And as before, the old man does not even realize, that "
+                         "you are there.");
         break;
     case CGameProgression::EGameStage::eSeenBard:
-        Console::printLn("This time, the old man stands directly next to the entry, and smiles at you. Obviousely, "
+        Console::printLn("This time, the old man stands directly next to the "
+                         "entry, and smiles at you. Obviousely, "
                          "your are still no hero.");
         break;
     case CGameProgression::EGameStage::eProvenAsHero:
@@ -86,9 +88,11 @@ void CShrineOfTheAncients::firstVisit()
 
 void CShrineOfTheAncients::firstVisitStart()
 {
-    Console::printLn("There is something really strange before you. Something like a shrine. A hoary shrine. This must "
+    Console::printLn("There is something really strange before you. Something "
+                     "like a shrine. A hoary shrine. This must "
                      "be a Shrine of the ancients.");
-    Console::printLn("How you know? Surely because of your deep knowledget of ancient religious history. And, of "
+    Console::printLn("How you know? Surely because of your deep knowledget of "
+                     "ancient religious history. And, of "
                      "course, the signe next to the gate reading:");
     Console::printLn(ancientShrine());
     Console::printLn("Do you want to have a look?");
@@ -99,7 +103,8 @@ void CShrineOfTheAncients::firstVisitStart()
         return;
     }
 
-    Console::printLn("You go closer, and can see an old man, praying in the shrine. He does not even give you a single "
+    Console::printLn("You go closer, and can see an old man, praying in the shrine. He does "
+                     "not even give you a single "
                      "glance, and completely ignores you. Well, time to leave for now.");
 
     CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
@@ -108,7 +113,8 @@ void CShrineOfTheAncients::firstVisitStart()
 
 void CShrineOfTheAncients::firstVisitSeenBard()
 {
-    Console::printLn(std::format("As you apporach the {}, you see, something is different this time. The old man "
+    Console::printLn(std::format("As you apporach the {}, you see, something is "
+                                 "different this time. The old man "
                                  "stands at the gate and looks at you.",
                                  ancientShrine()));
     Console::printLn("As you come closer, he asks, if you have any questions.");
@@ -123,23 +129,28 @@ void CShrineOfTheAncients::firstVisitSeenBard()
         Console::printLn("\"No, not this time\", you think to yourself, and leave.");
     }
     Console::br();
-    Console::printLn(std::format("You ask the question, that is lurkin around your head for so long now: {}?",
+    Console::printLn(std::format("You ask the question, that is lurkin around "
+                                 "your head for so long now: {}?",
                                  Ressources::whoTheFuckIsUrza()));
     Console::printLn(
         std::format("The old man smiles, and replies: \"So, you want to know about {}?", Ressources::urza()));
-    Console::printLn(
-        "This is dangerous knowledge, nowadays. To get an answer to this question, you first have to become a hero!\"");
-    Console::printLn("This was the most underwhelming answer you have ever heard in your live, since you asked the "
-                     "beautiful farmers daughter to go for the dance when you was 8 years old.");
-    Console::printLn("But your wanted to become a hero anyway, so you will have to come back later.");
+    Console::printLn("This is dangerous knowledge, nowadays. To get an answer to "
+                     "this question, you first have to become a hero!\"");
+    Console::printLn("This was the most underwhelming answer you have ever heard "
+                     "in your live, since you asked the "
+                     "beautiful farmers daughter to go for the dance when you "
+                     "was 8 years old.");
+    Console::printLn("But your wanted to become a hero anyway, so you will have "
+                     "to come back later.");
     CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
 }
 
 void CShrineOfTheAncients::firstVisitProvenAsHero()
 {
-    Console::printLn(
-        std::format("Back to the {}. This time, the old man seems to await you and smiles at you.", ancientShrine()));
+    Console::printLn(std::format("Back to the {}. This time, the old man seems "
+                                 "to await you and smiles at you.",
+                                 ancientShrine()));
     Console::printLn("As you come closer, he asks, if you have any questions.");
     Console::printLn("And you have only one question in you mind?");
     Console::br();
@@ -152,10 +163,12 @@ void CShrineOfTheAncients::firstVisitProvenAsHero()
         Console::printLn("Maybe, proven to be a hero is enough.");
     }
     Console::br();
-    Console::printLn(std::format("The old man smiles wisely, and replies: \"{0} was important, and {0} is important!",
+    Console::printLn(std::format("The old man smiles wisely, and replies: \"{0} "
+                                 "was important, and {0} is important!",
                                  Ressources::urza()));
     Console::printLn("Find the people, who still believe in Urza!\"");
-    Console::printLn("And again, you are not much smarter than before, but you know what to look for.");
+    Console::printLn("And again, you are not much smarter than before, but you "
+                     "know what to look for.");
 
     CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();

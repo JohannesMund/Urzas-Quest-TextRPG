@@ -107,8 +107,11 @@ void CGameManagement::registerEncounter(CEncounter* encounter)
 void CGameManagement::unregisterEncounterByModuleName(const std::string_view& name)
 {
     auto it = std::remove_if(_encounters.begin(), _encounters.end(), CEncounter::moduleNameFilter(name));
-    _encounters.erase(it);
-    delete *it;
+    if (it != _encounters.end())
+    {
+        delete *it;
+        _encounters.erase(it);
+    }
 }
 
 CRoom* CGameManagement::currentRoom() const
