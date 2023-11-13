@@ -39,16 +39,7 @@ bool CEquipment::isEnhancable() const
 
 std::string CEquipment::name() const
 {
-    if (_namesByLevel.size() == 0)
-    {
-        return "something";
-    }
-
-    if (_level > _namesByLevel.size())
-    {
-        return _namesByLevel.at(_namesByLevel.size() - 1);
-    }
-    return _namesByLevel.at(_level);
+    return nameByLevel(_level);
 }
 
 unsigned int CEquipment::value() const
@@ -75,8 +66,7 @@ void CEquipment::enhance()
     }
 
     _level++;
-    Console::printLn(
-        std::format("your {} has been upgraded to to a {}", _namesByLevel.at(_level - 1), _namesByLevel.at(_level)));
+    Console::printLn(std::format("your {} has been upgraded to to a {}", nameByLevel(_level), nameByLevel(_level + 1)));
 }
 
 std::function<bool(const CItem*)> CEquipment::equipmentFilter()
@@ -130,4 +120,18 @@ unsigned int CEquipment::qualityModifier() const
         return 10;
         break;
     }
+}
+
+std::string CEquipment::nameByLevel(const unsigned int level) const
+{
+    if (_namesByLevel.size() == 0)
+    {
+        return "something";
+    }
+
+    if (level > _namesByLevel.size())
+    {
+        return _namesByLevel.at(_namesByLevel.size());
+    }
+    return _namesByLevel.at(level);
 }

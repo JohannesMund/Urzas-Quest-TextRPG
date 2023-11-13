@@ -102,6 +102,15 @@ set(URZAS_QUEST_SOURCES
     modules/lakeoftears/clakeoftearsbosstask.h modules/lakeoftears/clakeoftearsbosstask.cpp
     modules/lakeoftears/clakeoftearsencounter.h modules/lakeoftears/clakeoftearsencounter.cpp
     modules/lakeoftears/clakeoftearsboss.h modules/lakeoftears/clakeoftearsboss.cpp
+
+    modules/sewer/moduleressources.h modules/sewer/moduleressources.cpp
+    modules/sewer/csewerencounter.h modules/sewer/csewerencounter.cpp
+    modules/sewer/csewertask.h modules/sewer/csewertask.cpp
+    modules/sewer/csewerdungeonmap.h modules/sewer/csewerdungeonmap.cpp
+    modules/sewer/csewerdungeon.h modules/sewer/csewerdungeon.cpp
+    modules/sewer/csewerbattleencounter.h modules/sewer/csewerbattleencounter.cpp
+    modules/sewer/csewerbossroom.h modules/sewer/csewerbossroom.cpp
+    modules/sewer/csewerboss.h modules/sewer/csewerboss.cpp
 )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})

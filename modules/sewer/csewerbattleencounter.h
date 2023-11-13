@@ -2,10 +2,10 @@
 
 #include "cencounter.h"
 
-class CCaveBattleEncounter : public CEncounter
+class CSewerBattleEncounter : public CEncounter
 {
 public:
-    CCaveBattleEncounter();
+    CSewerBattleEncounter();
 
     virtual void execute(const std::string_view& moduleName = {}) override;
     virtual unsigned int encounterChance(const EEncounterType& tp,

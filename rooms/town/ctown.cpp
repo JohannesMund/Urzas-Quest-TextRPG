@@ -25,11 +25,14 @@ CTown::CTown()
 
 void CTown::execute()
 {
+    Console::printLn(_name, Console::EAlignment::eCenter);
+    Console::br();
+
+    CRoom::execute();
     if (_encounterPossible && !hasTask())
     {
         CGameManagement::getInstance()->executeRandomEncounter(CEncounter::eTown);
     }
-    CRoom::execute();
 
     CMenu menu;
     std::vector<CMenu::Action> navs = {menu.createAction("Blacksmith"),
@@ -46,11 +49,7 @@ void CTown::execute()
     CMenu::Action input;
     do
     {
-        Console::printLn(_name, Console::EAlignment::eCenter);
-        Console::br();
-        CRoom::execute();
         Console::hr();
-
         input = menu.execute();
 
         if (input.key == 'b')
@@ -73,11 +72,20 @@ void CTown::execute()
         {
             _farm.execute();
         }
+        Console::cls();
+        Console::printLn(_name, Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(_description);
+
     } while (!CMenu::exit(input));
 }
 
 std::string CTown::mapSymbol() const
 {
+    if (hasTask())
+    {
+        return "!";
+    }
     return "T";
 }
 
