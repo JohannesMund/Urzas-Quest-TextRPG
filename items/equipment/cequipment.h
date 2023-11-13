@@ -44,6 +44,8 @@ protected:
     bool doesEquipmentEffectFire() const;
     unsigned int qualityModifier() const;
 
+    std::string nameByLevel(const unsigned int level) const;
+
     unsigned int _level = 0;
     std::vector<std::string> _namesByLevel;
     unsigned int _levelCap = 0;
