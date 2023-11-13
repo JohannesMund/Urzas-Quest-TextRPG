@@ -5,11 +5,14 @@
 class CArmor : public CEquipment
 {
 public:
-    CArmor();
+    CArmor(const Ressources::Items::EQuality quality);
 
-    virtual void battleEffect(CEnemy* enemy) override = 0;
-    virtual int shield(const unsigned int i) override = 0;
+    virtual void battleEffect(CEnemy* enemy) override;
+    virtual int shield(const unsigned int i) override;
     virtual std::string typeName() const override;
 
     virtual std::function<bool(const CItem*)> equipmentTypeFilter() const override;
+
+private:
+    virtual unsigned int shieldAmount() const;
 };

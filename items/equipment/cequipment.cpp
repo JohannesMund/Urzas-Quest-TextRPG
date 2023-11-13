@@ -3,9 +3,33 @@
 #include "randomizer.h"
 
 #include <format>
-CEquipment::CEquipment() : CItem()
+CEquipment::CEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality) : CItem()
 {
-    _name = "";
+    _level = 1;
+
+    _type = type;
+    _quality = quality;
+    switch (quality)
+    {
+    case Ressources::Items::EQuality::eJunk:
+    default:
+        _levelCap = 3;
+        break;
+    case Ressources::Items::EQuality::eFair:
+        _levelCap = 4;
+        break;
+    case Ressources::Items::EQuality::eGood:
+        _levelCap = 5;
+        break;
+    case Ressources::Items::EQuality::eAwesomne:
+        _levelCap = 9;
+        break;
+    }
+
+    auto namesAndDescription = Ressources::Items::getRandomEquipmentNamesAndDescription(type, quality);
+
+    _namesByLevel = namesAndDescription.first;
+    _description = namesAndDescription.second;
 }
 
 bool CEquipment::isEnhancable() const
@@ -27,6 +51,11 @@ std::string CEquipment::name() const
     return _namesByLevel.at(_level);
 }
 
+unsigned int CEquipment::value() const
+{
+    return 150 * qualityModifier() * ((qualityModifier() - 1) * 2);
+}
+
 unsigned int CEquipment::level() const
 {
     return _level;
@@ -34,26 +63,8 @@ unsigned int CEquipment::level() const
 
 unsigned int CEquipment::upgradeCost() const
 {
-    unsigned int upgradeModifier = 0;
 
-    switch (_quality)
-    {
-    case EQuality::eJunk:
-    default:
-        upgradeModifier = 2;
-        break;
-    case EQuality::eFair:
-        upgradeModifier = 3;
-        break;
-    case EQuality::eGood:
-        upgradeModifier = 5;
-        break;
-    case EQuality::eAwesomne:
-        upgradeModifier = 10;
-        break;
-    }
-
-    return 150 + (_level * 150 * _level * upgradeModifier);
+    return 150 + (_level * 150 * _level * (qualityModifier() + 1));
 }
 
 void CEquipment::enhance()
@@ -99,4 +110,24 @@ std::function<CEquipment*(CItem*)> CEquipment::equipmentTransformation()
 bool CEquipment::doesEquipmentEffectFire() const
 {
     return Randomizer::getRandom(100) <= _level * 10;
+}
+
+unsigned int CEquipment::qualityModifier() const
+{
+    switch (_quality)
+    {
+    case Ressources::Items::EQuality::eJunk:
+    default:
+        return 1;
+        break;
+    case Ressources::Items::EQuality::eFair:
+        return 3;
+        break;
+    case Ressources::Items::EQuality::eGood:
+        return 5;
+        break;
+    case Ressources::Items::EQuality::eAwesomne:
+        return 10;
+        break;
+    }
 }

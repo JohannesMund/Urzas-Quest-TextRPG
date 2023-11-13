@@ -1,10 +1,9 @@
 #include "cdeadhero.h"
 #include "cgamemanagement.h"
-#include "cjunkarmor.h"
-#include "cjunkshield.h"
-#include "cjunksword.h"
 #include "cmenu.h"
 #include "console.h"
+#include "itemfactory.h"
+#include "ressources.h"
 
 #include <format>
 
@@ -19,14 +18,15 @@ void CDeadHero::execute(const std::string_view& moduleName)
     CEncounter::execute(moduleName);
     _hasBeenExecuted = true;
 
-    CJunkSword sword;
-    CJunkShield shield;
-
     Console::printLn(std::format(
         "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, "
         "just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you.",
-        sword.name(),
-        shield.name()));
+        Ressources::Items::getRandomEquipmentNamesAndDescription(Ressources::Items::EType::eSword,
+                                                                 Ressources::Items::EQuality::eJunk)
+            .first.at(0),
+        Ressources::Items::getRandomEquipmentNamesAndDescription(Ressources::Items::EType::eShield,
+                                                                 Ressources::Items::EQuality::eJunk)
+            .first.at(0)));
     Console::printLn("He is dead. Definitely dead. He lies in a puddle of his own blood, the limbs broken, all his "
                      "treasure gone (if he even had som treasure at all). All of his treasure?");
     Console::printLn("Maybe, just maybe you should have a look.");
@@ -63,7 +63,8 @@ void CDeadHero::execute(const std::string_view& moduleName)
     Console::printLn("Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now "
                      "have a shiny new armor to protect you.");
 
-    CGameManagement::getInventoryInstance()->addItem(new CJunkArmor());
+    CGameManagement::getInventoryInstance()->addItem(
+        ItemFactory::makeEquipment(Ressources::Items::EType::eArmor, Ressources::Items::EQuality::eJunk));
     Console::br();
 }
 

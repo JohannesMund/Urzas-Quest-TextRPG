@@ -1,34 +1,23 @@
 #pragma once
 
+#include "ressources.h"
+
 #include <citem.h>
 
 #include <string>
 #include <vector>
 
+#include "ressources.h"
+
 class CEquipment : public CItem
 {
 public:
-    enum class EType
-    {
-        eSword,
-        eShield,
-        eArmor,
-        eOther
-    };
-
-    enum class EQuality
-    {
-        eJunk,
-        eFair,
-        eGood,
-        eAwesomne
-    };
-
-    CEquipment();
+    CEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality);
 
     virtual bool isEnhancable() const;
     virtual std::string name() const override;
     virtual std::string typeName() const = 0;
+    virtual unsigned int value() const override;
 
     virtual unsigned int level() const;
     virtual unsigned int upgradeCost() const;
@@ -53,11 +42,12 @@ public:
 
 protected:
     bool doesEquipmentEffectFire() const;
+    unsigned int qualityModifier() const;
 
     unsigned int _level = 0;
     std::vector<std::string> _namesByLevel;
     unsigned int _levelCap = 0;
 
-    EType _type;
-    EQuality _quality;
+    Ressources::Items::EType _type;
+    Ressources::Items::EQuality _quality;
 };

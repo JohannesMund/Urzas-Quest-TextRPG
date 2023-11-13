@@ -55,9 +55,6 @@ set(URZAS_QUEST_SOURCES
     items/equipment/csword.h items/equipment/csword.cpp
     items/equipment/cshield.h items/equipment/cshield.cpp
     items/equipment/carmor.h items/equipment/carmor.cpp
-    items/equipment/cjunkshield.h items/equipment/cjunkshield.cpp
-    items/equipment/cjunksword.h items/equipment/cjunksword.cpp
-    items/equipment/cjunkarmor.h items/equipment/cjunkarmor.cpp
 
     items/citem.h items/citem.cpp
     items/itemfactory.h items/itemfactory.cpp
@@ -107,8 +104,7 @@ set(URZAS_QUEST_SOURCES
     modules/lakeoftears/clakeoftearsboss.h modules/lakeoftears/clakeoftearsboss.cpp
 )
 
-add_executable(UrzasQuest ${URZAS_QUEST_SOURCES}
-    )
+add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
 
 
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})

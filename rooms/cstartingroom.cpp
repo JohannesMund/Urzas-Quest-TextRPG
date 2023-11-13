@@ -1,9 +1,9 @@
 #include "cstartingroom.h"
+#include "cequipment.h"
 #include "cgamemanagement.h"
-#include "cjunkshield.h"
-#include "cjunksword.h"
 #include "cmenu.h"
 #include "console.h"
+#include "itemfactory.h"
 
 #include <format>
 
@@ -22,7 +22,7 @@ void CStartingRoom::execute()
         return;
     }
 
-    auto sword = new CJunkSword();
+    auto sword = ItemFactory::makeEquipment(Ressources::Items::EType::eSword, Ressources::Items::EQuality::eJunk);
 
     CMenu menu;
     menu.addMenuGroup({menu.createAction("Take it"), menu.createAction("Leave it")});
@@ -57,7 +57,7 @@ void CStartingRoom::execute()
         }
     } while (input.key != 't');
 
-    auto shield = new CJunkShield();
+    auto shield = ItemFactory::makeEquipment(Ressources::Items::EType::eShield, Ressources::Items::EQuality::eJunk);
 
     Console::br();
     Console::printLn("Having the sword, you look further. You still do not feel like a big, sturdy warrior. "
