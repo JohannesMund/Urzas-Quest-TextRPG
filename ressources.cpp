@@ -196,7 +196,7 @@ std::string Ressources::urza()
 
 std::string Ressources::urzaWhoTheFuckIsUrza()
 {
-    return std::format("{}{}", urza(), whoTheFuckIsUrza());
+    return std::format("{} {}", urza(), whoTheFuckIsUrza());
 }
 
 std::string Ressources::Items::sock()
