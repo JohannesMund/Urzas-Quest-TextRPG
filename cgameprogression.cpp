@@ -33,8 +33,8 @@ void CGameProgression::initEncounters()
     registerModule(CaveRessources::moduleName(), EGameStage::eSeenBard);
 
     registerModule(LakeTearsRessources::moduleName(), EGameStage::eProvenAsHero);
-    registerModule(SewerRessources::moduleName(), EGameStage::eProvenAsHero);
     registerModule(LaylaRessources::moduleName(), EGameStage::eProvenAsHero);
+    registerModule(SewerRessources::moduleName(), EGameStage::eProvenAsHero);
 
     progressToStage(EGameStage::eStart);
 }

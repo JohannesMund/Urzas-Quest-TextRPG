@@ -121,3 +121,8 @@ std::string SewerRessources::getBossWeapon()
 {
     return std::format("L{0}ast {1}R{0}essort{1}", CC::fgYellow(), CC::ccReset());
 }
+
+std::string SewerRessources::dungeonEncounterName()
+{
+    return "SewerDungeon";
+}

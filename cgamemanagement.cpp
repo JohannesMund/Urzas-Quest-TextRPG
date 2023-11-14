@@ -117,10 +117,20 @@ void CGameManagement::registerEncounter(CEncounter* encounter)
 
 void CGameManagement::unregisterEncounterByModuleName(const std::string_view& name)
 {
-    auto it = std::remove_if(_encounters.begin(), _encounters.end(), CEncounter::moduleNameFilter(name));
+    auto filterAndRemove = [&name](CEncounter* e)
+    {
+        if (CEncounter::moduleNameFilter(name)(e))
+        {
+            delete e;
+            return true;
+        }
+        return false;
+    };
+
+    auto it = std::remove_if(_encounters.begin(), _encounters.end(), filterAndRemove);
+
     if (it != _encounters.end())
     {
-        delete *it;
         _encounters.erase(it);
     }
 }

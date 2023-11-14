@@ -10,6 +10,7 @@ void deInitModule();
 
 std::string moduleName();
 std::string encounterName();
+std::string dungeonEncounterName();
 
 static const unsigned int fightChance = 15;
 
