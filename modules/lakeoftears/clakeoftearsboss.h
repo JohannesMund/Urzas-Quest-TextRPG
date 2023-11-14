@@ -1,27 +1,13 @@
 #pragma once
 
-#include <cenemy.h>
+#include "ctwoenemies.h"
 
-class CLakeOfTearsBoss : public CEnemy
+class CLakeOfTearsBoss : public CTwoEnemies
 {
 public:
     CLakeOfTearsBoss();
 
     virtual void spoilsOfWar() const override;
-    virtual void preBattleAction() override;
-    virtual void battleAction(bool& endRound) override;
-    virtual void postBattleAction() override;
 
-private:
-    enum class EWho
-    {
-        eBimmelchen,
-        ePimmelchen
-    };
-
-    unsigned int _hp1;
-    unsigned int _hp2;
-
-    EWho _currentTarget = EWho::eBimmelchen;
-    int _lastHp;
+    virtual void passiveBattleAction(CTwoEnemies::EWho who) override;
 };
