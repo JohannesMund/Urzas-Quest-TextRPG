@@ -9,7 +9,7 @@
 CRoom::CRoom()
 {
     _description = Ressources::Rooms::getRandomDescription();
-    _encounterPossible = true;
+    _encounterType = CEncounter::EEncounterType::eNone;
 }
 
 CRoom::~CRoom()
@@ -21,15 +21,13 @@ void CRoom::execute()
     Console::printLn(_description);
     Console::br();
 
-    if (hasTask())
+    if (hasTask() && _task->isAutoExecute())
     {
-        _task->execute();
-        if (_task->isFinished())
-        {
-            delete _task;
-            _task = nullptr;
-            _showInFogOfWar = false;
-        }
+        executeTask();
+    }
+    else
+    {
+        CGameManagement::getInstance()->executeRandomEncounter(_encounterType, _moduleName);
     }
     _seen = true;
 }
@@ -49,7 +47,7 @@ CTask* CRoom::takeTask()
 
 bool CRoom::isTaskPossible() const
 {
-    return _taskPossible && !hasTask();
+    return _isTaskPossible && !hasTask();
 }
 
 bool CRoom::hasTask() const
@@ -65,6 +63,17 @@ bool CRoom::isSpecialRoom() const
 bool CRoom::isEmptyRoom() const
 {
     return false;
+}
+
+void CRoom::executeTask()
+{
+    _task->execute();
+    if (_task->isFinished())
+    {
+        delete _task;
+        _task = nullptr;
+        _showInFogOfWar = false;
+    }
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

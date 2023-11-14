@@ -6,12 +6,12 @@
 
 #include <format>
 
-CInjuredPet::CInjuredPet()
+CInjuredPet::CInjuredPet() : CField()
 {
     _showInFogOfWar = true;
 
-    _encounterPossible = false;
-    _taskPossible = false;
+    _encounterType = CEncounter::EEncounterType::eNone;
+    _isTaskPossible = false;
 }
 
 void CInjuredPet::execute()
@@ -79,8 +79,8 @@ void CInjuredPet::execute()
 
     _showInFogOfWar = false;
 
-    _encounterPossible = true;
-    _taskPossible = true;
+    _encounterType = CEncounter::EEncounterType::eField;
+    _isTaskPossible = true;
 }
 
 std::string CInjuredPet::mapSymbol() const

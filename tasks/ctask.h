@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 /**
  * @brief The CTask class Represents a Task
  * Tasks are placed in a room and are executed, as soon as the room is entered
@@ -35,6 +37,10 @@ public:
      */
     bool isFinished();
 
+    bool isAutoExecute() const;
+    virtual std::string taskNav() const;
+
 protected:
     bool _isFinished = false;
+    bool _isAutoExecute = true;
 };

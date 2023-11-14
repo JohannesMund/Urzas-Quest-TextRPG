@@ -23,7 +23,7 @@ void CCaveBattleEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CCaveBattleEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
 {
-    if (moduleName.compare(CaveRessources::getModuleName()) != 0)
+    if (moduleName.compare(CaveRessources::getEncounterName()) != 0)
     {
         return 0;
     }

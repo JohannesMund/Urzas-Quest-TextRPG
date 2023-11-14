@@ -8,5 +8,4 @@ public:
     CField();
 
     virtual std::string mapSymbol() const;
-    virtual void execute();
 };

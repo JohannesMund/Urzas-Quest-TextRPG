@@ -7,12 +7,12 @@
 #include "ressources.h"
 
 #include <format>
-CShrineOfTheAncients::CShrineOfTheAncients()
+CShrineOfTheAncients::CShrineOfTheAncients() : CField()
 {
     _description = "";
 
-    _encounterPossible = false;
-    _taskPossible = false;
+    _encounterType = CEncounter::EEncounterType::eNone;
+    _isTaskPossible = false;
 
     _showInFogOfWar = true;
 }

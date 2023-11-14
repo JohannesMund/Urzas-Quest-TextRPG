@@ -1,20 +1,10 @@
 #include "cdungeonroom.h"
 #include "cgamemanagement.h"
 
-CDungeonRoom::CDungeonRoom()
+CDungeonRoom::CDungeonRoom() : CRoom()
 {
-    _encounterPossible = true;
-    _taskPossible = true;
-}
-
-void CDungeonRoom::execute()
-{
-    if (_encounterPossible && !hasTask())
-    {
-        CGameManagement::getInstance()->executeRandomEncounter(CEncounter::eDungeon, _moduleName);
-    }
-
-    CRoom::execute();
+    _encounterType = CEncounter::EEncounterType::eDungeon;
+    _isTaskPossible = true;
 }
 
 std::string CDungeonRoom::mapSymbol() const

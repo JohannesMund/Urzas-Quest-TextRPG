@@ -20,6 +20,10 @@ public:
         std::string name;
         std::string display;
         char key;
+        bool operator==(const Action& other) const
+        {
+            return key == other.key;
+        }
     };
 
     /**

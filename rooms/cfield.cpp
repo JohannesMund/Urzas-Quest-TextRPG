@@ -1,20 +1,12 @@
 #include "cfield.h"
 #include "cgamemanagement.h"
 
-CField::CField()
+CField::CField() : CRoom()
 {
+    _encounterType = CEncounter::EEncounterType::eField;
 }
 
 std::string CField::mapSymbol() const
 {
     return CRoom::mapSymbol();
-}
-
-void CField::execute()
-{
-    if (_encounterPossible && !hasTask())
-    {
-        CGameManagement::getInstance()->executeRandomEncounter(CEncounter::eField);
-    }
-    CRoom::execute();
 }

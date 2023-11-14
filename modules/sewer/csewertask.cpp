@@ -13,6 +13,7 @@
 
 CSewerTask::CSewerTask()
 {
+    _isAutoExecute = false;
 }
 
 void CSewerTask::execute()
@@ -51,6 +52,11 @@ void CSewerTask::execute()
         Console::printLn("Thankfullness is different.");
         _isFinished = true;
     }
+}
+
+std::string CSewerTask::taskNav() const
+{
+    return SewerRessources::encounterName();
 }
 
 void CSewerTask::executeDungeon()
