@@ -26,7 +26,7 @@ void CRatFarmTask::execute()
         RatFarmRessources::getTurnip()));
     Console::printLn("Ready for the battle?");
 
-    if (CMenu::yes(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::yes())
     {
         battle();
     }

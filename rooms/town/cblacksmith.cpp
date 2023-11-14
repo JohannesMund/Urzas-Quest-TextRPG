@@ -13,7 +13,7 @@ CBlackSmith::CBlackSmith()
 void CBlackSmith::execute()
 {
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Enhance Item")}, {CMenu::exitAction()});
+    menu.addMenuGroup({menu.createAction("Enhance Item")}, {CMenu::exit()});
     CMenu::Action input;
 
     do
@@ -32,7 +32,7 @@ void CBlackSmith::execute()
             enhanceItem();
         }
 
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }
 
 void CBlackSmith::enhanceItem()

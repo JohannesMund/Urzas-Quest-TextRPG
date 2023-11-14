@@ -11,7 +11,7 @@ CChurch::CChurch()
 void CChurch::execute()
 {
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Get Blessing", 'b')}, {CMenu::exitAction()});
+    menu.addMenuGroup({menu.createAction("Get Blessing", 'b')}, {CMenu::exit()});
     CMenu::Action input;
 
     do
@@ -33,5 +33,5 @@ void CChurch::execute()
             Console::confirmToContinue();
         }
 
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }

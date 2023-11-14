@@ -27,7 +27,7 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
     Console::printLn("This sounds totally trustworthy. Do you want to see what he has to offer?");
     Console::br();
 
-    if (CMenu::reject(CMenu::executeAcceptRejectMenu()))
+    if (CMenu::executeAcceptRejectMenu() == CMenu::reject())
     {
         Console::printLn(
             "Well... A shaday dealer in the middle of nowhere. You might not be the brightest of them all, but...");

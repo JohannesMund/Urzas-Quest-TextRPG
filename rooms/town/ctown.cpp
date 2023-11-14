@@ -51,7 +51,7 @@ void CTown::execute()
             taskAction = menu.createAction(_task->taskNav());
             navs.push_back(taskAction);
         }
-        menu.addMenuGroup(navs, {CMenu::exitAction()});
+        menu.addMenuGroup(navs, {CMenu::exit()});
 
         input = menu.execute();
 
@@ -87,7 +87,7 @@ void CTown::execute()
         Console::br();
         Console::printLn(_description);
 
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }
 
 std::string CTown::mapSymbol() const
