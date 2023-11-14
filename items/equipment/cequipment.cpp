@@ -65,8 +65,8 @@ void CEquipment::enhance()
         return;
     }
 
-    _level++;
     Console::printLn(std::format("your {} has been upgraded to to a {}", nameByLevel(_level), nameByLevel(_level + 1)));
+    _level++;
 }
 
 std::function<bool(const CItem*)> CEquipment::equipmentFilter()
@@ -129,9 +129,9 @@ std::string CEquipment::nameByLevel(const unsigned int level) const
         return "something";
     }
 
-    if (level > _namesByLevel.size())
+    if (level >= _namesByLevel.size())
     {
-        return _namesByLevel.at(_namesByLevel.size());
+        return _namesByLevel.at(_namesByLevel.size() - 1);
     }
-    return _namesByLevel.at(level);
+    return _namesByLevel.at(level - 1);
 }

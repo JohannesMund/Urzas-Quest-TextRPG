@@ -155,6 +155,7 @@ void CShop::sellItems()
     }
 
     sellItem(item.second, *amount);
+    Console::confirmToContinue();
 }
 
 void CShop::buyItem(CItem* item)
