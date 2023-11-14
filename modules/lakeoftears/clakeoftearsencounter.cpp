@@ -30,7 +30,7 @@ void CLakeOfTearsEncounter::execute(const std::string_view& moduleName)
                     "Again, you hear this name: {0}, you ask the old man, but all he tells you is, that the "
                     "river, which provides the water for the village has become salty for month now. The "
                     "crops cannot grow any longer, the cattle dies, and the villagers are thirsty.",
-                    Ressources::urza()));
+                    Ressources::Game::urza()));
     Console::br();
     Console::printLn("Do you want to offer some help?");
 

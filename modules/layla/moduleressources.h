@@ -7,6 +7,9 @@ namespace LaylaRessources
 void initModule();
 void deInitModule();
 
-std::string layla();
 std::string moduleName();
+
+std::string piefke();
+std::string schniefke();
+
 } // namespace LaylaRessources

@@ -28,7 +28,6 @@ void CLakeOfTearsBoss::spoilsOfWar() const
 
 void CLakeOfTearsBoss::passiveBattleAction(EWho who)
 {
-
     auto dmg = Randomizer::getRandom(3);
     if (dmg > 0)
     {

@@ -154,10 +154,7 @@ void CShop::sellItems()
         return;
     }
 
-    for (int i = 0; i < amount; i++)
-    {
-        sellItem(item.second);
-    }
+    sellItem(item.second, *amount);
 }
 
 void CShop::buyItem(CItem* item)
@@ -174,10 +171,16 @@ void CShop::buyItem(CItem* item)
     Console::confirmToContinue();
 }
 
-void CShop::sellItem(CItem* item)
+void CShop::sellItem(CItem* item, const unsigned int amount)
 {
-    CGameManagement::getPlayerInstance()->addGold(item->value());
-    CGameManagement::getInventoryInstance()->removeItem(item->name());
+    auto value = item->value();
+    auto name = item->name();
+
+    for (int i = 0; i < amount; i++)
+    {
+        CGameManagement::getPlayerInstance()->addGold(value);
+        CGameManagement::getInventoryInstance()->removeItem(name);
+    }
 }
 
 void CShop::replaceShopItems()

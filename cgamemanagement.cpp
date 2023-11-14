@@ -56,6 +56,11 @@ void CGameManagement::placeTask(CTask* task)
     _map.setTaskToRandomRoom(task);
 }
 
+void CGameManagement::placeTaskOnTown(CTask* task)
+{
+    _map.setTaskToRandomRoom(task, true);
+}
+
 void CGameManagement::start()
 {
     init();

@@ -13,7 +13,10 @@ public:
         eStart,
         eSeenBard,
         eProvenAsHero,
-        eLearnedAboutCult
+        eLearnedAboutCult,
+        eFoundCult,
+        eFoundUrza,
+        eFinale
     };
 
     void initEncounters();

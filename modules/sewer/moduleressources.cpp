@@ -109,7 +109,7 @@ std::string SewerRessources::getBossRoomDescription()
                        "depth of the towns cloaca. Its not that you care all too much about religion, or the specific "
                        "flavour of some god but this is interesting. it seems like this is a shrine for someone callen "
                        "{}. It seems you have just gotten one step closer",
-                       Ressources::urza());
+                       Ressources::Game::urza());
 }
 
 std::string SewerRessources::getColoredBossString()

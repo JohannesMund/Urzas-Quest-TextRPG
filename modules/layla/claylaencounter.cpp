@@ -35,7 +35,7 @@ void CLaylaEncounter::execute(const std::string_view& moduleName)
     Console::printLn(std::format(
         "You ask him what happened, and he tells you, that he was guaring {} and they got ambushed by highwaymen. The "
         "usual story, log on the street, cart crashes, guard is beaten up, princess is kidnapped.",
-        LaylaRessources::layla()));
+        Ressources::Game::princessLayla()));
     Console::printLn("Since this guy is seriously injured and the princess should be rescued soon (is she hot?) it is "
                      "up to you to do the job.");
     Console::br();
@@ -59,12 +59,12 @@ void CLaylaEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CLaylaEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
 {
-    return 9999;
+    return 5;
 }
 
 std::string CLaylaEncounter::name() const
 {
-    return std::format("{1}Kidnapped {0}P{1}rincess{2}", CC::fgLightMagenta(), CC::fgBlue(), CC::ccReset());
+    return std::format("{1}Kidnapped {0}P{1}rincess{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
 }
 
 std::string CLaylaEncounter::moduleName() const

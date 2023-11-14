@@ -41,7 +41,7 @@ void CDancingBard::execute(const std::string_view& moduleName)
         "At the climax of his show, the {} sings a song, everybody seems to know. Again and again everybody shouts:",
         name()));
     Console::br();
-    Console::printLn(Ressources::urzaWhoTheFuckIsUrza(), Console::EAlignment::eCenter);
+    Console::printLn(Ressources::Game::urzaWhoTheFuckIsUrza(), Console::EAlignment::eCenter);
     Console::br();
     Console::printLn(std::format(
         "This song touches you. So much, that you really start to poner, who on earth this {}Ur{}za{} might be.",

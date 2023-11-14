@@ -20,6 +20,7 @@ public:
     static CGameProgression* getProgressionInstance();
 
     void placeTask(CTask* task);
+    void placeTaskOnTown(CTask* task);
 
     void executeRandomEncounter(const CEncounter::EEncounterType type, const std::string& moduleName = {}) const;
     void registerEncounter(CEncounter* encounter);

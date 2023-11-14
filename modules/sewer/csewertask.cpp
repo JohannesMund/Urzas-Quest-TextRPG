@@ -51,7 +51,7 @@ void CSewerTask::execute()
         "asking around for the secret chapel you found down there, but as soon as you ask, or use the word {0} "
         "people stop talking or evade the talk. Eventually, one of the towns elders warns you, to continue asking "
         "questions about {0} or talking about anything you have seen down there.",
-        Ressources::urza()));
+        Ressources::Game::urza()));
     Console::printLn("Thankfullness is different.");
     _isFinished = true;
 }

@@ -17,11 +17,6 @@ std::string CaveRessources::getRandomDescription()
          "very hungry. Well, very, very very hungry"});
 }
 
-std::string CaveRessources::getEncounterName()
-{
-    return "Mysterious Cave";
-}
-
 std::string CaveRessources::getRandomEnemyName()
 {
     return Randomizer::getRandomStringFromVector({

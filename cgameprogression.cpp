@@ -31,11 +31,10 @@ void CGameProgression::initEncounters()
 
     registerModule(RatFarmRessources::moduleName(), EGameStage::eSeenBard);
     registerModule(CaveRessources::moduleName(), EGameStage::eSeenBard);
-    registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eSeenBard);
 
     registerModule(LakeTearsRessources::moduleName(), EGameStage::eProvenAsHero);
     registerModule(SewerRessources::moduleName(), EGameStage::eProvenAsHero);
-    registerModule(LaylaRessources::moduleName(), EGameStage::eStart);
+    registerModule(LaylaRessources::moduleName(), EGameStage::eProvenAsHero);
 
     progressToStage(EGameStage::eStart);
 }
@@ -227,7 +226,7 @@ void CGameProgression::progressToStage(EGameStage stage)
             std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
                         BardRessources::encounterName()));
         Console::br();
-        Console::printLn(Ressources::whoTheFuckIsUrza());
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza());
         Console::br();
         Console::printLn("You will have to find out.");
         break;
@@ -237,13 +236,25 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.");
         Console::printLn(
             std::format("But also know, that {} is a huge thing here, which brings you back, to your question:",
-                        Ressources::urza()));
+                        Ressources::Game::urza()));
         Console::br();
-        Console::printLn(Ressources::whoTheFuckIsUrza());
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza());
         Console::br();
         Console::printLn("Well, you are getting closer.");
         break;
     case EGameStage::eLearnedAboutCult:
+        Console::printLn("Chapter 3", Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(
+            std::format("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()));
+        Console::br();
+        Console::printLn(
+            std::format("But who the fuck are {} and {}", Ressources::Game::fiego(), Ressources::Game::brock()));
+        Console::br();
+        Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
+                                     Ressources::Game::princessLayla()));
+        break;
+
     default:
         break;
     }

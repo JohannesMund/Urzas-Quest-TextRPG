@@ -20,8 +20,12 @@ std::string LaylaRessources::moduleName()
     return "RescuePrincessLayla";
 }
 
-std::string LaylaRessources::layla()
+std::string LaylaRessources::piefke()
 {
+    return std::format("{0}Pi{1}ef{0}ke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+}
 
-    return std::format("{1}Princess {0}L{1}ayla{2}", CC::fgLightMagenta(), CC::fgBlue(), CC::ccReset());
+std::string LaylaRessources::schniefke()
+{
+    return std::format("{1}Sch{0}nie{1}fke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }

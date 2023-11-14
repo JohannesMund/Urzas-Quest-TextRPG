@@ -77,12 +77,12 @@ void CRatFarmTask::battle()
     Console::printLn(std::format("You are pondering what is worse, the rats, or the {0}s. You decide, not to think "
                                  "about this any more, and get away, as long you are able to carry all those {0}s",
                                  RatFarmRessources::getTurnip()));
-    Console::printLn(std::format("\"My {} bless you!\", is the last thing you hear from lady {}.",
-                                 RatFarmRessources::getCarrot(),
-                                 Ressources::urza()));
+    Console::printLn(std::format("\"May {} bless you!\", is the last thing you hear from lady {}.",
+                                 Ressources::Game::urza(),
+                                 RatFarmRessources::getCarrot()));
     Console::printLn(std::format("Again, this {} dude. {}??? well you will have to find out.",
-                                 Ressources::urza(),
-                                 Ressources::whoTheFuckIsUrza()));
+                                 Ressources::Game::urza(),
+                                 Ressources::Game::whoTheFuckIsUrza()));
 
     RatFarmRessources::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 7);
     CGameManagement::getProgressionInstance()->reportModuleFinished(RatFarmRessources::moduleName());

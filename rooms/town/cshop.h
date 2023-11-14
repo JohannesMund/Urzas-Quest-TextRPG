@@ -18,7 +18,7 @@ private:
     void buyItems();
     void sellItems();
     void buyItem(CItem* item);
-    void sellItem(CItem* item);
+    void sellItem(CItem* item, const unsigned int amount);
 
     void replaceShopItems();
     std::vector<CItem*> _shopItems;
