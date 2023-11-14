@@ -35,23 +35,25 @@ void CSewerTask::execute()
     Console::printLn("Do you think it is time to go down now?");
     Console::br();
 
-    if (CMenu::yes(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::no())
     {
-        executeDungeon();
-
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
-        Console::printLn(std::format(
-            "You bring the children back to the surface and everybody is happy to see them again. You instantly start "
-            "asking around for the secret chapel you found down there, but as soon as you ask, or use the word {0} "
-            "people stop talking or evade the talk. Eventually, one of the towns elders warns you, to continue asking "
-            "questions about {0} or talking about anything you have seen down there.",
-            Ressources::urza()));
-        Console::printLn("Thankfullness is different.");
-        _isFinished = true;
+        return;
     }
+
+    executeDungeon();
+
+    if (CGameManagement::getPlayerInstance()->isDead())
+    {
+        return;
+    }
+    Console::printLn(std::format(
+        "You bring the children back to the surface and everybody is happy to see them again. You instantly start "
+        "asking around for the secret chapel you found down there, but as soon as you ask, or use the word {0} "
+        "people stop talking or evade the talk. Eventually, one of the towns elders warns you, to continue asking "
+        "questions about {0} or talking about anything you have seen down there.",
+        Ressources::urza()));
+    Console::printLn("Thankfullness is different.");
+    _isFinished = true;
 }
 
 std::string CSewerTask::taskNav() const
@@ -61,7 +63,7 @@ std::string CSewerTask::taskNav() const
 
 void CSewerTask::executeDungeon()
 {
-    CSewerDungeonMap map(13, 25);
+    CSewerDungeonMap map(12, 19);
     map.setStartingPosition({10, 7});
     map.init();
 

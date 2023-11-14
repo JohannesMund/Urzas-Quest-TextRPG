@@ -40,9 +40,7 @@ void CInventory::addItem(CItem* item)
             Console::printLn(std::format(
                 "Your already have a {} do you want to replace it with {}", equipment->typeName(), equipment->name()));
 
-            auto input = CMenu::executeYesNoMenu();
-
-            if (CMenu::no(input))
+            if (CMenu::executeYesNoMenu() == CMenu::no())
             {
                 Console::printLn(std::format("You decide to keep {} and reject {}.", (*it)->name(), item->name()));
                 delete item;
@@ -83,7 +81,7 @@ void CInventory::print(const Scope& scope)
     {
         Console::hr();
         CMenu menu;
-        menu.addMenuGroup({menu.createAction("Use Item"), menu.createAction("View Item")}, {CMenu::exitAction()});
+        menu.addMenuGroup({menu.createAction("Use Item"), menu.createAction("View Item")}, {CMenu::exit()});
         input = menu.execute();
 
         if (input.key == 'u')
@@ -94,7 +92,7 @@ void CInventory::print(const Scope& scope)
         {
             printViewableItems();
         }
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }
 
 CInventory::ItemList CInventory::getItemsWithBattleEffect() const

@@ -40,7 +40,7 @@ void CSewerEncounter::execute(const std::string_view& moduleName)
     Console::printLn("Do you accept your new quest?");
     Console::br();
 
-    if (CMenu::reject(CMenu::executeAcceptRejectMenu()))
+    if (CMenu::executeAcceptRejectMenu() == CMenu::reject())
     {
         Console::printLn("You decide not to. You give the townsfolk a lecture about \"You-Problems vs. Me-Problems\", "
                          "and reject their quest.");

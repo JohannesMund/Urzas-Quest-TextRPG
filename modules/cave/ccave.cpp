@@ -18,7 +18,7 @@ CCave::CCave()
 void CCave::execute()
 {
     Console::printLn("There is a cave, do you want to have a look?");
-    if (CMenu::yes(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::yes())
     {
         CCaveDungeonMap map(25, 10);
         map.setStartingPosition({0, 0});

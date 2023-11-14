@@ -27,7 +27,7 @@ void CRatFarmEncounter::execute(const std::string_view& moduleName)
     Console::printLn(std::format("\"No, {}s\", she corrects you.", RatFarmRessources::getTurnip()));
     Console::printLn("\"But rats eat all my harvest, please, dear hero, please help me!\"");
     Console::br();
-    if (CMenu::reject(CMenu::executeAcceptRejectMenu()))
+    if (CMenu::executeAcceptRejectMenu() == CMenu::reject())
     {
         Console::printLn(std::format("You dont like {}, you don't like rats, and this lady is strange "
                                      "anyways. You decide to decline and go.",

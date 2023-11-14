@@ -64,7 +64,7 @@ void CDungeon::dungeonLoop()
         std::vector<CMenu::Action> exitActionHalf = {};
         if (_map->isExitAvailable())
         {
-            exitActionHalf.push_back(CMenu::exitAction());
+            exitActionHalf.push_back(CMenu::exit());
         }
 
         menu.addMenuGroup({menu.createAction("Reveal")}, exitActionHalf);
@@ -97,7 +97,7 @@ void CDungeon::dungeonLoop()
                 _map->printMap();
                 Console::confirmToContinue();
             }
-            if (CMenu::exit(input))
+            if (input == CMenu::exit())
             {
                 return;
             }

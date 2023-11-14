@@ -23,7 +23,7 @@ void CTavern::execute()
     {
         navs.push_back(menu.createAction("Bounty Hunt"));
     }
-    menu.addMenuGroup(navs, {CMenu::exitAction()});
+    menu.addMenuGroup(navs, {CMenu::exit()});
 
     do
     {
@@ -50,7 +50,7 @@ void CTavern::execute()
             Console::confirmToContinue();
         }
 
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }
 
 void CTavern::bountyHunt()
@@ -72,8 +72,7 @@ void CTavern::bountyHunt()
     Console::printLn("This guy shure looks dangerous, but the reward should be worth it. But the guy looks dangerous.");
     Console::hr();
 
-    auto input = CMenu::executeAcceptRejectMenu();
-    if (CMenu::accept(input))
+    if (CMenu::executeAcceptRejectMenu() == CMenu::accept())
     {
         Console::printLn("You feel brave and relentless, and decide to hunt this sucker down. You rip of his poster, "
                          "ask around for his whereabouts and start your hunt");

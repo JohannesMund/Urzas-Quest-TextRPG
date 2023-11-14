@@ -34,7 +34,7 @@ void CLakeOfTearsEncounter::execute(const std::string_view& moduleName)
     Console::br();
     Console::printLn("Do you want to offer some help?");
 
-    if (CMenu::accept(CMenu::executeAcceptRejectMenu()))
+    if (CMenu::executeAcceptRejectMenu() == CMenu::accept())
     {
         Console::br();
         Console::printLn("You remember what it means, to be a hero, agree to help the poor people.");

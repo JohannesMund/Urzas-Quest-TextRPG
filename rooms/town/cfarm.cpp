@@ -39,17 +39,17 @@ void CFarm::execute()
                 Console::printLn("This sounds like a bargain!");
                 ;
                 menu.addMenuGroup({menu.createAction(std::format("Train ({} Gold)", getTrainingCost()))},
-                                  {CMenu::exitAction()});
+                                  {CMenu::exit()});
             }
             else
             {
                 Console::printLn("This is too much! a little running around with you should do the same.");
-                menu.addMenuGroup({}, {CMenu::exitAction()});
+                menu.addMenuGroup({}, {CMenu::exit()});
             }
         }
         else
         {
-            menu.addMenuGroup({}, {CMenu::exitAction()});
+            menu.addMenuGroup({}, {CMenu::exit()});
         }
 
         input = menu.execute();
@@ -60,7 +60,7 @@ void CFarm::execute()
             Console::confirmToContinue();
         }
 
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }
 
 void CFarm::train()

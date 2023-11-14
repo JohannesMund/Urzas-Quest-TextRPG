@@ -192,8 +192,12 @@ void CGameManagement::executeTurn()
         auto input = menu.execute();
         if (input.key == 'q')
         {
-            _isGameOver = true;
-            return;
+            Console::printLn("Quit game? (No save, no mercy!");
+            if (CMenu::executeYesNoMenu() == CMenu::yes())
+            {
+                _isGameOver = true;
+                return;
+            }
         }
 
         if (CMap::string2Direction(input.name) != CMap::EDirections::eNone)

@@ -90,59 +90,26 @@ public:
     /**
      * @brief yesAction Predefined Action "[Y]es"
      */
-    static Action yesAction();
+    static Action yes();
     /**
      * @brief noAction Predefined Action "[N]o"
      */
-    static Action noAction();
+    static Action no();
 
     /**
      * @brief acceptAction Predefined Action "[A]ccept"
      */
-    static Action acceptAction();
+    static Action accept();
 
     /**
      * @brief rejectAction Predefined Action "[R]eject"
      */
-    static Action rejectAction();
+    static Action reject();
 
     /**
      * @brief exitAction Predefined Action "E[x]it"
      */
-    static Action exitAction();
-
-    /**
-     * @brief yes check, if action a is "[Y]es"
-     * @sa yesAction()
-     */
-    static bool yes(const Action& a);
-
-    /**
-     * @brief no check, if action is "[N]o"
-     * @sa noAction()
-     * @return
-     */
-    static bool no(const Action& a);
-
-    /**
-     * @brief accept check, if action is "[A]ccept"
-     * @sa acceptAction()
-     * @return
-     */
-    static bool accept(const Action& a);
-
-    /**
-     * @brief reject check, if action is "[R]eject"
-     * @sa rejectAction()
-     * @return
-     */
-    static bool reject(const Action& a);
-
-    /**
-     * @brief exit check, if action is "E[x]it"
-     * @sa exitAction()
-     */
-    static bool exit(const Action& a);
+    static Action exit();
 
 private:
     Action findActionByInput() const;

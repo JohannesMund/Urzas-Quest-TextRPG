@@ -14,7 +14,7 @@ void CHealingWell::execute()
     Console::br();
     Console::printLn(_question);
     Console::br();
-    if (CMenu::yes(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::yes())
     {
         Console::printLn(_effect);
         CGameManagement::getPlayerInstance()->addHp(9999);

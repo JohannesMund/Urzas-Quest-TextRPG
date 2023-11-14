@@ -59,7 +59,7 @@ void CShop::execute()
             menu.addMenuGroup({menu.createAction(std::format("Sell your Junk ({} Gold)", value), 'j')});
         }
 
-        menu.addMenuGroup({menu.createAction("Buy items"), menu.createAction("Sell items")}, {CMenu::exitAction()});
+        menu.addMenuGroup({menu.createAction("Buy items"), menu.createAction("Sell items")}, {CMenu::exit()});
         input = menu.execute();
         if (input.key == 'j')
         {
@@ -74,7 +74,7 @@ void CShop::execute()
             sellItems();
         }
 
-    } while (!CMenu::exit(input));
+    } while (input != CMenu::exit());
 }
 
 void CShop::sellJunk(CInventory::JunkItemList& junkItems)

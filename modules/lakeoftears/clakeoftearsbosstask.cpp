@@ -27,7 +27,7 @@ void CLakeOfTearsBossTask::execute()
     Console::br();
     Console::printLn("Go closer and have a look?");
 
-    if (CMenu::no(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::no())
     {
         Console::printLn("This is too weird, even for your standards.");
         return;

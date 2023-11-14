@@ -58,9 +58,9 @@ void CShrineOfTheAncients::visit()
 
     CMenu menu;
 
-    menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exitAction()});
+    menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
 
-    if (CMenu::exit(menu.execute()))
+    if (menu.execute() == CMenu::exit())
     {
         return;
     }
@@ -97,7 +97,7 @@ void CShrineOfTheAncients::firstVisitStart()
     Console::printLn(ancientShrine());
     Console::printLn("Do you want to have a look?");
 
-    if (CMenu::no(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::no())
     {
         Console::printLn("You probably have seen enough, and leave this place.");
         return;

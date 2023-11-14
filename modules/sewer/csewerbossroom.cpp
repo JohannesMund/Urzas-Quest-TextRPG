@@ -32,7 +32,7 @@ void CSewerBossRoom::execute()
         "Nevertheless, from a small room you can clearly hear the missing children. And something else...");
     Console::printLn("Do you want to free the children now?");
 
-    if (CMenu::no(CMenu::executeYesNoMenu()))
+    if (CMenu::executeYesNoMenu() == CMenu::no())
     {
         Console::printLn("You are not done yet. You will return later.");
         return;
