@@ -63,6 +63,7 @@ CMenu::Action CMenu::createAction(const std::string_view& s, const char c)
     {
         menuAction.display = makeDisplayString(s, c);
         menuAction.key = std::tolower(c);
+        addNav(std::tolower(c));
         return menuAction;
     }
 
@@ -70,8 +71,9 @@ CMenu::Action CMenu::createAction(const std::string_view& s, const char c)
     {
         if (isNavPossible(cc))
         {
-            menuAction.key = std::tolower(cc);
             menuAction.display = makeDisplayString(s, cc);
+            menuAction.key = std::tolower(cc);
+            addNav(std::tolower(cc));
             return menuAction;
         }
     }
@@ -212,6 +214,9 @@ void CMenu::addNav(const char c)
 {
     if (c != 0)
     {
-        _acceptableNavs.push_back(c);
+        if (isNavPossible(c))
+        {
+            _acceptableNavs.push_back(c);
+        }
     }
 }

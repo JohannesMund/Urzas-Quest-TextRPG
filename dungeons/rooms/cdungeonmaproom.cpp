@@ -1,6 +1,6 @@
 #include "cdungeonmaproom.h"
 
-CDungeonMapRoom::CDungeonMapRoom()
+CDungeonMapRoom::CDungeonMapRoom() : CDungeonRoom()
 {
 }
 

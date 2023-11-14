@@ -9,6 +9,8 @@ public:
 
     virtual void execute() override;
 
+    virtual std::string taskNav() const override;
+
 private:
     void executeDungeon();
 };

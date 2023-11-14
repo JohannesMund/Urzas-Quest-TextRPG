@@ -7,10 +7,10 @@
 
 #include <format>
 
-CStartingRoom::CStartingRoom()
+CStartingRoom::CStartingRoom() : CField()
 {
-    _encounterPossible = false;
-    _taskPossible = false;
+    _encounterType = CEncounter::EEncounterType::eNone;
+    _isTaskPossible = false;
 }
 
 void CStartingRoom::execute()
@@ -91,8 +91,8 @@ void CStartingRoom::execute()
 
     CRoom::execute();
 
-    _encounterPossible = true;
-    _taskPossible = true;
+    _encounterType = CEncounter::EEncounterType::eField;
+    _isTaskPossible = true;
 }
 
 std::string CStartingRoom::mapSymbol() const

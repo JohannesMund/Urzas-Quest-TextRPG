@@ -17,7 +17,7 @@ std::string CaveRessources::getRandomDescription()
          "very hungry. Well, very, very very hungry"});
 }
 
-std::string CaveRessources::getModuleName()
+std::string CaveRessources::getEncounterName()
 {
     return "Mysterious Cave";
 }

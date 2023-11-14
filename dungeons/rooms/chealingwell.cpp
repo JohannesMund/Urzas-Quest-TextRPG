@@ -3,7 +3,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CHealingWell::CHealingWell()
+CHealingWell::CHealingWell() : CDungeonRoom()
 {
 }
 

@@ -287,7 +287,6 @@ void CGameManagement::gameLoop()
     while (!_isGameOver)
     {
         _progression.progress();
-        Console::cls();
         executeTurn();
         handlePlayerDeath();
         if (_player.isDead())

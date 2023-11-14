@@ -1,4 +1,5 @@
 #pragma once
+#include "cencounter.h"
 #include "cmap.h"
 
 #include <string>
@@ -34,17 +35,20 @@ public:
     virtual bool isEmptyRoom() const;
 
 protected:
+    void executeTask();
+
     bool _pathNorth = true;
     bool _pathEast = true;
     bool _pathSouth = true;
     bool _pathWest = true;
-
-    bool _encounterPossible = true;
-    bool _taskPossible = true;
 
     bool _showInFogOfWar = false;
     bool _seen = false;
     std::string _description;
 
     CTask* _task = nullptr;
+    bool _isTaskPossible = true;
+
+    CEncounter::EEncounterType _encounterType;
+    std::string _moduleName;
 };

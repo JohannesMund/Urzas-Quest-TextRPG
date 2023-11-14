@@ -2,8 +2,8 @@
 
 CDungeonRoomNoRoom::CDungeonRoomNoRoom()
 {
-    _taskPossible = false;
-    _encounterPossible = false;
+    _isTaskPossible = false;
+    _encounterType = CEncounter::EEncounterType::eNone;
 
     _pathNorth = false;
     _pathSouth = false;
