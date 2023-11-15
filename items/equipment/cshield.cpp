@@ -13,14 +13,14 @@ CShield::CShield(const Ressources::Items::EQuality quality) : CEquipment(Ressour
 
 void CShield::battleEffect(CEnemy* enemy)
 {
-    Console::printLn(std::format("You raise your {} to protect you.", _name));
+    Console::printLn(std::format("You raise your {} to protect you.", name()));
 }
 
 void CShield::battleBuff(CEnemy* enemy, bool& endRound)
 {
     if (doesEquipmentEffectFire())
     {
-        Console::printLn(std::format("Your {} reflects some damage from the enemy attack", _name));
+        Console::printLn(std::format("Your {} reflects some damage from the enemy attack", name()));
         enemy->dealDamage(shieldDamage());
         endRound = true;
     }

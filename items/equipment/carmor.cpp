@@ -15,7 +15,7 @@ CArmor::CArmor(const Ressources::Items::EQuality quality) : CEquipment(Ressource
 void CArmor::battleEffect(CEnemy* enemy)
 {
     Console::printLn(std::format(
-        "You feel confident, that your {} will protect you from the furious attacks of {}", _name, enemy->name()));
+        "You feel confident, that your {} will protect you from the furious attacks of {}", name(), enemy->name()));
 }
 
 int CArmor::shield(const unsigned int i)

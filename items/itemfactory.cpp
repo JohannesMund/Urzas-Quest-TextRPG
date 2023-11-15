@@ -104,7 +104,7 @@ CItem* ItemFactory::makeEquipment(const Ressources::Items::EType type, const Res
     {
     case Ressources::Items::EType::eWeapon:
     default:
-        return new CSword(quality);
+        return new CWeapon(quality);
     case Ressources::Items::EType::eShield:
         return new CShield(quality);
     case Ressources::Items::EType::eArmor:

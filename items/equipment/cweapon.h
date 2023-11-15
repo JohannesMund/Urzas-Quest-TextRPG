@@ -4,10 +4,10 @@
 #include "ressources.h"
 
 class CEnemy;
-class CSword : public CEquipment
+class CWeapon : public CEquipment
 {
 public:
-    CSword(const Ressources::Items::EQuality quality);
+    CWeapon(const Ressources::Items::EQuality quality);
 
     virtual void battleEffect(CEnemy* enemy) override;
     virtual void battleBuff(CEnemy* enemy, bool& endRound) override;
