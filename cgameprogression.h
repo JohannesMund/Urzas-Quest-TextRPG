@@ -6,6 +6,8 @@
 
 class CGameProgression
 {
+    friend class CGameManagement;
+
 public:
     enum class EGameStage
     {
@@ -21,8 +23,6 @@ public:
 
     void initEncounters();
 
-    CGameProgression();
-
     EGameStage currentGameStage() const;
 
     void progress();
@@ -34,6 +34,8 @@ public:
     unsigned int getBodyCount() const;
 
 private:
+    CGameProgression();
+
     bool isModuleFinished(const std::string_view& moduleName);
     void unFinishModule(const std::string_view& moduleName);
 

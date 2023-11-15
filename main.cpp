@@ -23,7 +23,7 @@ int main()
     char in = Console::getAcceptableInput("sq");
     if (in == 's')
     {
-        CGameManagement::getInstance()->start();
+        CGameManagement::getInstance();
     }
 
     cout << endl;

@@ -26,6 +26,7 @@ CGameManagement* CGameManagement::getInstance()
     {
         static CGameManagement instance;
         _instance = &instance;
+        _instance->start();
     }
 
     return _instance;
@@ -163,21 +164,8 @@ CGameProgression* CGameManagement::getProgression()
 
 void CGameManagement::printHUD()
 {
-
     Console::hr();
     _player.print();
-}
-
-void CGameManagement::printMap()
-{
-    Console::cls();
-    _map.printMap();
-}
-
-void CGameManagement::printInventory()
-{
-    Console::cls();
-    _inventory.print(CInventory::Scope::eList);
 }
 
 void CGameManagement::executeTurn()
@@ -233,12 +221,14 @@ void CGameManagement::executeTurn()
         }
         if (input.key == 'm')
         {
-            printMap();
+            Console::cls();
+            _map.printMap();
             Console::confirmToContinue();
         }
         if (input.key == 'i')
         {
-            printInventory();
+            Console::cls();
+            _inventory.print(CInventory::Scope::eList);
         }
     }
 }
