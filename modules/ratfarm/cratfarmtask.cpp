@@ -17,10 +17,10 @@ CRatFarmTask::CRatFarmTask()
 
 void CRatFarmTask::execute()
 {
-    Console::printLn(
-        std::format("Here you are, the {0} farm, with the {0} house of lady {0}. you are a little hungry, maybe ome "
-                    "{0}s would help now, but all of a sudden, you realize, that {0}s are not a thing for lady {0}.",
-                    RatFarmRessources::getCarrot()));
+    Console::printLn(std::format(
+        "Here you are, the {0} farm, with the {0} house of lady {0}. you are a little hungry, maybe one of the"
+        "{0}s would help now, but all of a sudden, you realize, that {0}s are not a thing for lady {0}.",
+        RatFarmRessources::getCarrot()));
     Console::printLn(std::format(
         "But this is not what matters now, the {} farm is rat-infected, and you have the job to solve this.",
         RatFarmRessources::getTurnip()));
@@ -39,7 +39,7 @@ void CRatFarmTask::execute()
 
 void CRatFarmTask::battle()
 {
-    for (int i = 0; i < RatFarmRessources::ratCount; i++)
+    for (int i = 0; i <= RatFarmRessources::ratCount; i++)
     {
         CRatFarmRat rat;
         CBattle battle(&rat);
@@ -50,7 +50,7 @@ void CRatFarmTask::battle()
             return;
         }
 
-        Console::printLn(std::format("This was rat number {}, but there are more rats to go.", i));
+        Console::printLn(std::format("This was rat number {}, but there are more rats to go.", i + 1));
         Console::confirmToContinue();
     }
 

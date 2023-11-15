@@ -130,7 +130,6 @@ void CGameManagement::unregisterEncounterByModuleName(const std::string_view& na
     };
 
     auto it = std::remove_if(_encounters.begin(), _encounters.end(), filterAndRemove);
-
     if (it != _encounters.end())
     {
         _encounters.erase(it);

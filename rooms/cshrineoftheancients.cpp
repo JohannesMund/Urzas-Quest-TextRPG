@@ -242,7 +242,8 @@ void CShrineOfTheAncients::stats() const
     auto equipment = CGameManagement::getInventoryInstance()->getEquipment();
     for (auto e : equipment)
     {
-        Console::printLnWithSpacer(e->typeName(), std::format("{} Level {}", e->name(), e->level()));
+        Console::printLnWithSpacer(std::format("{}:", e->typeName()),
+                                   std::format("{} (Level {})", e->name(), e->level()));
     }
     Console::confirmToContinue();
 }
