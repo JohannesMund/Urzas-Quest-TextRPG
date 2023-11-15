@@ -15,7 +15,6 @@ CEquipmentDealer::CEquipmentDealer()
 
 void CEquipmentDealer::execute(const std::string_view& moduleName)
 {
-    CGameManagement::getPlayerInstance()->addGold(999999);
     CEncounter::execute();
     _hasBeenExecuted = true;
 
@@ -90,7 +89,7 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
 
 unsigned int CEquipmentDealer::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
 {
-    return 99999;
+    return 2;
 }
 
 std::string CEquipmentDealer::name() const
@@ -100,7 +99,6 @@ std::string CEquipmentDealer::name() const
 
 bool CEquipmentDealer::canBeExecuted(const EEncounterType& tp) const
 {
-    return true;
     if (CGameManagement::getPlayerInstance()->level() < 5)
     {
         return false;
