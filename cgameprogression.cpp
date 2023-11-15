@@ -197,8 +197,13 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn(
             std::format("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()));
         Console::br();
-        Console::printLn(
-            std::format("But who the fuck are {} and {}", Ressources::Game::fiego(), Ressources::Game::brock()));
+
+        Console::printLn("But where there was one question, ther are now three:");
+        Console::printLn(std::format("who the hell is {}?", Ressources::Game::fiego()));
+        Console::printLn(std::format("who in the world is {}?", Ressources::Game::brock()));
+        Console::printLn("And of course:");
+        Console::br();
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza());
         Console::br();
         Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
                                      Ressources::Game::princessLayla()));

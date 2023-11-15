@@ -54,7 +54,6 @@ unsigned int CEquipment::level() const
 
 unsigned int CEquipment::upgradeCost() const
 {
-
     return 150 + (_level * 150 * _level * (qualityModifier() + 1));
 }
 

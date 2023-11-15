@@ -34,12 +34,15 @@ void CLaylaTownTask::execute()
                                  Ressources::Game::urza(),
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock()));
-    Console::printLn("Your search ends in a very dark and shady corner of the town, where you wake up in "
-                     "the gutter with a terrible headache and not the slightest idea, how you came here. Your Money is "
-                     "gone. But you have a new tatoo. It reads:");
+
+    Console::printLn(
+        "Your search ends in a very dark and very shady corner of the town, where you wake up in "
+        "the gutter with a terrible headache and not the slightest idea, what braught you there. Your Money is "
+        "gone. But you have a new tatoo. It reads:");
     Console::printLn(std::format("{} {}is geila{}", Ressources::Game::layla(), CC::fgLightMagenta(), CC::ccReset()),
                      Console::EAlignment::eCenter);
     Console::printLn("Whatever that means.");
+    Console::br();
 
     CGameManagement::getPlayerInstance()->addGold(CGameManagement::getPlayerInstance()->gold() * -1);
     CGameManagement::getProgressionInstance()->reportModuleFinished(LaylaRessources::moduleName());
