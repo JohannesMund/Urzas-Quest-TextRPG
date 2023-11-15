@@ -52,14 +52,14 @@ CGameProgression* CGameManagement::getProgressionInstance()
     return getInstance()->getProgression();
 }
 
-void CGameManagement::placeTask(CTask* task)
+void CGameManagement::placeTaskOnField(CTask* task)
 {
-    _map.setTaskToRandomRoom(task);
+    _map.setTaskToRandomRoom(task, true, false);
 }
 
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, true);
+    _map.setTaskToRandomRoom(task, false, true);
 }
 
 void CGameManagement::start()
@@ -190,7 +190,15 @@ void CGameManagement::executeTurn()
         }
 
         menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
-        menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
+
+        if (Ressources::Config::superCowPowers)
+        {
+            menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
+        }
+        else
+        {
+            menu.addMenuGroup({}, {menu.createAction("Quit Game")});
+        }
 
         auto input = menu.execute();
         if (input.key == 'q')

@@ -41,7 +41,7 @@ void CLakeOfTearsEncounter::execute(const std::string_view& moduleName)
         Console::printLn("The root of all their misery seems to be the salty river, so you should go up the stream and "
                          "look for the source of the salt.");
         Console::br();
-        CGameManagement::getInstance()->placeTask(new CLakeOfTearsTask());
+        CGameManagement::getInstance()->placeTaskOnField(new CLakeOfTearsTask());
         return;
     }
 

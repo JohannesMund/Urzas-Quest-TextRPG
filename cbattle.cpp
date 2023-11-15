@@ -119,13 +119,12 @@ void CBattle::battleLoop()
             switch (hasWonAgainst(playersChoice, _enemy->peek()))
             {
             case CBattle::EBattleResult::eWon:
-                Console::printLn("You hit the enemy.");
-                _enemy->dealDamage(1);
+                _enemy->dealDamage(CGameManagement::getPlayerInstance()->damage());
                 break;
             case CBattle::EBattleResult::eLost:
             {
                 Console::printLn("You got hit.");
-                CGameManagement::getPlayerInstance()->dealDamage(1);
+                CGameManagement::getPlayerInstance()->dealDamage(_enemy->damage());
                 break;
             }
             case CBattle::EBattleResult::eTie:

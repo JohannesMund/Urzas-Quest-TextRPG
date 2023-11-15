@@ -20,7 +20,7 @@ public:
     static CCompanion* getCompanionInstance();
     static CGameProgression* getProgressionInstance();
 
-    void placeTask(CTask* task);
+    void placeTaskOnField(CTask* task);
     void placeTaskOnTown(CTask* task);
 
     void executeRandomEncounter(const CEncounter::EEncounterType type, const std::string& moduleName = {}) const;

@@ -75,7 +75,7 @@ public:
 
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(CTask* task, const bool townsOnly = false);
+    void setTaskToRandomRoom(CTask* task, const bool fields, const bool towns);
 
 protected:
     std::vector<std::vector<CRoom*>> _map;

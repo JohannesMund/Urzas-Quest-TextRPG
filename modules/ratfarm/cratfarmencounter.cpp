@@ -39,7 +39,7 @@ void CRatFarmEncounter::execute(const std::string_view& moduleName)
                                  "duty to save this lady and her {}.",
                                  RatFarmRessources::getTurnip()));
 
-    CGameManagement::getInstance()->placeTask(new CRatFarmTask());
+    CGameManagement::getInstance()->placeTaskOnField(new CRatFarmTask());
     _hasBeenExecuted = true;
 }
 

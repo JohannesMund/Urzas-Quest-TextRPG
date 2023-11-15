@@ -67,7 +67,13 @@ void CDungeon::dungeonLoop()
             exitActionHalf.push_back(CMenu::exit());
         }
 
-        menu.addMenuGroup({menu.createAction("Reveal")}, exitActionHalf);
+        std::vector<CMenu::Action> superCowHalf = {};
+        if (Ressources::Config::superCowPowers)
+        {
+            superCowHalf.push_back(menu.createAction("Reveal"));
+        }
+
+        menu.addMenuGroup(superCowHalf, exitActionHalf);
 
         while (true)
         {

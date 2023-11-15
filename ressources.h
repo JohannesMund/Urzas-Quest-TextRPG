@@ -14,7 +14,7 @@ static const unsigned int consoleWidth = 80;
 namespace Config
 {
 
-unsigned int getXpForLevel(const unsigned int level);
+static const bool superCowPowers = true;
 
 static const unsigned int fieldWidth = 10;
 static const unsigned int fieldHeight = 10;

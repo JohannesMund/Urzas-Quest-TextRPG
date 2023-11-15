@@ -77,6 +77,6 @@ void CTavern::bountyHunt()
         Console::printLn("You feel brave and relentless, and decide to hunt this sucker down. You rip of his poster, "
                          "ask around for his whereabouts and start your hunt");
         auto bountyHunt = new CBountyHunt(bounty.first, reward);
-        CGameManagement::getInstance()->placeTask(bountyHunt);
+        CGameManagement::getInstance()->placeTaskOnField(bountyHunt);
     }
 }

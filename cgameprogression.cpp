@@ -170,7 +170,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn("You have seen quite some things, since you awoke in this strange world.");
         Console::printLn("At least, you have 2 things:");
         Console::printLn(
-            std::format("The matching {} for the {},", Ressources::Items::sock(), Ressources::Items::otherSock()));
+            std::format("The matching {} for the {},", Ressources::Items::otherSock(), Ressources::Items::sock()));
         Console::printLn(
             std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
                         BardRessources::encounterName()));

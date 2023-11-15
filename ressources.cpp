@@ -43,21 +43,25 @@ std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
         {{std::format("{}Boot{}", CC::fgYellow(), CC::ccReset())},
          {"An old, single boot made from leather.Good, expensive leather. But is damaged and dirty. And it is just "
           "a single boot."}},
-        {{"Vase"},
+        {{std::format("V{0}a{1}s{0}e{1}", CC::fgBlue(), CC::ccReset())},
          {"This is one beautiful vase. It will look nice on your table. or on a sideboard. you could fill it with "
-          "flowers. Or you just throw it away, for somone else to find ist."}}};
+          "flowers. Or you just throw it away, for somone else to find ist."}},
+        {{"Flask"},
+         {"An empty flask. Like the ones filled with magic potions, only without the potion. This one is filled with "
+          "nothing."}},
+        {{std::format("{0}Col{1}l{2}ec{0}tio{1}n o{0}f l{3}eav{1}es{4}",
+                      CC::fgYellow(),
+                      CC::fgLightYellow(),
+                      CC::fgLightGreen(),
+                      CC::fgLightRed(),
+                      CC::ccReset())},
+         {"A collection of especially beautiful leaves."}},
+        {{std::format("{}Ring{}", CC::fgYellow(), CC::ccReset())},
+         {std::format("A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for "
+                      "proposing to {}.",
+                      Game::princessLayla())}}};
 
     return items.at(Randomizer::getRandom(items.size()));
-}
-
-unsigned int Ressources::Config::getXpForLevel(const unsigned int level)
-{
-    static const std::vector<int> xpForLevel = {0, 300, 700, 1300, 2000, 4000, 8000, 14000, 20000};
-    if (level < xpForLevel.size())
-    {
-        return xpForLevel.at(level);
-    }
-    return xpForLevel.at(xpForLevel.size() - 1);
 }
 
 std::string Ressources::Enemies::getRandomEnemyName()

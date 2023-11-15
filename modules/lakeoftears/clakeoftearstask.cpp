@@ -63,11 +63,11 @@ void CLakeOfTearsTask::execute()
 
     if (_steps + Randomizer::getRandom(5) > 9)
     {
-        CGameManagement::getInstance()->placeTask(new CLakeOfTearsBossTask());
+        CGameManagement::getInstance()->placeTaskOnField(new CLakeOfTearsBossTask());
     }
     else
     {
-        CGameManagement::getInstance()->placeTask(new CLakeOfTearsTask(_steps + 1));
+        CGameManagement::getInstance()->placeTaskOnField(new CLakeOfTearsTask(_steps + 1));
     }
 
     _isFinished = true;

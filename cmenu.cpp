@@ -11,6 +11,11 @@ CMenu::CMenu()
 
 void CMenu::addMenuGroup(const std::vector<Action>& list1, const std::vector<Action>& list2)
 {
+    if (list1.empty() && list2.empty())
+    {
+        return;
+    }
+
     MenuGroup grp;
 
     for (const auto& a : list1)

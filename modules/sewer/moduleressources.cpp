@@ -30,17 +30,24 @@ std::string SewerRessources::encounterName()
 std::string SewerRessources::getRandomDescription()
 {
     return Randomizer::getRandomStringFromVector(
-        {"It is wet, it is moldy and the smell is disgusting, you don't even want to think about what' it is you's in "
-         "the water you are... oh! was this a Hotdog?",
+        {std::format("It is wet, it is moldy and the smell is disgusting, you don't even want to think about what' it "
+                     "is you's in "
+                     "the water you are... oh! was this a {}?",
+                     hotdog()),
 
          "There is a big hole in the wall, and even more stinking, dirty water fills the sewers. You are pretty sure, "
          "that there are things living down here, you did not even know existed.",
 
-         "Funny, what people are throwing away. There is a lotof pretty-ok stuff. But you should not have eaten that "
-         "hotdog!",
+         std::format("Funny, what people are throwing away. There is a lotof pretty-ok stuff. But you should not have "
+                     "eaten that "
+                     "{}!",
+                     hotdog()),
 
          "You expected more rats, but this seems more like a the cockroach kind of sewer. At least, you have seen lots "
-         "and lots of cockroaches."});
+         "and lots of cockroaches.",
+
+         "There is suspiciously much slime here. it comes out of pipes, drops from the walls and the ceiling. Some of "
+         "it seems to be acidic. You wonder, when it will attack you."});
 }
 
 std::string SewerRessources::getRandomEnemyName()
@@ -49,6 +56,7 @@ std::string SewerRessources::getRandomEnemyName()
                                                   "Spider",
                                                   "Rat",
                                                   "Slime",
+                                                  std::format("{}yellow Slime{}", CC::fgLightYellow(), CC::ccReset()),
                                                   std::format("{}red Slime{}", CC::fgRed(), CC::ccReset()),
                                                   std::format("{}green Slime{}", CC::fgLightGreen(), CC::ccReset()),
                                                   std::format("{}blue Slime{}", CC::fgLightBlue(), CC::ccReset())});
@@ -68,7 +76,9 @@ std::string SewerRessources::getWellDescription(const int i)
         return "This must be the outlet of the local healer. there is a stream of a red fluid, that looks suspiciously "
                "like a healing potion.";
     case 2:
-        return "There is a puddle of suspiciously clear liquid here. it looks magically";
+        return std::format("There is a puddle of suspiciously clear liquid here. it looks magically. You could use "
+                           "something to make you feel better. (Oh, that {}!)",
+                           hotdog());
     }
 }
 
@@ -90,7 +100,8 @@ std::string SewerRessources::getWellEffect(const int i)
     {
     case 1:
     default:
-        return "Its not really clean, but you are used to a lot. (why on earth did you eath that Hotdog?";
+        return std::format("Its not really clean, but you are used to a lot. (why on earth did you eath that {}?",
+                           hotdog());
     case 2:
         return "Well, it works.";
     }
@@ -125,4 +136,9 @@ std::string SewerRessources::getBossWeapon()
 std::string SewerRessources::dungeonEncounterName()
 {
     return "SewerDungeon";
+}
+
+std::string SewerRessources::hotdog()
+{
+    return std::format("{0}H{1}o{2}t{0}dog{3}", CC::fgYellow(), CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset());
 }

@@ -16,7 +16,7 @@ CMobEnemy::CMobEnemy() : CEnemy()
     _level = Randomizer::getRandom(maxLevel - minLevel) + minLevel;
     _initiative = Randomizer::getRandom(3) + 1;
 
-    _hp = Randomizer::getRandom(2) + 1;
+    _hp = Randomizer::getRandom(2) + 5;
 
     if (_level >= 2)
     {

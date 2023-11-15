@@ -29,4 +29,6 @@ std::string getBossRoomDescription();
 std::string getColoredBossString();
 std::string getBossWeapon();
 
+std::string hotdog();
+
 } // namespace SewerRessources
