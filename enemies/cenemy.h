@@ -21,7 +21,7 @@ public:
     virtual void postBattle();
     virtual void spoilsOfWar() const;
 
-    std::string name() const;
+    virtual std::string name() const;
     std::string weapon() const;
     unsigned int level() const;
 

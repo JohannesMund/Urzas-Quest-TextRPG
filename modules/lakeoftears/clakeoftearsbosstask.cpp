@@ -44,12 +44,12 @@ void CLakeOfTearsBossTask::execute()
                     "everybody is evil and nobody likes us and wen want {0} back, and because it is the only thing we "
                     "can do\". You start to understand. You understand everything. You have the whole picture. Ok, all "
                     "but the {0} thing.",
-                    Ressources::urza()));
+                    Ressources::Game::urza()));
 
     Console::confirmToContinue();
     CLakeOfTearsBoss boss;
     boss.printBossBattleHeader();
-    Console::printLn("\"Do you want a reason to cry?\" You do not wait for an answer, and attack:");
+    Console::printLn("\"Do you want a reason to cry?\" You do not wait for an answer, and attack.");
     Console::br();
     Console::confirmToContinue();
 

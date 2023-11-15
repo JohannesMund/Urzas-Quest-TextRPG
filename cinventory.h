@@ -12,6 +12,8 @@ class CEquipment;
 class CJunkItem;
 class CInventory
 {
+    friend class CGameManagement;
+
 public:
     using CompressedItem = std::pair<unsigned int, CItem*>;
     using CompressedItemMap = std::vector<CompressedItem>;
@@ -20,10 +22,6 @@ public:
     using EnhancableEquipmentList = std::vector<CEquipment*>;
 
     using JunkItemList = std::vector<CJunkItem*>;
-
-    CInventory();
-
-    ~CInventory();
 
     enum class Scope
     {
@@ -64,6 +62,9 @@ public:
     std::optional<CItem*> selectItemFromInventory(const Scope& scope);
 
 private:
+    CInventory();
+    ~CInventory();
+
     std::string printInventoryNav() const;
 
     CompressedItemMap getCompressedItemMap(std::function<bool(const CItem*)> filter) const;

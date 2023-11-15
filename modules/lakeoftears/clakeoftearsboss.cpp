@@ -7,9 +7,9 @@
 
 #include <format>
 
-CLakeOfTearsBoss::CLakeOfTearsBoss()
+CLakeOfTearsBoss::CLakeOfTearsBoss() : CTwoEnemies(LakeTearsRessources::bimmelchen(), LakeTearsRessources::pimmelchen())
 {
-    _name = LakeTearsRessources::getColoredBossString();
+    _name = "";
     _weapon = "Crocodile Tears of Despair";
     _extendedWeaponChoice = true;
 
@@ -26,83 +26,20 @@ void CLakeOfTearsBoss::spoilsOfWar() const
     Console::printLn("As expected they have nothing. You feel sad, dirty and just want to go.");
 }
 
-void CLakeOfTearsBoss::preBattleAction()
+void CLakeOfTearsBoss::passiveBattleAction(EWho who)
 {
-    if (_hp1 > 0 && _hp2 <= 0)
+    auto dmg = Randomizer::getRandom(3);
+    if (dmg > 0)
     {
-        _currentTarget = EWho::eBimmelchen;
-        return;
-    }
-    if (_hp1 <= 0 && _hp2 > 0)
-    {
-        _currentTarget = EWho::ePimmelchen;
-        return;
-    }
-
-    _lastHp = _hp;
-    Console::printLn("Who do you attack?");
-    CMenu menu;
-    menu.addMenuGroup({menu.createAction(LakeTearsRessources::bimmelchen(), 'b')},
-                      {menu.createAction(LakeTearsRessources::pimmelchen(), 'p')});
-    if (menu.execute().key == 'b')
-    {
-        _currentTarget = EWho::eBimmelchen;
-    }
-    else
-    {
-        _currentTarget = EWho::ePimmelchen;
-    }
-}
-
-void CLakeOfTearsBoss::battleAction(bool& endRound)
-{
-    if (_currentTarget == EWho::eBimmelchen)
-    {
-        if (_hp2 > 0)
+        if (who == CTwoEnemies::EWho::eEnemy1)
         {
-            auto dmg = Randomizer::getRandom(3);
-            if (dmg > 0)
-            {
-                Console::printLn(std::format("{} attacks you", LakeTearsRessources::pimmelchen()));
-                CGameManagement::getPlayerInstance()->dealDamage(dmg);
-            }
-        }
-    }
-
-    if (_currentTarget == EWho::ePimmelchen)
-    {
-        if (_hp1 > 0)
-        {
-            auto dmg = Randomizer::getRandom(3);
-            if (dmg > 0)
-            {
-                Console::printLn(std::format("{} attacks you", LakeTearsRessources::bimmelchen()));
-                CGameManagement::getPlayerInstance()->dealDamage(dmg);
-            }
-        }
-    }
-}
-
-void CLakeOfTearsBoss::postBattleAction()
-{
-    const int damage = _lastHp - _hp;
-    if (damage > 0)
-    {
-        if (_currentTarget == EWho::eBimmelchen)
-        {
-            _hp1 -= damage;
-            if (_hp1 <= 0)
-            {
-                Console::printLn(std::format("You killed {}", LakeTearsRessources::bimmelchen()));
-            }
+            Console::printLn(std::format("{} attacks you", LakeTearsRessources::bimmelchen()));
         }
         else
         {
-            _hp2 -= damage;
-            if (_hp2 <= 0)
-            {
-                Console::printLn(std::format("You killed {}", LakeTearsRessources::pimmelchen()));
-            }
+            Console::printLn(std::format("{} attacks you", LakeTearsRessources::pimmelchen()));
         }
+
+        CGameManagement::getPlayerInstance()->dealDamage(dmg);
     }
 }

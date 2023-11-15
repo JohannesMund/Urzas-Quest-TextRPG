@@ -14,7 +14,7 @@ int main()
     Console::hr();
     Console::printLn("T H E   Q U E S T   O F   U R Z A", Console::EAlignment::eCenter);
     Console::printLn("~or~", Console::EAlignment::eCenter);
-    Console::printLn(Ressources::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
+    Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
     Console::hr();
 
     Console::printLn("[S]tart a new game", Console::EAlignment::eCenter);
@@ -23,7 +23,7 @@ int main()
     char in = Console::getAcceptableInput("sq");
     if (in == 's')
     {
-        CGameManagement::getInstance()->start();
+        CGameManagement::getInstance();
     }
 
     cout << endl;

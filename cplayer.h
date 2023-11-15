@@ -8,8 +8,9 @@
 class CEnemy;
 class CPlayer
 {
+    friend class CGameManagement;
+
 public:
-    CPlayer();
     void print() const;
 
     void addGold(const int i);
@@ -34,6 +35,8 @@ public:
     unsigned int initiative() const;
 
 private:
+    CPlayer();
+
     int _hp = 10;
     int _maxHp = 10;
     int _gold = 0;

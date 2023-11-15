@@ -5,38 +5,38 @@
 
 #include <format>
 
-CSword::CSword(const Ressources::Items::EQuality quality) : CEquipment(Ressources::Items::EType::eWeapon, quality)
+CWeapon::CWeapon(const Ressources::Items::EQuality quality) : CEquipment(Ressources::Items::EType::eWeapon, quality)
 {
     _hasBattleEffect = true;
     _hasBattleBuff = true;
 }
 
-void CSword::battleEffect(CEnemy* enemy)
+void CWeapon::battleEffect(CEnemy* enemy)
 {
-    Console::printLn(std::format("You draw your {} at {} and try to look dangerous.", _name, enemy->name()));
+    Console::printLn(std::format("You draw your {} at {} and try to look dangerous.", name(), enemy->name()));
 }
 
-void CSword::battleBuff(CEnemy* enemy, bool& endRound)
+void CWeapon::battleBuff(CEnemy* enemy, bool& endRound)
 {
     if (doesEquipmentEffectFire())
     {
-        Console::printLn(std::format("Your {} deals some extra damage", _name));
+        Console::printLn(std::format("Your {} deals some extra damage", name()));
         enemy->dealDamage(extraDamage());
         endRound = true;
     }
 }
 
-std::string CSword::typeName() const
+std::string CWeapon::typeName() const
 {
     return "Weapon";
 }
 
-std::function<bool(const CItem*)> CSword::equipmentTypeFilter() const
+std::function<bool(const CItem*)> CWeapon::equipmentTypeFilter() const
 {
-    return [](const CItem* item) -> bool { return dynamic_cast<const CSword*>(item) != nullptr; };
+    return [](const CItem* item) -> bool { return dynamic_cast<const CWeapon*>(item) != nullptr; };
 }
 
-unsigned int CSword::extraDamage() const
+unsigned int CWeapon::extraDamage() const
 {
     switch (_quality)
     {

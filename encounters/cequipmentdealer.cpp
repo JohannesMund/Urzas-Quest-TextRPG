@@ -65,20 +65,31 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
         auto input = Console::getNumberInputWithEcho(1, buyableItems.size());
         if (input.has_value())
         {
-            auto item = buyableItems.at(*input);
+            auto item = buyableItems.at(*input - 1);
             CGameManagement::getInventoryInstance()->addItem(item);
             CGameManagement::getPlayerInstance()->addGold(item->buyValue() * -1);
+
+            auto newEnd = std::remove(buyableItems.begin(), buyableItems.end(), item);
+            if (newEnd != buyableItems.end())
+            {
+                buyableItems.erase(newEnd, buyableItems.end());
+            }
         }
     }
     else
     {
         Console::printLn("Looks like, you cannot afford anything, this guy has to offer");
     }
+
+    for (auto i : buyableItems)
+    {
+        delete i;
+    }
 }
 
 unsigned int CEquipmentDealer::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
 {
-    return 1;
+    return 2;
 }
 
 std::string CEquipmentDealer::name() const

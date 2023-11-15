@@ -146,18 +146,8 @@ void CShop::sellItems()
 
     auto item = sellableItems.at(*input - 1);
 
-    Console::printLn("How Many?");
-
-    auto amount = Console::getNumberInputWithEcho(1, item.first);
-    if (!amount.has_value())
-    {
-        return;
-    }
-
-    for (int i = 0; i < amount; i++)
-    {
-        sellItem(item.second);
-    }
+    sellItem(item.second, item.first);
+    Console::confirmToContinue();
 }
 
 void CShop::buyItem(CItem* item)
@@ -174,10 +164,29 @@ void CShop::buyItem(CItem* item)
     Console::confirmToContinue();
 }
 
-void CShop::sellItem(CItem* item)
+void CShop::sellItem(CItem* item, const unsigned int stock)
 {
-    CGameManagement::getPlayerInstance()->addGold(item->value());
-    CGameManagement::getInventoryInstance()->removeItem(item->name());
+    unsigned int count = 1;
+
+    if (stock > 1)
+    {
+        Console::printLn("How Many?");
+        auto amount = Console::getNumberInputWithEcho(1, stock);
+        if (!amount.has_value())
+        {
+            return;
+        }
+        count = *amount;
+    }
+
+    auto value = item->value();
+    auto name = item->name();
+
+    for (int i = 0; i < count; i++)
+    {
+        CGameManagement::getPlayerInstance()->addGold(value);
+        CGameManagement::getInventoryInstance()->removeItem(name);
+    }
 }
 
 void CShop::replaceShopItems()

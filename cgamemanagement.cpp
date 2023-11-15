@@ -26,6 +26,7 @@ CGameManagement* CGameManagement::getInstance()
     {
         static CGameManagement instance;
         _instance = &instance;
+        _instance->start();
     }
 
     return _instance;
@@ -54,6 +55,11 @@ CGameProgression* CGameManagement::getProgressionInstance()
 void CGameManagement::placeTask(CTask* task)
 {
     _map.setTaskToRandomRoom(task);
+}
+
+void CGameManagement::placeTaskOnTown(CTask* task)
+{
+    _map.setTaskToRandomRoom(task, true);
 }
 
 void CGameManagement::start()
@@ -112,10 +118,21 @@ void CGameManagement::registerEncounter(CEncounter* encounter)
 
 void CGameManagement::unregisterEncounterByModuleName(const std::string_view& name)
 {
-    auto it = std::remove_if(_encounters.begin(), _encounters.end(), CEncounter::moduleNameFilter(name));
+    auto filterAndRemove = [&name](CEncounter* e)
+    {
+        auto filter = CEncounter::moduleNameFilter(name);
+        if (filter(e))
+        {
+            delete e;
+            return true;
+        }
+        return false;
+    };
+
+    auto it = std::remove_if(_encounters.begin(), _encounters.end(), filterAndRemove);
+
     if (it != _encounters.end())
     {
-        delete *it;
         _encounters.erase(it);
     }
 }
@@ -147,21 +164,8 @@ CGameProgression* CGameManagement::getProgression()
 
 void CGameManagement::printHUD()
 {
-
     Console::hr();
     _player.print();
-}
-
-void CGameManagement::printMap()
-{
-    Console::cls();
-    _map.printMap();
-}
-
-void CGameManagement::printInventory()
-{
-    Console::cls();
-    _inventory.print(CInventory::Scope::eList);
 }
 
 void CGameManagement::executeTurn()
@@ -217,12 +221,14 @@ void CGameManagement::executeTurn()
         }
         if (input.key == 'm')
         {
-            printMap();
+            Console::cls();
+            _map.printMap();
             Console::confirmToContinue();
         }
         if (input.key == 'i')
         {
-            printInventory();
+            Console::cls();
+            _inventory.print(CInventory::Scope::eList);
         }
     }
 }

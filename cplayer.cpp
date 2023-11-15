@@ -240,5 +240,6 @@ std::string CPlayer::increasedOrDecreased(const int i)
 
 std::string CPlayer::lostOrGained(const int i)
 {
-    return i < 0 ? "lost" : "gained";
+    return i < 0 ? std::format("{}lost{}", CC::fgRed(), CC::ccReset())
+                 : std::format("{}gained{}", CC::fgLightGreen(), CC::ccReset());
 }

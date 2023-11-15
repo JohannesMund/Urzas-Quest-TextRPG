@@ -26,7 +26,7 @@ std::function<bool(const CEncounter*)> CEncounter::moduleNameFilter(const std::s
 
 bool CEncounter::canBeExecuted(const EEncounterType& type) const
 {
-    if ((_type & type) != type)
+    if ((_type & type) != _type)
     {
         return false;
     }

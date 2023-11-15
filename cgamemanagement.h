@@ -14,12 +14,14 @@ class CGameManagement
 {
 public:
     static CGameManagement* getInstance();
+
     static CPlayer* getPlayerInstance();
     static CInventory* getInventoryInstance();
     static CCompanion* getCompanionInstance();
     static CGameProgression* getProgressionInstance();
 
     void placeTask(CTask* task);
+    void placeTaskOnTown(CTask* task);
 
     void executeRandomEncounter(const CEncounter::EEncounterType type, const std::string& moduleName = {}) const;
     void registerEncounter(CEncounter* encounter);
@@ -27,23 +29,10 @@ public:
 
     CRoom* currentRoom() const;
 
-    void start();
-
     void printHUD();
 
 private:
-    CMap _map;
-    CPlayer _player;
-    CInventory _inventory;
-    CGameProgression _progression;
-
-    CCompanion* _companion;
-
-    std::vector<CEncounter*> _encounters;
-
-    bool _isGameOver = false;
-    void printMap();
-    void printInventory();
+    void start();
 
     void executeTurn();
     void handlePlayerDeath();
@@ -59,4 +48,14 @@ private:
 
     CGameManagement();
     ~CGameManagement();
+
+    CMap _map;
+    CPlayer _player;
+    CInventory _inventory;
+    CGameProgression _progression;
+
+    CCompanion* _companion;
+
+    bool _isGameOver = false;
+    std::vector<CEncounter*> _encounters;
 };

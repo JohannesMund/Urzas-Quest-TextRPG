@@ -6,10 +6,6 @@
 namespace Ressources
 {
 
-std::string urza();
-std::string whoTheFuckIsUrza();
-std::string urzaWhoTheFuckIsUrza();
-
 namespace Settings
 {
 static const unsigned int consoleWidth = 80;
@@ -40,6 +36,16 @@ namespace ShrineRessources
 {
 std::string moduleName();
 }
+std::string urza();
+std::string whoTheFuckIsUrza();
+std::string urzaWhoTheFuckIsUrza();
+
+std::string princessLayla();
+std::string layla();
+
+std::string fiego();
+std::string brock();
+
 } // namespace Game
 
 namespace Rooms

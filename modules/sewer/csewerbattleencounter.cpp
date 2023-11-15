@@ -37,5 +37,5 @@ std::string CSewerBattleEncounter::name() const
 
 std::string CSewerBattleEncounter::moduleName() const
 {
-    return SewerRessources::moduleName();
+    return SewerRessources::dungeonEncounterName();
 }

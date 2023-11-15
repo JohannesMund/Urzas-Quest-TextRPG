@@ -45,7 +45,8 @@ set(URZAS_QUEST_SOURCES
     enemies/cenemy.h enemies/cenemy.cpp
     enemies/cmobenemy.h enemies/cmobenemy.cpp
     enemies/cbountyenemy.h enemies/cbountyenemy.cpp
-    enemies/clivingchest.h enemies/clivingchest.cpp
+    enemies/clivingchest.h enemies/clivingchest.cpp    
+    enemies/ctwoenemies.h enemies/ctwoenemies.cpp
 
     tasks/ctask.h tasks/ctask.cpp
     tasks/cbountyhunt.h tasks/cbountyhunt.cpp
@@ -111,6 +112,12 @@ set(URZAS_QUEST_SOURCES
     modules/sewer/csewerbattleencounter.h modules/sewer/csewerbattleencounter.cpp
     modules/sewer/csewerbossroom.h modules/sewer/csewerbossroom.cpp
     modules/sewer/csewerboss.h modules/sewer/csewerboss.cpp
+
+    modules/layla/claylaencounter.h modules/layla/claylaencounter.cpp
+    modules/layla/moduleressources.h modules/layla/moduleressources.cpp
+    modules/layla/claylatask.h modules/layla/claylatask.cpp
+    modules/layla/claylaboss.h modules/layla/claylaboss.cpp
+    modules/layla/claylatowntask.h modules/layla/claylatowntask.cpp
 )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})

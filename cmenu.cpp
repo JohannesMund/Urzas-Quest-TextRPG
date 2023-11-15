@@ -177,7 +177,7 @@ std::string CMenu::makeDisplayString(const std::string_view s, const char c) con
         it = displayString.find(cc);
         if (it == std::string::npos)
         {
-            return displayString;
+            return std::format("[{}] {}", c, displayString);
         }
     }
 

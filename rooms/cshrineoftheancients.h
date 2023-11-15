@@ -21,6 +21,7 @@ private:
     void firstVisitStart();
     void firstVisitSeenBard();
     void firstVisitProvenAsHero();
+    void firstVisitLearnedAboutCult();
 
     void stats() const;
 

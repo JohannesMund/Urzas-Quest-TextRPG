@@ -10,6 +10,6 @@ CDungeonRoom* CCaveDungeonMap::makeDefaultRoom() const
 {
     auto dungeonRoom = new CDungeonRoom();
     dungeonRoom->setDescription(CaveRessources::getRandomDescription());
-    dungeonRoom->setModuleName(CaveRessources::getEncounterName());
+    dungeonRoom->setModuleName(CaveRessources::moduleName());
     return dungeonRoom;
 }

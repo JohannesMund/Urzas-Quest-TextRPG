@@ -188,7 +188,6 @@ void CDungeonMap::moveTasks()
     std::vector<CMap::SRoomCoords> newPositions;
     for (auto coords : _movingTasks)
     {
-
         auto room = roomAt(coords);
 
         if (!room.has_value())

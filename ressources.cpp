@@ -175,7 +175,7 @@ std::string Ressources::Rooms::getRandomRumor()
                                                   "The mayor of this town has an affair with a donkey."});
 }
 
-std::string Ressources::whoTheFuckIsUrza()
+std::string Ressources::Game::whoTheFuckIsUrza()
 {
     return std::format("{}wh{}o t{}he f{}uck {}is {}?{}",
                        CC::fgLightYellow(),
@@ -187,12 +187,12 @@ std::string Ressources::whoTheFuckIsUrza()
                        CC::ccReset());
 }
 
-std::string Ressources::urza()
+std::string Ressources::Game::urza()
 {
     return std::format("{}Ur{}za{}", CC::fgLightGreen(), CC::fgYellow(), CC::ccReset());
 }
 
-std::string Ressources::urzaWhoTheFuckIsUrza()
+std::string Ressources::Game::urzaWhoTheFuckIsUrza()
 {
     return std::format("{} {}", urza(), whoTheFuckIsUrza());
 }
@@ -476,4 +476,24 @@ std::pair<std::vector<std::string>, std::string> Ressources::Items::getRandomEqu
     }
 
     return {};
+}
+
+std::string Ressources::Game::fiego()
+{
+    return std::format("{}Fiego{}", CC::fgLightGreen(), CC::ccReset());
+}
+
+std::string Ressources::Game::brock()
+{
+    return std::format("{}The B-{}Rock{}", CC::fgLightGray(), CC::fgDarkGray(), CC::ccReset());
+}
+
+std::string Ressources::Game::princessLayla()
+{
+    return std::format("{}Princess {}{}", CC::fgLightMagenta(), layla(), CC::ccReset());
+}
+
+std::string Ressources::Game::layla()
+{
+    return std::format("{0}L{1}ayla{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
 }

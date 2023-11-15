@@ -19,7 +19,6 @@ CBattle::CBattle(CEnemy* enemy)
 
 void CBattle::fight()
 {
-    Console::cls();
     Console::printLn(std::format(
         "You encounter the enemy {}, who attacks you with his weapon {}!", _enemy->name(), _enemy->weapon()));
     Console::hr();
@@ -52,7 +51,10 @@ void CBattle::fight()
             Console::printLn(std::format(
                 "This is bad! {} is really fast, and gets you, there is no way to avoid this fight.", _enemy->name()));
         }
+        Console::confirmToContinue();
     }
+
+    Console::cls();
 
     preBattle();
     battleLoop();

@@ -1,11 +1,10 @@
 #pragma once
+#include <ctwoenemies.h>
 
-#include "ctwoenemies.h"
-
-class CLakeOfTearsBoss : public CTwoEnemies
+class CLaylaBoss : public CTwoEnemies
 {
 public:
-    CLakeOfTearsBoss();
+    CLaylaBoss();
 
     virtual void spoilsOfWar() const override;
 
