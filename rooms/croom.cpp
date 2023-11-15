@@ -27,7 +27,10 @@ void CRoom::execute()
     }
     else
     {
-        CGameManagement::getInstance()->executeRandomEncounter(_encounterType, _moduleName);
+        if (_encounterType != CEncounter::EEncounterType::eNone)
+        {
+            CGameManagement::getInstance()->executeRandomEncounter(_encounterType, _moduleName);
+        }
     }
     _seen = true;
 }

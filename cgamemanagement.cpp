@@ -119,7 +119,8 @@ void CGameManagement::unregisterEncounterByModuleName(const std::string_view& na
 {
     auto filterAndRemove = [&name](CEncounter* e)
     {
-        if (CEncounter::moduleNameFilter(name)(e))
+        auto filter = CEncounter::moduleNameFilter(name);
+        if (filter(e))
         {
             delete e;
             return true;
