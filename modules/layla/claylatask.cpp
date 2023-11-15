@@ -38,7 +38,7 @@ void CLaylaTask::execute()
     CLaylaBoss boss;
     boss.printBossBattleHeader();
     Console::printLn(
-        std::format("\"I am coming for your rescue, princess\" You scream in the direction of {}, and attack:",
+        std::format("\"I am coming for your rescue, princess\" You scream in the direction of {}, and attack.",
                     Ressources::Game::princessLayla()));
     Console::br();
     Console::confirmToContinue();

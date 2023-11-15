@@ -49,7 +49,7 @@ void CLakeOfTearsBossTask::execute()
     Console::confirmToContinue();
     CLakeOfTearsBoss boss;
     boss.printBossBattleHeader();
-    Console::printLn("\"Do you want a reason to cry?\" You do not wait for an answer, and attack:");
+    Console::printLn("\"Do you want a reason to cry?\" You do not wait for an answer, and attack.");
     Console::br();
     Console::confirmToContinue();
 

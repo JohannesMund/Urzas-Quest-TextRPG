@@ -27,14 +27,33 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
     CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
 
-    registerModule(BardRessources::moduleName(), EGameStage::eStart);
+    registerModule(
+        Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart, []() {}, []() {});
 
-    registerModule(RatFarmRessources::moduleName(), EGameStage::eSeenBard);
-    registerModule(CaveRessources::moduleName(), EGameStage::eSeenBard);
+    registerModule(
+        BardRessources::moduleName(), EGameStage::eStart, &BardRessources::initModule, &BardRessources::deInitModule);
 
-    registerModule(LakeTearsRessources::moduleName(), EGameStage::eProvenAsHero);
-    registerModule(LaylaRessources::moduleName(), EGameStage::eProvenAsHero);
-    registerModule(SewerRessources::moduleName(), EGameStage::eProvenAsHero);
+    registerModule(RatFarmRessources::moduleName(),
+                   EGameStage::eSeenBard,
+                   &RatFarmRessources::initModule,
+                   &RatFarmRessources::deInitModule);
+    registerModule(CaveRessources::moduleName(),
+                   EGameStage::eSeenBard,
+                   &CaveRessources::initModule,
+                   &CaveRessources::deInitModule);
+
+    registerModule(LakeTearsRessources::moduleName(),
+                   EGameStage::eProvenAsHero,
+                   &LakeTearsRessources::initModule,
+                   &LakeTearsRessources::deInitModule);
+    registerModule(LaylaRessources::moduleName(),
+                   EGameStage::eProvenAsHero,
+                   &LaylaRessources::initModule,
+                   &LaylaRessources::deInitModule);
+    registerModule(SewerRessources::moduleName(),
+                   EGameStage::eProvenAsHero,
+                   &SewerRessources::initModule,
+                   &SewerRessources::deInitModule);
 
     progressToStage(EGameStage::eStart);
 }
@@ -88,7 +107,7 @@ void CGameProgression::increaseBodyCount()
 
 unsigned int CGameProgression::getProgress() const
 {
-    return std::ceil((_finishedModules.size() * 100) / _modulesForStage.size());
+    return std::ceil((_finishedModules.size() * 100) / _moduleRegister.size());
 }
 
 unsigned int CGameProgression::getBodyCount() const
@@ -103,90 +122,18 @@ bool CGameProgression::isModuleFinished(const std::string_view& moduleName)
 
 void CGameProgression::unFinishModule(const std::string_view& moduleName)
 {
-    auto it = std::find(_finishedModules.begin(), _finishedModules.end(), moduleName);
+    auto it = std::remove(_finishedModules.begin(), _finishedModules.end(), moduleName);
     if (it != _finishedModules.end())
     {
         _finishedModules.erase(it);
     }
 }
 
-void CGameProgression::initModuleByName(const std::string_view& moduleName)
-{
-    auto is = [&moduleName](const std::string_view& s) { return moduleName.compare(s) == 0; };
-
-    if (is(BardRessources::moduleName()))
-    {
-        BardRessources::initModule();
-        return;
-    }
-    if (is(CaveRessources::moduleName()))
-    {
-        CaveRessources::initModule();
-        return;
-    }
-    if (is(RatFarmRessources::moduleName()))
-    {
-        RatFarmRessources::initModule();
-        return;
-    }
-    if (is(LakeTearsRessources::moduleName()))
-    {
-        LakeTearsRessources::initModule();
-        return;
-    }
-    if (is(SewerRessources::moduleName()))
-    {
-        SewerRessources::initModule();
-        return;
-    }
-    if (is(LaylaRessources::moduleName()))
-    {
-        LaylaRessources::initModule();
-        return;
-    }
-}
-
-void CGameProgression::deInitModuleByName(const std::string_view& moduleName)
-{
-    auto is = [&moduleName](const std::string_view& s) { return moduleName.compare(s) == 0; };
-
-    if (is(BardRessources::moduleName()))
-    {
-        BardRessources::deInitModule();
-        return;
-    }
-    if (is(CaveRessources::moduleName()))
-    {
-        CaveRessources::deInitModule();
-        return;
-    }
-    if (is(RatFarmRessources::moduleName()))
-    {
-        RatFarmRessources::deInitModule();
-        return;
-    }
-    if (is(LakeTearsRessources::moduleName()))
-    {
-        LakeTearsRessources::deInitModule();
-        return;
-    }
-    if (is(SewerRessources::moduleName()))
-    {
-        SewerRessources::deInitModule();
-        return;
-    }
-    if (is(LaylaRessources::moduleName()))
-    {
-        LaylaRessources::deInitModule();
-        return;
-    }
-}
-
 bool CGameProgression::canProgress()
 {
-    for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
+    for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
     {
-        if (!isModuleFinished(module.first))
+        if (!isModuleFinished(module.moduleName))
         {
             return false;
         }
@@ -196,17 +143,19 @@ bool CGameProgression::canProgress()
 
 void CGameProgression::progressToStage(EGameStage stage)
 {
-    for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
+    for (const auto& module :
+         _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
     {
-        deInitModuleByName(module.first);
+        module.deInitFunction();
     }
 
     _currentStage = stage;
     reRegisterModule(Ressources::Game::ShrineRessources::moduleName(), _currentStage);
 
-    for (auto module : _modulesForStage | std::views::filter(modPairStageFilter(_currentStage)))
+    for (const auto& module :
+         _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
     {
-        initModuleByName(module.first);
+        module.initFunction();
     }
 
     Console::cls();
@@ -264,30 +213,28 @@ void CGameProgression::progressToStage(EGameStage stage)
 void CGameProgression::reRegisterModule(const std::string_view& name, const EGameStage neededForStage)
 {
     unFinishModule(name);
-    registerModule(name, neededForStage);
+    registerModule(name, neededForStage, {}, {});
 }
 
-void CGameProgression::registerModule(const std::string_view& name, const EGameStage neededForStage)
+void CGameProgression::registerModule(const std::string_view& name,
+                                      const EGameStage neededForStage,
+                                      std::function<void()> initFunction,
+                                      std::function<void()> deInitFunction)
 {
-    auto it = std::find_if(_modulesForStage.begin(), _modulesForStage.end(), modPairNameFilter(name));
-    if (it != _modulesForStage.cend())
+    auto it =
+        std::find_if(_moduleRegister.begin(), _moduleRegister.end(), ModuleRegister::moduleRegisterNameFilter(name));
+    if (it != _moduleRegister.cend())
     {
-        (*it).second = neededForStage;
+        (*it).gameStage = neededForStage;
     }
     else
     {
-        _modulesForStage.push_back(std::make_pair(std::string(name), neededForStage));
+        ModuleRegister module;
+        module.moduleName = name;
+        module.gameStage = neededForStage;
+        module.initFunction = initFunction;
+        module.deInitFunction = deInitFunction;
+
+        _moduleRegister.push_back(module);
     }
-}
-
-std::function<bool(const std::pair<std::string, CGameProgression::EGameStage>&)> CGameProgression::modPairNameFilter(
-    const std::string_view& name)
-{
-    return [&name](const auto modPair) { return modPair.first.compare(name) == 0; };
-}
-
-std::function<bool(const std::pair<std::string, CGameProgression::EGameStage>&)> CGameProgression::modPairStageFilter(
-    const EGameStage& stage)
-{
-    return [&stage](auto module) { return module.second == stage; };
 }

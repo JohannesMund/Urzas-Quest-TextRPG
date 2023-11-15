@@ -34,6 +34,24 @@ public:
     unsigned int getBodyCount() const;
 
 private:
+    struct ModuleRegister
+    {
+        std::string moduleName;
+        std::function<void()> initFunction;
+        std::function<void()> deInitFunction;
+        EGameStage gameStage;
+
+        static std::function<bool(const ModuleRegister&)> moduleRegisterNameFilter(const std::string_view& name)
+        {
+            return [&name](const auto module) { return module.moduleName.compare(name) == 0; };
+        }
+        static std::function<bool(const ModuleRegister&)> moduleRegisterStageFilter(const EGameStage& stage)
+        {
+            return [&stage](auto module) { return module.gameStage == stage; };
+        }
+    };
+    std::vector<ModuleRegister> _moduleRegister;
+
     CGameProgression();
 
     bool isModuleFinished(const std::string_view& moduleName);
@@ -49,14 +67,10 @@ private:
     void progressToStage(EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
-    void registerModule(const std::string_view& name, const EGameStage neededForStage);
-
-    std::vector<std::pair<std::string, EGameStage>> _modulesForStage;
-
-    static std::function<bool(const std::pair<std::string, EGameStage>&)> modPairNameFilter(
-        const std::string_view& name);
-
-    static std::function<bool(const std::pair<std::string, EGameStage>&)> modPairStageFilter(const EGameStage& stage);
+    void registerModule(const std::string_view& name,
+                        const EGameStage neededForStage,
+                        std::function<void()> initFunction,
+                        std::function<void()> deInitFunction);
 
     std::vector<std::string> _finishedModules;
 
