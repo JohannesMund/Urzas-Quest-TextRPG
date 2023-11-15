@@ -34,6 +34,7 @@ void CLaylaTownTask::execute()
                                  Ressources::Game::urza(),
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock()));
+
     Console::printLn(
         "Your search ends in a very dark and very shady corner of the town, where you wake up in "
         "the gutter with a terrible headache and not the slightest idea, what braught you there. Your Money is "

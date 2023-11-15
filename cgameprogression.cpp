@@ -197,6 +197,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn(
             std::format("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()));
         Console::br();
+
         Console::printLn("But where there was one question, ther are now three:");
         Console::printLn(std::format("who the hell is {}?", Ressources::Game::fiego()));
         Console::printLn(std::format("who in the world is {}?", Ressources::Game::brock()));
