@@ -45,8 +45,29 @@ public:
      */
     void setDungeonMap(CDungeonMap* map);
 
-    CRoom* makeHealingWell(const std::string& description, const std::string& question, const std::string& effect);
-    CRoom* makeMapRoom(const std::string& description);
+    void setMapRooom(CRoom* mapRoom);
+
+    /**
+     * @brief creates a healing well room
+     * @remark room is not added to the dungeon, but has to bee added to the init function
+     * @sa init()
+     * @param description description of the room
+     * @param question question "Do you want to try"
+     * @param effect effect when player uses the healing room
+     * @return a pointer to a new healing well
+     */
+    static CRoom* makeHealingWell(const std::string& description,
+                                  const std::string& question,
+                                  const std::string& effect);
+
+    /**
+     * @brief makeMapRoom adds a map room
+     * @remark room is not added to the dungeon, but has to bee added to the init function
+     * @sa init()
+     * @param description
+     * @return a pointer to a new dungeon map room
+     */
+    static CRoom* makeMapRoom(const std::string& description);
 
 protected:
     /**

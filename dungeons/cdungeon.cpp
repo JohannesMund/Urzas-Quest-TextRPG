@@ -17,6 +17,15 @@ void CDungeon::setDungeonMap(CDungeonMap* map)
     _map = map;
 }
 
+void CDungeon::setMapRooom(CRoom* mapRoom)
+{
+    auto r = dynamic_cast<CDungeonMapRoom*>(mapRoom);
+    if (r != nullptr)
+    {
+        _mapRoom = r;
+    }
+}
+
 CRoom* CDungeon::makeHealingWell(const std::string& description, const std::string& question, const std::string& effect)
 {
     CHealingWell* well = new CHealingWell();
@@ -30,7 +39,6 @@ CRoom* CDungeon::makeMapRoom(const std::string& description)
 {
     CDungeonMapRoom* mapRoom = new CDungeonMapRoom();
     mapRoom->setDescription(description);
-    _mapRoom = mapRoom;
     return mapRoom;
 }
 

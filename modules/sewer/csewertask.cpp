@@ -63,25 +63,22 @@ std::string CSewerTask::taskNav() const
 
 void CSewerTask::executeDungeon()
 {
+    std::vector<CRoom*> rooms;
+    rooms.push_back(CDungeon::makeHealingWell(SewerRessources::getWellDescription(1),
+                                              SewerRessources::getWellQuestion(1),
+                                              SewerRessources::getWellEffect(1)));
+    rooms.push_back(CDungeon::makeHealingWell(SewerRessources::getWellDescription(2),
+                                              SewerRessources::getWellQuestion(2),
+                                              SewerRessources::getWellEffect(2)));
+    CRoom* mapRoom = CDungeon::makeMapRoom(SewerRessources::getMapRoomDescription());
+    rooms.push_back(mapRoom);
+
     CSewerDungeonMap map(12, 19);
     map.setStartingPosition({10, 7});
-
-    CSewerDungeon dungeon;
-    std::vector<CRoom*> rooms;
-    rooms.push_back(dungeon.makeHealingWell(SewerRessources::getWellDescription(1),
-                                            SewerRessources::getWellQuestion(1),
-                                            SewerRessources::getWellEffect(1)));
-    rooms.push_back(dungeon.makeHealingWell(SewerRessources::getWellDescription(2),
-                                            SewerRessources::getWellQuestion(2),
-                                            SewerRessources::getWellEffect(2)));
-
-    rooms.push_back(dungeon.makeMapRoom(SewerRessources::getMapRoomDescription()));
-
     map.init(rooms);
 
+    CSewerDungeon dungeon;
     dungeon.setDungeonMap(&map);
-
-    ;
-
+    dungeon.setMapRooom(mapRoom);
     dungeon.execute();
 }
