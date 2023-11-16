@@ -9,4 +9,7 @@ public:
 
     virtual void execute() override;
     virtual std::string mapSymbol() const override;
+
+private:
+    void initDungeon();
 };
