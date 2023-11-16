@@ -51,12 +51,9 @@ CMap::~CMap()
     }
 }
 
-void CMap::init()
+void CMap::init(std::vector<CRoom*>& rooms)
 {
-    std::vector<CRoom*> rooms;
-
     rooms.push_back(RoomFactory::makeInjuredPet());
-    rooms.push_back(RoomFactory::makeCave());
     rooms.push_back(RoomFactory::makeShrine());
 
     for (int i = 0; i < Ressources::Config::numberOfTowns; i++)
@@ -250,7 +247,6 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
 
         if (line == 2)
         {
-
             cout << string{left ? bottom ? " " : "_" : "|"};
             cout << string{bottom ? "  " : "__"};
         }

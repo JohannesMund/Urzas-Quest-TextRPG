@@ -59,7 +59,7 @@ public:
     CMap(const unsigned int width, const unsigned int height);
     ~CMap();
 
-    virtual void init();
+    virtual void init(std::vector<CRoom*>& rooms);
 
     void setStartingPosition(const SRoomCoords& coords);
     void movePlayer(const EDirections dir);

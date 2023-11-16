@@ -65,17 +65,23 @@ void CSewerTask::executeDungeon()
 {
     CSewerDungeonMap map(12, 19);
     map.setStartingPosition({10, 7});
-    map.init();
 
     CSewerDungeon dungeon;
+    std::vector<CRoom*> rooms;
+    rooms.push_back(dungeon.makeHealingWell(SewerRessources::getWellDescription(1),
+                                            SewerRessources::getWellQuestion(1),
+                                            SewerRessources::getWellEffect(1)));
+    rooms.push_back(dungeon.makeHealingWell(SewerRessources::getWellDescription(2),
+                                            SewerRessources::getWellQuestion(2),
+                                            SewerRessources::getWellEffect(2)));
+
+    rooms.push_back(dungeon.makeMapRoom(SewerRessources::getMapRoomDescription()));
+
+    map.init(rooms);
+
     dungeon.setDungeonMap(&map);
 
-    dungeon.addHealingWell(
-        SewerRessources::getWellDescription(1), SewerRessources::getWellQuestion(1), SewerRessources::getWellEffect(1));
-    dungeon.addHealingWell(
-        SewerRessources::getWellDescription(2), SewerRessources::getWellQuestion(2), SewerRessources::getWellEffect(2));
-
-    dungeon.addMapRoom(SewerRessources::getMapRoomDescription());
+    ;
 
     dungeon.execute();
 }

@@ -293,10 +293,13 @@ void CGameManagement::init()
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eUrzasGlasses));
 
+    std::vector<CRoom*> rooms;
+
     _progression.initEncounters();
+    _progression.initWorldMap(rooms);
 
     _map.setStartingPosition({3, 5});
-    _map.init();
+    _map.init(rooms);
 }
 
 void CGameManagement::gameLoop()

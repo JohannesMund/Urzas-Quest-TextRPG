@@ -22,25 +22,25 @@ void CCave::execute()
     {
         CCaveDungeonMap map(25, 10);
         map.setStartingPosition({0, 0});
-        map.init();
 
         CCaveDungeon dungeon;
         dungeon.setDungeonMap(&map);
 
-        dungeon.addHealingWell(CaveRessources::getWellDescription(1),
-                               CaveRessources::getWellQuestion(1),
-                               CaveRessources::getWellEffect(1));
+        std::vector<CRoom*> rooms;
+        rooms.push_back(dungeon.makeHealingWell(CaveRessources::getWellDescription(1),
+                                                CaveRessources::getWellQuestion(1),
+                                                CaveRessources::getWellEffect(1)));
 
-        dungeon.addHealingWell(CaveRessources::getWellDescription(2),
-                               CaveRessources::getWellQuestion(2),
-                               CaveRessources::getWellEffect(2));
+        rooms.push_back(dungeon.makeHealingWell(CaveRessources::getWellDescription(2),
+                                                CaveRessources::getWellQuestion(2),
+                                                CaveRessources::getWellEffect(2)));
 
-        dungeon.addHealingWell(CaveRessources::getWellDescription(3),
-                               CaveRessources::getWellQuestion(3),
-                               CaveRessources::getWellEffect(3));
+        rooms.push_back(dungeon.makeHealingWell(CaveRessources::getWellDescription(3),
+                                                CaveRessources::getWellQuestion(3),
+                                                CaveRessources::getWellEffect(3)));
 
-        dungeon.addMapRoom(CaveRessources::getMapRoomDescription());
-
+        rooms.push_back(dungeon.makeMapRoom(CaveRessources::getMapRoomDescription()));
+        map.init(rooms);
         dungeon.execute();
     }
 

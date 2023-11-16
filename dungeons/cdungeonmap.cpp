@@ -13,21 +13,28 @@ CDungeonMap::CDungeonMap(const unsigned int width, const unsigned int height) : 
 {
 }
 
-void CDungeonMap::init()
+void CDungeonMap::init(std::vector<CRoom*>& rooms)
 {
-    unsigned int steps = 0;
     _populatedRoomCount = std::ceil((_map.size() * _map.at(0).size()) / 2);
 
-    makeNextRoom(getPlayerPosition(), steps);
+    while (rooms.size() < _populatedRoomCount)
+    {
+        rooms.push_back(makeDefaultRoom());
+    }
+
+    std::shuffle(rooms.begin(), rooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
+
+    makeNextRoom(getPlayerPosition(), rooms);
 
     fillWithNoRooms();
 }
 
-void CDungeonMap::makeNextRoom(const SRoomCoords coords, unsigned int& i)
+void CDungeonMap::makeNextRoom(const SRoomCoords coords, std::vector<CRoom*>& rooms)
 {
-    _map.at(coords.y).at(coords.x) = makeDefaultRoom();
-    i++;
-    if (i >= _populatedRoomCount)
+    _map.at(coords.y).at(coords.x) = rooms.at(rooms.size() - 1);
+    rooms.pop_back();
+
+    if (rooms.empty())
     {
         return;
     }
@@ -55,8 +62,8 @@ void CDungeonMap::makeNextRoom(const SRoomCoords coords, unsigned int& i)
 
     for (auto c : possibilities)
     {
-        makeNextRoom(c, i);
-        if (i >= _populatedRoomCount)
+        makeNextRoom(c, rooms);
+        if (rooms.empty())
         {
             return;
         }

@@ -29,7 +29,7 @@ void CChurch::execute()
                 "The priest chants his prayers and a godly light surrounds you. Your wounds close, your pain "
                 "vanishes.");
             Console::printLn("You are fully healed.");
-            CGameManagement::getPlayerInstance()->addHp(9999);
+            CGameManagement::getPlayerInstance()->fullHeal();
             Console::confirmToContinue();
         }
 

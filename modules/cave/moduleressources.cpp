@@ -1,9 +1,10 @@
 #include "moduleressources.h"
+#include "ccave.h"
 #include "colorconsole.h"
 #include "randomizer.h"
+#include "roomfactory.h"
 
 #include <format>
-#include <vector>
 
 std::string CaveRessources::getRandomDescription()
 {
@@ -112,4 +113,9 @@ void CaveRessources::initModule()
 
 void CaveRessources::deInitModule()
 {
+}
+
+void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
+{
+    rooms.push_back(RoomFactory::makeCave());
 }

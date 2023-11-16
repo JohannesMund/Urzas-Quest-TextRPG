@@ -27,8 +27,7 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
     CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
 
-    registerModule(
-        Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart, []() {}, []() {});
+    registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart);
 
     registerModule(
         BardRessources::moduleName(), EGameStage::eStart, &BardRessources::initModule, &BardRessources::deInitModule);
@@ -39,8 +38,9 @@ void CGameProgression::initEncounters()
                    &RatFarmRessources::deInitModule);
     registerModule(CaveRessources::moduleName(),
                    EGameStage::eSeenBard,
-                   &CaveRessources::initModule,
-                   &CaveRessources::deInitModule);
+                   &ModuleRegister::noInitDeInitFunction,
+                   &ModuleRegister::noInitDeInitFunction,
+                   &CaveRessources::initWorldMap);
 
     registerModule(LakeTearsRessources::moduleName(),
                    EGameStage::eProvenAsHero,
@@ -100,6 +100,20 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
+bool CGameProgression::isModuleActive(const std::string_view& moduleName)
+{
+    for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)) |
+                            std::views::filter(ModuleRegister::moduleRegisterNameFilter(moduleName)))
+    {
+        if (isModuleFinished(module.moduleName))
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 void CGameProgression::increaseBodyCount()
 {
     _bodyCount++;
@@ -118,6 +132,14 @@ unsigned int CGameProgression::getBodyCount() const
 bool CGameProgression::isModuleFinished(const std::string_view& moduleName)
 {
     return std::find(_finishedModules.begin(), _finishedModules.end(), moduleName) != _finishedModules.end();
+}
+
+void CGameProgression::initWorldMap(std::vector<CRoom*>& rooms) const
+{
+    for (const auto& module : _moduleRegister)
+    {
+        module.initWorldMapFunction(rooms);
+    }
 }
 
 void CGameProgression::unFinishModule(const std::string_view& moduleName)
@@ -218,13 +240,14 @@ void CGameProgression::progressToStage(EGameStage stage)
 void CGameProgression::reRegisterModule(const std::string_view& name, const EGameStage neededForStage)
 {
     unFinishModule(name);
-    registerModule(name, neededForStage, {}, {});
+    registerModule(name, neededForStage, {}, {}, {});
 }
 
 void CGameProgression::registerModule(const std::string_view& name,
                                       const EGameStage neededForStage,
                                       std::function<void()> initFunction,
-                                      std::function<void()> deInitFunction)
+                                      std::function<void()> deInitFunction,
+                                      std::function<void(std::vector<CRoom*>&)> initWorldMapFunction)
 {
     auto it =
         std::find_if(_moduleRegister.begin(), _moduleRegister.end(), ModuleRegister::moduleRegisterNameFilter(name));
@@ -239,6 +262,7 @@ void CGameProgression::registerModule(const std::string_view& name,
         module.gameStage = neededForStage;
         module.initFunction = initFunction;
         module.deInitFunction = deInitFunction;
+        module.initWorldMapFunction = initWorldMapFunction;
 
         _moduleRegister.push_back(module);
     }

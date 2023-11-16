@@ -17,21 +17,21 @@ void CDungeon::setDungeonMap(CDungeonMap* map)
     _map = map;
 }
 
-void CDungeon::addHealingWell(const std::string& description, const std::string& question, const std::string& effect)
+CRoom* CDungeon::makeHealingWell(const std::string& description, const std::string& question, const std::string& effect)
 {
     CHealingWell* well = new CHealingWell();
     well->setDescription(description);
     well->setQuestion(question);
     well->setEffect(effect);
-    _map->addSpecificRoom(well);
+    return well;
 }
 
-void CDungeon::addMapRoom(const std::string& description)
+CRoom* CDungeon::makeMapRoom(const std::string& description)
 {
     CDungeonMapRoom* mapRoom = new CDungeonMapRoom();
     mapRoom->setDescription(description);
-    _map->addSpecificRoom(mapRoom);
     _mapRoom = mapRoom;
+    return mapRoom;
 }
 
 void CDungeon::dungeonLoop()

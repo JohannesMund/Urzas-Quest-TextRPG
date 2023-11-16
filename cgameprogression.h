@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+class CRoom;
 class CGameProgression
 {
     friend class CGameManagement;
@@ -28,6 +29,11 @@ public:
     void progress();
     void reportModuleFinished(const std::string_view& moduleName);
 
+    bool isModuleActive(const std::string_view& moduleName);
+    bool isModuleFinished(const std::string_view& moduleName);
+
+    void initWorldMap(std::vector<CRoom*>& rooms) const;
+
     void increaseBodyCount();
 
     unsigned int getProgress() const;
@@ -37,9 +43,10 @@ private:
     struct ModuleRegister
     {
         std::string moduleName;
+        EGameStage gameStage;
         std::function<void()> initFunction;
         std::function<void()> deInitFunction;
-        EGameStage gameStage;
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
 
         static std::function<bool(const ModuleRegister&)> moduleRegisterNameFilter(const std::string_view& name)
         {
@@ -49,12 +56,20 @@ private:
         {
             return [&stage](auto module) { return module.gameStage == stage; };
         }
+
+        static std::function<void()> noInitDeInitFunction()
+        {
+            return []() {};
+        }
+        static std::function<void(std::vector<CRoom*>&)> noInitWorldMapFunction()
+        {
+            return [](std::vector<CRoom*>&) {};
+        }
     };
     std::vector<ModuleRegister> _moduleRegister;
 
     CGameProgression();
 
-    bool isModuleFinished(const std::string_view& moduleName);
     void unFinishModule(const std::string_view& moduleName);
 
     void initModuleByName(const std::string_view& moduleName);
@@ -67,10 +82,12 @@ private:
     void progressToStage(EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
-    void registerModule(const std::string_view& name,
-                        const EGameStage neededForStage,
-                        std::function<void()> initFunction,
-                        std::function<void()> deInitFunction);
+    void registerModule(
+        const std::string_view& name,
+        const EGameStage neededForStage,
+        std::function<void()> initFunction = ModuleRegister::noInitDeInitFunction(),
+        std::function<void()> deInitFunction = ModuleRegister::noInitDeInitFunction(),
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = ModuleRegister::noInitWorldMapFunction());
 
     std::vector<std::string> _finishedModules;
 

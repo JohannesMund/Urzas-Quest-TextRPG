@@ -3,7 +3,9 @@
 #include "cmap.h"
 
 #include <optional>
+#include <vector>
 
+class CRoom;
 class CDungeonRoom;
 
 /**
@@ -26,7 +28,7 @@ public:
      * call, the have the dungeon filled
      * override, to replace certain rooms
      */
-    virtual void init() override;
+    virtual void init(std::vector<CRoom*>& rooms) override;
 
     /**
      * @brief reveal
@@ -110,7 +112,7 @@ protected:
 private:
     CMap::SRoomCoords getRandomRoomCoords(const bool noSpecialRooms = true, const bool notPlayerPosition = true);
 
-    void makeNextRoom(const CMap::SRoomCoords coords, unsigned int& i);
+    void makeNextRoom(const CMap::SRoomCoords coords, std::vector<CRoom*>& rooms);
 
     void fillWithNoRooms();
 

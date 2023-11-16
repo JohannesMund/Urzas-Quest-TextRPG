@@ -1,8 +1,8 @@
 #pragma once
 
 #include "cdungeonmap.h"
-#include "croom.h"
 
+class CRoom;
 class CDungeonMapRoom;
 
 /**
@@ -45,8 +45,8 @@ public:
      */
     void setDungeonMap(CDungeonMap* map);
 
-    void addHealingWell(const std::string& description, const std::string& question, const std::string& effect);
-    void addMapRoom(const std::string& description);
+    CRoom* makeHealingWell(const std::string& description, const std::string& question, const std::string& effect);
+    CRoom* makeMapRoom(const std::string& description);
 
 protected:
     /**

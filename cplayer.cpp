@@ -56,15 +56,19 @@ void CPlayer::addHp(const int i)
         return;
     }
 
+    if (_hp >= _maxHp)
+    {
+        Console::printLn(std::format("{}You are fully healed.{}", CC::fgLightGreen(), CC::ccReset()));
+        _hp = _maxHp;
+        return;
+    }
+
     Console::printLn(std::format("You {} {} Hitpoints.", lostOrGained(i), std::abs(i)));
+
     _hp += i;
     if (_hp <= 0)
     {
         _hp = 0;
-    }
-    if (_hp > _maxHp)
-    {
-        _hp = _maxHp;
     }
 }
 
@@ -131,12 +135,22 @@ int CPlayer::gold() const
 void CPlayer::addXp(const int i)
 {
     Console::printLn(std::format("You {} {} Experience.", lostOrGained(i), std::abs(i)));
-    _xp += i;
 
-    if (_xp > xpForNextLevel())
+    auto xpAvailable = i;
+    do
     {
-        levelUp();
-    }
+        auto xpNeeded = xpForNextLevel() - _xp;
+        if (xpNeeded < xpAvailable)
+        {
+            xpAvailable -= xpNeeded;
+            levelUp();
+        }
+        else
+        {
+            _xp += xpAvailable;
+            xpAvailable = 0;
+        }
+    } while (xpAvailable);
 }
 
 void CPlayer::levelUp()
@@ -148,8 +162,9 @@ void CPlayer::levelUp()
     _level++;
     _xp = 0;
 
-    addMaxHp(Randomizer::getRandom(3) + 1);
     fullHeal();
+    addMaxHp(Randomizer::getRandom(3) + 1);
+
     Console::hr();
 }
 
