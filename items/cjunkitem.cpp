@@ -12,7 +12,7 @@ CJunkItem::CJunkItem() : CItem()
     _value = Randomizer::getRandom(50) + 25;
 }
 
-std::function<bool(const CItem*)> CJunkItem::junkItemFilter()
+CItem::ItemFilter CJunkItem::junkItemFilter()
 {
     return [](const CItem* item) -> bool { return dynamic_cast<const CJunkItem*>(item) != nullptr; };
 }

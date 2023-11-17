@@ -58,6 +58,16 @@ std::string CCave::mapSymbol() const
     return "C";
 }
 
+std::string CCave::bgColor() const
+{
+    return CC::bgBlack();
+}
+
+std::string CCave::fgColor() const
+{
+    return CC::fgDarkGray();
+}
+
 void CCave::initDungeon()
 {
 

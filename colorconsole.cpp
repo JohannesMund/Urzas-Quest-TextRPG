@@ -78,6 +78,11 @@ std::string CC::fgLightCyan()
     return "\e[096m";
 }
 
+std::string CC::fgWhite()
+{
+    return "\e[097m";
+}
+
 std::string CC::bgBlack()
 {
     return "\e[040m";
@@ -151,6 +156,11 @@ std::string CC::bgLightMagenta()
 std::string CC::bgLightCyan()
 {
     return "\e[106m";
+}
+
+std::string CC::bgWhite()
+{
+    return "\e[107m";
 }
 
 std::string CC::ccReset()

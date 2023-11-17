@@ -237,11 +237,11 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
     }
     else
     {
-        cout << CC::bgDarkGray();
+        cout << (*room)->bgColor();
         if (line == 1)
         {
             cout << string{left ? " " : "|"};
-            cout << mapSymbol(coords);
+            cout << (*room)->fgColor() << mapSymbol(coords) << CC::ccReset() << (*room)->bgColor();
             cout << " ";
         }
 

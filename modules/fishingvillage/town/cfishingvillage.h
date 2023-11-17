@@ -1,11 +1,11 @@
 #pragma once
 
-#include "cfield.h"
+#include <cfield.h>
 
-class CCave : public CField
+class CFishingVillage : public CField
 {
 public:
-    CCave();
+    CFishingVillage();
 
     virtual void execute() override;
     virtual std::string mapSymbol() const override;
@@ -14,5 +14,5 @@ public:
     virtual std::string fgColor() const override;
 
 private:
-    void initDungeon();
+    void printHeader();
 };

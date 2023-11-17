@@ -24,6 +24,10 @@ public:
     bool showInFogOfWar() const;
 
     virtual std::string mapSymbol() const;
+
+    virtual std::string bgColor() const;
+    virtual std::string fgColor() const;
+
     virtual void execute();
 
     void setTask(CTask* task);

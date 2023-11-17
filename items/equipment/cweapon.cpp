@@ -31,7 +31,7 @@ std::string CWeapon::typeName() const
     return "Weapon";
 }
 
-std::function<bool(const CItem*)> CWeapon::equipmentTypeFilter() const
+CItem::ItemFilter CWeapon::equipmentTypeFilter() const
 {
     return [](const CItem* item) -> bool { return dynamic_cast<const CWeapon*>(item) != nullptr; };
 }

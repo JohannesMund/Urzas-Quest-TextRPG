@@ -20,6 +20,7 @@ std::string fgLightYellow();
 std::string fgLightBlue();
 std::string fgLightMagenta();
 std::string fgLightCyan();
+std::string fgWhite();
 
 std::string bgBlack();
 std::string bgRed();
@@ -36,6 +37,7 @@ std::string bgLightYellow();
 std::string bgLightBlue();
 std::string bgLightMagenta();
 std::string bgLightCyan();
+std::string bgWhite();
 
 std::string ccReset();
 std::string ccInvert();

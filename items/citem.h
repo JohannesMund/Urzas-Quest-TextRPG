@@ -12,6 +12,8 @@ class CEnemy;
 class CItem
 {
 public:
+    using ItemFilter = std::function<bool(const CItem*)>;
+
     /**
      * @brief CItem
      * Constructor
@@ -163,31 +165,31 @@ public:
      * @param name
      * @return a name filter function to be used in std containers
      */
-    static std::function<bool(const CItem*)> nameFilter(const std::string_view& name);
+    static ItemFilter nameFilter(const std::string_view& name);
 
     /**
      * @brief battleEffectFilter
      * @return a filter function to filter items with battle effect from std containers
      */
-    static std::function<bool(const CItem*)> battleEffectFilter();
+    static ItemFilter battleEffectFilter();
 
     /**
      * @brief durableBattleEffectFilter
      * @return a filter function to filter items with durable battle effect from std containers
      */
-    static std::function<bool(const CItem*)> durableBattleEffectFilter();
+    static ItemFilter durableBattleEffectFilter();
 
     /**
      * @brief shieldingActionFilter
      * @return a filter function to filter items with shield action from std containers
      */
-    static std::function<bool(const CItem*)> shieldingActionFilter();
+    static ItemFilter shieldingActionFilter();
 
     /**
      * @brief deathEffectFilter
      @return a filter function to filter items with death effect from std containers
      */
-    static std::function<bool(const CItem*)> deathEffectFilter();
+    static ItemFilter deathEffectFilter();
 
 protected:
     std::string _name;
