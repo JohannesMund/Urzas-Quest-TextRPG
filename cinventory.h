@@ -41,6 +41,8 @@ public:
 
     void print(const Scope& scope = Scope::eNone);
 
+    //    ItemList getItems(std::fun)
+
     ItemList getItemsWithBattleEffect() const;
     void useBattleEffect(CItem* item, CEnemy* enemy);
 
@@ -67,7 +69,7 @@ private:
 
     std::string printInventoryNav() const;
 
-    CompressedItemMap getCompressedItemMap(std::function<bool(const CItem*)> filter) const;
+    CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
     CompressedItemMap getInventoryCompressedForScope(const Scope& scope) const;
 
     static bool usableInScope(const CItem* item, const Scope& scope);

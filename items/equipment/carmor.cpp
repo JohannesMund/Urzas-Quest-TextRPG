@@ -40,7 +40,7 @@ std::string CArmor::typeName() const
     return "Armor";
 }
 
-std::function<bool(const CItem*)> CArmor::equipmentTypeFilter() const
+CItem::ItemFilter CArmor::equipmentTypeFilter() const
 {
     return [](const CItem* item) -> bool { return dynamic_cast<const CArmor*>(item) != nullptr; };
 }

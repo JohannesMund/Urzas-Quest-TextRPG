@@ -228,7 +228,7 @@ CInventory::CompressedItemMap CInventory::getInventoryCompressedForScope(const S
                                 { return usableInScope(item, scope) || scope == Scope::eList; });
 }
 
-CInventory::CompressedItemMap CInventory::getCompressedItemMap(std::function<bool(const CItem*)> filter) const
+CInventory::CompressedItemMap CInventory::getCompressedItemMap(CItem::ItemFilter filter) const
 {
     CompressedItemMap itemMap;
     for (auto item : _inventory)

@@ -13,7 +13,7 @@ public:
     virtual void battleBuff(CEnemy* enemy, bool& endRound) override;
     virtual std::string typeName() const override;
 
-    virtual std::function<bool(const CItem*)> equipmentTypeFilter() const override;
+    virtual ItemFilter equipmentTypeFilter() const override;
 
 private:
     virtual unsigned int extraDamage() const;

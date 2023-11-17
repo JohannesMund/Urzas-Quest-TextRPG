@@ -203,7 +203,7 @@ void CGameManagement::executeTurn()
         auto input = menu.execute();
         if (input.key == 'q')
         {
-            Console::printLn("Quit game? (No save, no mercy!");
+            Console::printLn("Quit game? (No save, no mercy!)");
             if (CMenu::executeYesNoMenu() == CMenu::yes())
             {
                 _isGameOver = true;

@@ -53,27 +53,27 @@ bool CItem::isConsumable() const
     return _isConsumable;
 }
 
-std::function<bool(const CItem*)> CItem::nameFilter(const std::string_view& name)
+CItem::ItemFilter CItem::nameFilter(const std::string_view& name)
 {
     return [&name](const CItem* item) { return item->name().compare(name) == 0; };
 }
 
-std::function<bool(const CItem*)> CItem::battleEffectFilter()
+CItem::ItemFilter CItem::battleEffectFilter()
 {
     return [](const CItem* item) { return item->hasBattleEffect(); };
 }
 
-std::function<bool(const CItem*)> CItem::durableBattleEffectFilter()
+CItem::ItemFilter CItem::durableBattleEffectFilter()
 {
     return [](const CItem* item) { return item->hasDurableBattleEffect(); };
 }
 
-std::function<bool(const CItem*)> CItem::shieldingActionFilter()
+CItem::ItemFilter CItem::shieldingActionFilter()
 {
     return [](const CItem* item) { return item->hasShieldingAction(); };
 }
 
-std::function<bool(const CItem*)> CItem::deathEffectFilter()
+CItem::ItemFilter CItem::deathEffectFilter()
 {
     return [](const CItem* item) { return item->hasDeathEffect(); };
 }

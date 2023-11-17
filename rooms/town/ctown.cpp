@@ -100,6 +100,16 @@ std::string CTown::mapSymbol() const
     return "T";
 }
 
+std::string CTown::bgColor() const
+{
+    return CC::bgDarkGray();
+}
+
+std::string CTown::fgColor() const
+{
+    return CC::fgLightGray();
+}
+
 std::string CTown::name() const
 {
     return _name;

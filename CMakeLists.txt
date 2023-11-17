@@ -119,8 +119,11 @@ set(URZAS_QUEST_SOURCES
     modules/layla/claylaboss.h modules/layla/claylaboss.cpp
     modules/layla/claylatowntask.h modules/layla/claylatowntask.cpp
 
-
-
+    modules/fishingvillage/town/cfishingvillage.h modules/fishingvillage/town/cfishingvillage.cpp
+    modules/fishingvillage/moduleressources.h modules/fishingvillage/moduleressources.cpp
+    modules/fishingvillage/town/cfishrestaurant.h modules/fishingvillage/town/cfishrestaurant.cpp
+    modules/fishingvillage/town/cfishingfritz.h modules/fishingvillage/town/cfishingfritz.cpp
+    modules/fishingvillage/town/cgofishing.h modules/fishingvillage/town/cgofishing.cpp
 )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
