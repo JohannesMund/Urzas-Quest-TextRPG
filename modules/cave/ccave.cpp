@@ -20,7 +20,6 @@ CCave::CCave()
 
 void CCave::execute()
 {
-
     if (CGameManagement::getProgressionInstance()->isModuleActive(CaveRessources::moduleName()))
     {
         Console::printLn(

@@ -21,11 +21,6 @@ CInjuredPet* RoomFactory::makeInjuredPet()
     return new CInjuredPet();
 }
 
-CCave* RoomFactory::makeCave()
-{
-    return new CCave();
-}
-
 CShrineOfTheAncients* RoomFactory::makeShrine()
 {
     return new CShrineOfTheAncients();

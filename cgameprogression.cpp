@@ -1,5 +1,6 @@
 #include "bard/moduleressources.h"
 #include "cave/moduleressources.h"
+#include "fishinglake/moduleressources.h"
 #include "lakeoftears/moduleressources.h"
 #include "layla/moduleressources.h"
 #include "ratfarm/moduleressources.h"
@@ -28,9 +29,13 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
 
     registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart);
-
     registerModule(
         BardRessources::moduleName(), EGameStage::eStart, &BardRessources::initModule, &BardRessources::deInitModule);
+    registerModule(FishingLakeRessources::moduleName(),
+                   EGameStage::eStart,
+                   &FishingLakeRessources::initModule,
+                   &FishingLakeRessources::deInitModule,
+                   &FishingLakeRessources::initWorldMap);
 
     registerModule(RatFarmRessources::moduleName(),
                    EGameStage::eSeenBard,

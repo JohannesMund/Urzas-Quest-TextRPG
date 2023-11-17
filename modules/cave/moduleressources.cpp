@@ -117,5 +117,5 @@ void CaveRessources::deInitModule()
 
 void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
 {
-    rooms.push_back(RoomFactory::makeCave());
+    rooms.push_back(new CCave());
 }

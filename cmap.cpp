@@ -241,7 +241,7 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
         if (line == 1)
         {
             cout << string{left ? " " : "|"};
-            cout << mapSymbol(coords);
+            cout << mapSymbol(coords) << CC::bgDarkGray();
             cout << " ";
         }
 
