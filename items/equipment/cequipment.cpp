@@ -96,6 +96,11 @@ std::function<CEquipment*(CItem*)> CEquipment::equipmentTransformation()
     return [](CItem* item) -> CEquipment* { return dynamic_cast<CEquipment*>(item); };
 }
 
+Ressources::Items::EType CEquipment::type() const
+{
+    return _type;
+}
+
 bool CEquipment::doesEquipmentEffectFire() const
 {
     return Randomizer::getRandom(100) <= _level * 10;

@@ -40,6 +40,8 @@ public:
 
     virtual CItem::ItemFilter equipmentTypeFilter() const = 0;
 
+    Ressources::Items::EType type() const;
+
 protected:
     bool doesEquipmentEffectFire() const;
     unsigned int qualityModifier() const;

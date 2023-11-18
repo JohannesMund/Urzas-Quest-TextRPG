@@ -33,12 +33,11 @@ void CGameProgression::initEncounters()
     registerModule(
         BardRessources::moduleName(), EGameStage::eStart, &BardRessources::initModule, &BardRessources::deInitModule);
 
-    registerModule(FishingVillageRessources::moduleName(),
-                   EGameStage::eStart,
-                   &FishingVillageRessources::initModule,
-                   &FishingVillageRessources::deInitModule,
+    registerModule(FishingVillageRessources::moduleNameMakeRod(),
+                   EGameStage::eSeenBard,
+                   &FishingVillageRessources::initModuleMakeRod,
+                   &ModuleRegister::noInitDeInitFunction,
                    &FishingVillageRessources::initWorldMap);
-
     registerModule(RatFarmRessources::moduleName(),
                    EGameStage::eSeenBard,
                    &RatFarmRessources::initModule,
@@ -49,6 +48,10 @@ void CGameProgression::initEncounters()
                    &ModuleRegister::noInitDeInitFunction,
                    &CaveRessources::initWorldMap);
 
+    registerModule(FishingVillageRessources::moduleNameMakeBoat(),
+                   EGameStage::eProvenAsHero,
+                   &FishingVillageRessources::initModuleMakeBoat,
+                   &ModuleRegister::noInitDeInitFunction);
     registerModule(LakeTearsRessources::moduleName(),
                    EGameStage::eProvenAsHero,
                    &LakeTearsRessources::initModule,

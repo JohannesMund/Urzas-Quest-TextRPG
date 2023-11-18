@@ -37,7 +37,7 @@ void CFishingVillage::execute()
 
     CMenu menu;
     menu.addMenuGroup(
-        {menu.createAction(FishingVillageRessources::fishingFritz(), 'f'), menu.createAction("Fish Restaurant", 'i')});
+        {menu.createAction(FishingVillageRessources::fishingFritz(), 'f'), menu.createAction("Restaurant", 'R')});
     menu.addMenuGroup({menu.createAction("Go Fishing", 'G')}, {CMenu::exit()});
 
     CMenu::Action input;
@@ -49,7 +49,7 @@ void CFishingVillage::execute()
             CFishingFritz f;
             f.execute();
         }
-        if (input.key == 'i')
+        if (input.key == 'r')
         {
             CFishRestaurant f;
             f.execute();
@@ -59,8 +59,6 @@ void CFishingVillage::execute()
             CGoFishing f;
             f.execute();
         }
-
-        Console::confirmToContinue();
         printHeader();
 
     } while (input != CMenu::exit());

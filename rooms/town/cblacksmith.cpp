@@ -49,13 +49,19 @@ void CBlackSmith::enhanceItem()
     Console::printLn("You look through your pockets and find the following items, that can be enhanced:");
     for (auto item : items)
     {
+
+        if (item->type() != Ressources::Items::EType::eArmor && item->type() != Ressources::Items::EType::eShield &&
+            item->type() != Ressources::Items::EType::eWeapon)
+        {
+            continue;
+        }
+
         auto cost = item->upgradeCost();
 
         if (cost <= CGameManagement::getPlayerInstance()->gold())
         {
-            number++;
             enhancableItems.push_back(item);
-            Console::printLn(std::format("[{:3}] {} ({} Gold)", number, item->name(), cost));
+            Console::printLn(std::format("[{:3}] {} ({} Gold)", enhancableItems.size(), item->name(), cost));
         }
         else
         {
@@ -65,7 +71,7 @@ void CBlackSmith::enhanceItem()
 
     if (enhancableItems.size() > 0)
     {
-        auto idx = Console::getNumberInputWithEcho(1, number);
+        auto idx = Console::getNumberInputWithEcho(1, enhancableItems.size());
 
         if (idx.has_value())
         {
