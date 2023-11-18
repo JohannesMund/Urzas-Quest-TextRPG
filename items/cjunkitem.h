@@ -7,5 +7,5 @@ class CJunkItem : public CItem
 public:
     CJunkItem();
 
-    static std::function<bool(const CItem*)> junkItemFilter();
+    static ItemFilter junkItemFilter();
 };

@@ -23,8 +23,9 @@ public:
 
     virtual std::string name() const;
     std::string weapon() const;
-    unsigned int level() const;
 
+    unsigned int level() const;
+    virtual unsigned int damage() const;
     unsigned int initiative() const;
 
     bool isDead() const;

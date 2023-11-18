@@ -11,7 +11,7 @@ public:
     virtual int shield(const unsigned int i) override;
     virtual std::string typeName() const override;
 
-    virtual std::function<bool(const CItem*)> equipmentTypeFilter() const override;
+    virtual ItemFilter equipmentTypeFilter() const override;
 
 private:
     virtual unsigned int shieldAmount() const;

@@ -27,18 +27,20 @@ public:
      * @brief equipmentFiler
      * @return a filter function to filter equipment items from std containers
      */
-    static std::function<bool(const CItem*)> equipmentFilter();
+    static CItem::ItemFilter equipmentFilter();
     static bool isEquipment(const CItem* item);
 
     /**
      * @brief enhancableEquipmentFilter
      * @return a filter function to filter equipment items that can be enhanced from std containers
      */
-    static std::function<bool(const CItem*)> enhancableEquipmentFilter();
+    static CItem::ItemFilter enhancableEquipmentFilter();
 
     static std::function<CEquipment*(CItem*)> equipmentTransformation();
 
-    virtual std::function<bool(const CItem*)> equipmentTypeFilter() const = 0;
+    virtual CItem::ItemFilter equipmentTypeFilter() const = 0;
+
+    Ressources::Items::EType type() const;
 
 protected:
     bool doesEquipmentEffectFire() const;

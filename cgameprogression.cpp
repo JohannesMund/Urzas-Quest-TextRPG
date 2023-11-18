@@ -1,5 +1,6 @@
 #include "bard/moduleressources.h"
 #include "cave/moduleressources.h"
+#include "fishingvillage/moduleressources.h"
 #include "lakeoftears/moduleressources.h"
 #include "layla/moduleressources.h"
 #include "ratfarm/moduleressources.h"
@@ -27,21 +28,30 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
     CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
 
-    registerModule(
-        Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart, []() {}, []() {});
+    registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart);
 
     registerModule(
         BardRessources::moduleName(), EGameStage::eStart, &BardRessources::initModule, &BardRessources::deInitModule);
 
+    registerModule(FishingVillageRessources::moduleNameMakeRod(),
+                   EGameStage::eSeenBard,
+                   &FishingVillageRessources::initModuleMakeRod,
+                   &ModuleRegister::noInitDeInitFunction,
+                   &FishingVillageRessources::initWorldMap);
     registerModule(RatFarmRessources::moduleName(),
                    EGameStage::eSeenBard,
                    &RatFarmRessources::initModule,
                    &RatFarmRessources::deInitModule);
     registerModule(CaveRessources::moduleName(),
                    EGameStage::eSeenBard,
-                   &CaveRessources::initModule,
-                   &CaveRessources::deInitModule);
+                   &ModuleRegister::noInitDeInitFunction,
+                   &ModuleRegister::noInitDeInitFunction,
+                   &CaveRessources::initWorldMap);
 
+    registerModule(FishingVillageRessources::moduleNameMakeBoat(),
+                   EGameStage::eProvenAsHero,
+                   &FishingVillageRessources::initModuleMakeBoat,
+                   &ModuleRegister::noInitDeInitFunction);
     registerModule(LakeTearsRessources::moduleName(),
                    EGameStage::eProvenAsHero,
                    &LakeTearsRessources::initModule,
@@ -100,6 +110,20 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
+bool CGameProgression::isModuleActive(const std::string_view& moduleName)
+{
+    for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)) |
+                            std::views::filter(ModuleRegister::moduleRegisterNameFilter(moduleName)))
+    {
+        if (isModuleFinished(module.moduleName))
+        {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
+
 void CGameProgression::increaseBodyCount()
 {
     _bodyCount++;
@@ -118,6 +142,14 @@ unsigned int CGameProgression::getBodyCount() const
 bool CGameProgression::isModuleFinished(const std::string_view& moduleName)
 {
     return std::find(_finishedModules.begin(), _finishedModules.end(), moduleName) != _finishedModules.end();
+}
+
+void CGameProgression::initWorldMap(std::vector<CRoom*>& rooms) const
+{
+    for (const auto& module : _moduleRegister)
+    {
+        module.initWorldMapFunction(rooms);
+    }
 }
 
 void CGameProgression::unFinishModule(const std::string_view& moduleName)
@@ -170,7 +202,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn("You have seen quite some things, since you awoke in this strange world.");
         Console::printLn("At least, you have 2 things:");
         Console::printLn(
-            std::format("The matching {} for the {},", Ressources::Items::sock(), Ressources::Items::otherSock()));
+            std::format("The matching {} for the {},", Ressources::Items::otherSock(), Ressources::Items::sock()));
         Console::printLn(
             std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
                         BardRessources::encounterName()));
@@ -218,13 +250,14 @@ void CGameProgression::progressToStage(EGameStage stage)
 void CGameProgression::reRegisterModule(const std::string_view& name, const EGameStage neededForStage)
 {
     unFinishModule(name);
-    registerModule(name, neededForStage, {}, {});
+    registerModule(name, neededForStage, {}, {}, {});
 }
 
 void CGameProgression::registerModule(const std::string_view& name,
                                       const EGameStage neededForStage,
                                       std::function<void()> initFunction,
-                                      std::function<void()> deInitFunction)
+                                      std::function<void()> deInitFunction,
+                                      std::function<void(std::vector<CRoom*>&)> initWorldMapFunction)
 {
     auto it =
         std::find_if(_moduleRegister.begin(), _moduleRegister.end(), ModuleRegister::moduleRegisterNameFilter(name));
@@ -239,6 +272,7 @@ void CGameProgression::registerModule(const std::string_view& name,
         module.gameStage = neededForStage;
         module.initFunction = initFunction;
         module.deInitFunction = deInitFunction;
+        module.initWorldMapFunction = initWorldMapFunction;
 
         _moduleRegister.push_back(module);
     }

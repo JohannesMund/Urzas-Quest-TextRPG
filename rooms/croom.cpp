@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "cgamemanagement.h"
+#include "colorconsole.h"
 #include "console.h"
 #include "croom.h"
 #include "ctask.h"
@@ -142,4 +143,14 @@ std::string CRoom::mapSymbol() const
         return "!";
     }
     return " ";
+}
+
+std::string CRoom::bgColor() const
+{
+    return CC::bgDarkGray();
+}
+
+std::string CRoom::fgColor() const
+{
+    return CC::fgLightGray();
 }

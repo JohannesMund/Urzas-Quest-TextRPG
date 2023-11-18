@@ -15,6 +15,7 @@ public:
 
     void addGold(const int i);
     void addHp(const int i);
+    void fullHeal();
     void dealDamage(const int i, const bool bNoShield = false);
     void addMaxHp(const int i);
 
@@ -33,6 +34,8 @@ public:
     std::string hpAsString() const;
 
     unsigned int initiative() const;
+
+    unsigned int damage() const;
 
 private:
     CPlayer();

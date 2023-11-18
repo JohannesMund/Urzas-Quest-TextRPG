@@ -37,7 +37,7 @@ void CLaylaEncounter::execute(const std::string_view& moduleName)
         "usual story, log on the street, cart crashes, guard is beaten up, princess is kidnapped.",
         Ressources::Game::princessLayla()));
     Console::printLn("Since this guy is seriously injured and the princess should be rescued soon (is she hot?) it is "
-                     "up to you to do the job.");
+                     "up to you, to do the job.");
     Console::br();
     Console::printLn("Will you do it?");
 
@@ -45,14 +45,15 @@ void CLaylaEncounter::execute(const std::string_view& moduleName)
     menu.addMenuGroup({menu.createAction("Hell Yeah!"), menu.createAction("No")});
     if (menu.execute().key == 'n')
     {
-        Console::printLn("You dont feel very heroic today. Maybe another time, you are sure, you will see this exact "
+        Console::printLn("You dont feel very heroic today, and usually, princesses in need are not very hot. Maybe "
+                         "another time, you are sure, you will see this exact "
                          "scene again (especially, if this event is story-relevant.");
         return;
     }
 
     Console::printLn("This a job for... ok, you need a name, it is a job for you, lets go.");
 
-    CGameManagement::getInstance()->placeTask(new CLaylaTask());
+    CGameManagement::getInstance()->placeTaskOnField(new CLaylaTask());
 
     _hasBeenExecuted = true;
 }

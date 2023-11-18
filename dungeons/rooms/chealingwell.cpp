@@ -17,7 +17,7 @@ void CHealingWell::execute()
     if (CMenu::executeYesNoMenu() == CMenu::yes())
     {
         Console::printLn(_effect);
-        CGameManagement::getPlayerInstance()->addHp(9999);
+        CGameManagement::getPlayerInstance()->fullHeal();
         Console::br();
         Console::confirmToContinue();
     }

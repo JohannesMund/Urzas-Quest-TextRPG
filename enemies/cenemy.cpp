@@ -1,8 +1,11 @@
 #include "cenemy.h"
 #include "cgamemanagement.h"
+#include "colorconsole.h"
 #include "console.h"
 #include "itemfactory.h"
 #include "randomizer.h"
+
+#include <format>
 
 CEnemy::CEnemy()
 {
@@ -73,6 +76,12 @@ unsigned int CEnemy::level() const
     return _level;
 }
 
+unsigned int CEnemy::damage() const
+{
+    auto levelBonus = std::max((int)std::ceil(_level / 5), 1);
+    return 1 + Randomizer::getRandom(levelBonus);
+}
+
 unsigned int CEnemy::initiative() const
 {
     return _initiative;
@@ -99,6 +108,11 @@ void CEnemy::addHp(const int i)
 
 void CEnemy::dealDamage(const int i)
 {
+    if (i == 0)
+    {
+        return;
+    }
+    Console::printLn(std::format("You hit the enemy for {}{} damage{}.", CC::fgLightBlue(), i, CC::ccReset()));
     addHp(i * -1);
 }
 

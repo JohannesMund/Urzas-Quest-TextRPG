@@ -12,6 +12,9 @@ public:
     virtual void execute() override;
     virtual std::string mapSymbol() const override;
 
+    virtual std::string fgColor() const override;
+    virtual std::string bgColor() const override;
+
 private:
     CGameProgression::EGameStage _seenDuringPhase = CGameProgression::EGameStage::eNone;
 

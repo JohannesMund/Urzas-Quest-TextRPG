@@ -52,14 +52,14 @@ CGameProgression* CGameManagement::getProgressionInstance()
     return getInstance()->getProgression();
 }
 
-void CGameManagement::placeTask(CTask* task)
+void CGameManagement::placeTaskOnField(CTask* task)
 {
-    _map.setTaskToRandomRoom(task);
+    _map.setTaskToRandomRoom(task, true, false);
 }
 
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, true);
+    _map.setTaskToRandomRoom(task, false, true);
 }
 
 void CGameManagement::start()
@@ -190,12 +190,20 @@ void CGameManagement::executeTurn()
         }
 
         menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
-        menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
+
+        if (Ressources::Config::superCowPowers)
+        {
+            menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
+        }
+        else
+        {
+            menu.addMenuGroup({}, {menu.createAction("Quit Game")});
+        }
 
         auto input = menu.execute();
         if (input.key == 'q')
         {
-            Console::printLn("Quit game? (No save, no mercy!");
+            Console::printLn("Quit game? (No save, no mercy!)");
             if (CMenu::executeYesNoMenu() == CMenu::yes())
             {
                 _isGameOver = true;
@@ -285,10 +293,13 @@ void CGameManagement::init()
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eUrzasGlasses));
 
+    std::vector<CRoom*> rooms;
+
     _progression.initEncounters();
+    _progression.initWorldMap(rooms);
 
     _map.setStartingPosition({3, 5});
-    _map.init();
+    _map.init(rooms);
 }
 
 void CGameManagement::gameLoop()

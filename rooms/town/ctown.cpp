@@ -45,13 +45,14 @@ void CTown::execute()
             navs.push_back(menu.createAction("Farm"));
         }
 
+        menu.addMenuGroup(navs, {CMenu::exit()});
+
         CMenu::Action taskAction;
         if (hasTask() && !_task->isAutoExecute())
         {
             taskAction = menu.createAction(_task->taskNav());
-            navs.push_back(taskAction);
+            menu.addMenuGroup({taskAction});
         }
-        menu.addMenuGroup(navs, {CMenu::exit()});
 
         input = menu.execute();
 
@@ -97,6 +98,16 @@ std::string CTown::mapSymbol() const
         return "!";
     }
     return "T";
+}
+
+std::string CTown::bgColor() const
+{
+    return CC::bgDarkGray();
+}
+
+std::string CTown::fgColor() const
+{
+    return CC::fgLightGray();
 }
 
 std::string CTown::name() const

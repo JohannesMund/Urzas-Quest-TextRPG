@@ -17,21 +17,29 @@ void CDungeon::setDungeonMap(CDungeonMap* map)
     _map = map;
 }
 
-void CDungeon::addHealingWell(const std::string& description, const std::string& question, const std::string& effect)
+void CDungeon::setMapRooom(CRoom* mapRoom)
+{
+    auto r = dynamic_cast<CDungeonMapRoom*>(mapRoom);
+    if (r != nullptr)
+    {
+        _mapRoom = r;
+    }
+}
+
+CRoom* CDungeon::makeHealingWell(const std::string& description, const std::string& question, const std::string& effect)
 {
     CHealingWell* well = new CHealingWell();
     well->setDescription(description);
     well->setQuestion(question);
     well->setEffect(effect);
-    _map->addSpecificRoom(well);
+    return well;
 }
 
-void CDungeon::addMapRoom(const std::string& description)
+CRoom* CDungeon::makeMapRoom(const std::string& description)
 {
     CDungeonMapRoom* mapRoom = new CDungeonMapRoom();
     mapRoom->setDescription(description);
-    _map->addSpecificRoom(mapRoom);
-    _mapRoom = mapRoom;
+    return mapRoom;
 }
 
 void CDungeon::dungeonLoop()
@@ -67,7 +75,13 @@ void CDungeon::dungeonLoop()
             exitActionHalf.push_back(CMenu::exit());
         }
 
-        menu.addMenuGroup({menu.createAction("Reveal")}, exitActionHalf);
+        std::vector<CMenu::Action> superCowHalf = {};
+        if (Ressources::Config::superCowPowers)
+        {
+            superCowHalf.push_back(menu.createAction("Reveal"));
+        }
+
+        menu.addMenuGroup(superCowHalf, exitActionHalf);
 
         while (true)
         {

@@ -2,12 +2,15 @@
 
 #include <string>
 #include <utility>
+#include <vector>
 
+class CRoom;
 namespace CaveRessources
 {
 
 void initModule();
 void deInitModule();
+void initWorldMap(std::vector<CRoom*>& rooms);
 
 std::string moduleName();
 

@@ -10,3 +10,13 @@ std::string CField::mapSymbol() const
 {
     return CRoom::mapSymbol();
 }
+
+std::string CField::fgColor() const
+{
+    return CC::fgWhite();
+}
+
+std::string CField::bgColor() const
+{
+    return "\e[48;5;22m";
+}

@@ -68,7 +68,7 @@ void CEquipment::enhance()
     _level++;
 }
 
-std::function<bool(const CItem*)> CEquipment::equipmentFilter()
+CItem::ItemFilter CEquipment::equipmentFilter()
 {
     return [](const CItem* item) -> bool { return CEquipment::isEquipment(item); };
 }
@@ -78,7 +78,7 @@ bool CEquipment::isEquipment(const CItem* item)
     return dynamic_cast<const CEquipment*>(item) != nullptr;
 }
 
-std::function<bool(const CItem*)> CEquipment::enhancableEquipmentFilter()
+CItem::ItemFilter CEquipment::enhancableEquipmentFilter()
 {
     return [](const CItem* item) -> bool
     {
@@ -94,6 +94,11 @@ std::function<bool(const CItem*)> CEquipment::enhancableEquipmentFilter()
 std::function<CEquipment*(CItem*)> CEquipment::equipmentTransformation()
 {
     return [](CItem* item) -> CEquipment* { return dynamic_cast<CEquipment*>(item); };
+}
+
+Ressources::Items::EType CEquipment::type() const
+{
+    return _type;
 }
 
 bool CEquipment::doesEquipmentEffectFire() const

@@ -5,8 +5,11 @@
 #include "cmenu.h"
 #include "colorconsole.h"
 #include "console.h"
+#include "randomizer.h"
 #include "ressources.h"
 
+#include <algorithm>
+#include <cmath>
 #include <format>
 #include <string>
 
@@ -48,20 +51,39 @@ void CPlayer::addGold(const int i)
 
 void CPlayer::addHp(const int i)
 {
+    if (i == 0)
+    {
+        return;
+    }
+
+    if (_hp >= _maxHp)
+    {
+        Console::printLn(std::format("{}You are fully healed.{}", CC::fgLightGreen(), CC::ccReset()));
+        _hp = _maxHp;
+        return;
+    }
+
     Console::printLn(std::format("You {} {} Hitpoints.", lostOrGained(i), std::abs(i)));
+
     _hp += i;
     if (_hp <= 0)
     {
         _hp = 0;
     }
-    if (_hp > _maxHp)
-    {
-        _hp = _maxHp;
-    }
+}
+
+void CPlayer::fullHeal()
+{
+    addHp(_maxHp - _hp);
 }
 
 void CPlayer::dealDamage(const int i, const bool bNoShield)
 {
+    if (i == 0)
+    {
+        return;
+    }
+
     int damage = i;
     if (bNoShield == false)
     {
@@ -113,18 +135,37 @@ int CPlayer::gold() const
 void CPlayer::addXp(const int i)
 {
     Console::printLn(std::format("You {} {} Experience.", lostOrGained(i), std::abs(i)));
-    _xp += i;
 
-    if (_xp > xpForNextLevel())
+    auto xpAvailable = i;
+    do
     {
-        levelUp();
-    }
+        auto xpNeeded = xpForNextLevel() - _xp;
+        if (xpNeeded < xpAvailable)
+        {
+            xpAvailable -= xpNeeded;
+            levelUp();
+        }
+        else
+        {
+            _xp += xpAvailable;
+            xpAvailable = 0;
+        }
+    } while (xpAvailable);
 }
 
 void CPlayer::levelUp()
 {
-    Console::printLn("You gained one level");
+    Console::hr();
+    Console::printLn(std::format("{}You gained one level{}", CC::fgLightYellow(), CC::ccReset()),
+                     Console::EAlignment::eCenter);
+    Console::br();
     _level++;
+    _xp = 0;
+
+    fullHeal();
+    addMaxHp(Randomizer::getRandom(3) + 1);
+
+    Console::hr();
 }
 
 void CPlayer::preBattle(CEnemy* enemy)
@@ -170,7 +211,13 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
             weapons.push_back(menu.createAction("Spock"));
         }
 
-        menu.addMenuGroup(weapons, {menu.createAction("Inventory"), menu.createAction("Win")});
+        std::vector<CMenu::Action> tools;
+        tools.push_back(menu.createAction("Inventory"));
+        if (Ressources::Config::superCowPowers)
+        {
+            tools.push_back(menu.createAction("Win"));
+        }
+        menu.addMenuGroup(weapons, tools);
         auto input = menu.execute();
 
         if (input.key == 'r')
@@ -228,9 +275,15 @@ unsigned int CPlayer::initiative() const
     return _initiative;
 }
 
+unsigned int CPlayer::damage() const
+{
+    auto levelBonus = std::max((int)std::ceil(_level / 5), 1);
+    return 1 + Randomizer::getRandom(levelBonus * 2);
+}
+
 unsigned int CPlayer::xpForNextLevel() const
 {
-    return Ressources::Config::getXpForLevel(_level);
+    return (_level * 75) * _level * 5;
 }
 
 std::string CPlayer::increasedOrDecreased(const int i)

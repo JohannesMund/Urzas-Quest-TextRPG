@@ -34,6 +34,16 @@ std::string CShrineOfTheAncients::mapSymbol() const
     return "#";
 }
 
+std::string CShrineOfTheAncients::fgColor() const
+{
+    return CC::fgDarkGray();
+}
+
+std::string CShrineOfTheAncients::bgColor() const
+{
+    return CC::bgLightGray();
+}
+
 void CShrineOfTheAncients::visit()
 {
 

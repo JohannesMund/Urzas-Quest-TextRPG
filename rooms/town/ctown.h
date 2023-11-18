@@ -17,7 +17,11 @@ public:
     CTown();
 
     virtual void execute() override;
+
     virtual std::string mapSymbol() const override;
+
+    virtual std::string bgColor() const override;
+    virtual std::string fgColor() const override;
 
     std::string name() const;
 
