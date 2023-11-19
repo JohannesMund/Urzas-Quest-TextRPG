@@ -1,7 +1,7 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "clakeoftearsencounter.h"
-#include "colorconsole.h"
+#include "colorize.h"
 
 #include <format>
 #include <string>
@@ -34,4 +34,9 @@ std::string LakeTearsRessources::bimmelchen()
 std::string LakeTearsRessources::pimmelchen()
 {
     return std::format("{1}P{0}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::string LakeTearsRessources::questLog()
+{
+    return "Find and remove the source of the salty water";
 }

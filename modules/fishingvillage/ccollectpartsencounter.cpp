@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "cmobenemy.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "fishingvillage/items/cboatpart.h"
 #include "fishingvillage/items/cfishingrodpart.h"

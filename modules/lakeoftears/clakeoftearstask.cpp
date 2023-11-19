@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "clakeoftearsbosstask.h"
 #include "cmobenemy.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "itemfactory.h"
 #include "randomizer.h"

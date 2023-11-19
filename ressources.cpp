@@ -1,5 +1,5 @@
 #include "ressources.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "randomizer.h"
 
 #include "bard/moduleressources.h"

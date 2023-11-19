@@ -1,7 +1,7 @@
 #include "ctown.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "ctask.h"
 #include "ressources.h"

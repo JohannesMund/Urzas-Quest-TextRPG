@@ -1,6 +1,6 @@
 #include "cratfarmturnip.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "moduleressources.h"
 

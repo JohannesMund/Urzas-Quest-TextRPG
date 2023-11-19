@@ -8,7 +8,7 @@ set(URZAS_QUEST_SOURCES
     main.cpp
 
     console.h console.cpp
-    colorconsole.h colorconsole.cpp
+    colorize.h colorize.cpp
     cmenu.h cmenu.cpp
 
     ressources.h ressources.cpp

@@ -10,6 +10,7 @@ void initModule();
 void deInitModule();
 
 std::string moduleName();
+std::string questLog();
 
 const unsigned int ratCount = 15;
 

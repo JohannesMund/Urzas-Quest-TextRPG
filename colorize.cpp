@@ -1,4 +1,4 @@
-#include "colorconsole.h"
+#include "colorize.h"
 
 #include <format>
 #include <regex>
@@ -180,7 +180,7 @@ std::string CC::colorizeString(const std::string_view& s, const std::string_view
 
 size_t CC::colorizedSize(const std::string& s)
 {
-    const std::regex expression("\\\e\\[(\\d*)m");
+    const std::regex expression(colorCodeRegExp());
 
     auto beginIt = std::sregex_iterator(s.begin(), s.end(), expression);
     auto endIt = std::sregex_iterator();
@@ -207,4 +207,15 @@ std::string CC::colorizedSubString(const std::string_view& text, const unsigned 
         substring.push_back(text.at(i));
     }
     return substring;
+}
+
+std::string CC::unColorizeString(const std::string& s)
+{
+    const std::regex expression(colorCodeRegExp());
+    return std::regex_replace(s, expression, "");
+}
+
+std::string CC::colorCodeRegExp()
+{
+    return "\\\e\\[(\\d*)m";
 }

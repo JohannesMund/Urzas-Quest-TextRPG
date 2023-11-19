@@ -2,7 +2,7 @@
 #include "cequipment.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "ressources.h"
 
@@ -255,6 +255,21 @@ void CShrineOfTheAncients::stats() const
         Console::printLnWithSpacer(std::format("{}:", e->typeName()),
                                    std::format("{} (Level {})", e->name(), e->level()));
     }
+
+    auto quests = CGameManagement::getProgressionInstance()->getQuestLog();
+    if (quests.size())
+    {
+        Console::br();
+        Console::hr();
+        Console::printLn("You current Quests:");
+        Console::br();
+
+        for (const auto& q : quests)
+        {
+            Console::printLn(q);
+        }
+    }
+    Console::br();
     Console::confirmToContinue();
 }
 

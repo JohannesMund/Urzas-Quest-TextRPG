@@ -1,7 +1,7 @@
 #include "cratfarmencounter.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "cratfarmtask.h"
 #include "moduleressources.h"

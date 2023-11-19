@@ -25,6 +25,10 @@ std::string moduleNameMakeRod();
 std::string moduleNameMakeBoat();
 std::string moduleNameFishLegend();
 
+std::string questLogMakeRod();
+std::string questLogMAkeBoat();
+std::string questLogFishLegend();
+
 void initModuleMakeRod();
 void initModuleMakeBoat();
 void initWorldMap(std::vector<CRoom*>& rooms);

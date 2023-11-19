@@ -1,6 +1,6 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "fishingvillage/ccollectpartsencounter.h"
 #include "fishingvillage/town/cfishingvillage.h"
 #include "randomizer.h"
@@ -125,4 +125,19 @@ FishingVillageRessources::EFishLevel FishingVillageRessources::getRandomRarity(c
     auto rnd = std::min(fishes.size() - 1,
                         (size_t)(Randomizer::getRandom(i) + calcBonus(rodLevel) + calcBonus(boatLevel) + 15));
     return fishes.at(rnd);
+}
+
+std::string FishingVillageRessources::questLogMakeRod()
+{
+    return "Build a fishing rod";
+}
+
+std::string FishingVillageRessources::questLogMAkeBoat()
+{
+    return "Build a boat";
+}
+
+std::string FishingVillageRessources::questLogFishLegend()
+{
+    return std::format("Catch the legendary {}", getFish(EFishLevel::eLegend));
 }

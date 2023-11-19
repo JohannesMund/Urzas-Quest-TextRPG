@@ -1,7 +1,7 @@
 #include "moduleressources.h"
 #include "cdancingbard.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 
 #include <format>
 std::string BardRessources::moduleName()

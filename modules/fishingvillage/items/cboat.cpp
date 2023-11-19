@@ -1,5 +1,5 @@
 #include "cboat.h"
-#include "colorconsole.h"
+#include "colorize.h"
 
 #include <format>
 

@@ -1,7 +1,7 @@
 #include "cfishingfritz.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "fishingvillage/items/cboat.h"
 #include "fishingvillage/items/cboatpart.h"

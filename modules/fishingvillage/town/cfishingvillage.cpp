@@ -5,7 +5,7 @@
 
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "fishingvillage/moduleressources.h"
 

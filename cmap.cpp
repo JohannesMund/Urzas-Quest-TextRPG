@@ -1,7 +1,7 @@
 #include "cmap.h"
 #include "cave/ccave.h"
 #include "cinjuredpet.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "croom.h"
 #include "cshrineoftheancients.h"

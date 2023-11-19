@@ -1,6 +1,6 @@
 #include "moduleressources.h"
 #include "ccave.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "randomizer.h"
 #include "roomfactory.h"
 
@@ -118,4 +118,9 @@ void CaveRessources::deInitModule()
 void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(new CCave());
+}
+
+std::string CaveRessources::questLog()
+{
+    return "Clear the Cave and defeat the evil cave boss";
 }
