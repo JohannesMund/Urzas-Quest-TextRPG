@@ -1,6 +1,6 @@
 #pragma once
 
-#include "colorconsole.h"
+#include "colorize.h"
 #include "ressources.h"
 #include <string>
 

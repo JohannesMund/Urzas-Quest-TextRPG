@@ -5,7 +5,7 @@
 #include "cgamemanagement.h"
 #include "chealingwell.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "moduleressources.h"
 

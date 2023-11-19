@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "cmobenemy.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "fishingvillage/items/cboatpart.h"
 #include "fishingvillage/items/cfishingrodpart.h"
@@ -12,11 +12,12 @@
 
 #include <format>
 
-CCollectPartsEncounter::CCollectPartsEncounter(const std::string_view& moduleName)
+CCollectPartsEncounter::CCollectPartsEncounter(const std::string_view& moduleName) :
+    CEncounter(),
+    _moduleName(moduleName)
 {
     _isSingleExecution = false;
     _type = CEncounter::eField;
-    _moduleName = moduleName;
 }
 
 void CCollectPartsEncounter::execute(const std::string_view& moduleName)

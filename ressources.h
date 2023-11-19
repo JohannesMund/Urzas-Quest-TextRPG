@@ -46,6 +46,10 @@ std::string layla();
 std::string fiego();
 std::string brock();
 
+std::string fishingFritz();
+
+std::string mobi();
+
 } // namespace Game
 
 namespace Rooms

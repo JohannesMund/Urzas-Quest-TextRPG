@@ -1,5 +1,5 @@
 #include "cfishingrod.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "ressources.h"
 
 #include <format>

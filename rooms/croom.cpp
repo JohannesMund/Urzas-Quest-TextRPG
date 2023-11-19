@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "croom.h"
 #include "ctask.h"

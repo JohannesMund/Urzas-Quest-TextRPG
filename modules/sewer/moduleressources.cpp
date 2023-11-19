@@ -142,3 +142,8 @@ std::string SewerRessources::hotdog()
 {
     return std::format("{0}H{1}o{2}t{0}dog{3}", CC::fgYellow(), CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset());
 }
+
+std::string SewerRessources::questLog()
+{
+    return "Rescue the missing children from the cities sewers.";
+}

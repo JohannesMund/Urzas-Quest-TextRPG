@@ -8,7 +8,7 @@ set(URZAS_QUEST_SOURCES
     main.cpp
 
     console.h console.cpp
-    colorconsole.h colorconsole.cpp
+    colorize.h colorize.cpp
     cmenu.h cmenu.cpp
 
     ressources.h ressources.cpp
@@ -130,9 +130,11 @@ set(URZAS_QUEST_SOURCES
     modules/fishingvillage/ccollectpartsencounter.h modules/fishingvillage/ccollectpartsencounter.cpp
     modules/fishingvillage/items/cboat.h modules/fishingvillage/items/cboat.cpp
     modules/fishingvillage/items/cboatpart.h modules/fishingvillage/items/cboatpart.cpp
+    modules/fishingvillage/tasks/cbuildequipmenttask.h modules/fishingvillage/tasks/cbuildequipmenttask.cpp
 )
 
-add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
+add_executable(UrzasQuest ${URZAS_QUEST_SOURCES}
+    modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp)
 
 
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})

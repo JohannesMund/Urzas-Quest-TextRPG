@@ -1,28 +1,28 @@
 #include "fishingvillage/town/cfishingvillage.h"
+#include "cgamemanagement.h"
+#include "cmenu.h"
+#include "colorize.h"
+#include "console.h"
+#include "ctask.h"
+#include "fishingvillage/moduleressources.h"
 #include "fishingvillage/town/cfishingfritz.h"
 #include "fishingvillage/town/cfishrestaurant.h"
 #include "fishingvillage/town/cgofishing.h"
 
-#include "cgamemanagement.h"
-#include "cmenu.h"
-#include "colorconsole.h"
-#include "console.h"
-#include "fishingvillage/moduleressources.h"
-
 #include <format>
 
-CFishingVillage::CFishingVillage()
+CFishingVillage::CFishingVillage() : CRoom()
 {
     _description = "";
 
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = false;
+    _isTaskPossible = true;
     _showInFogOfWar = true;
 }
 
 void CFishingVillage::execute()
 {
-    CField::execute();
+    CRoom::execute();
 
     printHeader();
 
@@ -31,18 +31,29 @@ void CFishingVillage::execute()
         "is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you "
         "can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
         FishingVillageRessources::fishingVilleName(),
-        FishingVillageRessources::fishingFritz(),
+        Ressources::Game::fishingFritz(),
         FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
     Console::br();
-
-    CMenu menu;
-    menu.addMenuGroup(
-        {menu.createAction(FishingVillageRessources::fishingFritz(), 'f'), menu.createAction("Restaurant", 'R')});
-    menu.addMenuGroup({menu.createAction("Go Fishing", 'G')}, {CMenu::exit()});
 
     CMenu::Action input;
     do
     {
+        CMenu menu;
+        menu.addMenuGroup({menu.createAction(Ressources::Game::fishingFritz(), 'f'),
+                           menu.createAction("Restaurant", 'R'),
+                           menu.createAction("Go Fishing", 'G')});
+
+        CMenu::Action taskAction;
+        if (hasTask() && !_task->isAutoExecute())
+        {
+            taskAction = menu.createAction(_task->taskNav());
+            menu.addMenuGroup({taskAction}, {CMenu::exit()});
+        }
+        else
+        {
+            menu.addMenuGroup({}, {CMenu::exit()});
+        }
+
         input = menu.execute();
         if (input.key == 'f')
         {
@@ -59,6 +70,11 @@ void CFishingVillage::execute()
             CGoFishing f;
             f.execute();
         }
+        if (input == taskAction)
+        {
+            executeTask();
+            Console::confirmToContinue();
+        }
         printHeader();
 
     } while (input != CMenu::exit());
@@ -66,6 +82,10 @@ void CFishingVillage::execute()
 
 std::string CFishingVillage::mapSymbol() const
 {
+    if (hasTask())
+    {
+        return "!";
+    }
     return "~";
 }
 
@@ -77,6 +97,11 @@ std::string CFishingVillage::bgColor() const
 std::string CFishingVillage::fgColor() const
 {
     return CC::fgWhite();
+}
+
+CMap::RoomFilter CFishingVillage::fishingVillageFilter()
+{
+    return [](const CRoom* room) { return dynamic_cast<const CFishingVillage*>(room) != nullptr; };
 }
 
 void CFishingVillage::printHeader()
@@ -92,7 +117,7 @@ void CFishingVillage::printHeader()
         "is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you "
         "can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
         FishingVillageRessources::fishingVilleName(),
-        FishingVillageRessources::fishingFritz(),
+        Ressources::Game::fishingFritz(),
         FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
     Console::br();
 }

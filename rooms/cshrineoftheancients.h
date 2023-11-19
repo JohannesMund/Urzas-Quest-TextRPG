@@ -1,10 +1,9 @@
 #pragma once
 
 #include "cgameprogression.h"
+#include "croom.h"
 
-#include <cfield.h>
-
-class CShrineOfTheAncients : public CField
+class CShrineOfTheAncients : public CRoom
 {
 public:
     CShrineOfTheAncients();

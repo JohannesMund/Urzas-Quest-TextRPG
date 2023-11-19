@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <map>
 #include <optional>
 #include <string>
@@ -21,6 +22,8 @@ public:
     };
 
     static const std::map<EDirections, std::string> _dirMap;
+
+    using RoomFilter = std::function<bool(const CRoom* room)>;
 
     struct SRoomCoords
     {
@@ -75,7 +78,8 @@ public:
 
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(CTask* task, const bool fields, const bool towns);
+    void setTaskToRandomRoom(
+        CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
 protected:
     std::vector<std::vector<CRoom*>> _map;

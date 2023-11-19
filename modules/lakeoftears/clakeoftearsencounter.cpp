@@ -2,7 +2,7 @@
 #include "cgamemanagement.h"
 #include "clakeoftearstask.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "moduleressources.h"
 #include "ressources.h"

@@ -25,12 +25,17 @@ std::string moduleNameMakeRod();
 std::string moduleNameMakeBoat();
 std::string moduleNameFishLegend();
 
+std::string questLogMakeRod();
+std::string questLogMAkeBoat();
+std::string questLogFishLegend();
+
 void initModuleMakeRod();
 void initModuleMakeBoat();
+void initModuleFishLegend();
+
 void initWorldMap(std::vector<CRoom*>& rooms);
 
 std::string fishingVilleName();
-std::string fishingFritz();
 
 std::string getFish(const EFishLevel level);
 unsigned int getFishPrice(const EFishLevel level);

@@ -1,7 +1,7 @@
 #include "ctown.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "ctask.h"
 #include "ressources.h"
@@ -113,4 +113,9 @@ std::string CTown::fgColor() const
 std::string CTown::name() const
 {
     return _name;
+}
+
+CMap::RoomFilter CTown::townFilter()
+{
+    return [](const CRoom* room) { return dynamic_cast<const CTown*>(room) != nullptr; };
 }
