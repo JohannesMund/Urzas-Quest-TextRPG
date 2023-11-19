@@ -5,6 +5,7 @@
 #include "roomfactory.h"
 
 #include <format>
+#include <vector>
 
 std::string CaveRessources::getRandomDescription()
 {

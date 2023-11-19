@@ -247,6 +247,7 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
 
         if (line == 2)
         {
+
             cout << string{left ? bottom ? " " : "_" : "|"};
             cout << string{bottom ? "  " : "__"};
         }
