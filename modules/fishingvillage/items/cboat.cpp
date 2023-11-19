@@ -7,7 +7,7 @@ CBoat::CBoat() : CEquipment(Ressources::Items::EType::eOther, Ressources::Items:
 {
     _namesByLevel = {
         std::format("{}Fragile {}Nutshell{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),
-        std::format("{}Tiny {}Rowboart{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),
+        std::format("{}Tiny {}Rowboat{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),
         std::format("{}Row{}boat{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),
         std::format("{}Fishing {}Boat{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),
         std::format("Godly {}Sh{}ip{} of the Dragon Fish", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset())};
