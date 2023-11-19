@@ -63,5 +63,5 @@ std::string RatFarmRessources::getColoredBossString()
 
 std::string RatFarmRessources::questLog()
 {
-    return std::format("Clear lady {}s farm from the rats.", getCarrot());
+    return std::format("Clear lady {}s {} farm from the rats.", getCarrot(), getTurnip());
 }

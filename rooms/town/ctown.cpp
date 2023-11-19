@@ -114,3 +114,8 @@ std::string CTown::name() const
 {
     return _name;
 }
+
+CMap::RoomFilter CTown::townFilter()
+{
+    return [](const CRoom* room) { return dynamic_cast<const CTown*>(room) != nullptr; };
+}

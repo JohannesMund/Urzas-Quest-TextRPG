@@ -2,6 +2,8 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "fishingvillage/ccollectpartsencounter.h"
+#include "fishingvillage/tasks/cbuildequipmenttask.h"
+#include "fishingvillage/tasks/cfishingvilletowntask.h"
 #include "fishingvillage/town/cfishingvillage.h"
 #include "randomizer.h"
 
@@ -26,11 +28,20 @@ std::string FishingVillageRessources::moduleNameFishLegend()
 void FishingVillageRessources::initModuleMakeRod()
 {
     CGameManagement::getInstance()->registerEncounter(new CCollectPartsEncounter(moduleNameMakeRod()));
+    CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeRod()),
+                                              CFishingVillage::fishingVillageFilter());
 }
 
 void FishingVillageRessources::initModuleMakeBoat()
 {
     CGameManagement::getInstance()->registerEncounter(new CCollectPartsEncounter(moduleNameMakeBoat()));
+    CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeBoat()),
+                                              CFishingVillage::fishingVillageFilter());
+}
+
+void FishingVillageRessources::initModuleFishLegend()
+{
+    CGameManagement::getInstance()->placeTaskOnTown(new CFishingVilleTownTask());
 }
 
 void FishingVillageRessources::initWorldMap(std::vector<CRoom*>& rooms)
@@ -41,11 +52,6 @@ void FishingVillageRessources::initWorldMap(std::vector<CRoom*>& rooms)
 std::string FishingVillageRessources::fishingVilleName()
 {
     return std::format("{}Middlesbron {}Cove{}", CC::fgLightGreen(), CC::fgLightBlue(), CC::ccReset());
-}
-
-std::string FishingVillageRessources::fishingFritz()
-{
-    return std::format("F{0}ishing{1} F{0}ritz{2}", CC::fgBlue(), CC::fgWhite(), CC::ccReset());
 }
 
 std::string FishingVillageRessources::getFish(const EFishLevel level)

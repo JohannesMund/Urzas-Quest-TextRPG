@@ -12,11 +12,12 @@
 
 #include <format>
 
-CCollectPartsEncounter::CCollectPartsEncounter(const std::string_view& moduleName)
+CCollectPartsEncounter::CCollectPartsEncounter(const std::string_view& moduleName) :
+    CEncounter(),
+    _moduleName(moduleName)
 {
     _isSingleExecution = false;
     _type = CEncounter::eField;
-    _moduleName = moduleName;
 }
 
 void CCollectPartsEncounter::execute(const std::string_view& moduleName)

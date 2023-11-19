@@ -23,3 +23,8 @@ void BardRessources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
 }
+
+std::string BardRessources::questLog()
+{
+    return std::format("Watch a show of the {} when he performes in a town.", encounterName());
+}

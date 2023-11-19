@@ -20,6 +20,7 @@ public:
     static CCompanion* getCompanionInstance();
     static CGameProgression* getProgressionInstance();
 
+    void placeTask(CTask* task, CMap::RoomFilter);
     void placeTaskOnField(CTask* task);
     void placeTaskOnTown(CTask* task);
 

@@ -1,8 +1,9 @@
 #pragma once
 
-#include <cfield.h>
+#include "cmap.h"
+#include "croom.h"
 
-class CFishingVillage : public CField
+class CFishingVillage : public CRoom
 {
 public:
     CFishingVillage();
@@ -12,6 +13,8 @@ public:
 
     virtual std::string bgColor() const override;
     virtual std::string fgColor() const override;
+
+    static CMap::RoomFilter fishingVillageFilter();
 
 private:
     void printHeader();

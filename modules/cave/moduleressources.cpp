@@ -122,5 +122,8 @@ void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
 
 std::string CaveRessources::questLog()
 {
-    return "Clear the Cave and defeat the evil cave boss";
+    return std::format("Clear the {0}Cave{2} and defeat the evil {0}cave boss{2}.",
+                       CC::fgDarkGray(),
+                       CC::fgLightGreen(),
+                       CC::ccReset());
 }

@@ -16,5 +16,5 @@ private:
     void findFishingRodPart();
     void findBoatPart();
 
-    std::string _moduleName;
+    const std::string _moduleName;
 };

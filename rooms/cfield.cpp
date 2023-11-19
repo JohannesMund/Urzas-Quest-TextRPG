@@ -20,3 +20,8 @@ std::string CField::bgColor() const
 {
     return "\e[48;5;22m";
 }
+
+CMap::RoomFilter CField::fieldFilter()
+{
+    return [](const CRoom* room) { return dynamic_cast<const CField*>(room) != nullptr; };
+}

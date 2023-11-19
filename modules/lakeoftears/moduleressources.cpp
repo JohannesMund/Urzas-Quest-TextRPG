@@ -38,5 +38,5 @@ std::string LakeTearsRessources::pimmelchen()
 
 std::string LakeTearsRessources::questLog()
 {
-    return "Find and remove the source of the salty water";
+    return "Find and remove the source of the salty water.";
 }

@@ -501,3 +501,13 @@ std::string Ressources::Game::layla()
 {
     return std::format("{0}L{1}ayla{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
 }
+
+std::string Ressources::Game::fishingFritz()
+{
+    return std::format("F{0}ishing{1} F{0}ritz{2}", CC::fgBlue(), CC::fgWhite(), CC::ccReset());
+}
+
+std::string Ressources::Game::mobi()
+{
+    return std::format("{}Dark {}Mo{}bi{}", CC::fgDarkGray(), CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+}

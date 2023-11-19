@@ -26,7 +26,7 @@ void CFishRestaurant::execute()
         Console::printLn(std::format("{}'s Inn", FishingVillageRessources::fishingVilleName()),
                          Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("Serving the best fresh fish since 833 ad. dragonis", FishingVillageRessources::fishingFritz()),
+            std::format("Serving the best fresh fish since 833 ad. dragonis", Ressources::Game::fishingFritz()),
             Console::EAlignment::eCenter);
         Console::br();
         Console::printLn("dish of the day:", Console::EAlignment::eCenter);

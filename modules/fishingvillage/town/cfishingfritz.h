@@ -14,9 +14,9 @@ private:
 
     bool isOpen() const;
 
-    void ask() const;
-    void buildRod() const;
-    void buildBoat() const;
+    void ask();
+    void checkFish();
+
     void getInformation() const;
 
     void sell() const;
@@ -27,4 +27,6 @@ private:
     bool isMakeBoatActive() const;
     bool hasFish() const;
     std::string sellYourFish() const;
+
+    bool _firstVisit = true;
 };

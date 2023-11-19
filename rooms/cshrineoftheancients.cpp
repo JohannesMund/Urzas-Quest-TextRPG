@@ -7,19 +7,17 @@
 #include "ressources.h"
 
 #include <format>
-CShrineOfTheAncients::CShrineOfTheAncients() : CField()
+CShrineOfTheAncients::CShrineOfTheAncients() : CRoom()
 {
     _description = "";
-
     _encounterType = CEncounter::EEncounterType::eNone;
     _isTaskPossible = false;
-
     _showInFogOfWar = true;
 }
 
 void CShrineOfTheAncients::execute()
 {
-    CField::execute();
+    CRoom::execute();
 
     if (_seenDuringPhase != CGameManagement::getProgressionInstance()->currentGameStage())
     {

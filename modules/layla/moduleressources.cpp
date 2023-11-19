@@ -33,5 +33,5 @@ std::string LaylaRessources::schniefke()
 
 std::string LaylaRessources::questLog()
 {
-    return std::format("Rescue the beautiful {}", Ressources::Game::princessLayla());
+    return std::format("Rescue the beautiful {}.", Ressources::Game::princessLayla());
 }

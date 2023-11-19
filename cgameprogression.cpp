@@ -32,7 +32,7 @@ void CGameProgression::initEncounters()
 
     registerModule(BardRessources::moduleName(),
                    EGameStage::eStart,
-                   &ModuleRegister::noQuestLogFunction,
+                   &BardRessources::questLog,
                    &BardRessources::initModule,
                    &BardRessources::deInitModule);
 
@@ -57,8 +57,7 @@ void CGameProgression::initEncounters()
     registerModule(FishingVillageRessources::moduleNameMakeBoat(),
                    EGameStage::eProvenAsHero,
                    &FishingVillageRessources::questLogMAkeBoat,
-                   &FishingVillageRessources::initModuleMakeBoat,
-                   &ModuleRegister::noInitDeInitFunction);
+                   &FishingVillageRessources::initModuleMakeBoat);
     registerModule(LakeTearsRessources::moduleName(),
                    EGameStage::eProvenAsHero,
                    &LakeTearsRessources::questLog,
@@ -74,6 +73,11 @@ void CGameProgression::initEncounters()
                    &SewerRessources::questLog,
                    &SewerRessources::initModule,
                    &SewerRessources::deInitModule);
+
+    registerModule(FishingVillageRessources::moduleNameFishLegend(),
+                   EGameStage::eLearnedAboutCult,
+                   &FishingVillageRessources::questLogFishLegend,
+                   &FishingVillageRessources::initModuleFishLegend);
 
     progressToStage(EGameStage::eStart);
 }
@@ -100,11 +104,11 @@ std::vector<std::string> CGameProgression::getQuestLog() const
         }
         if (isModuleFinished(m.moduleName))
         {
-            log = std::format("[{}Done{}] {}", CC::fgLightGreen(), CC::ccReset(), log);
+            log = std::format("[{} Done {}] {}", CC::fgLightGreen(), CC::ccReset(), log);
         }
         else
         {
-            log = std::format("       {}", log);
+            log = std::format("[    ] {}", log);
         }
         entries.push_back(log);
     }

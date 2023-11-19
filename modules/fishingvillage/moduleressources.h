@@ -31,10 +31,11 @@ std::string questLogFishLegend();
 
 void initModuleMakeRod();
 void initModuleMakeBoat();
+void initModuleFishLegend();
+
 void initWorldMap(std::vector<CRoom*>& rooms);
 
 std::string fishingVilleName();
-std::string fishingFritz();
 
 std::string getFish(const EFishLevel level);
 unsigned int getFishPrice(const EFishLevel level);

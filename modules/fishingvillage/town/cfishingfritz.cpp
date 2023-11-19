@@ -35,7 +35,7 @@ void CFishingFritz::execute()
                 std::format("{}'s fishing shop is an old, ramshackle hut. It is good, that the weather here is always "
                             "sunny and clear, because this hut would probably collapse, when hit by a medium strong "
                             "wind. Also, it will offer not much protection against rain, snow, or even cold.",
-                            FishingVillageRessources::fishingFritz()));
+                            Ressources::Game::fishingFritz()));
             Console::printLn("There is a sign on the locked door reding:");
             Console::printLn("\"Gone fishing, come back later\"", Console::EAlignment::eCenter);
         }
@@ -46,23 +46,15 @@ void CFishingFritz::execute()
                 defaultActionList.push_back(menu.createAction(sellYourFish(), 'S'));
             }
 
-            if (CGameManagement::getInventoryInstance()->hasItem(CFishingRod::fishingRodFilter()))
+            if (CGameManagement::getProgressionInstance()->isModuleActive(
+                    FishingVillageRessources::moduleNameFishLegend()) ||
+                CGameManagement::getProgressionInstance()->isModuleFinished(
+                    FishingVillageRessources ::moduleNameFishLegend()))
             {
-                defaultActionList.push_back(menu.createAction("Enhance Equipment", 'E'));
+                defaultActionList.push_back(menu.createAction("Ask for Information", 'A'));
             }
 
-            if (isMakeRodActive())
-            {
-                moduleActionList.push_back(menu.createAction("Ask about Fishing", 'A'));
-            }
-            else if (isMakeBoatActive())
-            {
-                moduleActionList.push_back(menu.createAction("Ask about Boating", 'A'));
-            }
-            else
-            {
-                moduleActionList.push_back(menu.createAction("Ask about Information", 'A'));
-            }
+            defaultActionList.push_back(menu.createAction("Enhance Equipment", 'E'));
         }
 
         menu.addMenuGroup(moduleActionList);
@@ -73,6 +65,7 @@ void CFishingFritz::execute()
         {
             ask();
         }
+
         if (input.key == 's')
         {
             sell();
@@ -88,8 +81,8 @@ void CFishingFritz::execute()
 void CFishingFritz::printHeader() const
 {
     Console::cls();
-    Console::printLn(std::format("{}", FishingVillageRessources::fishingFritz()), Console::EAlignment::eCenter);
-    Console::printLn(std::format("Fishing fresh fish since 832 ad. dragonis", FishingVillageRessources::fishingFritz()),
+    Console::printLn(std::format("{}", Ressources::Game::fishingFritz()), Console::EAlignment::eCenter);
+    Console::printLn(std::format("Fishing fresh fish since 832 ad. dragonis", Ressources::Game::fishingFritz()),
                      Console::EAlignment::eCenter);
     Console::br();
 }
@@ -100,144 +93,69 @@ bool CFishingFritz::isOpen() const
            CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageRessources::moduleNameMakeRod());
 }
 
-void CFishingFritz::ask() const
+void CFishingFritz::ask()
 {
-    if (isMakeRodActive())
-    {
-        buildRod();
-    }
-    else if (isMakeBoatActive())
-    {
-        buildBoat();
-    }
-    else
+    if (CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageRessources::moduleNameFishLegend()))
     {
         getInformation();
     }
+    checkFish();
 }
 
-void CFishingFritz::buildRod() const
+void CFishingFritz::checkFish()
 {
-    Console::printLn("You want to get into the fishing businnes, and thos guy seems to be exactly the right one to ask "
-                     "how. He tells you about fishes, fishing rods, baits, boars and the weather, but after all, the "
-                     "first thing you need is a fishing rod.");
-
-    Console::printLn(std::format("{} will build you one fishing rod for free, if you bring hin the following items:",
-                                 FishingVillageRessources::fishingFritz()));
-
-    Console::printLn(std::format("{0}x {1}, {0}x {2} and {0}x {3}",
-                                 FishingVillageRessources::necessaryRodParts,
-                                 CFishingRodPart::nameForPart(CFishingRodPart::EPart::eRod),
-                                 CFishingRodPart::nameForPart(CFishingRodPart::EPart::eThread),
-                                 CFishingRodPart::nameForPart(CFishingRodPart::EPart::eHook)));
-    Console::br();
-    Console::printLn("You have:");
-
-    unsigned int partsComplete = 0;
-    for (const auto& part :
-         {CFishingRodPart::EPart::eRod, CFishingRodPart::EPart::eThread, CFishingRodPart::EPart::eHook})
+    if (_firstVisit)
     {
-        auto items = CGameManagement::getInventoryInstance()->getCompressedItemMap(CFishingRodPart::partFilter(part));
-        auto count = 0;
-        if (items.size())
-        {
-            count = items.at(0).first;
-            if (count >= FishingVillageRessources::necessaryRodParts)
-            {
-                partsComplete++;
-            }
-        }
-        Console::printLn(std::format("{}: {}", CFishingRodPart::nameForPart(part), count));
-    }
-    Console::br();
-    if (partsComplete >= 3)
-    {
-        CFishingRod* rod = new CFishingRod();
+        _firstVisit = false;
         Console::printLn(
-            std::format("{} taks your parts, and starts working. After s short while, he gives you your brand new {}.",
-                        FishingVillageRessources::fishingFritz(),
-                        rod->name()));
+            std::format("Straight to the point, you ask {} about everything: {}, {}, {}, you even show him you {} "
+                        "tattoo. You just make clear, that you need to know everything, no matter the cost.",
+                        Ressources::Game::fishingFritz(),
+                        Ressources::Game::urza(),
+                        Ressources::Game::fiego(),
+                        Ressources::Game::brock(),
+                        Ressources::Game::princessLayla()));
+        Console::printLn(std::format(
+            "{} looks at you suspicious and tells you, that he knows a lot, but not, wether he can trust you. the only "
+            "people he can trust, are prople who are able to bring him {}. The legendary fish that can be caught in {}",
+            Ressources::Game::fishingFritz(),
+            FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend),
+            FishingVillageRessources::fishingVilleName()));
+        Console::printLn("looks, as if you have another task.");
+        Console::confirmToContinue();
+        return;
+    }
 
-        for (const auto& part :
-             {CFishingRodPart::EPart::eRod, CFishingRodPart::EPart::eThread, CFishingRodPart::EPart::eHook})
-        {
-            for (int i = 0; i < FishingVillageRessources::necessaryRodParts; i++)
-            {
-                CGameManagement::getInventoryInstance()->removeItem(CFishingRodPart::nameForPart(part));
-            }
-        }
-        Console::br();
-        CGameManagement::getInventoryInstance()->addItem(rod);
-        Console::br();
-        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageRessources::moduleNameMakeRod());
-        CGameManagement::getInstance()->unregisterEncounterByModuleName(FishingVillageRessources::moduleNameMakeRod());
+    if (CGameManagement::getInventoryInstance()->hasItem(
+            CFish::fishRarityFilter(FishingVillageRessources::EFishLevel::eLegend)))
+    {
+        Console::printLn(std::format("{} Smiles at you. Well he smiles more at the {} than he smiles at you. But at "
+                                     "least he smiles for the first time since... For the first time.",
+                                     Ressources::Game::fishingFritz(),
+                                     FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
+        Console::printLn(
+            "Of course, he cannot pay you for the fish, but at least he is willing to give you information.");
+        Console::printLn(std::format("{0} is a legend. But {1} and {2} are heroes, and they surely can tell you more "
+                                     "about {0}. To find them, you should find {3}.",
+                                     Ressources::Game::urza(),
+                                     Ressources::Game::fiego(),
+                                     Ressources::Game::brock(),
+                                     Ressources::Game::mobi()));
+        Console::printLn(std::format("This adds another name to your list. How... frustrating, but maybe, this {} is "
+                                     "easier to find that the other guys. You will find out.",
+                                     Ressources::Game::mobi()));
+
+        CGameManagement::getProgressionInstance()->reportModuleFinished(
+            FishingVillageRessources::moduleNameFishLegend());
     }
     else
     {
-        Console::printLn("This is not enough, you will have to find more");
-    }
-
-    Console::confirmToContinue();
-}
-
-void CFishingFritz::buildBoat() const
-{
-    Console::printLn("For better fish, you need a boat. Using a boat you can get out onto the lake and catch better "
-                     "fish from the deeper waters.");
-
-    Console::printLn(std::format("{} will build you one boat for free, if you bring hin the following items:",
-                                 FishingVillageRessources::fishingFritz()));
-
-    Console::printLn(std::format("{0}x {1}, {0}x {2} and {0}x {3}",
-                                 FishingVillageRessources::necessaryBoatParts,
-                                 CBoatPart::nameForPart(CBoatPart::EPart::eBoard),
-                                 CBoatPart::nameForPart(CBoatPart::EPart::eNail),
-                                 CBoatPart::nameForPart(CBoatPart::EPart::eRope)));
-    Console::br();
-    Console::printLn("You have:");
-
-    unsigned int partsComplete = 0;
-    for (const auto& part : {CBoatPart::EPart::eBoard, CBoatPart::EPart::eNail, CBoatPart::EPart::eRope})
-    {
-        auto items = CGameManagement::getInventoryInstance()->getCompressedItemMap(CBoatPart::partFilter(part));
-        auto count = 0;
-        if (items.size())
-        {
-            count = items.at(0).first;
-            if (count >= FishingVillageRessources::necessaryBoatParts)
-            {
-                partsComplete++;
-            }
-        }
-        Console::printLn(std::format("{}: {}", CBoatPart::nameForPart(part), count));
-    }
-    Console::br();
-    if (partsComplete >= 3)
-    {
-        CBoat* boat = new CBoat();
         Console::printLn(
-            std::format("{} taks your parts, and starts working. After s short while, he gives you your brand new {}.",
-                        FishingVillageRessources::fishingFritz(),
-                        boat->name()));
-
-        for (const auto& part : {CBoatPart::EPart::eBoard, CBoatPart::EPart::eNail, CBoatPart::EPart::eRope})
-        {
-            for (int i = 0; i < FishingVillageRessources::necessaryRodParts; i++)
-            {
-                CGameManagement::getInventoryInstance()->removeItem(CBoatPart::nameForPart(part));
-            }
-        }
-        Console::br();
-        CGameManagement::getInventoryInstance()->addItem(boat);
-        Console::br();
-        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageRessources::moduleNameMakeBoat());
-        CGameManagement::getInstance()->unregisterEncounterByModuleName(FishingVillageRessources::moduleNameMakeBoat());
+            std::format("{} looks grumpy at you and shakes his head. No fish, no information. A deal is a deal.",
+                        Ressources::Game::fishingFritz()));
+        Console::printLn(std::format("How hard can it be to catch a {}?",
+                                     FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
     }
-    else
-    {
-        Console::printLn("This is not enough, you will have to find more");
-    }
-
     Console::confirmToContinue();
 }
 

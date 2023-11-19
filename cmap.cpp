@@ -343,23 +343,19 @@ CRoom* CMap::currentRoom() const
     return roomAt(_playerPosition).value();
 }
 
-void CMap::setTaskToRandomRoom(CTask* task, const bool fields, const bool towns)
+void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
 {
     std::vector<CRoom*> possibleRooms;
     for (const auto& row : _map)
     {
         for (auto& room : row)
         {
-            if (!fields && dynamic_cast<CField*>(room) != nullptr)
-            {
-                continue;
-            }
-            if (!towns && dynamic_cast<CTown*>(room) != nullptr)
+            if (!filter(room))
             {
                 continue;
             }
 
-            if (room->isTaskPossible() && room != currentRoom())
+            if (room->isTaskPossible())
             {
                 possibleRooms.push_back(room);
             }
