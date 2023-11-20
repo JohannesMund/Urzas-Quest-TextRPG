@@ -95,7 +95,7 @@ std::vector<std::string> CGameProgression::getQuestLog() const
 {
     std::vector<std::string> entries;
 
-    for (auto m : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
+    for (const auto& m : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
     {
         auto log = m.questLogFunction();
         if (log.empty())
@@ -104,7 +104,7 @@ std::vector<std::string> CGameProgression::getQuestLog() const
         }
         if (isModuleFinished(m.moduleName))
         {
-            log = std::format("[{} Done {}] {}", CC::fgLightGreen(), CC::ccReset(), log);
+            log = std::format("[{}Done{}] {}", CC::fgLightGreen(), CC::ccReset(), log);
         }
         else
         {

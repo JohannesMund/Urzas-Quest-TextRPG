@@ -39,7 +39,7 @@ void CRatFarmTask::execute()
 
 void CRatFarmTask::battle()
 {
-    for (int i = 0; i <= RatFarmRessources::ratCount; i++)
+    for (int i = 0; i < RatFarmRessources::ratCount; i++)
     {
         CRatFarmRat rat;
         CBattle battle(&rat);

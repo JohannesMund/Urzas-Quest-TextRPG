@@ -44,7 +44,6 @@ void CBlackSmith::enhanceItem()
         return;
     }
 
-    int number = 0;
     std::vector<CEquipment*> enhancableItems;
     Console::printLn("You look through your pockets and find the following items, that can be enhanced:");
     for (auto item : items)
