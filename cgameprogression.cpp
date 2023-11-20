@@ -228,60 +228,71 @@ void CGameProgression::progressToStage(EGameStage stage)
         module.initFunction();
     }
 
-    Console::cls();
-
+    Console::cls(false);
+    Console::hr();
     switch (_currentStage)
     {
     case EGameStage::eStart:
         return;
     case EGameStage::eSeenBard:
         Console::printLn("Chapter 1", Console::EAlignment::eCenter);
-        Console::br();
-        Console::printLn("You have seen quite some things, since you awoke in this strange world.");
-        Console::printLn("At least, you have 2 things:");
+        Console::hr();
+        Console::printLn("You have seen quite some things, since you awoke in this strange world.",
+                         Console::EAlignment::eCenter);
+        Console::printLn("At least, you have 2 things:", Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("The matching {} for the {},", Ressources::Items::otherSock(), Ressources::Items::sock()));
+            std::format("The matching {} for the {},", Ressources::Items::otherSock(), Ressources::Items::sock()),
+            Console::EAlignment::eCenter);
         Console::printLn(
             std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
-                        BardRessources::encounterName()));
+                        BardRessources::encounterName()),
+            Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(Ressources::Game::whoTheFuckIsUrza());
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("You will have to find out.");
+        Console::printLn("You will have to find out.", Console::EAlignment::eCenter);
         break;
     case EGameStage::eProvenAsHero:
         Console::printLn("Chapter 2", Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.");
+        Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.",
+                         Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("But also know, that {} is a huge thing here, which brings you back, to your question:",
-                        Ressources::Game::urza()));
+            std::format("But also you learnde, that {} is a huge thing here, which brings you back, to your question:",
+                        Ressources::Game::urza()),
+            Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(Ressources::Game::whoTheFuckIsUrza());
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("Well, you are getting closer.");
+        Console::printLn("Well, you are getting closer.", Console::EAlignment::eCenter);
         break;
     case EGameStage::eLearnedAboutCult:
         Console::printLn("Chapter 3", Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(
-            std::format("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()));
+            std::format("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()),
+            Console::EAlignment::eCenter);
         Console::br();
 
-        Console::printLn("But where there was one question, ther are now three:");
-        Console::printLn(std::format("who the hell is {}?", Ressources::Game::fiego()));
-        Console::printLn(std::format("who in the world is {}?", Ressources::Game::brock()));
-        Console::printLn("And of course:");
+        Console::printLn("But where there was one question, ther are now three:", Console::EAlignment::eCenter);
+        Console::printLn(std::format("who the hell is {}?", Ressources::Game::fiego()), Console::EAlignment::eCenter);
+        Console::printLn(std::format("who in the world is {}?", Ressources::Game::brock()),
+                         Console::EAlignment::eCenter);
+        Console::printLn("And of course:", Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(Ressources::Game::whoTheFuckIsUrza());
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
-                                     Ressources::Game::princessLayla()));
+                                     Ressources::Game::princessLayla()),
+                         Console::EAlignment::eCenter);
         break;
 
     default:
         break;
     }
+
+    Console::hr();
+    Console::br();
     Console::confirmToContinue();
 }
 
