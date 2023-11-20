@@ -1,6 +1,6 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "cratfarmencounter.h"
 #include "cratfarmturnip.h"
 #include "randomizer.h"
@@ -59,4 +59,9 @@ std::string RatFarmRessources::getColoredBossString()
                        CC::fgLightRed(),
                        CC::fgLightYellow(),
                        CC::ccReset());
+}
+
+std::string RatFarmRessources::questLog()
+{
+    return std::format("Clear lady {}s {} farm from the rats.", getCarrot(), getTurnip());
 }

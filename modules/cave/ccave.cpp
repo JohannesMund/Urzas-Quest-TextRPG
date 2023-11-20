@@ -5,7 +5,7 @@
 #include "cgamemanagement.h"
 #include "chealingwell.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "moduleressources.h"
 
@@ -20,7 +20,6 @@ CCave::CCave()
 
 void CCave::execute()
 {
-
     if (CGameManagement::getProgressionInstance()->isModuleActive(CaveRessources::moduleName()))
     {
         Console::printLn(

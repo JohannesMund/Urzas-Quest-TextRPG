@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cmap.h"
 #include "croom.h"
 
 class CField : public CRoom
@@ -11,4 +12,6 @@ public:
 
     virtual std::string fgColor() const override;
     virtual std::string bgColor() const override;
+
+    static CMap::RoomFilter fieldFilter();
 };

@@ -1,7 +1,7 @@
 #include "moduleressources.h"
 #include "cdancingbard.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 
 #include <format>
 std::string BardRessources::moduleName()
@@ -22,4 +22,9 @@ void BardRessources::initModule()
 void BardRessources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
+}
+
+std::string BardRessources::questLog()
+{
+    return std::format("Watch a show of the {} when he performes in a town.", encounterName());
 }

@@ -1,7 +1,7 @@
 #include "csewertask.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "csewerdungeon.h"
 #include "csewerdungeonmap.h"

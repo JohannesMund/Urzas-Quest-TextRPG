@@ -2,7 +2,7 @@
 #include "cgamemanagement.h"
 #include "claylatask.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "moduleressources.h"
 

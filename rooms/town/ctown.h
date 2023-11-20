@@ -4,6 +4,7 @@
 #include "cchurch.h"
 #include "cfarm.h"
 #include "cinventory.h"
+#include "cmap.h"
 #include "croom.h"
 #include "cshop.h"
 #include "ctavern.h"
@@ -24,6 +25,8 @@ public:
     virtual std::string fgColor() const override;
 
     std::string name() const;
+
+    static CMap::RoomFilter townFilter();
 
 private:
     std::string _name;

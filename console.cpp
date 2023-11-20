@@ -6,7 +6,7 @@
 
 #include "console.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "ressources.h"
 
 #include <algorithm>

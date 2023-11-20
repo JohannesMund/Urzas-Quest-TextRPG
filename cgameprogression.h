@@ -26,11 +26,13 @@ public:
 
     EGameStage currentGameStage() const;
 
+    std::vector<std::string> getQuestLog() const;
+
     void progress();
     void reportModuleFinished(const std::string_view& moduleName);
 
-    bool isModuleActive(const std::string_view& moduleName);
-    bool isModuleFinished(const std::string_view& moduleName);
+    bool isModuleActive(const std::string_view& moduleName) const;
+    bool isModuleFinished(const std::string_view& moduleName) const;
 
     void initWorldMap(std::vector<CRoom*>& rooms) const;
 
@@ -44,6 +46,7 @@ private:
     {
         std::string moduleName;
         EGameStage gameStage;
+        std::function<std::string()> questLogFunction;
         std::function<void()> initFunction;
         std::function<void()> deInitFunction;
         std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
@@ -57,13 +60,15 @@ private:
             return [&stage](auto module) { return module.gameStage == stage; };
         }
 
-        static std::function<void()> noInitDeInitFunction()
+        static void noInitDeInitFunction()
         {
-            return []() {};
         }
-        static std::function<void(std::vector<CRoom*>&)> noInitWorldMapFunction()
+        static void noInitWorldMapFunction(std::vector<CRoom*>&)
         {
-            return [](std::vector<CRoom*>&) {};
+        }
+        static std::string noQuestLogFunction()
+        {
+            return std::string{};
         }
     };
     std::vector<ModuleRegister> _moduleRegister;
@@ -85,9 +90,10 @@ private:
     void registerModule(
         const std::string_view& name,
         const EGameStage neededForStage,
-        std::function<void()> initFunction = ModuleRegister::noInitDeInitFunction(),
-        std::function<void()> deInitFunction = ModuleRegister::noInitDeInitFunction(),
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = ModuleRegister::noInitWorldMapFunction());
+        std::function<std::string()> questLogFunction = &ModuleRegister::noQuestLogFunction,
+        std::function<void()> initFunction = &ModuleRegister::noInitDeInitFunction,
+        std::function<void()> deInitFunction = &ModuleRegister::noInitDeInitFunction,
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &ModuleRegister::noInitWorldMapFunction);
 
     std::vector<std::string> _finishedModules;
 

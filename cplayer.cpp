@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "citem.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "randomizer.h"
 #include "ressources.h"

@@ -1,10 +1,11 @@
 #include "moduleressources.h"
 #include "ccave.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "randomizer.h"
 #include "roomfactory.h"
 
 #include <format>
+#include <vector>
 
 std::string CaveRessources::getRandomDescription()
 {
@@ -117,5 +118,13 @@ void CaveRessources::deInitModule()
 
 void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
 {
-    rooms.push_back(RoomFactory::makeCave());
+    rooms.push_back(new CCave());
+}
+
+std::string CaveRessources::questLog()
+{
+    return std::format("Clear the {0}Cave{2} and defeat the evil {0}cave boss{2}.",
+                       CC::fgDarkGray(),
+                       CC::fgLightGreen(),
+                       CC::ccReset());
 }

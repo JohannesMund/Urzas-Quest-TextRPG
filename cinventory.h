@@ -55,6 +55,11 @@ public:
     ItemList getItemsWithDeathEffect() const;
     void useDeathAction(CItem* item);
 
+    ItemList getItemsByFilter(CItem::ItemFilter filter) const;
+    CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
+
+    bool hasItem(CItem::ItemFilter filter) const;
+
     JunkItemList getJunkItems() const;
     EquipmentList getEquipment() const;
     EquipmentList getEnhancableEquipment() const;
@@ -69,7 +74,6 @@ private:
 
     std::string printInventoryNav() const;
 
-    CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
     CompressedItemMap getInventoryCompressedForScope(const Scope& scope) const;
 
     static bool usableInScope(const CItem* item, const Scope& scope);

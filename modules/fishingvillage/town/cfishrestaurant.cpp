@@ -1,7 +1,7 @@
 #include "cfishrestaurant.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "fishingvillage/moduleressources.h"
 #include "randomizer.h"
@@ -26,7 +26,7 @@ void CFishRestaurant::execute()
         Console::printLn(std::format("{}'s Inn", FishingVillageRessources::fishingVilleName()),
                          Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("Serving the best fresh fish since 833 ad. dragonis", FishingVillageRessources::fishingFritz()),
+            std::format("Serving the best fresh fish since 833 ad. dragonis", Ressources::Game::fishingFritz()),
             Console::EAlignment::eCenter);
         Console::br();
         Console::printLn("dish of the day:", Console::EAlignment::eCenter);
@@ -60,23 +60,8 @@ void CFishRestaurant::execute()
 
 void CFishRestaurant::makeDishOfTheDay()
 {
-    std::vector<FishingVillageRessources::EFishLevel> fishes;
-
-    auto add = [&fishes](const unsigned int number, const FishingVillageRessources::EFishLevel level)
-    {
-        for (int i = 0; i < number; i++)
-        {
-            fishes.push_back(level);
-        }
-    };
-
-    add(25, FishingVillageRessources::EFishLevel::eCommon);
-    add(15, FishingVillageRessources::EFishLevel::eUncommon);
-    add(10, FishingVillageRessources::EFishLevel::eRare);
-    add(5, FishingVillageRessources::EFishLevel::eUltraRare);
-    add(1, FishingVillageRessources::EFishLevel::eLegend);
-
-    _dishOfTheDayLevel = fishes.at(Randomizer::getRandom(fishes.size() - 1));
+    _dishOfTheDayLevel = FishingVillageRessources::getRandomRarity(FishingVillageRessources::rodLevelCap,
+                                                                   FishingVillageRessources::boatLevelCap);
 
     auto fish = FishingVillageRessources::getFish(_dishOfTheDayLevel);
 
@@ -98,20 +83,7 @@ void CFishRestaurant::makeDishOfTheDay()
 
 unsigned int CFishRestaurant::priceOfTheDay() const
 {
-    switch (_dishOfTheDayLevel)
-    {
-    case FishingVillageRessources::EFishLevel::eCommon:
-    default:
-        return 100;
-    case FishingVillageRessources::EFishLevel::eUncommon:
-        return 200;
-    case FishingVillageRessources::EFishLevel::eRare:
-        return 500;
-    case FishingVillageRessources::EFishLevel::eUltraRare:
-        return 1000;
-    case FishingVillageRessources::EFishLevel::eLegend:
-        return 100000;
-    }
+    return FishingVillageRessources::getFishPrice(_dishOfTheDayLevel) * 2;
 }
 
 void CFishRestaurant::eat() const

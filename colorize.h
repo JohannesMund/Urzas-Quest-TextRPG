@@ -44,8 +44,10 @@ std::string ccInvert();
 
 size_t colorizedSize(const std::string& s);
 size_t colorCodeSize();
+std::string colorCodeRegExp();
+
 std::string colorizedSubString(const std::string_view& text, const unsigned int from, const unsigned int size);
 
 std::string colorizeString(const std::string_view& s, const std::string_view& c1, const std::string_view& c2);
-
+std::string unColorizeString(const std::string& s);
 } // namespace CC

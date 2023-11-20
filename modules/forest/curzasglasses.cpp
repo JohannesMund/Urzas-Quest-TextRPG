@@ -1,6 +1,6 @@
 #include "curzasglasses.h"
 #include "cenemy.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "randomizer.h"
 

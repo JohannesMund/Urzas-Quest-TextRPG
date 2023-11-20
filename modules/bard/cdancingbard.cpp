@@ -1,6 +1,6 @@
 #include "cdancingbard.h"
 #include "cgamemanagement.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "ctown.h"
 #include "moduleressources.h"

@@ -180,6 +180,16 @@ void CInventory::useDeathAction(CItem* item)
     }
 }
 
+CInventory::ItemList CInventory::getItemsByFilter(CItem::ItemFilter filter) const
+{
+    ItemList items;
+    for (const auto& item : _inventory | std::views::filter(filter))
+    {
+        items.push_back(item);
+    }
+    return items;
+}
+
 CInventory::JunkItemList CInventory::getJunkItems() const
 {
     JunkItemList junkItems;
@@ -253,6 +263,11 @@ CInventory::CompressedItemMap CInventory::getCompressedItemMap(CItem::ItemFilter
         }
     }
     return itemMap;
+}
+
+bool CInventory::hasItem(CItem::ItemFilter filter) const
+{
+    return std::find_if(_inventory.begin(), _inventory.end(), filter) != _inventory.end();
 }
 
 std::optional<CItem*> CInventory::selectItemFromInventory(const Scope& scope)

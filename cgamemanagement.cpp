@@ -2,6 +2,7 @@
 #include "cbattleencounter.h"
 #include "cdeadhero.h"
 #include "cencounter.h"
+#include "cfield.h"
 #include "cgameprogression.h"
 #include "cmenu.h"
 #include "cmysteriouschest.h"
@@ -9,6 +10,7 @@
 #include "console.h"
 #include "croom.h"
 #include "ctask.h"
+#include "ctown.h"
 #include "itemfactory.h"
 #include "randomizer.h"
 
@@ -52,14 +54,19 @@ CGameProgression* CGameManagement::getProgressionInstance()
     return getInstance()->getProgression();
 }
 
+void CGameManagement::placeTask(CTask* task, CMap::RoomFilter filter)
+{
+    _map.setTaskToRandomRoom(task, filter);
+}
+
 void CGameManagement::placeTaskOnField(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, true, false);
+    _map.setTaskToRandomRoom(task, CField::fieldFilter());
 }
 
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, false, true);
+    _map.setTaskToRandomRoom(task, CTown::townFilter());
 }
 
 void CGameManagement::start()
@@ -130,6 +137,7 @@ void CGameManagement::unregisterEncounterByModuleName(const std::string_view& na
     };
 
     auto it = std::remove_if(_encounters.begin(), _encounters.end(), filterAndRemove);
+
     if (it != _encounters.end())
     {
         _encounters.erase(it);

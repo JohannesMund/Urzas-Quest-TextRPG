@@ -16,12 +16,12 @@ namespace Config
 
 static const bool superCowPowers = true;
 
-static const unsigned int fieldWidth = 10;
+static const unsigned int fieldWidth = 26;
 static const unsigned int fieldHeight = 10;
 static const unsigned int encounterChance = 10;
 static const unsigned int fightChance = 15;
 
-static const unsigned int numberOfTowns = 3;
+static const unsigned int numberOfTowns = 4;
 
 static const unsigned int maxHp = 10;
 static const unsigned int maxHpMin = 3;
@@ -45,6 +45,10 @@ std::string layla();
 
 std::string fiego();
 std::string brock();
+
+std::string fishingFritz();
+
+std::string mobi();
 
 } // namespace Game
 

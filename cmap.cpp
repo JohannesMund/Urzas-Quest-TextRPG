@@ -1,7 +1,7 @@
 #include "cmap.h"
 #include "cave/ccave.h"
 #include "cinjuredpet.h"
-#include "colorconsole.h"
+#include "colorize.h"
 #include "console.h"
 #include "croom.h"
 #include "cshrineoftheancients.h"
@@ -247,6 +247,7 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
 
         if (line == 2)
         {
+
             cout << string{left ? bottom ? " " : "_" : "|"};
             cout << string{bottom ? "  " : "__"};
         }
@@ -343,23 +344,19 @@ CRoom* CMap::currentRoom() const
     return roomAt(_playerPosition).value();
 }
 
-void CMap::setTaskToRandomRoom(CTask* task, const bool fields, const bool towns)
+void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
 {
     std::vector<CRoom*> possibleRooms;
     for (const auto& row : _map)
     {
         for (auto& room : row)
         {
-            if (!fields && dynamic_cast<CField*>(room) != nullptr)
-            {
-                continue;
-            }
-            if (!towns && dynamic_cast<CTown*>(room) != nullptr)
+            if (!filter(room))
             {
                 continue;
             }
 
-            if (room->isTaskPossible() && room != currentRoom())
+            if (room->isTaskPossible())
             {
                 possibleRooms.push_back(room);
             }

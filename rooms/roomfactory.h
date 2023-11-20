@@ -10,7 +10,6 @@ namespace RoomFactory
 
 CRoom* makeRoom();
 CTown* makeTown();
-CCave* makeCave();
 CShrineOfTheAncients* makeShrine();
 CInjuredPet* makeInjuredPet();
 
