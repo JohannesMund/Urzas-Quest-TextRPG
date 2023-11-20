@@ -285,21 +285,14 @@ void CGameManagement::init()
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionM));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionM));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::ePhoenixFeather));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHeartContainer));
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eUrzasGlasses));
 
     std::vector<CRoom*> rooms;
 

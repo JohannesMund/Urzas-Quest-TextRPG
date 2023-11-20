@@ -5,9 +5,6 @@
 #include "console.h"
 #include "ctask.h"
 #include "fishingvillage/moduleressources.h"
-#include "fishingvillage/town/cfishingfritz.h"
-#include "fishingvillage/town/cfishrestaurant.h"
-#include "fishingvillage/town/cgofishing.h"
 
 #include <format>
 
@@ -57,18 +54,15 @@ void CFishingVillage::execute()
         input = menu.execute();
         if (input.key == 'f')
         {
-            CFishingFritz f;
-            f.execute();
+            _fishingFritz.execute();
         }
         if (input.key == 'r')
         {
-            CFishRestaurant f;
-            f.execute();
+            _fishRestaurant.execute();
         }
         if (input.key == 'g')
         {
-            CGoFishing f;
-            f.execute();
+            _goFishing.execute();
         }
         if (input == taskAction)
         {
