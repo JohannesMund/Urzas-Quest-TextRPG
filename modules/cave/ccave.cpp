@@ -52,11 +52,6 @@ void CCave::execute()
     CField::execute();
 }
 
-std::string CCave::mapSymbol() const
-{
-    return "C";
-}
-
 std::string CCave::bgColor() const
 {
     return CC::bgBlack();
@@ -98,4 +93,10 @@ void CCave::initDungeon()
 
         dungeon.execute();
     }
+}
+
+char CCave::getMapSymbol() const
+{
+
+    return 'C';
 }

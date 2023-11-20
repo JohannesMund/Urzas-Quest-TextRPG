@@ -333,7 +333,8 @@ std::string CMap::mapSymbol(const SRoomCoords& coords)
     auto room = roomAt(coords);
     if (room.has_value() && (*room) != nullptr)
     {
-        return (*room)->mapSymbol();
+
+        return {(*room)->mapSymbol()};
     }
 
     return " ";

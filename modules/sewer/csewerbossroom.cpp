@@ -60,12 +60,12 @@ void CSewerBossRoom::execute()
     }
 }
 
-std::string CSewerBossRoom::mapSymbol() const
-{
-    return "O";
-}
-
 bool CSewerBossRoom::isSpecialRoom() const
 {
     return true;
+}
+
+char CSewerBossRoom::getMapSymbol() const
+{
+    return 'O';
 }

@@ -10,11 +10,6 @@ void CDungeonMapRoom::execute()
     _isMapRevealed = true;
 }
 
-std::string CDungeonMapRoom::mapSymbol() const
-{
-    return "m";
-}
-
 bool CDungeonMapRoom::isSpecialRoom() const
 {
     return true;
@@ -23,4 +18,9 @@ bool CDungeonMapRoom::isSpecialRoom() const
 bool CDungeonMapRoom::isMapRevealed() const
 {
     return _isMapRevealed;
+}
+
+char CDungeonMapRoom::getMapSymbol() const
+{
+    return 'm';
 }

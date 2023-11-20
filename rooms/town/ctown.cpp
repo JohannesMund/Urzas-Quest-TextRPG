@@ -91,15 +91,6 @@ void CTown::execute()
     } while (input != CMenu::exit());
 }
 
-std::string CTown::mapSymbol() const
-{
-    if (hasTask())
-    {
-        return "!";
-    }
-    return "T";
-}
-
 std::string CTown::bgColor() const
 {
     return CC::bgDarkGray();
@@ -118,4 +109,9 @@ std::string CTown::name() const
 CMap::RoomFilter CTown::townFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CTown*>(room) != nullptr; };
+}
+
+char CTown::getMapSymbol() const
+{
+    return 'T';
 }

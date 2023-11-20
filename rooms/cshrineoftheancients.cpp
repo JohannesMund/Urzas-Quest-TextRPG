@@ -27,11 +27,6 @@ void CShrineOfTheAncients::execute()
     visit();
 }
 
-std::string CShrineOfTheAncients::mapSymbol() const
-{
-    return "#";
-}
-
 std::string CShrineOfTheAncients::fgColor() const
 {
     return CC::fgDarkGray();
@@ -269,6 +264,11 @@ void CShrineOfTheAncients::stats() const
     }
     Console::br();
     Console::confirmToContinue();
+}
+
+char CShrineOfTheAncients::getMapSymbol() const
+{
+    return '#';
 }
 
 std::string CShrineOfTheAncients::ancientShrine() const
