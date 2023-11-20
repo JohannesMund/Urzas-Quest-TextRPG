@@ -211,8 +211,16 @@ void CGameManagement::executeTurn()
         auto input = menu.execute();
         if (input.key == 'q')
         {
-            Console::printLn("Quit game? (No save, no mercy!)");
-            if (CMenu::executeYesNoMenu() == CMenu::yes())
+            Console::cls(false);
+            Console::hr();
+            Console::printLn("Quit game?", Console::EAlignment::eCenter);
+            Console::printLn("(No save, no mercy!)", Console::EAlignment::eCenter);
+            Console::hr();
+            Console::br();
+            CMenu menu;
+            menu.addMenuGroup({CMenu::yes()}, {CMenu::no()});
+
+            if (menu.execute() == CMenu::yes())
             {
                 _isGameOver = true;
                 return;
@@ -238,7 +246,6 @@ void CGameManagement::executeTurn()
         {
             Console::cls();
             _map.printMap();
-            Console::confirmToContinue();
         }
         if (input.key == 'i')
         {
@@ -285,21 +292,14 @@ void CGameManagement::init()
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionM));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionM));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::ePhoenixFeather));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHeartContainer));
 
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
     _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eUrzasGlasses));
 
     std::vector<CRoom*> rooms;
 

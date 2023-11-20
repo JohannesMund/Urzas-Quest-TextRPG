@@ -18,6 +18,7 @@ CFish::CFish(const FishingVillageRessources::EFishLevel level) : CItem()
     _isSellable = false;
     _isBuyable = false;
 
+    _fishLevel = level;
     _description =
         "A beautiful fish, caught by yourself. Can be sold for money. Money can be exchanged for goods and services.";
 }
@@ -34,7 +35,7 @@ CItem::ItemFilter CFish::fishFilter()
 
 CItem::ItemFilter CFish::fishRarityFilter(const FishingVillageRessources::EFishLevel level)
 {
-    return [&level](const CItem* item)
+    return [level](const CItem* item)
     {
         auto fish = dynamic_cast<const CFish*>(item);
         if (fish != nullptr)

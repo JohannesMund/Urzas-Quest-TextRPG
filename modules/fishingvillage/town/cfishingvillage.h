@@ -2,6 +2,9 @@
 
 #include "cmap.h"
 #include "croom.h"
+#include "fishingvillage/town/cfishingfritz.h"
+#include "fishingvillage/town/cfishrestaurant.h"
+#include "fishingvillage/town/cgofishing.h"
 
 class CFishingVillage : public CRoom
 {
@@ -18,4 +21,8 @@ public:
 
 private:
     void printHeader();
+
+    CFishingFritz _fishingFritz;
+    CFishRestaurant _fishRestaurant;
+    CGoFishing _goFishing;
 };

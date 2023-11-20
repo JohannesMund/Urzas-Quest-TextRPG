@@ -129,7 +129,7 @@ void Console::printLn(std::string text, const EAlignment align)
 
             if ((written + substring.size()) >= text.size())
             {
-                printLn(substring);
+                printLn(substring, align);
                 return;
             }
 
