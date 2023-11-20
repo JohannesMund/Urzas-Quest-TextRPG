@@ -49,7 +49,7 @@ CTask* CRoom::takeTask()
     return task;
 }
 
-bool CRoom::isTaskPossible() const
+bool CRoom::isTaskPossible(const std::string_view&) const
 {
     return _isTaskPossible && !hasTask();
 }

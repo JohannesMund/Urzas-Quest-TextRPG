@@ -1,6 +1,8 @@
 #include "moduleressources.h"
 #include "ccave.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
+#include "copencaveencounter.h"
 #include "randomizer.h"
 #include "roomfactory.h"
 
@@ -110,10 +112,12 @@ std::string CaveRessources::moduleName()
 
 void CaveRessources::initModule()
 {
+    CGameManagement::getInstance()->registerEncounter(new COpenCaveEncounter());
 }
 
 void CaveRessources::deInitModule()
 {
+    CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
 }
 
 void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
@@ -127,4 +131,9 @@ std::string CaveRessources::questLog()
                        CC::fgDarkGray(),
                        CC::fgLightGreen(),
                        CC::ccReset());
+}
+
+std::string CaveRessources::dungeonEncounterName()
+{
+    return moduleName() + "Dungeon";
 }

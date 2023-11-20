@@ -38,7 +38,7 @@ void CLakeOfTearsTask::execute()
     case 4:
     case 5:
         Console::printLn("There is something in the bushes");
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
+        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
         break;
     case 6:
         battle(EEnemy::eFrog);

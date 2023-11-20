@@ -357,7 +357,7 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
                 continue;
             }
 
-            if (room->isTaskPossible())
+            if (room->isTaskPossible(task->moduleName()))
             {
                 possibleRooms.push_back(room);
             }

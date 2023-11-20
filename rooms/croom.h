@@ -32,7 +32,7 @@ public:
 
     void setTask(CTask* task);
     CTask* takeTask();
-    bool isTaskPossible() const;
+    virtual bool isTaskPossible(const std::string_view& = {}) const;
     bool hasTask() const;
 
     virtual bool isSpecialRoom() const;

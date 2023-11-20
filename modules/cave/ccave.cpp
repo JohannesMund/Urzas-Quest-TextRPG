@@ -20,14 +20,14 @@ CCave::CCave()
 
 void CCave::execute()
 {
-    if (CGameManagement::getProgressionInstance()->isModuleActive(CaveRessources::moduleName()))
+    if (_isOpen)
     {
         Console::printLn(
             "After all your battles and Adventures, you feel confident enought to enter this dark, mysterious cave.");
         Console::printLn("Do you dare to enter?");
         initDungeon();
     }
-    else if (CGameManagement::getProgressionInstance()->isModuleActive(CaveRessources::moduleName()))
+    else if (CGameManagement::getProgressionInstance()->isModuleFinished(CaveRessources::moduleName()))
     {
         Console::printLn(std::format("You remember this cave, you remember {} who lurked inside this cave. You also "
                                      "remember, that this guy should no longer be a problem. Or is he? ",
@@ -60,6 +60,26 @@ std::string CCave::bgColor() const
 std::string CCave::fgColor() const
 {
     return CC::fgDarkGray();
+}
+
+void CCave::setOpen(const bool bOpen)
+{
+    _isOpen = bOpen;
+}
+
+CMap::RoomFilter CCave::caveFilter()
+{
+    return [](const CRoom* room) { return dynamic_cast<const CCave*>(room) != nullptr; };
+}
+
+bool CCave::isTaskPossible(const std::string_view& moduleName) const
+{
+    if (!moduleName.empty())
+    {
+        return moduleName.compare(CaveRessources::moduleName());
+    }
+
+    return CField::isTaskPossible(moduleName);
 }
 
 void CCave::initDungeon()

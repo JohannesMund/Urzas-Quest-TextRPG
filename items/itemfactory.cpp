@@ -18,9 +18,27 @@
 namespace
 {
 
-}
+enum class EItemType
+{
+    eHealingPotionS,
+    eHealingPotionM,
+    eHealingPotionL,
+    eHealingPotionXL,
 
-CItem* ItemFactory::makeItem(const EItemType tp)
+    eBombS,
+    eBombM,
+    eBombL,
+    eBombXL,
+
+    ePhoenixFeather,
+    eHeartContainer,
+
+    eJunkItem,
+
+    eUrzasGlasses
+};
+
+CItem* makeItem(const EItemType tp)
 {
     switch (tp)
     {
@@ -55,6 +73,8 @@ CItem* ItemFactory::makeItem(const EItemType tp)
     }
     return nullptr;
 }
+
+} // namespace
 
 CItem* ItemFactory::makeShopItem()
 {
@@ -147,4 +167,9 @@ CItem* ItemFactory::makeShopEquipment(const unsigned int playerLevel)
     }
 
     return makeEquipment(type, quality);
+}
+
+CItem* ItemFactory::makeLootItem()
+{
+    return makeItem(EItemType::eJunkItem);
 }

@@ -56,7 +56,7 @@ void CEnemy::spoilsOfWar() const
         Console::printLn("This one collected stuff, you grab what you can.");
         do
         {
-            CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
+            CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
         } while (Randomizer::getRandom(2) == 0);
     }
 }

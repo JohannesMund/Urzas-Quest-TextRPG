@@ -290,16 +290,11 @@ void CGameManagement::init()
 {
     Randomizer::init();
 
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionM));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
+    _inventory.addItem(ItemFactory::makeLootItem());
+    _inventory.addItem(ItemFactory::makeLootItem());
+    _inventory.addItem(ItemFactory::makeLootItem());
+    _inventory.addItem(ItemFactory::makeLootItem());
+    _inventory.addItem(ItemFactory::makeLootItem());
 
     std::vector<CRoom*> rooms;
 

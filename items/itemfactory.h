@@ -6,27 +6,9 @@ class CItem;
 
 namespace ItemFactory
 {
-enum class EItemType
-{
-    eHealingPotionS,
-    eHealingPotionM,
-    eHealingPotionL,
-    eHealingPotionXL,
 
-    eBombS,
-    eBombM,
-    eBombL,
-    eBombXL,
+CItem* makeLootItem();
 
-    ePhoenixFeather,
-    eHeartContainer,
-
-    eJunkItem,
-
-    eUrzasGlasses
-};
-
-CItem* makeItem(const EItemType tp);
 CItem* makeShopEquipment(const unsigned int playerLevel);
 CItem* makeAwesomneItem();
 

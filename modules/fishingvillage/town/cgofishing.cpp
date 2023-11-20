@@ -128,7 +128,7 @@ void CGoFishing::catchAFish()
     }
     else if (i < 50)
     {
-        auto item = ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem);
+        auto item = ItemFactory::makeLootItem();
         Console::printLn(std::format("You sit there and wath the pose of your fishing rod, waiting for something to "
                                      "happen... and wait, and sit, and sit, ant wait. and si... until all of a sudden "
                                      "your fishing rod moves. You pull it in and see that you have caught a {}.",

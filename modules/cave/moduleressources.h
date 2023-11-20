@@ -13,6 +13,8 @@ void deInitModule();
 void initWorldMap(std::vector<CRoom*>& rooms);
 
 std::string moduleName();
+std::string dungeonEncounterName();
+
 std::string questLog();
 
 static const unsigned int fightChance = 15;

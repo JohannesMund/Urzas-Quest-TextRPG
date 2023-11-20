@@ -32,7 +32,7 @@ void CSewerBoss::spoilsOfWar() const
     amount = Randomizer::getRandom(7) + 5;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
+        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
     }
 
     CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeAwesomneItem());

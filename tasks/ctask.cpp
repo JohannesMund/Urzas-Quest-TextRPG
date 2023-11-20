@@ -15,6 +15,11 @@ std::string CTask::taskNav() const
     return {};
 }
 
+std::string CTask::moduleName() const
+{
+    return {};
+}
+
 CTask::CTask()
 {
 }

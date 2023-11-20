@@ -85,6 +85,8 @@ set(URZAS_QUEST_SOURCES
     modules/cave/ccavebosstask.h modules/cave/ccavebosstask.cpp    
     modules/cave/ccavebattleencounter.h modules/cave/ccavebattleencounter.cpp
     modules/cave/ccaveboss.h modules/cave/ccaveboss.cpp
+    modules/cave/copencavetask.h modules/cave/copencavetask.cpp
+    modules/cave/copencaveencounter.h modules/cave/copencaveencounter.cpp
 
     modules/ratfarm/moduleressources.h modules/ratfarm/moduleressources.cpp
     modules/ratfarm/cratfarmtask.h modules/ratfarm/cratfarmtask.cpp
@@ -131,10 +133,10 @@ set(URZAS_QUEST_SOURCES
     modules/fishingvillage/items/cboat.h modules/fishingvillage/items/cboat.cpp
     modules/fishingvillage/items/cboatpart.h modules/fishingvillage/items/cboatpart.cpp
     modules/fishingvillage/tasks/cbuildequipmenttask.h modules/fishingvillage/tasks/cbuildequipmenttask.cpp
+    modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp
 )
 
-add_executable(UrzasQuest ${URZAS_QUEST_SOURCES}
-    modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp)
+add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
 
 
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})
