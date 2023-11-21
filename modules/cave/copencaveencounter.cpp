@@ -5,6 +5,7 @@
 #include "colorize.h"
 #include "console.h"
 #include "copencavetask.h"
+#include "cshaggyssandwich.h"
 
 #include <format>
 
@@ -26,6 +27,7 @@ void COpenCaveEncounter::execute(const std::string_view& moduleName)
         "\"Mo-mo-mo-mo-moooonsteeeer\" screems the guy. \"C-c-c-c-aaaaaaave\" screams the dog. Yes, this dog can talk. "
         "what a world, that you are living in! (Did I mention the gigantic sandwich, the guy carries? no? anyone?). "
         "Appearently, you did well in not entering the cave up to now.");
+    CGameManagement::getInventoryInstance()->addItem(new CShaggysSandwich);
 }
 
 unsigned int COpenCaveEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const

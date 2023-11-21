@@ -97,7 +97,7 @@ public:
      * @brief description
      * @return desctiption of the item
      */
-    std::string description() const;
+    virtual std::string description() const;
 
     /**
      * @brief isSellable

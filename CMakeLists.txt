@@ -56,6 +56,7 @@ set(URZAS_QUEST_SOURCES
     items/equipment/cweapon.h items/equipment/cweapon.cpp
     items/equipment/cshield.h items/equipment/cshield.cpp
     items/equipment/carmor.h items/equipment/carmor.cpp
+    items/csandwich.h items/csandwich.cpp
 
     items/citem.h items/citem.cpp
     items/citemfactory.h items/citemfactory.cpp
@@ -87,6 +88,7 @@ set(URZAS_QUEST_SOURCES
     modules/cave/ccaveboss.h modules/cave/ccaveboss.cpp
     modules/cave/copencavetask.h modules/cave/copencavetask.cpp
     modules/cave/copencaveencounter.h modules/cave/copencaveencounter.cpp
+    modules/cave/cshaggyssandwich.h modules/cave/cshaggyssandwich.cpp
 
     modules/ratfarm/moduleressources.h modules/ratfarm/moduleressources.cpp
     modules/ratfarm/cratfarmtask.h modules/ratfarm/cratfarmtask.cpp
@@ -129,7 +131,6 @@ set(URZAS_QUEST_SOURCES
     modules/fishingvillage/items/cfish.h modules/fishingvillage/items/cfish.cpp
     modules/fishingvillage/items/cfishingrodpart.h modules/fishingvillage/items/cfishingrodpart.cpp
     modules/fishingvillage/items/cfishingrod.h modules/fishingvillage/items/cfishingrod.cpp
-
     modules/fishingvillage/items/cboat.h modules/fishingvillage/items/cboat.cpp
     modules/fishingvillage/items/cboatpart.h modules/fishingvillage/items/cboatpart.cpp
     modules/fishingvillage/tasks/cbuildequipmenttask.h modules/fishingvillage/tasks/cbuildequipmenttask.cpp
