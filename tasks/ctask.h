@@ -37,8 +37,29 @@ public:
      */
     bool isFinished();
 
+    /**
+     * @brief isAutoExecute
+     * Set by the dereived class. determins, wether the task is automatically executed, when the player enters the
+     * field, or whether the task provides a nav
+     * @sa taskNav()
+     * @return is the task auto executed
+     */
     bool isAutoExecute() const;
+
+    /**
+     * @brief taskNav
+     * @return a string to be added to the menu to execute the task manually
+     * @sa isAutoExecute()
+     * @remark only used, when _isAutoExecute == false
+     */
     virtual std::string taskNav() const;
+
+    /**
+     * @brief moduleName
+     * @return a moduleName for the task. handed over to the room, when attempting to place the task
+     * @sa CRoom::isTaskPossible()
+     */
+    virtual std::string moduleName() const;
 
 protected:
     bool _isFinished = false;

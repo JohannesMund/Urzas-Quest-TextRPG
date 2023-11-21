@@ -7,11 +7,6 @@ CDungeonRoom::CDungeonRoom() : CRoom()
     _isTaskPossible = true;
 }
 
-std::string CDungeonRoom::mapSymbol() const
-{
-    return CRoom::mapSymbol();
-}
-
 void CDungeonRoom::setDescription(const std::string_view& description)
 {
     _description = description;
@@ -25,4 +20,9 @@ void CDungeonRoom::setModuleName(const std::string_view& moduleName)
 bool CDungeonRoom::isSpecialRoom() const
 {
     return false;
+}
+
+char CDungeonRoom::getMapSymbol() const
+{
+    return ' ';
 }

@@ -18,9 +18,7 @@ public:
     CTown();
 
     virtual void execute() override;
-
-    virtual std::string mapSymbol() const override;
-
+#
     virtual std::string bgColor() const override;
     virtual std::string fgColor() const override;
 
@@ -30,6 +28,8 @@ public:
 
 private:
     std::string _name;
+
+    virtual char getMapSymbol() const override;
 
     CShop _shop;
     CChurch _church;

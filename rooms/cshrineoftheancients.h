@@ -9,7 +9,6 @@ public:
     CShrineOfTheAncients();
 
     virtual void execute() override;
-    virtual std::string mapSymbol() const override;
 
     virtual std::string fgColor() const override;
     virtual std::string bgColor() const override;
@@ -26,6 +25,8 @@ private:
     void firstVisitLearnedAboutCult();
 
     void stats() const;
+
+    virtual char getMapSymbol() const override;
 
     std::string ancientShrine() const;
 };

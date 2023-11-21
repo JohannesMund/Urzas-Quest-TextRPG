@@ -1,9 +1,9 @@
 #include "ccaveboss.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "console.h"
-#include "itemfactory.h"
-#include "randomizer.h"
 #include "moduleressources.h"
+#include "randomizer.h"
 
 CCaveBoss::CCaveBoss() : CEnemy()
 {
@@ -25,16 +25,16 @@ void CCaveBoss::spoilsOfWar() const
     auto amount = Randomizer::getRandom(3) + 1;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+        CGameManagement::getInventoryInstance()->addShopItem();
     }
 
     amount = Randomizer::getRandom(7) + 5;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
+        CGameManagement::getInventoryInstance()->addLootItem();
     }
 
-    CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeAwesomneItem());
+    CGameManagement::getInventoryInstance()->addAwesomneItem();
 }
 
 void CCaveBoss::battleAction(bool& endRound)

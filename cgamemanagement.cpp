@@ -4,6 +4,7 @@
 #include "cencounter.h"
 #include "cfield.h"
 #include "cgameprogression.h"
+#include "citemfactory.h"
 #include "cmenu.h"
 #include "cmysteriouschest.h"
 #include "companionfactory.h"
@@ -11,7 +12,6 @@
 #include "croom.h"
 #include "ctask.h"
 #include "ctown.h"
-#include "itemfactory.h"
 #include "randomizer.h"
 
 #include <iostream>
@@ -52,6 +52,11 @@ CCompanion* CGameManagement::getCompanionInstance()
 CGameProgression* CGameManagement::getProgressionInstance()
 {
     return getInstance()->getProgression();
+}
+
+CItemFactory* CGameManagement::getItemFactoryInstance()
+{
+    return getInstance()->getItemFactory();
 }
 
 void CGameManagement::placeTask(CTask* task, CMap::RoomFilter filter)
@@ -167,6 +172,11 @@ CCompanion* CGameManagement::getCompanion()
 CGameProgression* CGameManagement::getProgression()
 {
     return &_progression;
+}
+
+CItemFactory* CGameManagement::getItemFactory()
+{
+    return &_itemFactory;
 }
 
 void CGameManagement::printHUD()
@@ -290,16 +300,11 @@ void CGameManagement::init()
 {
     Randomizer::init();
 
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionS));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eHealingPotionM));
-
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
-    _inventory.addItem(ItemFactory::makeItem(ItemFactory::EItemType::eJunkItem));
+    _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
+    _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
+    _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
+    _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
+    _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
 
     std::vector<CRoom*> rooms;
 
@@ -331,7 +336,9 @@ void CGameManagement::lookForTrouble()
     battle.fight();
 }
 
-CGameManagement::CGameManagement() : _map(CMap(Ressources::Config::fieldWidth, Ressources::Config::fieldHeight))
+CGameManagement::CGameManagement() :
+    _map(CMap(Ressources::Config::fieldWidth, Ressources::Config::fieldHeight)),
+    _inventory(&_itemFactory)
 {
     _companion = CompanionFactory::makeRandomCompanion();
 }

@@ -10,6 +10,7 @@
 class CEnemy;
 class CEquipment;
 class CJunkItem;
+class CItemFactory;
 class CInventory
 {
     friend class CGameManagement;
@@ -35,6 +36,10 @@ public:
 
     bool hasItem(const std::string_view& name);
     void addItem(CItem* item);
+
+    void addLootItem();
+    void addAwesomneItem();
+    void addShopItem();
 
     void removeItem(CItem* item);
     void removeItem(const std::string_view& name);
@@ -69,7 +74,7 @@ public:
     std::optional<CItem*> selectItemFromInventory(const Scope& scope);
 
 private:
-    CInventory();
+    CInventory(CItemFactory* itemFactory);
     ~CInventory();
 
     std::string printInventoryNav() const;
@@ -85,4 +90,5 @@ private:
 
     CItem* getItem(const unsigned int index);
     ItemList _inventory;
+    CItemFactory* _itemFactory;
 };

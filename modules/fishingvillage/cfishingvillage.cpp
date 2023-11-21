@@ -1,4 +1,4 @@
-#include "fishingvillage/town/cfishingvillage.h"
+#include "fishingvillage/cfishingvillage.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorize.h"
@@ -74,15 +74,6 @@ void CFishingVillage::execute()
     } while (input != CMenu::exit());
 }
 
-std::string CFishingVillage::mapSymbol() const
-{
-    if (hasTask())
-    {
-        return "!";
-    }
-    return "~";
-}
-
 std::string CFishingVillage::bgColor() const
 {
     return CC::bgLightBlue();
@@ -114,4 +105,9 @@ void CFishingVillage::printHeader()
         Ressources::Game::fishingFritz(),
         FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
     Console::br();
+}
+
+char CFishingVillage::getMapSymbol() const
+{
+    return '~';
 }

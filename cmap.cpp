@@ -333,7 +333,8 @@ std::string CMap::mapSymbol(const SRoomCoords& coords)
     auto room = roomAt(coords);
     if (room.has_value() && (*room) != nullptr)
     {
-        return (*room)->mapSymbol();
+
+        return {(*room)->mapSymbol()};
     }
 
     return " ";
@@ -356,7 +357,7 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
                 continue;
             }
 
-            if (room->isTaskPossible())
+            if (room->isTaskPossible(task->moduleName()))
             {
                 possibleRooms.push_back(room);
             }

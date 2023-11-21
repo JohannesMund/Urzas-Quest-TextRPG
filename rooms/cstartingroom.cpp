@@ -1,9 +1,9 @@
 #include "cstartingroom.h"
 #include "cequipment.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "cmenu.h"
 #include "console.h"
-#include "itemfactory.h"
 
 #include <format>
 
@@ -22,7 +22,8 @@ void CStartingRoom::execute()
         return;
     }
 
-    auto sword = ItemFactory::makeEquipment(Ressources::Items::EType::eWeapon, Ressources::Items::EQuality::eJunk);
+    auto sword = CGameManagement::getItemFactoryInstance()->makeEquipment(Ressources::Items::EType::eWeapon,
+                                                                          Ressources::Items::EQuality::eJunk);
 
     CMenu menu;
     menu.addMenuGroup({menu.createAction("Take it"), menu.createAction("Leave it")});
@@ -57,7 +58,8 @@ void CStartingRoom::execute()
         }
     } while (input.key != 't');
 
-    auto shield = ItemFactory::makeEquipment(Ressources::Items::EType::eShield, Ressources::Items::EQuality::eJunk);
+    auto shield = CGameManagement::getItemFactoryInstance()->makeEquipment(Ressources::Items::EType::eShield,
+                                                                           Ressources::Items::EQuality::eJunk);
 
     Console::br();
     Console::printLn("Having the sword, you look further. You still do not feel like a big, sturdy warrior. "
@@ -95,7 +97,7 @@ void CStartingRoom::execute()
     _isTaskPossible = true;
 }
 
-std::string CStartingRoom::mapSymbol() const
+char CStartingRoom::getMapSymbol() const
 {
-    return "*";
+    return '*';
 }

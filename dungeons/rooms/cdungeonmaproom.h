@@ -8,7 +8,6 @@ public:
     CDungeonMapRoom();
 
     virtual void execute() override;
-    virtual std::string mapSymbol() const override;
 
     virtual bool isSpecialRoom() const override;
 
@@ -16,4 +15,6 @@ public:
 
 private:
     bool _isMapRevealed = false;
+
+    virtual char getMapSymbol() const override;
 };

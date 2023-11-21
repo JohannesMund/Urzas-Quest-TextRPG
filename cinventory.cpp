@@ -1,5 +1,6 @@
 #include "cinventory.h"
 #include "cequipment.h"
+#include "citemfactory.h"
 #include "cjunkitem.h"
 #include "cmenu.h"
 #include "console.h"
@@ -9,10 +10,6 @@
 #include <ranges>
 #include <string>
 #include <utility>
-
-CInventory::CInventory()
-{
-}
 
 CInventory::~CInventory()
 {
@@ -56,6 +53,21 @@ void CInventory::addItem(CItem* item)
 
     Console::printLn(std::format("You optained {}", item->name()));
     _inventory.push_back(item);
+}
+
+void CInventory::addLootItem()
+{
+    addItem(_itemFactory->makeLootItem());
+}
+
+void CInventory::addAwesomneItem()
+{
+    addItem(_itemFactory->makeAwesomneItem());
+}
+
+void CInventory::addShopItem()
+{
+    addItem(_itemFactory->makeShopItem());
 }
 
 void CInventory::removeItem(CItem* item)
@@ -296,6 +308,10 @@ std::optional<CItem*> CInventory::selectItemFromInventory(const Scope& scope)
         }
     }
     return {};
+}
+
+CInventory::CInventory(CItemFactory* itemFactory) : _itemFactory(itemFactory)
+{
 }
 
 bool CInventory::usableInScope(const CItem* item, const Scope& scope)

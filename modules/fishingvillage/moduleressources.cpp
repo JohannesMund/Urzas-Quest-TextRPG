@@ -1,10 +1,11 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
-#include "fishingvillage/ccollectpartsencounter.h"
+#include "fishingvillage/cfishingvillage.h"
+#include "fishingvillage/items/cboatpart.h"
+#include "fishingvillage/items/cfishingrodpart.h"
 #include "fishingvillage/tasks/cbuildequipmenttask.h"
 #include "fishingvillage/tasks/cfishingvilletowntask.h"
-#include "fishingvillage/town/cfishingvillage.h"
 #include "randomizer.h"
 
 #include <algorithm>
@@ -27,14 +28,16 @@ std::string FishingVillageRessources::moduleNameFishLegend()
 
 void FishingVillageRessources::initModuleMakeRod()
 {
-    CGameManagement::getInstance()->registerEncounter(new CCollectPartsEncounter(moduleNameMakeRod()));
+    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+        moduleNameMakeRod(), []() { return new CFishingRodPart(); }, 10);
     CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeRod()),
                                               CFishingVillage::fishingVillageFilter());
 }
 
 void FishingVillageRessources::initModuleMakeBoat()
 {
-    CGameManagement::getInstance()->registerEncounter(new CCollectPartsEncounter(moduleNameMakeBoat()));
+    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+        moduleNameMakeRod(), []() { return new CBoatPart(); }, 10);
     CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeBoat()),
                                               CFishingVillage::fishingVillageFilter());
 }

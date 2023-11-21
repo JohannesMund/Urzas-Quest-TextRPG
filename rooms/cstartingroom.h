@@ -8,5 +8,7 @@ public:
     CStartingRoom();
 
     virtual void execute() override;
-    virtual std::string mapSymbol() const override;
+
+private:
+    virtual char getMapSymbol() const override;
 };

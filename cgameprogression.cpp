@@ -50,8 +50,8 @@ void CGameProgression::initEncounters()
     registerModule(CaveRessources::moduleName(),
                    EGameStage::eSeenBard,
                    &CaveRessources::questLog,
-                   &ModuleRegister::noInitDeInitFunction,
-                   &ModuleRegister::noInitDeInitFunction,
+                   &CaveRessources::initModule,
+                   &CaveRessources::deInitModule,
                    &CaveRessources::initWorldMap);
 
     registerModule(FishingVillageRessources::moduleNameMakeBoat(),

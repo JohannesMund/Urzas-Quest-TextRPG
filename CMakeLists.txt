@@ -58,7 +58,7 @@ set(URZAS_QUEST_SOURCES
     items/equipment/carmor.h items/equipment/carmor.cpp
 
     items/citem.h items/citem.cpp
-    items/itemfactory.h items/itemfactory.cpp
+    items/citemfactory.h items/citemfactory.cpp
     items/chealingpotion.h items/chealingpotion.cpp
     items/cjunkitem.h items/cjunkitem.cpp
     items/cphoenixfeather.h items/cphoenixfeather.cpp
@@ -85,6 +85,8 @@ set(URZAS_QUEST_SOURCES
     modules/cave/ccavebosstask.h modules/cave/ccavebosstask.cpp    
     modules/cave/ccavebattleencounter.h modules/cave/ccavebattleencounter.cpp
     modules/cave/ccaveboss.h modules/cave/ccaveboss.cpp
+    modules/cave/copencavetask.h modules/cave/copencavetask.cpp
+    modules/cave/copencaveencounter.h modules/cave/copencaveencounter.cpp
 
     modules/ratfarm/moduleressources.h modules/ratfarm/moduleressources.cpp
     modules/ratfarm/cratfarmtask.h modules/ratfarm/cratfarmtask.cpp
@@ -119,7 +121,7 @@ set(URZAS_QUEST_SOURCES
     modules/layla/claylaboss.h modules/layla/claylaboss.cpp
     modules/layla/claylatowntask.h modules/layla/claylatowntask.cpp
 
-    modules/fishingvillage/town/cfishingvillage.h modules/fishingvillage/town/cfishingvillage.cpp
+    modules/fishingvillage/cfishingvillage.h modules/fishingvillage/cfishingvillage.cpp
     modules/fishingvillage/moduleressources.h modules/fishingvillage/moduleressources.cpp
     modules/fishingvillage/town/cfishrestaurant.h modules/fishingvillage/town/cfishrestaurant.cpp
     modules/fishingvillage/town/cfishingfritz.h modules/fishingvillage/town/cfishingfritz.cpp
@@ -127,14 +129,14 @@ set(URZAS_QUEST_SOURCES
     modules/fishingvillage/items/cfish.h modules/fishingvillage/items/cfish.cpp
     modules/fishingvillage/items/cfishingrodpart.h modules/fishingvillage/items/cfishingrodpart.cpp
     modules/fishingvillage/items/cfishingrod.h modules/fishingvillage/items/cfishingrod.cpp
-    modules/fishingvillage/ccollectpartsencounter.h modules/fishingvillage/ccollectpartsencounter.cpp
+
     modules/fishingvillage/items/cboat.h modules/fishingvillage/items/cboat.cpp
     modules/fishingvillage/items/cboatpart.h modules/fishingvillage/items/cboatpart.cpp
     modules/fishingvillage/tasks/cbuildequipmenttask.h modules/fishingvillage/tasks/cbuildequipmenttask.cpp
+    modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp
 )
 
-add_executable(UrzasQuest ${URZAS_QUEST_SOURCES}
-    modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp)
+add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
 
 
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})

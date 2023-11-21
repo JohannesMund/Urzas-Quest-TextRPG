@@ -23,11 +23,6 @@ void CHealingWell::execute()
     }
 }
 
-std::string CHealingWell::mapSymbol() const
-{
-    return "w";
-}
-
 void CHealingWell::setQuestion(const std::string_view& question)
 {
     _question = question;
@@ -41,4 +36,9 @@ void CHealingWell::setEffect(const std::string_view& effect)
 bool CHealingWell::isSpecialRoom() const
 {
     return true;
+}
+
+char CHealingWell::getMapSymbol() const
+{
+    return 'w';
 }

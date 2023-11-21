@@ -12,7 +12,6 @@ public:
     CFishingVillage();
 
     virtual void execute() override;
-    virtual std::string mapSymbol() const override;
 
     virtual std::string bgColor() const override;
     virtual std::string fgColor() const override;
@@ -21,6 +20,8 @@ public:
 
 private:
     void printHeader();
+
+    virtual char getMapSymbol() const override;
 
     CFishingFritz _fishingFritz;
     CFishRestaurant _fishRestaurant;
