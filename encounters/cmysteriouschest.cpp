@@ -62,20 +62,20 @@ void CMysteriousChest::execute(const std::string_view& moduleName)
 
     if (reward >= 15)
     {
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeAwesomneItem());
+        CGameManagement::getInventoryInstance()->addAwesomneItem();
     }
     if (reward >= 7)
     {
         gold -= CGameManagement::getPlayerInstance()->level() * 250;
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
+        CGameManagement::getInventoryInstance()->addShopItem();
         if (Randomizer::getRandom(2) == 0)
         {
-            CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
+            CGameManagement::getInventoryInstance()->addShopItem();
         }
     }
     if (reward >= 5)
     {
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
+        CGameManagement::getInventoryInstance()->addShopItem();
     }
     CGameManagement::getPlayerInstance()->addGold(gold);
 }

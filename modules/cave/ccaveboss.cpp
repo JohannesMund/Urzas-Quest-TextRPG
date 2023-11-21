@@ -25,16 +25,16 @@ void CCaveBoss::spoilsOfWar() const
     auto amount = Randomizer::getRandom(3) + 1;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
+        CGameManagement::getInventoryInstance()->addShopItem();
     }
 
     amount = Randomizer::getRandom(7) + 5;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
+        CGameManagement::getInventoryInstance()->addLootItem();
     }
 
-    CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeAwesomneItem());
+    CGameManagement::getInventoryInstance()->addAwesomneItem();
 }
 
 void CCaveBoss::battleAction(bool& endRound)

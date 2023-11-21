@@ -178,6 +178,7 @@ CItem* CItemFactory::makeLootItem()
             indices.push_back(index);
         }
     }
+
     if (indices.size() == 0)
     {
         return makeItem(EItemType::eJunkItem);

@@ -27,7 +27,7 @@ void CLakeOfTearsTask::execute()
     {
     case 0:
         Console::printLn("While testing the water, you find something hidden under a lily pad.");
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
+        CGameManagement::getInventoryInstance()->addShopItem();
         break;
     case 1:
     case 2:
@@ -38,7 +38,7 @@ void CLakeOfTearsTask::execute()
     case 4:
     case 5:
         Console::printLn("There is something in the bushes");
-        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
+        CGameManagement::getInventoryInstance()->addLootItem();
         break;
     case 6:
         battle(EEnemy::eFrog);

@@ -25,7 +25,7 @@ void CBountyEnemy::spoilsOfWar() const
     {
         for (auto i = 0; i <= amount; i++)
         {
-            CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
+            CGameManagement::getInventoryInstance()->addShopItem();
         }
     }
 }

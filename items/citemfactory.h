@@ -11,17 +11,17 @@ class CItem;
 class CItemFactory
 {
     friend class CGameManagement;
+    friend class CInventory;
 
 public:
-    using LootItemGeneratorFunction = std::function<CItem*()>;
-
     CItem* makeLootItem();
+    CItem* makeAwesomneItem();
+    CItem* makeShopItem();
 
     CItem* makeShopEquipment(const unsigned int playerLevel);
-    CItem* makeAwesomneItem();
-
-    CItem* makeShopItem();
     CItem* makeEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality);
+
+    using LootItemGeneratorFunction = std::function<CItem*()>;
 
     void registerLootItemGenerator(const std::string_view& moduleName,
                                    LootItemGeneratorFunction generatorFunction,
