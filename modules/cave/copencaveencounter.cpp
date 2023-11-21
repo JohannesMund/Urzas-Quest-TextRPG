@@ -24,7 +24,8 @@ void COpenCaveEncounter::execute(const std::string_view& moduleName)
                      "stirred up by them. Their faces are marked with sheer panic.");
     Console::printLn(
         "\"Mo-mo-mo-mo-moooonsteeeer\" screems the guy. \"C-c-c-c-aaaaaaave\" screams the dog. Yes, this dog can talk. "
-        "what a world, that you are living ins. Appearently, you did well in not entering the cave up to now.");
+        "what a world, that you are living in! (Did I mention the gigantic sandwich, the guy carries? no? anyone?). "
+        "Appearently, you did well in not entering the cave up to now.");
 }
 
 unsigned int COpenCaveEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const

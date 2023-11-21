@@ -34,8 +34,6 @@ public:
     bool isModuleActive(const std::string_view& moduleName) const;
     bool isModuleFinished(const std::string_view& moduleName) const;
 
-    void initWorldMap(std::vector<CRoom*>& rooms) const;
-
     void increaseBodyCount();
 
     unsigned int getProgress() const;
@@ -84,6 +82,8 @@ private:
 
     void deInitStage();
     void initStage();
+    void initWorldMap(std::vector<CRoom*>& rooms) const;
+
     void progressToStage(EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);

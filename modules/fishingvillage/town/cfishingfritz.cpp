@@ -99,7 +99,10 @@ void CFishingFritz::ask()
     {
         getInformation();
     }
-    checkFish();
+    else
+    {
+        checkFish();
+    }
 }
 
 void CFishingFritz::checkFish()
@@ -161,6 +164,8 @@ void CFishingFritz::checkFish()
 
 void CFishingFritz::getInformation() const
 {
+    Console::printLn(std::format("{} has nothing right now", Ressources::Game::fishingFritz()));
+    Console::confirmToContinue();
 }
 
 void CFishingFritz::sell() const
