@@ -77,6 +77,10 @@ void CShrineOfTheAncients::visit()
 
 void CShrineOfTheAncients::firstVisit()
 {
+
+    _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
+    CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
+
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
     case CGameProgression::EGameStage::eNone:
@@ -120,9 +124,6 @@ void CShrineOfTheAncients::firstVisitStart()
     Console::printLn("You go closer, and can see an old man, praying in the shrine. He does "
                      "not even give you a single "
                      "glance, and completely ignores you. Well, time to leave for now.");
-
-    CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
-    _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
 }
 
 void CShrineOfTheAncients::firstVisitSeenBard()
@@ -156,8 +157,6 @@ void CShrineOfTheAncients::firstVisitSeenBard()
                      "was 8 years old.");
     Console::printLn("But your wanted to become a hero anyway, so you will have "
                      "to come back later.");
-    CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
-    _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
 }
 
 void CShrineOfTheAncients::firstVisitProvenAsHero()
@@ -183,9 +182,6 @@ void CShrineOfTheAncients::firstVisitProvenAsHero()
     Console::printLn("Find the people, who still believe in Urza!\"");
     Console::printLn("And again, you are not much smarter than before, but you "
                      "know what to look for.");
-
-    CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
-    _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
 }
 
 void CShrineOfTheAncients::firstVisitLearnedAboutCult()
@@ -268,7 +264,7 @@ void CShrineOfTheAncients::stats() const
 
 char CShrineOfTheAncients::getMapSymbol() const
 {
-    return '#';
+    return 'Q';
 }
 
 std::string CShrineOfTheAncients::ancientShrine() const

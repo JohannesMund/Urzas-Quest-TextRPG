@@ -86,7 +86,10 @@ void CItemFactory::registerLootItemGenerator(const std::string_view& moduleName,
 void CItemFactory::unregisterLootItemGeneratorByName(const std::string_view& moduleName)
 {
     auto it = std::remove_if(_lootGenerators.begin(), _lootGenerators.end(), LootItemGenerator::nameFilter(moduleName));
-    _lootGenerators.erase(it);
+    if (it != _lootGenerators.end())
+    {
+        _lootGenerators.erase(it);
+    }
 }
 
 CItem* CItemFactory::makeItem(const EItemType tp)

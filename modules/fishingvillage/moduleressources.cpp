@@ -37,7 +37,7 @@ void FishingVillageRessources::initModuleMakeRod()
 void FishingVillageRessources::initModuleMakeBoat()
 {
     CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-        moduleNameMakeRod(), []() { return new CBoatPart(); }, 10);
+        moduleNameMakeBoat(), []() { return new CBoatPart(); }, 10);
     CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeBoat()),
                                               CFishingVillage::fishingVillageFilter());
 }
