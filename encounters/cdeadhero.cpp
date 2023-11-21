@@ -1,8 +1,8 @@
 #include "cdeadhero.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "cmenu.h"
 #include "console.h"
-#include "itemfactory.h"
 #include "ressources.h"
 
 #include <format>
@@ -63,8 +63,8 @@ void CDeadHero::execute(const std::string_view& moduleName)
     Console::printLn("Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now "
                      "have a shiny new armor to protect you.");
 
-    CGameManagement::getInventoryInstance()->addItem(
-        ItemFactory::makeEquipment(Ressources::Items::EType::eArmor, Ressources::Items::EQuality::eJunk));
+    CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeEquipment(
+        Ressources::Items::EType::eArmor, Ressources::Items::EQuality::eJunk));
     Console::br();
 }
 

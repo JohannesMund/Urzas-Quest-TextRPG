@@ -1,9 +1,9 @@
 #include "cequipmentdealer.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
-#include "itemfactory.h"
 
 #include <format>
 
@@ -45,7 +45,8 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
     std::vector<CItem*> buyableItems;
     for (int i = 0; i < 3; i++)
     {
-        auto item = ItemFactory::makeShopEquipment(CGameManagement::getPlayerInstance()->level());
+        auto item =
+            CGameManagement::getItemFactoryInstance()->makeShopEquipment(CGameManagement::getPlayerInstance()->level());
 
         if (item->buyValue() <= CGameManagement::getPlayerInstance()->gold())
         {

@@ -1,8 +1,8 @@
 #include "cenemy.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "colorize.h"
 #include "console.h"
-#include "itemfactory.h"
 #include "randomizer.h"
 
 #include <format>
@@ -56,7 +56,7 @@ void CEnemy::spoilsOfWar() const
         Console::printLn("This one collected stuff, you grab what you can.");
         do
         {
-            CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
+            CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
         } while (Randomizer::getRandom(2) == 0);
     }
 }

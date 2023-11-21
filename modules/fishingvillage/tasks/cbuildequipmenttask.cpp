@@ -88,7 +88,9 @@ void CBuildEquipmentTask::buildBoat()
         CGameManagement::getInventoryInstance()->addItem(boat);
         Console::br();
         CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageRessources::moduleNameMakeBoat());
-        CGameManagement::getInstance()->unregisterEncounterByModuleName(FishingVillageRessources::moduleNameMakeBoat());
+        CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(
+            FishingVillageRessources::moduleNameMakeBoat());
+
         _isFinished = true;
     }
     else
@@ -151,7 +153,8 @@ void CBuildEquipmentTask::buildRod()
         CGameManagement::getInventoryInstance()->addItem(rod);
         Console::br();
         CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageRessources::moduleNameMakeRod());
-        CGameManagement::getInstance()->unregisterEncounterByModuleName(FishingVillageRessources::moduleNameMakeRod());
+        CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(
+            FishingVillageRessources::moduleNameMakeRod());
         _isFinished = true;
     }
     else

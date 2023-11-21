@@ -4,6 +4,7 @@
 #include "cencounter.h"
 #include "cgameprogression.h"
 #include "cinventory.h"
+#include "citemfactory.h"
 #include "cmap.h"
 #include "cplayer.h"
 
@@ -19,6 +20,7 @@ public:
     static CInventory* getInventoryInstance();
     static CCompanion* getCompanionInstance();
     static CGameProgression* getProgressionInstance();
+    static CItemFactory* getItemFactoryInstance();
 
     void placeTask(CTask* task, CMap::RoomFilter);
     void placeTaskOnField(CTask* task);
@@ -46,6 +48,7 @@ private:
     CInventory* getInventory();
     CCompanion* getCompanion();
     CGameProgression* getProgression();
+    CItemFactory* getItemFactory();
 
     CGameManagement();
     ~CGameManagement();
@@ -59,4 +62,6 @@ private:
 
     bool _isGameOver = false;
     std::vector<CEncounter*> _encounters;
+
+    CItemFactory _itemFactory;
 };

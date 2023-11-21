@@ -1,7 +1,7 @@
 #include "csewerboss.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "console.h"
-#include "itemfactory.h"
 #include "moduleressources.h"
 #include "randomizer.h"
 
@@ -26,16 +26,16 @@ void CSewerBoss::spoilsOfWar() const
     auto amount = Randomizer::getRandom(3) + 1;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
     }
 
     amount = Randomizer::getRandom(7) + 5;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
     }
 
-    CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeAwesomneItem());
+    CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeAwesomneItem());
 }
 
 void CSewerBoss::battleAction(bool& endRound)

@@ -1,9 +1,9 @@
 #include "cmysteriouschest.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "clivingchest.h"
 #include "cmenu.h"
 #include "console.h"
-#include "itemfactory.h"
 #include "randomizer.h"
 
 CMysteriousChest::CMysteriousChest() : CEncounter()
@@ -62,20 +62,20 @@ void CMysteriousChest::execute(const std::string_view& moduleName)
 
     if (reward >= 15)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeAwesomneItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeAwesomneItem());
     }
     if (reward >= 7)
     {
         gold -= CGameManagement::getPlayerInstance()->level() * 250;
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
         if (Randomizer::getRandom(2) == 0)
         {
-            CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+            CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
         }
     }
     if (reward >= 5)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
     }
     CGameManagement::getPlayerInstance()->addGold(gold);
 }

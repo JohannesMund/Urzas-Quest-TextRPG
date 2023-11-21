@@ -1,4 +1,4 @@
-#include "fishingvillage/town/cfishingvillage.h"
+#include "fishingvillage/cfishingvillage.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorize.h"

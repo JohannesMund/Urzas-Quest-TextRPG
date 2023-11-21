@@ -1,9 +1,9 @@
 #include "cshop.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "cjunkitem.h"
 #include "cmenu.h"
 #include "console.h"
-#include "itemfactory.h"
 
 #include <algorithm>
 #include <format>
@@ -159,7 +159,7 @@ void CShop::buyItem(CItem* item)
     if (it != _shopItems.end())
     {
         _shopItems.erase(it);
-        _shopItems.push_back(ItemFactory::makeShopItem());
+        _shopItems.push_back(CGameManagement::getItemFactoryInstance()->makeShopItem());
     }
     Console::confirmToContinue();
 }
@@ -200,6 +200,6 @@ void CShop::replaceShopItems()
 
     for (int i = 0; i < 5; i++)
     {
-        _shopItems.push_back(ItemFactory::makeShopItem());
+        _shopItems.push_back(CGameManagement::getItemFactoryInstance()->makeShopItem());
     }
 }

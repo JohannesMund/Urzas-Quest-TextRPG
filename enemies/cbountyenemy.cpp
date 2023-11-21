@@ -1,7 +1,7 @@
 #include "cbountyenemy.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "console.h"
-#include "itemfactory.h"
 #include "randomizer.h"
 #include "ressources.h"
 
@@ -25,7 +25,7 @@ void CBountyEnemy::spoilsOfWar() const
     {
         for (auto i = 0; i <= amount; i++)
         {
-            CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+            CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
         }
     }
 }

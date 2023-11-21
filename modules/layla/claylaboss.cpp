@@ -41,7 +41,7 @@ void CLaylaBoss::spoilsOfWar() const
     auto amount = Randomizer::getRandom(4) + 7;
     for (auto i = 0; i <= amount; i++)
     {
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
     }
 }
 

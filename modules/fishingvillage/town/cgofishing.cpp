@@ -1,6 +1,7 @@
 #include "cgofishing.h"
 #include "cequipment.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
@@ -8,7 +9,6 @@
 #include "fishingvillage/items/cfish.h"
 #include "fishingvillage/items/cfishingrod.h"
 #include "fishingvillage/moduleressources.h"
-#include "itemfactory.h"
 #include "randomizer.h"
 
 #include <format>
@@ -128,7 +128,7 @@ void CGoFishing::catchAFish()
     }
     else if (i < 50)
     {
-        auto item = ItemFactory::makeLootItem();
+        auto item = CGameManagement::getItemFactoryInstance()->makeLootItem();
         Console::printLn(std::format("You sit there and wath the pose of your fishing rod, waiting for something to "
                                      "happen... and wait, and sit, and sit, ant wait. and si... until all of a sudden "
                                      "your fishing rod moves. You pull it in and see that you have caught a {}.",

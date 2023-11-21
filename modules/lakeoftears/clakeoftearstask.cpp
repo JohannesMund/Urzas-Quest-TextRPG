@@ -1,11 +1,11 @@
 #include "clakeoftearstask.h"
 #include "cbattle.h"
 #include "cgamemanagement.h"
+#include "citemfactory.h"
 #include "clakeoftearsbosstask.h"
 #include "cmobenemy.h"
 #include "colorize.h"
 #include "console.h"
-#include "itemfactory.h"
 #include "randomizer.h"
 
 #include <format>
@@ -27,7 +27,7 @@ void CLakeOfTearsTask::execute()
     {
     case 0:
         Console::printLn("While testing the water, you find something hidden under a lily pad.");
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeShopItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeShopItem());
         break;
     case 1:
     case 2:
@@ -38,7 +38,7 @@ void CLakeOfTearsTask::execute()
     case 4:
     case 5:
         Console::printLn("There is something in the bushes");
-        CGameManagement::getInventoryInstance()->addItem(ItemFactory::makeLootItem());
+        CGameManagement::getInventoryInstance()->addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
         break;
     case 6:
         battle(EEnemy::eFrog);
