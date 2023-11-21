@@ -97,7 +97,6 @@ void CDungeon::dungeonLoop()
             {
                 Console::cls();
                 _map->printMap();
-                Console::confirmToContinue();
             }
             if (input.key == 'i')
             {
@@ -109,7 +108,6 @@ void CDungeon::dungeonLoop()
                 Console::cls();
                 _map->reveal();
                 _map->printMap();
-                Console::confirmToContinue();
             }
             if (input == CMenu::exit())
             {
