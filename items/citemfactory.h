@@ -7,7 +7,7 @@
 #include <vector>
 
 class CItem;
-
+class CSandwich;
 class CItemFactory
 {
     friend class CGameManagement;
@@ -17,6 +17,7 @@ public:
     CItem* makeLootItem();
     CItem* makeAwesomneItem();
     CItem* makeShopItem() const;
+    CSandwich* sandwichMaker() const;
 
     CItem* makeShopEquipment(const unsigned int playerLevel);
     CItem* makeEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality);

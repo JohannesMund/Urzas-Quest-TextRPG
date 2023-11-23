@@ -31,9 +31,10 @@ public:
 
     CSandwich(const std::vector<EIngredients>& ingredients);
 
-    static std::string ingredient2String(const EIngredients ingredient);
-
     virtual std::string description() const override;
+    virtual void useFromInventory() override;
+
+    static std::string ingredient2String(const EIngredients ingredient);
 
     bool operator==(const CSandwich& other) const
     {

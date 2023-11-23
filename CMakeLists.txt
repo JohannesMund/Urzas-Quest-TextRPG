@@ -138,6 +138,10 @@ set(URZAS_QUEST_SOURCES
     modules/fishingvillage/items/cboatpart.h modules/fishingvillage/items/cboatpart.cpp
     modules/fishingvillage/tasks/cbuildequipmenttask.h modules/fishingvillage/tasks/cbuildequipmenttask.cpp
     modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp
+
+    modules/rebellionhideout/csandwichshop.h modules/rebellionhideout/csandwichshop.cpp
+    modules/rebellionhideout/moduleressources.h modules/rebellionhideout/moduleressources.cpp
+
 )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})

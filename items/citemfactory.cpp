@@ -7,6 +7,7 @@
 #include "citem.h"
 #include "cjunkitem.h"
 #include "cphoenixfeather.h"
+#include "csandwich.h"
 #include "cshield.h"
 #include "cweapon.h"
 #include "randomizer.h"
@@ -36,21 +37,44 @@ CItem* CItemFactory::generateShopItem()
                                     EItemType::eHealingPotionXL, EItemType::eBombXL,         EItemType::eHeartContainer,
                                     EItemType::ePhoenixFeather};
 
-    std::shuffle(items.begin(), items.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
-    return generateItem(items.at(0));
+    return generateItem(items.at(Randomizer::getRandom(items.size())));
 }
 
 CItem* CItemFactory::makeAwesomneItem()
 {
     std::vector<EItemType> items = {EItemType::ePhoenixFeather, EItemType::eHeartContainer};
 
-    std::shuffle(items.begin(), items.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
-    return generateItem(items.at(0));
+    return generateItem(items.at(Randomizer::getRandom(items.size())));
 }
 
 CItem* CItemFactory::makeShopItem() const
 {
     return itemFromGeneratorList(_shopGenerators, &CItemFactory::generateShopItem);
+}
+
+CSandwich* CItemFactory::sandwichMaker() const
+{
+    std::vector<CSandwich::EIngredients> ingredients;
+    for (auto i : CSandwich::ingredientIterator())
+    {
+        ingredients.push_back(i);
+    }
+
+    int count = 0;
+
+    std::vector<CSandwich::EIngredients> sandwichIngredients;
+
+    do
+    {
+        sandwichIngredients.push_back(ingredients.at(Randomizer::getRandom(ingredients.size())));
+
+        if (Randomizer::getRandom(3) == 0)
+        {
+            break;
+        }
+    } while (count < 25);
+
+    return new CSandwich(sandwichIngredients);
 }
 
 CItem* CItemFactory::makeEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality)

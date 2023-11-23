@@ -1,5 +1,8 @@
 #include "csandwich.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
+#include "console.h"
+#include "randomizer.h"
 
 #include <format>
 
@@ -8,6 +11,13 @@ CSandwich::CSandwich(const std::vector<CSandwich::EIngredients>& ingredients) : 
     _ingredients = ingredients;
     _isSellable = false;
     _isBuyable = false;
+
+    _value = 100;
+
+    for (int i = 0; i < ingredients.size(); i++)
+    {
+        _value += Randomizer::getRandom(25) + 1;
+    }
 }
 
 std::string CSandwich::ingredient2String(const EIngredients ingredient)
@@ -80,4 +90,20 @@ std::string CSandwich::description() const
     desc.pop_back();
     desc.append(".");
     return desc;
+}
+
+void CSandwich::useFromInventory()
+{
+    Console::printLn("The sandwich tastes awesomne and restores your live spirit.");
+    unsigned int hp = 0;
+    for (auto i : _ingredients)
+    {
+        if (i == EIngredients::eUnknown)
+        {
+            Console::printLn(std::format("Eating this {} is a real experience!", ingredient2String(i)));
+            CGameManagement::getPlayerInstance()->addXp(Randomizer::getRandom(150) + 50);
+        }
+        hp += Randomizer::getRandom(3);
+    }
+    CGameManagement::getPlayerInstance()->addHp(hp);
 }

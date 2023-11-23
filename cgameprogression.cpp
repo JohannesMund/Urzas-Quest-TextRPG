@@ -4,6 +4,7 @@
 #include "lakeoftears/moduleressources.h"
 #include "layla/moduleressources.h"
 #include "ratfarm/moduleressources.h"
+#include "rebellionhideout/moduleressources.h"
 #include "sewer/moduleressources.h"
 
 #include "cbattleencounter.h"
@@ -78,6 +79,13 @@ void CGameProgression::initEncounters()
                    EGameStage::eLearnedAboutCult,
                    &FishingVillageRessources::questLogFishLegend,
                    &FishingVillageRessources::initModuleFishLegend);
+
+    registerModule(RebellionHideoutRessources::moduleName(),
+                   EGameStage::eLearnedAboutCult,
+                   &RebellionHideoutRessources::questLog,
+                   &RebellionHideoutRessources::initModule,
+                   &RebellionHideoutRessources::deInitModule,
+                   &RebellionHideoutRessources::initWorldMap);
 
     progressToStage(EGameStage::eStart);
 }
