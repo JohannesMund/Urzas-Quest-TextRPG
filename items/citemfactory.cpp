@@ -8,8 +8,8 @@
 #include "cjunkitem.h"
 #include "cphoenixfeather.h"
 #include "cshield.h"
+#include "curzasglasses.h"
 #include "cweapon.h"
-#include "forest/curzasglasses.h"
 #include "randomizer.h"
 
 #include <algorithm>

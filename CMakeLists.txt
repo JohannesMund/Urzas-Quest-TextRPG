@@ -13,6 +13,7 @@ set(URZAS_QUEST_SOURCES
 
     ressources.h ressources.cpp
     randomizer.h randomizer.cpp
+    enumiterator.h
 
     cgamemanagement.h cgamemanagement.cpp
     cgameprogression.h cgameprogression.cpp
@@ -66,6 +67,9 @@ set(URZAS_QUEST_SOURCES
     items/cheartcontainer.h items/cheartcontainer.cpp    
     items/cbomb.h items/cbomb.cpp
 
+    items/story/cshaggyssandwich.h items/story/cshaggyssandwich.cpp
+    items/story/curzasglasses.h items/story/curzasglasses.cpp
+
     encounters/cencounter.h encounters/cencounter.cpp
     encounters/cbattleencounter.h encounters/cbattleencounter.cpp
     encounters/cdeadhero.h encounters/cdeadhero.cpp
@@ -88,7 +92,6 @@ set(URZAS_QUEST_SOURCES
     modules/cave/ccaveboss.h modules/cave/ccaveboss.cpp
     modules/cave/copencavetask.h modules/cave/copencavetask.cpp
     modules/cave/copencaveencounter.h modules/cave/copencaveencounter.cpp
-    modules/cave/cshaggyssandwich.h modules/cave/cshaggyssandwich.cpp
 
     modules/ratfarm/moduleressources.h modules/ratfarm/moduleressources.cpp
     modules/ratfarm/cratfarmtask.h modules/ratfarm/cratfarmtask.cpp
@@ -97,7 +100,7 @@ set(URZAS_QUEST_SOURCES
     modules/ratfarm/cratfarmratboss.h modules/ratfarm/cratfarmratboss.cpp
     modules/ratfarm/cratfarmturnip.h modules/ratfarm/cratfarmturnip.cpp
 
-    modules/forest/curzasglasses.h modules/forest/curzasglasses.cpp
+
 
     modules/bard/moduleressources.h modules/bard/moduleressources.cpp
     modules/bard/cdancingbard.h modules/bard/cdancingbard.cpp
@@ -144,6 +147,7 @@ target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/companion)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items/equipment)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items/story)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/enemies)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/rooms)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/rooms/town)
