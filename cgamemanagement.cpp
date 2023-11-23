@@ -187,6 +187,7 @@ void CGameManagement::printHUD()
 
 void CGameManagement::executeTurn()
 {
+    _progression.increaseTurns();
     Console::cls();
 
     _map.currentRoom()->execute();
@@ -319,7 +320,7 @@ void CGameManagement::gameLoop()
 {
     while (!_isGameOver)
     {
-        _progression.progress();
+        _progression.checkGameProgress();
         executeTurn();
         handlePlayerDeath();
         if (_player.isDead())

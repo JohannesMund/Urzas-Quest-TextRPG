@@ -22,6 +22,7 @@ static const unsigned int encounterChance = 10;
 static const unsigned int fightChance = 15;
 
 static const unsigned int numberOfTowns = 4;
+static const unsigned int turnsUntilShopRefresh = 100;
 
 static const unsigned int maxHp = 10;
 static const unsigned int maxHpMin = 3;

@@ -67,7 +67,7 @@ void CInventory::addAwesomneItem()
 
 void CInventory::addShopItem()
 {
-    addItem(_itemFactory->makeShopItem());
+    addItem(_itemFactory->generateShopItem());
 }
 
 void CInventory::removeItem(CItem* item)

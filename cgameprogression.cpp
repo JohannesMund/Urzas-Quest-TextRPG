@@ -115,7 +115,7 @@ std::vector<std::string> CGameProgression::getQuestLog() const
     return entries;
 }
 
-void CGameProgression::progress()
+void CGameProgression::checkGameProgress()
 {
     if (!canProgress())
     {
@@ -167,14 +167,24 @@ void CGameProgression::increaseBodyCount()
     _bodyCount++;
 }
 
-unsigned int CGameProgression::getProgress() const
+void CGameProgression::increaseTurns()
+{
+    _turns++;
+}
+
+unsigned int CGameProgression::progress() const
 {
     return std::ceil((_finishedModules.size() * 100) / _moduleRegister.size());
 }
 
-unsigned int CGameProgression::getBodyCount() const
+unsigned long CGameProgression::bodyCount() const
 {
     return _bodyCount;
+}
+
+unsigned long CGameProgression::turns() const
+{
+    return _turns;
 }
 
 bool CGameProgression::isModuleFinished(const std::string_view& moduleName) const

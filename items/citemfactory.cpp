@@ -8,14 +8,13 @@
 #include "cjunkitem.h"
 #include "cphoenixfeather.h"
 #include "cshield.h"
-#include "curzasglasses.h"
 #include "cweapon.h"
 #include "randomizer.h"
 
 #include <algorithm>
 #include <vector>
 
-CItem* CItemFactory::makeShopItem()
+CItem* CItemFactory::generateShopItem()
 {
     std::vector<EItemType> items = {EItemType::eHealingPotionS,  EItemType::eHealingPotionS, EItemType::eHealingPotionS,
                                     EItemType::eHealingPotionS,  EItemType::eHealingPotionS, EItemType::eHealingPotionS,
@@ -38,23 +37,20 @@ CItem* CItemFactory::makeShopItem()
                                     EItemType::ePhoenixFeather};
 
     std::shuffle(items.begin(), items.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
-    return makeItem(items.at(0));
+    return generateItem(items.at(0));
 }
 
 CItem* CItemFactory::makeAwesomneItem()
 {
-    std::vector<EItemType> items = {EItemType::eUrzasGlasses,
-
-                                    EItemType::ePhoenixFeather,
-                                    EItemType::ePhoenixFeather,
-                                    EItemType::ePhoenixFeather,
-
-                                    EItemType::eHeartContainer,
-                                    EItemType::eHeartContainer,
-                                    EItemType::eHeartContainer};
+    std::vector<EItemType> items = {EItemType::ePhoenixFeather, EItemType::eHeartContainer};
 
     std::shuffle(items.begin(), items.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
-    return makeItem(items.at(0));
+    return generateItem(items.at(0));
+}
+
+CItem* CItemFactory::makeShopItem() const
+{
+    return itemFromGeneratorList(_shopGenerators, &CItemFactory::generateShopItem);
 }
 
 CItem* CItemFactory::makeEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality)
@@ -72,10 +68,10 @@ CItem* CItemFactory::makeEquipment(const Ressources::Items::EType type, const Re
 }
 
 void CItemFactory::registerLootItemGenerator(const std::string_view& moduleName,
-                                             LootItemGeneratorFunction generatorFunction,
+                                             ItemGeneratorFunction generatorFunction,
                                              const unsigned int dropRate)
 {
-    LootItemGenerator generator;
+    ItemGenerator generator;
     generator.moduleName = moduleName;
     generator.lootGenerator = generatorFunction;
     generator.dropRate = dropRate;
@@ -85,14 +81,35 @@ void CItemFactory::registerLootItemGenerator(const std::string_view& moduleName,
 
 void CItemFactory::unregisterLootItemGeneratorByName(const std::string_view& moduleName)
 {
-    auto it = std::remove_if(_lootGenerators.begin(), _lootGenerators.end(), LootItemGenerator::nameFilter(moduleName));
+    auto it = std::remove_if(_lootGenerators.begin(), _lootGenerators.end(), ItemGenerator::nameFilter(moduleName));
     if (it != _lootGenerators.end())
     {
         _lootGenerators.erase(it);
     }
 }
 
-CItem* CItemFactory::makeItem(const EItemType tp)
+void CItemFactory::registerShopItemGenerator(const std::string_view& moduleName,
+                                             ItemGeneratorFunction generatorFunction,
+                                             const unsigned int dropRate)
+{
+    ItemGenerator generator;
+    generator.moduleName = moduleName;
+    generator.lootGenerator = generatorFunction;
+    generator.dropRate = dropRate;
+
+    _shopGenerators.push_back(generator);
+}
+
+void CItemFactory::unregisterShopItemGeneratorByName(const std::string_view& moduleName)
+{
+    auto it = std::remove_if(_shopGenerators.begin(), _shopGenerators.end(), ItemGenerator::nameFilter(moduleName));
+    if (it != _shopGenerators.end())
+    {
+        _shopGenerators.erase(it);
+    }
+}
+
+CItem* CItemFactory::generateItem(const EItemType tp)
 {
     switch (tp)
     {
@@ -120,12 +137,44 @@ CItem* CItemFactory::makeItem(const EItemType tp)
         return new CHeartContainer;
     case EItemType::eJunkItem:
         return new CJunkItem();
-    case EItemType::eUrzasGlasses:
-        return new CUrzasGlasses();
+
     default:
         return nullptr;
     }
     return nullptr;
+}
+
+CItem* CItemFactory::itemFromGeneratorList(const ItemGeneratorList& list,
+                                           const ItemGeneratorFunction& defaultGenerator) const
+{
+    if (list.size() == 0)
+    {
+        return defaultGenerator();
+    }
+
+    unsigned int index = 0;
+    std::vector<unsigned int> indices;
+    for (const auto& gen : list)
+    {
+        for (int j = 0; j < gen.dropRate; j++)
+        {
+            indices.push_back(index);
+        }
+    }
+
+    if (indices.size() == 0)
+    {
+        return defaultGenerator();
+    }
+
+    auto randomIndex = Randomizer::getRandom(indices.size() * 2);
+
+    if (randomIndex < indices.size())
+    {
+        return list.at(indices.at(randomIndex)).lootGenerator();
+    }
+
+    return defaultGenerator();
 }
 
 CItem* CItemFactory::makeShopEquipment(const unsigned int playerLevel)
@@ -167,32 +216,5 @@ CItem* CItemFactory::makeShopEquipment(const unsigned int playerLevel)
 
 CItem* CItemFactory::makeLootItem()
 {
-    if (_lootGenerators.size() == 0)
-    {
-        return makeItem(EItemType::eJunkItem);
-    }
-
-    unsigned int index = 0;
-    std::vector<unsigned int> indices;
-    for (const auto& gen : _lootGenerators)
-    {
-        for (int j = 0; j < gen.dropRate; j++)
-        {
-            indices.push_back(index);
-        }
-    }
-
-    if (indices.size() == 0)
-    {
-        return makeItem(EItemType::eJunkItem);
-    }
-
-    auto randomIndex = Randomizer::getRandom(indices.size() * 2);
-
-    if (randomIndex < indices.size())
-    {
-        return _lootGenerators.at(indices.at(randomIndex)).lootGenerator();
-    }
-
-    return makeItem(EItemType::eJunkItem);
+    return itemFromGeneratorList(_lootGenerators, []() { return CItemFactory::generateItem(EItemType::eJunkItem); });
 }

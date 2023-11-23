@@ -28,7 +28,7 @@ CShop::~CShop()
 
 void CShop::execute()
 {
-    if (CGameManagement::getPlayerInstance()->level() != _playerLevel)
+    if (CGameManagement::getProgressionInstance()->turns() - _turns > Ressources::Config::turnsUntilShopRefresh)
     {
         replaceShopItems();
     }
@@ -191,7 +191,7 @@ void CShop::sellItem(CItem* item, const unsigned int stock)
 
 void CShop::replaceShopItems()
 {
-    _playerLevel = CGameManagement::getPlayerInstance()->level();
+    _turns = CGameManagement::getProgressionInstance()->turns();
     for (auto i : _shopItems)
     {
         delete i;

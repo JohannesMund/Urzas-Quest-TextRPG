@@ -28,16 +28,17 @@ public:
 
     std::vector<std::string> getQuestLog() const;
 
-    void progress();
     void reportModuleFinished(const std::string_view& moduleName);
 
     bool isModuleActive(const std::string_view& moduleName) const;
     bool isModuleFinished(const std::string_view& moduleName) const;
 
     void increaseBodyCount();
+    void increaseTurns();
 
-    unsigned int getProgress() const;
-    unsigned int getBodyCount() const;
+    unsigned int progress() const;
+    unsigned long bodyCount() const;
+    unsigned long turns() const;
 
 private:
     struct ModuleRegister
@@ -73,6 +74,8 @@ private:
 
     CGameProgression();
 
+    void checkGameProgress();
+
     void unFinishModule(const std::string_view& moduleName);
 
     void initModuleByName(const std::string_view& moduleName);
@@ -98,5 +101,6 @@ private:
     std::vector<std::string> _finishedModules;
 
     EGameStage _currentStage = EGameStage::eNone;
-    unsigned int _bodyCount = 0;
+    unsigned long _bodyCount = 0;
+    unsigned long _turns = 0;
 };
