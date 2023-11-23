@@ -11,7 +11,7 @@ class CSandwich : public CItem
 public:
     enum class EIngredients
     {
-        eNone,
+        eUnknown,
         eSalami,
         ePeperoni,
         eHam,
@@ -25,11 +25,9 @@ public:
         eTomato,
         ePickles,
         eOlives,
-
-        eLast
     };
 
-    typedef EnumIterator<EIngredients, EIngredients::eNone, EIngredients::eLast> ingredientIterator;
+    typedef EnumIterator<EIngredients, EIngredients::eUnknown, EIngredients::eOlives> ingredientIterator;
 
     CSandwich(const std::vector<EIngredients>& ingredients);
 
@@ -42,5 +40,6 @@ public:
         return _ingredients == other._ingredients;
     }
 
+private:
     std::vector<EIngredients> _ingredients;
 };

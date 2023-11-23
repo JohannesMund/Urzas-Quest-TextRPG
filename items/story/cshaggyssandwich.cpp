@@ -8,7 +8,7 @@ CShaggysSandwich::CShaggysSandwich() :
                CSandwich::EIngredients::eMortardella, CSandwich::EIngredients::eSalami,
                CSandwich::EIngredients::eBacon,       CSandwich::EIngredients::eBacon,
                CSandwich::EIngredients::eCheddar,     CSandwich::EIngredients::eGouda,
-               CSandwich::EIngredients::eMozzarella,  CSandwich::EIngredients::eNone,
+               CSandwich::EIngredients::eMozzarella,  CSandwich::EIngredients::eUnknown,
                CSandwich::EIngredients::eMortardella, CSandwich::EIngredients::eMortardella,
                CSandwich::EIngredients::ePeperoni,    CSandwich::EIngredients::ePeperoni,
                CSandwich::EIngredients::eCheddar,     CSandwich::EIngredients::eCheddar,
