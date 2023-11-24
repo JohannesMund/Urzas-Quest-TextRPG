@@ -205,7 +205,7 @@ void CSandwichShop::makeASandwich()
             availableIngredients.push_back(i);
         }
 
-        input = Console::getNumberInputWithEcho();
+        input = Console::getNumberInputWithEcho(index - 1);
 
         if (input.has_value())
         {
