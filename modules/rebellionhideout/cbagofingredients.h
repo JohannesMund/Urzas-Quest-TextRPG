@@ -20,6 +20,8 @@ public:
     static CBagOfIngredients* makeShopItem();
     static CBagOfIngredients* makeLootItem();
 
+    IngredientsList getIngredients() const;
+
     virtual unsigned int buyValue() const override;
 
     static CItem::ItemFilter CBagOfIngredientsFilter();

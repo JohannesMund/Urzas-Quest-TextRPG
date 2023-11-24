@@ -37,6 +37,7 @@ public:
     virtual unsigned int buyValue() const override;
 
     static std::string ingredient2String(const EIngredients ingredient);
+    static std::string ingredients2String(const IngredientsList ingredient);
     static IngredientsList getListOfAllIngredients();
 
     bool operator==(const CSandwich& other) const
@@ -44,6 +45,6 @@ public:
         return _ingredients == other._ingredients;
     }
 
-private:
+protected:
     IngredientsList _ingredients;
 };

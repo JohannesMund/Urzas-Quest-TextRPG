@@ -55,6 +55,20 @@ std::string CSandwich::ingredient2String(const EIngredients ingredient)
     };
 }
 
+std::string CSandwich::ingredients2String(const IngredientsList ingredients)
+{
+    std::string desc;
+    for (const auto& i : ingredients)
+    {
+        desc.append(ingredient2String(i));
+        desc.append(", ");
+    }
+
+    desc.pop_back();
+    desc.pop_back();
+    return desc;
+}
+
 CSandwich::IngredientsList CSandwich::getListOfAllIngredients()
 {
     IngredientsList ingredients;
@@ -88,16 +102,7 @@ std::string CSandwich::description() const
     {
         desc.append("huge, enormous, gigantic ");
     }
-    desc.append("Sandwich with: ");
-
-    for (const auto& i : _ingredients)
-    {
-        desc.append(ingredient2String(i));
-        desc.append(", ");
-    }
-
-    desc.pop_back();
-    desc.pop_back();
+    desc.append(ingredients2String(_ingredients));
     desc.append(".");
     return desc;
 }

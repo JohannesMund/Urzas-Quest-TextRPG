@@ -1,10 +1,11 @@
 #pragma once
 
 #include "croom.h"
+#include "csandwich.h"
 
+#include <map>
 #include <vector>
 
-class CSandwich;
 class CSandwichShop : public CRoom
 {
 public:
@@ -23,7 +24,9 @@ private:
     void showSandwichOfTheDay();
     void eatSandwichOfTheDay();
 
-    void checkSandwich();
+    void checkForShaggysSandwich();
+    void deliverIngredients();
+    void makeASandwich();
 
     void sellSandwiches();
 
@@ -36,4 +39,6 @@ private:
 
     bool _playerOwnsShop = false;
     bool _playerDiscoveredHideout = false;
+
+    std::map<CSandwich::EIngredients, int> _ingredientStore;
 };

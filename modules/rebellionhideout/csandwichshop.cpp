@@ -1,4 +1,5 @@
 #include "csandwichshop.h"
+#include "cbagofingredients.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorize.h"
@@ -29,11 +30,11 @@ void CSandwichShop::execute()
     }
 
     printHeader();
-
-    checkSandwich();
+    checkForShaggysSandwich();
 
     if (_playerOwnsShop)
     {
+        deliverIngredients();
         sellSandwiches();
     }
     else
@@ -104,23 +105,19 @@ void CSandwichShop::eatSandwichOfTheDay()
     replaceSandwichOfTheDay();
 }
 
-void CSandwichShop::checkSandwich()
+void CSandwichShop::checkForShaggysSandwich()
 {
     if (_playerOwnsShop)
     {
         return;
     }
-    if (CGameManagement::getInventoryInstance()->hasItem(CShaggysSandwich::shaggysSandwichFilter()))
+
+    auto list = CGameManagement::getInventoryInstance()->getItemsByFilter(CShaggysSandwich::shaggysSandwichFilter());
+    std::string sandwich;
+
+    if (list.size() != 0)
     {
-
-        auto list =
-            CGameManagement::getInventoryInstance()->getItemsByFilter(CShaggysSandwich::shaggysSandwichFilter());
-        std::string sandwich;
-
-        if (list.size())
-        {
-            sandwich = list.at(0)->name();
-        }
+        sandwich = list.at(0)->name();
 
         Console::printLn(std::format(
             "As soon as you enter, you realize, that {0} acts stange, he snoops around your bag, he seems nervous and "
@@ -139,8 +136,91 @@ void CSandwichShop::checkSandwich()
     }
 }
 
+void CSandwichShop::deliverIngredients()
+{
+    auto bags = CGameManagement::getInventoryInstance()->getItemsByFilter(CBagOfIngredients::CBagOfIngredientsFilter());
+    if (!bags.size())
+    {
+        return;
+    }
+
+    for (const auto& bag : bags)
+    {
+        Console::printLn(std::format("you open a {} and put it's contents into your stroage.", bag->name()));
+        for (const auto& i : dynamic_cast<const CBagOfIngredients*>(bag)->getIngredients())
+        {
+            _ingredientStore.at(i)++;
+        }
+        CGameManagement::getInventoryInstance()->removeItem(bag);
+    }
+}
+
+void CSandwichShop::makeASandwich()
+{
+    std::optional<int> input = {};
+    CSandwich::IngredientsList ingredients;
+    while (!input.has_value())
+    {
+        if (ingredients.size() > 0)
+        {
+            Console::printLn(std::format("Selected Ingredients: {}", CSandwich::ingredients2String(ingredients)));
+        }
+
+        CSandwich::IngredientsList availableIngredients;
+
+        int index = 0;
+
+        for (auto i : CSandwich::ingredientIterator())
+        {
+            if (_ingredientStore.at(i) <= 0)
+            {
+                continue;
+            }
+
+            index++;
+            Console::printLn(std::format("[{:3}] {}", index, CSandwich::ingredient2String(i)));
+            availableIngredients.push_back(i);
+        }
+
+        input = Console::getNumberInputWithEcho();
+
+        if (input.has_value())
+        {
+            auto ingredient = availableIngredients.at((*input) - 1);
+            ingredients.push_back(ingredient);
+            _ingredientStore.at(ingredient)--;
+        }
+    }
+
+    _sandwiches.push_back(new CSandwich(ingredients));
+}
+
 void CSandwichShop::sellSandwiches()
 {
+    CMenu::Action input;
+    do
+    {
+        Console::cls();
+        Console::br();
+        Console::printLn("Sandwiches of the day:", Console::EAlignment::eCenter);
+        Console::br();
+        for (auto s : _sandwiches)
+        {
+            Console::printLn(s->description(), Console::EAlignment::eCenter);
+            Console::br();
+        }
+
+        CMenu menu;
+        if (_sandwiches.size() < 5)
+        {
+            menu.addMenuGroup({menu.createAction("Make a sandwich", 'M')}, {CMenu::exit()});
+        }
+        else
+        {
+            menu.addMenuGroup({}, {CMenu::exit()});
+        }
+        input = menu.execute();
+    } while (input != CMenu::exit());
 }
 
 char CSandwichShop::getMapSymbol() const
