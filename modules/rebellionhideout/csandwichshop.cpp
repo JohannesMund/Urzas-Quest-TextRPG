@@ -23,7 +23,7 @@ CSandwichShop::CSandwichShop()
 
     _encounterType = CEncounter::EEncounterType::eNone;
     _isTaskPossible = true;
-    _showInFogOfWar = true;
+    _showInFogOfWar = false;
 }
 
 void CSandwichShop::execute()
