@@ -72,15 +72,30 @@ void CInventory::addShopItem()
 
 void CInventory::removeItem(CItem* item)
 {
-    removeItem(item->name());
+    removeItem([item](const CItem* otherItem) { return item == otherItem; });
 }
+
 void CInventory::removeItem(const std::string_view& name)
 {
-    auto found = std::find_if(_inventory.begin(), _inventory.end(), CItem::nameFilter(name));
-    if (found != _inventory.end())
+    removeItem(CItem::nameFilter(name));
+}
+
+void CInventory::removeItem(CItem::ItemFilter filter)
+{
+    auto filterAndRemove = [&filter](CItem* item)
     {
-        delete *found;
-        _inventory.erase(found);
+        if (filter(item))
+        {
+            delete item;
+            return true;
+        }
+        return false;
+    };
+
+    auto it = std::remove_if(_inventory.begin(), _inventory.end(), filterAndRemove);
+    if (it != _inventory.end())
+    {
+        _inventory.erase(it);
     }
 }
 

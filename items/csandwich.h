@@ -28,13 +28,16 @@ public:
     };
 
     typedef EnumIterator<EIngredients, EIngredients::eUnknown, EIngredients::eOlives> ingredientIterator;
+    using IngredientsList = std::vector<EIngredients>;
 
-    CSandwich(const std::vector<EIngredients>& ingredients);
+    CSandwich(const IngredientsList& ingredients);
 
     virtual std::string description() const override;
     virtual void useFromInventory() override;
+    virtual unsigned int buyValue() const override;
 
     static std::string ingredient2String(const EIngredients ingredient);
+    static IngredientsList getListOfAllIngredients();
 
     bool operator==(const CSandwich& other) const
     {
@@ -42,5 +45,5 @@ public:
     }
 
 private:
-    std::vector<EIngredients> _ingredients;
+    IngredientsList _ingredients;
 };

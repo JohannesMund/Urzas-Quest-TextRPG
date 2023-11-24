@@ -55,7 +55,7 @@ bool CItem::isConsumable() const
 
 CItem::ItemFilter CItem::nameFilter(const std::string_view& name)
 {
-    return [&name](const CItem* item) { return item->name().compare(name) == 0; };
+    return [name](const CItem* item) { return item->name().compare(name) == 0; };
 }
 
 CItem::ItemFilter CItem::battleEffectFilter()

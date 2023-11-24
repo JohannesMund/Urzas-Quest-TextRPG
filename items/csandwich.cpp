@@ -6,7 +6,7 @@
 
 #include <format>
 
-CSandwich::CSandwich(const std::vector<CSandwich::EIngredients>& ingredients) : CItem()
+CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients) : CItem()
 {
     _ingredients = ingredients;
     _isSellable = false;
@@ -53,6 +53,16 @@ std::string CSandwich::ingredient2String(const EIngredients ingredient)
     default:
         return "Whatever that is";
     };
+}
+
+CSandwich::IngredientsList CSandwich::getListOfAllIngredients()
+{
+    IngredientsList ingredients;
+    for (auto i : CSandwich::ingredientIterator())
+    {
+        ingredients.push_back(i);
+    }
+    return ingredients;
 }
 
 std::string CSandwich::description() const
@@ -106,4 +116,9 @@ void CSandwich::useFromInventory()
         hp += Randomizer::getRandom(3);
     }
     CGameManagement::getPlayerInstance()->addHp(hp);
+}
+
+unsigned int CSandwich::buyValue() const
+{
+    return CItem::buyValue() * 2;
 }

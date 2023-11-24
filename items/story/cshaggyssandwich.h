@@ -6,4 +6,6 @@ class CShaggysSandwich : public CSandwich
 {
 public:
     CShaggysSandwich();
+
+    static CItem::ItemFilter shaggysSandwichFilter();
 };

@@ -23,6 +23,8 @@ private:
     void showSandwichOfTheDay();
     void eatSandwichOfTheDay();
 
+    void checkSandwich();
+
     void sellSandwiches();
 
     virtual char getMapSymbol() const override;

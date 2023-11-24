@@ -4,12 +4,30 @@
 
 #include <format>
 
-void RebellionHideoutRessources::initModule()
+void RebellionHideoutRessources::initModuleSandwichShop()
 {
 }
 
-void RebellionHideoutRessources::deInitModule()
+void RebellionHideoutRessources::deInitModuleSandwichShop()
 {
+}
+
+void RebellionHideoutRessources::initModuleRebellionHideout()
+{
+}
+
+void RebellionHideoutRessources::deInitModuleRebellionHideout()
+{
+}
+
+std::string RebellionHideoutRessources::questLogRebellionHideout()
+{
+    return "Find the rebellion hideout";
+}
+
+std::string RebellionHideoutRessources::questLogSandwichShop()
+{
+    return "Own a sandwich shop";
 }
 
 void RebellionHideoutRessources::initWorldMap(std::vector<CRoom*>& rooms)
@@ -17,14 +35,9 @@ void RebellionHideoutRessources::initWorldMap(std::vector<CRoom*>& rooms)
     rooms.push_back(new CSandwichShop());
 }
 
-std::string RebellionHideoutRessources::moduleName()
+std::string RebellionHideoutRessources::moduleNameSandwichShop()
 {
-    return "Rebellion Hideout";
-}
-
-std::string RebellionHideoutRessources::questLog()
-{
-    return "Find the Hideout of the Rebellion";
+    return "SandwichShop";
 }
 
 std::string RebellionHideoutRessources::sandwichShopName()
@@ -35,4 +48,9 @@ std::string RebellionHideoutRessources::sandwichShopName()
 std::string RebellionHideoutRessources::mrSoop()
 {
     return std::format("{}Mr. {}Soop{}", CC::fgGreen(), CC::fgLightYellow(), CC::ccReset());
+}
+
+std::string RebellionHideoutRessources::moduleNameRebellionHideout()
+{
+    return "RebellionHideout";
 }

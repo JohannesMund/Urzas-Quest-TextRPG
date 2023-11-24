@@ -43,6 +43,7 @@ public:
 
     void removeItem(CItem* item);
     void removeItem(const std::string_view& name);
+    void removeItem(CItem::ItemFilter filter);
 
     void print(const Scope& scope = Scope::eNone);
 

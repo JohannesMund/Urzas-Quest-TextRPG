@@ -28,3 +28,8 @@ CShaggysSandwich::CShaggysSandwich() :
                         CC::fgWhite(),
                         CC::ccReset());
 }
+
+CItem::ItemFilter CShaggysSandwich::shaggysSandwichFilter()
+{
+    return [](const CItem* item) { return dynamic_cast<const CShaggysSandwich*>(item) != nullptr; };
+}

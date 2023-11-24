@@ -48,12 +48,16 @@ void CGameProgression::initEncounters()
                    &RatFarmRessources::questLog,
                    &RatFarmRessources::initModule,
                    &RatFarmRessources::deInitModule);
-    registerModule(CaveRessources::moduleName(),
+    registerModule(SewerRessources::moduleName(),
                    EGameStage::eSeenBard,
-                   &CaveRessources::questLog,
-                   &CaveRessources::initModule,
-                   &CaveRessources::deInitModule,
-                   &CaveRessources::initWorldMap);
+                   &SewerRessources::questLog,
+                   &SewerRessources::initModule,
+                   &SewerRessources::deInitModule);
+    registerModule(LaylaRessources::moduleName(),
+                   EGameStage::eSeenBard,
+                   &LaylaRessources::questLog,
+                   &LaylaRessources::initModule,
+                   &LaylaRessources::deInitModule);
 
     registerModule(FishingVillageRessources::moduleNameMakeBoat(),
                    EGameStage::eProvenAsHero,
@@ -64,28 +68,28 @@ void CGameProgression::initEncounters()
                    &LakeTearsRessources::questLog,
                    &LakeTearsRessources::initModule,
                    &LakeTearsRessources::deInitModule);
-    registerModule(LaylaRessources::moduleName(),
+    registerModule(CaveRessources::moduleName(),
                    EGameStage::eProvenAsHero,
-                   &LaylaRessources::questLog,
-                   &LaylaRessources::initModule,
-                   &LaylaRessources::deInitModule);
-    registerModule(SewerRessources::moduleName(),
+                   &CaveRessources::questLog,
+                   &CaveRessources::initModule,
+                   &CaveRessources::deInitModule,
+                   &CaveRessources::initWorldMap);
+    registerModule(RebellionHideoutRessources::moduleNameSandwichShop(),
                    EGameStage::eProvenAsHero,
-                   &SewerRessources::questLog,
-                   &SewerRessources::initModule,
-                   &SewerRessources::deInitModule);
+                   &RebellionHideoutRessources::questLogSandwichShop,
+                   &RebellionHideoutRessources::initModuleSandwichShop,
+                   &RebellionHideoutRessources::deInitModuleSandwichShop,
+                   &RebellionHideoutRessources::initWorldMap);
 
     registerModule(FishingVillageRessources::moduleNameFishLegend(),
                    EGameStage::eLearnedAboutCult,
                    &FishingVillageRessources::questLogFishLegend,
                    &FishingVillageRessources::initModuleFishLegend);
-
-    registerModule(RebellionHideoutRessources::moduleName(),
+    registerModule(RebellionHideoutRessources::moduleNameRebellionHideout(),
                    EGameStage::eLearnedAboutCult,
-                   &RebellionHideoutRessources::questLog,
-                   &RebellionHideoutRessources::initModule,
-                   &RebellionHideoutRessources::deInitModule,
-                   &RebellionHideoutRessources::initWorldMap);
+                   &RebellionHideoutRessources::questLogRebellionHideout,
+                   &RebellionHideoutRessources::initModuleRebellionHideout,
+                   &RebellionHideoutRessources::deInitModuleRebellionHideout);
 
     progressToStage(EGameStage::eStart);
 }
