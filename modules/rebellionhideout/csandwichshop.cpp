@@ -240,6 +240,12 @@ void CSandwichShop::sellSandwiches()
             menu.addMenuGroup({}, {CMenu::exit()});
         }
         input = menu.execute();
+
+        if (input.key == 'm')
+        {
+            makeASandwich();
+        }
+
     } while (input != CMenu::exit());
 }
 

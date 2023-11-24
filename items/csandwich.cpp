@@ -102,6 +102,7 @@ std::string CSandwich::description() const
     {
         desc.append("huge, enormous, gigantic ");
     }
+    desc.appemd(" sandwich with: ");
     desc.append(ingredients2String(_ingredients));
     desc.append(".");
     return desc;
