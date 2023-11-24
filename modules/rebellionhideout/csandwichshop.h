@@ -41,4 +41,5 @@ private:
     bool _playerDiscoveredHideout = false;
 
     std::map<CSandwich::EIngredients, int> _ingredientStore;
+    int _goldAvailable = 0;
 };

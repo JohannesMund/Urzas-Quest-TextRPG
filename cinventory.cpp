@@ -20,7 +20,7 @@ CInventory::~CInventory()
     _inventory.clear();
 }
 
-bool CInventory::hasItem(const std::string_view& name)
+bool CInventory::hasItem(const std::string& name)
 {
     return std::find_if(_inventory.begin(), _inventory.end(), CItem::nameFilter(name)) != _inventory.end();
 }
@@ -75,14 +75,14 @@ void CInventory::removeItem(CItem* item)
     removeItem([item](const CItem* otherItem) { return item == otherItem; });
 }
 
-void CInventory::removeItem(const std::string_view& name)
+void CInventory::removeItem(const std::string& name)
 {
     removeItem(CItem::nameFilter(name));
 }
 
 void CInventory::removeItem(CItem::ItemFilter filter)
 {
-    auto filterAndRemove = [&filter](CItem* item)
+    auto filterAndRemove = [filter](CItem* item)
     {
         if (filter(item))
         {
@@ -95,7 +95,7 @@ void CInventory::removeItem(CItem::ItemFilter filter)
     auto it = std::remove_if(_inventory.begin(), _inventory.end(), filterAndRemove);
     if (it != _inventory.end())
     {
-        _inventory.erase(it);
+        _inventory.erase(it, _inventory.end());
     }
 }
 

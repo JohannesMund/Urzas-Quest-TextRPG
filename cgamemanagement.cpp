@@ -18,8 +18,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 CGameManagement* _instance = nullptr;
 
 CGameManagement* CGameManagement::getInstance()

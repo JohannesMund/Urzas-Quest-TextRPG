@@ -53,7 +53,7 @@ bool CItem::isConsumable() const
     return _isConsumable;
 }
 
-CItem::ItemFilter CItem::nameFilter(const std::string_view& name)
+CItem::ItemFilter CItem::nameFilter(const std::string& name)
 {
     return [name](const CItem* item) { return item->name().compare(name) == 0; };
 }

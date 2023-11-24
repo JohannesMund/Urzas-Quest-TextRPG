@@ -81,7 +81,7 @@ void CSandwichShop::showSandwichOfTheDay()
 
     CMenu menu;
 
-    if (CGameManagement::getPlayerInstance()->gold() >= _sandwiches.at(0)->value())
+    if (CGameManagement::getPlayerInstance()->gold() >= _sandwiches.at(0)->buyValue())
     {
         menu.addMenuGroup(
             {menu.createAction(std::format("Eat Sandwich of the Day ({} Gold)", _sandwiches.at(0)->buyValue()), 'E')},
@@ -204,9 +204,29 @@ void CSandwichShop::sellSandwiches()
         Console::br();
         Console::printLn("Sandwiches of the day:", Console::EAlignment::eCenter);
         Console::br();
-        for (auto s : _sandwiches)
+
+        if (_sandwiches.size() == 0)
         {
-            Console::printLn(s->description(), Console::EAlignment::eCenter);
+            Console::printLn("SOLD OUT", Console::EAlignment::eCenter);
+            Console::br();
+        }
+        else
+        {
+            for (auto s : _sandwiches)
+            {
+                Console::printLn(s->description(), Console::EAlignment::eCenter);
+                Console::br();
+            }
+        }
+
+        if (_goldAvailable > 0)
+        {
+            Console::printLn(std::format("While you were away, sandwiches have been sold and you earned {}{} Gold{}",
+                                         CC::fgLightYellow(),
+                                         _goldAvailable,
+                                         CC::ccReset()));
+            CGameManagement::getPlayerInstance()->addGold(_goldAvailable);
+            _goldAvailable = 0;
             Console::br();
         }
 
@@ -233,9 +253,13 @@ void CSandwichShop::replaceSandwichOfTheDay()
     _turns = CGameManagement::getProgressionInstance()->turns();
     for (auto i : _sandwiches)
     {
+        if (_playerOwnsShop)
+        {
+            _goldAvailable += i->buyValue();
+        }
+
         delete i;
     }
     _sandwiches.clear();
-
     _sandwiches.push_back(CGameManagement::getItemFactoryInstance()->sandwichMaker());
 }

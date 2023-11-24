@@ -34,7 +34,7 @@ public:
         eDeath
     };
 
-    bool hasItem(const std::string_view& name);
+    bool hasItem(const std::string& name);
     void addItem(CItem* item);
 
     void addLootItem();
@@ -42,7 +42,7 @@ public:
     void addShopItem();
 
     void removeItem(CItem* item);
-    void removeItem(const std::string_view& name);
+    void removeItem(const std::string& name);
     void removeItem(CItem::ItemFilter filter);
 
     void print(const Scope& scope = Scope::eNone);
