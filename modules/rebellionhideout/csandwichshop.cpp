@@ -12,6 +12,11 @@
 
 CSandwichShop::CSandwichShop()
 {
+    for (const auto i : CSandwich::ingredientIterator())
+    {
+        _ingredientStore.insert(std::make_pair(i, 0));
+    }
+
     replaceSandwichOfTheDay();
 
     _description = "";
@@ -29,12 +34,10 @@ void CSandwichShop::execute()
         replaceSandwichOfTheDay();
     }
 
-    printHeader();
     checkForShaggysSandwich();
 
     if (_playerOwnsShop)
     {
-        deliverIngredients();
         sellSandwiches();
     }
     else
@@ -68,6 +71,7 @@ void CSandwichShop::printHeader()
 
 void CSandwichShop::showSandwichOfTheDay()
 {
+    printHeader();
     Console::printLn(
         std::format("The Sandwich shop is run by {}, an old man with a dream, who once started this shop "
                     "to make the perfect sandwich, but after years and years of making and selling "
@@ -146,21 +150,40 @@ void CSandwichShop::deliverIngredients()
 
     for (const auto& bag : bags)
     {
-        Console::printLn(std::format("you open a {} and put it's contents into your stroage.", bag->name()));
-        for (const auto& i : dynamic_cast<const CBagOfIngredients*>(bag)->getIngredients())
+        auto ingredients = dynamic_cast<const CBagOfIngredients*>(bag)->getIngredients();
+
+        Console::printLn(std::format("You open a {} and put {} into your stroage.",
+                                     bag->name(),
+                                     CBagOfIngredients::ingredients2String(ingredients)));
+        Console::br();
+        for (const auto& i : ingredients)
         {
             _ingredientStore.at(i)++;
         }
         CGameManagement::getInventoryInstance()->removeItem(bag);
     }
+    Console::confirmToContinue();
 }
 
 void CSandwichShop::makeASandwich()
 {
+    if (countIngredients() <= 0)
+    {
+        Console::br();
+        Console::printLn("You have no ingredients available to make a sandwich");
+        Console::br();
+        Console::confirmToContinue();
+        return;
+    }
+
     std::optional<int> input = {};
     CSandwich::IngredientsList ingredients;
-    while (!input.has_value())
+    do
     {
+        Console::cls();
+        Console::br();
+        Console::printLn("Make a sandwich", Console::EAlignment::eCenter);
+        Console::br();
         if (ingredients.size() > 0)
         {
             Console::printLn(std::format("Selected Ingredients: {}", CSandwich::ingredients2String(ingredients)));
@@ -190,7 +213,7 @@ void CSandwichShop::makeASandwich()
             ingredients.push_back(ingredient);
             _ingredientStore.at(ingredient)--;
         }
-    }
+    } while (input.has_value() && countIngredients() > 0);
 
     _sandwiches.push_back(new CSandwich(ingredients));
 }
@@ -201,7 +224,8 @@ void CSandwichShop::sellSandwiches()
     do
     {
         Console::cls();
-        Console::br();
+        printHeader();
+
         Console::printLn("Sandwiches of the day:", Console::EAlignment::eCenter);
         Console::br();
 
@@ -231,22 +255,41 @@ void CSandwichShop::sellSandwiches()
         }
 
         CMenu menu;
+
+        CMenu::ActionList actions;
+
         if (_sandwiches.size() < 5)
         {
-            menu.addMenuGroup({menu.createAction("Make a sandwich", 'M')}, {CMenu::exit()});
+            actions.push_back(menu.createAction("Make a sandwich", 'M'));
         }
-        else
+        if (CGameManagement::getInventoryInstance()->hasItem(CBagOfIngredients::CBagOfIngredientsFilter()))
         {
-            menu.addMenuGroup({}, {CMenu::exit()});
+            actions.push_back(menu.createAction("Deliver ingredients", 'D'));
         }
+
+        menu.addMenuGroup(actions, {CMenu::exit()});
         input = menu.execute();
 
         if (input.key == 'm')
         {
             makeASandwich();
         }
+        if (input.key == 'd')
+        {
+            deliverIngredients();
+        }
 
     } while (input != CMenu::exit());
+}
+
+int CSandwichShop::countIngredients()
+{
+    int count = 0;
+    for (const auto& i : _ingredientStore)
+    {
+        count += i.second;
+    }
+    return count;
 }
 
 char CSandwichShop::getMapSymbol() const

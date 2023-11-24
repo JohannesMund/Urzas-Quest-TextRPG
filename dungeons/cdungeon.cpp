@@ -61,7 +61,7 @@ void CDungeon::dungeonLoop()
         }
 
         CMenu menu;
-        std::vector<CMenu::Action> navs;
+        CMenu::ActionList navs;
         for (auto nav : _map->getDirectionNavs())
         {
             navs.push_back(menu.createAction(nav));
@@ -69,13 +69,13 @@ void CDungeon::dungeonLoop()
 
         menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
 
-        std::vector<CMenu::Action> exitActionHalf = {};
+        CMenu::ActionList exitActionHalf = {};
         if (_map->isExitAvailable())
         {
             exitActionHalf.push_back(CMenu::exit());
         }
 
-        std::vector<CMenu::Action> superCowHalf = {};
+        CMenu::ActionList superCowHalf = {};
         if (Ressources::Config::superCowPowers)
         {
             superCowHalf.push_back(menu.createAction("Reveal"));

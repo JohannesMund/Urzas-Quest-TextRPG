@@ -30,16 +30,17 @@ private:
 
     void sellSandwiches();
 
+    int countIngredients();
+
     virtual char getMapSymbol() const override;
 
     void replaceSandwichOfTheDay();
 
-    std::vector<CSandwich*> _sandwiches;
     unsigned long _turns = 0;
-
     bool _playerOwnsShop = false;
     bool _playerDiscoveredHideout = false;
-
-    std::map<CSandwich::EIngredients, int> _ingredientStore;
     int _goldAvailable = 0;
+
+    std::vector<CSandwich*> _sandwiches;
+    std::map<CSandwich::EIngredients, int> _ingredientStore;
 };

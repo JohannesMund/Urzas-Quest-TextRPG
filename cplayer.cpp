@@ -203,7 +203,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
     while (true)
     {
         CMenu menu;
-        std::vector<CMenu::Action> weapons = {
+        CMenu::ActionList weapons = {
             menu.createAction("Rock"), menu.createAction("Paper"), menu.createAction("Scissors")};
         if (enemy->hasExtendedWeaponChoice())
         {
@@ -211,7 +211,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
             weapons.push_back(menu.createAction("Spock"));
         }
 
-        std::vector<CMenu::Action> tools;
+        CMenu::ActionList tools;
         tools.push_back(menu.createAction("Inventory"));
         if (Ressources::Config::superCowPowers)
         {

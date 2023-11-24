@@ -23,7 +23,7 @@ void CGoFishing::execute()
 
     CMenu menu;
 
-    std::vector<CMenu::Action> actions;
+    CMenu::ActionList actions;
     if (_fishingRod != nullptr || _boat != nullptr)
     {
         actions.push_back(menu.createAction("Catch fish"));

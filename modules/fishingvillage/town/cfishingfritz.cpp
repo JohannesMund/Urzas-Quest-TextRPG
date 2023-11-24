@@ -26,8 +26,8 @@ void CFishingFritz::execute()
 
         CMenu menu;
 
-        std::vector<CMenu::Action> moduleActionList;
-        std::vector<CMenu::Action> defaultActionList;
+        CMenu::ActionList moduleActionList;
+        CMenu::ActionList defaultActionList;
 
         if (!isOpen())
         {

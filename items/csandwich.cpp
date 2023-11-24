@@ -51,7 +51,7 @@ std::string CSandwich::ingredient2String(const EIngredients ingredient)
     case EIngredients::eOlives:
         return std::format("{}Olives{}", CC::fgGreen(), CC::ccReset());
     default:
-        return "Whatever that is";
+        return std::format("{0}Whatever {1}that{0} is{2}", CC::fgLightMagenta(), CC::fgGreen(), CC::ccReset());
     };
 }
 
@@ -102,7 +102,7 @@ std::string CSandwich::description() const
     {
         desc.append("huge, enormous, gigantic ");
     }
-    desc.appemd(" sandwich with: ");
+    desc.append("sandwich with: ");
     desc.append(ingredients2String(_ingredients));
     desc.append(".");
     return desc;

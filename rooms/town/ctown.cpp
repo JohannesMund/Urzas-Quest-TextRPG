@@ -36,7 +36,7 @@ void CTown::execute()
         Console::hr();
 
         CMenu menu;
-        std::vector<CMenu::Action> navs = {menu.createAction("Blacksmith"),
+        CMenu::ActionList navs = {menu.createAction("Blacksmith"),
                                            menu.createAction("Church"),
                                            menu.createAction("Tavern"),
                                            menu.createAction("Shop")};

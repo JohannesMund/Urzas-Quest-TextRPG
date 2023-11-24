@@ -13,6 +13,7 @@
 #include "ctask.h"
 #include "ctown.h"
 #include "randomizer.h"
+#include "rebellionhideout/cbagofingredients.h"
 
 #include <iostream>
 #include <string>
@@ -200,7 +201,7 @@ void CGameManagement::executeTurn()
 
         CMenu menu;
 
-        std::vector<CMenu::Action> navs;
+        CMenu::ActionList navs;
         for (auto nav : _map.getDirectionNavs())
         {
             navs.push_back(menu.createAction(nav));
