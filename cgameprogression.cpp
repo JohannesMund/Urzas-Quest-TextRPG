@@ -10,11 +10,11 @@
 #include "cbattleencounter.h"
 #include "cdeadhero.h"
 #include "cequipmentdealer.h"
-#include "cmysteriouschest.h"
-
 #include "cgamemanagement.h"
 #include "cgameprogression.h"
+#include "cmysteriouschest.h"
 #include "console.h"
+#include "randomizer.h"
 
 #include <algorithm>
 #include <cmath>
@@ -160,6 +160,21 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
+void CGameProgression::registerModuleHint(const std::string_view& moduleName, const std::string_view& hint)
+{
+    _moduleHints.push_back(std::make_pair(std::string(moduleName), std::string(hint)));
+}
+
+std::string CGameProgression::getRandomHint() const
+{
+    if (_moduleHints.size() == 0)
+    {
+        return {};
+    }
+
+    return _moduleHints.at(Randomizer::getRandom(_moduleHints.size())).second;
+}
+
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
 {
     for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)) |
@@ -221,6 +236,18 @@ void CGameProgression::unFinishModule(const std::string_view& moduleName)
     }
 }
 
+void CGameProgression::unregisterModuleHintsByModuleName(const std::string& moduleName)
+{
+    auto it = std::remove_if(_moduleHints.begin(),
+                             _moduleHints.end(),
+                             [moduleName](const std::pair<std::string, std::string> hint)
+                             { return hint.first.compare(moduleName) == 0; });
+    if (it != _moduleHints.end())
+    {
+        _moduleHints.erase(it);
+    }
+}
+
 bool CGameProgression::canProgress()
 {
     for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
@@ -239,6 +266,7 @@ void CGameProgression::progressToStage(EGameStage stage)
          _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
     {
         module.deInitFunction();
+        unregisterModuleHintsByModuleName(module.moduleName);
     }
 
     _currentStage = stage;

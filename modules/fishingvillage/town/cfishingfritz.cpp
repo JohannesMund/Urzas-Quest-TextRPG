@@ -164,10 +164,52 @@ void CFishingFritz::checkFish()
 
 void CFishingFritz::getInformation() const
 {
-    Console::printLn(std::format("{} has nothing right now", Ressources::Game::fishingFritz()));
-    Console::confirmToContinue();
-}
+    CMenu menu;
+    CMenu::ActionList actions;
+    auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
 
+    if (hint.empty())
+    {
+        Console::printLn(std::format("{} thinks, but finally shakes his head. \"My informants have nothing right "
+                                     "now.\". Seems like you will have to come back later.",
+                                     Ressources::Game::fishingFritz()));
+    }
+    else
+    {
+        Console::printLn(
+            std::format("{} looks at you conspirational. \"Indeed, I have new information for you. But this "
+                        "information is explosive! So explosive, that one of my informants died, delivering ist. you "
+                        "will understand, that i will have to charge you something to get it. It will cost you {}{} "
+                        "Gold{} to get this information.\"",
+                        Ressources::Game::fishingFritz(),
+                        CC::fgLightYellow(),
+                        Ressources::Config::informationCost,
+                        CC::ccReset()));
+
+        if (CGameManagement::getPlayerInstance()->gold() > Ressources::Config::informationCost)
+        {
+            actions.push_back(
+                menu.createAction(std::format("Get information ({} Gold)", Ressources::Config::informationCost), 'G'));
+        }
+        else
+        {
+            Console::br();
+            Console::printLn("This seems to be a high price for some information, so you reject.");
+        }
+    }
+
+    menu.addMenuGroup(actions, {CMenu::exit()});
+    if (menu.execute().key == 'g')
+    {
+        CGameManagement::getPlayerInstance()->addGold(Ressources::Config::informationCost * -1);
+        Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
+                                     Ressources::Game::fishingFritz()));
+        Console::br();
+        Console::printLn(hint, Console::EAlignment::eCenter);
+        Console::br();
+        Console::confirmToContinue();
+    }
+}
 void CFishingFritz::sell() const
 {
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFish::fishFilter());

@@ -137,6 +137,12 @@ void CSandwichShop::checkForShaggysSandwich()
 
         _playerOwnsShop = true;
         CGameManagement::getInventoryInstance()->removeItem(CShaggysSandwich::shaggysSandwichFilter());
+        CGameManagement::getProgressionInstance()->registerModuleHint(
+            RebellionHideoutRessources::moduleNameRebellionHideout(),
+            std::format("You want to know where {} and {} are hiding? Are you really that blind? Did you ever woner "
+                        "who is buying you crappy sandwiches?",
+                        Ressources::Game::fiego(),
+                        Ressources::Game::brock()));
     }
 }
 
@@ -245,10 +251,14 @@ void CSandwichShop::sellSandwiches()
 
         if (_goldAvailable > 0)
         {
-            Console::printLn(std::format("While you were away, sandwiches have been sold and you earned {}{} Gold{}",
-                                         CC::fgLightYellow(),
-                                         _goldAvailable,
-                                         CC::ccReset()));
+            Console::printLn(
+                std::format("While you were away, sandwiches have been sold and you earned {}{} Gold{}. This always "
+                            "happens. You wonder who is selling the sandwiches, there seems to be no staff here. at "
+                            "least you hired nobody. Even more you wonder who is buying your sandwiches, and who is "
+                            "honest enough to pay, with no staff on duty. One day, you will have to check for that.",
+                            CC::fgLightYellow(),
+                            _goldAvailable,
+                            CC::ccReset()));
             CGameManagement::getPlayerInstance()->addGold(_goldAvailable);
             _goldAvailable = 0;
             Console::br();
@@ -310,5 +320,8 @@ void CSandwichShop::replaceSandwichOfTheDay()
         delete i;
     }
     _sandwiches.clear();
-    _sandwiches.push_back(CGameManagement::getItemFactoryInstance()->sandwichMaker());
+    if (_playerOwnsShop == false)
+    {
+        _sandwiches.push_back(CGameManagement::getItemFactoryInstance()->sandwichMaker());
+    }
 }
