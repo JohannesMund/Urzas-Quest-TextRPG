@@ -38,7 +38,7 @@ void CBountyHunt::execute()
     if (bounty.isDead())
     {
         Console::printLn("This is the end of the criminal master mind. The world us safe again. But, for how long?");
-        CGameManagement::getPlayerInstance()->addGold(_reward);
+        CGameManagement::getPlayerInstance()->gainGold(_reward);
         Console::printLn("You grab your reward, and continue your adventure.");
     }
     else

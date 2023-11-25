@@ -44,7 +44,7 @@ void CLaylaTownTask::execute()
     Console::printLn("Whatever that means.");
     Console::br();
 
-    CGameManagement::getPlayerInstance()->addGold(CGameManagement::getPlayerInstance()->gold() * -1);
+    CGameManagement::getPlayerInstance()->loseGold(CGameManagement::getPlayerInstance()->gold());
     CGameManagement::getProgressionInstance()->reportModuleFinished(LaylaRessources::moduleName());
     _isFinished = true;
 }

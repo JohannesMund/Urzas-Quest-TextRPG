@@ -13,7 +13,10 @@ class CPlayer
 public:
     void print() const;
 
-    void addGold(const int i);
+    void spendGold(const unsigned int i);
+    void loseGold(const unsigned int i);
+    void gainGold(const unsigned int i);
+
     void addHp(const int i);
     void fullHeal();
     void dealDamage(const int i, const bool bNoShield = false);
@@ -50,6 +53,8 @@ private:
     unsigned int _initiative = 1;
 
     unsigned int xpForNextLevel() const;
+
+    void addGold(const int i);
 
     static std::string increasedOrDecreased(const int i);
     static std::string lostOrGained(const int i);

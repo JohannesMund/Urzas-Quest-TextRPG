@@ -194,14 +194,14 @@ void CFishingFritz::getInformation() const
         else
         {
             Console::br();
-            Console::printLn("This seems to be a high price for some information, so you reject.");
+            Console::printLn("This seems to be a high price for some piece of information, so you reject.");
         }
     }
 
     menu.addMenuGroup(actions, {CMenu::exit()});
     if (menu.execute().key == 'g')
     {
-        CGameManagement::getPlayerInstance()->addGold(Ressources::Config::informationCost * -1);
+        CGameManagement::getPlayerInstance()->spendGold(Ressources::Config::informationCost);
         Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
                                      Ressources::Game::fishingFritz()));
         Console::br();
@@ -219,7 +219,7 @@ void CFishingFritz::sell() const
     };
     for (const auto& item : items)
     {
-        CGameManagement::getPlayerInstance()->addGold(item->value());
+        CGameManagement::getPlayerInstance()->gainGold(item->value());
         CGameManagement::getInventoryInstance()->removeItem(item);
     }
     Console::confirmToContinue();
@@ -263,7 +263,7 @@ void CFishingFritz::enhance() const
             auto item = enhancableItems.at(*idx - 1);
             auto cost = item->upgradeCost();
             item->enhance();
-            CGameManagement::getPlayerInstance()->addGold(cost * -1);
+            CGameManagement::getPlayerInstance()->spendGold(cost);
         }
     }
     Console::confirmToContinue();

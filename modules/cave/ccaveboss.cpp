@@ -19,7 +19,7 @@ void CCaveBoss::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 200);
     Console::printLn("For such an ugly, savage beeing, this guy has quite some money.");
-    CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 100) + _level * 33);
+    CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) + _level * 33);
 
     Console::printLn("Going through his bag, you find some more or less usefull items.");
     auto amount = Randomizer::getRandom(3) + 1;

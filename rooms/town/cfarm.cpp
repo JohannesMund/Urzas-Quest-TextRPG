@@ -69,7 +69,7 @@ void CFarm::train()
                                  CGameManagement::getCompanionInstance()->name(),
                                  CGameManagement::getCompanionInstance()->name()));
 
-    CGameManagement::getPlayerInstance()->addGold(getTrainingCost() * -1);
+    CGameManagement::getPlayerInstance()->spendGold(getTrainingCost());
     CGameManagement::getCompanionInstance()->evolve();
 }
 

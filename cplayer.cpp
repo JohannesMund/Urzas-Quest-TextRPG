@@ -43,10 +43,31 @@ void CPlayer::print() const
     Console::hr();
 }
 
+void CPlayer::spendGold(const unsigned int i)
+{
+    Console::printLn(std::format("You {}spent {} gold{}.", CC::fgLightYellow(), i, CC::ccReset()));
+    addGold(i * -1);
+}
+
+void CPlayer::loseGold(const unsigned int i)
+{
+    Console::printLn(std::format("You {}lost {} gold{}.", CC::fgRed(), i, CC::ccReset()));
+    addGold(i * -1);
+}
+
+void CPlayer::gainGold(const unsigned int i)
+{
+    Console::printLn(std::format("You {}gained {} gold{}.", CC::fgLightYellow(), i, CC::ccReset()));
+    addGold(i);
+}
+
 void CPlayer::addGold(const int i)
 {
-    Console::printLn(std::format("You {} {} gold.", lostOrGained(i), std::abs(i)));
     _gold += i;
+    if (_gold < 0)
+    {
+        _gold = 0;
+    }
 }
 
 void CPlayer::addHp(const int i)

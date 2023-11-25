@@ -34,10 +34,10 @@ void CLaylaBoss::spoilsOfWar() const
 
     Console::printLn(std::format("Crime seems to be well paid.", CC::fgBlue(), CC::fgYellow(), CC::ccReset()));
 
-    CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 100) +
-                                                  _level * (Randomizer::getRandom(65) + 1));
-    CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 100) +
-                                                  _level * (Randomizer::getRandom(65) + 1));
+    CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) +
+                                                   _level * (Randomizer::getRandom(65) + 1));
+    CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) +
+                                                   _level * (Randomizer::getRandom(65) + 1));
     auto amount = Randomizer::getRandom(4) + 7;
     for (auto i = 0; i <= amount; i++)
     {

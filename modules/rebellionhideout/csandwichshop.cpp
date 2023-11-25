@@ -105,7 +105,7 @@ void CSandwichShop::showSandwichOfTheDay()
 void CSandwichShop::eatSandwichOfTheDay()
 {
     _sandwiches.at(0)->useFromInventory();
-    CGameManagement::getPlayerInstance()->addGold(_sandwiches.at(0)->buyValue() * -1);
+    CGameManagement::getPlayerInstance()->spendGold(_sandwiches.at(0)->buyValue());
     replaceSandwichOfTheDay();
 }
 
@@ -259,7 +259,7 @@ void CSandwichShop::sellSandwiches()
                             CC::fgLightYellow(),
                             _goldAvailable,
                             CC::ccReset()));
-            CGameManagement::getPlayerInstance()->addGold(_goldAvailable);
+            CGameManagement::getPlayerInstance()->gainGold(_goldAvailable);
             _goldAvailable = 0;
             Console::br();
         }

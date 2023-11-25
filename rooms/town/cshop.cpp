@@ -83,7 +83,7 @@ void CShop::sellJunk(CInventory::JunkItemList& junkItems)
     {
         if (j->isSellable())
         {
-            CGameManagement::getPlayerInstance()->addGold(j->value());
+            CGameManagement::getPlayerInstance()->gainGold(j->value());
             CGameManagement::getInventoryInstance()->removeItem(j);
         }
     }
@@ -153,7 +153,7 @@ void CShop::sellItems()
 void CShop::buyItem(CItem* item)
 {
     CGameManagement::getInventoryInstance()->addItem(item);
-    CGameManagement::getPlayerInstance()->addGold(item->buyValue() * -1);
+    CGameManagement::getPlayerInstance()->spendGold(item->buyValue());
 
     auto it = std::find_if(_shopItems.begin(), _shopItems.end(), CItem::nameFilter(item->name()));
     if (it != _shopItems.end())
@@ -184,7 +184,7 @@ void CShop::sellItem(CItem* item, const unsigned int stock)
 
     for (int i = 0; i < count; i++)
     {
-        CGameManagement::getPlayerInstance()->addGold(value);
+        CGameManagement::getPlayerInstance()->gainGold(value);
         CGameManagement::getInventoryInstance()->removeItem(name);
     }
 }
