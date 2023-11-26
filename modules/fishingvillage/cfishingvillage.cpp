@@ -13,7 +13,7 @@ CFishingVillage::CFishingVillage() : CRoom()
     _description = "";
 
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = true;
+    _isRandomTaskPossible = true;
     _showInFogOfWar = true;
 }
 

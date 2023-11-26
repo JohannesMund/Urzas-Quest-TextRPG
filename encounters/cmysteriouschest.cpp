@@ -77,7 +77,7 @@ void CMysteriousChest::execute(const std::string_view& moduleName)
     {
         CGameManagement::getInventoryInstance()->addShopItem();
     }
-    CGameManagement::getPlayerInstance()->addGold(gold);
+    CGameManagement::getPlayerInstance()->gainGold(gold);
 }
 
 unsigned int CMysteriousChest::encounterChance(const EEncounterType& tp, const std::string_view&) const

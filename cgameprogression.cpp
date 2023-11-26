@@ -3,17 +3,19 @@
 #include "fishingvillage/moduleressources.h"
 #include "lakeoftears/moduleressources.h"
 #include "layla/moduleressources.h"
+#include "layla2/moduleressources.h"
 #include "ratfarm/moduleressources.h"
+#include "rebellionhideout/moduleressources.h"
 #include "sewer/moduleressources.h"
 
 #include "cbattleencounter.h"
 #include "cdeadhero.h"
 #include "cequipmentdealer.h"
-#include "cmysteriouschest.h"
-
 #include "cgamemanagement.h"
 #include "cgameprogression.h"
+#include "cmysteriouschest.h"
 #include "console.h"
+#include "randomizer.h"
 
 #include <algorithm>
 #include <cmath>
@@ -47,12 +49,16 @@ void CGameProgression::initEncounters()
                    &RatFarmRessources::questLog,
                    &RatFarmRessources::initModule,
                    &RatFarmRessources::deInitModule);
-    registerModule(CaveRessources::moduleName(),
+    registerModule(SewerRessources::moduleName(),
                    EGameStage::eSeenBard,
-                   &CaveRessources::questLog,
-                   &CaveRessources::initModule,
-                   &CaveRessources::deInitModule,
-                   &CaveRessources::initWorldMap);
+                   &SewerRessources::questLog,
+                   &SewerRessources::initModule,
+                   &SewerRessources::deInitModule);
+    registerModule(LaylaRessources::moduleName(),
+                   EGameStage::eSeenBard,
+                   &LaylaRessources::questLog,
+                   &LaylaRessources::initModule,
+                   &LaylaRessources::deInitModule);
 
     registerModule(FishingVillageRessources::moduleNameMakeBoat(),
                    EGameStage::eProvenAsHero,
@@ -63,21 +69,33 @@ void CGameProgression::initEncounters()
                    &LakeTearsRessources::questLog,
                    &LakeTearsRessources::initModule,
                    &LakeTearsRessources::deInitModule);
-    registerModule(LaylaRessources::moduleName(),
+    registerModule(CaveRessources::moduleName(),
                    EGameStage::eProvenAsHero,
-                   &LaylaRessources::questLog,
-                   &LaylaRessources::initModule,
-                   &LaylaRessources::deInitModule);
-    registerModule(SewerRessources::moduleName(),
+                   &CaveRessources::questLog,
+                   &CaveRessources::initModule,
+                   &CaveRessources::deInitModule,
+                   &CaveRessources::initWorldMap);
+    registerModule(RebellionHideoutRessources::moduleNameSandwichShop(),
                    EGameStage::eProvenAsHero,
-                   &SewerRessources::questLog,
-                   &SewerRessources::initModule,
-                   &SewerRessources::deInitModule);
+                   &RebellionHideoutRessources::questLogSandwichShop,
+                   &RebellionHideoutRessources::initModuleSandwichShop,
+                   &RebellionHideoutRessources::deInitModuleSandwichShop,
+                   &RebellionHideoutRessources::initWorldMap);
 
     registerModule(FishingVillageRessources::moduleNameFishLegend(),
                    EGameStage::eLearnedAboutCult,
                    &FishingVillageRessources::questLogFishLegend,
                    &FishingVillageRessources::initModuleFishLegend);
+    registerModule(RebellionHideoutRessources::moduleNameRebellionHideout(),
+                   EGameStage::eLearnedAboutCult,
+                   &RebellionHideoutRessources::questLogRebellionHideout,
+                   &RebellionHideoutRessources::initModuleRebellionHideout,
+                   &RebellionHideoutRessources::deInitModuleRebellionHideout);
+    registerModule(Layla2Ressources::moduleName(),
+                   EGameStage::eLearnedAboutCult,
+                   &Layla2Ressources::questLog,
+                   &Layla2Ressources::initModule,
+                   &Layla2Ressources::deInitModule);
 
     progressToStage(EGameStage::eStart);
 }
@@ -115,7 +133,7 @@ std::vector<std::string> CGameProgression::getQuestLog() const
     return entries;
 }
 
-void CGameProgression::progress()
+void CGameProgression::checkGameProgress()
 {
     if (!canProgress())
     {
@@ -148,6 +166,21 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
+void CGameProgression::registerModuleHint(const std::string_view& moduleName, const std::string_view& hint)
+{
+    _moduleHints.push_back(std::make_pair(std::string(moduleName), std::string(hint)));
+}
+
+std::string CGameProgression::getRandomHint() const
+{
+    if (_moduleHints.size() == 0)
+    {
+        return {};
+    }
+
+    return _moduleHints.at(Randomizer::getRandom(_moduleHints.size())).second;
+}
+
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
 {
     for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)) |
@@ -167,14 +200,24 @@ void CGameProgression::increaseBodyCount()
     _bodyCount++;
 }
 
-unsigned int CGameProgression::getProgress() const
+void CGameProgression::increaseTurns()
+{
+    _turns++;
+}
+
+unsigned int CGameProgression::progress() const
 {
     return std::ceil((_finishedModules.size() * 100) / _moduleRegister.size());
 }
 
-unsigned int CGameProgression::getBodyCount() const
+unsigned long CGameProgression::bodyCount() const
 {
     return _bodyCount;
+}
+
+unsigned long CGameProgression::turns() const
+{
+    return _turns;
 }
 
 bool CGameProgression::isModuleFinished(const std::string_view& moduleName) const
@@ -199,6 +242,18 @@ void CGameProgression::unFinishModule(const std::string_view& moduleName)
     }
 }
 
+void CGameProgression::unregisterModuleHintsByModuleName(const std::string& moduleName)
+{
+    auto it = std::remove_if(_moduleHints.begin(),
+                             _moduleHints.end(),
+                             [moduleName](const std::pair<std::string, std::string> hint)
+                             { return hint.first.compare(moduleName) == 0; });
+    if (it != _moduleHints.end())
+    {
+        _moduleHints.erase(it);
+    }
+}
+
 bool CGameProgression::canProgress()
 {
     for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
@@ -217,6 +272,7 @@ void CGameProgression::progressToStage(EGameStage stage)
          _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
     {
         module.deInitFunction();
+        unregisterModuleHintsByModuleName(module.moduleName);
     }
 
     _currentStage = stage;

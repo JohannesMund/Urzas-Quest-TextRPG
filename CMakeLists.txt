@@ -13,6 +13,7 @@ set(URZAS_QUEST_SOURCES
 
     ressources.h ressources.cpp
     randomizer.h randomizer.cpp
+    enumiterator.h
 
     cgamemanagement.h cgamemanagement.cpp
     cgameprogression.h cgameprogression.cpp
@@ -41,12 +42,14 @@ set(URZAS_QUEST_SOURCES
     rooms/town/cblacksmith.h rooms/town/cblacksmith.cpp
     rooms/town/cfarm.h rooms/town/cfarm.cpp
     rooms/town/ctavern.h rooms/town/ctavern.cpp
+    rooms/ccapital.h rooms/ccapital.cpp
 
     enemies/cenemy.h enemies/cenemy.cpp
     enemies/cmobenemy.h enemies/cmobenemy.cpp
     enemies/cbountyenemy.h enemies/cbountyenemy.cpp
     enemies/clivingchest.h enemies/clivingchest.cpp    
     enemies/ctwoenemies.h enemies/ctwoenemies.cpp
+    enemies/cenemyhorde.h enemies/cenemyhorde.cpp
 
     tasks/ctask.h tasks/ctask.cpp
     tasks/cbountyhunt.h tasks/cbountyhunt.cpp
@@ -64,6 +67,11 @@ set(URZAS_QUEST_SOURCES
     items/cphoenixfeather.h items/cphoenixfeather.cpp
     items/cheartcontainer.h items/cheartcontainer.cpp    
     items/cbomb.h items/cbomb.cpp
+    items/csandwich.h items/csandwich.cpp
+
+    items/story/cshaggyssandwich.h items/story/cshaggyssandwich.cpp
+    items/story/curzasglasses.h items/story/curzasglasses.cpp
+    items/story/claylasribbon.h items/story/claylasribbon.cpp
 
     encounters/cencounter.h encounters/cencounter.cpp
     encounters/cbattleencounter.h encounters/cbattleencounter.cpp
@@ -95,7 +103,7 @@ set(URZAS_QUEST_SOURCES
     modules/ratfarm/cratfarmratboss.h modules/ratfarm/cratfarmratboss.cpp
     modules/ratfarm/cratfarmturnip.h modules/ratfarm/cratfarmturnip.cpp
 
-    modules/forest/curzasglasses.h modules/forest/curzasglasses.cpp
+
 
     modules/bard/moduleressources.h modules/bard/moduleressources.cpp
     modules/bard/cdancingbard.h modules/bard/cdancingbard.cpp
@@ -129,11 +137,24 @@ set(URZAS_QUEST_SOURCES
     modules/fishingvillage/items/cfish.h modules/fishingvillage/items/cfish.cpp
     modules/fishingvillage/items/cfishingrodpart.h modules/fishingvillage/items/cfishingrodpart.cpp
     modules/fishingvillage/items/cfishingrod.h modules/fishingvillage/items/cfishingrod.cpp
-
     modules/fishingvillage/items/cboat.h modules/fishingvillage/items/cboat.cpp
     modules/fishingvillage/items/cboatpart.h modules/fishingvillage/items/cboatpart.cpp
     modules/fishingvillage/tasks/cbuildequipmenttask.h modules/fishingvillage/tasks/cbuildequipmenttask.cpp
     modules/fishingvillage/tasks/cfishingvilletowntask.h modules/fishingvillage/tasks/cfishingvilletowntask.cpp
+
+    modules/rebellionhideout/csandwichshop.h modules/rebellionhideout/csandwichshop.cpp
+    modules/rebellionhideout/moduleressources.h modules/rebellionhideout/moduleressources.cpp
+    modules/rebellionhideout/cbagofingredients.h modules/rebellionhideout/cbagofingredients.cpp
+
+    modules/layla2/enemies/claylabossguards.h modules/layla2/enemies/claylabossguards.cpp
+    modules/layla2/moduleressources.h modules/layla2/moduleressources.cpp
+    modules/layla2/enemies/claylabossorks.h modules/layla2/enemies/claylabossorks.cpp
+    modules/layla2/encounters/clayla2encounter.h modules/layla2/encounters/clayla2encounter.cpp
+    modules/layla2/encounters/clayla2goblinencounter.h modules/layla2/encounters/clayla2goblinencounter.cpp
+    modules/layla2/tasks/clayla2goblinvillagetask.h modules/layla2/tasks/clayla2goblinvillagetask.cpp
+    modules/layla2/enemies/cgoblinhorde.h modules/layla2/enemies/cgoblinhorde.cpp
+    modules/layla2/tasks/clayla2capitaltask.h modules/layla2/tasks/clayla2capitaltask.cpp
+
 )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
@@ -143,6 +164,7 @@ target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/companion)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items/equipment)
+target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/items/story)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/enemies)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/rooms)
 target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/rooms/town)

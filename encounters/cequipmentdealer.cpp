@@ -68,7 +68,7 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
         {
             auto item = buyableItems.at(*input - 1);
             CGameManagement::getInventoryInstance()->addItem(item);
-            CGameManagement::getPlayerInstance()->addGold(item->buyValue() * -1);
+            CGameManagement::getPlayerInstance()->spendGold(item->buyValue());
 
             auto newEnd = std::remove(buyableItems.begin(), buyableItems.end(), item);
             if (newEnd != buyableItems.end())

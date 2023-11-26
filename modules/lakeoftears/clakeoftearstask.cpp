@@ -32,7 +32,7 @@ void CLakeOfTearsTask::execute()
     case 1:
     case 2:
         Console::printLn("Some poor guy lost his purse here. Probably the disgusting water let him lower his guards");
-        CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(100) * 2 + 123);
+        CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(100) * 2 + 123);
         break;
     case 3:
     case 4:

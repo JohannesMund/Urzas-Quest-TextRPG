@@ -9,4 +9,5 @@ public:
 
     virtual void spoilsOfWar() const override;
     virtual void battleAction(bool& endRound) override;
+    virtual void postBattle() override;
 };

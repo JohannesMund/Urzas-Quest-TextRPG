@@ -52,9 +52,9 @@ void cls(const bool bHud = true);
  * @brief printLn Prints of line of text, with automatic breaks and alignment
  * @param text the text to be printed
  * @param align the alignment
- * @param nobr set to true, no automatic breaks are done
+ * @param bReset auto true, reset colors at end of output.
  */
-void printLn(std::string text, const EAlignment align = EAlignment::eLeft);
+void printLn(std::string text, const EAlignment align = EAlignment::eLeft, const bool bReset = true);
 
 /**
  * @brief printWithSpacer Prints two lines of text with a spacer inbetween

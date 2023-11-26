@@ -23,5 +23,5 @@ private:
     void replaceShopItems();
     std::vector<CItem*> _shopItems;
 
-    unsigned int _playerLevel;
+    unsigned long _turns;
 };

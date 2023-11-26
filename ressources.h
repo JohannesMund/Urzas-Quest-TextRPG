@@ -22,6 +22,8 @@ static const unsigned int encounterChance = 10;
 static const unsigned int fightChance = 15;
 
 static const unsigned int numberOfTowns = 4;
+static const unsigned int turnsUntilShopRefresh = 100;
+static const unsigned int informationCost = 1000;
 
 static const unsigned int maxHp = 10;
 static const unsigned int maxHpMin = 3;
@@ -50,12 +52,17 @@ std::string fishingFritz();
 
 std::string mobi();
 
+std::string kingJesster();
+
 } // namespace Game
 
 namespace Rooms
 {
 std::string getRandomDescription();
 std::pair<std::string, std::string> getRandomTown();
+std::pair<std::string, std::string> getCapital();
+std::string getCapitalRejection();
+
 std::string getRandomRumor();
 } // namespace Rooms
 

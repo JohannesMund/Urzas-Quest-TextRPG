@@ -1,5 +1,6 @@
 #include "roomfactory.h"
 #include "cave/ccave.h"
+#include "ccapital.h"
 #include "cfield.h"
 #include "cinjuredpet.h"
 #include "croom.h"
@@ -24,4 +25,9 @@ CInjuredPet* RoomFactory::makeInjuredPet()
 CShrineOfTheAncients* RoomFactory::makeShrine()
 {
     return new CShrineOfTheAncients();
+}
+
+CCapital* RoomFactory::makeCapital()
+{
+    return new CCapital();
 }

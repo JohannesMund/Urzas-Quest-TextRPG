@@ -77,7 +77,7 @@ void CBlackSmith::enhanceItem()
             auto item = enhancableItems.at(*idx - 1);
             auto cost = item->upgradeCost();
             item->enhance();
-            CGameManagement::getPlayerInstance()->addGold(cost * -1);
+            CGameManagement::getPlayerInstance()->spendGold(cost);
         }
     }
     Console::confirmToContinue();

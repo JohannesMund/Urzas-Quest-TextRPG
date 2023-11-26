@@ -14,7 +14,7 @@ CSewerBossRoom::CSewerBossRoom(bool* isBossDefeated)
     _showInFogOfWar = true;
     _bossDefeated = isBossDefeated;
     _seen = true;
-    _isTaskPossible = false;
+    _isRandomTaskPossible = false;
     _encounterType = CEncounter::EEncounterType::eNone;
 }
 

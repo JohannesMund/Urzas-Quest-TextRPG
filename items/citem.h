@@ -97,7 +97,7 @@ public:
      * @brief description
      * @return desctiption of the item
      */
-    std::string description() const;
+    virtual std::string description() const;
 
     /**
      * @brief isSellable
@@ -165,7 +165,7 @@ public:
      * @param name
      * @return a name filter function to be used in std containers
      */
-    static ItemFilter nameFilter(const std::string_view& name);
+    static ItemFilter nameFilter(const std::string& name);
 
     /**
      * @brief battleEffectFilter

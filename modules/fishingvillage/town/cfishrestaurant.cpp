@@ -89,7 +89,7 @@ unsigned int CFishRestaurant::priceOfTheDay() const
 void CFishRestaurant::eat() const
 {
     Console::printLn("You get a plate with a steaming hot fish meal, and it tastes amazing!");
-    CGameManagement::getPlayerInstance()->addGold(priceOfTheDay() * -1);
+    CGameManagement::getPlayerInstance()->spendGold(priceOfTheDay());
 
     switch (_dishOfTheDayLevel)
     {

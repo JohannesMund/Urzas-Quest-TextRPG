@@ -26,8 +26,8 @@ void CFishingFritz::execute()
 
         CMenu menu;
 
-        std::vector<CMenu::Action> moduleActionList;
-        std::vector<CMenu::Action> defaultActionList;
+        CMenu::ActionList moduleActionList;
+        CMenu::ActionList defaultActionList;
 
         if (!isOpen())
         {
@@ -164,10 +164,52 @@ void CFishingFritz::checkFish()
 
 void CFishingFritz::getInformation() const
 {
-    Console::printLn(std::format("{} has nothing right now", Ressources::Game::fishingFritz()));
-    Console::confirmToContinue();
-}
+    CMenu menu;
+    CMenu::ActionList actions;
+    auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
 
+    if (hint.empty())
+    {
+        Console::printLn(std::format("{} thinks, but finally shakes his head. \"My informants have nothing right "
+                                     "now.\". Seems like you will have to come back later.",
+                                     Ressources::Game::fishingFritz()));
+    }
+    else
+    {
+        Console::printLn(
+            std::format("{} looks at you conspirational. \"Indeed, I have new information for you. But this "
+                        "information is explosive! So explosive, that one of my informants died, delivering ist. you "
+                        "will understand, that i will have to charge you something to get it. It will cost you {}{} "
+                        "Gold{} to get this information.\"",
+                        Ressources::Game::fishingFritz(),
+                        CC::fgLightYellow(),
+                        Ressources::Config::informationCost,
+                        CC::ccReset()));
+
+        if (CGameManagement::getPlayerInstance()->gold() > Ressources::Config::informationCost)
+        {
+            actions.push_back(
+                menu.createAction(std::format("Get information ({} Gold)", Ressources::Config::informationCost), 'G'));
+        }
+        else
+        {
+            Console::br();
+            Console::printLn("This seems to be a high price for some piece of information, so you reject.");
+        }
+    }
+
+    menu.addMenuGroup(actions, {CMenu::exit()});
+    if (menu.execute().key == 'g')
+    {
+        CGameManagement::getPlayerInstance()->spendGold(Ressources::Config::informationCost);
+        Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
+                                     Ressources::Game::fishingFritz()));
+        Console::br();
+        Console::printLn(hint, Console::EAlignment::eCenter);
+        Console::br();
+        Console::confirmToContinue();
+    }
+}
 void CFishingFritz::sell() const
 {
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFish::fishFilter());
@@ -177,7 +219,7 @@ void CFishingFritz::sell() const
     };
     for (const auto& item : items)
     {
-        CGameManagement::getPlayerInstance()->addGold(item->value());
+        CGameManagement::getPlayerInstance()->gainGold(item->value());
         CGameManagement::getInventoryInstance()->removeItem(item);
     }
     Console::confirmToContinue();
@@ -221,7 +263,7 @@ void CFishingFritz::enhance() const
             auto item = enhancableItems.at(*idx - 1);
             auto cost = item->upgradeCost();
             item->enhance();
-            CGameManagement::getPlayerInstance()->addGold(cost * -1);
+            CGameManagement::getPlayerInstance()->spendGold(cost);
         }
     }
     Console::confirmToContinue();

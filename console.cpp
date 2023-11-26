@@ -118,7 +118,7 @@ void Console::setEcho(const bool on)
 #endif
 }
 
-void Console::printLn(std::string text, const EAlignment align)
+void Console::printLn(std::string text, const EAlignment align, const bool bReset)
 {
     if (CC::colorizedSize(text) > Ressources::Settings::consoleWidth)
     {
@@ -143,7 +143,7 @@ void Console::printLn(std::string text, const EAlignment align)
             else
             {
                 auto subsubstring = substring.substr(0, ++it);
-                printLn(subsubstring, align);
+                printLn(subsubstring, align, false);
                 written += subsubstring.size();
             }
         }
@@ -166,7 +166,12 @@ void Console::printLn(std::string text, const EAlignment align)
                 text.insert(0, 1, ' ');
             }
         }
-        cout << text << CC::ccReset() << endl;
+        cout << text;
+        if (bReset)
+        {
+            cout << CC::ccReset();
+        }
+        cout << endl;
     }
 }
 

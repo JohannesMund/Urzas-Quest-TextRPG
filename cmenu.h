@@ -31,7 +31,8 @@ public:
      * is always a pair:
      * [A]ccept [R]eject <---> E[x]it
      */
-    using MenuGroup = std::pair<std::vector<Action>, std::vector<Action>>;
+    using ActionList = std::vector<Action>;
+    using MenuGroup = std::pair<ActionList, ActionList>;
 
     /**
      * @brief CMenu Constructor

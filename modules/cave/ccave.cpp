@@ -15,7 +15,7 @@ CCave::CCave()
 {
     _showInFogOfWar = true;
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = false;
+    _isRandomTaskPossible = false;
 }
 
 void CCave::execute()

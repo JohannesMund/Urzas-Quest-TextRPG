@@ -53,7 +53,7 @@ protected:
     std::string _description;
 
     CTask* _task = nullptr;
-    bool _isTaskPossible = true;
+    bool _isRandomTaskPossible = true;
 
     CEncounter::EEncounterType _encounterType;
     std::string _moduleName;

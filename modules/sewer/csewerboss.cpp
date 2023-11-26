@@ -19,7 +19,7 @@ void CSewerBoss::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 200);
     Console::printLn("It is a cockroach, but is has money.");
-    CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 100) + _level * 33);
+    CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) + _level * 33);
 
     Console::printLn("Going through his bag, you find some more or less usefull items.");
     auto amount = Randomizer::getRandom(3) + 1;
@@ -46,4 +46,9 @@ void CSewerBoss::battleAction(bool& endRound)
         endRound = true;
     }
     CEnemy::battleAction(endRound);
+}
+
+void CSewerBoss::postBattle()
+{
+    Console::printLn("I cut YOUR live into pieces!");
 }

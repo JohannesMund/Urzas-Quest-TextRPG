@@ -24,9 +24,7 @@ void CLaylaBoss::spoilsOfWar() const
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
 
-    Console::printLn(std::format("{} and {} realize, that they will not stand a chance and run away",
-                                 LaylaRessources::piefke(),
-                                 LaylaRessources::schniefke()));
+    Console::printLn(std::format("{} and {} realize, that they will not stand a chance and run away", _name1, _name2));
     Console::printLn(std::format("\"{} will not like that!\" - \"{} Neither, but their punishment is better, than "
                                  "dealing with this monster!\"",
                                  Ressources::Game::fiego(),
@@ -34,10 +32,10 @@ void CLaylaBoss::spoilsOfWar() const
 
     Console::printLn(std::format("Crime seems to be well paid.", CC::fgBlue(), CC::fgYellow(), CC::ccReset()));
 
-    CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 100) +
-                                                  _level * (Randomizer::getRandom(65) + 1));
-    CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 100) +
-                                                  _level * (Randomizer::getRandom(65) + 1));
+    CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) +
+                                                   _level * (Randomizer::getRandom(65) + 1));
+    CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) +
+                                                   _level * (Randomizer::getRandom(65) + 1));
     auto amount = Randomizer::getRandom(4) + 7;
     for (auto i = 0; i <= amount; i++)
     {
@@ -52,11 +50,11 @@ void CLaylaBoss::passiveBattleAction(EWho who)
     {
         if (who == CTwoEnemies::EWho::eEnemy1)
         {
-            Console::printLn(std::format("{} attacks you", LaylaRessources::piefke()));
+            Console::printLn(std::format("{} attacks you", _name1));
         }
         else
         {
-            Console::printLn(std::format("{} attacks you", LaylaRessources::schniefke()));
+            Console::printLn(std::format("{} attacks you", _name2));
         }
 
         CGameManagement::getPlayerInstance()->dealDamage(dmg);

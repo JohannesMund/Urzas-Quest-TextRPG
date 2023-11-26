@@ -1,4 +1,5 @@
 #include "cmenu.h"
+#include "colorize.h"
 #include "console.h"
 
 #include <algorithm>
@@ -172,9 +173,15 @@ std::string CMenu::makeDisplayString(const std::string_view s, const char c) con
         return {};
     }
 
+    std::string displayString(s);
+
+    if (CC::isColorized(displayString))
+    {
+        return std::format("[{}] {}", c, displayString);
+    }
+
     char cc(c);
 
-    std::string displayString(s);
     auto it = displayString.find(cc);
     if (it == std::string::npos)
     {

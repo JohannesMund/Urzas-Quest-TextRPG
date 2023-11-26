@@ -16,7 +16,7 @@ void CTavern::execute()
 {
     CMenu::Action input;
     CMenu menu;
-    std::vector<CMenu::Action> navs;
+    CMenu::ActionList navs;
     navs.push_back(menu.createAction("Rumors"));
 
     if (!CBountyHunt::isHuntActive())

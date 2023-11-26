@@ -76,6 +76,7 @@ public:
     std::vector<std::string_view> getDirectionNavs();
     std::string mapSymbol(const SRoomCoords& coords);
 
+    std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
 
     void setTaskToRandomRoom(

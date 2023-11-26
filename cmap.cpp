@@ -1,5 +1,6 @@
 #include "cmap.h"
 #include "cave/ccave.h"
+#include "ccapital.h"
 #include "cinjuredpet.h"
 #include "colorize.h"
 #include "console.h"
@@ -55,6 +56,7 @@ void CMap::init(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(RoomFactory::makeInjuredPet());
     rooms.push_back(RoomFactory::makeShrine());
+    rooms.push_back(RoomFactory::makeCapital());
 
     for (int i = 0; i < Ressources::Config::numberOfTowns; i++)
     {
@@ -338,6 +340,22 @@ std::string CMap::mapSymbol(const SRoomCoords& coords)
     }
 
     return " ";
+}
+
+std::vector<CRoom*> CMap::roomsMatchingFilter(RoomFilter filter) const
+{
+    std::vector<CRoom*> rooms;
+    for (const auto& row : _map)
+    {
+        for (const auto& room : row)
+        {
+            if (filter(room))
+            {
+                rooms.push_back(room);
+            }
+        }
+    }
+    return rooms;
 }
 
 CRoom* CMap::currentRoom() const

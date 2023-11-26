@@ -50,4 +50,5 @@ std::string colorizedSubString(const std::string_view& text, const unsigned int 
 
 std::string colorizeString(const std::string_view& s, const std::string_view& c1, const std::string_view& c2);
 std::string unColorizeString(const std::string& s);
+bool isColorized(const std::string& s);
 } // namespace CC

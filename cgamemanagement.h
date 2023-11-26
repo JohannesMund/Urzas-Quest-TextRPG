@@ -31,6 +31,7 @@ public:
     void unregisterEncounterByModuleName(const std::string_view& name);
 
     CRoom* currentRoom() const;
+    std::vector<CRoom*> roomsMatchingFilter(CMap::RoomFilter filter) const;
 
     void printHUD();
 

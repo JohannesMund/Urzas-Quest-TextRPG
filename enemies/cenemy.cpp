@@ -48,7 +48,7 @@ void CEnemy::spoilsOfWar() const
     if (Randomizer::getRandom(2) == 0)
     {
         Console::printLn("Your enemy seems to be rich. At least he has a bag of gold.");
-        CGameManagement::getPlayerInstance()->addGold(Randomizer::getRandom(_level * 33) + _level * 25);
+        CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 33) + _level * 25);
     }
 
     if (Randomizer::getRandom(3) < 2)
@@ -130,7 +130,7 @@ void CEnemy::printBossBattleHeader() const
 {
     Console::cls();
     Console::printLn("Boss Battle", Console::EAlignment::eCenter);
-    Console::printLn(_name, Console::EAlignment::eCenter);
+    Console::printLn(name(), Console::EAlignment::eCenter);
     Console::br();
 }
 

@@ -11,7 +11,7 @@ CShrineOfTheAncients::CShrineOfTheAncients() : CRoom()
 {
     _description = "";
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = false;
+    _isRandomTaskPossible = false;
     _showInFogOfWar = true;
 }
 
@@ -217,7 +217,7 @@ void CShrineOfTheAncients::stats() const
     Console::printLn("You take some time to think about yourself:");
     Console::br();
 
-    auto progress = CGameManagement::getProgressionInstance()->getProgress();
+    auto progress = CGameManagement::getProgressionInstance()->progress();
     std::string progressString = "[";
 
     int i = 0;
@@ -235,8 +235,10 @@ void CShrineOfTheAncients::stats() const
     progressString.append("]");
 
     Console::printLnWithSpacer("Progress:", progressString);
-    Console::printLnWithSpacer("BodyCount:",
-                               std::format("{}", CGameManagement::getProgressionInstance()->getBodyCount()));
+    Console::printLnWithSpacer("Body count:",
+                               std::format("{}", CGameManagement::getProgressionInstance()->bodyCount()));
+    Console::printLnWithSpacer("Turns:", std::format("{}", CGameManagement::getProgressionInstance()->turns()));
+
     Console::br();
     auto equipment = CGameManagement::getInventoryInstance()->getEquipment();
     for (auto e : equipment)

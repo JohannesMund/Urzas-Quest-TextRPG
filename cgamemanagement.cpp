@@ -13,12 +13,11 @@
 #include "ctask.h"
 #include "ctown.h"
 #include "randomizer.h"
+#include "rebellionhideout/cbagofingredients.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
-
-using namespace std;
 
 CGameManagement* _instance = nullptr;
 
@@ -154,6 +153,11 @@ CRoom* CGameManagement::currentRoom() const
     return _map.currentRoom();
 }
 
+std::vector<CRoom*> CGameManagement::roomsMatchingFilter(CMap::RoomFilter filter) const
+{
+    return _map.roomsMatchingFilter(filter);
+}
+
 CPlayer* CGameManagement::getPlayer()
 {
     return &_player;
@@ -187,6 +191,7 @@ void CGameManagement::printHUD()
 
 void CGameManagement::executeTurn()
 {
+    _progression.increaseTurns();
     Console::cls();
 
     _map.currentRoom()->execute();
@@ -201,7 +206,7 @@ void CGameManagement::executeTurn()
 
         CMenu menu;
 
-        std::vector<CMenu::Action> navs;
+        CMenu::ActionList navs;
         for (auto nav : _map.getDirectionNavs())
         {
             navs.push_back(menu.createAction(nav));
@@ -319,7 +324,7 @@ void CGameManagement::gameLoop()
 {
     while (!_isGameOver)
     {
-        _progression.progress();
+        _progression.checkGameProgress();
         executeTurn();
         handlePlayerDeath();
         if (_player.isDead())
