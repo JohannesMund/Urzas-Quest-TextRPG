@@ -42,7 +42,9 @@ void CLayla2GoblinVillageTask::execute()
     CLaylaBossOrks boss;
     boss.printBossBattleHeader();
     Console::printLn(std::format(
+        "You look at the slain {}s, and realize, that this not over yet. You still have a boss battle in front of you. "
         "\"I am coming for your rescue, princess\" You scream once again, a little less motivated, and attack.",
+        Layla2Ressources::greenskin(),
         Ressources::Game::princessLayla()));
     CBattle battle2(&boss);
     battle2.fight();
@@ -53,7 +55,8 @@ void CLayla2GoblinVillageTask::execute()
     }
     Console::confirmToContinue();
 
-    Console::printLn("Finally, the princess is save again. But... for how long?");
+    Console::printLn(
+        "There it is, your first ever genocide. And finally, the princess is save again. But... for how long?");
     Console::printLn(std::format(
         "This does not matter now. You untie the beautiful, sexy princess, and give her back her {}. But instead of "
         "jumping at you and giving you an appropriate \"thank you\" she just makes a disgusted face \"Eeeew, this "

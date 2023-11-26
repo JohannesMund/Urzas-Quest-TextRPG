@@ -52,12 +52,12 @@ std::string Layla2Ressources::questLog()
 
 std::string Layla2Ressources::mork()
 {
-    return std::format("{}M{}ork{}", CC::fgGreen(), CC::fgYellow(), CC::ccReset());
+    return std::format("{}M{}ork{}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());
 }
 
 std::string Layla2Ressources::gork()
 {
-    return std::format("{}G{}ork{}", CC::fgYellow(), CC::fgGreen(), CC::ccReset());
+    return std::format("{}G{}ork{}", CC::fgLightGreen(), CC::fgGreen(), CC::ccReset());
 }
 
 std::string Layla2Ressources::ribbon()

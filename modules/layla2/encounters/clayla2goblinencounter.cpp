@@ -34,11 +34,9 @@ void CLayla2GoblinEncounter::execute(const std::string_view& moduleName)
     Console::br();
     Console::printLn(
         std::format("{} gets hit by a club and is drawn into the woods. You run towards her, but all you can see is "
-                    "some {}g{}reenskin{}, running away on a wild boar, with your dream lady over his shoulders.",
+                    "some {}, running away on a wild boar, with the lady of your over his shoulders.",
                     Ressources::Game::princessLayla(),
-                    CC::fgGreen(),
-                    CC::fgLightGreen(),
-                    CC::ccReset()));
+                    Layla2Ressources::greenskin()));
     Console::printLn(std::format("At least you are able to recover her {}. You pick it up and put it in your pocket. "
                                  "Maybe this will make you her hero, when you give it back to her.",
                                  Layla2Ressources::ribbon()));

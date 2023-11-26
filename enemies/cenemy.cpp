@@ -130,7 +130,7 @@ void CEnemy::printBossBattleHeader() const
 {
     Console::cls();
     Console::printLn("Boss Battle", Console::EAlignment::eCenter);
-    Console::printLn(_name, Console::EAlignment::eCenter);
+    Console::printLn(name(), Console::EAlignment::eCenter);
     Console::br();
 }
 

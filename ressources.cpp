@@ -599,7 +599,9 @@ std::string Ressources::Rooms::getCapitalRejection()
 {
     return std::format(
         "The {}Guard{} looks at you, and shakes his head. \"Not on the list!\", is all he says. \"What list?\" you "
-        "ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here.",
+        "ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here. You "
+        "think about it for a short while, and realize, that you don't even have a name. so what should they even "
+        "write on their list? So probably, everything is in perfect order.",
         CC::fgLightRed(),
         CC::ccReset());
 }

@@ -27,6 +27,12 @@ void CLayla2CapitalTask::execute()
                     townName,
                     Ressources::Game::princessLayla(),
                     Ressources::Game::kingJesster()));
+    Console::printLn(
+        std::format("Taking a closer look at the king, you realize, that he is not the sublime type of wise, old man, "
+                    "you would expect from a king. he looks... funny. He is dressed like a jester, and he looks like "
+                    "a jester. You never questioned his name, but now, as you see him tha name {} makes sense to you. "
+                    "You wonder if the people of the land know, that they are ruled by a mere clown?",
+                    Ressources::Game::kingJesster()));
     Console::printLn(std::format(
         "{} immediately starts complaining about the long hard walk, and her hurting feet, nothing you have not heard "
         "the whole time. {} hugs his daughter and smiles at you. \"I suppose i have to thank you.\"",

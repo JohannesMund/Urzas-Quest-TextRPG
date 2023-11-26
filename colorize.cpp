@@ -219,3 +219,9 @@ std::string CC::colorCodeRegExp()
 {
     return "\\\e\\[(\\d*)m";
 }
+
+bool CC::isColorized(const std::string& s)
+{
+    const std::regex expression(colorCodeRegExp());
+    return std::regex_search(s, expression);
+}
