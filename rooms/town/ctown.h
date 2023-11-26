@@ -18,7 +18,7 @@ public:
     CTown();
 
     virtual void execute() override;
-#
+
     virtual std::string bgColor() const override;
     virtual std::string fgColor() const override;
 
@@ -26,11 +26,11 @@ public:
 
     static CMap::RoomFilter townFilter();
 
-private:
+protected:
     std::string _name;
-
     virtual char getMapSymbol() const override;
 
+private:
     CShop _shop;
     CChurch _church;
     CBlackSmith _blackSmith;

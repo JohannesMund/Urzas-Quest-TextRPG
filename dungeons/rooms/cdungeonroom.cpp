@@ -4,7 +4,7 @@
 CDungeonRoom::CDungeonRoom() : CRoom()
 {
     _encounterType = CEncounter::EEncounterType::eDungeon;
-    _isTaskPossible = true;
+    _isRandomTaskPossible = true;
 }
 
 void CDungeonRoom::setDescription(const std::string_view& description)

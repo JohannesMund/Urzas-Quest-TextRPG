@@ -51,7 +51,7 @@ CTask* CRoom::takeTask()
 
 bool CRoom::isTaskPossible(const std::string_view&) const
 {
-    return _isTaskPossible && !hasTask();
+    return _isRandomTaskPossible && !hasTask();
 }
 
 bool CRoom::hasTask() const

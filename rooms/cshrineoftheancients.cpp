@@ -11,7 +11,7 @@ CShrineOfTheAncients::CShrineOfTheAncients() : CRoom()
 {
     _description = "";
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = false;
+    _isRandomTaskPossible = false;
     _showInFogOfWar = true;
 }
 

@@ -21,7 +21,7 @@ CTown::CTown() : CRoom()
     _tavern.setCityName(_name);
 
     _encounterType = CEncounter::EEncounterType::eTown;
-    _isTaskPossible = true;
+    _isRandomTaskPossible = true;
 }
 
 void CTown::execute()

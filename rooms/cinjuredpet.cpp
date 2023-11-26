@@ -11,7 +11,7 @@ CInjuredPet::CInjuredPet() : CField()
     _showInFogOfWar = true;
 
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = false;
+    _isRandomTaskPossible = false;
 }
 
 void CInjuredPet::execute()
@@ -80,7 +80,7 @@ void CInjuredPet::execute()
     _showInFogOfWar = false;
 
     _encounterType = CEncounter::EEncounterType::eField;
-    _isTaskPossible = true;
+    _isRandomTaskPossible = true;
 }
 
 char CInjuredPet::getMapSymbol() const

@@ -10,7 +10,7 @@
 CStartingRoom::CStartingRoom() : CField()
 {
     _encounterType = CEncounter::EEncounterType::eNone;
-    _isTaskPossible = false;
+    _isRandomTaskPossible = false;
 }
 
 void CStartingRoom::execute()
@@ -94,7 +94,7 @@ void CStartingRoom::execute()
     CRoom::execute();
 
     _encounterType = CEncounter::EEncounterType::eField;
-    _isTaskPossible = true;
+    _isRandomTaskPossible = true;
 }
 
 char CStartingRoom::getMapSymbol() const

@@ -1,13 +1,12 @@
-#include "claylaboss.h"
+#include "claylabossguards.h"
 #include "cgamemanagement.h"
-#include "colorize.h"
 #include "console.h"
-#include "moduleressources.h"
+#include "layla2/moduleressources.h"
 #include "randomizer.h"
 
 #include <format>
 
-CLaylaBoss::CLaylaBoss() : CTwoEnemies(LaylaRessources::piefke(), LaylaRessources::schniefke())
+CLaylaBossGuards::CLaylaBossGuards() : CTwoEnemies(Layla2Ressources::bimmel(), Layla2Ressources::bommel())
 {
     _name = "";
     _weapon = "Sword and Pike";
@@ -19,7 +18,7 @@ CLaylaBoss::CLaylaBoss() : CTwoEnemies(LaylaRessources::piefke(), LaylaRessource
     _hp = _hp1 + _hp2;
 }
 
-void CLaylaBoss::spoilsOfWar() const
+void CLaylaBossGuards::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
@@ -43,7 +42,7 @@ void CLaylaBoss::spoilsOfWar() const
     }
 }
 
-void CLaylaBoss::passiveBattleAction(EWho who)
+void CLaylaBossGuards::passiveBattleAction(EWho who)
 {
     auto dmg = Randomizer::getRandom(3);
     if (dmg > 0)

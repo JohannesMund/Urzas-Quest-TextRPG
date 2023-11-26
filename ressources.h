@@ -52,12 +52,17 @@ std::string fishingFritz();
 
 std::string mobi();
 
+std::string kingJesster();
+
 } // namespace Game
 
 namespace Rooms
 {
 std::string getRandomDescription();
 std::pair<std::string, std::string> getRandomTown();
+std::pair<std::string, std::string> getCapital();
+std::string getCapitalRejection();
+
 std::string getRandomRumor();
 } // namespace Rooms
 

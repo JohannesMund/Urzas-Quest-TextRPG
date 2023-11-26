@@ -42,12 +42,14 @@ set(URZAS_QUEST_SOURCES
     rooms/town/cblacksmith.h rooms/town/cblacksmith.cpp
     rooms/town/cfarm.h rooms/town/cfarm.cpp
     rooms/town/ctavern.h rooms/town/ctavern.cpp
+    rooms/ccapital.h rooms/ccapital.cpp
 
     enemies/cenemy.h enemies/cenemy.cpp
     enemies/cmobenemy.h enemies/cmobenemy.cpp
     enemies/cbountyenemy.h enemies/cbountyenemy.cpp
     enemies/clivingchest.h enemies/clivingchest.cpp    
     enemies/ctwoenemies.h enemies/ctwoenemies.cpp
+    enemies/cenemyhorde.h enemies/cenemyhorde.cpp
 
     tasks/ctask.h tasks/ctask.cpp
     tasks/cbountyhunt.h tasks/cbountyhunt.cpp
@@ -57,7 +59,6 @@ set(URZAS_QUEST_SOURCES
     items/equipment/cweapon.h items/equipment/cweapon.cpp
     items/equipment/cshield.h items/equipment/cshield.cpp
     items/equipment/carmor.h items/equipment/carmor.cpp
-    items/csandwich.h items/csandwich.cpp
 
     items/citem.h items/citem.cpp
     items/citemfactory.h items/citemfactory.cpp
@@ -66,9 +67,11 @@ set(URZAS_QUEST_SOURCES
     items/cphoenixfeather.h items/cphoenixfeather.cpp
     items/cheartcontainer.h items/cheartcontainer.cpp    
     items/cbomb.h items/cbomb.cpp
+    items/csandwich.h items/csandwich.cpp
 
     items/story/cshaggyssandwich.h items/story/cshaggyssandwich.cpp
     items/story/curzasglasses.h items/story/curzasglasses.cpp
+    items/story/claylasribbon.h items/story/claylasribbon.cpp
 
     encounters/cencounter.h encounters/cencounter.cpp
     encounters/cbattleencounter.h encounters/cbattleencounter.cpp
@@ -142,6 +145,15 @@ set(URZAS_QUEST_SOURCES
     modules/rebellionhideout/csandwichshop.h modules/rebellionhideout/csandwichshop.cpp
     modules/rebellionhideout/moduleressources.h modules/rebellionhideout/moduleressources.cpp
     modules/rebellionhideout/cbagofingredients.h modules/rebellionhideout/cbagofingredients.cpp
+
+    modules/layla2/enemies/claylabossguards.h modules/layla2/enemies/claylabossguards.cpp
+    modules/layla2/moduleressources.h modules/layla2/moduleressources.cpp
+    modules/layla2/enemies/claylabossorks.h modules/layla2/enemies/claylabossorks.cpp
+    modules/layla2/encounters/clayla2encounter.h modules/layla2/encounters/clayla2encounter.cpp
+    modules/layla2/encounters/clayla2goblinencounter.h modules/layla2/encounters/clayla2goblinencounter.cpp
+    modules/layla2/tasks/clayla2goblinvillagetask.h modules/layla2/tasks/clayla2goblinvillagetask.cpp
+    modules/layla2/enemies/cgoblinhorde.h modules/layla2/enemies/cgoblinhorde.cpp
+    modules/layla2/tasks/clayla2capitaltask.h modules/layla2/tasks/clayla2capitaltask.cpp
 
 )
 

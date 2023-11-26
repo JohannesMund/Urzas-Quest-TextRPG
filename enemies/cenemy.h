@@ -43,6 +43,7 @@ protected:
     unsigned int _level;
     int _hp;
     unsigned int _initiative;
+    unsigned int _count;
 
     bool _extendedWeaponChoice = false;
 

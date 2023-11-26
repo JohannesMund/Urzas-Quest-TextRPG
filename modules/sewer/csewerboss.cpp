@@ -47,3 +47,8 @@ void CSewerBoss::battleAction(bool& endRound)
     }
     CEnemy::battleAction(endRound);
 }
+
+void CSewerBoss::postBattle()
+{
+    Console::printLn("I cut YOUR live into pieces!");
+}

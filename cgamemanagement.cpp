@@ -153,6 +153,11 @@ CRoom* CGameManagement::currentRoom() const
     return _map.currentRoom();
 }
 
+std::vector<CRoom*> CGameManagement::roomsMatchingFilter(CMap::RoomFilter filter) const
+{
+    return _map.roomsMatchingFilter(filter);
+}
+
 CPlayer* CGameManagement::getPlayer()
 {
     return &_player;

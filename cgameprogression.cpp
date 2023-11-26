@@ -3,6 +3,7 @@
 #include "fishingvillage/moduleressources.h"
 #include "lakeoftears/moduleressources.h"
 #include "layla/moduleressources.h"
+#include "layla2/moduleressources.h"
 #include "ratfarm/moduleressources.h"
 #include "rebellionhideout/moduleressources.h"
 #include "sewer/moduleressources.h"
@@ -90,6 +91,11 @@ void CGameProgression::initEncounters()
                    &RebellionHideoutRessources::questLogRebellionHideout,
                    &RebellionHideoutRessources::initModuleRebellionHideout,
                    &RebellionHideoutRessources::deInitModuleRebellionHideout);
+    registerModule(Layla2Ressources::moduleName(),
+                   EGameStage::eLearnedAboutCult,
+                   &Layla2Ressources::questLog,
+                   &Layla2Ressources::initModule,
+                   &Layla2Ressources::deInitModule);
 
     progressToStage(EGameStage::eStart);
 }

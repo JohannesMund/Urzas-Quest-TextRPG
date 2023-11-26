@@ -270,7 +270,6 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
         break;
     }
     case Ressources::Items::EQuality::eGood:
-    case Ressources::Items::EQuality::eAwesomne:
     {
         switch (Randomizer::getRandom(5))
         {
@@ -299,6 +298,83 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
             names = {"Whip", "Whip +1", "Whip +2", "Whip +3", "Whip +4"};
             colorizeNames(names, CC::fgLightMagenta(), CC::fgRed());
             description = "Who fights with a whip? Everybody should, considering the reach of this beast";
+            break;
+        }
+        break;
+    }
+    case Ressources::Items::EQuality::eAwesomne:
+    {
+        switch (Randomizer::getRandom(5))
+        {
+        case 0:
+        default:
+            names = {"godly Stick of the Whale",
+                     "godly Stick of the Whale +1",
+                     "godly Stick of the Whale +2",
+                     "godly Stick of the Whale +3",
+                     "godly Stick of the Whale +4",
+                     "godly Stick of the Whale +5",
+                     "godly Stick of the Whale +6",
+                     "godly Stick of the Whale +7",
+                     "godly Stick of the Whale +8"};
+            colorizeNames(names, CC::fgBlue(), CC::fgLightBlue());
+            description = "Its a stick, but other than the other sticks, it has a label \"godly Stick of the Whale\"";
+            break;
+        case 1:
+            names = {"antique Sword of the Ancients",
+                     "antique Sword of the Ancients +1",
+                     "antique Sword of the Ancients +2",
+                     "antique Sword of the Ancients +3",
+                     "antique Sword of the Ancients +4",
+                     "antique Sword of the Ancients +5",
+                     "antique Sword of the Ancients +6",
+                     "antique Sword of the Ancients +7",
+                     "antique Sword of the Ancients +8"};
+            colorizeNames(names, CC::fgYellow(), CC::fgLightYellow());
+            description = "This is one really really old and magic sword.";
+            break;
+        case 2:
+            names = {
+                "Trident of the Demon king",
+                "Trident of the Demon king +1",
+                "Trident of the Demon king +2",
+                "Trident of the Demon king +3",
+                "Trident of the Demon king +4",
+                "Trident of the Demon king +5",
+                "Trident of the Demon king +6",
+                "Trident of the Demon king +7",
+                "Trident of the Demon king +8",
+            };
+            colorizeNames(names, CC::fgRed(), CC::fgDarkGray());
+            description =
+                std::format("A cool trident, the spikes seem to glow, and they are hot! well, not as hot as {}.",
+                            Ressources::Game::layla());
+            break;
+        case 3:
+            names = {"Whip of the beast tamer",
+                     "Whip of the beast tamer +1",
+                     "Whip of the beast tamer +2",
+                     "Whip of the beast tamer +3",
+                     "Whip of the beast tamer +4",
+                     "Whip of the beast tamer +5",
+                     "Whip of the beast tamer +6",
+                     "Whip of the beast tamer +7",
+                     "Whip of the beast tamer +8"};
+            colorizeNames(names, CC::fgLightGray(), CC::fgYellow());
+            description = "This whip has certainly tamed many beasts. Who knows, maybe it works on a certain princess?";
+            break;
+        case 4:
+            names = {"Holy mace of the Nephalim",
+                     "Holy mace of the Nephalim +1",
+                     "Holy mace of the Nephalim +2",
+                     "Holy mace of the Nephalim +3",
+                     "Holy mace of the Nephalim +4",
+                     "Holy mace of the Nephalim +5",
+                     "Holy mace of the Nephalim +6",
+                     "Holy mace of the Nephalim +7",
+                     "Holy mace of the Nephalim +8"};
+            colorizeNames(names, CC::fgLightYellow(), CC::fgLightGray());
+            description = "A mace, so holy, you can stick a tail on it, and call it a beaver.";
             break;
         }
         break;
@@ -510,4 +586,25 @@ std::string Ressources::Game::fishingFritz()
 std::string Ressources::Game::mobi()
 {
     return std::format("{}Dark {}Mo{}bi{}", CC::fgDarkGray(), CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::pair<std::string, std::string> Ressources::Rooms::getCapital()
+{
+    return std::make_pair(
+        "Drerachi, The Dream City",
+        "The capital of the land. Big houses, the Kings' Castle, a Kathedral, everything a glorious capital needs.");
+}
+
+std::string Ressources::Rooms::getCapitalRejection()
+{
+    return std::format(
+        "The {}Guard{} looks at you, and shakes his head. \"Not on the list!\", is all he says. \"What list?\" you "
+        "ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here.",
+        CC::fgLightRed(),
+        CC::ccReset());
+}
+
+std::string Ressources::Game::kingJesster()
+{
+    return std::format("{}King {}Jes{}ster{}", CC::fgRed(), CC::fgLightGreen(), CC::fgRed(), CC::ccReset());
 }

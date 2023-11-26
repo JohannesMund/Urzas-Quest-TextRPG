@@ -8,7 +8,4 @@ public:
     CLaylaTask();
 
     virtual void execute() override;
-
-private:
-    void battle();
 };
