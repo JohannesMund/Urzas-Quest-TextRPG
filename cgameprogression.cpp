@@ -369,6 +369,24 @@ void CGameProgression::progressToStage(EGameStage stage)
                                      Ressources::Game::princessLayla()),
                          Console::EAlignment::eCenter);
         break;
+    case EGameStage::eFoundCult:
+        Console::printLn("Chapter 4", Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(std::format("Here you are. Proud Memner of the Rebellion.", Ressources::Game::urza()),
+                         Console::EAlignment::eCenter);
+        Console::br();
+
+        Console::printLn("Now you only have to find out:", Console::EAlignment::eCenter);
+        Console::printLn("Why do we rebel?", Console::EAlignment::eCenter);
+        Console::printLn("Against whom do we rebel?", Console::EAlignment::eCenter);
+        Console::printLn("of course:", Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(std::format("And last not least, is ist right to kidnap {}, and when do we do it?",
+                                     Ressources::Game::princessLayla()),
+                         Console::EAlignment::eCenter);
+        break;
 
     default:
         break;
