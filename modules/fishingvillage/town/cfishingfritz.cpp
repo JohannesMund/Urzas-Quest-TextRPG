@@ -65,7 +65,6 @@ void CFishingFritz::execute()
         {
             ask();
         }
-
         if (input.key == 's')
         {
             sell();

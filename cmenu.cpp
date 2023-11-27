@@ -177,7 +177,7 @@ std::string CMenu::makeDisplayString(const std::string_view s, const char c) con
 
     if (CC::isColorized(displayString))
     {
-        return std::format("[{}] {}", c, displayString);
+        return std::format("[{}]{}", c, displayString);
     }
 
     char cc(c);
@@ -189,7 +189,7 @@ std::string CMenu::makeDisplayString(const std::string_view s, const char c) con
         it = displayString.find(cc);
         if (it == std::string::npos)
         {
-            return std::format("[{}] {}", c, displayString);
+            return std::format("[{}]{}", c, displayString);
         }
     }
 

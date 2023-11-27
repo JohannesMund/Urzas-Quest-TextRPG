@@ -36,7 +36,7 @@ void CFishingVillage::execute()
     do
     {
         CMenu menu;
-        menu.addMenuGroup({menu.createAction(Ressources::Game::fishingFritz(), 'f'),
+        menu.addMenuGroup({menu.createAction(CC::unColorizeString(Ressources::Game::fishingFritz()), 'f'),
                            menu.createAction("Restaurant", 'R'),
                            menu.createAction("Go Fishing", 'G')});
 
