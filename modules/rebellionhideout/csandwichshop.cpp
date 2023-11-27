@@ -244,9 +244,11 @@ void CSandwichShop::observe()
     CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(
         RebellionHideoutRessources::moduleNameRebellionHideout());
 
-    Console::printLn("You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
-                     "sun sets, a secret door, hidden behind one of the advertisment posters opens, and two guys "
-                     "appear. They seem to be hungry, and immediately rush to the sandwiches.");
+    Console::printLn(
+        "You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
+        "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich shop even "
+        "has an employees bathroom, you have no employees), but the toilet is pushed aside, and two guys "
+        "appear. They seem to be hungry, and immediately rush to the sandwiches.");
     Console::printLn(
         std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
                     "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",

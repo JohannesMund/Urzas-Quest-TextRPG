@@ -187,24 +187,18 @@ void CGameProgression::unregisterModuleHintsByModuleName(const std::string& modu
 bool CGameProgression::seenModuleHints(const std::string_view& moduleName)
 {
     bool seen = false;
-
-    auto it = _moduleHints.begin();
-
-    while (it != _moduleHints.end())
+    for (auto& moduleHint : _moduleHints | std::views::filter(ModuleHint::moduleHintNameFilter(moduleName)))
     {
-        it = std::find_if(it, _moduleHints.end(), ModuleHint::moduleHintNameFilter(moduleName));
-        if (it != _moduleHints.end())
+        if (moduleHint.seen == false)
         {
-            if (it->seen == false)
-            {
-                return false;
-            }
-            else
-            {
-                seen = true;
-            }
+            return false;
+        }
+        else
+        {
+            seen = true;
         }
     }
+
     return seen;
 }
 
