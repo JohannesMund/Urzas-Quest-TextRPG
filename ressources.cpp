@@ -610,3 +610,8 @@ std::string Ressources::Game::kingJesster()
 {
     return std::format("{}King {}Jes{}ster{}", CC::fgRed(), CC::fgLightGreen(), CC::fgRed(), CC::ccReset());
 }
+
+std::string Ressources::Game::laylasRibbon()
+{
+    return std::format("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
+}

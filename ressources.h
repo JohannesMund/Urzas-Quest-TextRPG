@@ -44,6 +44,7 @@ std::string urzaWhoTheFuckIsUrza();
 
 std::string princessLayla();
 std::string layla();
+std::string laylasRibbon();
 
 std::string fiego();
 std::string brock();

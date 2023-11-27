@@ -60,11 +60,6 @@ std::string Layla2Ressources::gork()
     return std::format("{}G{}ork{}", CC::fgLightGreen(), CC::fgGreen(), CC::ccReset());
 }
 
-std::string Layla2Ressources::ribbon()
-{
-    return std::format("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
-}
-
 std::string Layla2Ressources::greenskin()
 {
     return std::format("{}G{}reenskin{}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());

@@ -166,19 +166,58 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
-void CGameProgression::registerModuleHint(const std::string_view& moduleName, const std::string_view& hint)
+void CGameProgression::registerModuleHint(const std::string_view& moduleName, const std::string_view& hintText)
 {
-    _moduleHints.push_back(std::make_pair(std::string(moduleName), std::string(hint)));
+    ModuleHint hint;
+    hint.moduleName = moduleName;
+    hint.hintText = hintText;
+
+    _moduleHints.push_back(hint);
 }
 
-std::string CGameProgression::getRandomHint() const
+void CGameProgression::unregisterModuleHintsByModuleName(const std::string& moduleName)
+{
+    auto it = std::remove_if(_moduleHints.begin(), _moduleHints.end(), ModuleHint::moduleHintNameFilter(moduleName));
+    if (it != _moduleHints.end())
+    {
+        _moduleHints.erase(it);
+    }
+}
+
+bool CGameProgression::seenModuleHints(const std::string_view& moduleName)
+{
+    bool seen = false;
+
+    auto it = _moduleHints.begin();
+
+    while (it != _moduleHints.end())
+    {
+        it = std::find_if(it, _moduleHints.end(), ModuleHint::moduleHintNameFilter(moduleName));
+        if (it != _moduleHints.end())
+        {
+            if (it->seen == false)
+            {
+                return false;
+            }
+            else
+            {
+                seen = true;
+            }
+        }
+    }
+    return seen;
+}
+
+std::string CGameProgression::getRandomHint()
 {
     if (_moduleHints.size() == 0)
     {
         return {};
     }
 
-    return _moduleHints.at(Randomizer::getRandom(_moduleHints.size())).second;
+    auto index = Randomizer::getRandom(_moduleHints.size());
+    _moduleHints.at(index).seen = true;
+    return _moduleHints.at(index).hintText;
 }
 
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
@@ -239,18 +278,6 @@ void CGameProgression::unFinishModule(const std::string_view& moduleName)
     if (it != _finishedModules.end())
     {
         _finishedModules.erase(it);
-    }
-}
-
-void CGameProgression::unregisterModuleHintsByModuleName(const std::string& moduleName)
-{
-    auto it = std::remove_if(_moduleHints.begin(),
-                             _moduleHints.end(),
-                             [moduleName](const std::pair<std::string, std::string> hint)
-                             { return hint.first.compare(moduleName) == 0; });
-    if (it != _moduleHints.end())
-    {
-        _moduleHints.erase(it);
     }
 }
 

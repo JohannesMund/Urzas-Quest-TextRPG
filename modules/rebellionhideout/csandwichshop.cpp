@@ -146,6 +146,17 @@ void CSandwichShop::checkForShaggysSandwich()
     }
 }
 
+bool CSandwichShop::checkForRebellionHideoutHint()
+{
+    if (_playerDiscoveredHideout)
+    {
+        return false;
+    }
+
+    return CGameManagement::getProgressionInstance()->seenModuleHints(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
+}
+
 void CSandwichShop::deliverIngredients()
 {
     auto bags = CGameManagement::getInventoryInstance()->getItemsByFilter(CBagOfIngredients::CBagOfIngredientsFilter());
@@ -224,6 +235,39 @@ void CSandwichShop::makeASandwich()
     _sandwiches.push_back(new CSandwich(ingredients));
 }
 
+void CSandwichShop::observe()
+{
+    _playerDiscoveredHideout = true;
+    CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
+
+    Console::printLn("You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
+                     "sun sets, a secret door, hidden behind one of the advertisment posters opens, and two guys "
+                     "appear. They seem to be hungry, and immediately rush to the sandwiches.");
+    Console::printLn(
+        std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
+                    "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
+                    RebellionHideoutRessources::mrSoop()));
+    Console::printLn("A little bit proud, that they call you a sandwich legend, you leave your hideout. \"Who are you "
+                     "two, and why are you hiding in my sandwich store?\"");
+    Console::printLn(
+        std::format("A little bit shocked, the two guys stop eating and introduce themselves. \"My name is {} and "
+                    "this is {}\" says the first guy \"We are the leaders of the rebellion\", says the other.",
+                    Ressources::Game::fiego(),
+                    Ressources::Game::brock()));
+    Console::printLn(
+        std::format("\"Sou you are the guys who kidnapped {0} repeatedly?\" you ask. \"So you are the one, who "
+                    "intercepted our plans to abduct {0} repeatedly?\" answer the two rebellion leaders.",
+                    Ressources::Game::princessLayla()));
+    Console::printLn("After some laughing, you decide to work together. You provide them with food and support, the "
+                     "will not abduct any princess, without your approval.");
+    Console::confirmToContinue();
+}
+
+void CSandwichShop::talkToRebellion()
+{
+}
+
 void CSandwichShop::sellSandwiches()
 {
     CMenu::Action input;
@@ -276,6 +320,14 @@ void CSandwichShop::sellSandwiches()
         {
             actions.push_back(menu.createAction("Deliver ingredients", 'D'));
         }
+        if (checkForRebellionHideoutHint())
+        {
+            actions.push_back(menu.createAction("Observe, who buys your sandwiches", 'O'));
+        }
+        if (_playerDiscoveredHideout)
+        {
+            actions.push_back(menu.createAction("Talk to the rebellion", 'T'));
+        }
 
         menu.addMenuGroup(actions, {CMenu::exit()});
         input = menu.execute();
@@ -287,6 +339,14 @@ void CSandwichShop::sellSandwiches()
         if (input.key == 'd')
         {
             deliverIngredients();
+        }
+        if (input.key == 'o')
+        {
+            observe();
+        }
+        if (input.key == 't')
+        {
+            talkToRebellion();
         }
 
     } while (input != CMenu::exit());

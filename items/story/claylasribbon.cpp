@@ -6,7 +6,7 @@
 
 CLaylasRibbon::CLaylasRibbon()
 {
-    _name = std::format("{}s Ribbon", Ressources::Game::layla());
+    _name = std::format("{}s {}", Ressources::Game::princessLayla(), Ressources::Game::laylasRibbon());
     _description = std::format("The ribbon of {}. She gave it to you as a lucky charm and to protect you. You will "
                                "honor this precious treasure forever",
                                Ressources::Game::princessLayla());
