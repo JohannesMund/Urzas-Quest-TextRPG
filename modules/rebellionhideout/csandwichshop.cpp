@@ -9,6 +9,7 @@
 #include "moduleressources.h"
 
 #include <format>
+#include <ranges>
 
 CSandwichShop::CSandwichShop()
 {
@@ -137,12 +138,18 @@ void CSandwichShop::checkForShaggysSandwich()
 
         _playerOwnsShop = true;
         CGameManagement::getInventoryInstance()->removeItem(CShaggysSandwich::shaggysSandwichFilter());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(
+            RebellionHideoutRessources::moduleNameSandwichShop());
         CGameManagement::getProgressionInstance()->registerModuleHint(
             RebellionHideoutRessources::moduleNameRebellionHideout(),
             std::format("You want to know where {} and {} are hiding? Are you really that blind? Did you ever woner "
                         "who is buying you crappy sandwiches?",
                         Ressources::Game::fiego(),
                         Ressources::Game::brock()));
+        CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 5);
+        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 5);
     }
 }
 
@@ -159,6 +166,7 @@ bool CSandwichShop::checkForRebellionHideoutHint()
 
 void CSandwichShop::deliverIngredients()
 {
+
     auto bags = CGameManagement::getInventoryInstance()->getItemsByFilter(CBagOfIngredients::CBagOfIngredientsFilter());
     if (!bags.size())
     {
@@ -210,19 +218,14 @@ void CSandwichShop::makeASandwich()
 
         int index = 0;
 
-        for (auto i : CSandwich::ingredientIterator())
+        for (auto i : _ingredientStore | std::views::filter([](const auto& p) { return p.second > 0; }) |
+                          std::views::transform([](const auto& p) { return p.first; }))
         {
-            if (_ingredientStore.at(i) <= 0)
-            {
-                continue;
-            }
-
-            index++;
-            Console::printLn(std::format("[{:3}] {}", index, CSandwich::ingredient2String(i)));
             availableIngredients.push_back(i);
+            Console::printLn(std::format("[{:3}] {}", availableIngredients.size(), CSandwich::ingredient2String(i)));
         }
 
-        input = Console::getNumberInputWithEcho(index - 1);
+        input = Console::getNumberInputWithEcho(1, availableIngredients.size());
 
         if (input.has_value())
         {
