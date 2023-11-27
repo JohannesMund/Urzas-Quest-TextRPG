@@ -147,9 +147,9 @@ void CSandwichShop::checkForShaggysSandwich()
                         Ressources::Game::fiego(),
                         Ressources::Game::brock()));
         CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 5);
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 25);
         CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 5);
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 25);
     }
 }
 
@@ -240,8 +240,11 @@ void CSandwichShop::makeASandwich()
 
 void CSandwichShop::observe()
 {
+    Console::cls();
     _playerDiscoveredHideout = true;
     CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(
         RebellionHideoutRessources::moduleNameRebellionHideout());
 
     Console::printLn(

@@ -94,19 +94,19 @@ CSandwich::IngredientsList CBagOfIngredients::fill(const EBagSize size)
     switch (size)
     {
     case EBagSize::S:
-        content = 2 + Randomizer::getRandom(3);
+        content = 1 + Randomizer::getRandom(2);
         break;
     case EBagSize::M:
-        content = 3 + Randomizer::getRandom(5);
+        content = 2 + Randomizer::getRandom(3);
         break;
     case EBagSize::L:
-        content = 5 + Randomizer::getRandom(7);
+        content = 3 + Randomizer::getRandom(4);
         break;
     case EBagSize::XL:
-        content = 7 + Randomizer::getRandom(10);
+        content = 4 + Randomizer::getRandom(5);
         break;
     case EBagSize::XXL:
-        content = 10 + Randomizer::getRandom(12);
+        content = 7 + Randomizer::getRandom(8);
         break;
     }
 

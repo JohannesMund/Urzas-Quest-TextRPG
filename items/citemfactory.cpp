@@ -191,7 +191,7 @@ CItem* CItemFactory::itemFromGeneratorList(const ItemGeneratorList& list,
         return defaultGenerator();
     }
 
-    auto randomIndex = Randomizer::getRandom(indices.size() * 2);
+    auto randomIndex = Randomizer::getRandom(indices.size() + 100);
 
     if (randomIndex < indices.size())
     {
