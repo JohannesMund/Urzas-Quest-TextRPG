@@ -341,7 +341,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.",
                          Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("But also you learnde, that {} is a huge thing here, which brings you back, to your question:",
+            std::format("But also you learnd, that {} is a huge thing here, which brings you back, to your question:",
                         Ressources::Game::urza()),
             Console::EAlignment::eCenter);
         Console::br();

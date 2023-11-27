@@ -2,6 +2,7 @@
 #include "cdancingbard.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
+#include "ressources.h"
 
 #include <format>
 std::string BardRessources::moduleName()
@@ -11,7 +12,7 @@ std::string BardRessources::moduleName()
 
 std::string BardRessources::encounterName()
 {
-    return std::format("{}Dan{}cing {}Bard{}", CC::fgRed(), CC::fgLightRed(), CC::fgGreen(), CC::ccReset());
+    return Ressources::Game::dancingBard();
 }
 
 void BardRessources::initModule()

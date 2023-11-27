@@ -7,7 +7,7 @@
 
 #include <format>
 
-CLakeOfTearsBoss::CLakeOfTearsBoss() : CTwoEnemies(LakeTearsRessources::bimmelchen(), LakeTearsRessources::pimmelchen())
+CLakeOfTearsBoss::CLakeOfTearsBoss() : CTwoEnemies(Ressources::Game::bimmelchen(), Ressources::Game::pimmelchen())
 {
     _name = "";
     _weapon = "Crocodile Tears of Despair";
@@ -33,13 +33,12 @@ void CLakeOfTearsBoss::passiveBattleAction(EWho who)
     {
         if (who == CTwoEnemies::EWho::eEnemy1)
         {
-            Console::printLn(std::format("{} attacks you", LakeTearsRessources::bimmelchen()));
+            Console::printLn(std::format("{} attacks you", _name1));
         }
         else
         {
-            Console::printLn(std::format("{} attacks you", LakeTearsRessources::pimmelchen()));
+            Console::printLn(std::format("{} attacks you", _name2));
         }
-
         CGameManagement::getPlayerInstance()->dealDamage(dmg);
     }
 }

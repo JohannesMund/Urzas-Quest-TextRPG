@@ -49,7 +49,11 @@ std::string laylasRibbon();
 std::string fiego();
 std::string brock();
 
+std::string bimmelchen();
+std::string pimmelchen();
+
 std::string fishingFritz();
+std::string dancingBard();
 
 std::string mobi();
 

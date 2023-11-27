@@ -259,8 +259,35 @@ void CSandwichShop::observe()
         std::format("\"Sou you are the guys who kidnapped {0} repeatedly?\" you ask. \"So you are the one, who "
                     "intercepted our plans to abduct {0} repeatedly?\" answer the two rebellion leaders.",
                     Ressources::Game::princessLayla()));
-    Console::printLn("After some laughing, you decide to work together. You provide them with food and support, the "
+    Console::printLn("After some laughing, you decide to work together. You provide them with food and support, they "
                      "will not abduct any princess, without your approval.");
+    Console::confirmToContinue();
+
+    Console::printLn(
+        std::format("The rest of the night is spent, talking about the rebellion. Both, {0} and {1} think, that {2} is "
+                    "more a clown, than a king, and after you saw {2}, you agree with the. They also seem to know a "
+                    "lot more about {3}, but they always put you of to \"another time\" as soon as {3} is mentioned.",
+                    Ressources::Game::fiego(),
+                    Ressources::Game::brock(),
+                    Ressources::Game::kingJesster(),
+                    Ressources::Game::urza()));
+    Console::printLn(std::format(
+        "You are also very surprised to hear, that the {} you saw at the beginning of your adventure is actually a "
+        "minion of {}, who travels through the land, making propaganda for the king and against the {} - cults.",
+        Ressources::Game::dancingBard(),
+        Ressources::Game::kingJesster(),
+        Ressources::Game::urza()));
+    Console::printLn(
+        std::format("Funny story: {} and {} where part of the rebellion too, but had to leave, because their constant "
+                    "crying did not add anything to the whole deal. \"You met them?\" {} asks you surprised. \"How are "
+                    "they?\" - \"Well, at least this time, they stopped crying for once\", you answer, making clear, "
+                    "that you will not carry that topic out any more.",
+                    Ressources::Game::bimmelchen(),
+                    Ressources::Game::pimmelchen(),
+                    Ressources::Game::fiego()));
+    Console::br();
+    Console::printLn(
+        std::format("{} and {} look at you, stunned.", Ressources::Game::fiego(), Ressources::Game::brock()));
     Console::confirmToContinue();
 }
 
