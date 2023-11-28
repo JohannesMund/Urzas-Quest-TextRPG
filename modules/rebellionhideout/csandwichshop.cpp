@@ -216,8 +216,6 @@ void CSandwichShop::makeASandwich()
 
         CSandwich::IngredientsList availableIngredients;
 
-        int index = 0;
-
         for (auto i : _ingredientStore | std::views::filter([](const auto& p) { return p.second > 0; }) |
                           std::views::transform([](const auto& p) { return p.first; }))
         {
@@ -256,6 +254,7 @@ void CSandwichShop::observe()
         std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
                     "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
                     RebellionHideoutRessources::mrSoop()));
+    Console::br();
     Console::printLn("A little bit proud, that they call you a sandwich legend, you leave your hideout. \"Who are you "
                      "two, and why are you hiding in my sandwich store?\"");
     Console::printLn(
@@ -285,6 +284,7 @@ void CSandwichShop::observe()
         Ressources::Game::dancingBard(),
         Ressources::Game::kingJesster(),
         Ressources::Game::urza()));
+    Console::br();
     Console::printLn(
         std::format("Funny story: {} and {} where part of the rebellion too, but had to leave, because their constant "
                     "crying did not add anything to the whole deal. \"You met them?\" {} asks you surprised. \"How are "
