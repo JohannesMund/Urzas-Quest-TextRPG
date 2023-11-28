@@ -37,9 +37,9 @@ void CTown::execute()
 
         CMenu menu;
         CMenu::ActionList navs = {menu.createAction("Blacksmith"),
-                                           menu.createAction("Church"),
-                                           menu.createAction("Tavern"),
-                                           menu.createAction("Shop")};
+                                  menu.createAction("Church"),
+                                  menu.createAction("Tavern"),
+                                  menu.createAction("Shop")};
         if (CGameManagement::getCompanionInstance()->hasCompanion())
         {
             navs.push_back(menu.createAction("Farm"));
@@ -77,7 +77,7 @@ void CTown::execute()
             _farm.execute();
         }
 
-        if (input == taskAction)
+        if (!taskAction.isNull() && input == taskAction)
         {
             executeTask();
             Console::confirmToContinue();

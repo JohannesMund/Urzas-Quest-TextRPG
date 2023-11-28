@@ -24,6 +24,11 @@ public:
         {
             return key == other.key;
         }
+
+        bool isNull() const
+        {
+            return key == 0;
+        }
     };
 
     /**
