@@ -151,6 +151,7 @@ void CGameProgression::checkGameProgress()
     case EGameStage::eProvenAsHero:
         progressToStage(EGameStage::eLearnedAboutCult);
     case EGameStage::eLearnedAboutCult:
+        progressToStage(EGameStage::eFoundCult);
     default:
         return;
     }
