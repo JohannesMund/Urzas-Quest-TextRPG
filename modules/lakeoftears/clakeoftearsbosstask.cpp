@@ -34,8 +34,8 @@ void CLakeOfTearsBossTask::execute()
 
     Console::printLn(
         std::format("\"Who are you guys?\" you ask. \"{}\", replys the mermaid. \"{}\", the merboyman-thing.",
-                    LakeTearsRessources::bimmelchen(),
-                    LakeTearsRessources::pimmelchen()));
+                    Ressources::Game::bimmelchen(),
+                    Ressources::Game::pimmelchen()));
     Console::printLn(
         std::format("\"And what are you doing here?\", you ask, and realize, that those two are starting to get on "
                     "your nerves. The answer is coming from both simultaneously ans is not much of a surprise "

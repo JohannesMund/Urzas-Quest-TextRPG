@@ -2,6 +2,7 @@
 #include "cgamemanagement.h"
 #include "clakeoftearsencounter.h"
 #include "colorize.h"
+#include "ressources.h"
 
 #include <format>
 #include <string>
@@ -21,22 +22,12 @@ void LakeTearsRessources::deInitModule()
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
 }
 
-std::string LakeTearsRessources::getColoredBossString()
-{
-    return std::format("{} and {}", bimmelchen(), pimmelchen());
-}
-
-std::string LakeTearsRessources::bimmelchen()
-{
-    return std::format("{0}B{1}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
-}
-
-std::string LakeTearsRessources::pimmelchen()
-{
-    return std::format("{1}P{0}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
-}
-
 std::string LakeTearsRessources::questLog()
 {
     return "Find and remove the source of the salty water.";
+}
+
+std::string LakeTearsRessources::getColoredsBossString()
+{
+    return std::format("{} and {}", Ressources::Game::bimmelchen(), Ressources::Game::pimmelchen());
 }

@@ -610,3 +610,23 @@ std::string Ressources::Game::kingJesster()
 {
     return std::format("{}King {}Jes{}ster{}", CC::fgRed(), CC::fgLightGreen(), CC::fgRed(), CC::ccReset());
 }
+
+std::string Ressources::Game::laylasRibbon()
+{
+    return std::format("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::string Ressources::Game::bimmelchen()
+{
+    return std::format("{0}B{1}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::string Ressources::Game::pimmelchen()
+{
+    return std::format("{1}P{0}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::string Ressources::Game::dancingBard()
+{
+    return std::format("{}Dan{}cing {}Bard{}", CC::fgRed(), CC::fgLightRed(), CC::fgGreen(), CC::ccReset());
+}

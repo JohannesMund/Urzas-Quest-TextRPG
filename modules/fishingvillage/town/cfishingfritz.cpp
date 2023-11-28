@@ -65,7 +65,6 @@ void CFishingFritz::execute()
         {
             ask();
         }
-
         if (input.key == 's')
         {
             sell();
@@ -129,8 +128,9 @@ void CFishingFritz::checkFish()
         return;
     }
 
-    if (CGameManagement::getInventoryInstance()->hasItem(
-            CFish::fishRarityFilter(FishingVillageRessources::EFishLevel::eLegend)))
+    auto fishes = CGameManagement::getInventoryInstance()->getItemsByFilter(
+        CFish::fishRarityFilter(FishingVillageRessources::EFishLevel::eLegend));
+    if (!fishes.empty())
     {
         Console::printLn(std::format("{} Smiles at you. Well he smiles more at the {} than he smiles at you. But at "
                                      "least he smiles for the first time since... For the first time.",
@@ -147,6 +147,8 @@ void CFishingFritz::checkFish()
         Console::printLn(std::format("This adds another name to your list. How... frustrating, but maybe, this {} is "
                                      "easier to find that the other guys. You will find out.",
                                      Ressources::Game::mobi()));
+
+        CGameManagement::getInventoryInstance()->removeItem(fishes.at(0));
 
         CGameManagement::getProgressionInstance()->reportModuleFinished(
             FishingVillageRessources::moduleNameFishLegend());

@@ -22,9 +22,19 @@ void CShrineOfTheAncients::execute()
     if (_seenDuringPhase != CGameManagement::getProgressionInstance()->currentGameStage())
     {
         firstVisit();
+    }
+    else
+    {
+        visit();
+    }
+    Console::br();
+    CMenu menu;
+    menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
+    if (menu.execute() == CMenu::exit())
+    {
         return;
     }
-    visit();
+    stats();
 }
 
 std::string CShrineOfTheAncients::fgColor() const
@@ -39,7 +49,6 @@ std::string CShrineOfTheAncients::bgColor() const
 
 void CShrineOfTheAncients::visit()
 {
-
     Console::printLn(std::format("Once again, you approach the {}.", ancientShrine()));
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
@@ -62,17 +71,6 @@ void CShrineOfTheAncients::visit()
             "This time, grampa stands in the opened gate. He smiles, but you are probably still not ready.");
         break;
     }
-    Console::br();
-
-    CMenu menu;
-
-    menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
-
-    if (menu.execute() == CMenu::exit())
-    {
-        return;
-    }
-    stats();
 }
 
 void CShrineOfTheAncients::firstVisit()

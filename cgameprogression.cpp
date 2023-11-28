@@ -166,19 +166,52 @@ void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
     _finishedModules.push_back(std::string(moduleName));
 }
 
-void CGameProgression::registerModuleHint(const std::string_view& moduleName, const std::string_view& hint)
+void CGameProgression::registerModuleHint(const std::string_view& moduleName, const std::string_view& hintText)
 {
-    _moduleHints.push_back(std::make_pair(std::string(moduleName), std::string(hint)));
+    ModuleHint hint;
+    hint.moduleName = moduleName;
+    hint.hintText = hintText;
+
+    _moduleHints.push_back(hint);
 }
 
-std::string CGameProgression::getRandomHint() const
+void CGameProgression::unregisterModuleHintsByModuleName(const std::string& moduleName)
+{
+    auto it = std::remove_if(_moduleHints.begin(), _moduleHints.end(), ModuleHint::moduleHintNameFilter(moduleName));
+    if (it != _moduleHints.end())
+    {
+        _moduleHints.erase(it);
+    }
+}
+
+bool CGameProgression::seenModuleHints(const std::string_view& moduleName)
+{
+    bool seen = false;
+    for (auto& moduleHint : _moduleHints | std::views::filter(ModuleHint::moduleHintNameFilter(moduleName)))
+    {
+        if (moduleHint.seen == false)
+        {
+            return false;
+        }
+        else
+        {
+            seen = true;
+        }
+    }
+
+    return seen;
+}
+
+std::string CGameProgression::getRandomHint()
 {
     if (_moduleHints.size() == 0)
     {
         return {};
     }
 
-    return _moduleHints.at(Randomizer::getRandom(_moduleHints.size())).second;
+    auto index = Randomizer::getRandom(_moduleHints.size());
+    _moduleHints.at(index).seen = true;
+    return _moduleHints.at(index).hintText;
 }
 
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
@@ -242,18 +275,6 @@ void CGameProgression::unFinishModule(const std::string_view& moduleName)
     }
 }
 
-void CGameProgression::unregisterModuleHintsByModuleName(const std::string& moduleName)
-{
-    auto it = std::remove_if(_moduleHints.begin(),
-                             _moduleHints.end(),
-                             [moduleName](const std::pair<std::string, std::string> hint)
-                             { return hint.first.compare(moduleName) == 0; });
-    if (it != _moduleHints.end())
-    {
-        _moduleHints.erase(it);
-    }
-}
-
 bool CGameProgression::canProgress()
 {
     for (auto& module : _moduleRegister | std::views::filter(ModuleRegister::moduleRegisterStageFilter(_currentStage)))
@@ -314,7 +335,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.",
                          Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("But also you learnde, that {} is a huge thing here, which brings you back, to your question:",
+            std::format("But also you learnd, that {} is a huge thing here, which brings you back, to your question:",
                         Ressources::Game::urza()),
             Console::EAlignment::eCenter);
         Console::br();
@@ -339,6 +360,24 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
+                                     Ressources::Game::princessLayla()),
+                         Console::EAlignment::eCenter);
+        break;
+    case EGameStage::eFoundCult:
+        Console::printLn("Chapter 4", Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(std::format("Here you are. Proud Memner of the Rebellion.", Ressources::Game::urza()),
+                         Console::EAlignment::eCenter);
+        Console::br();
+
+        Console::printLn("Now you only have to find out:", Console::EAlignment::eCenter);
+        Console::printLn("Why do we rebel?", Console::EAlignment::eCenter);
+        Console::printLn("Against whom do we rebel?", Console::EAlignment::eCenter);
+        Console::printLn("of course:", Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn(std::format("And last not least, is ist right to kidnap {}, and when do we do it?",
                                      Ressources::Game::princessLayla()),
                          Console::EAlignment::eCenter);
         break;

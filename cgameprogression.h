@@ -29,8 +29,11 @@ public:
     std::vector<std::string> getQuestLog() const;
 
     void reportModuleFinished(const std::string_view& moduleName);
+
     void registerModuleHint(const std::string_view& moduleName, const std::string_view& hint);
-    std::string getRandomHint() const;
+    void unregisterModuleHintsByModuleName(const std::string& moduleName);
+    bool seenModuleHints(const std::string_view& moduleName);
+    std::string getRandomHint();
 
     bool isModuleActive(const std::string_view& moduleName) const;
     bool isModuleFinished(const std::string_view& moduleName) const;
@@ -51,8 +54,6 @@ private:
 
     void initModuleByName(const std::string_view& moduleName);
     void deInitModuleByName(const std::string_view& moduleName);
-
-    void unregisterModuleHintsByModuleName(const std::string& moduleName);
 
     bool canProgress();
 
@@ -84,13 +85,13 @@ private:
         std::function<void()> deInitFunction;
         std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
 
-        static std::function<bool(const ModuleRegister&)> moduleRegisterNameFilter(const std::string_view& name)
+        static std::function<bool(const ModuleRegister)> moduleRegisterNameFilter(const std::string_view& name)
         {
-            return [&name](const auto module) { return module.moduleName.compare(name) == 0; };
+            return [name](const auto module) { return module.moduleName.compare(name) == 0; };
         }
-        static std::function<bool(const ModuleRegister&)> moduleRegisterStageFilter(const EGameStage& stage)
+        static std::function<bool(const ModuleRegister)> moduleRegisterStageFilter(const EGameStage& stage)
         {
-            return [&stage](auto module) { return module.gameStage == stage; };
+            return [stage](auto module) { return module.gameStage == stage; };
         }
 
         static void noInitDeInitFunction()
@@ -107,5 +108,17 @@ private:
 
     std::vector<std::string> _finishedModules;
     std::vector<ModuleRegister> _moduleRegister;
-    std::vector<std::pair<std::string, std::string>> _moduleHints;
+
+    struct ModuleHint
+    {
+        std::string moduleName;
+        std::string hintText;
+        bool seen = false;
+        static std::function<bool(const ModuleHint)> moduleHintNameFilter(const std::string_view& name)
+        {
+            return [name](const auto hint) { return hint.moduleName.compare(name) == 0; };
+        }
+    };
+
+    std::vector<ModuleHint> _moduleHints;
 };

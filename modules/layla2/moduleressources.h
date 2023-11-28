@@ -19,6 +19,5 @@ std::string bommel();
 std::string mork();
 std::string gork();
 
-std::string ribbon();
 std::string greenskin();
 } // namespace Layla2Ressources

@@ -9,6 +9,7 @@
 #include "moduleressources.h"
 
 #include <format>
+#include <ranges>
 
 CSandwichShop::CSandwichShop()
 {
@@ -137,17 +138,35 @@ void CSandwichShop::checkForShaggysSandwich()
 
         _playerOwnsShop = true;
         CGameManagement::getInventoryInstance()->removeItem(CShaggysSandwich::shaggysSandwichFilter());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(
+            RebellionHideoutRessources::moduleNameSandwichShop());
         CGameManagement::getProgressionInstance()->registerModuleHint(
             RebellionHideoutRessources::moduleNameRebellionHideout(),
             std::format("You want to know where {} and {} are hiding? Are you really that blind? Did you ever woner "
                         "who is buying you crappy sandwiches?",
                         Ressources::Game::fiego(),
                         Ressources::Game::brock()));
+        CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 25);
+        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 25);
     }
+}
+
+bool CSandwichShop::checkForRebellionHideoutHint()
+{
+    if (_playerDiscoveredHideout)
+    {
+        return false;
+    }
+
+    return CGameManagement::getProgressionInstance()->seenModuleHints(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
 }
 
 void CSandwichShop::deliverIngredients()
 {
+
     auto bags = CGameManagement::getInventoryInstance()->getItemsByFilter(CBagOfIngredients::CBagOfIngredientsFilter());
     if (!bags.size())
     {
@@ -197,21 +216,14 @@ void CSandwichShop::makeASandwich()
 
         CSandwich::IngredientsList availableIngredients;
 
-        int index = 0;
-
-        for (auto i : CSandwich::ingredientIterator())
+        for (auto i : _ingredientStore | std::views::filter([](const auto& p) { return p.second > 0; }) |
+                          std::views::transform([](const auto& p) { return p.first; }))
         {
-            if (_ingredientStore.at(i) <= 0)
-            {
-                continue;
-            }
-
-            index++;
-            Console::printLn(std::format("[{:3}] {}", index, CSandwich::ingredient2String(i)));
             availableIngredients.push_back(i);
+            Console::printLn(std::format("[{:3}] {}", availableIngredients.size(), CSandwich::ingredient2String(i)));
         }
 
-        input = Console::getNumberInputWithEcho(index - 1);
+        input = Console::getNumberInputWithEcho(1, availableIngredients.size());
 
         if (input.has_value())
         {
@@ -222,6 +234,73 @@ void CSandwichShop::makeASandwich()
     } while (input.has_value() && countIngredients() > 0);
 
     _sandwiches.push_back(new CSandwich(ingredients));
+}
+
+void CSandwichShop::observe()
+{
+    Console::cls();
+    _playerDiscoveredHideout = true;
+    CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
+
+    Console::printLn(
+        "You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
+        "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich shop even "
+        "has an employees bathroom, you have no employees), but the toilet is pushed aside, and two guys "
+        "appear. They seem to be hungry, and immediately rush to the sandwiches.");
+    Console::printLn(
+        std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
+                    "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
+                    RebellionHideoutRessources::mrSoop()));
+    Console::br();
+    Console::printLn("A little bit proud, that they call you a sandwich legend, you leave your hideout. \"Who are you "
+                     "two, and why are you hiding in my sandwich store?\"");
+    Console::printLn(
+        std::format("A little bit shocked, the two guys stop eating and introduce themselves. \"My name is {} and "
+                    "this is {}\" says the first guy \"We are the leaders of the rebellion\", says the other.",
+                    Ressources::Game::fiego(),
+                    Ressources::Game::brock()));
+    Console::printLn(
+        std::format("\"Sou you are the guys who kidnapped {0} repeatedly?\" you ask. \"So you are the one, who "
+                    "intercepted our plans to abduct {0} repeatedly?\" answer the two rebellion leaders.",
+                    Ressources::Game::princessLayla()));
+    Console::printLn("After some laughing, you decide to work together. You provide them with food and support, they "
+                     "will not abduct any princess, without your approval.");
+    Console::confirmToContinue();
+
+    Console::printLn(
+        std::format("The rest of the night is spent, talking about the rebellion. Both, {0} and {1} think, that {2} is "
+                    "more a clown, than a king, and after you saw {2}, you agree with the. They also seem to know a "
+                    "lot more about {3}, but they always put you of to \"another time\" as soon as {3} is mentioned.",
+                    Ressources::Game::fiego(),
+                    Ressources::Game::brock(),
+                    Ressources::Game::kingJesster(),
+                    Ressources::Game::urza()));
+    Console::printLn(std::format(
+        "You are also very surprised to hear, that the {} you saw at the beginning of your adventure is actually a "
+        "minion of {}, who travels through the land, making propaganda for the king and against the {} - cults.",
+        Ressources::Game::dancingBard(),
+        Ressources::Game::kingJesster(),
+        Ressources::Game::urza()));
+    Console::br();
+    Console::printLn(
+        std::format("Funny story: {} and {} where part of the rebellion too, but had to leave, because their constant "
+                    "crying did not add anything to the whole deal. \"You met them?\" {} asks you surprised. \"How are "
+                    "they?\" - \"Well, at least this time, they stopped crying for once\", you answer, making clear, "
+                    "that you will not carry that topic out any more.",
+                    Ressources::Game::bimmelchen(),
+                    Ressources::Game::pimmelchen(),
+                    Ressources::Game::fiego()));
+    Console::br();
+    Console::printLn(
+        std::format("{} and {} look at you, stunned.", Ressources::Game::fiego(), Ressources::Game::brock()));
+    Console::confirmToContinue();
+}
+
+void CSandwichShop::talkToRebellion()
+{
 }
 
 void CSandwichShop::sellSandwiches()
@@ -276,6 +355,14 @@ void CSandwichShop::sellSandwiches()
         {
             actions.push_back(menu.createAction("Deliver ingredients", 'D'));
         }
+        if (checkForRebellionHideoutHint())
+        {
+            actions.push_back(menu.createAction("Observe, who buys your sandwiches", 'O'));
+        }
+        if (_playerDiscoveredHideout)
+        {
+            actions.push_back(menu.createAction("Talk to the rebellion", 'T'));
+        }
 
         menu.addMenuGroup(actions, {CMenu::exit()});
         input = menu.execute();
@@ -287,6 +374,14 @@ void CSandwichShop::sellSandwiches()
         if (input.key == 'd')
         {
             deliverIngredients();
+        }
+        if (input.key == 'o')
+        {
+            observe();
+        }
+        if (input.key == 't')
+        {
+            talkToRebellion();
         }
 
     } while (input != CMenu::exit());

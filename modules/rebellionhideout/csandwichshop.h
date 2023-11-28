@@ -25,8 +25,12 @@ private:
     void eatSandwichOfTheDay();
 
     void checkForShaggysSandwich();
+    bool checkForRebellionHideoutHint();
+
     void deliverIngredients();
     void makeASandwich();
+    void observe();
+    void talkToRebellion();
 
     void sellSandwiches();
 

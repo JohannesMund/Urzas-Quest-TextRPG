@@ -75,7 +75,7 @@ void CLayla2Encounter::execute(const std::string_view& moduleName)
         CC::ccReset()));
     Console::printLn(std::format("During the kidnapping, she lost her {0}, the {0} gifted to her by her grandmother. "
                                  "Sha cannot return home without this {0}.",
-                                 Layla2Ressources::ribbon()));
+                                 Ressources::Game::laylasRibbon()));
     Console::printLn(std::format("You start to understand, that the royal guards probably are not totally incompetent, "
                                  "but what man could refuse the wich of beautiful woman like {}.",
                                  Ressources::Game::princessLayla()));

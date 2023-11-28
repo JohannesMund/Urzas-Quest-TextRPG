@@ -61,12 +61,12 @@ void CLayla2GoblinVillageTask::execute()
         "This does not matter now. You untie the beautiful, sexy princess, and give her back her {}. But instead of "
         "jumping at you and giving you an appropriate \"thank you\" she just makes a disgusted face \"Eeeew, this "
         "thing is all dirty and,... Here, please, keep it as my royal gift, as a reward for your courage.\"",
-        Layla2Ressources::ribbon()));
+        Ressources::Game::laylasRibbon()));
 
     Console::printLn(
         std::format("...and another disappointment, If she just weren't this hot! But at least, now you have a nice, "
                     "beautiful, dirty and a little ripped royal {}, You decide to keep it as a prove for her love.",
-                    Layla2Ressources::ribbon()));
+                    Ressources::Game::laylasRibbon()));
 
     auto rooms = CGameManagement::getInstance()->roomsMatchingFilter(CCapital::capitalFilter());
     if (rooms.size())

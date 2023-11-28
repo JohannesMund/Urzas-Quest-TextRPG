@@ -29,7 +29,7 @@ std::string FishingVillageRessources::moduleNameFishLegend()
 void FishingVillageRessources::initModuleMakeRod()
 {
     CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-        moduleNameMakeRod(), []() { return new CFishingRodPart(); }, 10);
+        moduleNameMakeRod(), []() { return new CFishingRodPart(); }, 50);
     CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeRod()),
                                               CFishingVillage::fishingVillageFilter());
 }
@@ -37,7 +37,7 @@ void FishingVillageRessources::initModuleMakeRod()
 void FishingVillageRessources::initModuleMakeBoat()
 {
     CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-        moduleNameMakeBoat(), []() { return new CBoatPart(); }, 10);
+        moduleNameMakeBoat(), []() { return new CBoatPart(); }, 50);
     CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeBoat()),
                                               CFishingVillage::fishingVillageFilter());
 }
