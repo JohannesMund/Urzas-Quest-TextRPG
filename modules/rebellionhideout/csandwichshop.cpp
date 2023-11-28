@@ -164,6 +164,17 @@ bool CSandwichShop::checkForRebellionHideoutHint()
         RebellionHideoutRessources::moduleNameRebellionHideout());
 }
 
+bool CSandwichShop::checkForRebellionHideoutHint()
+{
+    if (_playerDiscoveredHideout)
+    {
+        return false;
+    }
+
+    return CGameManagement::getProgressionInstance()->seenModuleHints(
+        RebellionHideoutRessources::moduleNameRebellionHideout());
+}
+
 void CSandwichShop::deliverIngredients()
 {
 
