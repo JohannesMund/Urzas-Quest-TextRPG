@@ -19,7 +19,7 @@ public:
     {
         std::string name;
         std::string display;
-        char key;
+        char key = 0;
         bool operator==(const Action& other) const
         {
             return key == other.key;
