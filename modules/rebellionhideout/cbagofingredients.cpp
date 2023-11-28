@@ -15,19 +15,19 @@ CBagOfIngredients::CBagOfIngredients(const EBagSize size) : CSandwich(fill(size)
     switch (size)
     {
     case EBagSize::S:
-        bagSize = "small";
+        bagSize = "Small";
         break;
     case EBagSize::M:
-        bagSize = "";
+        bagSize = "Medium";
         break;
     case EBagSize::L:
-        bagSize = "full";
+        bagSize = "Full";
         break;
     case EBagSize::XL:
-        bagSize = "jam-packed";
+        bagSize = "Jam-packed";
         break;
     case EBagSize::XXL:
-        bagSize = "overflowing";
+        bagSize = "Overflowing";
         break;
     }
 
@@ -106,7 +106,7 @@ CSandwich::IngredientsList CBagOfIngredients::fill(const EBagSize size)
         content = 4 + Randomizer::getRandom(5);
         break;
     case EBagSize::XXL:
-        content = 7 + Randomizer::getRandom(8);
+        content = 5 + Randomizer::getRandom(6);
         break;
     }
 
