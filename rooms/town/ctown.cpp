@@ -7,6 +7,7 @@
 #include "ressources.h"
 
 #include <format>
+#include <optional>
 
 CTown::CTown() : CRoom()
 {
@@ -37,9 +38,9 @@ void CTown::execute()
 
         CMenu menu;
         CMenu::ActionList navs = {menu.createAction("Blacksmith"),
-                                           menu.createAction("Church"),
-                                           menu.createAction("Tavern"),
-                                           menu.createAction("Shop")};
+                                  menu.createAction("Church"),
+                                  menu.createAction("Tavern"),
+                                  menu.createAction("Shop")};
         if (CGameManagement::getCompanionInstance()->hasCompanion())
         {
             navs.push_back(menu.createAction("Farm"));
@@ -47,11 +48,11 @@ void CTown::execute()
 
         menu.addMenuGroup(navs, {CMenu::exit()});
 
-        CMenu::Action taskAction;
+        std::optional<CMenu::Action> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
             taskAction = menu.createAction(_task->taskNav());
-            menu.addMenuGroup({taskAction});
+            menu.addMenuGroup({taskAction.value()});
         }
 
         input = menu.execute();
@@ -77,7 +78,7 @@ void CTown::execute()
             _farm.execute();
         }
 
-        if (input == taskAction)
+        if (taskAction.has_value() && input == *taskAction)
         {
             executeTask();
             Console::confirmToContinue();

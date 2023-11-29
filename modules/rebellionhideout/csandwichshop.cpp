@@ -147,9 +147,9 @@ void CSandwichShop::checkForShaggysSandwich()
                         Ressources::Game::fiego(),
                         Ressources::Game::brock()));
         CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 25);
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 10);
         CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 25);
+            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 10);
     }
 }
 

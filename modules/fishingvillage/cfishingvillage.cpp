@@ -7,6 +7,7 @@
 #include "fishingvillage/moduleressources.h"
 
 #include <format>
+#include <optional>
 
 CFishingVillage::CFishingVillage() : CRoom()
 {
@@ -40,11 +41,11 @@ void CFishingVillage::execute()
                            menu.createAction("Restaurant", 'R'),
                            menu.createAction("Go Fishing", 'G')});
 
-        CMenu::Action taskAction;
+        std::optional<CMenu::Action> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
             taskAction = menu.createAction(_task->taskNav());
-            menu.addMenuGroup({taskAction}, {CMenu::exit()});
+            menu.addMenuGroup({taskAction.value()}, {CMenu::exit()});
         }
         else
         {
@@ -64,7 +65,7 @@ void CFishingVillage::execute()
         {
             _goFishing.execute();
         }
-        if (input == taskAction)
+        if (taskAction.has_value() && input == *taskAction)
         {
             executeTask();
             Console::confirmToContinue();

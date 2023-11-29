@@ -314,7 +314,9 @@ void CGameManagement::init()
     std::vector<CRoom*> rooms;
 
     _progression.initEncounters();
+    _progression.initModules();
     _progression.initWorldMap(rooms);
+    _progression.startGame();
 
     _map.setStartingPosition({3, 5});
     _map.init(rooms);

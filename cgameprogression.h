@@ -1,5 +1,7 @@
 #pragma once
 
+#include "enumiterator.h"
+
 #include <functional>
 #include <string>
 #include <vector>
@@ -22,10 +24,7 @@ public:
         eFinale
     };
 
-    void initEncounters();
-
     EGameStage currentGameStage() const;
-
     std::vector<std::string> getQuestLog() const;
 
     void reportModuleFinished(const std::string_view& moduleName);
@@ -46,35 +45,7 @@ public:
     unsigned long turns() const;
 
 private:
-    CGameProgression();
-
-    void checkGameProgress();
-
-    void unFinishModule(const std::string_view& moduleName);
-
-    void initModuleByName(const std::string_view& moduleName);
-    void deInitModuleByName(const std::string_view& moduleName);
-
-    bool canProgress();
-
-    void deInitStage();
-    void initStage();
-    void initWorldMap(std::vector<CRoom*>& rooms) const;
-
-    void progressToStage(EGameStage stage);
-
-    void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
-    void registerModule(
-        const std::string_view& name,
-        const EGameStage neededForStage,
-        std::function<std::string()> questLogFunction = &ModuleRegister::noQuestLogFunction,
-        std::function<void()> initFunction = &ModuleRegister::noInitDeInitFunction,
-        std::function<void()> deInitFunction = &ModuleRegister::noInitDeInitFunction,
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &ModuleRegister::noInitWorldMapFunction);
-
-    EGameStage _currentStage = EGameStage::eNone;
-    unsigned long _bodyCount = 0;
-    unsigned long _turns = 0;
+    typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
 
     struct ModuleRegister
     {
@@ -106,9 +77,6 @@ private:
         }
     };
 
-    std::vector<std::string> _finishedModules;
-    std::vector<ModuleRegister> _moduleRegister;
-
     struct ModuleHint
     {
         std::string moduleName;
@@ -120,5 +88,41 @@ private:
         }
     };
 
+    CGameProgression();
+
+    void initEncounters();
+    void initModules();
+    void startGame();
+
+    void checkGameProgress();
+
+    void unFinishModule(const std::string_view& moduleName);
+
+    void initModuleByName(const std::string_view& moduleName);
+    void deInitModuleByName(const std::string_view& moduleName);
+
+    bool canProgress();
+
+    void deInitStage();
+    void initStage();
+    void initWorldMap(std::vector<CRoom*>& rooms) const;
+
+    void progressToStage(EGameStage stage);
+
+    void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
+    void registerModule(
+        const std::string_view& name,
+        const EGameStage neededForStage,
+        std::function<std::string()> questLogFunction = &ModuleRegister::noQuestLogFunction,
+        std::function<void()> initFunction = &ModuleRegister::noInitDeInitFunction,
+        std::function<void()> deInitFunction = &ModuleRegister::noInitDeInitFunction,
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &ModuleRegister::noInitWorldMapFunction);
+
+    EGameStage _currentStage = EGameStage::eNone;
+    unsigned long _bodyCount = 0;
+    unsigned long _turns = 0;
+
+    std::vector<std::string> _finishedModules;
+    std::vector<ModuleRegister> _moduleRegister;
     std::vector<ModuleHint> _moduleHints;
 };
