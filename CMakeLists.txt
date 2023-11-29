@@ -154,7 +154,6 @@ set(URZAS_QUEST_SOURCES
     modules/layla2/tasks/clayla2goblinvillagetask.h modules/layla2/tasks/clayla2goblinvillagetask.cpp
     modules/layla2/enemies/cgoblinhorde.h modules/layla2/enemies/cgoblinhorde.cpp
     modules/layla2/tasks/clayla2capitaltask.h modules/layla2/tasks/clayla2capitaltask.cpp
-
 )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES})
