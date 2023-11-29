@@ -11,7 +11,6 @@ class CRoom;
 class CGameProgression
 {
     friend class CGameManagement;
-    friend class ModuleRegister;
 
 public:
     enum class EGameStage
@@ -45,6 +44,14 @@ public:
     unsigned int progress() const;
     unsigned long bodyCount() const;
     unsigned long turns() const;
+
+    void registerModule(
+        const std::string_view& name,
+        const EGameStage neededForStage,
+        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
+        std::function<void()> initFunction = &Module::noInitDeInitFunction,
+        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
@@ -112,14 +119,6 @@ private:
     void progressToStage(EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
-
-    void registerModule(
-        const std::string_view& name,
-        const EGameStage neededForStage,
-        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
-        std::function<void()> initFunction = &Module::noInitDeInitFunction,
-        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
 
     void registerModule(const Module& modules);
 

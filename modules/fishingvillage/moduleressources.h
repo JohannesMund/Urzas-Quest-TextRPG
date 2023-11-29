@@ -33,6 +33,10 @@ void initModuleMakeRod();
 void initModuleMakeBoat();
 void initModuleFishLegend();
 
+void deInitModuleMakeRod();
+void deInitModuleMakeBoat();
+void deInitModuleFishLegend();
+
 void initWorldMap(std::vector<CRoom*>& rooms);
 
 std::string fishingVilleName();
