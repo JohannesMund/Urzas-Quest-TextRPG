@@ -2,6 +2,7 @@
 
 #include "cgameprogression.h"
 #include "croom.h"
+#include "ressources.h"
 
 class CShrineOfTheAncients : public CRoom
 {

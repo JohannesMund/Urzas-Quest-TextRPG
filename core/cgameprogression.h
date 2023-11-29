@@ -1,6 +1,7 @@
 #pragma once
 
 #include "enumiterator.h"
+#include "ressources.h"
 
 #include <functional>
 #include <string>
@@ -10,6 +11,7 @@ class CRoom;
 class CGameProgression
 {
     friend class CGameManagement;
+    friend class ModuleRegister;
 
 public:
     enum class EGameStage
@@ -47,7 +49,7 @@ public:
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
 
-    struct ModuleRegister
+    struct Module
     {
         std::string moduleName;
         EGameStage gameStage;
@@ -56,11 +58,11 @@ private:
         std::function<void()> deInitFunction;
         std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
 
-        static std::function<bool(const ModuleRegister)> moduleRegisterNameFilter(const std::string_view& name)
+        static std::function<bool(const Module)> moduleRegisterNameFilter(const std::string_view& name)
         {
             return [name](const auto module) { return module.moduleName.compare(name) == 0; };
         }
-        static std::function<bool(const ModuleRegister)> moduleRegisterStageFilter(const EGameStage& stage)
+        static std::function<bool(const Module)> moduleRegisterStageFilter(const EGameStage& stage)
         {
             return [stage](auto module) { return module.gameStage == stage; };
         }
@@ -110,19 +112,22 @@ private:
     void progressToStage(EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
+
     void registerModule(
         const std::string_view& name,
         const EGameStage neededForStage,
-        std::function<std::string()> questLogFunction = &ModuleRegister::noQuestLogFunction,
-        std::function<void()> initFunction = &ModuleRegister::noInitDeInitFunction,
-        std::function<void()> deInitFunction = &ModuleRegister::noInitDeInitFunction,
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &ModuleRegister::noInitWorldMapFunction);
+        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
+        std::function<void()> initFunction = &Module::noInitDeInitFunction,
+        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
+
+    void registerModule(const Module& modules);
 
     EGameStage _currentStage = EGameStage::eNone;
     unsigned long _bodyCount = 0;
     unsigned long _turns = 0;
 
     std::vector<std::string> _finishedModules;
-    std::vector<ModuleRegister> _moduleRegister;
+    std::vector<Module> _registeredModules;
     std::vector<ModuleHint> _moduleHints;
 };
