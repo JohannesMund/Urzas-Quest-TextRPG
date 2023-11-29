@@ -2,8 +2,6 @@
 #include "colorize.h"
 #include "randomizer.h"
 
-#include "bard/moduleressources.h"
-
 #include <algorithm>
 #include <format>
 #include <map>

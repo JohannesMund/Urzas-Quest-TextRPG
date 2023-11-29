@@ -2,6 +2,7 @@
 
 #include "cgameprogression.h"
 #include "croom.h"
+#include "ressources.h"
 
 class CShrineOfTheAncients : public CRoom
 {
@@ -14,7 +15,7 @@ public:
     virtual std::string bgColor() const override;
 
 private:
-    CGameProgression::EGameStage _seenDuringPhase = CGameProgression::EGameStage::eNone;
+    Ressources::Game::EGameStage _seenDuringPhase = Ressources::Game::EGameStage::eNone;
 
     void visit();
     void firstVisit();

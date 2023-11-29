@@ -34,6 +34,18 @@ static const unsigned int initiative = 5;
 
 namespace Game
 {
+enum class EGameStage
+{
+    eNone,
+    eStart,
+    eSeenBard,
+    eProvenAsHero,
+    eLearnedAboutCult,
+    eFoundCult,
+    eFoundUrza,
+    eFinale
+};
+
 namespace ShrineRessources
 {
 std::string moduleName();

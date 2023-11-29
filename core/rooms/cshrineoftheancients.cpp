@@ -52,21 +52,21 @@ void CShrineOfTheAncients::visit()
     Console::printLn(std::format("Once again, you approach the {}.", ancientShrine()));
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
-    case CGameProgression::EGameStage::eNone:
-    case CGameProgression::EGameStage::eStart:
-    case CGameProgression::EGameStage::eSeenBard:
+    case Ressources::Game::EGameStage::eNone:
+    case Ressources::Game::EGameStage::eStart:
+    case Ressources::Game::EGameStage::eSeenBard:
         Console::printLn("And as before, the old man does not even realize, that "
                          "you are there.");
         break;
-    case CGameProgression::EGameStage::eProvenAsHero:
+    case Ressources::Game::EGameStage::eProvenAsHero:
         Console::printLn("This time, the old man stands directly next to the "
                          "entry, and smiles at you. Obviousely, "
                          "your are still no hero.");
         break;
-    case CGameProgression::EGameStage::eLearnedAboutCult:
-    case CGameProgression::EGameStage::eFoundCult:
-    case CGameProgression::EGameStage::eFoundUrza:
-    case CGameProgression::EGameStage::eFinale:
+    case Ressources::Game::EGameStage::eLearnedAboutCult:
+    case Ressources::Game::EGameStage::eFoundCult:
+    case Ressources::Game::EGameStage::eFoundUrza:
+    case Ressources::Game::EGameStage::eFinale:
         Console::printLn(
             "This time, grampa stands in the opened gate. He smiles, but you are probably still not ready.");
         break;
@@ -81,22 +81,22 @@ void CShrineOfTheAncients::firstVisit()
 
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
-    case CGameProgression::EGameStage::eNone:
-    case CGameProgression::EGameStage::eStart:
+    case Ressources::Game::EGameStage::eNone:
+    case Ressources::Game::EGameStage::eStart:
         firstVisitStart();
         break;
-    case CGameProgression::EGameStage::eSeenBard:
+    case Ressources::Game::EGameStage::eSeenBard:
         firstVisitSeenBard();
         break;
-    case CGameProgression::EGameStage::eProvenAsHero:
+    case Ressources::Game::EGameStage::eProvenAsHero:
         firstVisitProvenAsHero();
         break;
-    case CGameProgression::EGameStage::eLearnedAboutCult:
+    case Ressources::Game::EGameStage::eLearnedAboutCult:
         firstVisitLearnedAboutCult();
         break;
-    case CGameProgression::EGameStage::eFoundCult:
-    case CGameProgression::EGameStage::eFoundUrza:
-    case CGameProgression::EGameStage::eFinale:
+    case Ressources::Game::EGameStage::eFoundCult:
+    case Ressources::Game::EGameStage::eFoundUrza:
+    case Ressources::Game::EGameStage::eFinale:
         Console::printLn("Not implemented");
         Console::confirmToContinue();
         break;
