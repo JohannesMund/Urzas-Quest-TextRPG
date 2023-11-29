@@ -103,8 +103,6 @@ set(URZAS_QUEST_SOURCES
     modules/ratfarm/cratfarmratboss.h modules/ratfarm/cratfarmratboss.cpp
     modules/ratfarm/cratfarmturnip.h modules/ratfarm/cratfarmturnip.cpp
 
-
-
     modules/bard/moduleressources.h modules/bard/moduleressources.cpp
     modules/bard/cdancingbard.h modules/bard/cdancingbard.cpp
 
