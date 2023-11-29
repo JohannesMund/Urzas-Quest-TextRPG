@@ -15,7 +15,7 @@ public:
     virtual std::string bgColor() const override;
 
 private:
-    Ressources::Game::EGameStage _seenDuringPhase = Ressources::Game::EGameStage::eNone;
+    CGameProgression::EGameStage _seenDuringPhase = CGameProgression::EGameStage::eNone;
 
     void visit();
     void firstVisit();

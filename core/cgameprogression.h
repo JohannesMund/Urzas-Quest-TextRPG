@@ -1,7 +1,6 @@
 #pragma once
 
 #include "enumiterator.h"
-#include "modulesregister.h"
 #include "ressources.h"
 
 #include <functional>
@@ -12,9 +11,22 @@ class CRoom;
 class CGameProgression
 {
     friend class CGameManagement;
+    friend class ModuleRegister;
 
 public:
-    Ressources::Game::EGameStage currentGameStage() const;
+    enum class EGameStage
+    {
+        eNone,
+        eStart,
+        eSeenBard,
+        eProvenAsHero,
+        eLearnedAboutCult,
+        eFoundCult,
+        eFoundUrza,
+        eFinale
+    };
+
+    EGameStage currentGameStage() const;
     std::vector<std::string> getQuestLog() const;
 
     void reportModuleFinished(const std::string_view& moduleName);
@@ -35,10 +47,37 @@ public:
     unsigned long turns() const;
 
 private:
-    typedef EnumIterator<Ressources::Game::EGameStage,
-                         Ressources::Game::EGameStage::eNone,
-                         Ressources::Game::EGameStage::eFinale>
-        gameStageIterator;
+    typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
+
+    struct Module
+    {
+        std::string moduleName;
+        EGameStage gameStage;
+        std::function<std::string()> questLogFunction;
+        std::function<void()> initFunction;
+        std::function<void()> deInitFunction;
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
+
+        static std::function<bool(const Module)> moduleRegisterNameFilter(const std::string_view& name)
+        {
+            return [name](const auto module) { return module.moduleName.compare(name) == 0; };
+        }
+        static std::function<bool(const Module)> moduleRegisterStageFilter(const EGameStage& stage)
+        {
+            return [stage](auto module) { return module.gameStage == stage; };
+        }
+
+        static void noInitDeInitFunction()
+        {
+        }
+        static void noInitWorldMapFunction(std::vector<CRoom*>&)
+        {
+        }
+        static std::string noQuestLogFunction()
+        {
+            return std::string{};
+        }
+    };
 
     struct ModuleHint
     {
@@ -70,17 +109,25 @@ private:
     void initStage();
     void initWorldMap(std::vector<CRoom*>& rooms) const;
 
-    void progressToStage(Ressources::Game::EGameStage stage);
+    void progressToStage(EGameStage stage);
 
-    void reRegisterModule(const std::string_view& name, const Ressources::Game::EGameStage neededForStage);
+    void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
 
-    void registerModule(const ModuleRegister::Module& modules);
+    void registerModule(
+        const std::string_view& name,
+        const EGameStage neededForStage,
+        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
+        std::function<void()> initFunction = &Module::noInitDeInitFunction,
+        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
 
-    Ressources::Game::EGameStage _currentStage = Ressources::Game::EGameStage::eNone;
+    void registerModule(const Module& modules);
+
+    EGameStage _currentStage = EGameStage::eNone;
     unsigned long _bodyCount = 0;
     unsigned long _turns = 0;
 
     std::vector<std::string> _finishedModules;
-    std::vector<ModuleRegister::Module> _moduleRegister;
+    std::vector<Module> _registeredModules;
     std::vector<ModuleHint> _moduleHints;
 };

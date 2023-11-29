@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(URZAS_QUEST_SOURCES_ROOT
 	main.cpp
 	ressources.h ressources.cpp
+    modulesregister.h
 )
 set(URZAS_QUEST_SOURCES_CORE
 	core/console.h core/console.cpp
