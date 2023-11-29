@@ -29,7 +29,10 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CDeadHero());
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
     CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
+}
 
+void CGameProgression::initModules()
+{
     registerModule(Ressources::Game::ShrineRessources::moduleName(), EGameStage::eStart);
 
     registerModule(BardRessources::moduleName(),
@@ -96,7 +99,10 @@ void CGameProgression::initEncounters()
                    &Layla2Ressources::questLog,
                    &Layla2Ressources::initModule,
                    &Layla2Ressources::deInitModule);
+}
 
+void CGameProgression::startGame()
+{
     progressToStage(EGameStage::eStart);
 }
 
@@ -140,21 +146,8 @@ void CGameProgression::checkGameProgress()
         return;
     }
 
-    switch (_currentStage)
-    {
-    case EGameStage::eStart:
-        progressToStage(EGameStage::eSeenBard);
-        return;
-    case EGameStage::eSeenBard:
-        progressToStage(EGameStage::eProvenAsHero);
-        return;
-    case EGameStage::eProvenAsHero:
-        progressToStage(EGameStage::eLearnedAboutCult);
-    case EGameStage::eLearnedAboutCult:
-        progressToStage(EGameStage::eFoundCult);
-    default:
-        return;
-    }
+    gameStageIterator it = _currentStage;
+    progressToStage(*(++it));
 }
 
 void CGameProgression::reportModuleFinished(const std::string_view& moduleName)
