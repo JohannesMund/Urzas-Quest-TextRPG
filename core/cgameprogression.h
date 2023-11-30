@@ -25,6 +25,17 @@ public:
         eFinale
     };
 
+    struct ModuleQuest
+    {
+        std::string moduleName;
+        std::string questText;
+        bool accepted = false;
+        static std::function<bool(const ModuleQuest)> moduleQuestNameFilter(const std::string_view& name)
+        {
+            return [name](const auto hint) { return hint.moduleName.compare(name) == 0; };
+        }
+    };
+
     EGameStage currentGameStage() const;
     std::vector<std::string> getQuestLog() const;
 
@@ -32,8 +43,16 @@ public:
 
     void registerModuleHint(const std::string_view& moduleName, const std::string_view& hint);
     void unregisterModuleHintsByModuleName(const std::string& moduleName);
-    bool seenModuleHints(const std::string_view& moduleName);
+    bool areModuleHintsSeen(const std::string_view& moduleName) const;
     std::string getRandomHint();
+    bool moduleHintsAvailable() const;
+
+    void registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText);
+    void unregisterModuleQuestByModuleName(const std::string& moduleName);
+    bool isModuleQuestAccepted(const std::string_view& moduleName) const;
+    ModuleQuest getRandomQuest() const;
+    void acceptModuleQuest(const std::string_view& moduleName);
+    bool areModuleQuestsAvailable() const;
 
     bool isModuleActive(const std::string_view& moduleName) const;
     bool isModuleFinished(const std::string_view& moduleName) const;
@@ -96,7 +115,6 @@ private:
             return [name](const auto hint) { return hint.moduleName.compare(name) == 0; };
         }
     };
-
     CGameProgression();
 
     void initEncounters();
@@ -128,5 +146,7 @@ private:
 
     std::vector<std::string> _finishedModules;
     std::vector<Module> _registeredModules;
+
     std::vector<ModuleHint> _moduleHints;
+    std::vector<ModuleQuest> _moduleQuests;
 };

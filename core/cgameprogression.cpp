@@ -104,7 +104,7 @@ void CGameProgression::unregisterModuleHintsByModuleName(const std::string& modu
     }
 }
 
-bool CGameProgression::seenModuleHints(const std::string_view& moduleName)
+bool CGameProgression::areModuleHintsSeen(const std::string_view& moduleName) const
 {
     bool seen = false;
     for (auto& moduleHint : _moduleHints | std::views::filter(ModuleHint::moduleHintNameFilter(moduleName)))
@@ -132,6 +132,72 @@ std::string CGameProgression::getRandomHint()
     auto index = Randomizer::getRandom(_moduleHints.size());
     _moduleHints.at(index).seen = true;
     return _moduleHints.at(index).hintText;
+}
+
+bool CGameProgression::moduleHintsAvailable() const
+{
+    return _moduleHints.size() != 0;
+}
+
+void CGameProgression::registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText)
+{
+
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
+    {
+        moduleQuest.questText = questText;
+        moduleQuest.accepted = false;
+        return;
+    }
+
+    ModuleQuest quest;
+    quest.moduleName = moduleName;
+    quest.questText = questText;
+    _moduleQuests.push_back(quest);
+}
+
+void CGameProgression::unregisterModuleQuestByModuleName(const std::string& moduleName)
+{
+    auto it =
+        std::remove_if(_moduleQuests.begin(), _moduleQuests.end(), ModuleQuest::moduleQuestNameFilter(moduleName));
+    if (it != _moduleQuests.end())
+    {
+        _moduleQuests.erase(it);
+    }
+}
+
+bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName) const
+{
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
+    {
+        if (moduleQuest.accepted == true)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+CGameProgression::ModuleQuest CGameProgression::getRandomQuest() const
+{
+    if (_moduleQuests.size() == 0)
+    {
+        return {};
+    }
+    return _moduleQuests.at(Randomizer::getRandom(_moduleQuests.size()));
+}
+
+void CGameProgression::acceptModuleQuest(const std::string_view& moduleName)
+{
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
+    {
+        moduleQuest.accepted = true;
+        return;
+    }
+}
+
+bool CGameProgression::areModuleQuestsAvailable() const
+{
+    return _moduleQuests.size() != 0;
 }
 
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
