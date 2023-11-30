@@ -25,14 +25,15 @@ private:
     void eatSandwichOfTheDay();
 
     void checkForShaggysSandwich();
-    bool checkForRebellionHideoutHint();
+    void checkForSoldSandwiches();
+    bool seenRebellionHideoutHint();
+
+    void revolutionaryThoughts();
 
     void deliverIngredients();
     void makeASandwich();
     void observe();
     void talkToRebellion();
-
-    void sellSandwiches();
 
     int countIngredients();
 
