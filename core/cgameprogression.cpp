@@ -144,14 +144,14 @@ void CGameProgression::registerModuleQuest(const std::string_view& moduleName, c
 
     for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
     {
-        moduleQuest.questText = questText;
+        moduleQuest.questInfo.questText = questText;
         moduleQuest.accepted = false;
         return;
     }
 
     ModuleQuest quest;
-    quest.moduleName = moduleName;
-    quest.questText = questText;
+    quest.questInfo.moduleName = moduleName;
+    quest.questInfo.questText = questText;
     _moduleQuests.push_back(quest);
 }
 
@@ -177,13 +177,13 @@ bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName)
     return false;
 }
 
-CGameProgression::ModuleQuest CGameProgression::getRandomQuest() const
+CGameProgression::ModuleQuestInfo CGameProgression::getRandomQuest() const
 {
     if (_moduleQuests.size() == 0)
     {
         return {};
     }
-    return _moduleQuests.at(Randomizer::getRandom(_moduleQuests.size()));
+    return _moduleQuests.at(Randomizer::getRandom(_moduleQuests.size())).questInfo;
 }
 
 void CGameProgression::acceptModuleQuest(const std::string_view& moduleName)

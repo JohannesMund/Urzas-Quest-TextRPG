@@ -25,15 +25,10 @@ public:
         eFinale
     };
 
-    struct ModuleQuest
+    struct ModuleQuestInfo
     {
         std::string moduleName;
         std::string questText;
-        bool accepted = false;
-        static std::function<bool(const ModuleQuest)> moduleQuestNameFilter(const std::string_view& name)
-        {
-            return [name](const auto hint) { return hint.moduleName.compare(name) == 0; };
-        }
     };
 
     EGameStage currentGameStage() const;
@@ -50,7 +45,7 @@ public:
     void registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText);
     void unregisterModuleQuestByModuleName(const std::string& moduleName);
     bool isModuleQuestAccepted(const std::string_view& moduleName) const;
-    ModuleQuest getRandomQuest() const;
+    ModuleQuestInfo getRandomQuest() const;
     void acceptModuleQuest(const std::string_view& moduleName);
     bool areModuleQuestsAvailable() const;
 
@@ -115,6 +110,17 @@ private:
             return [name](const auto hint) { return hint.moduleName.compare(name) == 0; };
         }
     };
+
+    struct ModuleQuest
+    {
+        ModuleQuestInfo questInfo;
+        bool accepted = false;
+        static std::function<bool(const ModuleQuest)> moduleQuestNameFilter(const std::string_view& name)
+        {
+            return [name](const auto quest) { return quest.questInfo.moduleName.compare(name) == 0; };
+        }
+    };
+
     CGameProgression();
 
     void initEncounters();
