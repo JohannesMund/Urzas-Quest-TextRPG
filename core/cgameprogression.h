@@ -66,6 +66,7 @@ public:
         std::function<void()> initFunction = &Module::noInitDeInitFunction,
         std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
         std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
+    void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
@@ -118,6 +119,16 @@ private:
         static std::function<bool(const ModuleQuest)> moduleQuestNameFilter(const std::string_view& name)
         {
             return [name](const auto quest) { return quest.questInfo.moduleName.compare(name) == 0; };
+        }
+
+        static std::function<bool(const ModuleQuest)> moduleQuestAvailableFilter()
+        {
+            return [](const auto quest) { return quest.accepted == false; };
+        }
+
+        static std::function<bool(const ModuleQuest)> moduleQuestAcceptedFilter()
+        {
+            return [](const auto quest) { return quest.accepted == true; };
         }
     };
 

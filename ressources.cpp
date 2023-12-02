@@ -214,11 +214,6 @@ std::string Ressources::Items::otherSock()
                        CC::ccReset());
 }
 
-std::string Ressources::Game::ShrineRessources::moduleName()
-{
-    return "ShrineOfTheAncients";
-}
-
 namespace
 {
 

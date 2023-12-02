@@ -3,6 +3,7 @@
 #include "ressources.h"
 
 #include "modules/bard/moduleressources.h"
+#include "modules/blackivorytower/moduleressources.h"
 #include "modules/cave/moduleressources.h"
 #include "modules/fishingvillage/moduleressources.h"
 #include "modules/lakeoftears/moduleressources.h"
@@ -11,6 +12,7 @@
 #include "modules/ratfarm/moduleressources.h"
 #include "modules/rebellionhideout/moduleressources.h"
 #include "modules/sewer/moduleressources.h"
+#include "modules/shrineoftheancients/moduleressources.h"
 
 #include "cgameprogression.h"
 
@@ -19,7 +21,12 @@ namespace ModuleRegister
 void registerModules(CGameProgression* progression)
 {
 
-    progression->registerModule(Ressources::Game::ShrineRessources::moduleName(), CGameProgression::EGameStage::eStart);
+    progression->registerModule(ShrineRessources::moduleName(),
+                                CGameProgression::EGameStage::eStart,
+                                &ShrineRessources::questLog,
+                                &ShrineRessources::initModule,
+                                &ShrineRessources::deInitModule,
+                                &ShrineRessources::initWorldMap);
 
     progression->registerModule(BardRessources::moduleName(),
                                 CGameProgression::EGameStage::eStart,
@@ -87,5 +94,12 @@ void registerModules(CGameProgression* progression)
                                 &Layla2Ressources::questLog,
                                 &Layla2Ressources::initModule,
                                 &Layla2Ressources::deInitModule);
+
+    progression->registerModule(BlackIvoryTowerRessources::moduleName(),
+                                CGameProgression::EGameStage::eStart,
+                                &BlackIvoryTowerRessources::questLog,
+                                &BlackIvoryTowerRessources::initModule,
+                                &BlackIvoryTowerRessources::deInitModule,
+                                &BlackIvoryTowerRessources::initWorldMap);
 }
 } // namespace ModuleRegister

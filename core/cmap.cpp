@@ -5,7 +5,6 @@
 #include "colorize.h"
 #include "console.h"
 #include "croom.h"
-#include "cshrineoftheancients.h"
 #include "cstartingroom.h"
 #include "ctask.h"
 #include "ctown.h"
@@ -55,7 +54,6 @@ CMap::~CMap()
 void CMap::init(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(RoomFactory::makeInjuredPet());
-    rooms.push_back(RoomFactory::makeShrine());
     rooms.push_back(RoomFactory::makeCapital());
 
     for (int i = 0; i < Ressources::Config::numberOfTowns; i++)

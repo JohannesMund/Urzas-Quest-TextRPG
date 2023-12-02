@@ -167,12 +167,10 @@ void CGameProgression::unregisterModuleQuestByModuleName(const std::string& modu
 
 bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName) const
 {
-    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)) |
+                                 std::views::filter(ModuleQuest::moduleQuestAcceptedFilter()))
     {
-        if (moduleQuest.accepted == true)
-        {
-            return true;
-        }
+        return true;
     }
     return false;
 }
@@ -183,7 +181,18 @@ CGameProgression::ModuleQuestInfo CGameProgression::getRandomQuest() const
     {
         return {};
     }
-    return _moduleQuests.at(Randomizer::getRandom(_moduleQuests.size())).questInfo;
+
+    std::vector<ModuleQuest> availableQuests;
+    std::copy_if(_moduleQuests.begin(),
+                 _moduleQuests.end(),
+                 std::back_inserter(availableQuests),
+                 ModuleQuest::moduleQuestAvailableFilter());
+
+    if (availableQuests.size() == 0)
+    {
+        return {};
+    }
+    return availableQuests.at(Randomizer::getRandom(availableQuests.size())).questInfo;
 }
 
 void CGameProgression::acceptModuleQuest(const std::string_view& moduleName)
@@ -197,7 +206,7 @@ void CGameProgression::acceptModuleQuest(const std::string_view& moduleName)
 
 bool CGameProgression::areModuleQuestsAvailable() const
 {
-    return _moduleQuests.size() != 0;
+    return std::any_of(_moduleQuests.begin(), _moduleQuests.end(), ModuleQuest::moduleQuestAvailableFilter()) != 0;
 }
 
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
@@ -282,7 +291,6 @@ void CGameProgression::progressToStage(EGameStage stage)
     }
 
     _currentStage = stage;
-    reRegisterModule(Ressources::Game::ShrineRessources::moduleName(), _currentStage);
 
     for (const auto& module : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)))
     {
@@ -407,4 +415,9 @@ void CGameProgression::registerModule(const std::string_view& name,
     module.deInitFunction = deInitFunction;
     module.initWorldMapFunction = initWorldMapFunction;
     registerModule(module);
+}
+
+void CGameProgression::reRegisterModuleForNextStage(const std::string_view& moduleName)
+{
+    reRegisterModule(moduleName, *(++gameStageIterator(_currentStage)));
 }

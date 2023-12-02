@@ -26,7 +26,6 @@ void CCapital::execute()
         CRoom::execute();
 
         Console::printLn(Ressources::Rooms::getCapitalRejection());
-        Console::confirmToContinue();
     }
 }
 

@@ -24,7 +24,7 @@ CSandwichShop::CSandwichShop()
 
     _encounterType = CEncounter::EEncounterType::eNone;
     _isRandomTaskPossible = true;
-    _showInFogOfWar = false;
+    _showInFogOfWar = true;
 }
 
 void CSandwichShop::execute()
