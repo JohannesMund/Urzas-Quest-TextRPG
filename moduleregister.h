@@ -96,7 +96,7 @@ void registerModules(CGameProgression* progression)
                                 &Layla2Ressources::deInitModule);
 
     progression->registerModule(BlackIvoryTowerRessources::moduleName(),
-                                CGameProgression::EGameStage::eStart,
+                                CGameProgression::EGameStage::eFoundCult,
                                 &BlackIvoryTowerRessources::questLog,
                                 &BlackIvoryTowerRessources::initModule,
                                 &BlackIvoryTowerRessources::deInitModule,

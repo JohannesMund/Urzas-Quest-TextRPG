@@ -12,7 +12,7 @@ public:
     void setName(const std::string& name);
     void setWeapon(const std::string& weapon);
 
-private:
+protected:
     void specialAttack();
     unsigned int _specialAttackChance = 0;
 };

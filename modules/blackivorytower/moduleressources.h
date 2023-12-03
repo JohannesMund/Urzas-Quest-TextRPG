@@ -15,5 +15,8 @@ void initWorldMap(std::vector<CRoom*>& rooms);
 std::string questLog();
 
 std::string darkIvoryTower();
+
+std::string lunatic();
+std::string lunatics();
 std::string moduleName();
 } // namespace BlackIvoryTowerRessources

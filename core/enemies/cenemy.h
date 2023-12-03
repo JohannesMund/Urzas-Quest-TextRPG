@@ -19,6 +19,7 @@ public:
     virtual void battleAction(bool& endRound);
     virtual void postBattleAction();
     virtual void postBattle();
+    virtual int shieldingAction(const int damage) const;
     virtual void spoilsOfWar() const;
 
     virtual std::string name() const;

@@ -41,6 +41,11 @@ void CEnemy::postBattle()
 {
 }
 
+int CEnemy::shieldingAction(const int damage) const
+{
+    return damage;
+}
+
 void CEnemy::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(basicXP(_level));
@@ -108,12 +113,14 @@ void CEnemy::addHp(const int i)
 
 void CEnemy::dealDamage(const int i)
 {
-    if (i == 0)
+    int damage = shieldingAction(i);
+
+    if (damage == 0)
     {
         return;
     }
     Console::printLn(std::format("You hit the enemy for {}{} damage{}.", CC::fgLightBlue(), i, CC::ccReset()));
-    addHp(i * -1);
+    addHp(damage * -1);
 }
 
 unsigned int CEnemy::hp() const
