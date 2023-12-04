@@ -4,6 +4,7 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "moduleressources.h"
 #include "ressources.h"
 
 #include <format>
@@ -77,7 +78,7 @@ void CShrineOfTheAncients::firstVisit()
 {
 
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
-    CGameManagement::getProgressionInstance()->reportModuleFinished(Ressources::Game::ShrineRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(ShrineRessources::moduleName());
 
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {

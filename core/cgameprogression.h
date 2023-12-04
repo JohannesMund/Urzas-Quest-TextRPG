@@ -8,10 +8,10 @@
 #include <vector>
 
 class CRoom;
+struct Module;
 class CGameProgression
 {
     friend class CGameManagement;
-    friend class ModuleRegister;
 
 public:
     enum class EGameStage
@@ -26,6 +26,12 @@ public:
         eFinale
     };
 
+    struct ModuleQuestInfo
+    {
+        std::string moduleName;
+        std::string questText;
+    };
+
     EGameStage currentGameStage() const;
     std::vector<std::string> getQuestLog() const;
 
@@ -33,8 +39,16 @@ public:
 
     void registerModuleHint(const std::string_view& moduleName, const std::string_view& hint);
     void unregisterModuleHintsByModuleName(const std::string& moduleName);
-    bool seenModuleHints(const std::string_view& moduleName);
+    bool areModuleHintsSeen(const std::string_view& moduleName) const;
     std::string getRandomHint();
+    bool moduleHintsAvailable() const;
+
+    void registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText);
+    void unregisterModuleQuestByModuleName(const std::string& moduleName);
+    bool isModuleQuestAccepted(const std::string_view& moduleName) const;
+    ModuleQuestInfo getRandomQuest() const;
+    void acceptModuleQuest(const std::string_view& moduleName);
+    bool areModuleQuestsAvailable() const;
 
     bool isModuleActive(const std::string_view& moduleName) const;
     bool isModuleFinished(const std::string_view& moduleName) const;
@@ -45,6 +59,15 @@ public:
     unsigned int progress() const;
     unsigned long bodyCount() const;
     unsigned long turns() const;
+
+    void registerModule(
+        const std::string_view& name,
+        const EGameStage neededForStage,
+        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
+        std::function<void()> initFunction = &Module::noInitDeInitFunction,
+        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
+        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
+    void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
@@ -90,6 +113,26 @@ private:
         }
     };
 
+    struct ModuleQuest
+    {
+        ModuleQuestInfo questInfo;
+        bool accepted = false;
+        static std::function<bool(const ModuleQuest)> moduleQuestNameFilter(const std::string_view& name)
+        {
+            return [name](const auto quest) { return quest.questInfo.moduleName.compare(name) == 0; };
+        }
+
+        static std::function<bool(const ModuleQuest)> moduleQuestAvailableFilter()
+        {
+            return [](const auto quest) { return quest.accepted == false; };
+        }
+
+        static std::function<bool(const ModuleQuest)> moduleQuestAcceptedFilter()
+        {
+            return [](const auto quest) { return quest.accepted == true; };
+        }
+    };
+
     CGameProgression();
 
     void initEncounters();
@@ -113,14 +156,6 @@ private:
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
 
-    void registerModule(
-        const std::string_view& name,
-        const EGameStage neededForStage,
-        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
-        std::function<void()> initFunction = &Module::noInitDeInitFunction,
-        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
-
     void registerModule(const Module& modules);
 
     EGameStage _currentStage = EGameStage::eNone;
@@ -129,5 +164,7 @@ private:
 
     std::vector<std::string> _finishedModules;
     std::vector<Module> _registeredModules;
+
     std::vector<ModuleHint> _moduleHints;
+    std::vector<ModuleQuest> _moduleQuests;
 };

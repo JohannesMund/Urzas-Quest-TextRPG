@@ -7,6 +7,7 @@
 #include "console.h"
 #include "moduleregister.h"
 #include "randomizer.h"
+
 #include <algorithm>
 #include <cmath>
 #include <format>
@@ -104,7 +105,7 @@ void CGameProgression::unregisterModuleHintsByModuleName(const std::string& modu
     }
 }
 
-bool CGameProgression::seenModuleHints(const std::string_view& moduleName)
+bool CGameProgression::areModuleHintsSeen(const std::string_view& moduleName) const
 {
     bool seen = false;
     for (auto& moduleHint : _moduleHints | std::views::filter(ModuleHint::moduleHintNameFilter(moduleName)))
@@ -132,6 +133,81 @@ std::string CGameProgression::getRandomHint()
     auto index = Randomizer::getRandom(_moduleHints.size());
     _moduleHints.at(index).seen = true;
     return _moduleHints.at(index).hintText;
+}
+
+bool CGameProgression::moduleHintsAvailable() const
+{
+    return _moduleHints.size() != 0;
+}
+
+void CGameProgression::registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText)
+{
+
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
+    {
+        moduleQuest.questInfo.questText = questText;
+        moduleQuest.accepted = false;
+        return;
+    }
+
+    ModuleQuest quest;
+    quest.questInfo.moduleName = moduleName;
+    quest.questInfo.questText = questText;
+    _moduleQuests.push_back(quest);
+}
+
+void CGameProgression::unregisterModuleQuestByModuleName(const std::string& moduleName)
+{
+    auto it =
+        std::remove_if(_moduleQuests.begin(), _moduleQuests.end(), ModuleQuest::moduleQuestNameFilter(moduleName));
+    if (it != _moduleQuests.end())
+    {
+        _moduleQuests.erase(it);
+    }
+}
+
+bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName) const
+{
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)) |
+                                 std::views::filter(ModuleQuest::moduleQuestAcceptedFilter()))
+    {
+        return true;
+    }
+    return false;
+}
+
+CGameProgression::ModuleQuestInfo CGameProgression::getRandomQuest() const
+{
+    if (_moduleQuests.size() == 0)
+    {
+        return {};
+    }
+
+    std::vector<ModuleQuest> availableQuests;
+    std::copy_if(_moduleQuests.begin(),
+                 _moduleQuests.end(),
+                 std::back_inserter(availableQuests),
+                 ModuleQuest::moduleQuestAvailableFilter());
+
+    if (availableQuests.size() == 0)
+    {
+        return {};
+    }
+    return availableQuests.at(Randomizer::getRandom(availableQuests.size())).questInfo;
+}
+
+void CGameProgression::acceptModuleQuest(const std::string_view& moduleName)
+{
+    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
+    {
+        moduleQuest.accepted = true;
+        return;
+    }
+}
+
+bool CGameProgression::areModuleQuestsAvailable() const
+{
+    return std::any_of(_moduleQuests.begin(), _moduleQuests.end(), ModuleQuest::moduleQuestAvailableFilter()) != 0;
 }
 
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
@@ -216,7 +292,6 @@ void CGameProgression::progressToStage(EGameStage stage)
     }
 
     _currentStage = stage;
-    reRegisterModule(Ressources::Game::ShrineRessources::moduleName(), _currentStage);
 
     for (const auto& module : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)))
     {
@@ -341,4 +416,9 @@ void CGameProgression::registerModule(const std::string_view& name,
     module.deInitFunction = deInitFunction;
     module.initWorldMapFunction = initWorldMapFunction;
     registerModule(module);
+}
+
+void CGameProgression::reRegisterModuleForNextStage(const std::string_view& moduleName)
+{
+    reRegisterModule(moduleName, *(++gameStageIterator(_currentStage)));
 }

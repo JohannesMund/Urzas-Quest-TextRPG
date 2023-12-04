@@ -168,9 +168,8 @@ void CFishingFritz::getInformation() const
 {
     CMenu menu;
     CMenu::ActionList actions;
-    auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
 
-    if (hint.empty())
+    if (CGameManagement::getProgressionInstance()->moduleHintsAvailable())
     {
         Console::printLn(std::format("{} thinks, but finally shakes his head. \"My informants have nothing right "
                                      "now.\". Seems like you will have to come back later.",
@@ -203,6 +202,7 @@ void CFishingFritz::getInformation() const
     menu.addMenuGroup(actions, {CMenu::exit()});
     if (menu.execute().key == 'g')
     {
+        auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
         CGameManagement::getPlayerInstance()->spendGold(Ressources::Config::informationCost);
         Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
                                      Ressources::Game::fishingFritz()));

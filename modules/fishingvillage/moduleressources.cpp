@@ -47,6 +47,18 @@ void FishingVillageRessources::initModuleFishLegend()
     CGameManagement::getInstance()->placeTaskOnTown(new CFishingVilleTownTask());
 }
 
+void FishingVillageRessources::deInitModuleMakeBoat()
+{
+}
+
+void FishingVillageRessources::deInitModuleFishLegend()
+{
+}
+
+void FishingVillageRessources::deInitModuleMakeRod()
+{
+}
+
 void FishingVillageRessources::initWorldMap(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(new CFishingVillage());

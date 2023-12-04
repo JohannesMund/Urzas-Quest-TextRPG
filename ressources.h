@@ -35,10 +35,6 @@ static const unsigned int initiative = 5;
 namespace Game
 {
 
-namespace ShrineRessources
-{
-std::string moduleName();
-}
 std::string urza();
 std::string whoTheFuckIsUrza();
 std::string urzaWhoTheFuckIsUrza();

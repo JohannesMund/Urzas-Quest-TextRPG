@@ -35,16 +35,81 @@ void CSandwichShop::execute()
         replaceSandwichOfTheDay();
     }
 
-    checkForShaggysSandwich();
-
-    if (_playerOwnsShop)
+    CMenu::Action input;
+    do
     {
-        sellSandwiches();
-    }
-    else
-    {
+        printHeader();
+        checkForSoldSandwiches();
+        checkForShaggysSandwich();
         showSandwichOfTheDay();
-    }
+
+        CMenu menu;
+        CMenu::ActionList actions;
+
+        if (_playerOwnsShop)
+        {
+            if (_sandwiches.size() < 5)
+            {
+                actions.push_back(menu.createAction("Make a sandwich", 'M'));
+            }
+            if (CGameManagement::getInventoryInstance()->hasItem(CBagOfIngredients::CBagOfIngredientsFilter()))
+            {
+                actions.push_back(menu.createAction("Deliver ingredients", 'D'));
+            }
+
+            if (seenRebellionHideoutHint())
+            {
+                actions.push_back(menu.createAction("Observe, who buys your sandwiches", 'O'));
+            }
+
+            if (_playerDiscoveredHideout)
+            {
+                actions.push_back(menu.createAction("Talk to the rebellion", 'T'));
+            }
+            else
+            {
+                actions.push_back(menu.createAction("View revolutionary thoughts", 'V'));
+            }
+        }
+        else
+        {
+            if (CGameManagement::getPlayerInstance()->gold() >= _sandwiches.at(0)->buyValue())
+            {
+                actions.push_back(menu.createAction(
+                    std::format("Eat Sandwich of the Day ({} Gold)", _sandwiches.at(0)->buyValue()), 'E'));
+            }
+            actions.push_back(menu.createAction("View revolutionary thoughts", 'V'));
+        }
+
+        menu.addMenuGroup(actions, {CMenu::exit()});
+
+        input = menu.execute();
+        if (input.key == 'e')
+        {
+            eatSandwichOfTheDay();
+        }
+        if (input.key == 'm')
+        {
+            makeASandwich();
+        }
+        if (input.key == 'd')
+        {
+            deliverIngredients();
+        }
+        if (input.key == 'o')
+        {
+            observe();
+        }
+        if (input.key == 't')
+        {
+            talkToRebellion();
+        }
+        if (input.key == 'v')
+        {
+            revolutionaryThoughts();
+        }
+
+    } while (input != CMenu::exit());
 }
 
 std::string CSandwichShop::bgColor() const
@@ -68,38 +133,50 @@ void CSandwichShop::printHeader()
     Console::printLn(std::format("{}", RebellionHideoutRessources::sandwichShopName()), Console::EAlignment::eCenter);
     Console::printLn("Ye olde Sandwich Shoppe, est. 489 ad. dragonis", Console::EAlignment::eCenter);
     Console::br();
+
+    if (!_playerOwnsShop)
+    {
+        Console::printLn(
+            std::format("The Sandwich shop is run by {}, an old man with a dream, who once started this shop "
+                        "to make the perfect sandwich, but after years and years of making and selling "
+                        "sandwiches lost all of his spirits. His sandwiches are still great though, but he reduced the "
+                        "menu to one single sandwich of the day, written on the sign next to the counter",
+                        RebellionHideoutRessources::mrSoop()));
+    }
+    else
+    {
+        Console::printLn("Here you are, your very own sandwich shop.");
+    }
+
+    if (!_playerDiscoveredHideout)
+    {
+        Console::printLn(
+            "On one of the walls, you can see a blackboard. This board does not contain the menu, as one "
+            "would expect, but a collection of hand written notes and pamphlets. A big headline tells you, "
+            "what can be found there, it reads. \"Revolutionary Thoughts\"");
+    }
+
+    Console::br();
 }
 
 void CSandwichShop::showSandwichOfTheDay()
 {
-    printHeader();
-    Console::printLn(
-        std::format("The Sandwich shop is run by {}, an old man with a dream, who once started this shop "
-                    "to make the perfect sandwich, but after years and years of making and selling "
-                    "sandwiches lost all of his spirits. His sandwiches are still great though, but he reduced the "
-                    "menu to one single sandwich of the day, written on the sign next to the counter",
-                    RebellionHideoutRessources::mrSoop()));
-    Console::br();
-    Console::printLn("Sandwich of the day:", Console::EAlignment::eCenter);
-    Console::printLn(_sandwiches.at(0)->description(), Console::EAlignment::eCenter);
+    Console::printLn(std::format("Sandwiche{} of the day:", _sandwiches.size() == 0 ? "" : "s"),
+                     Console::EAlignment::eCenter);
     Console::br();
 
-    CMenu menu;
-
-    if (CGameManagement::getPlayerInstance()->gold() >= _sandwiches.at(0)->buyValue())
+    if (_sandwiches.size() == 0)
     {
-        menu.addMenuGroup(
-            {menu.createAction(std::format("Eat Sandwich of the Day ({} Gold)", _sandwiches.at(0)->buyValue()), 'E')},
-            {CMenu::exit()});
+        Console::printLn("SOLD OUT", Console::EAlignment::eCenter);
+        Console::br();
     }
     else
     {
-        menu.addMenuGroup({}, {CMenu::exit()});
-    }
-
-    if (menu.execute().key == 'e')
-    {
-        eatSandwichOfTheDay();
+        for (auto s : _sandwiches)
+        {
+            Console::printLn(s->description(), Console::EAlignment::eCenter);
+            Console::br();
+        }
     }
 }
 
@@ -108,6 +185,7 @@ void CSandwichShop::eatSandwichOfTheDay()
     _sandwiches.at(0)->useFromInventory();
     CGameManagement::getPlayerInstance()->spendGold(_sandwiches.at(0)->buyValue());
     replaceSandwichOfTheDay();
+    Console::confirmToContinue();
 }
 
 void CSandwichShop::checkForShaggysSandwich()
@@ -153,20 +231,76 @@ void CSandwichShop::checkForShaggysSandwich()
     }
 }
 
-bool CSandwichShop::checkForRebellionHideoutHint()
+void CSandwichShop::checkForSoldSandwiches()
+{
+    if (_goldAvailable > 0)
+    {
+        Console::printLn(
+            std::format("While you were away, sandwiches have been sold and you earned {}{} Gold{}. This always "
+                        "happens. You wonder who is selling the sandwiches, there seems to be no staff here. at "
+                        "least you hired nobody. Even more you wonder who is buying your sandwiches, and who is "
+                        "honest enough to pay, with no staff on duty. One day, you will have to check for that.",
+                        CC::fgLightYellow(),
+                        _goldAvailable,
+                        CC::ccReset()));
+        CGameManagement::getPlayerInstance()->gainGold(_goldAvailable);
+        _goldAvailable = 0;
+        Console::br();
+    }
+}
+
+bool CSandwichShop::seenRebellionHideoutHint()
 {
     if (_playerDiscoveredHideout)
     {
         return false;
     }
 
-    return CGameManagement::getProgressionInstance()->seenModuleHints(
+    return CGameManagement::getProgressionInstance()->areModuleHintsSeen(
         RebellionHideoutRessources::moduleNameRebellionHideout());
+}
+
+void CSandwichShop::revolutionaryThoughts()
+{
+    Console::cls();
+    Console::printLn("The board is full of various notes with random thoughts, pieces of information or just rants "
+                     "against the king. The sense for revolution seems to be strong in this land.");
+
+    if (CGameManagement::getProgressionInstance()->areModuleQuestsAvailable())
+    {
+        auto quest = CGameManagement::getProgressionInstance()->getRandomQuest();
+
+        Console::printLn("On note catches your attention:");
+        Console::br();
+        Console::printLn(quest.questText, Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn("Do you accept this task?");
+        Console::br();
+        if (CMenu::executeAcceptRejectMenu() == CMenu::accept())
+        {
+            Console::br();
+            Console::printLn(std::format(
+                "For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
+                Ressources::Game::princessLayla()));
+            CGameManagement::getProgressionInstance()->acceptModuleQuest(quest.moduleName);
+        }
+        else
+        {
+            Console::br();
+            Console::printLn("Revolution is not exactly your cup of ale, so you decide to leave the revolution for the "
+                             "revolutionaries.");
+        }
+    }
+    else
+    {
+        Console::printLn("But even after several closer looks, you cannot find anything of interest there.");
+    }
+    Console::br();
+    Console::confirmToContinue();
 }
 
 void CSandwichShop::deliverIngredients()
 {
-
     auto bags = CGameManagement::getInventoryInstance()->getItemsByFilter(CBagOfIngredients::CBagOfIngredientsFilter());
     if (!bags.size())
     {
@@ -301,90 +435,57 @@ void CSandwichShop::observe()
 
 void CSandwichShop::talkToRebellion()
 {
-}
+    Console::printLn(std::format(
+        "You enter the employees bathroom (which is, as you know now, not totally necessary, since you still don't "
+        "have any employees but you have a rebellion base in your shop, and with big rebellion bases comes big "
+        "responsibility.), move away the toilet and enter the stairway to the hidden office of {} and {}.",
+        Ressources::Game::fiego(),
+        Ressources::Game::brock()));
 
-void CSandwichShop::sellSandwiches()
-{
-    CMenu::Action input;
-    do
+    if (CGameManagement::getProgressionInstance()->areModuleQuestsAvailable())
     {
-        Console::cls();
-        printHeader();
+        auto quest = CGameManagement::getProgressionInstance()->getRandomQuest();
 
-        Console::printLn("Sandwiches of the day:", Console::EAlignment::eCenter);
+        Console::printLn(std::format(
+            "As you arrive, {} and {} start rummaging in their papers and eventually pull out a crumpled sheet. "
+            "There is a job to be done for the glory of the rebellion. You take a look at the "
+            "paper and read the instruction:",
+            Ressources::Game::fiego(),
+            Ressources::Game::brock()));
         Console::br();
-
-        if (_sandwiches.size() == 0)
+        Console::printLn(quest.questText, Console::EAlignment::eCenter);
+        Console::br();
+        Console::printLn("Do you accept this task?");
+        Console::br();
+        if (CMenu::executeAcceptRejectMenu() == CMenu::accept())
         {
-            Console::printLn("SOLD OUT", Console::EAlignment::eCenter);
             Console::br();
+            Console::printLn(std::format(
+                "For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
+                Ressources::Game::princessLayla()));
+            CGameManagement::getProgressionInstance()->acceptModuleQuest(quest.moduleName);
         }
         else
         {
-            for (auto s : _sandwiches)
-            {
-                Console::printLn(s->description(), Console::EAlignment::eCenter);
-                Console::br();
-            }
-        }
-
-        if (_goldAvailable > 0)
-        {
-            Console::printLn(
-                std::format("While you were away, sandwiches have been sold and you earned {}{} Gold{}. This always "
-                            "happens. You wonder who is selling the sandwiches, there seems to be no staff here. at "
-                            "least you hired nobody. Even more you wonder who is buying your sandwiches, and who is "
-                            "honest enough to pay, with no staff on duty. One day, you will have to check for that.",
-                            CC::fgLightYellow(),
-                            _goldAvailable,
-                            CC::ccReset()));
-            CGameManagement::getPlayerInstance()->gainGold(_goldAvailable);
-            _goldAvailable = 0;
             Console::br();
+            Console::printLn("Not today, the whole rebellion thing is still somehow suspisous to you. what are they "
+                             "doing in the basement of you shop anyway?");
         }
+    }
+    else
+    {
+        Console::printLn(std::format(
+            "As you arrive, {} and {} are brainstorming the next actions, the rebellion will take. They are a little "
+            "bit uncreative right now, all they come up with is kidnapping {} over and over again. As much as you "
+            "would appreciate her beeing around, as much you don't want to kidnap her without any good reason to do "
+            "so, so they make clear, that you dont approve any kidnapping operations for now. With this option out of "
+            "the way, There seems nothing to be done for now.",
+            Ressources::Game::fiego(),
+            Ressources::Game::brock(),
+            Ressources::Game::layla()));
+    }
 
-        CMenu menu;
-
-        CMenu::ActionList actions;
-
-        if (_sandwiches.size() < 5)
-        {
-            actions.push_back(menu.createAction("Make a sandwich", 'M'));
-        }
-        if (CGameManagement::getInventoryInstance()->hasItem(CBagOfIngredients::CBagOfIngredientsFilter()))
-        {
-            actions.push_back(menu.createAction("Deliver ingredients", 'D'));
-        }
-        if (checkForRebellionHideoutHint())
-        {
-            actions.push_back(menu.createAction("Observe, who buys your sandwiches", 'O'));
-        }
-        if (_playerDiscoveredHideout)
-        {
-            actions.push_back(menu.createAction("Talk to the rebellion", 'T'));
-        }
-
-        menu.addMenuGroup(actions, {CMenu::exit()});
-        input = menu.execute();
-
-        if (input.key == 'm')
-        {
-            makeASandwich();
-        }
-        if (input.key == 'd')
-        {
-            deliverIngredients();
-        }
-        if (input.key == 'o')
-        {
-            observe();
-        }
-        if (input.key == 't')
-        {
-            talkToRebellion();
-        }
-
-    } while (input != CMenu::exit());
+    Console::confirmToContinue();
 }
 
 int CSandwichShop::countIngredients()

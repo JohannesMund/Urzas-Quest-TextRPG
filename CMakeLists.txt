@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(URZAS_QUEST_SOURCES_ROOT
 	main.cpp
 	ressources.h ressources.cpp
-    modulesregister.h
+    moduleregister.h
 )
 set(URZAS_QUEST_SOURCES_CORE
 	core/console.h core/console.cpp
@@ -37,7 +37,6 @@ set(URZAS_QUEST_SOURCES_CORE
     core/rooms/cfield.h core/rooms/cfield.cpp
     core/rooms/cstartingroom.h core/rooms/cstartingroom.cpp
     core/rooms/cinjuredpet.h core/rooms/cinjuredpet.cpp
-    core/rooms/cshrineoftheancients.h core/rooms/cshrineoftheancients.cpp
 
     core/rooms/town/ctown.h core/rooms/town/ctown.cpp
     core/rooms/town/ctownmodule.h core/rooms/town/ctownmodule.cpp
@@ -92,6 +91,10 @@ set(URZAS_QUEST_SOURCES_CORE
 )
 
 set(URZAS_QUEST_SOURCES_MODULES
+
+    modules/shrineoftheancients/cshrineoftheancients.h modules/shrineoftheancients/cshrineoftheancients.cpp
+    modules/shrineoftheancients/moduleressources.h modules/shrineoftheancients/moduleressources.cpp
+
 	modules/cave/moduleressources.h modules/cave/moduleressources.cpp
     modules/cave/ccavedungeon.h modules/cave/ccavedungeon.cpp
     modules/cave/ccave.h modules/cave/ccave.cpp
@@ -159,7 +162,11 @@ set(URZAS_QUEST_SOURCES_MODULES
     modules/layla2/enemies/cgoblinhorde.h modules/layla2/enemies/cgoblinhorde.cpp
     modules/layla2/tasks/clayla2capitaltask.h modules/layla2/tasks/clayla2capitaltask.cpp
 
-)
+    modules/blackivorytower/moduleressources.h modules/blackivorytower/moduleressources.cpp
+    modules/blackivorytower/cblackivorytower.h modules/blackivorytower/cblackivorytower.cpp
+    modules/blackivorytower/clunatic.h modules/blackivorytower/clunatic.cpp
+    modules/blackivorytower/cdarkmobi.h modules/blackivorytower/cdarkmobi.cpp
+    )
 
 add_executable(UrzasQuest ${URZAS_QUEST_SOURCES_ROOT} ${URZAS_QUEST_SOURCES_CORE} ${URZAS_QUEST_SOURCES_MODULES})
 

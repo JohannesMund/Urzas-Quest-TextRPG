@@ -35,6 +35,9 @@ void CSewerBoss::spoilsOfWar() const
     }
 
     CGameManagement::getInventoryInstance()->addShopItem();
+
+    Console::br();
+    Console::printLn("I cut YOUR live into pieces!");
 }
 
 void CSewerBoss::battleAction(bool& endRound)
@@ -50,5 +53,4 @@ void CSewerBoss::battleAction(bool& endRound)
 
 void CSewerBoss::postBattle()
 {
-    Console::printLn("I cut YOUR live into pieces!");
 }
