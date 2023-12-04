@@ -15,7 +15,7 @@ CDungeonMap::CDungeonMap(const unsigned int width, const unsigned int height) : 
 
 void CDungeonMap::init(std::vector<CRoom*>& rooms)
 {
-    _populatedRoomCount = std::ceil((_map.size() * _map.at(0).size()) / 2);
+    _populatedRoomCount = static_cast<unsigned int>(std::ceil((_map.size() * _map.at(0).size()) / 2));
 
     while (rooms.size() < _populatedRoomCount)
     {

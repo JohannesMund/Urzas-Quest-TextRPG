@@ -27,7 +27,7 @@ void CLivingChest::battleAction(bool&)
     {
         Console::printLn(std::format("The {} of {} is totally unpredictable.", _weapon, _name));
 
-        unsigned int amount = std::ceil(_level / 2);
+        unsigned int amount = static_cast<unsigned int>(std::ceil(_level / 2));
         CGameManagement::getPlayerInstance()->dealDamage(amount);
     }
 }

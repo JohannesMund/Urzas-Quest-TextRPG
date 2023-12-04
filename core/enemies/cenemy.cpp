@@ -83,7 +83,7 @@ unsigned int CEnemy::level() const
 
 unsigned int CEnemy::damage() const
 {
-    auto levelBonus = std::max((int)std::ceil(_level / 5), 1);
+    auto levelBonus = static_cast<unsigned int>(std::max((int)std::ceil(_level / 5), 1));
     return 1 + Randomizer::getRandom(levelBonus);
 }
 

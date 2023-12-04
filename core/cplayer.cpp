@@ -298,7 +298,7 @@ unsigned int CPlayer::initiative() const
 
 unsigned int CPlayer::damage() const
 {
-    auto levelBonus = std::max((int)std::ceil(_level / 5), 1);
+    auto levelBonus = std::max(static_cast<int>(std::ceil(_level / 5)), 1);
     return 1 + Randomizer::getRandom(levelBonus * 2);
 }
 
