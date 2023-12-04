@@ -11,6 +11,7 @@ class CRoom;
 class CGameProgression
 {
     friend class CGameManagement;
+    friend class ModuleRegister;
 
 public:
     enum class EGameStage
