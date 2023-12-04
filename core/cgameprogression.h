@@ -8,7 +8,6 @@
 #include <vector>
 
 class CRoom;
-struct Module;
 class CGameProgression
 {
     friend class CGameManagement;
