@@ -42,10 +42,10 @@ void Console::cls(const bool bHud)
     }
 }
 
-char Console::getAcceptableInput(string_view acceptableChars)
+unsigned char Console::getAcceptableInput(string_view acceptableChars)
 {
     bool found = false;
-    char input;
+    unsigned char input;
 #ifdef _USE_WINDOWS
     while (!found)
     {

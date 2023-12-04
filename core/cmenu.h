@@ -19,7 +19,7 @@ public:
     {
         std::string name;
         std::string display;
-        char key = 0;
+        unsigned char key = 0;
         bool operator==(const Action& other) const
         {
             return key == other.key;
@@ -64,7 +64,7 @@ public:
      * the menu
      * @return the new action
      */
-    Action createAction(const std::string_view& name, const char key = 0);
+    Action createAction(const std::string_view& name, const unsigned char key = 0);
 
     /**
      * @brief clear
@@ -116,10 +116,10 @@ private:
     Action findActionByInput() const;
     std::string halfGroup2String(const std::vector<Action>& l) const;
 
-    bool isNavPossible(const char c) const;
-    std::string makeDisplayString(const std::string_view s, const char c) const;
+    bool isNavPossible(const unsigned char c) const;
+    std::string makeDisplayString(const std::string_view s, const unsigned char c) const;
 
-    void addNav(const char c = 0);
+    void addNav(const unsigned char c = 0);
 
     std::string _acceptableNavs;
     std::vector<MenuGroup> _menu;

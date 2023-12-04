@@ -60,7 +60,7 @@ CMenu::Action CMenu::execute()
     return findActionByInput();
 }
 
-CMenu::Action CMenu::createAction(const std::string_view& s, const char c)
+CMenu::Action CMenu::createAction(const std::string_view& s, const unsigned char c)
 {
     Action menuAction;
     menuAction.name = s;
@@ -73,7 +73,7 @@ CMenu::Action CMenu::createAction(const std::string_view& s, const char c)
         return menuAction;
     }
 
-    for (char cc : s)
+    for (unsigned char cc : s)
     {
         if (isNavPossible(cc))
         {
@@ -161,12 +161,12 @@ std::string CMenu::halfGroup2String(const std::vector<Action>& l) const
     return s;
 }
 
-bool CMenu::isNavPossible(const char c) const
+bool CMenu::isNavPossible(const unsigned char c) const
 {
     return _acceptableNavs.find(std::tolower(c)) == std::string::npos;
 }
 
-std::string CMenu::makeDisplayString(const std::string_view s, const char c) const
+std::string CMenu::makeDisplayString(const std::string_view s, const unsigned char c) const
 {
     if (isNavPossible(c) == false)
     {
@@ -180,7 +180,7 @@ std::string CMenu::makeDisplayString(const std::string_view s, const char c) con
         return std::format("[{}] {}", c, displayString);
     }
 
-    char cc(c);
+    unsigned char cc(c);
 
     auto it = displayString.find(cc);
     if (it == std::string::npos)
@@ -197,7 +197,7 @@ std::string CMenu::makeDisplayString(const std::string_view s, const char c) con
     return displayString;
 }
 
-void CMenu::addNav(const char c)
+void CMenu::addNav(const unsigned char c)
 {
     if (c != 0)
     {
