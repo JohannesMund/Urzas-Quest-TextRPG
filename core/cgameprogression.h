@@ -71,6 +71,7 @@ public:
     unsigned long bodyCount() const;
     unsigned long turns() const;
 
+
     void registerModule(const std::string_view& name,
                         const EGameStage neededForStage,
                         std::function<std::string()> questLogFunction = &noQuestLogFunction,
