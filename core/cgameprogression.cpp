@@ -236,7 +236,7 @@ void CGameProgression::increaseTurns()
 
 unsigned int CGameProgression::progress() const
 {
-    return std::ceil((_finishedModules.size() * 100) / _registeredModules.size());
+    return static_cast<unsigned int>(std::ceil((_finishedModules.size() * 100) / _registeredModules.size()));
 }
 
 unsigned long CGameProgression::bodyCount() const

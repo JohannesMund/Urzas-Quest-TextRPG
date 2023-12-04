@@ -168,7 +168,7 @@ set(URZAS_QUEST_SOURCES_MODULES
     modules/blackivorytower/cblackivorytower.h modules/blackivorytower/cblackivorytower.cpp
     modules/blackivorytower/clunatic.h modules/blackivorytower/clunatic.cpp
     modules/blackivorytower/cdarkmobi.h modules/blackivorytower/cdarkmobi.cpp
-    )
+)
 
 add_executable(${TARGET_NAME} ${URZAS_QUEST_SOURCES_ROOT} ${URZAS_QUEST_SOURCES_CORE} ${URZAS_QUEST_SOURCES_MODULES})
 
