@@ -20,7 +20,7 @@ int main()
     Console::printLn("[S]tart a new game", Console::EAlignment::eCenter);
     Console::printLn("[Q]uit game", Console::EAlignment::eCenter);
 
-    char in = Console::getAcceptableInput("sq");
+    unsigned char in = Console::getAcceptableInput("sq");
     if (in == 's')
     {
         CGameManagement::getInstance();

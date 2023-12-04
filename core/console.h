@@ -75,7 +75,7 @@ void setEcho(const bool on);
  * @param accepableChars a string with all char that shall be accepted
  * @return the accepted char
  */
-char getAcceptableInput(std::string_view accepableChars);
+unsigned char getAcceptableInput(std::string_view accepableChars);
 
 /**
  * @brief getNumberInputWithEcho blocks until a integer beween min and max is entered
