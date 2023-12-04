@@ -73,7 +73,7 @@ void CSandwichShop::execute()
         }
         else
         {
-            if (CGameManagement::getPlayerInstance()->gold() >= (int)_sandwiches.at(0)->buyValue())
+            if (CGameManagement::getPlayerInstance()->gold() >= _sandwiches.at(0)->buyValue())
             {
                 actions.push_back(menu.createAction(
                     std::format("Eat Sandwich of the Day ({} Gold)", _sandwiches.at(0)->buyValue()), 'E'));

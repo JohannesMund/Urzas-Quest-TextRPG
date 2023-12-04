@@ -34,7 +34,7 @@ public:
 
     virtual std::string description() const override;
     virtual void useFromInventory() override;
-    virtual unsigned int buyValue() const override;
+    virtual int buyValue() const override;
 
     static std::string ingredient2String(const EIngredients ingredient);
     static std::string ingredients2String(const IngredientsList ingredient);

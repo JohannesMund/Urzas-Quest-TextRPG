@@ -35,7 +35,7 @@ void CFishRestaurant::execute()
 
         CMenu menu;
 
-        if (CGameManagement::getPlayerInstance()->gold() >= (int)priceOfTheDay())
+        if (CGameManagement::getPlayerInstance()->gold() >= priceOfTheDay())
         {
             menu.addMenuGroup({menu.createAction(std::format("Eat dish of the day ({} Gold)", priceOfTheDay()), 'E')});
         }
@@ -81,7 +81,7 @@ void CFishRestaurant::makeDishOfTheDay()
     }
 }
 
-unsigned int CFishRestaurant::priceOfTheDay() const
+int CFishRestaurant::priceOfTheDay() const
 {
     return FishingVillageRessources::getFishPrice(_dishOfTheDayLevel) * 2;
 }

@@ -22,7 +22,7 @@ public:
 
     IngredientsList getIngredients() const;
 
-    virtual unsigned int buyValue() const override;
+    virtual int buyValue() const override;
 
     static CItem::ItemFilter CBagOfIngredientsFilter();
 

@@ -97,7 +97,7 @@ void CShop::buyItems()
     std::vector<CItem*> buyableItems;
     for (auto i : _shopItems)
     {
-        if (i->buyValue() <= (unsigned)CGameManagement::getPlayerInstance()->gold())
+        if (i->buyValue() <= CGameManagement::getPlayerInstance()->gold())
         {
             buyableItems.push_back(i);
             Console::printLn(std::format("[{:3}] {} ({} Gold)", buyableItems.size(), i->name(), i->buyValue()));

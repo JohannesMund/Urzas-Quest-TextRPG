@@ -48,7 +48,7 @@ void CEquipmentDealer::execute(const std::string_view&)
         auto item =
             CGameManagement::getItemFactoryInstance()->makeShopEquipment(CGameManagement::getPlayerInstance()->level());
 
-        if (item->buyValue() <= (unsigned)CGameManagement::getPlayerInstance()->gold())
+        if (item->buyValue() <= CGameManagement::getPlayerInstance()->gold())
         {
             buyableItems.push_back(item);
             Console::printLn(std::format("[{:3}] {} ({} Gold)", buyableItems.size(), item->name(), item->buyValue()));

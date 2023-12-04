@@ -77,7 +77,7 @@ CSandwich::IngredientsList CBagOfIngredients::getIngredients() const
     return _ingredients;
 }
 
-unsigned int CBagOfIngredients::buyValue() const
+int CBagOfIngredients::buyValue() const
 {
     return CSandwich::buyValue() / 2;
 }

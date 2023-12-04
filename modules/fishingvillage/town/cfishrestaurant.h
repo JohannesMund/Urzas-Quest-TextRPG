@@ -12,7 +12,7 @@ public:
 
 private:
     void makeDishOfTheDay();
-    unsigned int priceOfTheDay() const;
+    int priceOfTheDay() const;
     void eat() const;
 
     std::string _dishOfTheDay;

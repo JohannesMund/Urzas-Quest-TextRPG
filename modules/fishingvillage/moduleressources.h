@@ -42,7 +42,7 @@ void initWorldMap(std::vector<CRoom*>& rooms);
 std::string fishingVilleName();
 
 std::string getFish(const EFishLevel level);
-unsigned int getFishPrice(const EFishLevel level);
+int getFishPrice(const EFishLevel level);
 EFishLevel getRandomRarity(const unsigned int rodLevel, const unsigned int boatLevel);
 
 } // namespace FishingVillageRessources

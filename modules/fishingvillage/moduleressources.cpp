@@ -96,7 +96,7 @@ std::string FishingVillageRessources::getFish(const EFishLevel level)
     }
 }
 
-unsigned int FishingVillageRessources::getFishPrice(const EFishLevel level)
+int FishingVillageRessources::getFishPrice(const EFishLevel level)
 {
     switch (level)
     {
