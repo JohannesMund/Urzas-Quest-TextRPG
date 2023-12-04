@@ -7,6 +7,7 @@
 #include "console.h"
 #include "moduleregister.h"
 #include "randomizer.h"
+
 #include <algorithm>
 #include <cmath>
 #include <format>

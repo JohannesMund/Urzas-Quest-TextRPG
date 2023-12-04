@@ -8,10 +8,10 @@
 #include <vector>
 
 class CRoom;
+struct Module;
 class CGameProgression
 {
     friend class CGameManagement;
-    friend class ModuleRegister;
 
 public:
     enum class EGameStage

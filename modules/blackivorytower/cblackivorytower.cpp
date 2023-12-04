@@ -16,7 +16,7 @@ CBlackIvoryTower::CBlackIvoryTower() : CField()
 {
     _encounterType = CEncounter::EEncounterType::eNone;
     _isRandomTaskPossible = false;
-    _showInFogOfWar = true;
+    _showInFogOfWar = false;
 }
 
 void CBlackIvoryTower::execute()
@@ -62,17 +62,17 @@ void CBlackIvoryTower::execute()
 
 std::string CBlackIvoryTower::bgColor() const
 {
-    return CC::bgBlack();
+    return CC::bgWhite();
 }
 
 std::string CBlackIvoryTower::fgColor() const
 {
-    return CC::fgLightYellow();
+    return CC::fgBlack();
 }
 
 char CBlackIvoryTower::getMapSymbol() const
 {
-    return '#';
+    return 'I';
 }
 
 CMap::RoomFilter CBlackIvoryTower::towerFilter()
