@@ -13,7 +13,7 @@ CEquipmentDealer::CEquipmentDealer()
     _type = CEncounter::eField;
 }
 
-void CEquipmentDealer::execute(const std::string_view& moduleName)
+void CEquipmentDealer::execute(const std::string_view&)
 {
     CEncounter::execute();
     _hasBeenExecuted = true;
@@ -48,7 +48,7 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
         auto item =
             CGameManagement::getItemFactoryInstance()->makeShopEquipment(CGameManagement::getPlayerInstance()->level());
 
-        if (item->buyValue() <= CGameManagement::getPlayerInstance()->gold())
+        if (item->buyValue() <= (unsigned)CGameManagement::getPlayerInstance()->gold())
         {
             buyableItems.push_back(item);
             Console::printLn(std::format("[{:3}] {} ({} Gold)", buyableItems.size(), item->name(), item->buyValue()));
@@ -88,7 +88,7 @@ void CEquipmentDealer::execute(const std::string_view& moduleName)
     }
 }
 
-unsigned int CEquipmentDealer::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CEquipmentDealer::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 2;
 }

@@ -60,7 +60,7 @@ void CDancingBard::execute(const std::string_view& moduleName)
     CGameManagement::getProgressionInstance()->reportModuleFinished(BardRessources::moduleName());
 }
 
-unsigned int CDancingBard::encounterChance(const EEncounterType& tp, const std::string_view&) const
+unsigned int CDancingBard::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

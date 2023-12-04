@@ -121,7 +121,7 @@ FishingVillageRessources::EFishLevel FishingVillageRessources::getRandomRarity(c
 
     auto add = [&fishes](const unsigned int number, const FishingVillageRessources::EFishLevel level)
     {
-        for (int i = 0; i < number; i++)
+        for (auto i = 0U; i < number; i++)
         {
             fishes.push_back(level);
         }

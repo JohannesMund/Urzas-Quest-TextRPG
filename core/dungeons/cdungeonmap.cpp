@@ -89,7 +89,7 @@ CMap::SRoomCoords CDungeonMap::getRandomRoomCoords(const bool noSpecialRooms, co
 
     auto targetRoom = Randomizer::getRandom(roomCount);
 
-    auto counter = 0;
+    auto counter = 0U;
     for (unsigned int x = 0; x < _map.size(); x++)
     {
         auto line = _map.at(x);

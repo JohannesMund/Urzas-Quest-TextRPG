@@ -22,7 +22,7 @@ std::string CAttackerCompanion::type() const
     return Ressources::Companion::typeAsString(Ressources::Companion::ECompanionType::eAttacker);
 }
 
-void CAttackerCompanion::preBattle(CEnemy* enemy)
+void CAttackerCompanion::preBattle(CEnemy*)
 {
     if (_level <= 0)
     {
@@ -48,7 +48,7 @@ void CAttackerCompanion::battleAction(CEnemy* enemy, bool&)
     }
 }
 
-void CAttackerCompanion::postBattle(CEnemy* enemy)
+void CAttackerCompanion::postBattle(CEnemy*)
 {
     if (_level <= 0)
     {

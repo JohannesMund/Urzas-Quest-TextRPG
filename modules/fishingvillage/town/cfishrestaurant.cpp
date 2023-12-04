@@ -35,7 +35,7 @@ void CFishRestaurant::execute()
 
         CMenu menu;
 
-        if (CGameManagement::getPlayerInstance()->gold() >= priceOfTheDay())
+        if (CGameManagement::getPlayerInstance()->gold() >= (int)priceOfTheDay())
         {
             menu.addMenuGroup({menu.createAction(std::format("Eat dish of the day ({} Gold)", priceOfTheDay()), 'E')});
         }

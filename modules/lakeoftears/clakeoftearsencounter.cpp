@@ -49,7 +49,7 @@ void CLakeOfTearsEncounter::execute(const std::string_view& moduleName)
                      "your quest as a true, brave and shiny hero.");
 }
 
-unsigned int CLakeOfTearsEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CLakeOfTearsEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

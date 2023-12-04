@@ -180,7 +180,7 @@ CItem* CItemFactory::itemFromGeneratorList(const ItemGeneratorList& list,
     std::vector<unsigned int> indices;
     for (const auto& gen : list)
     {
-        for (int j = 0; j < gen.dropRate; j++)
+        for (auto j = 0U; j < gen.dropRate; j++)
         {
             indices.push_back(index);
         }

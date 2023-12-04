@@ -1,8 +1,8 @@
 #include "cratfarmrat.h"
 #include "cgamemanagement.h"
 #include "cratfarmturnip.h"
-#include "randomizer.h"
 #include "moduleressources.h"
+#include "randomizer.h"
 
 CRatFarmRat::CRatFarmRat()
 {
@@ -41,7 +41,7 @@ CRatFarmRat::CRatFarmRat()
     }
 }
 
-void CRatFarmRat::battleAction(bool& endRound)
+void CRatFarmRat::battleAction(bool&)
 {
 }
 

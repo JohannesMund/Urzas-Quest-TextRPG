@@ -21,7 +21,7 @@ void CCaveBattleEncounter::execute(const std::string_view& moduleName)
     battle.fight();
 }
 
-unsigned int CCaveBattleEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CCaveBattleEncounter::encounterChance(const EEncounterType&, const std::string_view& moduleName) const
 {
     if (moduleName.compare(CaveRessources::moduleName()) != 0)
     {

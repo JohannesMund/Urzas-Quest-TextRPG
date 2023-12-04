@@ -23,10 +23,10 @@ static const unsigned int fightChance = 15;
 
 static const unsigned int numberOfTowns = 4;
 static const unsigned int turnsUntilShopRefresh = 100;
-static const unsigned int informationCost = 1000;
+static const int informationCost = 1000;
 
-static const unsigned int maxHp = 10;
-static const unsigned int maxHpMin = 3;
+static const int maxHp = 10;
+static const int maxHpMin = 3;
 static const unsigned int gold = 100;
 static const unsigned int initiative = 5;
 

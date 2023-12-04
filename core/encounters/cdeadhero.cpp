@@ -68,7 +68,7 @@ void CDeadHero::execute(const std::string_view& moduleName)
     Console::br();
 }
 
-unsigned int CDeadHero::encounterChance(const EEncounterType& tp, const std::string_view&) const
+unsigned int CDeadHero::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

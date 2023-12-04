@@ -15,7 +15,7 @@ CLayla2GoblinEncounter::CLayla2GoblinEncounter()
     _type = CEncounter::eField;
 }
 
-void CLayla2GoblinEncounter::execute(const std::string_view& moduleName)
+void CLayla2GoblinEncounter::execute(const std::string_view&)
 {
     Console::printLn(
         std::format("Backtracking {}s way since you first rescued her, you have seen a lot of the land, but not the "
@@ -48,7 +48,7 @@ void CLayla2GoblinEncounter::execute(const std::string_view& moduleName)
     _hasBeenExecuted = true;
 }
 
-unsigned int CLayla2GoblinEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CLayla2GoblinEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

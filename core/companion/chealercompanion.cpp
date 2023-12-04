@@ -22,7 +22,7 @@ std::string CHealerCompanion::type() const
     return Ressources::Companion::typeAsString(Ressources::Companion::ECompanionType::eHealer);
 }
 
-void CHealerCompanion::preBattle(CEnemy* enemy)
+void CHealerCompanion::preBattle(CEnemy*)
 {
     if (_level <= 0)
     {
@@ -31,11 +31,11 @@ void CHealerCompanion::preBattle(CEnemy* enemy)
     Console::printLn(std::format("{} tries to look dangerous but it does not work. At least it is cute", name()));
 }
 
-void CHealerCompanion::battleAction(CEnemy* enemy, bool& endRound)
+void CHealerCompanion::battleAction(CEnemy*, bool&)
 {
 }
 
-void CHealerCompanion::postBattle(CEnemy* enemy)
+void CHealerCompanion::postBattle(CEnemy*)
 {
     if (_level <= 0)
     {

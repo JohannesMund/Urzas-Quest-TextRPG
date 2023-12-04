@@ -21,7 +21,7 @@ std::string CDefenderCompanion::type() const
     return Ressources::Companion::typeAsString(Ressources::Companion::ECompanionType::eDefender);
 }
 
-void CDefenderCompanion::preBattle(CEnemy* enemy)
+void CDefenderCompanion::preBattle(CEnemy*)
 {
     if (_level <= 0)
     {
@@ -30,11 +30,11 @@ void CDefenderCompanion::preBattle(CEnemy* enemy)
     Console::printLn(std::format("{} tries to look dangerous but it does not work. At least it is cute", name()));
 }
 
-void CDefenderCompanion::battleAction(CEnemy* enemy, bool& endRound)
+void CDefenderCompanion::battleAction(CEnemy*, bool&)
 {
 }
 
-void CDefenderCompanion::postBattle(CEnemy* enemy)
+void CDefenderCompanion::postBattle(CEnemy*)
 {
     if (_level <= 0)
     {

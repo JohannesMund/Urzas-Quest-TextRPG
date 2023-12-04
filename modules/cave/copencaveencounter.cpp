@@ -30,7 +30,7 @@ void COpenCaveEncounter::execute(const std::string_view& moduleName)
     CGameManagement::getInventoryInstance()->addItem(new CShaggysSandwich);
 }
 
-unsigned int COpenCaveEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int COpenCaveEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

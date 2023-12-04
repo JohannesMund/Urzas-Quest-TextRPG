@@ -58,7 +58,7 @@ void CSewerEncounter::execute(const std::string_view& moduleName)
     _hasBeenExecuted = true;
 }
 
-unsigned int CSewerEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CSewerEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

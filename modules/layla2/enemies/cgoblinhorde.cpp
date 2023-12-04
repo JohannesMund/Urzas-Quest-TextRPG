@@ -15,13 +15,13 @@ CGoblinHorde::CGoblinHorde() : CEnemyHorde(25, 3, 7)
 
 void CGoblinHorde::spoilsOfWar() const
 {
-    for (int i = 0; i < _count; i++)
+    for (auto i = 0U; i < _count; i++)
     {
         CGameManagement::getPlayerInstance()->addXp(basicXP(_level));
     }
 
     Console::printLn("As expected, not much can be gained from them.");
-    for (int i = 0; i < _count; i++)
+    for (auto i = 0U; i < _count; i++)
     {
         if (Randomizer::getRandom(3) < 2)
         {

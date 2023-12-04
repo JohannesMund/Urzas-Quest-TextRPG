@@ -219,7 +219,7 @@ void CShrineOfTheAncients::stats() const
     auto progress = CGameManagement::getProgressionInstance()->progress();
     std::string progressString = "[";
 
-    int i = 0;
+    unsigned int i = 0;
     while (i < progress)
     {
         progressString.append("#");

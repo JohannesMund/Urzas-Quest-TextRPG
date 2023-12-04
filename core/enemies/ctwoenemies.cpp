@@ -37,7 +37,7 @@ void CTwoEnemies::preBattleAction()
     }
 }
 
-void CTwoEnemies::battleAction(bool& endRound)
+void CTwoEnemies::battleAction(bool&)
 {
     if (_currentTarget == EWho::eEnemy1)
     {

@@ -113,7 +113,7 @@ CSandwich::IngredientsList CBagOfIngredients::fill(const EBagSize size)
     auto ingredients = CSandwich::getListOfAllIngredients();
 
     IngredientsList randomIngredients;
-    for (int i = 0; i <= content; i++)
+    for (auto i = 0U; i <= content; i++)
     {
         randomIngredients.push_back(ingredients.at(Randomizer::getRandom(ingredients.size())));
     }
