@@ -12,7 +12,7 @@ CLaylasRibbon::CLaylasRibbon()
                                Ressources::Game::princessLayla());
 }
 
-void CLaylasRibbon::battleEffect(CEnemy* enemy)
+void CLaylasRibbon::battleEffect(CEnemy*)
 {
     Console::printLn(std::format("The power of {}s love protects you.", Ressources::Game::princessLayla()));
 }

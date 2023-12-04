@@ -36,7 +36,7 @@ void CLaylaBossGuards::spoilsOfWar() const
     CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) +
                                                    _level * (Randomizer::getRandom(65) + 1));
     auto amount = Randomizer::getRandom(4) + 7;
-    for (auto i = 0; i <= amount; i++)
+    for (auto i = 0U; i <= amount; i++)
     {
         CGameManagement::getInventoryInstance()->addLootItem();
     }

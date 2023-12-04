@@ -15,7 +15,7 @@ void CBattleEncounter::execute(const std::string_view& moduleName)
     battle.fight();
 }
 
-unsigned int CBattleEncounter::encounterChance(const EEncounterType& tp, const std::string_view&) const
+unsigned int CBattleEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return Ressources::Config::fightChance;
 }

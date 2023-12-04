@@ -12,7 +12,7 @@ CMysteriousChest::CMysteriousChest() : CEncounter()
     _type = CEncounter::eField | CEncounter::eDungeon;
 }
 
-void CMysteriousChest::execute(const std::string_view& moduleName)
+void CMysteriousChest::execute(const std::string_view&)
 {
     CEncounter::execute();
     _hasBeenExecuted = true;
@@ -80,7 +80,7 @@ void CMysteriousChest::execute(const std::string_view& moduleName)
     CGameManagement::getPlayerInstance()->gainGold(gold);
 }
 
-unsigned int CMysteriousChest::encounterChance(const EEncounterType& tp, const std::string_view&) const
+unsigned int CMysteriousChest::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 3;
 }

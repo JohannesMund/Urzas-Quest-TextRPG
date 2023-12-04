@@ -23,7 +23,7 @@ void CBountyEnemy::spoilsOfWar() const
 
     auto amount = Randomizer::getRandom(2);
     {
-        for (auto i = 0; i <= amount; i++)
+        for (auto i = 0U; i <= amount; i++)
         {
             CGameManagement::getInventoryInstance()->addShopItem();
         }

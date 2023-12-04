@@ -23,13 +23,13 @@ void CSewerBoss::spoilsOfWar() const
 
     Console::printLn("Going through his bag, you find some more or less usefull items.");
     auto amount = Randomizer::getRandom(3) + 1;
-    for (auto i = 0; i <= amount; i++)
+    for (auto i = 0U; i <= amount; i++)
     {
         CGameManagement::getInventoryInstance()->addShopItem();
     }
 
     amount = Randomizer::getRandom(7) + 5;
-    for (auto i = 0; i <= amount; i++)
+    for (auto i = 0U; i <= amount; i++)
     {
         CGameManagement::getInventoryInstance()->addLootItem();
     }

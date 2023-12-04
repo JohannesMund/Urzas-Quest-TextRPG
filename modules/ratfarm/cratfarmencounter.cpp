@@ -43,7 +43,7 @@ void CRatFarmEncounter::execute(const std::string_view& moduleName)
     _hasBeenExecuted = true;
 }
 
-unsigned int CRatFarmEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CRatFarmEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

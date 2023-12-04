@@ -38,7 +38,7 @@ void CScaryMonsterCompanion::preBattle(CEnemy* enemy)
     }
 }
 
-void CScaryMonsterCompanion::battleAction(CEnemy* enemy, bool& endRound)
+void CScaryMonsterCompanion::battleAction(CEnemy* enemy, bool&)
 {
     if (_level <= 0)
     {
@@ -56,7 +56,7 @@ void CScaryMonsterCompanion::battleAction(CEnemy* enemy, bool& endRound)
     }
 }
 
-void CScaryMonsterCompanion::postBattle(CEnemy* enemy)
+void CScaryMonsterCompanion::postBattle(CEnemy*)
 {
     if (_level <= 0)
     {

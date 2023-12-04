@@ -93,7 +93,7 @@ void CGameManagement::executeRandomEncounter(const CEncounter::EEncounterType ty
 
     std::vector<unsigned int> indices;
 
-    for (int index = 0; index < _encounters.size(); index++)
+    for (unsigned int index = 0; index < _encounters.size(); index++)
     {
         auto encounter = _encounters.at(index);
         if (encounter->canBeExecuted(type) == false)
@@ -106,7 +106,7 @@ void CGameManagement::executeRandomEncounter(const CEncounter::EEncounterType ty
         {
             continue;
         }
-        for (int i = 0; i < chance; i++)
+        for (unsigned int i = 0; i < chance; i++)
         {
             indices.push_back(index);
         }

@@ -11,7 +11,7 @@ CShield::CShield(const Ressources::Items::EQuality quality) : CEquipment(Ressour
     _hasBattleBuff = true;
 }
 
-void CShield::battleEffect(CEnemy* enemy)
+void CShield::battleEffect(CEnemy*)
 {
     Console::printLn(std::format("You raise your {} to protect you.", name()));
 }

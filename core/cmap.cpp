@@ -24,11 +24,11 @@ const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eN
 
 CMap::CMap(const unsigned int width, const unsigned int height)
 {
-    for (int x = 0; x < height; x++)
+    for (unsigned int x = 0; x < height; x++)
     {
         std::vector<CRoom*> row;
 
-        for (int y = 0; y < width; y++)
+        for (unsigned int y = 0; y < width; y++)
         {
             row.push_back(nullptr);
         }
@@ -56,7 +56,7 @@ void CMap::init(std::vector<CRoom*>& rooms)
     rooms.push_back(RoomFactory::makeInjuredPet());
     rooms.push_back(RoomFactory::makeCapital());
 
-    for (int i = 0; i < Ressources::Config::numberOfTowns; i++)
+    for (unsigned int i = 0; i < Ressources::Config::numberOfTowns; i++)
     {
         rooms.push_back(RoomFactory::makeTown());
     }
@@ -68,10 +68,10 @@ void CMap::init(std::vector<CRoom*>& rooms)
 
     std::shuffle(rooms.begin(), rooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
 
-    for (int iRow = 0; iRow < _map.size(); iRow++)
+    for (unsigned int iRow = 0; iRow < _map.size(); iRow++)
     {
         auto row = _map.at(iRow);
-        for (int iCol = 0; iCol < row.size(); iCol++)
+        for (unsigned int iCol = 0; iCol < row.size(); iCol++)
         {
             if (iRow == _playerPosition.y && iCol == _playerPosition.x)
             {

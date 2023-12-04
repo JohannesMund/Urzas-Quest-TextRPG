@@ -49,7 +49,7 @@ public:
      * @param enemy the current opponent
      * Called at the start of a battle
      */
-    virtual void battleEffect(CEnemy* enemy)
+    virtual void battleEffect(CEnemy*)
     {
     }
 
@@ -59,7 +59,7 @@ public:
      * @param enemy the current opponent
      * @param endRound ends the turn before the combattants can select an action
      */
-    virtual void battleBuff(CEnemy* enemy, bool& endTurn)
+    virtual void battleBuff(CEnemy*, bool&)
     {
     }
 

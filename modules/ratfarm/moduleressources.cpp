@@ -19,7 +19,7 @@ std::string RatFarmRessources::getCarrot()
 
 void RatFarmRessources::TurnipFactory::addTurnips(unsigned int cnt)
 {
-    for (int i = 0; i <= cnt; i++)
+    for (auto i = 0U; i <= cnt; i++)
     {
         auto sz = Randomizer::getRandom(10);
         if (sz >= 9)

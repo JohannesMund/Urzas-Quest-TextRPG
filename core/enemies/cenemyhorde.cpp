@@ -20,10 +20,10 @@ void CEnemyHorde::preBattleAction()
     _lastHp = _hp;
 }
 
-void CEnemyHorde::battleAction(bool& endRound)
+void CEnemyHorde::battleAction(bool&)
 {
     _attacks = 0;
-    int counter = 0;
+    unsigned int counter = 0;
     for (unsigned int i = 1; i < _hps.size(); i++)
     {
         if (i <= 0)

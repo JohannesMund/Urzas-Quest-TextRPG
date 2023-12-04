@@ -18,8 +18,8 @@ enum class EFishLevel
 static const unsigned int rodLevelCap = 5;
 static const unsigned int boatLevelCap = 5;
 
-static const unsigned int necessaryRodParts = 3;
-static const unsigned int necessaryBoatParts = 7;
+static const int necessaryRodParts = 3;
+static const int necessaryBoatParts = 7;
 
 std::string moduleNameMakeRod();
 std::string moduleNameMakeBoat();

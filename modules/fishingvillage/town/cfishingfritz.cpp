@@ -238,7 +238,7 @@ void CFishingFritz::enhance() const
         {
             return;
         }
-        auto cost = item->upgradeCost();
+        int cost = item->upgradeCost();
 
         if (cost <= CGameManagement::getPlayerInstance()->gold())
         {

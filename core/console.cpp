@@ -78,7 +78,7 @@ void Console::br()
 
 void Console::hr()
 {
-    for (int i = 0; i < Ressources::Settings::consoleWidth; i++)
+    for (unsigned int i = 0; i < Ressources::Settings::consoleWidth; i++)
     {
         cout << "=";
     }

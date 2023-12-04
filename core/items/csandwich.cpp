@@ -14,7 +14,7 @@ CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients) : CItem()
 
     _value = 100;
 
-    for (int i = 0; i < ingredients.size(); i++)
+    for (auto i = 0U; i < ingredients.size(); i++)
     {
         _value += Randomizer::getRandom(25) + 1;
     }

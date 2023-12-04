@@ -14,7 +14,7 @@ CLaylaEncounter::CLaylaEncounter()
     _type = CEncounter::eField;
 }
 
-void CLaylaEncounter::execute(const std::string_view& moduleName)
+void CLaylaEncounter::execute(const std::string_view&)
 {
     Console::printLn("Next to the road, there is a broken cart, probably involved into a heavy accident. An injured, "
                      "armored guard lies there and needs help.");
@@ -58,7 +58,7 @@ void CLaylaEncounter::execute(const std::string_view& moduleName)
     _hasBeenExecuted = true;
 }
 
-unsigned int CLaylaEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CLaylaEncounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }

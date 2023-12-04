@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(UrzasQuest LANGUAGES CXX)
+set(TARGET_NAME UrzasQuest)
+
+project(${TARGET_NAME} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -168,26 +170,32 @@ set(URZAS_QUEST_SOURCES_MODULES
     modules/blackivorytower/cdarkmobi.h modules/blackivorytower/cdarkmobi.cpp
     )
 
-add_executable(UrzasQuest ${URZAS_QUEST_SOURCES_ROOT} ${URZAS_QUEST_SOURCES_CORE} ${URZAS_QUEST_SOURCES_MODULES})
+add_executable(${TARGET_NAME} ${URZAS_QUEST_SOURCES_ROOT} ${URZAS_QUEST_SOURCES_CORE} ${URZAS_QUEST_SOURCES_MODULES})
 
 
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR})
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/companion)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/items)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/items/equipment)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/items/story)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/enemies)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/rooms)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/rooms/town)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/tasks)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/encounters)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/dungeons)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/core/dungeons/rooms)
-target_include_directories(UrzasQuest PRIVATE ${CMAKE_SOURCE_DIR}/modules)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/companion)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/items)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/items/equipment)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/items/story)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/enemies)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/rooms)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/rooms/town)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/tasks)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/encounters)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/dungeons)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/dungeons/rooms)
+target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/modules)
+
+if(MSVC)
+  target_compile_options(${TARGET_NAME} PRIVATE /W4 /WX)
+else()
+  target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
 
 include(GNUInstallDirs)
-install(TARGETS UrzasQuest
+install(TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )

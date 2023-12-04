@@ -21,7 +21,7 @@ void CSewerBattleEncounter::execute(const std::string_view& moduleName)
     battle.fight();
 }
 
-unsigned int CSewerBattleEncounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CSewerBattleEncounter::encounterChance(const EEncounterType&, const std::string_view& moduleName) const
 {
     if (moduleName.compare(SewerRessources::moduleName()) != 0)
     {

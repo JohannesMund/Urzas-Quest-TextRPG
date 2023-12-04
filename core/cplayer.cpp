@@ -160,7 +160,7 @@ void CPlayer::addXp(const int i)
     auto xpAvailable = i;
     do
     {
-        auto xpNeeded = xpForNextLevel() - _xp;
+        int xpNeeded = xpForNextLevel() - _xp;
         if (xpNeeded < xpAvailable)
         {
             xpAvailable -= xpNeeded;

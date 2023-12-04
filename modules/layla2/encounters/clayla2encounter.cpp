@@ -16,7 +16,7 @@ CLayla2Encounter::CLayla2Encounter()
     _type = CEncounter::eField;
 }
 
-void CLayla2Encounter::execute(const std::string_view& moduleName)
+void CLayla2Encounter::execute(const std::string_view&)
 {
     Console::printLn(
         std::format("While walking through the land and doing adventurers things, you hear a well-known {}s{}cream{}. "
@@ -85,7 +85,7 @@ void CLayla2Encounter::execute(const std::string_view& moduleName)
     _hasBeenExecuted = true;
 }
 
-unsigned int CLayla2Encounter::encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const
+unsigned int CLayla2Encounter::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }
