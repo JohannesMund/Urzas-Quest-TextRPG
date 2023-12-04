@@ -59,7 +59,7 @@ std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
                       "proposing to {}.",
                       Game::princessLayla())}}};
 
-    return items.at(Randomizer::getRandom(items.size()));
+    return items.at(Randomizer::getRandom((unsigned int)items.size()));
 }
 
 std::string Ressources::Enemies::getRandomEnemyName()
@@ -99,7 +99,7 @@ std::pair<std::string, std::string> Ressources::Rooms::getRandomTown()
         {"Timbuktu",
          "The mysterous city, where the pepper grows. Many legendary heroes have been sent here. But on second sight, "
          "it is just a city."}};
-    return towns.at(Randomizer::getRandom(towns.size()));
+    return towns.at((unsigned int)Randomizer::getRandom(towns.size()));
 }
 
 std::string Ressources::Companion::nameForCompanionType(const ECompanionType& tp, const unsigned int level)
@@ -167,7 +167,7 @@ std::pair<std::string, std::string> Ressources::Enemies::getRandomBountyName()
         {"Evil Wizard", "Doing evil wizard things"},
         {"Robin Would", "Stealing from the rich"},
         {"Taffy, the Pirate", "Crimes against the world government"}};
-    return names.at(Randomizer::getRandom(names.size()));
+    return names.at((unsigned int)Randomizer::getRandom(names.size()));
 }
 
 std::string Ressources::Rooms::getRandomRumor()

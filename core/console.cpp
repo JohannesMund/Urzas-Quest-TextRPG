@@ -122,7 +122,7 @@ void Console::printLn(std::string text, const EAlignment align, const bool bRese
 {
     if (CC::colorizedSize(text) > Ressources::Settings::consoleWidth)
     {
-        unsigned int written = 0;
+        size_t written = 0;
         while (written < text.size())
         {
             auto substring = CC::colorizedSubString(text, written, Ressources::Settings::consoleWidth);
