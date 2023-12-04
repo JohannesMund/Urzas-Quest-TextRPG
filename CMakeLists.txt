@@ -188,12 +188,6 @@ target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/dunge
 target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/core/dungeons/rooms)
 target_include_directories(${TARGET_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/modules)
 
-if(MSVC)
-  target_compile_options(${TARGET_NAME} PRIVATE /W4 /WX)
-else()
-  target_compile_options(${TARGET_NAME} PRIVATE -Wall -Wextra -Wpedantic)
-endif()
-
 include(GNUInstallDirs)
 install(TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
