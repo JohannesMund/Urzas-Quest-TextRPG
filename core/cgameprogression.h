@@ -8,6 +8,7 @@
 #include <vector>
 
 class CRoom;
+
 class CGameProgression
 {
     friend class CGameManagement;
@@ -30,6 +31,17 @@ public:
         std::string moduleName;
         std::string questText;
     };
+
+    static void noInitDeInitFunction()
+    {
+    }
+    static void noInitWorldMapFunction(std::vector<CRoom*>&)
+    {
+    }
+    static std::string noQuestLogFunction()
+    {
+        return std::string{};
+    }
 
     EGameStage currentGameStage() const;
     std::vector<std::string> getQuestLog() const;
@@ -59,13 +71,12 @@ public:
     unsigned long bodyCount() const;
     unsigned long turns() const;
 
-    void registerModule(
-        const std::string_view& name,
-        const EGameStage neededForStage,
-        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
-        std::function<void()> initFunction = &Module::noInitDeInitFunction,
-        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction);
+    void registerModule(const std::string_view& name,
+                        const EGameStage neededForStage,
+                        std::function<std::string()> questLogFunction = &noQuestLogFunction,
+                        std::function<void()> initFunction = &noInitDeInitFunction,
+                        std::function<void()> deInitFunction = &noInitDeInitFunction,
+                        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &noInitWorldMapFunction);
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
 private:
@@ -87,17 +98,6 @@ private:
         static std::function<bool(const Module)> moduleRegisterStageFilter(const EGameStage& stage)
         {
             return [stage](auto module) { return module.gameStage == stage; };
-        }
-
-        static void noInitDeInitFunction()
-        {
-        }
-        static void noInitWorldMapFunction(std::vector<CRoom*>&)
-        {
-        }
-        static std::string noQuestLogFunction()
-        {
-            return std::string{};
         }
     };
 
