@@ -5,172 +5,172 @@
 
 std::string CC::fgBlack()
 {
-    return "\e[030m";
+    return "\33[030m";
 }
 
 std::string CC::fgRed()
 {
-    return "\e[031m";
+    return "\33[031m";
 }
 
 std::string CC::fgGreen()
 {
-    return "\e[032m";
+    return "\33[032m";
 }
 
 std::string CC::fgYellow()
 {
-    return "\e[033m";
+    return "\33[033m";
 }
 
 std::string CC::fgBlue()
 {
-    return "\e[034m";
+    return "\33[034m";
 }
 
 std::string CC::fgMagenta()
 {
-    return "\e[035m";
+    return "\33[035m";
 }
 
 std::string CC::fgCyan()
 {
-    return "\e[036m";
+    return "\33[036m";
 }
 
 std::string CC::fgLightGray()
 {
-    return "\e[037m";
+    return "\33[037m";
 }
 
 std::string CC::fgDarkGray()
 {
-    return "\e[090m";
+    return "\33[090m";
 }
 
 std::string CC::fgLightRed()
 {
-    return "\e[091m";
+    return "\33[091m";
 }
 
 std::string CC::fgLightGreen()
 {
-    return "\e[092m";
+    return "\33[092m";
 }
 
 std::string CC::fgLightYellow()
 {
-    return "\e[093m";
+    return "\33[093m";
 }
 
 std::string CC::fgLightBlue()
 {
-    return "\e[094m";
+    return "\33[094m";
 }
 
 std::string CC::fgLightMagenta()
 {
-    return "\e[095m";
+    return "\33[095m";
 }
 
 std::string CC::fgLightCyan()
 {
-    return "\e[096m";
+    return "\33[096m";
 }
 
 std::string CC::fgWhite()
 {
-    return "\e[097m";
+    return "\33[097m";
 }
 
 std::string CC::bgBlack()
 {
-    return "\e[040m";
+    return "\33[040m";
 }
 
 std::string CC::bgRed()
 {
-    return "\e[041m";
+    return "\33[041m";
 }
 
 std::string CC::bgGreen()
 {
-    return "\e[042m";
+    return "\33[042m";
 }
 
 std::string CC::bgYellow()
 {
-    return "\e[043m";
+    return "\33[043m";
 }
 
 std::string CC::bgBlue()
 {
-    return "\e[044m";
+    return "\33[044m";
 }
 
 std::string CC::bgMagenta()
 {
-    return "\e[045m";
+    return "\33[045m";
 }
 
 std::string CC::bgCyan()
 {
-    return "\e[046m";
+    return "\33[046m";
 }
 
 std::string CC::bgLightGray()
 {
-    return "\e[047m";
+    return "\33[047m";
 }
 
 std::string CC::bgDarkGray()
 {
-    return "\e[100m";
+    return "\33[100m";
 }
 
 std::string CC::bgLightRed()
 {
-    return "\e[101m";
+    return "\33[101m";
 }
 
 std::string CC::bgLightGreen()
 {
-    return "\e[102m";
+    return "\33[102m";
 }
 
 std::string CC::bgLightYellow()
 {
-    return "\e[103m";
+    return "\33[103m";
 }
 
 std::string CC::bgLightBlue()
 {
-    return "\e[104m";
+    return "\33[104m";
 }
 
 std::string CC::bgLightMagenta()
 {
-    return "\e[105m";
+    return "\33[105m";
 }
 
 std::string CC::bgLightCyan()
 {
-    return "\e[106m";
+    return "\33[106m";
 }
 
 std::string CC::bgWhite()
 {
-    return "\e[107m";
+    return "\33[107m";
 }
 
 std::string CC::ccReset()
 {
-    return "\e[000m";
+    return "\33[000m";
 }
 
 std::string CC::ccInvert()
 {
-    return "\e[007m";
+    return "\33[007m";
 }
 
 std::string CC::colorizeString(const std::string_view& s, const std::string_view& c1, const std::string_view& c2)
@@ -191,7 +191,7 @@ size_t CC::colorizedSize(const std::string& s)
 
 size_t CC::colorCodeSize()
 {
-    return std::string("\e[000m").size();
+    return std::string("\33[000m").size();
 }
 
 std::string CC::colorizedSubString(const std::string_view& text, const unsigned int from, const unsigned int size)
@@ -200,7 +200,7 @@ std::string CC::colorizedSubString(const std::string_view& text, const unsigned 
     auto len = from + size;
     for (auto i = from; i < len && i < text.size(); i++)
     {
-        if (text.at(i) == '\e')
+        if (text.at(i) == '\33')
         {
             len += CC::colorCodeSize();
         }
@@ -217,7 +217,7 @@ std::string CC::unColorizeString(const std::string& s)
 
 std::string CC::colorCodeRegExp()
 {
-    return "\\\e\\[(\\d*)m";
+    return "\\\33\\[(\\d*)m";
 }
 
 bool CC::isColorized(const std::string& s)

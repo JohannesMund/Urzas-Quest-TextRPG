@@ -168,12 +168,12 @@ void CGameProgression::unregisterModuleQuestByModuleName(const std::string& modu
 
 bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName) const
 {
-    for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)) |
-                                 std::views::filter(ModuleQuest::moduleQuestAcceptedFilter()))
-    {
-        return true;
-    }
-    return false;
+    return std::count_if(_moduleQuests.begin(),
+                         _moduleQuests.end(),
+                         [moduleName](const ModuleQuest& quest) {
+                             return ModuleQuest::moduleQuestNameFilter(moduleName)(quest) &&
+                                    ModuleQuest::moduleQuestAcceptedFilter()(quest);
+                         }) != 0;
 }
 
 CGameProgression::ModuleQuestInfo CGameProgression::getRandomQuest() const
