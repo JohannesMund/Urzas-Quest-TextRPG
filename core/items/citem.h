@@ -115,7 +115,7 @@ public:
      * @brief value
      * @return the value, when a player wants to buy the item
      */
-    virtual unsigned int buyValue() const;
+    virtual int buyValue() const;
 
     /**
      * @brief isUsableFromInventory

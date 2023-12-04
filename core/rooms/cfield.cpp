@@ -13,7 +13,7 @@ std::string CField::fgColor() const
 
 std::string CField::bgColor() const
 {
-    return "\e[48;5;22m";
+    return "\33[48;5;22m";
 }
 
 CMap::RoomFilter CField::fieldFilter()

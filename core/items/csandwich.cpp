@@ -124,7 +124,7 @@ void CSandwich::useFromInventory()
     CGameManagement::getPlayerInstance()->addHp(hp);
 }
 
-unsigned int CSandwich::buyValue() const
+int CSandwich::buyValue() const
 {
     return CItem::buyValue() * 2;
 }
