@@ -173,25 +173,42 @@ void CBlackIvoryTower::executeTopOffice()
             Ressources::Game::bimmelchen(),
             Ressources::Game::pimmelchen(),
             Ressources::Game::darkMobi()));
-        Console::printLn(std::format(
-            "In the end, she agrees to support the rebellion as much as she can, even though, she will "
-            "not become a member again, for the price of some {}sand{}wiches{}. You did not realize, but your "
-            "sandwiches start to become a thing in the land.",
-            CC::fgGreen(),
-            CC::fgLightYellow(),
-            CC::ccReset()));
+        Console::printLn(
+            std::format("In the end, she agrees to support the rebellion as much as she can, even though, she will "
+                        "not become a member again. For now, she will open a döner restaurant in her tower.",
+                        CC::fgGreen(),
+                        CC::fgLightYellow(),
+                        CC::ccReset()));
 
         Console::confirmToContinue();
         return;
     }
     else
     {
-        Console::printLn(std::format("{} is not here right now. probably she is off having some {}sand{}wiches{}. "
-                                     "Seems you climbed the stairs for nothing.",
-                                     Ressources::Game::darkMobi(),
-                                     CC::fgGreen(),
-                                     CC::fgLightYellow(),
-                                     CC::ccReset()));
+        Console::printLn(
+            std::format("{0} is not here right now. probably she is off having some {1}sand{2}wiches{3}. "
+                        "But you did not climb the stairs for nothing, as promised, {0} opened a Döner shop here in "
+                        "her tower. A big barbecue skewer with a huge chunk of meat is slowly spinning over a fire, it "
+                        "smells like barbecue and garlic.",
+                        Ressources::Game::darkMobi(),
+                        CC::fgGreen(),
+                        CC::fgLightYellow(),
+                        CC::ccReset()));
+        Console::printLn(std::format(
+            "Behind the counter is one of {}s {}. This guy looks pretty beaten up, his body is covered with scratches "
+            "and wounds, he wears bandages and has a black eye. When he sees you, he looks pretty scared. You cannot "
+            "stop thinking, that you have seen him before.",
+            Ressources::Game::mobi(),
+            BlackIvoryTowerRessources::lunatics()));
+        Console::printLn("With fear in his eyes and a shaking voice, he offers you a free döner.");
+
+        CMenu menu;
+
+        menu.addMenuGroup({menu.createAction("Have a Döner", 'H')}, {CMenu::exit()});
+        if (menu.execute().key == 'h')
+        {
+            haveADoener();
+        }
     }
 }
 
@@ -288,4 +305,36 @@ void CBlackIvoryTower::printHeader(const unsigned int stage) const
         Console::printLn(std::format("Floor {}", stage), Console::EAlignment::eCenter);
     }
     Console::br();
+}
+
+void CBlackIvoryTower::haveADoener()
+{
+    Console::printLn(
+        std::format("With shaking hands, the {0} cuts open some bread, fills it with fresh-cut meat, vegetables and a "
+                    "generous splash of the (as he sais) home made garlic sauce. The {0} tries to act professional, "
+                    "but in his eyes, you can see the sheer terror. If only you could remember, why he is so scared of "
+                    "you. Probably that is, because you are a friend of his boss.",
+                    BlackIvoryTowerRessources::lunatic()));
+    if (_hadADoener)
+    {
+        Console::printLn("You already know what to expect. Döner is great, Döner is tasty and for sure, Döner makes "
+                         "you more beautiful.");
+        Console::printLn("If only you knew, where the urge to put onions on your head is coming from?");
+    }
+    else
+    {
+        Console::printLn(
+            std::format("So this is a Döner. It is probably the best thing you have ever eaten. It is savory and "
+                        "tasty and the home made garlic sauce tastes like heaven. You quickly think about making "
+                        "something similar in your {}sand{}wich{} shop, but decide, that this market belongs to {}. "
+                        "You feel a strong urge to put onions on your head, and you are sure, that the onions will "
+                        "make you look more beautiful.",
+                        CC::fgYellow(),
+                        CC::fgGreen(),
+                        CC::ccReset(),
+                        Ressources::Game::darkMobi()));
+        CGameManagement::getPlayerInstance()->addXp(99);
+    }
+
+    CGameManagement::getPlayerInstance()->addHp(1);
 }
