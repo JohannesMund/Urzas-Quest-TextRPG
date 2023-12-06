@@ -16,7 +16,7 @@ void BlackIvoryTowerRessources::initModule()
                     "the rebellion. She lives on top of the {0}, a gigantic tower, guarded by {1}s {2}. Climb the "
                     "{0} and talk to {1}.{3}",
                     darkIvoryTower(),
-                    Ressources::Game::mobi(),
+                    Ressources::Game::darkMobi(),
                     lunatics(),
                     CC::ccReset()));
 }

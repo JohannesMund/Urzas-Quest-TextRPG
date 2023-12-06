@@ -578,7 +578,12 @@ std::string Ressources::Game::fishingFritz()
 
 std::string Ressources::Game::mobi()
 {
-    return std::format("{}Dark {}Mo{}bi{}", CC::fgDarkGray(), CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+    return std::format("{}Mo{}bi{}",CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::string Ressources::Game::darkMobi()
+{
+    return std::format("{}Dark {}", CC::fgDarkGray(), mobi());
 }
 
 std::pair<std::string, std::string> Ressources::Rooms::getCapital()

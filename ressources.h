@@ -53,6 +53,7 @@ std::string fishingFritz();
 std::string dancingBard();
 
 std::string mobi();
+std::string darkMobi();
 
 std::string kingJesster();
 

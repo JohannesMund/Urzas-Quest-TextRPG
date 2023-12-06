@@ -132,21 +132,21 @@ void CBlackIvoryTower::executeTopOffice()
         std::format("The winding stair case seemed like forever! This is the office in the top floor. Obviously, the "
                     "office of {}. It is stuffed with books and papers, there is a big desk in front of the window. "
                     "Looks like a mages chamber. Or the chamber of a master beurocrat.",
-                    Ressources::Game::mobi()));
+                    Ressources::Game::darkMobi()));
     Console::br();
 
     if (!_isOpen)
     {
         Console::printLn(std::format("{} is here, and does not look very amused. \"How dare you, coming here, and kill "
                                      "all my {}?\", she asks, and without waiting for an answer, she attacks.",
-                                     Ressources::Game::mobi(),
+                                     Ressources::Game::darkMobi(),
                                      BlackIvoryTowerRessources::lunatics()));
         Console::br();
         Console::confirmToContinue();
 
-        CDarkMobi mobi;
-        mobi.printBossBattleHeader();
-        CBattle battle(&mobi);
+        CDarkMobi darkMobi;
+        darkMobi.printBossBattleHeader();
+        CBattle battle(&darkMobi);
         battle.fight();
 
         if (CGameManagement::getPlayerInstance()->isDead())
@@ -160,7 +160,7 @@ void CBlackIvoryTower::executeTopOffice()
             "You task was to talk to {0}, not to kill her, so you let her live, and you start talking. As "
             "expected, {0} is not very excited about the death of her {1}, but she is a former member of "
             "the rebellion, and still well-disposed towards {2} and {3}, since they have a common past together",
-            Ressources::Game::mobi(),
+            Ressources::Game::darkMobi(),
             BlackIvoryTowerRessources::lunatics(),
             Ressources::Game::fiego(),
             Ressources::Game::brock()));
@@ -172,7 +172,7 @@ void CBlackIvoryTower::executeTopOffice()
             "witnessed you, hanging up the moon: \"You must truely be the chosen one!\"",
             Ressources::Game::bimmelchen(),
             Ressources::Game::pimmelchen(),
-            Ressources::Game::mobi()));
+            Ressources::Game::darkMobi()));
         Console::printLn(std::format(
             "In the end, she agrees to support the rebellion as much as she can, even though, she will "
             "not become a member again, for the price of some {}sand{}wiches{}. You did not realize, but your "
@@ -188,7 +188,7 @@ void CBlackIvoryTower::executeTopOffice()
     {
         Console::printLn(std::format("{} is not here right now. probably she is off having some {}sand{}wiches{}. "
                                      "Seems you climbed the stairs for nothing.",
-                                     Ressources::Game::mobi(),
+                                     Ressources::Game::darkMobi(),
                                      CC::fgGreen(),
                                      CC::fgLightYellow(),
                                      CC::ccReset()));
@@ -273,7 +273,15 @@ void CBlackIvoryTower::printHeader(const unsigned int stage) const
     }
     else if (stage >= BlackIvoryTowerRessources::towerHeight)
     {
-        Console::printLn("Top floor", Console::EAlignment::eCenter);
+        if (_isOpen)
+        {
+            Console::printLn(std::format("{}'s Döner", Ressources::Game::mobi()), Console::EAlignment::eCenter);
+            Console::printLn("Einmal essen niemals vergessen", Console::EAlignment::eCenter);
+        }
+        else
+        {
+            Console::printLn("Top floor", Console::EAlignment::eCenter);
+        }
     }
     else
     {
