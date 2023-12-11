@@ -10,15 +10,6 @@
 
 void BlackIvoryTowerRessources::initModule()
 {
-    CGameManagement::getProgressionInstance()->registerModuleQuest(
-        moduleName(),
-        std::format("{1} is a former Member of the Rebellion. She left the rebellion for good, but is still an ally to "
-                    "the rebellion. She lives on top of the {0}, a gigantic tower, guarded by {1}s {2}. Climb the "
-                    "{0} and talk to {1}.{3}",
-                    darkIvoryTower(),
-                    Ressources::Game::darkMobi(),
-                    lunatics(),
-                    CC::ccReset()));
 }
 void BlackIvoryTowerRessources::deInitModule()
 {

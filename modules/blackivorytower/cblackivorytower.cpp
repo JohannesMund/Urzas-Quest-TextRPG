@@ -7,6 +7,7 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "curzasglasses.h"
 #include "moduleressources.h"
 #include "randomizer.h"
 
@@ -31,12 +32,29 @@ void CBlackIvoryTower::execute()
                                  CC::fgDarkGray(),
                                  CC::ccReset()));
     Console::br();
-    if (!_isOpen &&
-        !CGameManagement::getProgressionInstance()->isModuleQuestAccepted(BlackIvoryTowerRessources::moduleName()))
+    if (!_isOpen)
     {
-        Console::printLn("The only entry is locked, there is no way to get into the tower.");
-        Console::confirmToContinue();
-        return;
+        CUrzasGlasses glasses;
+        Console::printLn(
+            "You walk around the tower several time, but there seems to be no entry. You continue to walk and walk "
+            "and walk und still walk until you get dizzy and decide, that this tower probably has no entry. Or you "
+            "cannot see the entry. If only you had some seeing entries support item...");
+
+        if (!CGameManagement::getInventoryInstance()->hasItem(CItem::nameFilter(glasses.name())))
+        {
+            Console::confirmToContinue();
+            return;
+        }
+        else
+        {
+
+            Console::printLn(std::format(
+                "Wait, you have found a seeing support item recently. Maybe it is an seeing entries spoort item. whio "
+                "knows? You take {0} out of you pocket and put it onto your nose. You walk around the tower once more, "
+                "and e voila, there is an entry! {0} is a seeing entries support item!",
+                glasses.name()));
+            Console::confirmToContinue();
+        }
     }
 
     CMenu::Action input;
