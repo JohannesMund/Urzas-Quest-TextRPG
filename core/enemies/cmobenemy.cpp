@@ -16,7 +16,7 @@ CMobEnemy::CMobEnemy() : CEnemy()
     _level = Randomizer::getRandom(maxLevel - minLevel) + minLevel;
     _initiative = Randomizer::getRandom(3) + 1;
 
-    _hp = Randomizer::getRandom(2) + 5;
+    _hp = basicHP(_level);
 
     if (_level >= 2)
     {
@@ -24,7 +24,6 @@ CMobEnemy::CMobEnemy() : CEnemy()
     }
     if (_level >= 3)
     {
-        _hp++;
         _initiative++;
     }
     if (_level >= 4)
@@ -34,7 +33,7 @@ CMobEnemy::CMobEnemy() : CEnemy()
     if (_level >= 5)
     {
         _extendedWeaponChoice = Randomizer::getRandom(2) == 0;
-        _hp += Randomizer::getRandom(3) + 1;
+
         _initiative += Randomizer::getRandom(5) + 1;
     }
     if (_level >= 6)
@@ -44,7 +43,6 @@ CMobEnemy::CMobEnemy() : CEnemy()
     if (_level >= 7)
     {
         _extendedWeaponChoice = true;
-        _hp++;
         _initiative++;
     }
     if (_level >= 10)

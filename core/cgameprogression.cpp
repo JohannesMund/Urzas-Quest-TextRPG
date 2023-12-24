@@ -140,19 +140,23 @@ bool CGameProgression::moduleHintsAvailable() const
     return _moduleHints.size() != 0;
 }
 
-void CGameProgression::registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText)
+void CGameProgression::registerModuleQuest(const std::string_view& moduleName,
+                                           const std::string_view& questText,
+                                           std::function<void()> questAcceptedFunction)
 {
 
     for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
     {
         moduleQuest.questInfo.questText = questText;
         moduleQuest.accepted = false;
+        moduleQuest.questAcceptedFunction = questAcceptedFunction;
         return;
     }
 
     ModuleQuest quest;
     quest.questInfo.moduleName = moduleName;
     quest.questInfo.questText = questText;
+    quest.questAcceptedFunction = questAcceptedFunction;
     _moduleQuests.push_back(quest);
 }
 
@@ -201,6 +205,7 @@ void CGameProgression::acceptModuleQuest(const std::string_view& moduleName)
     for (auto& moduleQuest : _moduleQuests | std::views::filter(ModuleQuest::moduleQuestNameFilter(moduleName)))
     {
         moduleQuest.accepted = true;
+        moduleQuest.questAcceptedFunction();
         return;
     }
 }
@@ -229,6 +234,11 @@ void CGameProgression::increaseBodyCount()
     _bodyCount++;
 }
 
+void CGameProgression::increaseGenocideCount()
+{
+    _genocideCount++;
+}
+
 void CGameProgression::increaseTurns()
 {
     _turns++;
@@ -242,6 +252,11 @@ unsigned int CGameProgression::progress() const
 unsigned long CGameProgression::bodyCount() const
 {
     return _bodyCount;
+}
+
+unsigned long CGameProgression::genocideCount() const
+{
+    return _genocideCount;
 }
 
 unsigned long CGameProgression::turns() const
@@ -353,7 +368,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
-                                     Ressources::Game::princessLayla()),
+                                     Ressources::Game::princessLeila()),
                          Console::EAlignment::eCenter);
         break;
     case EGameStage::eFoundCult:
@@ -371,7 +386,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(std::format("And last not least, is ist right to kidnap {}, and when do we do it?",
-                                     Ressources::Game::princessLayla()),
+                                     Ressources::Game::princessLeila()),
                          Console::EAlignment::eCenter);
         break;
 

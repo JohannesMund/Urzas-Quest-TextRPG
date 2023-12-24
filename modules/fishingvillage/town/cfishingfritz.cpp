@@ -116,7 +116,7 @@ void CFishingFritz::checkFish()
                         Ressources::Game::urza(),
                         Ressources::Game::fiego(),
                         Ressources::Game::brock(),
-                        Ressources::Game::princessLayla()));
+                        Ressources::Game::princessLeila()));
         Console::printLn(std::format(
             "{} looks at you suspicious and tells you, that he knows a lot, but not, wether he can trust you. the only "
             "people he can trust, are prople who are able to bring him {}. The legendary fish that can be caught in {}",

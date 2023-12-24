@@ -39,9 +39,14 @@ std::string urza();
 std::string whoTheFuckIsUrza();
 std::string urzaWhoTheFuckIsUrza();
 
-std::string princessLayla();
-std::string layla();
-std::string laylasRibbon();
+std::string princessLeila();
+std::string leila();
+std::string leilasRibbon();
+
+std::string piefke();
+std::string schniefke();
+std::string bimmel();
+std::string bommel();
 
 std::string fiego();
 std::string brock();

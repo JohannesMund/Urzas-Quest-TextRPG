@@ -7,11 +7,13 @@
 class CEnemyHorde : public CEnemy
 {
 public:
-    CEnemyHorde(const unsigned int count, const unsigned int minHp, const unsigned int maxHp);
+    CEnemyHorde(const unsigned int count);
 
     virtual void preBattleAction() override;
     virtual void battleAction(bool& endRound) override;
     virtual void postBattleAction() override;
+
+    virtual void postBattle() override;
 
     virtual unsigned int damage() const override;
 

@@ -57,7 +57,7 @@ std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
         {{std::format("{}Ring{}", CC::fgYellow(), CC::ccReset())},
          {std::format("A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for "
                       "proposing to {}.",
-                      Game::princessLayla())}}};
+                      Game::princessLeila())}}};
 
     return items.at(Randomizer::getRandom((unsigned int)items.size()));
 }
@@ -341,7 +341,7 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
             colorizeNames(names, CC::fgRed(), CC::fgDarkGray());
             description =
                 std::format("A cool trident, the spikes seem to glow, and they are hot! well, not as hot as {}.",
-                            Ressources::Game::layla());
+                            Ressources::Game::leila());
             break;
         case 3:
             names = {"Whip of the beast tamer",
@@ -561,14 +561,14 @@ std::string Ressources::Game::brock()
     return std::format("{}The B-{}Rock{}", CC::fgLightGray(), CC::fgDarkGray(), CC::ccReset());
 }
 
-std::string Ressources::Game::princessLayla()
+std::string Ressources::Game::princessLeila()
 {
-    return std::format("{}Princess {}{}", CC::fgLightMagenta(), layla(), CC::ccReset());
+    return std::format("{}Princess {}{}", CC::fgLightMagenta(), leila(), CC::ccReset());
 }
 
-std::string Ressources::Game::layla()
+std::string Ressources::Game::leila()
 {
-    return std::format("{0}L{1}ayla{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
+    return std::format("{0}L{1}eila{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
 }
 
 std::string Ressources::Game::fishingFritz()
@@ -578,7 +578,7 @@ std::string Ressources::Game::fishingFritz()
 
 std::string Ressources::Game::mobi()
 {
-    return std::format("{}Mo{}bi{}",CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+    return std::format("{}Mo{}bi{}", CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
 }
 
 std::string Ressources::Game::darkMobi()
@@ -609,9 +609,29 @@ std::string Ressources::Game::kingJesster()
     return std::format("{}King {}Jes{}ster{}", CC::fgRed(), CC::fgLightGreen(), CC::fgRed(), CC::ccReset());
 }
 
-std::string Ressources::Game::laylasRibbon()
+std::string Ressources::Game::leilasRibbon()
 {
     return std::format("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
+}
+
+std::string Ressources::Game::piefke()
+{
+    return std::format("{0}Pi{1}ef{0}ke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+}
+
+std::string Ressources::Game::schniefke()
+{
+    return std::format("{1}Sch{0}nie{1}fke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+}
+
+std::string Ressources::Game::bimmel()
+{
+    return std::format("{0}Bi{1}mm{0}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+}
+
+std::string Ressources::Game::bommel()
+{
+    return std::format("{1}Bo{0}mm{1}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::bimmelchen()

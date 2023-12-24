@@ -281,7 +281,7 @@ void CSandwichShop::revolutionaryThoughts()
             Console::br();
             Console::printLn(std::format(
                 "For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
-                Ressources::Game::princessLayla()));
+                Ressources::Game::princessLeila()));
             CGameManagement::getProgressionInstance()->acceptModuleQuest(quest.moduleName);
         }
         else
@@ -399,7 +399,7 @@ void CSandwichShop::observe()
     Console::printLn(
         std::format("\"Sou you are the guys who kidnapped {0} repeatedly?\" you ask. \"So you are the one, who "
                     "intercepted our plans to abduct {0} repeatedly?\" answer the two rebellion leaders.",
-                    Ressources::Game::princessLayla()));
+                    Ressources::Game::princessLeila()));
     Console::printLn("After some laughing, you decide to work together. You provide them with food and support, they "
                      "will not abduct any princess, without your approval.");
     Console::confirmToContinue();
@@ -462,7 +462,7 @@ void CSandwichShop::talkToRebellion()
             Console::br();
             Console::printLn(std::format(
                 "For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
-                Ressources::Game::princessLayla()));
+                Ressources::Game::princessLeila()));
             CGameManagement::getProgressionInstance()->acceptModuleQuest(quest.moduleName);
         }
         else
@@ -482,7 +482,7 @@ void CSandwichShop::talkToRebellion()
             "the way, There seems nothing to be done for now.",
             Ressources::Game::fiego(),
             Ressources::Game::brock(),
-            Ressources::Game::layla()));
+            Ressources::Game::leila()));
     }
 
     Console::confirmToContinue();

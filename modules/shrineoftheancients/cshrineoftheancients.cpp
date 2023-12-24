@@ -236,6 +236,8 @@ void CShrineOfTheAncients::stats() const
     Console::printLnWithSpacer("Progress:", progressString);
     Console::printLnWithSpacer("Body count:",
                                std::format("{}", CGameManagement::getProgressionInstance()->bodyCount()));
+    Console::printLnWithSpacer("Genocides committed:",
+                               std::format("{}", CGameManagement::getProgressionInstance()->genocideCount()));
     Console::printLnWithSpacer("Turns:", std::format("{}", CGameManagement::getProgressionInstance()->turns()));
 
     Console::br();

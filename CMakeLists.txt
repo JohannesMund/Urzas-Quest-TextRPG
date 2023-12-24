@@ -16,11 +16,8 @@ set(URZAS_QUEST_SOURCES_CORE
 	core/console.h core/console.cpp
     core/colorize.h core/colorize.cpp
     core/cmenu.h core/cmenu.cpp
-
-    
     core/randomizer.h core/randomizer.cpp
     core/enumiterator.h
-
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
@@ -132,11 +129,11 @@ set(URZAS_QUEST_SOURCES_MODULES
     modules/sewer/csewerbossroom.h modules/sewer/csewerbossroom.cpp
     modules/sewer/csewerboss.h modules/sewer/csewerboss.cpp
 
-    modules/layla/claylaencounter.h modules/layla/claylaencounter.cpp
-    modules/layla/moduleressources.h modules/layla/moduleressources.cpp
-    modules/layla/claylatask.h modules/layla/claylatask.cpp
-    modules/layla/claylaboss.h modules/layla/claylaboss.cpp
-    modules/layla/claylatowntask.h modules/layla/claylatowntask.cpp
+    modules/leila/cleilaencounter.h modules/leila/cleilaencounter.cpp
+    modules/leila/moduleressources.h modules/leila/moduleressources.cpp
+    modules/leila/cleilatask.h modules/leila/cleilatask.cpp
+    modules/leila/cleilaboss.h modules/leila/cleilaboss.cpp
+    modules/leila/cleilatowntask.h modules/leila/cleilatowntask.cpp
 
     modules/fishingvillage/cfishingvillage.h modules/fishingvillage/cfishingvillage.cpp
     modules/fishingvillage/moduleressources.h modules/fishingvillage/moduleressources.cpp
@@ -155,20 +152,26 @@ set(URZAS_QUEST_SOURCES_MODULES
     modules/rebellionhideout/moduleressources.h modules/rebellionhideout/moduleressources.cpp
     modules/rebellionhideout/cbagofingredients.h modules/rebellionhideout/cbagofingredients.cpp
 
-    modules/layla2/enemies/claylabossguards.h modules/layla2/enemies/claylabossguards.cpp
-    modules/layla2/moduleressources.h modules/layla2/moduleressources.cpp
-    modules/layla2/enemies/claylabossorks.h modules/layla2/enemies/claylabossorks.cpp
-    modules/layla2/encounters/clayla2encounter.h modules/layla2/encounters/clayla2encounter.cpp
-    modules/layla2/encounters/clayla2goblinencounter.h modules/layla2/encounters/clayla2goblinencounter.cpp
-    modules/layla2/tasks/clayla2goblinvillagetask.h modules/layla2/tasks/clayla2goblinvillagetask.cpp
-    modules/layla2/enemies/cgoblinhorde.h modules/layla2/enemies/cgoblinhorde.cpp
-    modules/layla2/tasks/clayla2capitaltask.h modules/layla2/tasks/clayla2capitaltask.cpp
+    modules/leila2/enemies/cleilabossguards.h modules/leila2/enemies/cleilabossguards.cpp
+    modules/leila2/moduleressources.h modules/leila2/moduleressources.cpp
+    modules/leila2/enemies/cleilabossorks.h modules/leila2/enemies/cleilabossorks.cpp
+    modules/leila2/encounters/cleila2encounter.h modules/leila2/encounters/cleila2encounter.cpp
+    modules/leila2/encounters/cleila2goblinencounter.h modules/leila2/encounters/cleila2goblinencounter.cpp
+    modules/leila2/tasks/cleila2goblinvillagetask.h modules/leila2/tasks/cleila2goblinvillagetask.cpp
+    modules/leila2/enemies/cgoblinhorde.h modules/leila2/enemies/cgoblinhorde.cpp
+    modules/leila2/tasks/cleila2capitaltask.h modules/leila2/tasks/cleila2capitaltask.cpp
 
     modules/blackivorytower/moduleressources.h modules/blackivorytower/moduleressources.cpp
     modules/blackivorytower/cblackivorytower.h modules/blackivorytower/cblackivorytower.cpp
     modules/blackivorytower/clunatic.h modules/blackivorytower/clunatic.cpp
     modules/blackivorytower/cdarkmobi.h modules/blackivorytower/cdarkmobi.cpp
-)
+
+    modules/leilarescue/moduleressources.h modules/leilarescue/moduleressources.cpp
+    modules/leilarescue/tasks/cfindguardstask.h modules/leilarescue/tasks/cfindguardstask.cpp
+    modules/leilarescue/tasks/cleilarescuecapitaltask.h modules/leilarescue/tasks/cleilarescuecapitaltask.cpp
+    modules/leilarescue/enemies/ccannibalhorde.h modules/leilarescue/enemies/ccannibalhorde.cpp
+    modules/leilarescue/enemies/cguardhorde.h modules/leilarescue/enemies/cguardhorde.cpp
+ )
 
 add_executable(${TARGET_NAME} ${URZAS_QUEST_SOURCES_ROOT} ${URZAS_QUEST_SOURCES_CORE} ${URZAS_QUEST_SOURCES_MODULES})
 
