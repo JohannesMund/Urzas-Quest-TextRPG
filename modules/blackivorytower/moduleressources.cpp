@@ -11,9 +11,11 @@
 void BlackIvoryTowerRessources::initModule()
 {
 }
+
 void BlackIvoryTowerRessources::deInitModule()
 {
 }
+
 void BlackIvoryTowerRessources::initWorldMap(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(new CBlackIvoryTower());
