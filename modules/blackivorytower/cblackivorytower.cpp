@@ -233,7 +233,6 @@ void CBlackIvoryTower::executeTopOffice()
 void CBlackIvoryTower::executeStairs(const unsigned int stage)
 {
     printHeader(stage);
-
     Console::printLn("Gray brick walls, a stair case up and a stair case down. This floor looks exactly like all the "
                      "other floors. there is no decoration, no tapestry (as you would expect in a building like that, "
                      "and if you would not cout the floors for yourself you would not have the slightest idea, whether "
