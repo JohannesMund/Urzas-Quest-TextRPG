@@ -171,6 +171,7 @@ set(URZAS_QUEST_SOURCES_MODULES
     modules/leilarescue/tasks/cleilarescuecapitaltask.h modules/leilarescue/tasks/cleilarescuecapitaltask.cpp
     modules/leilarescue/enemies/ccannibalhorde.h modules/leilarescue/enemies/ccannibalhorde.cpp
     modules/leilarescue/enemies/cguardhorde.h modules/leilarescue/enemies/cguardhorde.cpp
+    modules/leilarescue/items/cguardstuff.h modules/leilarescue/items/cguardstuff.cpp
  )
 
 add_executable(${TARGET_NAME} ${URZAS_QUEST_SOURCES_ROOT} ${URZAS_QUEST_SOURCES_CORE} ${URZAS_QUEST_SOURCES_MODULES})

@@ -1,5 +1,4 @@
-#ifndef CBOATPART_H
-#define CBOATPART_H
+#pragma once
 
 #include <cjunkitem.h>
 
@@ -22,5 +21,3 @@ public:
 private:
     EPart _part;
 };
-
-#endif // CBOATPART_H
