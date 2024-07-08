@@ -44,11 +44,8 @@ void CBountyHunt::execute()
     else
     {
         Console::printLn("You failed miserably!");
-        if (!CGameManagement::getPlayerInstance()->isDead())
-        {
-            Console::printLn("At least you survived. Bounty hunter does not seem to be the fitting job choice for you. "
-                             "Maybe bus driver would be better. Are there busses here in this wordl?");
-        }
+        Console::printLn("At least you survived. Bounty hunter does not seem to be the fitting job choice for you. "
+                         "Maybe bus driver would be better. Are there busses here in this wordl?");
     }
 
     Console::br();

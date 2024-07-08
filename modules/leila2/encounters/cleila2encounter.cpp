@@ -55,10 +55,6 @@ void CLeila2Encounter::execute(const std::string_view&)
     CBattle battle(&boss);
     battle.fight();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
     Console::confirmToContinue();
     Console::printLn(std::format("While untying {}, you ask how she got abducted again, and she tells you, that the "
                                  "royal guards just failed to bring her home. the journey took days, and eventually, "

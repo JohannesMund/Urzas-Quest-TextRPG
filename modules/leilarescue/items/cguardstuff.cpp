@@ -9,7 +9,7 @@ CGuardStuff::CGuardStuff()
 {
     std::vector<EPart> possibleStuff;
     possibleStuff.push_back(EPart::eUnknown);
-    for (auto i : CGuardStuff::stuffIterator())
+    for (auto i : CGuardStuff::partIterator())
     {
         if (i != EPart::eUnknown && !has(i))
         {
@@ -87,7 +87,7 @@ bool CGuardStuff::has(const EPart part)
 
 bool CGuardStuff::hasAll()
 {
-    for (auto i : CGuardStuff::stuffIterator())
+    for (auto i : CGuardStuff::partIterator())
     {
         if (!has(i))
         {
@@ -100,7 +100,7 @@ bool CGuardStuff::hasAll()
 std::vector<std::string> CGuardStuff::listMissingParts()
 {
     std::vector<std::string> missingStuff;
-    for (auto i : CGuardStuff::stuffIterator())
+    for (auto i : CGuardStuff::partIterator())
     {
         if (!has(i))
         {

@@ -12,9 +12,9 @@
 #include "croom.h"
 #include "ctask.h"
 #include "ctown.h"
+#include "exceptions.h"
 #include "randomizer.h"
 #include "rebellionhideout/cbagofingredients.h"
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -195,10 +195,6 @@ void CGameManagement::executeTurn()
     Console::cls();
 
     _map.currentRoom()->execute();
-    if (_player.isDead())
-    {
-        return;
-    }
 
     while (true)
     {
@@ -237,8 +233,7 @@ void CGameManagement::executeTurn()
 
             if (menu.execute() == CMenu::yes())
             {
-                _isGameOver = true;
-                return;
+                throw CGameOverException();
             }
         }
 
@@ -324,14 +319,24 @@ void CGameManagement::init()
 
 void CGameManagement::gameLoop()
 {
-    while (!_isGameOver)
+    while (true)
     {
         _progression.checkGameProgress();
-        executeTurn();
-        handlePlayerDeath();
-        if (_player.isDead())
+
+        try
         {
-            _isGameOver = true;
+            executeTurn();
+        }
+        catch (const CPlayerDiedException& e)
+        {
+            handlePlayerDeath();
+            if (_player.isDead())
+            {
+                return;
+            }
+        }
+        catch (const CGameOverException& e)
+        {
             return;
         }
     }

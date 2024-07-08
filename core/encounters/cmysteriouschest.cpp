@@ -45,10 +45,6 @@ void CMysteriousChest::execute(const std::string_view&)
         CBattle battle(&chest);
         battle.fight();
 
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
         if (!chest.isDead())
         {
             Console::printLn("You manage to escape. This was one scary monster!");

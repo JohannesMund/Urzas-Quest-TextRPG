@@ -70,10 +70,6 @@ void CBlackIvoryTower::execute()
         if (input.key == 'c')
         {
             climb();
-            if (CGameManagement::getPlayerInstance()->isDead())
-            {
-                return;
-            }
         }
     } while (input != CMenu::exit());
 }
@@ -105,10 +101,6 @@ void CBlackIvoryTower::climb()
     {
 
         executeStairs(currentStage);
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
 
         CMenu menu;
         CMenu::ActionList downAction = {menu.createAction("Down", 'd')};
@@ -134,10 +126,6 @@ void CBlackIvoryTower::climb()
         if (input.key == 'v')
         {
             executeTopOffice();
-            if (CGameManagement::getPlayerInstance()->isDead())
-            {
-                return;
-            }
         }
     }
 }
@@ -166,11 +154,6 @@ void CBlackIvoryTower::executeTopOffice()
         darkMobi.printBossBattleHeader();
         CBattle battle(&darkMobi);
         battle.fight();
-
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
 
         _isOpen = true;
         CGameManagement::getProgressionInstance()->reportModuleFinished(BlackIvoryTowerRessources::moduleName());
@@ -287,10 +270,6 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
         CLunatic lunatic;
         CBattle battle(&lunatic);
         battle.fight();
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
     }
     break;
     }

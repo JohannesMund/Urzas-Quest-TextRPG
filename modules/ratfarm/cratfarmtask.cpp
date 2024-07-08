@@ -64,11 +64,6 @@ void CRatFarmTask::battle()
     CBattle battle(&ratBoss);
     battle.fight();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
-
     Console::confirmToContinue();
     Console::printLn("Thats it! Your first genocide! What a milestone!");
     Console::printLn(std::format("Lady {0} runs toward you and starts thanking you for rescuing her {0} house in {0} "

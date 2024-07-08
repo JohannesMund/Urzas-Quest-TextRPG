@@ -64,14 +64,11 @@ void CFindGuardsTask::fightCannibalHorde()
     CBattle battle(&horde);
     battle.fight();
 
-    if (!CGameManagement::getPlayerInstance()->isDead())
-    {
-        Console::printLn(
-            "Your second genocide. Again, while rescuing the same woman. Well, genocides are daily business for "
-            "adventuerers / heros like you. And all genocides where for the greater good.");
-        Console::printLn("Of course, if genocides are not the foundation for a good and healthy relationship "
-                         "between hero and princess, what else could be?");
-        Console::printLn("You untie the guard and lead him to the others.");
-        finishTask();
-    }
+    Console::printLn(
+        "Your second genocide. Again, while rescuing the same woman. Well, genocides are daily business for "
+        "adventuerers / heros like you. And all genocides where for the greater good.");
+    Console::printLn("Of course, if genocides are not the foundation for a good and healthy relationship "
+                     "between hero and princess, what else could be?");
+    Console::printLn("You untie the guard and lead him to the others.");
+    finishTask();
 }

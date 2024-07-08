@@ -18,6 +18,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cmenu.h core/cmenu.cpp
     core/randomizer.h core/randomizer.cpp
     core/enumiterator.h
+    core/exceptions.h
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp

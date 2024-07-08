@@ -46,11 +46,6 @@ void CLeilaTask::execute()
     CBattle battle(&boss);
     battle.fight();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
-
     Console::confirmToContinue();
     Console::printLn(std::format("After putting the two rouges to flight you turn to {0}, untie her und guard her to "
                                  "the next town. Unfortunately {0} is a real princess and does not show the slightest "

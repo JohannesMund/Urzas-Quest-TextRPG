@@ -33,10 +33,6 @@ void CLeila2GoblinVillageTask::execute()
     CBattle battle(&horde);
     battle.fight();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
     Console::confirmToContinue();
 
     CLeilaBossOrks boss;
@@ -49,10 +45,6 @@ void CLeila2GoblinVillageTask::execute()
     CBattle battle2(&boss);
     battle2.fight();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
     Console::confirmToContinue();
 
     Console::printLn(
