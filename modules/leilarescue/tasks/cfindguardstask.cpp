@@ -27,6 +27,7 @@ void CFindGuardsTask::finishTask()
         CGameManagement::getInstance()->placeTaskOnField(new CFindGuardsTask(_number + 1));
     }
     else
+        break;
     {
         CGameManagement::getInstance()->placeTask(new CLeilaRescueCapitalTask(), CCapital::townFilter());
     }
