@@ -78,7 +78,20 @@ set(URZAS_QUEST_SOURCES_CORE
     core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp    
 )
 
-set(CORE_INCLUDE_DIRS /core /core/companion /core/items /core/items/equipment /core/items/story /core/enemies /core/rooms /core/rooms/town /core/tasks /core/encounters /core/dungeons /core/dungeons/rooms)
+set(CORE_INCLUDE_DIRS 
+    /core 
+    /core/companion 
+    /core/items 
+    /core/items/equipment 
+    /core/items/story 
+    /core/enemies 
+    /core/rooms 
+    /core/rooms/town 
+    /core/tasks 
+    /core/encounters 
+    /core/dungeons 
+    /core/dungeons/rooms
+)
 
 
 
