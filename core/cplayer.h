@@ -4,8 +4,10 @@
 
 #include <optional>
 #include <string>
+#include <vector>
 
 class CEnemy;
+class CCompanion;
 class CPlayer
 {
     friend class CGameManagement;
@@ -40,6 +42,9 @@ public:
 
     unsigned int damage() const;
 
+    void addSupport(CCompanion* support);
+    void removeSupporByName(const std::string_view& name);
+
 private:
     CPlayer();
 
@@ -58,4 +63,6 @@ private:
 
     static std::string increasedOrDecreased(const int i);
     static std::string lostOrGained(const int i);
+
+    std::vector<CCompanion*> _supporters;
 };
