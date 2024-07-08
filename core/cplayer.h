@@ -44,6 +44,7 @@ public:
 
     void addSupport(CCompanion* support);
     void removeSupporByName(const std::string_view& name);
+    void removeAllSupport();
 
 private:
     CPlayer();

@@ -15,7 +15,15 @@ private:
     void findFirstGuard();
     void fightCannibalHorde();
     void rescueGuardFromMafia();
-    unsigned int _number = 0;
+    void fightBossMonster();
+    void collectStuff();
 
-    const unsigned int _maxNumber = 5;
+    const unsigned int _number = 0;
+    static constexpr unsigned int _maxNumber = 4;
+
+    const unsigned int _mafiaStartingMoney = 10000;
+    const unsigned int _maxMafiaMoney = 25000;
+    const unsigned int _mafiaIntrest = 13;
+
+    unsigned int _mafiaMoney = _mafiaStartingMoney;
 };

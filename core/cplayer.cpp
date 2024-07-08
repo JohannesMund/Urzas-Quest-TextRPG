@@ -114,6 +114,8 @@ void CPlayer::dealDamage(const int i, const bool bNoShield)
         {
             damage = CGameManagement::getInventoryInstance()->useShieldingAction(item, damage);
         }
+        damage = CGameManagement::getCompanionInstance()->shield(damage);
+        std::for_each(_supporters.begin(), _supporters.end(), [&damage](CCompanion* c) { damage = c->shield(damage); });
     }
     else
     {
@@ -199,10 +201,7 @@ void CPlayer::preBattle(CEnemy* enemy)
     }
     CGameManagement::getCompanionInstance()->preBattle(enemy);
 
-    for (const auto s : _supporters)
-    {
-        s->preBattle(enemy);
-    }
+    std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CCompanion* c) { c->preBattle(enemy); });
 }
 
 std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endRound)
@@ -222,10 +221,9 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
         }
     }
     CGameManagement::getCompanionInstance()->battleAction(enemy, endRound);
-    for (const auto s : _supporters)
-    {
-        s->battleAction(enemy, endRound);
-    }
+    std::for_each(_supporters.begin(),
+                  _supporters.end(),
+                  [&enemy, &endRound](CCompanion* c) { c->battleAction(enemy, endRound); });
 
     if (endRound || enemy->isDead())
     {
@@ -295,10 +293,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
 void CPlayer::postBattle(CEnemy* enemy)
 {
     CGameManagement::getCompanionInstance()->postBattle(enemy);
-    for (const auto s : _supporters)
-    {
-        s->postBattle(enemy);
-    }
+    std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CCompanion* c) { c->postBattle(enemy); });
 }
 
 std::string CPlayer::hpAsString() const
@@ -324,12 +319,28 @@ void CPlayer::addSupport(CCompanion* support)
 
 void CPlayer::removeSupporByName(const std::string_view& name)
 {
-    auto it = std::remove_if(
-        _supporters.begin(), _supporters.end(), [&name](const CCompanion* c) { return c->name() == name; });
+    auto filterAndRemove = [&name](CCompanion* c)
+    {
+        auto filter = CCompanion::companionNameFilter(name);
+        if (filter(c))
+        {
+            delete c;
+            return true;
+        }
+        return false;
+    };
+
+    auto it = std::remove_if(_supporters.begin(), _supporters.end(), filterAndRemove);
     if (it != _supporters.end())
     {
         _supporters.erase(it);
     }
+}
+
+void CPlayer::removeAllSupport()
+{
+    std::for_each(_supporters.begin(), _supporters.end(), [](CCompanion* c) { delete c; });
+    _supporters.clear();
 }
 
 unsigned int CPlayer::xpForNextLevel() const
