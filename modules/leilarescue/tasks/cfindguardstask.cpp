@@ -1,4 +1,5 @@
 #include "cfindguardstask.h"
+#include "../companions/cguardcompanion.h"
 #include "../enemies/ccannibalhorde.h"
 #include "cbattle.h"
 #include "ccapital.h"
@@ -29,6 +30,12 @@ void CFindGuardsTask::execute()
     case 2:
         fightCannibalHorde();
         break;
+    case 3:
+        collectStuff();
+        break;
+    case 4:
+        fightBossMonster();
+        break;
     }
 }
 
@@ -55,6 +62,7 @@ void CFindGuardsTask::findFirstGuard()
                                  "they are also not used to to wild live outside the capital. You will have to find "
                                  "all {}, and together, they will come up with a plan how to get into the dungeon.",
                                  _maxNumber));
+    CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::bimmel()));
     finishTask();
 }
 
@@ -118,6 +126,8 @@ void CFindGuardsTask::rescueGuardFromMafia()
             CC::ccReset()));
         Console::printLn("The messed up guard looks relieved as the mafia dudes set him free. you grab him and leave.");
         CGameManagement::getPlayerInstance()->spendGold(_mafiaMoney);
+        CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::bommel()));
+
         finishTask();
         return;
     }
@@ -126,6 +136,18 @@ void CFindGuardsTask::rescueGuardFromMafia()
         "Not this time. You will have to come back. Or maybe not. Maybe there is another way to rescue {0}. Oh please, "
         "let there be another way to rescue {0}! The probably is no other way to rescue {0}",
         Ressources::Game::princessLeila()));
+}
+
+void CFindGuardsTask::fightBossMonster()
+{
+    CGameManagement::getPlayerInstance()->removeAllSupport();
+    finishTask();
+}
+
+void CFindGuardsTask::collectStuff()
+{
+    finishTask();
+    CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::schniefke()));
 }
 
 void CFindGuardsTask::fightCannibalHorde()
@@ -157,5 +179,6 @@ void CFindGuardsTask::fightCannibalHorde()
     Console::printLn("Of course, if genocides are not the foundation for a good and healthy relationship "
                      "between hero and princess, what else could be?");
     Console::printLn("You untie the guard and lead him to the others.");
+    CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::piefke()));
     finishTask();
 }
