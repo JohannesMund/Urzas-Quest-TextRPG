@@ -8,7 +8,7 @@
 
 CDarkMobi::CDarkMobi()
 {
-    _name = Ressources::Game::mobi();
+    _name = Ressources::Game::darkMobi();
     _weapon = "poisonous tongue";
     _extendedWeaponChoice = true;
 

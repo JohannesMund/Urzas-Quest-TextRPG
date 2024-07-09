@@ -22,5 +22,5 @@ unsigned int Randomizer::getRandomEngineSeed()
 
 std::string Randomizer::getRandomStringFromVector(const std::vector<std::string>& vector)
 {
-    return vector.at(getRandom(vector.size()));
+    return getRandomEntry<std::string>(vector);
 }

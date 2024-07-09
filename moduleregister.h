@@ -7,8 +7,8 @@
 #include "modules/cave/moduleressources.h"
 #include "modules/fishingvillage/moduleressources.h"
 #include "modules/lakeoftears/moduleressources.h"
-#include "modules/layla/moduleressources.h"
-#include "modules/layla2/moduleressources.h"
+#include "modules/leila/moduleressources.h"
+#include "modules/leila2/moduleressources.h"
 #include "modules/ratfarm/moduleressources.h"
 #include "modules/rebellionhideout/moduleressources.h"
 #include "modules/sewer/moduleressources.h"
@@ -52,11 +52,11 @@ void registerModules(CGameProgression* progression)
                                 &SewerRessources::initModule,
                                 &SewerRessources::deInitModule);
 
-    progression->registerModule(LaylaRessources::moduleName(),
+    progression->registerModule(LeilaRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
-                                &LaylaRessources::questLog,
-                                &LaylaRessources::initModule,
-                                &LaylaRessources::deInitModule);
+                                &LeilaRessources::questLog,
+                                &LeilaRessources::initModule,
+                                &LeilaRessources::deInitModule);
 
     progression->registerModule(FishingVillageRessources::moduleNameMakeBoat(),
                                 CGameProgression::EGameStage::eProvenAsHero,
@@ -89,11 +89,11 @@ void registerModules(CGameProgression* progression)
                                 &RebellionHideoutRessources::questLogRebellionHideout,
                                 &RebellionHideoutRessources::initModuleRebellionHideout,
                                 &RebellionHideoutRessources::deInitModuleRebellionHideout);
-    progression->registerModule(Layla2Ressources::moduleName(),
+    progression->registerModule(Leila2Ressources::moduleName(),
                                 CGameProgression::EGameStage::eLearnedAboutCult,
-                                &Layla2Ressources::questLog,
-                                &Layla2Ressources::initModule,
-                                &Layla2Ressources::deInitModule);
+                                &Leila2Ressources::questLog,
+                                &Leila2Ressources::initModule,
+                                &Leila2Ressources::deInitModule);
 
     progression->registerModule(BlackIvoryTowerRessources::moduleName(),
                                 CGameProgression::EGameStage::eFoundCult,

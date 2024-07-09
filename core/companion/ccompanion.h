@@ -2,6 +2,8 @@
 
 #include "colorize.h"
 #include "ressources.h"
+
+#include <functional>
 #include <string>
 
 class CEnemy;
@@ -11,6 +13,8 @@ public:
     virtual ~CCompanion()
     {
     }
+
+    static std::function<bool(const CCompanion*)> companionNameFilter(const std::string_view& name);
 
     virtual std::string name() const = 0;
     virtual std::string type() const = 0;

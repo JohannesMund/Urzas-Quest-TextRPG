@@ -54,7 +54,10 @@ public:
     std::string getRandomHint();
     bool moduleHintsAvailable() const;
 
-    void registerModuleQuest(const std::string_view& moduleName, const std::string_view& questText);
+    void registerModuleQuest(const std::string_view& moduleName,
+                             const std::string_view& questText,
+                             std::function<void()> questAcceptedFunction = ModuleQuest::noQuestAcceptedFunction());
+
     void unregisterModuleQuestByModuleName(const std::string& moduleName);
     bool isModuleQuestAccepted(const std::string_view& moduleName) const;
     ModuleQuestInfo getRandomQuest() const;
@@ -65,12 +68,13 @@ public:
     bool isModuleFinished(const std::string_view& moduleName) const;
 
     void increaseBodyCount();
+    void increaseGenocideCount();
     void increaseTurns();
 
     unsigned int progress() const;
     unsigned long bodyCount() const;
+    unsigned long genocideCount() const;
     unsigned long turns() const;
-
 
     void registerModule(const std::string_view& name,
                         const EGameStage neededForStage,
@@ -117,6 +121,13 @@ private:
     {
         ModuleQuestInfo questInfo;
         bool accepted = false;
+        std::function<void()> questAcceptedFunction;
+
+        static std::function<void()> noQuestAcceptedFunction()
+        {
+            return []() {};
+        }
+
         static std::function<bool(const ModuleQuest)> moduleQuestNameFilter(const std::string_view& name)
         {
             return [name](const auto quest) { return quest.questInfo.moduleName.compare(name) == 0; };
@@ -161,6 +172,7 @@ private:
     EGameStage _currentStage = EGameStage::eNone;
     unsigned long _bodyCount = 0;
     unsigned long _turns = 0;
+    unsigned long _genocideCount = 0;
 
     std::vector<std::string> _finishedModules;
     std::vector<Module> _registeredModules;

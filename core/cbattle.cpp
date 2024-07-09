@@ -4,6 +4,7 @@
 #include "cmenu.h"
 #include "cmobenemy.h"
 #include "console.h"
+#include "exceptions.h"
 #include "randomizer.h"
 
 #include <format>
@@ -146,10 +147,12 @@ void CBattle::postBattle()
         _enemy->postBattle();
     }
 
-    if (!CGameManagement::getPlayerInstance()->isDead())
+    if (CGameManagement::getPlayerInstance()->isDead())
     {
-        CGameManagement::getPlayerInstance()->postBattle(_enemy);
+        throw CPlayerDiedException(std::format("The enemy {} was too hard for a weakling like you.", _enemy->name()));
     }
+
+    CGameManagement::getPlayerInstance()->postBattle(_enemy);
 }
 
 bool CBattle::doesPlayerGoFirst()

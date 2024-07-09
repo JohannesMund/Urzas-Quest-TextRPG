@@ -52,6 +52,7 @@ protected:
     std::string _weapon;
 
     static unsigned int basicXP(const unsigned int level);
+    static unsigned int basicHP(const unsigned int level);
 
 private:
     std::optional<CBattle::EWeapons> _battleDecision;

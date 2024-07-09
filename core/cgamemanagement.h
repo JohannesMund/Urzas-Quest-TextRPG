@@ -61,7 +61,6 @@ private:
 
     CCompanion* _companion;
 
-    bool _isGameOver = false;
     std::vector<CEncounter*> _encounters;
 
     CItemFactory _itemFactory;

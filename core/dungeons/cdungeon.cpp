@@ -55,10 +55,6 @@ void CDungeon::dungeonLoop()
         loopHook();
 
         _map->currentRoom()->execute();
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
 
         CMenu menu;
         CMenu::ActionList navs;

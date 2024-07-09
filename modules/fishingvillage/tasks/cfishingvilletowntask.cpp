@@ -33,7 +33,7 @@ void CFishingVilleTownTask::execute()
     Console::printLn(
         std::format("The last time, you tried to find those information, you ended up in the gutter, with no money, "
                     "and a tatoo of {} on your arm. At least something, but definitely not what you where looking for.",
-                    Ressources::Game::princessLayla()));
+                    Ressources::Game::princessLeila()));
     Console::printLn(
         std::format("This time, you consciously avoid the dark and shady areas of {}, and ask around. still nobody "
                     "wants to talk about {}, {} and {}, but at least you get one hint: Appearently, {} is one of the "

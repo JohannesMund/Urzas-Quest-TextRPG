@@ -145,3 +145,21 @@ unsigned int CEnemy::basicXP(const unsigned int level)
 {
     return Randomizer::getRandom(level * 75) + level * 75;
 }
+
+unsigned int CEnemy::basicHP(const unsigned int level)
+{
+    auto hp = Randomizer::getRandom(2) + 5;
+    if (level >= 3)
+    {
+        hp++;
+    }
+    if (level >= 5)
+    {
+        hp += Randomizer::getRandom(3) + 1;
+    }
+    if (level >= 7)
+    {
+        hp++;
+    }
+    return hp;
+}

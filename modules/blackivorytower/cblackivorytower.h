@@ -23,6 +23,8 @@ private:
     void executeStairs(const unsigned int stage);
 
     void printHeader(const unsigned int stage) const;
+    void haveADoener();
 
     bool _isOpen = false;
+    bool _hadADoener = false;
 };

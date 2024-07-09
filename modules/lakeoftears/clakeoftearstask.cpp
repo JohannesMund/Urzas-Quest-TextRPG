@@ -54,11 +54,6 @@ void CLakeOfTearsTask::execute()
         break;
     }
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
-
     Console::confirmToContinue();
 
     if (_steps + Randomizer::getRandom(5) > 9)

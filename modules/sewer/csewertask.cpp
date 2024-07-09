@@ -42,10 +42,6 @@ void CSewerTask::execute()
 
     executeDungeon();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
     Console::printLn(std::format(
         "You bring the children back to the surface and everybody is happy to see them again. You instantly start "
         "asking around for the secret chapel you found down there, but as soon as you ask, or use the word {0} "

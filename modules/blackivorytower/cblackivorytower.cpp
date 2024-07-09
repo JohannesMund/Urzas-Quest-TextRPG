@@ -7,6 +7,7 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "curzasglasses.h"
 #include "moduleressources.h"
 #include "randomizer.h"
 
@@ -31,12 +32,29 @@ void CBlackIvoryTower::execute()
                                  CC::fgDarkGray(),
                                  CC::ccReset()));
     Console::br();
-    if (!_isOpen &&
-        !CGameManagement::getProgressionInstance()->isModuleQuestAccepted(BlackIvoryTowerRessources::moduleName()))
+    if (!_isOpen)
     {
-        Console::printLn("The only entry is locked, there is no way to get into the tower.");
-        Console::confirmToContinue();
-        return;
+        CUrzasGlasses glasses;
+        Console::printLn(
+            "You walk around the tower several time, but there seems to be no entry. You continue to walk and walk "
+            "and walk und still walk until you get dizzy and decide, that this tower probably has no entry. Or you "
+            "cannot see the entry. If only you had some seeing entries support item...");
+
+        if (!CGameManagement::getInventoryInstance()->hasItem(CItem::nameFilter(glasses.name())))
+        {
+            Console::confirmToContinue();
+            return;
+        }
+        else
+        {
+
+            Console::printLn(std::format(
+                "Wait, you have found a seeing support item recently. Maybe it is an seeing entries spoort item. whio "
+                "knows? You take {0} out of you pocket and put it onto your nose. You walk around the tower once more, "
+                "and e voila, there is an entry! {0} is a seeing entries support item!",
+                glasses.name()));
+            Console::confirmToContinue();
+        }
     }
 
     CMenu::Action input;
@@ -52,10 +70,6 @@ void CBlackIvoryTower::execute()
         if (input.key == 'c')
         {
             climb();
-            if (CGameManagement::getPlayerInstance()->isDead())
-            {
-                return;
-            }
         }
     } while (input != CMenu::exit());
 }
@@ -87,10 +101,6 @@ void CBlackIvoryTower::climb()
     {
 
         executeStairs(currentStage);
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
 
         CMenu menu;
         CMenu::ActionList downAction = {menu.createAction("Down", 'd')};
@@ -116,10 +126,6 @@ void CBlackIvoryTower::climb()
         if (input.key == 'v')
         {
             executeTopOffice();
-            if (CGameManagement::getPlayerInstance()->isDead())
-            {
-                return;
-            }
         }
     }
 }
@@ -132,27 +138,22 @@ void CBlackIvoryTower::executeTopOffice()
         std::format("The winding stair case seemed like forever! This is the office in the top floor. Obviously, the "
                     "office of {}. It is stuffed with books and papers, there is a big desk in front of the window. "
                     "Looks like a mages chamber. Or the chamber of a master beurocrat.",
-                    Ressources::Game::mobi()));
+                    Ressources::Game::darkMobi()));
     Console::br();
 
     if (!_isOpen)
     {
         Console::printLn(std::format("{} is here, and does not look very amused. \"How dare you, coming here, and kill "
                                      "all my {}?\", she asks, and without waiting for an answer, she attacks.",
-                                     Ressources::Game::mobi(),
+                                     Ressources::Game::darkMobi(),
                                      BlackIvoryTowerRessources::lunatics()));
         Console::br();
         Console::confirmToContinue();
 
-        CDarkMobi mobi;
-        mobi.printBossBattleHeader();
-        CBattle battle(&mobi);
+        CDarkMobi darkMobi;
+        darkMobi.printBossBattleHeader();
+        CBattle battle(&darkMobi);
         battle.fight();
-
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
 
         _isOpen = true;
         CGameManagement::getProgressionInstance()->reportModuleFinished(BlackIvoryTowerRessources::moduleName());
@@ -160,7 +161,7 @@ void CBlackIvoryTower::executeTopOffice()
             "You task was to talk to {0}, not to kill her, so you let her live, and you start talking. As "
             "expected, {0} is not very excited about the death of her {1}, but she is a former member of "
             "the rebellion, and still well-disposed towards {2} and {3}, since they have a common past together",
-            Ressources::Game::mobi(),
+            Ressources::Game::darkMobi(),
             BlackIvoryTowerRessources::lunatics(),
             Ressources::Game::fiego(),
             Ressources::Game::brock()));
@@ -172,33 +173,49 @@ void CBlackIvoryTower::executeTopOffice()
             "witnessed you, hanging up the moon: \"You must truely be the chosen one!\"",
             Ressources::Game::bimmelchen(),
             Ressources::Game::pimmelchen(),
-            Ressources::Game::mobi()));
-        Console::printLn(std::format(
-            "In the end, she agrees to support the rebellion as much as she can, even though, she will "
-            "not become a member again, for the price of some {}sand{}wiches{}. You did not realize, but your "
-            "sandwiches start to become a thing in the land.",
-            CC::fgGreen(),
-            CC::fgLightYellow(),
-            CC::ccReset()));
+            Ressources::Game::darkMobi()));
+        Console::printLn(
+            std::format("In the end, she agrees to support the rebellion as much as she can, even though, she will "
+                        "not become a member again. For now, she will open a döner restaurant in her tower.",
+                        CC::fgGreen(),
+                        CC::fgLightYellow(),
+                        CC::ccReset()));
 
         Console::confirmToContinue();
         return;
     }
     else
     {
-        Console::printLn(std::format("{} is not here right now. probably she is off having some {}sand{}wiches{}. "
-                                     "Seems you climbed the stairs for nothing.",
-                                     Ressources::Game::mobi(),
-                                     CC::fgGreen(),
-                                     CC::fgLightYellow(),
-                                     CC::ccReset()));
+        Console::printLn(
+            std::format("{0} is not here right now. probably she is off having some {1}sand{2}wiches{3}. "
+                        "But you did not climb the stairs for nothing, as promised, {0} opened a Döner shop here in "
+                        "her tower. A big barbecue skewer with a huge chunk of meat is slowly spinning over a fire, it "
+                        "smells like barbecue and garlic.",
+                        Ressources::Game::darkMobi(),
+                        CC::fgGreen(),
+                        CC::fgLightYellow(),
+                        CC::ccReset()));
+        Console::printLn(std::format(
+            "Behind the counter is one of {}s {}. This guy looks pretty beaten up, his body is covered with scratches "
+            "and wounds, he wears bandages and has a black eye. When he sees you, he looks pretty scared. You cannot "
+            "stop thinking, that you have seen him before.",
+            Ressources::Game::mobi(),
+            BlackIvoryTowerRessources::lunatics()));
+        Console::printLn("With fear in his eyes and a shaking voice, he offers you a free döner.");
+
+        CMenu menu;
+
+        menu.addMenuGroup({menu.createAction("Have a Döner", 'H')}, {CMenu::exit()});
+        if (menu.execute().key == 'h')
+        {
+            haveADoener();
+        }
     }
 }
 
 void CBlackIvoryTower::executeStairs(const unsigned int stage)
 {
     printHeader(stage);
-
     Console::printLn("Gray brick walls, a stair case up and a stair case down. This floor looks exactly like all the "
                      "other floors. there is no decoration, no tapestry (as you would expect in a building like that, "
                      "and if you would not cout the floors for yourself you would not have the slightest idea, whether "
@@ -253,10 +270,6 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
         CLunatic lunatic;
         CBattle battle(&lunatic);
         battle.fight();
-        if (CGameManagement::getPlayerInstance()->isDead())
-        {
-            return;
-        }
     }
     break;
     }
@@ -273,11 +286,51 @@ void CBlackIvoryTower::printHeader(const unsigned int stage) const
     }
     else if (stage >= BlackIvoryTowerRessources::towerHeight)
     {
-        Console::printLn("Top floor", Console::EAlignment::eCenter);
+        if (_isOpen)
+        {
+            Console::printLn(std::format("{}'s Döner", Ressources::Game::mobi()), Console::EAlignment::eCenter);
+            Console::printLn("Einmal essen niemals vergessen", Console::EAlignment::eCenter);
+        }
+        else
+        {
+            Console::printLn("Top floor", Console::EAlignment::eCenter);
+        }
     }
     else
     {
         Console::printLn(std::format("Floor {}", stage), Console::EAlignment::eCenter);
     }
     Console::br();
+}
+
+void CBlackIvoryTower::haveADoener()
+{
+    Console::printLn(
+        std::format("With shaking hands, the {0} cuts open some bread, fills it with fresh-cut meat, vegetables and a "
+                    "generous splash of the (as he sais) home made garlic sauce. The {0} tries to act professional, "
+                    "but in his eyes, you can see the sheer terror. If only you could remember, why he is so scared of "
+                    "you. Probably that is, because you are a friend of his boss.",
+                    BlackIvoryTowerRessources::lunatic()));
+    if (_hadADoener)
+    {
+        Console::printLn("You already know what to expect. Döner is great, Döner is tasty and for sure, Döner makes "
+                         "you more beautiful.");
+        Console::printLn("If only you knew, where the urge to put onions on your head is coming from?");
+    }
+    else
+    {
+        Console::printLn(
+            std::format("So this is a Döner. It is probably the best thing you have ever eaten. It is savory and "
+                        "tasty and the home made garlic sauce tastes like heaven. You quickly think about making "
+                        "something similar in your {}sand{}wich{} shop, but decide, that this market belongs to {}. "
+                        "You feel a strong urge to put onions on your head, and you are sure, that the onions will "
+                        "make you look more beautiful.",
+                        CC::fgYellow(),
+                        CC::fgGreen(),
+                        CC::ccReset(),
+                        Ressources::Game::darkMobi()));
+        CGameManagement::getPlayerInstance()->addXp(99);
+    }
+
+    CGameManagement::getPlayerInstance()->addHp(1);
 }

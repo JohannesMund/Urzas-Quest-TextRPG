@@ -17,4 +17,10 @@ unsigned int getRandomEngineSeed();
 
 std::string getRandomStringFromVector(const std::vector<std::string>& vector);
 
+template <typename T>
+T getRandomEntry(const std::vector<T>& vector)
+{
+    return vector.at(getRandom(vector.size()));
+}
+
 } // namespace Randomizer

@@ -4,12 +4,14 @@
 #include "randomizer.h"
 
 #include <format>
-CEnemyHorde::CEnemyHorde(const unsigned int count, const unsigned int minHp, const unsigned int maxHp) : CEnemy()
+CEnemyHorde::CEnemyHorde(const unsigned int count) : CEnemy()
 {
     _count = count;
+    _level = std::max(1U, CGameManagement::getPlayerInstance()->level() - 2);
+
     for (unsigned int i = 0; i < count; i++)
     {
-        auto hp = Randomizer::getRandom(maxHp - minHp) + minHp;
+        auto hp = basicHP(_level);
         _hps.push_back(hp);
         _hp += hp;
     }
@@ -66,6 +68,10 @@ void CEnemyHorde::postBattleAction()
     removeDeadEnemies();
 }
 
+void CEnemyHorde::postBattle()
+{
+}
+
 unsigned int CEnemyHorde::damage() const
 {
     return CEnemy::damage() * (_attacks + 1);
@@ -81,6 +87,7 @@ void CEnemyHorde::removeDeadEnemies()
     auto it = std::remove_if(_hps.begin(), _hps.end(), [](const int nbr) { return nbr <= 0; });
     if (it != _hps.end())
     {
+        CGameManagement::getProgressionInstance()->increaseBodyCount();
         _hps.erase(it);
     }
     if (_hps.size() == 0)

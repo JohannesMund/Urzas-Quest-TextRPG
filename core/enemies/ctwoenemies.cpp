@@ -1,6 +1,8 @@
 #include "ctwoenemies.h"
+#include "cgamemanagement.h"
 #include "cmenu.h"
 #include "console.h"
+
 
 #include <format>
 
@@ -65,6 +67,7 @@ void CTwoEnemies::postBattleAction()
             _hp1 -= damage;
             if (_hp1 <= 0)
             {
+                CGameManagement::getProgressionInstance()->increaseBodyCount();
                 Console::printLn(std::format("You defeated {}", _name1));
             }
         }
@@ -73,6 +76,7 @@ void CTwoEnemies::postBattleAction()
             _hp2 -= damage;
             if (_hp2 <= 0)
             {
+                CGameManagement::getProgressionInstance()->increaseBodyCount();
                 Console::printLn(std::format("You defeated {}", _name2));
             }
         }

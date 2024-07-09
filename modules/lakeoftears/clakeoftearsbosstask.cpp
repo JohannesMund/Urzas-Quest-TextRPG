@@ -55,11 +55,6 @@ void CLakeOfTearsBossTask::execute()
     CBattle battle(&boss);
     battle.fight();
 
-    if (CGameManagement::getPlayerInstance()->isDead())
-    {
-        return;
-    }
-
     _isFinished = true;
     CGameManagement::getProgressionInstance()->reportModuleFinished(LakeTearsRessources::moduleName());
 }

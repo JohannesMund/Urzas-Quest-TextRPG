@@ -19,7 +19,6 @@ CFishingRodPart::CFishingRodPart()
 
         _part = EPart::eThread;
         _name = nameForPart(_part);
-
         _description = "A very long, very strong thread. This will make an awesomne fishing line.";
         break;
     case 2:

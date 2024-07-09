@@ -116,7 +116,7 @@ void CFishingFritz::checkFish()
                         Ressources::Game::urza(),
                         Ressources::Game::fiego(),
                         Ressources::Game::brock(),
-                        Ressources::Game::princessLayla()));
+                        Ressources::Game::princessLeila()));
         Console::printLn(std::format(
             "{} looks at you suspicious and tells you, that he knows a lot, but not, wether he can trust you. the only "
             "people he can trust, are prople who are able to bring him {}. The legendary fish that can be caught in {}",
@@ -143,10 +143,10 @@ void CFishingFritz::checkFish()
                                      Ressources::Game::urza(),
                                      Ressources::Game::fiego(),
                                      Ressources::Game::brock(),
-                                     Ressources::Game::mobi()));
+                                     Ressources::Game::darkMobi()));
         Console::printLn(std::format("This adds another name to your list. How... frustrating, but maybe, this {} is "
                                      "easier to find that the other guys. You will find out.",
-                                     Ressources::Game::mobi()));
+                                     Ressources::Game::darkMobi()));
 
         CGameManagement::getInventoryInstance()->removeItem(fishes.at(0));
 
