@@ -1,11 +1,12 @@
 #include "cguardcompanion.h"
+#include "../moduleressources.h"
 #include "cenemy.h"
 #include "console.h"
 #include "randomizer.h"
 
 #include <format>
 
-CGuardCompanion::CGuardCompanion(const std::string_view& name) : CCompanion()
+CGuardCompanion::CGuardCompanion(const std::string_view& name) : CSupportCompanion(LeilaRescueRessources::moduleName())
 {
     if (Randomizer::getRandom(1))
     {

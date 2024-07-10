@@ -14,8 +14,6 @@ public:
     {
     }
 
-    static std::function<bool(const CCompanion*)> companionNameFilter(const std::string_view& name);
-
     virtual std::string name() const = 0;
     virtual std::string type() const = 0;
     std::string description() const;

@@ -6,11 +6,6 @@
 #include <format>
 #include <string>
 
-std::function<bool(const CCompanion*)> CCompanion::companionNameFilter(const std::string_view& name)
-{
-    return [&name](const CCompanion* companion) { return companion->name().compare(name) == 0; };
-}
-
 std::string CCompanion::description() const
 {
     return _description;

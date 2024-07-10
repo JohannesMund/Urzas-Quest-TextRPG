@@ -15,6 +15,7 @@ set(URZAS_QUEST_SOURCES_CORE
 
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp
+    core/companion/csupportcompanion.h core/companion/csupportcompanion.cpp
     core/companion/cattackercompanion.h core/companion/cattackercompanion.cpp
     core/companion/cdefendercompanion.h core/companion/cdefendercompanion.cpp
     core/companion/chealercompanion.h core/companion/chealercompanion.cpp

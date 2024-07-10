@@ -1,9 +1,9 @@
 #pragma once
 
-#include "ccompanion.h"
+#include "csupportcompanion.h"
 #include "ressources.h"
 
-class CGuardCompanion : public CCompanion
+class CGuardCompanion : public CSupportCompanion
 {
 public:
     CGuardCompanion(const std::string_view& name);

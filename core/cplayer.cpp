@@ -1,11 +1,11 @@
 #include "cplayer.h"
-#include "ccompanion.h"
 #include "cenemy.h"
 #include "cgamemanagement.h"
 #include "citem.h"
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "csupportcompanion.h"
 #include "randomizer.h"
 #include "ressources.h"
 
@@ -115,7 +115,8 @@ void CPlayer::dealDamage(const int i, const bool bNoShield)
             damage = CGameManagement::getInventoryInstance()->useShieldingAction(item, damage);
         }
         damage = CGameManagement::getCompanionInstance()->shield(damage);
-        std::for_each(_supporters.begin(), _supporters.end(), [&damage](CCompanion* c) { damage = c->shield(damage); });
+        std::for_each(
+            _supporters.begin(), _supporters.end(), [&damage](CSupportCompanion* c) { damage = c->shield(damage); });
     }
     else
     {
@@ -201,7 +202,7 @@ void CPlayer::preBattle(CEnemy* enemy)
     }
     CGameManagement::getCompanionInstance()->preBattle(enemy);
 
-    std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CCompanion* c) { c->preBattle(enemy); });
+    std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CSupportCompanion* c) { c->preBattle(enemy); });
 }
 
 std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endRound)
@@ -223,7 +224,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
     CGameManagement::getCompanionInstance()->battleAction(enemy, endRound);
     std::for_each(_supporters.begin(),
                   _supporters.end(),
-                  [&enemy, &endRound](CCompanion* c) { c->battleAction(enemy, endRound); });
+                  [&enemy, &endRound](CSupportCompanion* c) { c->battleAction(enemy, endRound); });
 
     if (endRound || enemy->isDead())
     {
@@ -293,7 +294,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
 void CPlayer::postBattle(CEnemy* enemy)
 {
     CGameManagement::getCompanionInstance()->postBattle(enemy);
-    std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CCompanion* c) { c->postBattle(enemy); });
+    std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CSupportCompanion* c) { c->postBattle(enemy); });
 }
 
 std::string CPlayer::hpAsString() const
@@ -312,25 +313,24 @@ unsigned int CPlayer::damage() const
     return 1 + Randomizer::getRandom(levelBonus * 2);
 }
 
-void CPlayer::addSupport(CCompanion* support)
+void CPlayer::addSupport(CSupportCompanion* support)
 {
     _supporters.push_back(support);
 }
 
 void CPlayer::removeSupporByName(const std::string_view& name)
 {
-    auto filterAndRemove = [&name](CCompanion* c)
+    auto it = std::remove_if(_supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByName(name));
+    if (it != _supporters.end())
     {
-        auto filter = CCompanion::companionNameFilter(name);
-        if (filter(c))
-        {
-            delete c;
-            return true;
-        }
-        return false;
-    };
+        _supporters.erase(it);
+    }
+}
 
-    auto it = std::remove_if(_supporters.begin(), _supporters.end(), filterAndRemove);
+void CPlayer::removeSupporByModuleName(const std::string_view& moduleName)
+{
+    auto it = std::remove_if(
+        _supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByModuleName(moduleName));
     if (it != _supporters.end())
     {
         _supporters.erase(it);

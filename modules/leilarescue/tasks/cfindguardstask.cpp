@@ -1,6 +1,7 @@
 #include "cfindguardstask.h"
 #include "../companions/cguardcompanion.h"
 #include "../enemies/ccannibalhorde.h"
+#include "../moduleressources.h"
 #include "cbattle.h"
 #include "ccapital.h"
 #include "cgamemanagement.h"
@@ -140,7 +141,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
 
 void CFindGuardsTask::fightBossMonster()
 {
-    CGameManagement::getPlayerInstance()->removeAllSupport();
+    CGameManagement::getPlayerInstance()->removeSupporByModuleName(LeilaRescueRessources::moduleName());
     finishTask();
 }
 

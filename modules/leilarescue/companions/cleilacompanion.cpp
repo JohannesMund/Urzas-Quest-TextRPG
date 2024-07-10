@@ -1,4 +1,5 @@
 #include "cleilacompanion.h"
+#include "../moduleressources.h"
 #include "cenemy.h"
 #include "cgamemanagement.h"
 #include "console.h"
@@ -7,7 +8,7 @@
 
 #include <format>
 
-CLeilaCompanion::CLeilaCompanion() : CCompanion()
+CLeilaCompanion::CLeilaCompanion() : CSupportCompanion(LeilaRescueRessources::moduleName())
 {
     _level = 5;
 }
@@ -15,11 +16,6 @@ CLeilaCompanion::CLeilaCompanion() : CCompanion()
 std::string CLeilaCompanion::name() const
 {
     return Ressources::Game::leila();
-}
-
-std::string CLeilaCompanion::type() const
-{
-    return Ressources::Companion::typeAsString(Ressources::Companion::ECompanionType::eScaryMonster);
 }
 
 void CLeilaCompanion::preBattle(CEnemy*)
@@ -53,9 +49,4 @@ void CLeilaCompanion::postBattle(CEnemy*)
     {
         Console::printLn(std::format("{} looks victorious.", name()));
     }
-}
-
-int CLeilaCompanion::shield(const int i)
-{
-    return i;
 }
