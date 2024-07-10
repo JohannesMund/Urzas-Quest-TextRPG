@@ -14,4 +14,7 @@ std::string questLog();
 
 std::string questText();
 
+std::string getColoredBossString();
+std::string getBossWeapon();
+
 } // namespace LeilaRescueRessources

@@ -313,33 +313,42 @@ unsigned int CPlayer::damage() const
     return 1 + Randomizer::getRandom(levelBonus * 2);
 }
 
-void CPlayer::addSupport(CSupportCompanion* support)
+void CPlayer::addSupportCompanion(CSupportCompanion* support)
 {
+    support->joinText();
     _supporters.push_back(support);
 }
 
-void CPlayer::removeSupporByName(const std::string_view& name)
+void CPlayer::removeSupporCompanionByName(const std::string_view& name)
 {
     auto it = std::remove_if(_supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByName(name));
+    (*it)->leaveText();
     if (it != _supporters.end())
     {
         _supporters.erase(it);
     }
 }
 
-void CPlayer::removeSupporByModuleName(const std::string_view& moduleName)
+void CPlayer::removeSupportCompanionByModuleName(const std::string_view& moduleName)
 {
     auto it = std::remove_if(
         _supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByModuleName(moduleName));
+    (*it)->leaveText();
     if (it != _supporters.end())
     {
         _supporters.erase(it);
     }
 }
 
-void CPlayer::removeAllSupport()
+void CPlayer::removeAllSupportCompanions()
 {
-    std::for_each(_supporters.begin(), _supporters.end(), [](CCompanion* c) { delete c; });
+    std::for_each(_supporters.begin(),
+                  _supporters.end(),
+                  [](CSupportCompanion* c)
+                  {
+                      c->leaveText();
+                      delete c;
+                  });
     _supporters.clear();
 }
 

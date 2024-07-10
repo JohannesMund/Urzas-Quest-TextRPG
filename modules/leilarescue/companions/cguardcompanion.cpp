@@ -71,3 +71,15 @@ int CGuardCompanion::shield(const int i)
 
     return i;
 }
+
+void CGuardCompanion::joinText() const
+{
+    Console::printLn(std::format(
+        "After rescuing him, {} swears alligience to you, and joins you on your hunt for the rest of the guards"));
+}
+
+void CGuardCompanion::leaveText() const
+{
+    Console::printLn(std::format("The job is done, as a new member of the rebellion {} leaves you to return to the "
+                                 "rebellion hindeout and do rebellion things."));
+}

@@ -4,7 +4,6 @@
 #include "ressources.h"
 #include "tasks/cfindguardstask.h"
 
-
 #include <format>
 
 void LeilaRescueRessources::initModule()
@@ -45,4 +44,15 @@ std::string LeilaRescueRessources::questText()
                        Ressources::Game::princessLeila(),
                        Ressources::Game::kingJesster(),
                        Ressources::Rooms::getCapital().first);
+}
+
+std::string LeilaRescueRessources::getColoredBossString()
+{
+    return std::format(
+        "{0}V{1}enus {2}F{1}ly {0}T{1}rap{3}", CC::fgLightGreen(), CC::fgGreen(), CC::fgRed(), CC::ccReset());
+}
+
+std::string LeilaRescueRessources::getBossWeapon()
+{
+    return std::format("{0}t{1}horny {2}T{1}endrils{3}", CC::fgLightGreen(), CC::fgGreen(), CC::fgRed(), CC::ccReset());
 }

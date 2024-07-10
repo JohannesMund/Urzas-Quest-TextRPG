@@ -63,7 +63,7 @@ void CFindGuardsTask::findFirstGuard()
                                  "they are also not used to to wild live outside the capital. You will have to find "
                                  "all {}, and together, they will come up with a plan how to get into the dungeon.",
                                  _maxNumber));
-    CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::bimmel()));
+    CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::bimmel()));
     finishTask();
 }
 
@@ -127,7 +127,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
             CC::ccReset()));
         Console::printLn("The messed up guard looks relieved as the mafia dudes set him free. you grab him and leave.");
         CGameManagement::getPlayerInstance()->spendGold(_mafiaMoney);
-        CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::bommel()));
+        CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::bommel()));
 
         finishTask();
         return;
@@ -141,14 +141,15 @@ void CFindGuardsTask::rescueGuardFromMafia()
 
 void CFindGuardsTask::fightBossMonster()
 {
-    CGameManagement::getPlayerInstance()->removeSupporByModuleName(LeilaRescueRessources::moduleName());
+
     finishTask();
+    CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::horst()));
 }
 
 void CFindGuardsTask::collectStuff()
 {
     finishTask();
-    CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::schniefke()));
+    CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::schniefke()));
 }
 
 void CFindGuardsTask::fightCannibalHorde()
@@ -180,6 +181,6 @@ void CFindGuardsTask::fightCannibalHorde()
     Console::printLn("Of course, if genocides are not the foundation for a good and healthy relationship "
                      "between hero and princess, what else could be?");
     Console::printLn("You untie the guard and lead him to the others.");
-    CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::piefke()));
+    CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::piefke()));
     finishTask();
 }

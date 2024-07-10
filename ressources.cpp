@@ -634,6 +634,11 @@ std::string Ressources::Game::bommel()
     return std::format("{1}Bo{0}mm{1}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
+std::string Ressources::Game::horst()
+{
+    return std::format("{1}H{0}or{1}st{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+}
+
 std::string Ressources::Game::bimmelchen()
 {
     return std::format("{0}B{1}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());

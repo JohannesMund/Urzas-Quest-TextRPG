@@ -50,3 +50,14 @@ void CLeilaCompanion::postBattle(CEnemy*)
         Console::printLn(std::format("{} looks victorious.", name()));
     }
 }
+
+void CLeilaCompanion::joinText() const
+{
+    Console::printLn(std::format("Your dreams come true, {} decides to join forces with you!", name()));
+}
+
+void CLeilaCompanion::leaveText() const
+{
+    Console::printLn(
+        std::format("After some great time together, {} leaves your side to return to the Rebellion", name()));
+}

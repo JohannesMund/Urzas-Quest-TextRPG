@@ -21,6 +21,9 @@ public:
     virtual void postBattle(CEnemy* enemy) override;
     virtual int shield(const int i) override;
 
+    virtual void joinText() const;
+    virtual void leaveText() const;
+
 private:
     std::string _moduleName;
 };

@@ -1,5 +1,8 @@
 #include "csupportcompanion.h"
+#include "console.h"
 #include "ressources.h"
+
+#include <format>
 
 CSupportCompanion::CSupportCompanion(const std::string_view& moduleName) : CCompanion(), _moduleName(moduleName)
 {
@@ -64,4 +67,14 @@ void CSupportCompanion::postBattle(CEnemy*)
 int CSupportCompanion::shield(const int i)
 {
     return i;
+}
+
+void CSupportCompanion::joinText() const
+{
+    Console::printLn(std::format("{} joins you", name()));
+}
+
+void CSupportCompanion::leaveText() const
+{
+    Console::printLn(std::format("{} leaves you", name()));
 }
