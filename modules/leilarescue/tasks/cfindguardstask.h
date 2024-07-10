@@ -24,6 +24,7 @@ private:
     const unsigned int _mafiaStartingMoney = 10000;
     const unsigned int _maxMafiaMoney = 25000;
     const unsigned int _mafiaIntrest = 13;
-
     unsigned int _mafiaMoney = _mafiaStartingMoney;
+
+    bool _stuffCollectionStarted = false;
 };

@@ -1,7 +1,4 @@
 #include "cfindguardstask.h"
-#include "../companions/cguardcompanion.h"
-#include "../enemies/ccannibalhorde.h"
-#include "../moduleressources.h"
 #include "cbattle.h"
 #include "ccapital.h"
 #include "cgamemanagement.h"
@@ -9,6 +6,11 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "leilarescue/companions/cguardcompanion.h"
+#include "leilarescue/enemies/ccannibalhorde.h"
+#include "leilarescue/enemies/cvenusflytrap.h"
+#include "leilarescue/items/cguardstuff.h"
+#include "leilarescue/moduleressources.h"
 
 #include <cmath>
 #include <format>
@@ -141,6 +143,9 @@ void CFindGuardsTask::rescueGuardFromMafia()
 
 void CFindGuardsTask::fightBossMonster()
 {
+    CVenusFlyTrap boss;
+    CBattle battle(&boss);
+    battle.fight();
 
     finishTask();
     CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::horst()));
@@ -148,8 +153,22 @@ void CFindGuardsTask::fightBossMonster()
 
 void CFindGuardsTask::collectStuff()
 {
-    finishTask();
-    CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::schniefke()));
+    if (_stuffCollectionStarted == false)
+    {
+        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+            LeilaRescueRessources::moduleName(), []() { return new CGuardStuff(); }, 50);
+        _stuffCollectionStarted = true;
+    }
+    else if (CGuardStuff::hasAll())
+    {
+        finishTask();
+        CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(Ressources::Game::schniefke()));
+        CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(
+            LeilaRescueRessources::moduleName());
+    }
+    else
+    {
+    }
 }
 
 void CFindGuardsTask::fightCannibalHorde()
