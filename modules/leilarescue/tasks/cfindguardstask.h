@@ -26,5 +26,7 @@ private:
     const unsigned int _mafiaIntrest = 13;
     unsigned int _mafiaMoney = _mafiaStartingMoney;
 
+    std::string nameOfCurrentGuard() const;
+
     bool _stuffCollectionStarted = false;
 };

@@ -19,13 +19,15 @@ public:
     EPart part() const;
 
     static CItem::ItemFilter guardStuffFilter(const EPart part);
+
     static std::string nameForPart(const EPart part);
 
-    static bool has(const EPart part);
     static bool hasAll();
+    static bool has(const EPart part);
     static std::vector<std::string> listMissingParts();
 
-private:
     typedef EnumIterator<EPart, EPart::eBatch, EPart::eUnknown> partIterator;
+
+private:
     EPart _part;
 };
