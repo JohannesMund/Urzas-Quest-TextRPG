@@ -51,6 +51,11 @@ void CFindGuardsTask::finishTask()
     }
     else
     {
+        Console::printLn(std::format(
+            "And with this, you managed to rescue all {} guards. The guys instantly start discussing how to "
+            "approach the dungeon beneath the capital. So, up and away, time to head to the capital and  rescue {}.",
+            _maxNumber,
+            Ressources::Game::leila()));
         CGameManagement::getInstance()->placeTask(new CLeilaRescueCapitalTask(), CCapital::townFilter());
     }
 }
@@ -143,18 +148,48 @@ void CFindGuardsTask::rescueGuardFromMafia()
 
 void CFindGuardsTask::fightBossMonster()
 {
+    CVenusFlyTrap boss;
+
+    Console::printLn(
+        "You are surprised, no, shocked, SCHOCKED! to find the next guard, and see that, and more important, how "
+        "he managed to get himself into trouble.");
+    Console::printLn(std::format("{} has been caught by a gigantic {}. The guard hangs crossways in the mouth of the "
+                                 "huge, man-eating plant. The plant chews on him, only struggeling with his armor.",
+                                 nameOfCurrentGuard(),
+                                 boss.name()));
+    Console::printLn(
+        std::format("Your memory seems to be awesomne. you still remember all of the guards names. Also, the plant "
+                    "looks familiar, When you where a kid, you had a tiny {}. Your Grampa baught it in a little shop "
+                    "of horrors. You loved the tiny plant. You used to call it \"Flea-eater\". Eventually, you set "
+                    "them free, because wild man-eating plants must be free.",
+                    boss.name()));
+    Console::printLn("But seriously, is that really \"Flea-eater\"?");
+
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Attack"), menu.createAction("Retreat")});
+    menu.addMenuGroup({menu.createAction("Check"), menu.createAction("Retreat")});
+    Console::br();
 
     if (menu.execute().key == 'r')
     {
+        Console::printLn("Probably it is not. And you don't want to risk a fight right now. Guards Armors are sturdy, "
+                         "even for such a big monster. This leaves you the time for more preparation.");
         Console::confirmToContinue();
         return;
     }
 
-    CVenusFlyTrap boss;
+    Console::printLn(std::format("You approch the giant plant. {}\"Flea-eater? Is that you?\", you ask hopefully, "
+                                 "excited to see your old friend again.",
+                                 CC::bgLightGreen(),
+                                 CC::ccReset()));
+    Console::printLn("It is not!");
+    Console::printLn("The plant drops its food, and attacks you.");
     CBattle battle(&boss);
     battle.fight();
+
+    Console::printLn("This has not been your old friend. You remember that he did not grow very large, after you set "
+                     "him free. Also, you might have forgotten to give him water. And stepped on him several times. So "
+                     "no, this was surely not him.");
+    Console::printLn("At least, you managed to free another guard.");
 
     CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
     finishTask();

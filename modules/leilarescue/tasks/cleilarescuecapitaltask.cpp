@@ -4,7 +4,7 @@
 
 CLeilaRescueCapitalTask::CLeilaRescueCapitalTask() : CTask()
 {
-    CGameManagement::getPlayerInstance()->removeSupportCompanionByModuleName(LeilaRescueRessources::moduleName());
+    CGameManagement::getPlayerInstance()->removeSupportCompanionsByModuleName(LeilaRescueRessources::moduleName());
 }
 
 void CLeilaRescueCapitalTask::execute()

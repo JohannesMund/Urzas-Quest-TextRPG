@@ -43,8 +43,8 @@ public:
     unsigned int damage() const;
 
     void addSupportCompanion(CSupportCompanion* support);
-    void removeSupporCompanionByName(const std::string_view& name);
-    void removeSupportCompanionByModuleName(const std::string_view& moduleName);
+    void removeSupporCompanionsByName(const std::string_view& name);
+    void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
 
 private:
     CPlayer();

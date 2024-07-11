@@ -319,7 +319,7 @@ void CPlayer::addSupportCompanion(CSupportCompanion* support)
     _supporters.push_back(support);
 }
 
-void CPlayer::removeSupporCompanionByName(const std::string_view& name)
+void CPlayer::removeSupporCompanionsByName(const std::string_view& name)
 {
     auto it = std::remove_if(_supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByName(name));
     (*it)->leaveText();
@@ -329,7 +329,7 @@ void CPlayer::removeSupporCompanionByName(const std::string_view& name)
     }
 }
 
-void CPlayer::removeSupportCompanionByModuleName(const std::string_view& moduleName)
+void CPlayer::removeSupportCompanionsByModuleName(const std::string_view& moduleName)
 {
     auto it = std::remove_if(
         _supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByModuleName(moduleName));
