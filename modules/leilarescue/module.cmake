@@ -8,4 +8,8 @@ modules/leilarescue/moduleressources.h modules/leilarescue/moduleressources.cpp
     modules/leilarescue/items/cguardstuff.h modules/leilarescue/items/cguardstuff.cpp
     modules/leilarescue/companions/cguardcompanion.h modules/leilarescue/companions/cguardcompanion.cpp
     modules/leilarescue/companions/cleilacompanion.h modules/leilarescue/companions/cleilacompanion.cpp
+    modules/leilarescue/dungeon/ccapitaldungeon.h modules/leilarescue/dungeon/ccapitaldungeon.cpp
+    modules/leilarescue/dungeon/cleilaprisonroom.h modules/leilarescue/dungeon/cleilaprisonroom.cpp
+    modules/leilarescue/dungeon/ccapitaldungeonbosstask.h modules/leilarescue/dungeon/ccapitaldungeonbosstask.cpp
+    
  )
