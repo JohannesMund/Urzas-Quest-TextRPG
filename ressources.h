@@ -47,6 +47,7 @@ std::string piefke();
 std::string schniefke();
 std::string bimmel();
 std::string bommel();
+std::string horst();
 
 std::string fiego();
 std::string brock();

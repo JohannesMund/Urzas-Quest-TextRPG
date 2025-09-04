@@ -61,7 +61,6 @@ std::string CGuardStuff::nameForPart(const EPart part)
     default:
         return std::format("totally random {}Guard {}stuff{}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
         break;
-
     case EPart::eBatch:
         return std::format("{}Guard's {}Batch{}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
         break;
@@ -77,6 +76,10 @@ std::string CGuardStuff::nameForPart(const EPart part)
     case EPart::eBoot:
         return std::format("{}Guard's {}Boot{}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
         break;
+    case EPart::eFirstAidKit:
+        return std::format("{}Guard's {}First-Aid Kit{}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+        break;
+
     }
 }
 

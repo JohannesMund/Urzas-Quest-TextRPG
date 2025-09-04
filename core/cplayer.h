@@ -7,7 +7,7 @@
 #include <vector>
 
 class CEnemy;
-class CCompanion;
+class CSupportCompanion;
 class CPlayer
 {
     friend class CGameManagement;
@@ -39,12 +39,11 @@ public:
     std::string hpAsString() const;
 
     unsigned int initiative() const;
-
     unsigned int damage() const;
 
-    void addSupport(CCompanion* support);
-    void removeSupporByName(const std::string_view& name);
-    void removeAllSupport();
+    void addSupportCompanion(CSupportCompanion* support);
+    void removeSupporCompanionsByName(const std::string_view& name);
+    void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
 
 private:
     CPlayer();
@@ -65,5 +64,7 @@ private:
     static std::string increasedOrDecreased(const int i);
     static std::string lostOrGained(const int i);
 
-    std::vector<CCompanion*> _supporters;
+    void removeAllSupportCompanions();
+    std::vector<CSupportCompanion*> _supporters;
+
 };

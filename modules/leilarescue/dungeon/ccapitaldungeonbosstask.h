@@ -1,10 +1,10 @@
 #pragma once
 #include "ctask.h"
 
-class CCaveBossTask : public CTask
+class CCapitalDungeonBossTask : public CTask
 {
 public:
-    CCaveBossTask(bool* bossDefeated);
+    CCapitalDungeonBossTask(bool* bossDefeated);
 
     virtual void execute() override;
 
