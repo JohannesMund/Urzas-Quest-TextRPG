@@ -1,4 +1,5 @@
 #include "cfindguardstask.h"
+
 #include "cbattle.h"
 #include "ccapital.h"
 #include "cgamemanagement.h"
@@ -6,6 +7,7 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+
 #include "leilarescue/companions/cguardcompanion.h"
 #include "leilarescue/enemies/ccannibalhorde.h"
 #include "leilarescue/enemies/cvenusflytrap.h"
@@ -51,6 +53,7 @@ void CFindGuardsTask::finishTask()
     }
     else
     {
+
         Console::printLn(std::format(
             "And with this, you managed to rescue all {} guards. The guys instantly start discussing how to "
             "approach the dungeon beneath the capital. So, up and away, time to head to the capital and  rescue {}.",
@@ -62,15 +65,18 @@ void CFindGuardsTask::finishTask()
 
 void CFindGuardsTask::findFirstGuard()
 {
+
     Console::printLn(std::format(
         "You find the first of the guards, you know the guy, you treated his wounds after his first beat-up by the "
         "rebellion. His name is {}. He recognizes you and after some short explainations, he agrees to help.",
         nameOfCurrentGuard()));
+
     Console::printLn(std::format("But unfortunately, he and the other guards scattered and lost each other. Most "
                                  "probaby the others are in danger, not only are they bad at their jobs as guards, but "
                                  "they are also not used to to wild live outside the capital. You will have to find "
                                  "all {}, and together, they will come up with a plan how to get into the dungeon.",
                                  _maxNumber));
+
     CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
     finishTask();
 }
@@ -80,6 +86,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
     if (_mafiaMoney == _mafiaStartingMoney)
     {
         Console::printLn(
+
             "This one really put himself into he hell of a mess. he is surrounded by several heavily armed "
             "mafia dudes, lead by the boss dude, nobody is looking happy, espesially not the guard. It seems to be "
             "about money. it s always about monay. Looking at the number of mafia dudes and their weapons,  attacking "
@@ -134,7 +141,8 @@ void CFindGuardsTask::rescueGuardFromMafia()
             CC::ccReset()));
         Console::printLn("The messed up guard looks relieved as the mafia dudes set him free. you grab him and leave.");
         CGameManagement::getPlayerInstance()->spendGold(_mafiaMoney);
-        CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
+        CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));      
+        CGameManagement::getPlayerInstance()->addSupport(new CGuardCompanion(Ressources::Game::bommel()));
 
         finishTask();
         return;
@@ -148,6 +156,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
 
 void CFindGuardsTask::fightBossMonster()
 {
+
     CVenusFlyTrap boss;
 
     Console::printLn(
@@ -190,13 +199,14 @@ void CFindGuardsTask::fightBossMonster()
                      "him free. Also, you might have forgotten to give him water. And stepped on him several times. So "
                      "no, this was surely not him.");
     Console::printLn("At least, you managed to free another guard.");
-
     CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
+
     finishTask();
 }
 
 void CFindGuardsTask::collectStuff()
 {
+
     const auto listMissingParts = []()
     {
         const auto missing = CGuardStuff::listMissingParts();
@@ -283,7 +293,6 @@ std::string CFindGuardsTask::nameOfCurrentGuard() const
     default:
         return "By the way, who is this guy???";
     }
-
     return std::string();
 }
 
@@ -295,6 +304,11 @@ void CFindGuardsTask::fightCannibalHorde()
         "tied in their hairs are standing around the fire holding simple wooden plates and forks. You seem to have "
         "discovered a rare, savage tribe of cannibals.",
         nameOfCurrentGuard()));
+    Console::printLn(
+        "You find this guard, tied to a stick that hangs over a big fire. A lot of savaga people, with little bones "
+        "tied in their hairs are standing around the fire holding simple wooden plates and forks. You seem to have "
+        "discovered a rare, savage trive of cannibals.");
+
     Console::printLn("It is already smelling like bacon, so you should hurry, if you want to rescue this guard alive.");
 
     CMenu menu;
@@ -302,6 +316,7 @@ void CFindGuardsTask::fightCannibalHorde()
 
     if (menu.execute().key == 'r')
     {
+
         Console::printLn(
             std::format("There are many cannibals. And you are alone. {} is a big guy, it will take a while "
                         "until he is well done. You should have the time for more preparations. After all, he still is "
@@ -320,7 +335,9 @@ void CFindGuardsTask::fightCannibalHorde()
         "adventuerers / heros like you. And all genocides where for the greater good.");
     Console::printLn("Of course, if genocides are not the foundation for a good and healthy relationship "
                      "between hero and princess, what else could be?");
+
     Console::printLn(std::format("You untie {} and lead him to the others.", nameOfCurrentGuard()));
     CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
+
     finishTask();
 }

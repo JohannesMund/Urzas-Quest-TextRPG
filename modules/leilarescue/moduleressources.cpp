@@ -45,7 +45,6 @@ std::string LeilaRescueRessources::questText()
                        Ressources::Game::kingJesster(),
                        Ressources::Rooms::getCapital().first);
 }
-
 std::string LeilaRescueRessources::getColoredBossString()
 {
     return std::format(

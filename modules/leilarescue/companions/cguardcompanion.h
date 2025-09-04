@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "csupportcompanion.h"
 #include "ressources.h"
 
@@ -15,6 +16,7 @@ public:
     virtual void battleAction(CEnemy* enemy, bool& endRound) override;
     virtual void postBattle(CEnemy* enemy) override;
     virtual int shield(const int i) override;
+
 
     virtual void joinText() const override;
     virtual void leaveText() const override;

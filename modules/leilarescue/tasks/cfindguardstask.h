@@ -29,4 +29,5 @@ private:
     std::string nameOfCurrentGuard() const;
 
     bool _stuffCollectionStarted = false;
+
 };
