@@ -6,9 +6,10 @@
 #include <string>
 #include <vector>
 
+#include <nlohmann/json.hpp>
+
 class CRoom;
 class CTask;
-
 class CMap
 {
 public:
@@ -81,6 +82,8 @@ public:
 
     void setTaskToRandomRoom(
         CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+
+    nlohmann::json saveMapState() const;
 
 protected:
     std::vector<std::vector<CRoom*>> _map;

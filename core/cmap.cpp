@@ -390,6 +390,14 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
+nlohmann::json CMap::saveMapState() const
+{
+    nlohmann::json mapState;
+    mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};
+
+    return mapState;
+}
+
 std::optional<CRoom*> CMap::roomAt(const EDirections dir) const
 {
     return roomAt(_playerPosition, dir);
