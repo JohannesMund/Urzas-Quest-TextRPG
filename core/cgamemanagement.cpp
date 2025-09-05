@@ -10,12 +10,15 @@
 #include "companionfactory.h"
 #include "console.h"
 #include "croom.h"
+#include "csavefile.h"
 #include "ctask.h"
 #include "ctown.h"
 #include "exceptions.h"
 #include "randomizer.h"
 #include "rebellionhideout/cbagofingredients.h"
+
 #include <iostream>
+
 #include <string>
 #include <vector>
 
@@ -27,7 +30,6 @@ CGameManagement* CGameManagement::getInstance()
     {
         static CGameManagement instance;
         _instance = &instance;
-        _instance->start();
     }
 
     return _instance;
@@ -73,10 +75,18 @@ void CGameManagement::placeTaskOnTown(CTask* task)
     _map.setTaskToRandomRoom(task, CTown::townFilter());
 }
 
-void CGameManagement::start()
+void CGameManagement::startGame()
 {
     init();
     gameLoop();
+}
+
+void CGameManagement::loadGame()
+{
+    if (load())
+    {
+        gameLoop();
+    }
 }
 
 void CGameManagement::executeRandomEncounter(const CEncounter::EEncounterType type, const std::string& moduleName) const
@@ -199,9 +209,7 @@ void CGameManagement::executeTurn()
     while (true)
     {
         Console::hr();
-
         CMenu menu;
-
         CMenu::ActionList navs;
         for (auto nav : _map.getDirectionNavs())
         {
@@ -225,13 +233,23 @@ void CGameManagement::executeTurn()
             Console::cls(false);
             Console::hr();
             Console::printLn("Quit game?", Console::EAlignment::eCenter);
-            Console::printLn("(No save, no mercy!)", Console::EAlignment::eCenter);
             Console::hr();
             Console::br();
             CMenu menu;
-            menu.addMenuGroup({CMenu::yes()}, {CMenu::no()});
 
-            if (menu.execute() == CMenu::yes())
+            CMenu::Action saveAction = {"Save", "[S]ave", 's'};
+            CMenu::Action cancelAction = {"Cancel", "[C]cancel", 'c'};
+            CMenu::Action quitAction = {"Quit without saving", "[Q]uit without saving", 'q'};
+
+            menu.addMenuGroup({saveAction, quitAction});
+            menu.addMenuGroup({cancelAction});
+            auto reply = menu.execute();
+            if (reply == quitAction)
+            {
+                throw CGameOverException();
+            }
+
+            if (reply == saveAction && save() == true)
             {
                 throw CGameOverException();
             }
@@ -346,6 +364,40 @@ void CGameManagement::lookForTrouble()
 {
     CBattle battle;
     battle.fight();
+}
+
+bool CGameManagement::load()
+{
+    if (!saveGameAvailable())
+    {
+        return false;
+    }
+    return false;
+}
+
+bool CGameManagement::saveGameAvailable()
+{
+    return CSaveFile::saveGameAvailable();
+}
+
+bool CGameManagement::save()
+{
+    if (saveGameAvailable())
+    {
+        Console::hr();
+        Console::printLn("A save game exists.", Console::EAlignment::eCenter);
+        Console::printLn("Overwrite?", Console::EAlignment::eCenter);
+        Console::hr();
+        Console::br();
+
+        if (CMenu::executeYesNoMenu() != CMenu::yes())
+        {
+            return false;
+        }
+    }
+
+    CSaveFile savegame;
+    return savegame.dump();
 }
 
 CGameManagement::CGameManagement() :

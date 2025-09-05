@@ -2,12 +2,14 @@ set(URZAS_QUEST_SOURCES_CORE
 	core/core.cmake
 
 	core/console.h core/console.cpp
+    core/localdirectory.h core/localdirectory.cpp
     core/colorize.h core/colorize.cpp
     core/cmenu.h core/cmenu.cpp
     core/randomizer.h core/randomizer.cpp
     core/enumiterator.h
     core/exceptions.h
     core/cgamemanagement.h core/cgamemanagement.cpp
+    core/csavefile.h core/csavefile.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
     core/cmap.h core/cmap.cpp
