@@ -85,3 +85,4 @@ void CGuardCompanion::leaveText() const
                                  "rebellion hindeout and do rebellion things.",
                                  name()));
 }
+

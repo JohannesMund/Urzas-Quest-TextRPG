@@ -1,5 +1,6 @@
 #include "cleilacompanion.h"
 #include "../moduleressources.h"
+
 #include "cenemy.h"
 #include "cgamemanagement.h"
 #include "console.h"
@@ -7,6 +8,7 @@
 #include "ressources.h"
 
 #include <format>
+
 
 CLeilaCompanion::CLeilaCompanion() : CSupportCompanion(LeilaRescueRessources::moduleName())
 {
@@ -50,6 +52,7 @@ void CLeilaCompanion::postBattle(CEnemy*)
         Console::printLn(std::format("{} looks victorious.", name()));
     }
 }
+
 
 void CLeilaCompanion::joinText() const
 {

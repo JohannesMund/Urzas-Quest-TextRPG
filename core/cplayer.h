@@ -39,7 +39,6 @@ public:
     std::string hpAsString() const;
 
     unsigned int initiative() const;
-
     unsigned int damage() const;
 
     void addSupportCompanion(CSupportCompanion* support);
@@ -66,6 +65,6 @@ private:
     static std::string lostOrGained(const int i);
 
     void removeAllSupportCompanions();
-
     std::vector<CSupportCompanion*> _supporters;
+
 };

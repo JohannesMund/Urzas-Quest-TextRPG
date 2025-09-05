@@ -1,4 +1,5 @@
 #include "cplayer.h"
+#include "ccompanion.h"
 #include "cenemy.h"
 #include "cgamemanagement.h"
 #include "citem.h"
@@ -201,7 +202,6 @@ void CPlayer::preBattle(CEnemy* enemy)
         CGameManagement::getInventoryInstance()->useBattleEffect(item, enemy);
     }
     CGameManagement::getCompanionInstance()->preBattle(enemy);
-
     std::for_each(_supporters.begin(), _supporters.end(), [&enemy](CSupportCompanion* c) { c->preBattle(enemy); });
 }
 
@@ -334,6 +334,7 @@ void CPlayer::removeSupportCompanionsByModuleName(const std::string_view& module
     auto it = std::remove_if(
         _supporters.begin(), _supporters.end(), CSupportCompanion::filterAndRemoveByModuleName(moduleName));
     (*it)->leaveText();
+
     if (it != _supporters.end())
     {
         _supporters.erase(it);
@@ -349,6 +350,7 @@ void CPlayer::removeAllSupportCompanions()
                       c->leaveText();
                       delete c;
                   });
+
     _supporters.clear();
 }
 
