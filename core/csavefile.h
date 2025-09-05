@@ -5,8 +5,8 @@ using json = nlohmann::json;
 class CSaveFile
 {
 public:
-    static bool saveGameAvailable();
 
+    static bool saveGameAvailable();
     CSaveFile();
 
     bool dump();

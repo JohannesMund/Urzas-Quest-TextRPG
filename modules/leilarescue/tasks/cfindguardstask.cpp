@@ -142,7 +142,8 @@ void CFindGuardsTask::rescueGuardFromMafia()
         Console::printLn("The messed up guard looks relieved as the mafia dudes set him free. you grab him and leave.");
         CGameManagement::getPlayerInstance()->spendGold(_mafiaMoney);
         CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
-        finishTask();
+
+      finishTask();
         return;
     }
 
