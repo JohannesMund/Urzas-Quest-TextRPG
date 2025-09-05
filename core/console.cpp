@@ -1,12 +1,7 @@
-#if defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS)
-#define _USE_WINDOWS
-#else
-#define _USE_UNIX
-#endif
-
 #include "console.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
+#include "globals.h"
 #include "ressources.h"
 
 #include <algorithm>

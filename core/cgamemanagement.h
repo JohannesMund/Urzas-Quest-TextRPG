@@ -14,6 +14,8 @@ class CTask;
 class CGameManagement
 {
 public:
+    static bool saveGameAvailable();
+
     static CGameManagement* getInstance();
 
     static CPlayer* getPlayerInstance();
@@ -35,15 +37,19 @@ public:
 
     void printHUD();
 
-private:
-    void start();
+    void startGame();
+    void loadGame();
 
+private:
     void executeTurn();
     void handlePlayerDeath();
 
     void init();
     void gameLoop();
     void lookForTrouble();
+
+    bool load();
+    bool save();
 
     CPlayer* getPlayer();
     CInventory* getInventory();

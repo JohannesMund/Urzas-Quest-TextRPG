@@ -17,13 +17,28 @@ int main()
     Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
     Console::hr();
 
+    std::string acceptableChars;
     Console::printLn("[S]tart a new game", Console::EAlignment::eCenter);
-    Console::printLn("[Q]uit game", Console::EAlignment::eCenter);
+    acceptableChars += 's';
 
-    unsigned char in = Console::getAcceptableInput("sq");
+    if (CGameManagement::saveGameAvailable())
+    {
+        Console::printLn("[L]oad game", Console::EAlignment::eCenter);
+        acceptableChars += 'l';
+    }
+
+    Console::printLn("[Q]uit game", Console::EAlignment::eCenter);
+    acceptableChars += 'q';
+
+    unsigned char in = Console::getAcceptableInput(acceptableChars);
     if (in == 's')
     {
-        CGameManagement::getInstance();
+        CGameManagement::getInstance()->startGame();
+    }
+
+    if (in == 'l')
+    {
+        CGameManagement::getInstance()->loadGame();
     }
 
     cout << endl;

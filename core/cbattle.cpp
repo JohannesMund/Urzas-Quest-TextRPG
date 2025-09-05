@@ -210,6 +210,7 @@ CBattle::EBattleResult CBattle::hasWonAgainst(const std::optional<CBattle::EWeap
         {
             return CBattle::EBattleResult::eWon;
         }
+        return CBattle::EBattleResult::eLost;
     case EWeapons::eSpock:
         if (*other == EWeapons::eRock || *other == EWeapons::eScissors)
         {

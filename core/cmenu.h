@@ -24,6 +24,10 @@ public:
         {
             return key == other.key;
         }
+        bool operator!=(const Action& other) const
+        {
+            return key != other.key;
+        }
     };
 
     /**

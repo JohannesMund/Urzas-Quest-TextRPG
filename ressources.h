@@ -9,6 +9,8 @@ namespace Ressources
 namespace Settings
 {
 static const unsigned int consoleWidth = 80;
+static const std::string saveFileName = "savegame.json";
+static const std::string appName = "UruzsQuestTextRPG";
 } // namespace Settings
 
 namespace Config
