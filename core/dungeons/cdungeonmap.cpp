@@ -208,11 +208,8 @@ void CDungeonMap::moveTasks()
         }
 
         std::vector<CMap::EDirections> possibilities;
-        for (auto dir : {CMap::EDirections::eEast,
-                         CMap::EDirections::eSouth,
-                         CMap::EDirections::eWest,
-                         CMap::EDirections::eNorth,
-                         CMap::EDirections::eEast})
+        for (auto dir :
+             {CMap::EDirections::eEast, CMap::EDirections::eSouth, CMap::EDirections::eWest, CMap::EDirections::eNorth})
         {
             auto newRoom = roomAt(coords, dir);
             if (!newRoom.has_value())

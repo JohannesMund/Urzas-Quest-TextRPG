@@ -4,6 +4,7 @@ set(URZAS_QUEST_SOURCES_CORE
 	core/console.h core/console.cpp
     core/localdirectory.h core/localdirectory.cpp
     core/colorize.h core/colorize.cpp
+    core/cgamestateobject.h core/cgamestateobject.cpp
     core/cmenu.h core/cmenu.cpp
     core/randomizer.h core/randomizer.cpp
     core/enumiterator.h

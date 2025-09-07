@@ -16,13 +16,14 @@
 #include <iostream>
 #include <random>
 
+const std::string CMap::saveObjectName = "Map";
 const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eNorth, "North"},
                                                                 {EDirections::eSouth, "South"},
                                                                 {EDirections::eWest, "West"},
                                                                 {EDirections::eEast, "East"},
                                                                 {EDirections::eNone, "None"}};
 
-CMap::CMap(const unsigned int width, const unsigned int height)
+CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject("Map")
 {
     for (unsigned int x = 0; x < height; x++)
     {
@@ -390,7 +391,7 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
-nlohmann::json CMap::saveMapState() const
+nlohmann::json CMap::save() const
 {
     nlohmann::json mapState;
     mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};

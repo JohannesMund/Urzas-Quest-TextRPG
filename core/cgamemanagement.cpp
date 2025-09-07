@@ -397,6 +397,7 @@ bool CGameManagement::save()
     }
 
     CSaveFile savegame;
+    savegame.addGameObject(_map);
     return savegame.dump();
 }
 

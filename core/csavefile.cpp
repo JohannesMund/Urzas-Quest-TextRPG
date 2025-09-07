@@ -1,4 +1,5 @@
 #include "csavefile.h"
+#include "cgamestateobject.h"
 #include "console.h"
 #include "globals.h"
 #include "localdirectory.h"
@@ -30,6 +31,11 @@ bool CSaveFile::saveGameAvailable()
 
     path.append(Ressources::Settings::saveFileName);
     return std::filesystem::exists(path);
+}
+
+void CSaveFile::addGameObject(const CGameStateObject& obj)
+{
+    addObject(obj.getObjectName(), obj.save());
 }
 
 bool CSaveFile::dump()
