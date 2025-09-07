@@ -38,6 +38,13 @@ void CSaveFile::addGameObject(const CGameStateObject& obj)
     addObject(obj.getObjectName(), obj.save());
 }
 
+void CSaveFile::addGameObject(json& gameObjectArray, const CGameStateObject* obj)
+{
+    auto o = obj->save();
+    o["ClassName"] = obj->getObjectName();
+    gameObjectArray.push_back(o);
+}
+
 bool CSaveFile::dump()
 {
     bool ok;

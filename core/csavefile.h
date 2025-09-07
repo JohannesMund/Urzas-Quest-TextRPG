@@ -12,6 +12,8 @@ public:
     CSaveFile();
 
     void addGameObject(const CGameStateObject& obj);
+    static void addGameObject(json& gameObjectArray, const CGameStateObject* obj);
+
     bool dump();
 
 private:

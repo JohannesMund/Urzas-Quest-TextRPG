@@ -1,7 +1,8 @@
 #include "cfield.h"
 #include "cgamemanagement.h"
+#include "cgamestateobject.h"
 
-CField::CField() : CRoom()
+CField::CField() : CRoom("CField")
 {
     _encounterType = CEncounter::EEncounterType::eField;
 }

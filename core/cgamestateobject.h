@@ -5,7 +5,7 @@
 class CGameStateObject
 {
 public:
-    CGameStateObject(const std::string& objectName);
+    explicit CGameStateObject(const std::string& objectName);
     std::string getObjectName() const;
 
     virtual nlohmann::json save() const = 0;

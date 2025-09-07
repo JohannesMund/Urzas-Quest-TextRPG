@@ -11,7 +11,7 @@
 #include <format>
 #include <ranges>
 
-CSandwichShop::CSandwichShop()
+CSandwichShop::CSandwichShop() : CRoom("CSandwichShop")
 {
     for (const auto i : CSandwich::ingredientIterator())
     {
@@ -125,6 +125,16 @@ std::string CSandwichShop::fgColor() const
 CMap::RoomFilter CSandwichShop::sandwichShopFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CSandwichShop*>(room) != nullptr; };
+}
+
+nlohmann::json CSandwichShop::save() const
+{
+    nlohmann::json o = CRoom::save();
+    o["turns"] = _turns;
+    o["playerOwnsShop"] = _playerOwnsShop;
+    o["playerDiscoveredHideout"] = _playerDiscoveredHideout;
+    o["goldAvailable"] = _goldAvailable;
+    return o;
 }
 
 void CSandwichShop::printHeader()

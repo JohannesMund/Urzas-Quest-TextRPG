@@ -5,6 +5,7 @@
 #include "colorize.h"
 #include "console.h"
 #include "croom.h"
+#include "csavefile.h"
 #include "cstartingroom.h"
 #include "ctask.h"
 #include "ctown.h"
@@ -395,6 +396,21 @@ nlohmann::json CMap::save() const
 {
     nlohmann::json mapState;
     mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};
+
+    nlohmann::json rooms = nlohmann::json::array();
+
+    for (auto row : _map)
+    {
+        nlohmann::json rowArray = nlohmann::json::array();
+        for (auto room : row)
+        {
+            CSaveFile::addGameObject(rowArray, room);
+        }
+
+        rooms.push_back(rowArray);
+    }
+
+    mapState["map"] = rooms;
 
     return mapState;
 }

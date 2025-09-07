@@ -1,7 +1,7 @@
 #include "cdungeonroom.h"
 #include "cgamemanagement.h"
 
-CDungeonRoom::CDungeonRoom() : CRoom()
+CDungeonRoom::CDungeonRoom() : CRoom("CDungeonRoom")
 {
     _encounterType = CEncounter::EEncounterType::eDungeon;
     _isRandomTaskPossible = true;

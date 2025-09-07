@@ -8,7 +8,7 @@
 #include "ressources.h"
 
 #include <format>
-CShrineOfTheAncients::CShrineOfTheAncients() : CRoom()
+CShrineOfTheAncients::CShrineOfTheAncients() : CRoom("CShrineOfTheAnchients")
 {
     _description = "";
     _encounterType = CEncounter::EEncounterType::eNone;

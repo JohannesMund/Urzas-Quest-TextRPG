@@ -3,7 +3,7 @@
 #include "console.h"
 #include "ressources.h"
 
-CCapital::CCapital()
+CCapital::CCapital() : CTown("CCaptial")
 {
     auto city = Ressources::Rooms::getCapital();
     _description = city.second;
@@ -42,6 +42,13 @@ std::string CCapital::fgColor() const
 CMap::RoomFilter CCapital::capitalFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CCapital*>(room) != nullptr; };
+}
+
+nlohmann::json CCapital::save() const
+{
+    nlohmann::json o = CTown::save();
+    o["open"] = _open;
+    return o;
 }
 
 char CCapital::getMapSymbol() const
