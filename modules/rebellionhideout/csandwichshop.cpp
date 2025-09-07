@@ -134,6 +134,16 @@ nlohmann::json CSandwichShop::save() const
     o["playerOwnsShop"] = _playerOwnsShop;
     o["playerDiscoveredHideout"] = _playerDiscoveredHideout;
     o["goldAvailable"] = _goldAvailable;
+
+    nlohmann::json ingredients = nlohmann::json::array();
+
+    for (auto i : _ingredientStore)
+    {
+        ingredients.push_back(i);
+    }
+
+    o["ingredientStore"] = ingredients;
+
     return o;
 }
 
