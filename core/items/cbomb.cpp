@@ -4,6 +4,7 @@
 #include "console.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
 CBomb::CBomb(const BombSize& size) : CItem("CBomb")
 {

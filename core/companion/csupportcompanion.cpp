@@ -3,6 +3,7 @@
 #include "ressources.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
 CSupportCompanion::CSupportCompanion(const std::string_view& moduleName) :
     CCompanion("CSupportCompanion"),

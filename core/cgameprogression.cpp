@@ -33,7 +33,7 @@ void CGameProgression::startGame()
     progressToStage(EGameStage::eStart);
 }
 
-CGameProgression::CGameProgression()
+CGameProgression::CGameProgression() : CGameStateObject("Progression")
 {
 }
 
@@ -436,4 +436,22 @@ void CGameProgression::registerModule(const std::string_view& name,
 void CGameProgression::reRegisterModuleForNextStage(const std::string_view& moduleName)
 {
     reRegisterModule(moduleName, *(++gameStageIterator(_currentStage)));
+}
+
+nlohmann::json CGameProgression::save() const
+{
+    nlohmann::json o;
+    o["currentStage"] = _currentStage;
+    o["bodyCount"] = _bodyCount;
+    o["turns"] = _turns;
+    o["genocideCount"] = _genocideCount;
+
+    nlohmann::json finishedModules = nlohmann::json::array();
+    for (auto m : _finishedModules)
+    {
+        finishedModules.push_back(m);
+    }
+    o["finishedModules"] = finishedModules;
+
+    return o;
 }

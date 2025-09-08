@@ -4,7 +4,9 @@
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 #include <string>
+
 
 CCompanion::CCompanion(const std::string& objectName) : CGameStateObject(objectName)
 {

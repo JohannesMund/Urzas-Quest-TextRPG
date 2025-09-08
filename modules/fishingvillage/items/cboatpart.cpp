@@ -3,6 +3,7 @@
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
 CBoatPart::CBoatPart() : CJunkItem("CBoatPart")
 {

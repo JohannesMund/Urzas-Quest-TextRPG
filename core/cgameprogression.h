@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cgamestateobject.h"
 #include "enumiterator.h"
 #include "ressources.h"
 
@@ -9,7 +10,7 @@
 
 class CRoom;
 
-class CGameProgression
+class CGameProgression : public CGameStateObject
 {
     friend class CGameManagement;
 
@@ -83,6 +84,8 @@ public:
                         std::function<void()> deInitFunction = &noInitDeInitFunction,
                         std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &noInitWorldMapFunction);
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
+
+    virtual nlohmann::json save() const override;
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;

@@ -3,6 +3,7 @@
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
 CFishingRodPart::CFishingRodPart() : CJunkItem("CFishingRodPart")
 {

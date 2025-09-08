@@ -1,5 +1,7 @@
 #include "cfish.h"
 
+#include <nlohmann/json.hpp>
+
 CFish::CFish() : CFish(0, 0)
 {
 }

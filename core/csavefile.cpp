@@ -14,7 +14,7 @@ CSaveFile::CSaveFile()
 {
     addObject("FSpec", {{"Name", "UrzasQuest TextRPG"}, {"version", 1}});
 
-    json gameState;
+    nlohmann::json gameState;
     auto now = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now());
     gameState["DateTime"] = std::format("{:%Y-%m-%d %H:%M:%S}", now);
     addObject("GameState", gameState);
@@ -47,7 +47,7 @@ void CSaveFile::addGameObject(const CGameStateObject* obj)
     addObject(obj->getObjectName(), obj->save());
 }
 
-void CSaveFile::addGameObject(json& gameObjectArray, const CGameStateObject* obj)
+void CSaveFile::addGameObject(nlohmann::json& gameObjectArray, const CGameStateObject* obj)
 {
     auto o = obj->save();
     o["ClassName"] = obj->getObjectName();
@@ -78,7 +78,7 @@ bool CSaveFile::dump()
     return true;
 }
 
-void CSaveFile::addObject(const std::string& key, const json& object)
+void CSaveFile::addObject(const std::string& key, const nlohmann::json& object)
 {
     _saveGame[key] = object;
 }
