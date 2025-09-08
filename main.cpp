@@ -12,7 +12,12 @@ int main()
     Console::cls(false);
 
     Console::hr();
-    Console::printLn("T H E   Q U E S T   O F   U R Z A", Console::EAlignment::eCenter);
+    Console::printLn(" _    _                      ____                  _   ", Console::EAlignment::eCenter);
+    Console::printLn("| |  | |                    / __ \\                | |  ", Console::EAlignment::eCenter);
+    Console::printLn("| |  | |_ __ ______ _ ___  | |  | |_   _  ___  ___| |_ ", Console::EAlignment::eCenter);
+    Console::printLn("| |  | | '__|_  / _` / __| | |  | | | | |/ _ \\/ __| __|", Console::EAlignment::eCenter);
+    Console::printLn("| |__| | |   / / (_| \\__ \\ | |__| | |_| |  __/\\__ \\ |_ ", Console::EAlignment::eCenter);
+    Console::printLn(" \\____/|_|  /___\\__,_|___/  \\___\\_\\__,_|\\___||___/\\___|", Console::EAlignment::eCenter);
     Console::printLn("~or~", Console::EAlignment::eCenter);
     Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
     Console::hr();
