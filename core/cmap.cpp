@@ -5,6 +5,7 @@
 #include "colorize.h"
 #include "console.h"
 #include "croom.h"
+#include "csavefile.h"
 #include "cstartingroom.h"
 #include "ctask.h"
 #include "ctown.h"
@@ -22,7 +23,7 @@ const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eN
                                                                 {EDirections::eEast, "East"},
                                                                 {EDirections::eNone, "None"}};
 
-CMap::CMap(const unsigned int width, const unsigned int height)
+CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject("Map")
 {
     for (unsigned int x = 0; x < height; x++)
     {
@@ -390,11 +391,27 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
-nlohmann::json CMap::saveMapState() const
+
+nlohmann::json CMap::save() const
+
 {
     nlohmann::json mapState;
     mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};
 
+    nlohmann::json rooms = nlohmann::json::array();
+
+    for (auto row : _map)
+    {
+        nlohmann::json rowArray = nlohmann::json::array();
+        for (auto room : row)
+        {
+            CSaveFile::addGameObject(rowArray, room);
+        }
+
+        rooms.push_back(rowArray);
+    }
+
+    mapState["map"] = rooms;
     return mapState;
 }
 

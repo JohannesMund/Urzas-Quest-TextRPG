@@ -1,13 +1,14 @@
 #include <iostream>
 
 #include "cgamemanagement.h"
+#include "cgamestateobject.h"
 #include "colorize.h"
 #include "console.h"
 #include "croom.h"
 #include "ctask.h"
 #include "ressources.h"
 
-CRoom::CRoom()
+CRoom::CRoom(const std::string& objectName) : CGameStateObject(objectName)
 {
     _description = Ressources::Rooms::getRandomDescription();
     _encounterType = CEncounter::EEncounterType::eNone;
@@ -78,6 +79,21 @@ void CRoom::executeTask()
         _task = nullptr;
         _showInFogOfWar = false;
     }
+}
+
+nlohmann::json CRoom::save() const
+{
+    nlohmann::json o;
+
+    o["pathNorth"] = _pathNorth;
+    o["pathEast"] = _pathEast;
+    o["pathSouth"] = _pathSouth;
+    o["pathWest"] = _pathWest;
+    o["showInFogOfWar"] = _showInFogOfWar;
+    o["seen"] = _seen;
+    o["description"] = _description;
+
+    return o;
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

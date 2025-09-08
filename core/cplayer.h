@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cbattle.h"
+#include "cgamestateobject.h"
 
 #include <optional>
 #include <string>
@@ -8,7 +9,7 @@
 
 class CEnemy;
 class CSupportCompanion;
-class CPlayer
+class CPlayer : public CGameStateObject
 {
     friend class CGameManagement;
 
@@ -45,6 +46,8 @@ public:
     void removeSupporCompanionsByName(const std::string_view& name);
     void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
 
+    virtual nlohmann::json save() const override;
+
 private:
     CPlayer();
 
@@ -66,5 +69,4 @@ private:
 
     void removeAllSupportCompanions();
     std::vector<CSupportCompanion*> _supporters;
-
 };

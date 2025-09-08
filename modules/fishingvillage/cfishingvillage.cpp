@@ -9,7 +9,7 @@
 #include <format>
 #include <optional>
 
-CFishingVillage::CFishingVillage() : CRoom()
+CFishingVillage::CFishingVillage() : CRoom("CFishingVillage")
 {
     _description = "";
 

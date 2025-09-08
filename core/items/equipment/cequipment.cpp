@@ -1,9 +1,13 @@
 #include "cequipment.h"
 #include "console.h"
+#include "csavefile.h"
 #include "randomizer.h"
 
 #include <format>
-CEquipment::CEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality) : CItem()
+CEquipment::CEquipment(const Ressources::Items::EType type,
+                       const Ressources::Items::EQuality quality,
+                       const std::string& objectName) :
+    CItem(objectName)
 {
     _level = 1;
 
@@ -99,6 +103,27 @@ std::function<CEquipment*(CItem*)> CEquipment::equipmentTransformation()
 Ressources::Items::EType CEquipment::type() const
 {
     return _type;
+}
+
+nlohmann::json CEquipment::save() const
+{
+
+    nlohmann::json o = CItem::save();
+
+    nlohmann::json names = nlohmann::json::array();
+
+    for (auto n : _namesByLevel)
+    {
+        names.push_back(n);
+    }
+
+    o["namesByLevel"] = names;
+    o["level"] = _level;
+    o["levelCap"] = _levelCap;
+    o["type"] = _type;
+    o["quality"] = _quality;
+
+    return o;
 }
 
 bool CEquipment::doesEquipmentEffectFire() const

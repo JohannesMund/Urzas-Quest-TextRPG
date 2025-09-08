@@ -5,7 +5,7 @@
 class CJunkItem : public CItem
 {
 public:
-    CJunkItem();
+    CJunkItem(const std::string& objectName = "CJunkItem");
 
     static ItemFilter junkItemFilter();
 };

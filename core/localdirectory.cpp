@@ -10,7 +10,6 @@
 #else
 #include <pwd.h>
 #include <unistd.h>
-
 #endif
 
 namespace
@@ -45,7 +44,7 @@ std::filesystem::path LocalDirectory::getLocalDirectoryPath(bool& bOk)
 #else
     const char* homeDir = getpwuid(getuid())->pw_dir;
     std::filesystem::path p{homeDir};
-    path = p;
+    result = p;
 #endif
     bOk = checkAndExpandPath(result);
     return result;

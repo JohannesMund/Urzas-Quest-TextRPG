@@ -5,13 +5,14 @@
 #include "colorize.h"
 #include "console.h"
 #include "csandwich.h"
+#include "csavefile.h"
 #include "cshaggyssandwich.h"
 #include "moduleressources.h"
 
 #include <format>
 #include <ranges>
 
-CSandwichShop::CSandwichShop()
+CSandwichShop::CSandwichShop() : CRoom("CSandwichShop")
 {
     for (const auto i : CSandwich::ingredientIterator())
     {
@@ -125,6 +126,30 @@ std::string CSandwichShop::fgColor() const
 CMap::RoomFilter CSandwichShop::sandwichShopFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CSandwichShop*>(room) != nullptr; };
+}
+
+nlohmann::json CSandwichShop::save() const
+{
+    nlohmann::json o = CRoom::save();
+    o["turns"] = _turns;
+    o["playerOwnsShop"] = _playerOwnsShop;
+    o["playerDiscoveredHideout"] = _playerDiscoveredHideout;
+    o["goldAvailable"] = _goldAvailable;
+
+    nlohmann::json ingredients = nlohmann::json::array();
+    for (auto i : _ingredientStore)
+    {
+        ingredients.push_back(i);
+    }
+    o["ingredientStore"] = ingredients;
+
+    nlohmann::json sandwiches = nlohmann::json::array();
+    for (auto s : _sandwiches)
+    {
+        CSaveFile::addGameObject(sandwiches, s);
+    }
+    o["sandwiches"] = sandwiches;
+    return o;
 }
 
 void CSandwichShop::printHeader()

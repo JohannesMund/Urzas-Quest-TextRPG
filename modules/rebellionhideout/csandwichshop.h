@@ -18,6 +18,8 @@ public:
 
     static CMap::RoomFilter sandwichShopFilter();
 
+    virtual nlohmann::json save() const override;
+
 private:
     void printHeader();
 

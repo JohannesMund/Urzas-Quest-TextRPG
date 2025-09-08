@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cgamestateobject.h"
 #include "citem.h"
 
 #include <map>
@@ -11,7 +12,7 @@ class CEnemy;
 class CEquipment;
 class CJunkItem;
 class CItemFactory;
-class CInventory
+class CInventory : public CGameStateObject
 {
     friend class CGameManagement;
 
@@ -88,6 +89,8 @@ private:
     void printViewableItems();
 
     void viewItem(CItem* item);
+
+    virtual nlohmann::json save() const override;
 
     CItem* getItem(const unsigned int index);
     ItemList _inventory;

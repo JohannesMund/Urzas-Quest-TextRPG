@@ -18,6 +18,8 @@ public:
 
     virtual void useFromBattle(CEnemy* enemy) override;
 
+    virtual nlohmann::json save() const override;
+
 private:
     BombSize _size;
 };

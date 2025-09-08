@@ -6,7 +6,7 @@
 
 #include <format>
 
-CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients) : CItem()
+CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients, const std::string objectName) : CItem(objectName)
 {
     _ingredients = ingredients;
     _isSellable = false;
@@ -77,6 +77,18 @@ CSandwich::IngredientsList CSandwich::getListOfAllIngredients()
         ingredients.push_back(i);
     }
     return ingredients;
+}
+
+nlohmann::json CSandwich::save() const
+{
+    nlohmann::json o = CItem::save();
+    nlohmann::json ingredients = nlohmann::json::array();
+    for (auto i : _ingredients)
+    {
+        ingredients.push_back(i);
+    }
+    o["ingredients"] = ingredients;
+    return o;
 }
 
 std::string CSandwich::description() const

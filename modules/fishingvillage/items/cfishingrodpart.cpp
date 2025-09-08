@@ -3,8 +3,9 @@
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
-CFishingRodPart::CFishingRodPart()
+CFishingRodPart::CFishingRodPart() : CJunkItem("CFishingRodPart")
 {
     switch (Randomizer::getRandom(3))
     {
@@ -63,4 +64,11 @@ std::string CFishingRodPart::nameForPart(const EPart part)
     case EPart::eHook:
         return std::format("{}Wire{}", CC::fgLightCyan(), CC::ccReset());
     }
+}
+
+nlohmann::json CFishingRodPart::save() const
+{
+    nlohmann::json o = CItem::save();
+    o["part"] = _part;
+    return o;
 }

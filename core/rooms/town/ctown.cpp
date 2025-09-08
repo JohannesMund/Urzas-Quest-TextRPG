@@ -9,7 +9,7 @@
 #include <format>
 #include <optional>
 
-CTown::CTown() : CRoom()
+CTown::CTown(const std::string& objectName) : CRoom(objectName)
 {
     auto town = Ressources::Rooms::getRandomTown();
     _name = town.first;
@@ -115,4 +115,11 @@ CMap::RoomFilter CTown::townFilter()
 char CTown::getMapSymbol() const
 {
     return 'T';
+}
+
+nlohmann::json CTown::save() const
+{
+    nlohmann::json o = CRoom::save();
+    o["name"] = _name;
+    return o;
 }

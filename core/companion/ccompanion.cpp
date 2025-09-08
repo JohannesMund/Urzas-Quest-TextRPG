@@ -4,7 +4,13 @@
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 #include <string>
+
+
+CCompanion::CCompanion(const std::string& objectName) : CGameStateObject(objectName)
+{
+}
 
 std::function<bool(const CCompanion*)> CCompanion::companionNameFilter(const std::string_view& name)
 {
@@ -47,6 +53,14 @@ void CCompanion::evolve()
     {
         Console::printLn(std::format("Your {} evolved into a {}", oldName, newName));
     }
+}
+
+nlohmann::json CCompanion::save() const
+{
+    nlohmann::json o;
+    o["description"] = _description;
+    o["level"] = _level;
+    return o;
 }
 
 bool CCompanion::fireDefaultAction() const

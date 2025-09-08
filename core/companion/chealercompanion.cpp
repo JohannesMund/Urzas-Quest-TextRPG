@@ -5,7 +5,7 @@
 
 #include <format>
 
-CHealerCompanion::CHealerCompanion()
+CHealerCompanion::CHealerCompanion() : CCompanion("CHealerCompanion")
 {
 }
 

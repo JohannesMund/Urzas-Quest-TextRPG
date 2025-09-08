@@ -6,7 +6,7 @@
 
 #include <format>
 
-CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size)
+CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem("CRatFarmTurnip")
 {
     std::string name;
 
@@ -51,6 +51,13 @@ void CRatFarmTurnip::useFromBattle(CEnemy*)
 {
     Console::printLn("You should not have time for lunch in the middle of a fight, but maybe this helps.");
     use();
+}
+
+nlohmann::json CRatFarmTurnip::save() const
+{
+    nlohmann::json o = CItem::save();
+    o["size"] = _size;
+    return o;
 }
 
 void CRatFarmTurnip::use()

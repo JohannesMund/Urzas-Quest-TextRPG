@@ -18,6 +18,8 @@ public:
     static CItem::ItemFilter partFilter(const EPart part);
     static std::string nameForPart(const EPart part);
 
+    virtual nlohmann::json save() const override;
+
 private:
     EPart _part;
 };

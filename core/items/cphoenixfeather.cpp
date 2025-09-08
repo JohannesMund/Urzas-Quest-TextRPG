@@ -5,7 +5,7 @@
 
 #include <format>
 
-CPhoenixFeather::CPhoenixFeather()
+CPhoenixFeather::CPhoenixFeather() : CItem("CPhoenixFeather")
 {
     _name = std::format("{}Ph{}oe{}ni{}x f{}ea{}th{}er{}",
                         CC::fgRed(),

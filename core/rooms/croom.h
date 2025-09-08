@@ -4,11 +4,12 @@
 
 #include <string>
 
+class CGameStateObject;
 class CTask;
-class CRoom
+class CRoom : public CGameStateObject
 {
 public:
-    CRoom();
+    CRoom(const std::string& objectName);
     virtual ~CRoom();
 
     void blockPath(const CMap::EDirections dir, const bool block);
@@ -57,4 +58,6 @@ protected:
 
     CEncounter::EEncounterType _encounterType;
     std::string _moduleName;
+
+    virtual nlohmann::json save() const override;
 };

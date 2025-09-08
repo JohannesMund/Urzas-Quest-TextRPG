@@ -15,7 +15,7 @@ class CItem;
 class CTown : public CRoom
 {
 public:
-    CTown();
+    CTown(const std::string& objectName = "CTown");
 
     virtual void execute() override;
 
@@ -25,6 +25,8 @@ public:
     std::string name() const;
 
     static CMap::RoomFilter townFilter();
+
+    virtual nlohmann::json save() const override;
 
 protected:
     std::string _name;

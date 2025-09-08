@@ -3,8 +3,9 @@
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
-CBoatPart::CBoatPart()
+CBoatPart::CBoatPart() : CJunkItem("CBoatPart")
 {
     switch (Randomizer::getRandom(3))
     {
@@ -64,4 +65,11 @@ std::string CBoatPart::nameForPart(const EPart part)
     case EPart::eRope:
         return std::format("{}Rope{}", CC::fgLightYellow(), CC::ccReset());
     }
+}
+
+nlohmann::json CBoatPart::save() const
+{
+    nlohmann::json o = CItem::save();
+    o["part"] = _part;
+    return o;
 }

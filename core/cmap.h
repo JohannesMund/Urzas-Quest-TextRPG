@@ -5,12 +5,13 @@
 #include <optional>
 #include <string>
 #include <vector>
-
 #include <nlohmann/json.hpp>
+
+#include "cgamestateobject.h"
 
 class CRoom;
 class CTask;
-class CMap
+class CMap : public CGameStateObject
 {
 public:
     enum class EDirections
@@ -80,8 +81,9 @@ public:
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(
-        CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+
+    virtual nlohmann::json save() const override;
 
     nlohmann::json saveMapState() const;
 
@@ -92,4 +94,6 @@ protected:
     std::optional<CRoom*> roomAt(const SRoomCoords& coords, const EDirections dir) const;
 
     SRoomCoords _playerPosition;
+
+    static const std::string saveObjectName;
 };
