@@ -395,7 +395,7 @@ nlohmann::json CInventory::save() const
         CSaveFile::addGameObject(inventory, i);
     }
     o["inventoy"] = inventory;
-    return nlohmann::json();
+    return o;
 }
 
 CItem* CInventory::getItem(const unsigned int index)
