@@ -5,7 +5,6 @@
 #include <optional>
 #include <string>
 #include <vector>
-
 #include <nlohmann/json.hpp>
 
 #include "cgamestateobject.h"
@@ -85,6 +84,8 @@ public:
     void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
     virtual nlohmann::json save() const override;
+
+    nlohmann::json saveMapState() const;
 
 protected:
     std::vector<std::vector<CRoom*>> _map;

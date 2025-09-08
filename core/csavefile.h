@@ -11,6 +11,7 @@ class CGameStateObject;
 class CSaveFile
 {
 public:
+
     /**
      * @brief is a save game available?
      * @remark just looks in the destination folder whether there is a file with the right name
@@ -36,6 +37,7 @@ public:
      * @brief writes the save game
      * @remark existing file is overwritten
      */
+
     bool dump();
 
 private:

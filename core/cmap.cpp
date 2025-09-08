@@ -391,7 +391,9 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
+
 nlohmann::json CMap::save() const
+
 {
     nlohmann::json mapState;
     mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};
@@ -410,7 +412,6 @@ nlohmann::json CMap::save() const
     }
 
     mapState["map"] = rooms;
-
     return mapState;
 }
 
