@@ -12,7 +12,9 @@
 class CEquipment : public CItem
 {
 public:
-    CEquipment(const Ressources::Items::EType type, const Ressources::Items::EQuality quality);
+    CEquipment(const Ressources::Items::EType type,
+               const Ressources::Items::EQuality quality,
+               const std::string& objectName);
 
     virtual bool isEnhancable() const;
     virtual std::string name() const override;
@@ -41,6 +43,8 @@ public:
     virtual CItem::ItemFilter equipmentTypeFilter() const = 0;
 
     Ressources::Items::EType type() const;
+
+    virtual nlohmann::json save() const override;
 
 protected:
     bool doesEquipmentEffectFire() const;

@@ -17,7 +17,6 @@
 #include <iostream>
 #include <random>
 
-const std::string CMap::saveObjectName = "Map";
 const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eNorth, "North"},
                                                                 {EDirections::eSouth, "South"},
                                                                 {EDirections::eWest, "West"},

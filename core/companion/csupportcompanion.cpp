@@ -4,7 +4,9 @@
 
 #include <format>
 
-CSupportCompanion::CSupportCompanion(const std::string_view& moduleName) : CCompanion(), _moduleName(moduleName)
+CSupportCompanion::CSupportCompanion(const std::string_view& moduleName) :
+    CCompanion("CSupportCompanion"),
+    _moduleName(moduleName)
 {
 }
 
@@ -77,4 +79,11 @@ void CSupportCompanion::joinText() const
 void CSupportCompanion::leaveText() const
 {
     Console::printLn(std::format("{} leaves you", name()));
+}
+
+nlohmann::json CSupportCompanion::save() const
+{
+    nlohmann::json o = CCompanion::save();
+    o["moduleName"] = _moduleName;
+    return o;
 }

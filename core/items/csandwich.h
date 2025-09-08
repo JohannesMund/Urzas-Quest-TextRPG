@@ -30,7 +30,7 @@ public:
     typedef EnumIterator<EIngredients, EIngredients::eUnknown, EIngredients::eOlives> ingredientIterator;
     using IngredientsList = std::vector<EIngredients>;
 
-    CSandwich(const IngredientsList& ingredients);
+    CSandwich(const IngredientsList& ingredients, const std::string objectName = "CSandwich");
 
     virtual std::string description() const override;
     virtual void useFromInventory() override;
@@ -39,6 +39,8 @@ public:
     static std::string ingredient2String(const EIngredients ingredient);
     static std::string ingredients2String(const IngredientsList ingredient);
     static IngredientsList getListOfAllIngredients();
+
+    virtual nlohmann::json save() const override;
 
     bool operator==(const CSandwich& other) const
     {

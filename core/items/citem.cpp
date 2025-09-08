@@ -7,7 +7,7 @@
 
 using namespace std;
 
-CItem::CItem()
+CItem::CItem(const std::string& objectName) : CGameStateObject(objectName)
 {
 }
 
@@ -76,6 +76,29 @@ CItem::ItemFilter CItem::shieldingActionFilter()
 CItem::ItemFilter CItem::deathEffectFilter()
 {
     return [](const CItem* item) { return item->hasDeathEffect(); };
+}
+
+nlohmann::json CItem::save() const
+{
+    nlohmann::json o;
+
+    o["name"] = _name;
+    o["description"] = _description;
+
+    o["isUsableFromInventory"] = _isUsableFromInventory;
+    o["isUsableFromBattle"] = _isUsableFromBattle;
+
+    o["hasDeathEffect"] = _hasDeathEffect;
+    o["hasBattleEffect"] = _hasBattleEffect;
+    o["hasBattleBuff"] = _hasBattleBuff;
+    o["hasShieldingAction"] = _hasShieldingAction;
+
+    o["isSellable"] = _isSellable;
+    o["isBuyable"] = _isBuyable;
+    o["value"] = _value;
+    o["isConsumable"] = _isConsumable;
+
+    return o;
 }
 
 string CItem::name() const

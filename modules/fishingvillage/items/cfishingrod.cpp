@@ -4,7 +4,8 @@
 
 #include <format>
 
-CFishingRod::CFishingRod() : CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood)
+CFishingRod::CFishingRod() :
+    CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood, "CFishingRod")
 {
     _namesByLevel = {
         std::format(

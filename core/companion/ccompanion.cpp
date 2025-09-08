@@ -6,6 +6,10 @@
 #include <format>
 #include <string>
 
+CCompanion::CCompanion(const std::string& objectName) : CGameStateObject(objectName)
+{
+}
+
 std::function<bool(const CCompanion*)> CCompanion::companionNameFilter(const std::string_view& name)
 {
     return [&name](const CCompanion* companion) { return companion->name().compare(name) == 0; };
@@ -47,6 +51,14 @@ void CCompanion::evolve()
     {
         Console::printLn(std::format("Your {} evolved into a {}", oldName, newName));
     }
+}
+
+nlohmann::json CCompanion::save() const
+{
+    nlohmann::json o;
+    o["description"] = _description;
+    o["level"] = _level;
+    return o;
 }
 
 bool CCompanion::fireDefaultAction() const

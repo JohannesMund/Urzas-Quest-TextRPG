@@ -3,7 +3,7 @@
 
 #include <format>
 
-CBoat::CBoat() : CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood)
+CBoat::CBoat() : CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood, "CBoat")
 {
     _namesByLevel = {
         std::format("{}Fragile {}Nutshell{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),

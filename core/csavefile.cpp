@@ -38,6 +38,15 @@ void CSaveFile::addGameObject(const CGameStateObject& obj)
     addObject(obj.getObjectName(), obj.save());
 }
 
+void CSaveFile::addGameObject(const CGameStateObject* obj)
+{
+    if (obj == nullptr)
+    {
+        return;
+    }
+    addObject(obj->getObjectName(), obj->save());
+}
+
 void CSaveFile::addGameObject(json& gameObjectArray, const CGameStateObject* obj)
 {
     auto o = obj->save();

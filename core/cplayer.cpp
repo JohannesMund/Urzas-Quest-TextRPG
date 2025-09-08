@@ -6,6 +6,7 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "csavefile.h"
 #include "csupportcompanion.h"
 #include "randomizer.h"
 #include "ressources.h"
@@ -15,7 +16,7 @@
 #include <format>
 #include <string>
 
-CPlayer::CPlayer()
+CPlayer::CPlayer() : CGameStateObject("Player")
 {
     _maxHp = Ressources::Config::maxHp;
     _hp = Ressources::Config::maxHp;
@@ -339,6 +340,27 @@ void CPlayer::removeSupportCompanionsByModuleName(const std::string_view& module
     {
         _supporters.erase(it);
     }
+}
+
+nlohmann::json CPlayer::save() const
+{
+    nlohmann::json o;
+
+    o["hp"] = _hp;
+    o["maxHp"] = _maxHp;
+    o["gold"] = _gold;
+    o["level"] = _level;
+    o["xp"] = _xp;
+    o["initiative"] = _initiative;
+
+    nlohmann::json supporters = nlohmann::json::array();
+    for (auto s : _supporters)
+    {
+        CSaveFile::addGameObject(supporters, s);
+    }
+    o["supporters"] = supporters;
+
+    return o;
 }
 
 void CPlayer::removeAllSupportCompanions()

@@ -4,6 +4,7 @@
 #include "cjunkitem.h"
 #include "cmenu.h"
 #include "console.h"
+#include "csavefile.h"
 
 #include <algorithm>
 #include <format>
@@ -325,7 +326,7 @@ std::optional<CItem*> CInventory::selectItemFromInventory(const Scope& scope)
     return {};
 }
 
-CInventory::CInventory(CItemFactory* itemFactory) : _itemFactory(itemFactory)
+CInventory::CInventory(CItemFactory* itemFactory) : CGameStateObject("Inventory"), _itemFactory(itemFactory)
 {
 }
 
@@ -383,6 +384,18 @@ void CInventory::viewItem(CItem* item)
         return;
     }
     item->view();
+}
+
+nlohmann::json CInventory::save() const
+{
+    nlohmann::json o;
+    nlohmann::json inventory = nlohmann::json::array();
+    for (auto i : _inventory)
+    {
+        CSaveFile::addGameObject(inventory, i);
+    }
+    o["inventoy"] = inventory;
+    return nlohmann::json();
 }
 
 CItem* CInventory::getItem(const unsigned int index)

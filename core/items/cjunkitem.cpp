@@ -2,7 +2,7 @@
 #include "randomizer.h"
 #include "ressources.h"
 
-CJunkItem::CJunkItem() : CItem()
+CJunkItem::CJunkItem(const std::string& objectName) : CItem(objectName)
 {
     auto it = Ressources::Items::getRandomJunkItems();
     _name = it.first;

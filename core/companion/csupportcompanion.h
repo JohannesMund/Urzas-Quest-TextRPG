@@ -24,6 +24,8 @@ public:
     virtual void joinText() const;
     virtual void leaveText() const;
 
+    virtual nlohmann::json save() const override;
+
 private:
     std::string _moduleName;
 };

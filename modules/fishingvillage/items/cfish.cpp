@@ -9,9 +9,8 @@ CFish::CFish(const unsigned int rodLevel, const unsigned int boatLevel) :
 {
 }
 
-CFish::CFish(const FishingVillageRessources::EFishLevel level) : CItem()
+CFish::CFish(const FishingVillageRessources::EFishLevel level) : CItem("CFish")
 {
-
     _value = FishingVillageRessources::getFishPrice(level);
     _name = FishingVillageRessources::getFish(level);
 
@@ -44,4 +43,11 @@ CItem::ItemFilter CFish::fishRarityFilter(const FishingVillageRessources::EFishL
         }
         return false;
     };
+}
+
+nlohmann::json CFish::save() const
+{
+    nlohmann::json o = CItem::save();
+    o["fishLevel"] = _fishLevel;
+    return o;
 }

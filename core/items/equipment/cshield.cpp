@@ -5,7 +5,8 @@
 
 #include <format>
 
-CShield::CShield(const Ressources::Items::EQuality quality) : CEquipment(Ressources::Items::EType::eShield, quality)
+CShield::CShield(const Ressources::Items::EQuality quality) :
+    CEquipment(Ressources::Items::EType::eShield, quality, "CShield")
 {
     _hasBattleEffect = true;
     _hasBattleBuff = true;

@@ -5,6 +5,7 @@
 #include "colorize.h"
 #include "console.h"
 #include "csandwich.h"
+#include "csavefile.h"
 #include "cshaggyssandwich.h"
 #include "moduleressources.h"
 
@@ -136,14 +137,18 @@ nlohmann::json CSandwichShop::save() const
     o["goldAvailable"] = _goldAvailable;
 
     nlohmann::json ingredients = nlohmann::json::array();
-
     for (auto i : _ingredientStore)
     {
         ingredients.push_back(i);
     }
-
     o["ingredientStore"] = ingredients;
 
+    nlohmann::json sandwiches = nlohmann::json::array();
+    for (auto s : _sandwiches)
+    {
+        CSaveFile::addGameObject(sandwiches, s);
+    }
+    o["sandwiches"] = sandwiches;
     return o;
 }
 

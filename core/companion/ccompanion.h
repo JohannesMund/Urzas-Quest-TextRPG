@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cgamestateobject.h"
 #include "colorize.h"
 #include "ressources.h"
 
@@ -7,9 +8,11 @@
 #include <string>
 
 class CEnemy;
-class CCompanion
+class CCompanion : public CGameStateObject
 {
 public:
+    CCompanion(const std::string& objectName);
+
     virtual ~CCompanion()
     {
     }
@@ -28,6 +31,8 @@ public:
     virtual int shield(const int i) = 0;
 
     void evolve();
+
+    virtual nlohmann::json save() const override;
 
 protected:
     bool fireDefaultAction() const;

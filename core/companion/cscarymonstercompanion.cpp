@@ -4,7 +4,7 @@
 
 #include <format>
 
-CScaryMonsterCompanion::CScaryMonsterCompanion()
+CScaryMonsterCompanion::CScaryMonsterCompanion() : CCompanion("CScaryMonsterCompanion")
 {
 }
 

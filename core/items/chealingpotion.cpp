@@ -7,7 +7,7 @@
 
 #include <format>
 
-CHealingPotion::CHealingPotion(const PotionSize& size) : CItem()
+CHealingPotion::CHealingPotion(const PotionSize& size) : CItem("CHealingPotion")
 {
     std::string name = "Potion of Healing";
     _description = "A fancy flask, made of glass with a shimmering, deep-red potion with shiny pink clouds inside. "
@@ -54,6 +54,13 @@ void CHealingPotion::useFromBattle(CEnemy*)
 {
     Console::printLn("It is in the middle of a hot fight, but you need healing.");
     use();
+}
+
+nlohmann::json CHealingPotion::save() const
+{
+    nlohmann::json o = CItem::save();
+    o["size"] = _size;
+    return o;
 }
 
 void CHealingPotion::use()

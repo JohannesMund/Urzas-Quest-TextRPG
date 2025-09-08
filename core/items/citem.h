@@ -1,15 +1,16 @@
 #pragma once
 
+#include "cgamestateobject.h"
+
 #include <functional>
 #include <string>
 
 class CEnemy;
-
 /**
  * @brief The CItem class
  * Represents one Item. Virtual, Must be derived for full power
  */
-class CItem
+class CItem : public CGameStateObject
 {
 public:
     using ItemFilter = std::function<bool(const CItem*)>;
@@ -18,7 +19,7 @@ public:
      * @brief CItem
      * Constructor
      */
-    CItem();
+    CItem(const std::string& objectName);
 
     virtual ~CItem()
     {
@@ -190,6 +191,8 @@ public:
      @return a filter function to filter items with death effect from std containers
      */
     static ItemFilter deathEffectFilter();
+
+    nlohmann::json save() const override;
 
 protected:
     std::string _name;

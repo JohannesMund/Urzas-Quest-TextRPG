@@ -5,7 +5,7 @@
 
 #include <format>
 
-CAttackerCompanion::CAttackerCompanion()
+CAttackerCompanion::CAttackerCompanion() : CCompanion("CAttackCompanion")
 {
 }
 

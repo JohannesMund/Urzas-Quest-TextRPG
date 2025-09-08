@@ -5,7 +5,7 @@
 
 #include <format>
 
-CBomb::CBomb(const BombSize& size)
+CBomb::CBomb(const BombSize& size) : CItem("CBomb")
 {
     std::string name;
     switch (size)
@@ -64,4 +64,11 @@ void CBomb::useFromBattle(CEnemy* enemy)
 
     Console::printLn(std::format("{} is hit for {} damage.", enemy->name(), damage));
     enemy->dealDamage(damage);
+}
+
+nlohmann::json CBomb::save() const
+{
+    nlohmann::json o = CItem::save();
+    o["size"] = _size;
+    return o;
 }
