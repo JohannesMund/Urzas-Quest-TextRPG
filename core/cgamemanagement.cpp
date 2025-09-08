@@ -234,16 +234,15 @@ void CGameManagement::executeTurn()
             Console::hr();
             Console::printLn("Quit game?", Console::EAlignment::eCenter);
             Console::hr();
-            Console::br();
-            CMenu menu;
 
+            CMenu menu;
             CMenu::Action saveAction = {"Save", "[S]ave", 's'};
             CMenu::Action cancelAction = {"Cancel", "[C]cancel", 'c'};
             CMenu::Action quitAction = {"Quit without saving", "[Q]uit without saving", 'q'};
-
             menu.addMenuGroup({saveAction, quitAction});
             menu.addMenuGroup({cancelAction});
             auto reply = menu.execute();
+
             if (reply == quitAction)
             {
                 throw CGameOverException();
@@ -388,7 +387,6 @@ bool CGameManagement::save()
         Console::printLn("A save game exists.", Console::EAlignment::eCenter);
         Console::printLn("Overwrite?", Console::EAlignment::eCenter);
         Console::hr();
-        Console::br();
 
         if (CMenu::executeYesNoMenu() != CMenu::yes())
         {
