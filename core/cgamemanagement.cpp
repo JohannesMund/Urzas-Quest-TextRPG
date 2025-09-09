@@ -374,6 +374,7 @@ bool CGameManagement::load()
 
     CSaveFile saveGame;
     saveGame.loadGameObject(&_player);
+    saveGame.loadGameObject(_companion);
     return false;
 }
 
