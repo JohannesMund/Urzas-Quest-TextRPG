@@ -11,7 +11,7 @@ class CEnemy;
 class CCompanion : public CGameStateObject
 {
 public:
-    CCompanion(const std::string& objectName);
+    CCompanion(const std::string_view& objectName);
 
     virtual ~CCompanion()
     {
@@ -33,6 +33,7 @@ public:
     void evolve();
 
     virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json& obj) override;
 
 protected:
     bool fireDefaultAction() const;

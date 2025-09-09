@@ -47,6 +47,7 @@ public:
     void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
 
     virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json& json) override;
 
 private:
     CPlayer();

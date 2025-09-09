@@ -9,8 +9,7 @@
 
 #include <format>
 
-
-CLeilaCompanion::CLeilaCompanion() : CSupportCompanion(LeilaRescueRessources::moduleName())
+CLeilaCompanion::CLeilaCompanion() : CSupportCompanion(LeilaRescueRessources::moduleName(), "CLeilaCompanion")
 {
     _level = 5;
 }
@@ -52,7 +51,6 @@ void CLeilaCompanion::postBattle(CEnemy*)
         Console::printLn(std::format("{} looks victorious.", name()));
     }
 }
-
 
 void CLeilaCompanion::joinText() const
 {

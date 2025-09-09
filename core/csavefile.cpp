@@ -10,6 +10,8 @@
 #include <filesystem>
 #include <fstream>
 
+const std::string CSaveFile::CommonName_ModuleName = "moduleName";
+
 CSaveFile::CSaveFile()
 {
     addObject("FSpec", {{"Name", "UrzasQuest TextRPG"}, {"version", 1}});
@@ -33,11 +35,6 @@ bool CSaveFile::saveGameAvailable()
     return std::filesystem::exists(path);
 }
 
-void CSaveFile::addGameObject(const CGameStateObject& obj)
-{
-    addObject(obj.getObjectName(), obj.save());
-}
-
 void CSaveFile::addGameObject(const CGameStateObject* obj)
 {
     if (obj == nullptr)
@@ -47,10 +44,22 @@ void CSaveFile::addGameObject(const CGameStateObject* obj)
     addObject(obj->getObjectName(), obj->save());
 }
 
+bool CSaveFile::loadGameObject(CGameStateObject* obj)
+{
+    auto val = getObject(obj->getObjectName());
+
+    if (val.has_value())
+    {
+        return obj->load(*val);
+    }
+
+    return false;
+}
+
 void CSaveFile::addGameObject(nlohmann::json& gameObjectArray, const CGameStateObject* obj)
 {
     auto o = obj->save();
-    o["ClassName"] = obj->getObjectName();
+    CGameStateObject::addObjectNameToJson(o, obj);
     gameObjectArray.push_back(o);
 }
 
@@ -81,4 +90,15 @@ bool CSaveFile::dump()
 void CSaveFile::addObject(const std::string& key, const nlohmann::json& object)
 {
     _saveGame[key] = object;
+}
+
+std::optional<nlohmann::json> CSaveFile::getObject(const std::string& key)
+{
+
+    if (_saveGame.contains(key))
+    {
+        return _saveGame[key];
+    }
+
+    return {};
 }

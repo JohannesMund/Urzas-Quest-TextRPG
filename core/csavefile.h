@@ -11,6 +11,7 @@ class CGameStateObject;
 class CSaveFile
 {
 public:
+    static const std::string CommonName_ModuleName;
 
     /**
      * @brief is a save game available?
@@ -24,8 +25,14 @@ public:
      * @brief adds a game state object  to the save file
      * @remark key name is the objectName of obj
      */
-    void addGameObject(const CGameStateObject& obj);
     void addGameObject(const CGameStateObject* obj);
+
+    /**
+     * @brief loads a game object from json
+     * @remark calls the load() from the game object.
+     * @remark game object must be initialized
+     */
+    bool loadGameObject(CGameStateObject* obj);
 
     /**
      * @brief adds a game state object a given array
@@ -37,10 +44,10 @@ public:
      * @brief writes the save game
      * @remark existing file is overwritten
      */
-
     bool dump();
 
 private:
     void addObject(const std::string& key, const nlohmann::json& object);
+    std::optional<nlohmann::json> getObject(const std::string& key);
     nlohmann::json _saveGame;
 };

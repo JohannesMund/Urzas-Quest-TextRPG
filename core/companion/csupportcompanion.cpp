@@ -1,12 +1,13 @@
 #include "csupportcompanion.h"
 #include "console.h"
+#include "csavefile.h"
 #include "ressources.h"
 
 #include <format>
 #include <nlohmann/json.hpp>
 
-CSupportCompanion::CSupportCompanion(const std::string_view& moduleName) :
-    CCompanion("CSupportCompanion"),
+CSupportCompanion::CSupportCompanion(const std::string_view& moduleName, const std::string_view& objectName) :
+    CCompanion(objectName),
     _moduleName(moduleName)
 {
 }
@@ -85,6 +86,17 @@ void CSupportCompanion::leaveText() const
 nlohmann::json CSupportCompanion::save() const
 {
     nlohmann::json o = CCompanion::save();
-    o["moduleName"] = _moduleName;
+    o[CSaveFile::CommonName_ModuleName] = _moduleName;
     return o;
+}
+
+bool CSupportCompanion::load(const nlohmann::json& json)
+{
+    _moduleName = json.value<std::string>(CSaveFile::CommonName_ModuleName, "");
+    if (_moduleName.empty())
+    {
+        return false;
+    }
+
+    return CCompanion::load(json);
 }

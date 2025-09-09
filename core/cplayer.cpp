@@ -5,6 +5,7 @@
 #include "citem.h"
 #include "cmenu.h"
 #include "colorize.h"
+#include "companionfactory.h"
 #include "console.h"
 #include "csavefile.h"
 #include "csupportcompanion.h"
@@ -14,6 +15,7 @@
 #include <algorithm>
 #include <cmath>
 #include <format>
+#include <nlohmann/json.hpp>
 #include <string>
 
 CPlayer::CPlayer() : CGameStateObject("Player")
@@ -344,23 +346,47 @@ void CPlayer::removeSupportCompanionsByModuleName(const std::string_view& module
 
 nlohmann::json CPlayer::save() const
 {
-    nlohmann::json o;
+    nlohmann::json json;
 
-    o["hp"] = _hp;
-    o["maxHp"] = _maxHp;
-    o["gold"] = _gold;
-    o["level"] = _level;
-    o["xp"] = _xp;
-    o["initiative"] = _initiative;
+    json["hp"] = _hp;
+    json["maxHp"] = _maxHp;
+    json["gold"] = _gold;
+    json["level"] = _level;
+    json["xp"] = _xp;
+    json["initiative"] = _initiative;
 
     nlohmann::json supporters = nlohmann::json::array();
     for (auto s : _supporters)
     {
         CSaveFile::addGameObject(supporters, s);
     }
-    o["supporters"] = supporters;
+    json["supporters"] = supporters;
 
-    return o;
+    return json;
+}
+
+bool CPlayer::load(const nlohmann::json& json)
+{
+    _hp = json.value<int>("hp", 1);
+    _maxHp = json.value<int>("maxHp", 1);
+    _gold = json.value<int>("gold", 0);
+    _level = json.value<unsigned int>("level", 0);
+    _xp = json.value<unsigned int>("xp", 0);
+    _initiative = json.value<unsigned int>("initiative", 1);
+
+    if (json.contains("supporters") and json["supporters"].is_array())
+    {
+        for (auto s : json["supporters"])
+        {
+            auto c = CompanionFactory::loadSupportCompanionFromSaveGame(s);
+            if (c != nullptr)
+            {
+                _supporters.push_back(c);
+            }
+        }
+    }
+
+    return false;
 }
 
 void CPlayer::removeAllSupportCompanions()

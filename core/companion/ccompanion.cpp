@@ -7,8 +7,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-
-CCompanion::CCompanion(const std::string& objectName) : CGameStateObject(objectName)
+CCompanion::CCompanion(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }
 
@@ -61,6 +60,13 @@ nlohmann::json CCompanion::save() const
     o["description"] = _description;
     o["level"] = _level;
     return o;
+}
+
+bool CCompanion::load(const nlohmann::json& obj)
+{
+    _description = obj.value<std::string>("description", "");
+    _level = obj.value("level", 0);
+    return true;
 }
 
 bool CCompanion::fireDefaultAction() const

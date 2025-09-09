@@ -371,6 +371,9 @@ bool CGameManagement::load()
     {
         return false;
     }
+
+    CSaveFile saveGame;
+    saveGame.loadGameObject(&_player);
     return false;
 }
 
@@ -395,11 +398,11 @@ bool CGameManagement::save()
     }
 
     CSaveFile savegame;
-    savegame.addGameObject(_player);
-    savegame.addGameObject(_inventory);
-    savegame.addGameObject(_map);
+    savegame.addGameObject(&_player);
+    savegame.addGameObject(&_inventory);
+    savegame.addGameObject(&_map);
     savegame.addGameObject(_companion);
-    savegame.addGameObject(_progression);
+    savegame.addGameObject(&_progression);
     return savegame.dump();
 }
 

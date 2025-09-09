@@ -14,7 +14,7 @@ public:
      * @remark Must be a unique name for each class.
      * @remark Every base class must implement this.
      */
-    CGameStateObject(const std::string& objectName);
+    CGameStateObject(const std::string_view& objectName);
 
     /**
      * @brief returns the object name
@@ -27,7 +27,15 @@ public:
      * @return a json object with the state of the class
      */
     virtual nlohmann::json save() const = 0;
+    virtual bool load(const nlohmann::json&)
+    {
+        return true;
+    };
+
+    static std::string getObjectNameFromJson(const nlohmann::json& json);
+    static void addObjectNameToJson(nlohmann::json& json, const CGameStateObject* object);
 
 private:
     const std::string _objectName;
+    static const std::string _objectNameTag;
 };
