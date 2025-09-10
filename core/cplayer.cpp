@@ -18,7 +18,7 @@
 #include <nlohmann/json.hpp>
 #include <string>
 
-CPlayer::CPlayer() : CGameStateObject("Player")
+CPlayer::CPlayer() : CGameStateObject(TagNames::Player::player)
 {
     _maxHp = Ressources::Config::maxHp;
     _hp = Ressources::Config::maxHp;
@@ -348,35 +348,35 @@ nlohmann::json CPlayer::save() const
 {
     nlohmann::json json;
 
-    json["hp"] = _hp;
-    json["maxHp"] = _maxHp;
-    json["gold"] = _gold;
-    json["level"] = _level;
-    json["xp"] = _xp;
-    json["initiative"] = _initiative;
+    json[TagNames::Player::hp] = _hp;
+    json[TagNames::Player::maxHp] = _maxHp;
+    json[TagNames::Player::gold] = _gold;
+    json[TagNames::Player::level] = _level;
+    json[TagNames::Player::xp] = _xp;
+    json[TagNames::Player::initiative] = _initiative;
 
     nlohmann::json supporters = nlohmann::json::array();
     for (auto s : _supporters)
     {
         CSaveFile::addGameObject(supporters, s);
     }
-    json["supporters"] = supporters;
+    json[TagNames::Player::supporters] = supporters;
 
     return json;
 }
 
 bool CPlayer::load(const nlohmann::json& json)
 {
-    _hp = json.value<int>("hp", 1);
-    _maxHp = json.value<int>("maxHp", 1);
-    _gold = json.value<int>("gold", 0);
-    _level = json.value<unsigned int>("level", 0);
-    _xp = json.value<unsigned int>("xp", 0);
-    _initiative = json.value<unsigned int>("initiative", 1);
+    _hp = json.value<int>(TagNames::Player::hp, 1);
+    _maxHp = json.value<int>(TagNames::Player::maxHp, 1);
+    _gold = json.value<int>(TagNames::Player::gold, 0);
+    _level = json.value<unsigned int>(TagNames::Player::level, 0);
+    _xp = json.value<unsigned int>(TagNames::Player::xp, 0);
+    _initiative = json.value<unsigned int>(TagNames::Player::initiative, 1);
 
     if (json.contains("supporters") and json["supporters"].is_array())
     {
-        for (auto s : json["supporters"])
+        for (auto s : json[TagNames::Player::supporters])
         {
             auto c = CompanionFactory::loadSupportCompanionFromSaveGame(s);
             if (c != nullptr)

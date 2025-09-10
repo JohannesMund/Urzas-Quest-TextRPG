@@ -2,8 +2,6 @@
 
 #include <nlohmann/json.hpp>
 
-const std::string CGameStateObject::_objectNameTag = "objectName";
-
 CGameStateObject::CGameStateObject(const std::string_view& objectName) : _objectName(objectName)
 {
 }
@@ -15,7 +13,7 @@ std::string CGameStateObject::getObjectName() const
 
 std::string CGameStateObject::getObjectNameFromJson(const nlohmann::json& json)
 {
-    return json.value<std::string>(_objectNameTag, "");
+    return json.value<std::string>(TagNames::Common::objectName, "");
 }
 
 void CGameStateObject::addObjectNameToJson(nlohmann::json& json, const CGameStateObject* object)
@@ -25,5 +23,5 @@ void CGameStateObject::addObjectNameToJson(nlohmann::json& json, const CGameStat
         return;
     }
 
-    json[_objectNameTag] = object->getObjectName();
+    json[TagNames::Common::objectName] = object->getObjectName();
 }

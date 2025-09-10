@@ -23,7 +23,7 @@ const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eN
                                                                 {EDirections::eEast, "East"},
                                                                 {EDirections::eNone, "None"}};
 
-CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject("Map")
+CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject(TagNames::Map::map)
 {
     for (unsigned int x = 0; x < height; x++)
     {
@@ -391,12 +391,11 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
-
 nlohmann::json CMap::save() const
-
 {
     nlohmann::json mapState;
-    mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};
+    mapState[TagNames::Map::playerPosition] = {{TagNames::Common::x, _playerPosition.x},
+                                               {TagNames::Common::y, _playerPosition.y}};
 
     nlohmann::json rooms = nlohmann::json::array();
 
@@ -411,7 +410,7 @@ nlohmann::json CMap::save() const
         rooms.push_back(rowArray);
     }
 
-    mapState["map"] = rooms;
+    mapState[TagNames::Map::roomMatrix] = rooms;
     return mapState;
 }
 

@@ -1,4 +1,6 @@
 #pragma once
+#include "cgamestatetagnames.h"
+
 #include <nlohmann/json_fwd.hpp>
 #include <string>
 
@@ -37,5 +39,4 @@ public:
 
 private:
     const std::string _objectName;
-    static const std::string _objectNameTag;
 };

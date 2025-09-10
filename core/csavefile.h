@@ -11,8 +11,6 @@ class CGameStateObject;
 class CSaveFile
 {
 public:
-    static const std::string CommonName_ModuleName;
-
     /**
      * @brief is a save game available?
      * @remark just looks in the destination folder whether there is a file with the right name
@@ -47,7 +45,7 @@ public:
     bool dump();
 
 private:
-    void addObject(const std::string& key, const nlohmann::json& object);
-    std::optional<nlohmann::json> getObject(const std::string& key);
+    void addObject(const std::string_view& key, const nlohmann::json& object);
+    std::optional<nlohmann::json> getObject(const std::string_view& key);
     nlohmann::json _saveGame;
 };

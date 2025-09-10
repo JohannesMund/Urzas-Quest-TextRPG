@@ -2,6 +2,15 @@
 
 #include <string>
 
+namespace TagNames
+{
+namespace LeilaRescue
+{
+constexpr std::string_view LeilaCompanion = "CLeilaCompanion";
+constexpr std::string_view GuardCompanion = "CGuardCompanion";
+} // namespace LeilaRescue
+} // namespace TagNames
+
 namespace LeilaRescueRessources
 {
 void initModule();

@@ -10,11 +10,10 @@
 #include <filesystem>
 #include <fstream>
 
-const std::string CSaveFile::CommonName_ModuleName = "moduleName";
-
 CSaveFile::CSaveFile()
 {
-    addObject("FSpec", {{"Name", "UrzasQuest TextRPG"}, {"version", 1}});
+    addObject(TagNames::FileSpec::fileSpec,
+              {{TagNames::FileSpec::name, "UrzasQuest TextRPG"}, {TagNames::FileSpec::version, 1}});
 
     nlohmann::json gameState;
     auto now = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now());
@@ -87,12 +86,12 @@ bool CSaveFile::dump()
     return true;
 }
 
-void CSaveFile::addObject(const std::string& key, const nlohmann::json& object)
+void CSaveFile::addObject(const std::string_view& key, const nlohmann::json& object)
 {
     _saveGame[key] = object;
 }
 
-std::optional<nlohmann::json> CSaveFile::getObject(const std::string& key)
+std::optional<nlohmann::json> CSaveFile::getObject(const std::string_view& key)
 {
 
     if (_saveGame.contains(key))

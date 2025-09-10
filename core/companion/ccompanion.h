@@ -2,6 +2,7 @@
 
 #include "cgamestateobject.h"
 #include "colorize.h"
+#include "companionfactory.h"
 #include "ressources.h"
 
 #include <functional>
@@ -10,9 +11,10 @@
 class CEnemy;
 class CCompanion : public CGameStateObject
 {
+    friend CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& json);
+
 public:
     CCompanion(const std::string_view& objectName);
-
     virtual ~CCompanion()
     {
     }
@@ -32,10 +34,10 @@ public:
 
     void evolve();
 
+protected:
     virtual nlohmann::json save() const override;
     virtual bool load(const nlohmann::json& obj) override;
 
-protected:
     bool fireDefaultAction() const;
 
     std::string _description;

@@ -57,15 +57,15 @@ void CCompanion::evolve()
 nlohmann::json CCompanion::save() const
 {
     nlohmann::json o;
-    o["description"] = _description;
-    o["level"] = _level;
+    o[TagNames::Companion::description] = _description;
+    o[TagNames::Companion::level] = _level;
     return o;
 }
 
 bool CCompanion::load(const nlohmann::json& obj)
 {
-    _description = obj.value<std::string>("description", "");
-    _level = obj.value("level", 0);
+    _description = obj.value<std::string>(TagNames::Companion::description, "");
+    _level = obj.value(TagNames::Companion::level, 0);
     return true;
 }
 

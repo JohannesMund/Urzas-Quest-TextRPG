@@ -86,13 +86,13 @@ void CSupportCompanion::leaveText() const
 nlohmann::json CSupportCompanion::save() const
 {
     nlohmann::json o = CCompanion::save();
-    o[CSaveFile::CommonName_ModuleName] = _moduleName;
+    o[TagNames::Common::moduleName] = _moduleName;
     return o;
 }
 
 bool CSupportCompanion::load(const nlohmann::json& json)
 {
-    _moduleName = json.value<std::string>(CSaveFile::CommonName_ModuleName, "");
+    _moduleName = json.value<std::string>(TagNames::Common::moduleName, "");
     if (_moduleName.empty())
     {
         return false;

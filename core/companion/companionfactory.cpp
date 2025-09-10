@@ -6,6 +6,7 @@
 #include "cscarymonstercompanion.h"
 #include "modules/leilarescue/companions/cguardcompanion.h"
 #include "modules/leilarescue/companions/cleilacompanion.h"
+#include "modules/leilarescue/moduleressources.h"
 
 #include "ressources.h"
 
@@ -14,7 +15,7 @@
 namespace
 {
 
-bool compareObjectName(const std::string& objectName, const nlohmann::json& json)
+bool compareObjectName(const std::string_view& objectName, const nlohmann::json& json)
 {
     const auto name = CGameStateObject::getObjectNameFromJson(json);
     if (name.empty())
@@ -29,22 +30,23 @@ bool compareObjectName(const std::string& objectName, const nlohmann::json& json
 
 CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& json)
 {
-    const auto isObjectName = [&json](const std::string& objectName) { return compareObjectName(objectName, json); };
+    const auto isObjectName = [&json](const std::string_view& objectName)
+    { return compareObjectName(objectName, json); };
     CCompanion* newCompanion = nullptr;
 
-    if (isObjectName("CAttackerCompanion"))
+    if (isObjectName(TagNames::Companion::attackCompanion))
     {
         newCompanion = new CAttackerCompanion();
     }
-    else if (isObjectName("CDefenderCompanion"))
+    else if (isObjectName(TagNames::Companion::defenderCompanion))
     {
         newCompanion = new CDefenderCompanion;
     }
-    else if (isObjectName("CHealerCompanion"))
+    else if (isObjectName(TagNames::Companion::healerCompanion))
     {
         newCompanion = new CHealerCompanion;
     }
-    else if (isObjectName("CScaryMonsterCompanion"))
+    else if (isObjectName(TagNames::Companion::scaryMonsterCompanion))
     {
         newCompanion = new CScaryMonsterCompanion;
     }
@@ -59,14 +61,15 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
 
 CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nlohmann::json& json)
 {
-    const auto isObjectName = [&json](const std::string& objectName) { return compareObjectName(objectName, json); };
+    const auto isObjectName = [&json](const std::string_view& objectName)
+    { return compareObjectName(objectName, json); };
     CSupportCompanion* newCompanion = nullptr;
 
-    if (isObjectName("CLeilyCompanion"))
+    if (isObjectName(TagNames::LeilaRescue::LeilaCompanion))
     {
         newCompanion = new CLeilaCompanion;
     }
-    else if (isObjectName("CGuardCompanion"))
+    else if (isObjectName(TagNames::LeilaRescue::GuardCompanion))
     {
         newCompanion = new CGuardCompanion("");
     }

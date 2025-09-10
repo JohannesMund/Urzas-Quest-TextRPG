@@ -1,6 +1,6 @@
 include(core/core.cmake)
 include(modules/modules.cmake)
-include (FetchContent)
+include(FetchContent)
 include(GNUInstallDirs)
 
 cmake_minimum_required(VERSION 3.11)
