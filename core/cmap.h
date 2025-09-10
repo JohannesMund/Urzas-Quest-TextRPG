@@ -2,10 +2,10 @@
 
 #include <functional>
 #include <map>
+#include <nlohmann/json.hpp>
 #include <optional>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 #include "cgamestateobject.h"
 
@@ -81,7 +81,8 @@ public:
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+    void setTaskToRandomRoom(
+        CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
     virtual nlohmann::json save() const override;
 

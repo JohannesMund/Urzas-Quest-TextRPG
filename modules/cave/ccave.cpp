@@ -11,7 +11,7 @@
 
 #include <format>
 
-CCave::CCave()
+CCave::CCave() : CRoom(TagNames::Cave::cave)
 {
     _showInFogOfWar = true;
     _encounterType = CEncounter::EEncounterType::eNone;
@@ -20,7 +20,7 @@ CCave::CCave()
 
 void CCave::execute()
 {
-    CField::execute();
+    CRoom::execute();
 
     if (_isOpen)
     {
@@ -84,7 +84,20 @@ bool CCave::isTaskPossible(const std::string_view& moduleName) const
         return moduleName.compare(CaveRessources::moduleName()) == 0;
     }
 
-    return CField::isTaskPossible(moduleName);
+    return CRoom::isTaskPossible(moduleName);
+}
+
+nlohmann::json CCave::save() const
+{
+    auto o = CRoom::save();
+    o[TagNames::Cave::isOpen] = _isOpen;
+    return o;
+}
+
+bool CCave::load(const nlohmann::json& json)
+{
+    _isOpen = json.value<bool>(TagNames::Cave::isOpen, false);
+    return CRoom::load(json);
 }
 
 void CCave::initDungeon()

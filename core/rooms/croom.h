@@ -9,7 +9,7 @@ class CTask;
 class CRoom : public CGameStateObject
 {
 public:
-    CRoom(const std::string& objectName);
+    CRoom(const std::string_view& objectName);
     virtual ~CRoom();
 
     void blockPath(const CMap::EDirections dir, const bool block);
@@ -60,4 +60,5 @@ protected:
     std::string _moduleName;
 
     virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json& json) override;
 };

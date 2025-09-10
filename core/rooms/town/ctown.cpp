@@ -9,7 +9,7 @@
 #include <format>
 #include <optional>
 
-CTown::CTown(const std::string& objectName) : CRoom(objectName)
+CTown::CTown(const std::string_view& objectName) : CRoom(objectName)
 {
     auto town = Ressources::Rooms::getRandomTown();
     _name = town.first;
@@ -122,4 +122,10 @@ nlohmann::json CTown::save() const
     nlohmann::json o = CRoom::save();
     o["name"] = _name;
     return o;
+}
+
+bool CTown::load(const nlohmann::json& json)
+{
+    _name = json.value<std::string>(TagNames::Room::name, "");
+    return CRoom::load(json);
 }

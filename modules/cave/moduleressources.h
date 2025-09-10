@@ -4,10 +4,20 @@
 #include <utility>
 #include <vector>
 
+#include "cgamestatetagnames.h"
+
+namespace TagNames
+{
+namespace Cave
+{
+constexpr std::string_view cave = "Cave";
+constexpr std::string_view isOpen = TagNames::Common::isOpen;
+} // namespace Cave
+} // namespace TagNames
+
 class CRoom;
 namespace CaveRessources
 {
-
 void initModule();
 void deInitModule();
 void initWorldMap(std::vector<CRoom*>& rooms);

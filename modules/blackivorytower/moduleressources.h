@@ -3,6 +3,18 @@
 #include <string>
 #include <vector>
 
+#include "cgamestatetagnames.h"
+
+namespace TagNames
+{
+namespace BlackIvoryTower
+{
+constexpr std::string_view blackIvoryTower = "BlackIvoryTower";
+constexpr std::string_view hadADoener = "HadADoener";
+constexpr std::string_view isOpen = TagNames::Common::isOpen;
+} // namespace BlackIvoryTower
+} // namespace TagNames
+
 class CRoom;
 namespace BlackIvoryTowerRessources
 {

@@ -13,7 +13,7 @@
 
 #include <format>
 
-CBlackIvoryTower::CBlackIvoryTower() : CField()
+CBlackIvoryTower::CBlackIvoryTower() : CRoom(TagNames::BlackIvoryTower::blackIvoryTower)
 {
     _encounterType = CEncounter::EEncounterType::eNone;
     _isRandomTaskPossible = false;
@@ -23,7 +23,7 @@ CBlackIvoryTower::CBlackIvoryTower() : CField()
 void CBlackIvoryTower::execute()
 {
 
-    CField::execute();
+    CRoom::execute();
 
     printHeader(0);
     Console::printLn(std::format("The tower is at least 250 feet hight and {}pich black{}, the walls are plated with "
@@ -87,6 +87,21 @@ std::string CBlackIvoryTower::fgColor() const
 char CBlackIvoryTower::getMapSymbol() const
 {
     return 'I';
+}
+
+nlohmann::json CBlackIvoryTower::save() const
+{
+    auto o = CRoom::save();
+    o[TagNames::BlackIvoryTower::isOpen] = _isOpen;
+    o[TagNames::BlackIvoryTower::hadADoener] = _hadADoener;
+    return o;
+}
+
+bool CBlackIvoryTower::load(const nlohmann::json& json)
+{
+    _isOpen = json.value<bool>(TagNames::BlackIvoryTower::isOpen, false);
+    _hadADoener = json.value<bool>(TagNames::BlackIvoryTower::hadADoener, false);
+    return CRoom::load(json);
 }
 
 CMap::RoomFilter CBlackIvoryTower::towerFilter()

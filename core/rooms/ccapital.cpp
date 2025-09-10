@@ -3,7 +3,7 @@
 #include "console.h"
 #include "ressources.h"
 
-CCapital::CCapital() : CTown("CCaptial")
+CCapital::CCapital() : CTown(TagNames::Room::capital)
 {
     auto city = Ressources::Rooms::getCapital();
     _description = city.second;
@@ -47,8 +47,14 @@ CMap::RoomFilter CCapital::capitalFilter()
 nlohmann::json CCapital::save() const
 {
     nlohmann::json o = CTown::save();
-    o["open"] = _open;
+    o[TagNames::Room::isOpen] = _open;
     return o;
+}
+
+bool CCapital::load(const nlohmann::json& json)
+{
+    _seen = json.value<bool>(TagNames::Room::isOpen, false);
+    return CTown::load(json);
 }
 
 char CCapital::getMapSymbol() const

@@ -7,7 +7,7 @@
 
 #include <format>
 
-CStartingRoom::CStartingRoom() : CField()
+CStartingRoom::CStartingRoom() : CField(TagNames::Room::startingRoom)
 {
     _encounterType = CEncounter::EEncounterType::eNone;
     _isRandomTaskPossible = false;

@@ -12,6 +12,7 @@ constexpr std::string_view description = "description";
 constexpr std::string_view level = "level";
 constexpr std::string_view x = "coord-x";
 constexpr std::string_view y = "coord-y";
+constexpr std::string_view isOpen = "isOpen";
 } // namespace Common
 
 namespace FileSpec
@@ -51,4 +52,25 @@ constexpr std::string_view map = "Map";
 constexpr std::string_view playerPosition = "playerPosition";
 constexpr std::string_view roomMatrix = "roomMatrix";
 } // namespace Map
+
+namespace Room
+{
+constexpr std::string_view field = "Field";
+constexpr std::string_view town = "Town";
+constexpr std::string_view capital = "Capital";
+constexpr std::string_view injuredPet = "InjuredPet";
+constexpr std::string_view startingRoom = "startingRoom";
+
+constexpr std::string_view pathNorth = "pathNorth";
+constexpr std::string_view pathEast = "pathEast";
+constexpr std::string_view pathSouth = "pathSouth";
+constexpr std::string_view pathWest = "pathWest";
+constexpr std::string_view showInFogOfWar = "showInFogOfWar";
+constexpr std::string_view seen = "seen";
+constexpr std::string_view description = TagNames::Common::description;
+constexpr std::string_view name = TagNames::Common::name;
+constexpr std::string_view isOpen = TagNames::Common::isOpen;
+constexpr std::string_view petIsDead = "petIsDead";
+} // namespace Room
+
 } // namespace TagNames
