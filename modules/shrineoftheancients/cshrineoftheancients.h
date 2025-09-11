@@ -14,6 +14,10 @@ public:
     virtual std::string fgColor() const override;
     virtual std::string bgColor() const override;
 
+protected:
+    virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json& json) override;
+
 private:
     CGameProgression::EGameStage _seenDuringPhase = CGameProgression::EGameStage::eNone;
 

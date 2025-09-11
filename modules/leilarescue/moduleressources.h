@@ -2,6 +2,8 @@
 
 #include <string>
 
+class CSupportCompanion;
+
 namespace TagNames
 {
 namespace LeilaRescue
@@ -17,6 +19,8 @@ void initModule();
 void deInitModule();
 
 void questAccepted();
+
+CSupportCompanion* companionFactory(const std::string_view& name);
 
 std::string moduleName();
 std::string questLog();

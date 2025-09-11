@@ -18,7 +18,9 @@ public:
 
     static CMap::RoomFilter sandwichShopFilter();
 
+protected:
     virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json& json) override;
 
 private:
     void printHeader();

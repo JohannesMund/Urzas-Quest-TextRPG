@@ -13,6 +13,9 @@ constexpr std::string_view level = "level";
 constexpr std::string_view x = "coord-x";
 constexpr std::string_view y = "coord-y";
 constexpr std::string_view isOpen = "isOpen";
+constexpr std::string_view gold = "gold";
+constexpr std::string_view turns = "turns";
+constexpr std::string_view count = "count";
 } // namespace Common
 
 namespace FileSpec
@@ -27,7 +30,7 @@ namespace Player
 constexpr std::string_view player = "Player";
 constexpr std::string_view hp = "hp";
 constexpr std::string_view maxHp = "maxHp";
-constexpr std::string_view gold = "gold";
+constexpr std::string_view gold = TagNames::Common::gold;
 constexpr std::string_view xp = "xp";
 constexpr std::string_view initiative = "initiative";
 constexpr std::string_view supporters = "supporters";

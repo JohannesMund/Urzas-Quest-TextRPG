@@ -6,10 +6,11 @@
 #include "ctask.h"
 #include "fishingvillage/moduleressources.h"
 
+#include "cfishingvillage.h"
 #include <format>
 #include <optional>
 
-CFishingVillage::CFishingVillage() : CRoom("CFishingVillage")
+CFishingVillage::CFishingVillage() : CRoom(TagNames::FishingVille::fishingVille)
 {
     _description = "";
 

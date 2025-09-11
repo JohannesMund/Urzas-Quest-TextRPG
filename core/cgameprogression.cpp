@@ -416,12 +416,17 @@ void CGameProgression::registerModule(const Module& module)
     _registeredModules.push_back(module);
 }
 
-void CGameProgression::registerModule(const std::string_view& name,
-                                      const EGameStage neededForStage,
-                                      std::function<std::string()> questLogFunction,
-                                      std::function<void()> initFunction,
-                                      std::function<void()> deInitFunction,
-                                      std::function<void(std::vector<CRoom*>&)> initWorldMapFunction)
+void CGameProgression::registerModule(
+    const std::string_view& name,
+    const EGameStage neededForStage,
+    std::function<std::string()> questLogFunction,
+    std::function<void()> initFunction,
+    std::function<void()> deInitFunction,
+    std::function<void(std::vector<CRoom*>&)> initWorldMapFunction,
+    std::function<CSupportCompanion*(const std::string_view& name)> supportCompanionFactory,
+    std::function<CRoom*(const std::string_view& name)> roomsFactory,
+    std::function<CItem*(const std::string_view& name)> itemFactory)
+
 {
     Module module;
     module.moduleName = name;
@@ -430,6 +435,9 @@ void CGameProgression::registerModule(const std::string_view& name,
     module.initFunction = initFunction;
     module.deInitFunction = deInitFunction;
     module.initWorldMapFunction = initWorldMapFunction;
+    module.supportCompantonFactory = supportCompanionFactory;
+    module.itemFactory = itemFactory;
+    module.roomFactory = roomsFactory;
     registerModule(module);
 }
 
@@ -454,4 +462,18 @@ nlohmann::json CGameProgression::save() const
     o["finishedModules"] = finishedModules;
 
     return o;
+}
+
+CSupportCompanion* CGameProgression::callModuleSupportCompanionFaction(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto companion = module.supportCompantonFactory(name);
+        if (companion != nullptr)
+        {
+            return companion;
+        }
+    }
+
+    return nullptr;
 }

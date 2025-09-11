@@ -3,6 +3,14 @@
 #include <string>
 #include <vector>
 
+namespace TagNames
+{
+namespace FishingVille
+{
+constexpr std::string_view fishingVille = "fishingVille";
+}
+} // namespace TagNames
+
 class CRoom;
 namespace FishingVillageRessources
 {

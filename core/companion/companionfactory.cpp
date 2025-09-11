@@ -2,6 +2,7 @@
 
 #include "cattackercompanion.h"
 #include "cdefendercompanion.h"
+#include "cgamemanagement.h"
 #include "chealercompanion.h"
 #include "cscarymonstercompanion.h"
 #include "modules/leilarescue/companions/cguardcompanion.h"
@@ -61,19 +62,9 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
 
 CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nlohmann::json& json)
 {
-    const auto isObjectName = [&json](const std::string_view& objectName)
-    { return compareObjectName(objectName, json); };
-    CSupportCompanion* newCompanion = nullptr;
-
-    if (isObjectName(TagNames::LeilaRescue::LeilaCompanion))
-    {
-        newCompanion = new CLeilaCompanion;
-    }
-    else if (isObjectName(TagNames::LeilaRescue::GuardCompanion))
-    {
-        newCompanion = new CGuardCompanion("");
-    }
-
+    CSupportCompanion* newCompanion =
+        CGameManagement::getInstance()->getProgressionInstance()->callModuleSupportCompanionFaction(
+            CGameStateObject::getObjectNameFromJson(json));
     if (newCompanion != nullptr)
     {
         newCompanion->load(json);

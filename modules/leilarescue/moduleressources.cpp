@@ -1,6 +1,8 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
+#include "companions/cguardcompanion.h"
+#include "companions/cleilacompanion.h"
 #include "ressources.h"
 #include "tasks/cfindguardstask.h"
 
@@ -18,6 +20,19 @@ void LeilaRescueRessources::deInitModule()
 void LeilaRescueRessources::questAccepted()
 {
     CGameManagement::getInstance()->placeTaskOnField(new CFindGuardsTask());
+}
+
+CSupportCompanion* LeilaRescueRessources::companionFactory(const std::string_view& name)
+{
+    if (TagNames::LeilaRescue::GuardCompanion.compare(name) == 0)
+    {
+        return new CGuardCompanion("");
+    }
+    if (TagNames::LeilaRescue::LeilaCompanion.compare(name) == 0)
+    {
+        return new CLeilaCompanion();
+    }
+    return nullptr;
 }
 
 std::string LeilaRescueRessources::moduleName()

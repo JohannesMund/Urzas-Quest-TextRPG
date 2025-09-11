@@ -9,7 +9,8 @@
 #include <vector>
 
 class CRoom;
-
+class CSupportCompanion;
+class CItem;
 class CGameProgression : public CGameStateObject
 {
     friend class CGameManagement;
@@ -39,6 +40,19 @@ public:
     static void noInitWorldMapFunction(std::vector<CRoom*>&)
     {
     }
+    static CSupportCompanion* noSupportCompanionFactory(const std::string_view&)
+    {
+        return nullptr;
+    }
+    static CRoom* noRoomFactory(const std::string_view&)
+    {
+        return nullptr;
+    }
+    static CItem* noItemFactory(const std::string_view&)
+    {
+        return nullptr;
+    }
+
     static std::string noQuestLogFunction()
     {
         return std::string{};
@@ -82,10 +96,17 @@ public:
                         std::function<std::string()> questLogFunction = &noQuestLogFunction,
                         std::function<void()> initFunction = &noInitDeInitFunction,
                         std::function<void()> deInitFunction = &noInitDeInitFunction,
-                        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &noInitWorldMapFunction);
+                        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &noInitWorldMapFunction,
+                        std::function<CSupportCompanion*(const std::string_view& name)> supportCompanionsFactory =
+                            &noSupportCompanionFactory,
+                        std::function<CRoom*(const std::string_view& name)> roomsFactory = &noRoomFactory,
+                        std::function<CItem*(const std::string_view& name)> itemsFactory = &noItemFactory);
+
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
     virtual nlohmann::json save() const override;
+
+    CSupportCompanion* callModuleSupportCompanionFaction(const std::string_view& name);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
@@ -98,6 +119,10 @@ private:
         std::function<void()> initFunction;
         std::function<void()> deInitFunction;
         std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
+
+        std::function<CSupportCompanion*(const std::string_view& name)> supportCompantonFactory;
+        std::function<CRoom*(const std::string_view& name)> roomFactory;
+        std::function<CItem*(const std::string_view& name)> itemFactory;
 
         static std::function<bool(const Module)> moduleRegisterNameFilter(const std::string_view& name)
         {

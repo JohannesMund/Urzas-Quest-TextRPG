@@ -8,7 +8,7 @@
 #include "ressources.h"
 
 #include <format>
-CShrineOfTheAncients::CShrineOfTheAncients() : CRoom("CShrineOfTheAnchients")
+CShrineOfTheAncients::CShrineOfTheAncients() : CRoom(TagNames::Shrine::shrine)
 {
     _description = "";
     _encounterType = CEncounter::EEncounterType::eNone;
@@ -29,6 +29,7 @@ void CShrineOfTheAncients::execute()
         visit();
     }
     Console::br();
+
     CMenu menu;
     menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
     if (menu.execute() == CMenu::exit())
@@ -46,6 +47,20 @@ std::string CShrineOfTheAncients::fgColor() const
 std::string CShrineOfTheAncients::bgColor() const
 {
     return CC::bgLightGray();
+}
+
+nlohmann::json CShrineOfTheAncients::save() const
+{
+    auto o = CRoom::save();
+    o[TagNames::Shrine::seenDuringPhase] = _seenDuringPhase;
+    return o;
+}
+
+bool CShrineOfTheAncients::load(const nlohmann::json& json)
+{
+    _seenDuringPhase =
+        static_cast<CGameProgression::EGameStage>(json.value<unsigned int>(TagNames::Shrine::seenDuringPhase, 0));
+    return CRoom::load(json);
 }
 
 void CShrineOfTheAncients::visit()
