@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cgamestateobject.h"
+#include "taskfactory.h"
 
 #include <string>
 
@@ -15,6 +16,8 @@
 
 class CTask : public CGameStateObject
 {
+    friend CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json);
+
 public:
     /**
      * @brief CTask Constructor

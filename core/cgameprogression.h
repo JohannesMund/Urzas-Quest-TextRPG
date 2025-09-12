@@ -11,6 +11,7 @@
 class CRoom;
 class CSupportCompanion;
 class CItem;
+class CTask;
 class CGameProgression : public CGameStateObject
 {
     friend class CGameManagement;
@@ -49,6 +50,10 @@ public:
         return nullptr;
     }
     static CItem* noItemFactory(const std::string_view&)
+    {
+        return nullptr;
+    }
+    static CTask* noTaskFactory(const std::string_view&)
     {
         return nullptr;
     }
@@ -100,7 +105,8 @@ public:
                         std::function<CSupportCompanion*(const std::string_view& name)> supportCompanionsFactory =
                             &noSupportCompanionFactory,
                         std::function<CRoom*(const std::string_view& name)> roomsFactory = &noRoomFactory,
-                        std::function<CItem*(const std::string_view& name)> itemsFactory = &noItemFactory);
+                        std::function<CItem*(const std::string_view& name)> itemsFactory = &noItemFactory,
+                        std::function<CTask*(const std::string_view& name)> taskFactory = &noTaskFactory);
 
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
@@ -108,6 +114,7 @@ public:
 
     CSupportCompanion* callModuleSupportCompanionFactory(const std::string_view& name);
     CRoom* callModuleRoomFactory(const std::string_view& name);
+    CTask* callModuleTaskFactory(const std::string_view& name);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
@@ -124,6 +131,7 @@ private:
         std::function<CSupportCompanion*(const std::string_view& name)> supportCompantonFactory;
         std::function<CRoom*(const std::string_view& name)> roomFactory;
         std::function<CItem*(const std::string_view& name)> itemFactory;
+        std::function<CTask*(const std::string_view& name)> taskFactory;
 
         static std::function<bool(const Module)> moduleRegisterNameFilter(const std::string_view& name)
         {

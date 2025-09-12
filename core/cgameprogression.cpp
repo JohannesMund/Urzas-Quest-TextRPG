@@ -425,7 +425,8 @@ void CGameProgression::registerModule(
     std::function<void(std::vector<CRoom*>&)> initWorldMapFunction,
     std::function<CSupportCompanion*(const std::string_view& name)> supportCompanionFactory,
     std::function<CRoom*(const std::string_view& name)> roomsFactory,
-    std::function<CItem*(const std::string_view& name)> itemFactory)
+    std::function<CItem*(const std::string_view& name)> itemFactory,
+    std::function<CTask*(const std::string_view& name)> taskFactory)
 
 {
     Module module;
@@ -438,6 +439,8 @@ void CGameProgression::registerModule(
     module.supportCompantonFactory = supportCompanionFactory;
     module.itemFactory = itemFactory;
     module.roomFactory = roomsFactory;
+    module.taskFactory = taskFactory;
+
     registerModule(module);
 }
 
@@ -486,6 +489,20 @@ CRoom* CGameProgression::callModuleRoomFactory(const std::string_view& name)
         if (room != nullptr)
         {
             return room;
+        }
+    }
+
+    return nullptr;
+}
+
+CTask* CGameProgression::callModuleTaskFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto task = module.taskFactory(name);
+        if (task != nullptr)
+        {
+            return task;
         }
     }
 

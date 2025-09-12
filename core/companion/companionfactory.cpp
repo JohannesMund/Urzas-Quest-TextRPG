@@ -32,9 +32,13 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
 
     if (newCompanion != nullptr)
     {
-        newCompanion->load(json);
+        if (newCompanion->load(json) == true)
+        {
+            return newCompanion;
+        }
+        delete newCompanion;
+        return nullptr;
     }
-
     return newCompanion;
 }
 
@@ -45,10 +49,13 @@ CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nloh
             CGameStateObject::getObjectNameFromJson(json));
     if (newCompanion != nullptr)
     {
-        newCompanion->load(json);
+        if (newCompanion->load(json) == true)
+        {
+            return newCompanion;
+        }
+        delete newCompanion;
     }
-
-    return newCompanion;
+    return nullptr;
 }
 
 CCompanion* CompanionFactory::makeRandomCompanion()

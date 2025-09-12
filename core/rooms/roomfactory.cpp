@@ -12,7 +12,7 @@
 
 CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
 {
-    CRoom* newRoom;
+    CRoom* newRoom = nullptr;
     if (CGameStateObject::compareObjectName(TagNames::Room::field, json))
     {
         newRoom = new CField();
@@ -36,17 +36,24 @@ CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
 
     if (newRoom != nullptr)
     {
-        newRoom->load(json);
-        return newRoom;
+        if (newRoom->load(json) == true)
+        {
+            return newRoom;
+        }
+        delete newRoom;
+        return nullptr;
     }
 
     newRoom = CGameManagement::getInstance()->getProgressionInstance()->callModuleRoomFactory(
         CGameStateObject::getObjectNameFromJson(json));
     if (newRoom != nullptr)
     {
-        newRoom->load(json);
+        if (newRoom->load(json) == true)
+        {
+            return newRoom;
+        }
+        delete newRoom;
     }
-
     return nullptr;
 }
 

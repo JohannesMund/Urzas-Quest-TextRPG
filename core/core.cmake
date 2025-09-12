@@ -46,6 +46,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/enemies/ctwoenemies.h core/enemies/ctwoenemies.cpp
     core/enemies/cenemyhorde.h core/enemies/cenemyhorde.cpp
 
+    core/tasks/taskfactory.h core/tasks/taskfactory.cpp
     core/tasks/ctask.h core/tasks/ctask.cpp
     core/tasks/cbountyhunt.h core/tasks/cbountyhunt.cpp
 
