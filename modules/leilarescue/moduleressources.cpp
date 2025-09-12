@@ -24,11 +24,11 @@ void LeilaRescueRessources::questAccepted()
 
 CSupportCompanion* LeilaRescueRessources::companionFactory(const std::string_view& name)
 {
-    if (TagNames::LeilaRescue::GuardCompanion.compare(name) == 0)
+    if (TagNames::LeilaRescue::guardCompanion.compare(name) == 0)
     {
         return new CGuardCompanion("");
     }
-    if (TagNames::LeilaRescue::LeilaCompanion.compare(name) == 0)
+    if (TagNames::LeilaRescue::leilaCompanion.compare(name) == 0)
     {
         return new CLeilaCompanion();
     }

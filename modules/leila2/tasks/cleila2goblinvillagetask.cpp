@@ -12,7 +12,7 @@
 
 #include <format>
 
-CLeila2GoblinVillageTask::CLeila2GoblinVillageTask()
+CLeila2GoblinVillageTask::CLeila2GoblinVillageTask() : CTask(TagNames::Leila2::goblinVillage)
 {
 }
 

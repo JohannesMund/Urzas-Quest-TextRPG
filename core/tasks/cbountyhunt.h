@@ -15,9 +15,13 @@ public:
 
     std::string name() const;
 
+protected:
+    virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json&) override;
+
 private:
-    const std::string _name;
-    const unsigned int _reward;
+    std::string _name;
+    unsigned int _reward;
 
     static bool huntActive;
 };

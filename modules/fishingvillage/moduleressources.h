@@ -8,7 +8,9 @@ namespace TagNames
 namespace FishingVille
 {
 constexpr std::string_view fishingVille = "fishingVille";
-}
+constexpr std::string_view buildEquipmentTask = "buildEquipment";
+constexpr std::string_view fishingVilleTask = "fishingVille";
+} // namespace FishingVille
 } // namespace TagNames
 
 class CRoom;

@@ -11,7 +11,7 @@
 #include <format>
 #include <string>
 
-CSewerTask::CSewerTask()
+CSewerTask::CSewerTask() : CTask(TagNames::Sewer::sever)
 {
     _isAutoExecute = false;
 }

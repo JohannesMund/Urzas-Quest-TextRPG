@@ -76,4 +76,16 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 constexpr std::string_view petIsDead = "petIsDead";
 } // namespace Room
 
+namespace Task
+{
+constexpr std::string_view task = "Task";
+constexpr std::string_view bountyHunt = "BountyHunt";
+
+constexpr std::string_view finished = "finished";
+constexpr std::string_view autoExecute = "autoExecute";
+constexpr std::string_view reward = "reward";
+constexpr std::string_view name = TagNames::Common::name;
+
+} // namespace Task
+
 } // namespace TagNames

@@ -4,7 +4,7 @@
 #include "cmap.h"
 #include "moduleressources.h"
 
-COpenCaveTask ::COpenCaveTask()
+COpenCaveTask::COpenCaveTask() : CTask(TagNames::Cave::openCave)
 {
     _isAutoExecute = true;
 }

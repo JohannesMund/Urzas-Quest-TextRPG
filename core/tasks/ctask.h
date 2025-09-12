@@ -1,5 +1,7 @@
 #pragma once
 
+#include "cgamestateobject.h"
+
 #include <string>
 
 /**
@@ -11,13 +13,13 @@
  * @remark Derive from CTask to create a new task
  */
 
-class CTask
+class CTask : public CGameStateObject
 {
 public:
     /**
      * @brief CTask Constructor
      */
-    CTask();
+    CTask(const std::string_view& objectName);
     /**
      * @brief ~CTask Destructor
      */
@@ -62,6 +64,9 @@ public:
     virtual std::string moduleName() const;
 
 protected:
+    virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json&) override;
+
     bool _isFinished = false;
     bool _isAutoExecute = true;
 };

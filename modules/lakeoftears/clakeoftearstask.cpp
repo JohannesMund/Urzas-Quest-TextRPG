@@ -6,12 +6,13 @@
 #include "cmobenemy.h"
 #include "colorize.h"
 #include "console.h"
+#include "moduleressources.h"
 #include "randomizer.h"
 
 #include <format>
 #include <string>
 
-CLakeOfTearsTask::CLakeOfTearsTask(const unsigned int steps) : CTask(), _steps(steps)
+CLakeOfTearsTask::CLakeOfTearsTask(const unsigned int steps) : CTask(TagNames::LakeOfTears::lakeOfTears), _steps(steps)
 {
 }
 

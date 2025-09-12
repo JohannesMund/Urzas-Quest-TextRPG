@@ -8,7 +8,7 @@
 
 #include <format>
 
-CLeilaTownTask::CLeilaTownTask()
+CLeilaTownTask::CLeilaTownTask() : CTask(TagNames::Leila::leilaTown)
 {
     _isAutoExecute = false;
 }

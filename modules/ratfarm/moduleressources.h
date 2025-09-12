@@ -3,6 +3,16 @@
 #include <string>
 #include <utility>
 
+#include <string>
+
+namespace TagNames
+{
+namespace RatFarm
+{
+constexpr std::string_view ratFarm = ("ratFarm");
+}
+} // namespace TagNames
+
 namespace RatFarmRessources
 {
 

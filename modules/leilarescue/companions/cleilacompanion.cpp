@@ -10,7 +10,7 @@
 #include <format>
 
 CLeilaCompanion::CLeilaCompanion() :
-    CSupportCompanion(LeilaRescueRessources::moduleName(), TagNames::LeilaRescue::LeilaCompanion)
+    CSupportCompanion(LeilaRescueRessources::moduleName(), TagNames::LeilaRescue::leilaCompanion)
 {
     _level = 5;
 }

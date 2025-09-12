@@ -2,6 +2,14 @@
 
 #include <string>
 
+namespace TagNames
+{
+namespace Sewer
+{
+constexpr std::string_view sever = "sewer";
+}
+} // namespace TagNames
+
 namespace SewerRessources
 {
 

@@ -10,7 +10,9 @@
 
 #include <format>
 
-CBuildEquipmentTask::CBuildEquipmentTask(const std::string_view& moduleName) : CTask(), _moduleName(moduleName)
+CBuildEquipmentTask::CBuildEquipmentTask(const std::string_view& moduleName) :
+    CTask(TagNames::FishingVille::buildEquipmentTask),
+    _moduleName(moduleName)
 {
     _isAutoExecute = false;
 }

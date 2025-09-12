@@ -11,7 +11,7 @@
 #include <format>
 #include <string>
 
-CLakeOfTearsBossTask::CLakeOfTearsBossTask() : CTask()
+CLakeOfTearsBossTask::CLakeOfTearsBossTask() : CTask(TagNames::LakeOfTears::lakeOfTearsBoss)
 {
 }
 

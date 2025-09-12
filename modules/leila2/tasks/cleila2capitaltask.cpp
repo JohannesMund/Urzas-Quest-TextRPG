@@ -8,7 +8,7 @@
 #include "ressources.h"
 #include <format>
 
-CLeila2CapitalTask::CLeila2CapitalTask()
+CLeila2CapitalTask::CLeila2CapitalTask() : CTask(TagNames::Leila2::leilaCaptial)
 {
 }
 

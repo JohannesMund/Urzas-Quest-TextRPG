@@ -8,8 +8,11 @@ namespace TagNames
 {
 namespace LeilaRescue
 {
-constexpr std::string_view LeilaCompanion = "CLeilaCompanion";
-constexpr std::string_view GuardCompanion = "CGuardCompanion";
+constexpr std::string_view leilaCompanion = "leilaCompanion";
+constexpr std::string_view guardCompanion = "guardCompanion";
+constexpr std::string_view findGuards = "findGuards";
+constexpr std::string_view leilaRescueCapital = "leilaRescueCapital";
+constexpr std::string_view dungeonBoss = "dungeonBoss";
 } // namespace LeilaRescue
 } // namespace TagNames
 

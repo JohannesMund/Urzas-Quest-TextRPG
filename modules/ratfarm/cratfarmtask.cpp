@@ -11,7 +11,7 @@
 
 #include <format>
 
-CRatFarmTask::CRatFarmTask()
+CRatFarmTask::CRatFarmTask() : CTask(TagNames::RatFarm::ratFarm)
 {
 }
 

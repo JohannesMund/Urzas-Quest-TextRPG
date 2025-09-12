@@ -17,7 +17,7 @@
 #include <cmath>
 #include <format>
 
-CFindGuardsTask::CFindGuardsTask(const unsigned int number) : _number(number)
+CFindGuardsTask::CFindGuardsTask(const unsigned int number) : CTask(TagNames::LeilaRescue::findGuards), _number(number)
 {
 }
 
@@ -143,7 +143,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
         CGameManagement::getPlayerInstance()->spendGold(_mafiaMoney);
         CGameManagement::getPlayerInstance()->addSupportCompanion(new CGuardCompanion(nameOfCurrentGuard()));
 
-      finishTask();
+        finishTask();
         return;
     }
 

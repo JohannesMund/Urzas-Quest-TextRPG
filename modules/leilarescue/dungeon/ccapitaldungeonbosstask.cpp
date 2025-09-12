@@ -5,7 +5,9 @@
 #include "modules/leilarescue/enemies/cguardhorde.h"
 #include "modules/leilarescue/moduleressources.h"
 
-CCapitalDungeonBossTask::CCapitalDungeonBossTask(bool* bossDefeated) : CTask(), _bossDefeated(bossDefeated)
+CCapitalDungeonBossTask::CCapitalDungeonBossTask(bool* bossDefeated) :
+    CTask(TagNames::LeilaRescue::dungeonBoss),
+    _bossDefeated(bossDefeated)
 {
 }
 
