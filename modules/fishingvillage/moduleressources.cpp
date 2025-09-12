@@ -64,6 +64,15 @@ void FishingVillageRessources::initWorldMap(std::vector<CRoom*>& rooms)
     rooms.push_back(new CFishingVillage());
 }
 
+CRoom* FishingVillageRessources::roomFactory(const std::string_view& objectName)
+{
+    if (TagNames::FishingVille::fishingVille.compare(objectName) == 0)
+    {
+        return new CFishingVillage();
+    }
+    return nullptr;
+}
+
 std::string FishingVillageRessources::fishingVilleName()
 {
     return std::format("{}Middlesbron {}Cove{}", CC::fgLightGreen(), CC::fgLightBlue(), CC::ccReset());

@@ -120,6 +120,16 @@ void CaveRessources::deInitModule()
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
 }
 
+CRoom* CaveRessources::roomFactory(const std::string_view& objectName)
+{
+    if (TagNames::Cave::cave.compare(objectName) == 0)
+    {
+        return new CCave();
+    }
+
+    return nullptr;
+}
+
 void CaveRessources::initWorldMap(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(new CCave());

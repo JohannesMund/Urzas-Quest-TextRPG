@@ -46,6 +46,7 @@ void deInitModuleMakeBoat();
 void deInitModuleFishLegend();
 
 void initWorldMap(std::vector<CRoom*>& rooms);
+CRoom* roomFactory(const std::string_view& objectName);
 
 std::string fishingVilleName();
 

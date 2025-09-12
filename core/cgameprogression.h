@@ -106,7 +106,8 @@ public:
 
     virtual nlohmann::json save() const override;
 
-    CSupportCompanion* callModuleSupportCompanionFaction(const std::string_view& name);
+    CSupportCompanion* callModuleSupportCompanionFactory(const std::string_view& name);
+    CRoom* callModuleRoomFactory(const std::string_view& name);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;

@@ -26,7 +26,9 @@ void registerModules(CGameProgression* progression)
                                 &ShrineRessources::questLog,
                                 &ShrineRessources::initModule,
                                 &ShrineRessources::deInitModule,
-                                &ShrineRessources::initWorldMap);
+                                &ShrineRessources::initWorldMap,
+                                CGameProgression::noSupportCompanionFactory,
+                                &ShrineRessources::roomFactory);
 
     progression->registerModule(BardRessources::moduleName(),
                                 CGameProgression::EGameStage::eStart,
@@ -39,7 +41,9 @@ void registerModules(CGameProgression* progression)
                                 &FishingVillageRessources::questLogMakeRod,
                                 &FishingVillageRessources::initModuleMakeRod,
                                 &FishingVillageRessources::deInitModuleMakeRod,
-                                &FishingVillageRessources::initWorldMap);
+                                &FishingVillageRessources::initWorldMap,
+                                CGameProgression::noSupportCompanionFactory,
+                                &FishingVillageRessources::roomFactory);
     progression->registerModule(RatFarmRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
                                 &RatFarmRessources::questLog,
@@ -72,13 +76,17 @@ void registerModules(CGameProgression* progression)
                                 &CaveRessources::questLog,
                                 &CaveRessources::initModule,
                                 &CaveRessources::deInitModule,
-                                &CaveRessources::initWorldMap);
+                                &CaveRessources::initWorldMap,
+                                CGameProgression::noSupportCompanionFactory,
+                                &CaveRessources::roomFactory);
     progression->registerModule(RebellionHideoutRessources::moduleNameSandwichShop(),
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &RebellionHideoutRessources::questLogSandwichShop,
                                 &RebellionHideoutRessources::initModuleSandwichShop,
                                 &RebellionHideoutRessources::deInitModuleSandwichShop,
-                                &RebellionHideoutRessources::initWorldMap);
+                                &RebellionHideoutRessources::initWorldMap,
+                                CGameProgression::noSupportCompanionFactory,
+                                &RebellionHideoutRessources::roomFactory);
 
     progression->registerModule(FishingVillageRessources::moduleNameFishLegend(),
                                 CGameProgression::EGameStage::eLearnedAboutCult,
@@ -100,6 +108,8 @@ void registerModules(CGameProgression* progression)
                                 &BlackIvoryTowerRessources::questLog,
                                 &BlackIvoryTowerRessources::initModule,
                                 &BlackIvoryTowerRessources::deInitModule,
-                                &BlackIvoryTowerRessources::initWorldMap);
+                                &BlackIvoryTowerRessources::initWorldMap,
+                                CGameProgression::noSupportCompanionFactory,
+                                &BlackIvoryTowerRessources::roomFactory);
 }
 } // namespace ModuleRegister

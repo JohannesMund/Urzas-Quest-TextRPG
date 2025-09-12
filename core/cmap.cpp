@@ -414,6 +414,36 @@ nlohmann::json CMap::save() const
     return mapState;
 }
 
+bool CMap::load(const nlohmann::json& json)
+{
+    _playerPosition.x = 0;
+    _playerPosition.y = 0;
+    if (json.contains(TagNames::Map::playerPosition))
+    {
+        _playerPosition.x = json[TagNames::Map::playerPosition].value<unsigned int>(TagNames::Common::x, 0);
+        _playerPosition.y = json[TagNames::Map::playerPosition].value<unsigned int>(TagNames::Common::y, 0);
+    }
+
+    if (json.contains(TagNames::Map::roomMatrix))
+    {
+        for (auto row : json[TagNames::Map::roomMatrix])
+        {
+            std::vector<CRoom*> mapRow;
+            for (auto room : row)
+            {
+                auto r = RoomFactory::loadRoomFromSaveGame(room);
+                if (r != nullptr)
+                {
+                    mapRow.push_back(r);
+                }
+            }
+            _map.push_back(mapRow);
+        }
+    }
+
+    return false;
+}
+
 std::optional<CRoom*> CMap::roomAt(const EDirections dir) const
 {
     return roomAt(_playerPosition, dir);

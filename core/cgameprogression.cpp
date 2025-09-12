@@ -464,7 +464,7 @@ nlohmann::json CGameProgression::save() const
     return o;
 }
 
-CSupportCompanion* CGameProgression::callModuleSupportCompanionFaction(const std::string_view& name)
+CSupportCompanion* CGameProgression::callModuleSupportCompanionFactory(const std::string_view& name)
 {
     for (const auto& module : _registeredModules)
     {
@@ -472,6 +472,20 @@ CSupportCompanion* CGameProgression::callModuleSupportCompanionFaction(const std
         if (companion != nullptr)
         {
             return companion;
+        }
+    }
+
+    return nullptr;
+}
+
+CRoom* CGameProgression::callModuleRoomFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto room = module.roomFactory(name);
+        if (room != nullptr)
+        {
+            return room;
         }
     }
 

@@ -35,6 +35,15 @@ void RebellionHideoutRessources::initWorldMap(std::vector<CRoom*>& rooms)
     rooms.push_back(new CSandwichShop());
 }
 
+CRoom* RebellionHideoutRessources::roomFactory(const std::string_view& objectName)
+{
+    if (TagNames::RebellionHideout::rebellionHideout.compare(objectName) == 0)
+    {
+        return new CSandwichShop();
+    }
+    return nullptr;
+}
+
 std::string RebellionHideoutRessources::moduleNameSandwichShop()
 {
     return "SandwichShop";

@@ -8,6 +8,16 @@
 
 #include <format>
 
+CRoom* BlackIvoryTowerRessources::roomFactory(const std::string_view& objectName)
+{
+    if (TagNames::BlackIvoryTower::blackIvoryTower.compare(objectName) == 0)
+    {
+        return new CBlackIvoryTower();
+    }
+
+    return nullptr;
+}
+
 void BlackIvoryTowerRessources::initModule()
 {
 }

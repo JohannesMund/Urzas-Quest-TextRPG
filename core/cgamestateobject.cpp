@@ -25,3 +25,13 @@ void CGameStateObject::addObjectNameToJson(nlohmann::json& json, const CGameStat
 
     json[TagNames::Common::objectName] = object->getObjectName();
 }
+
+bool CGameStateObject::compareObjectName(const std::string_view& objectName, const nlohmann::json& json)
+{
+    const auto name = CGameStateObject::getObjectNameFromJson(json);
+    if (name.empty())
+    {
+        return false;
+    }
+    return name.compare(objectName) == 0;
+}

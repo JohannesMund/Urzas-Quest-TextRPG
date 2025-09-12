@@ -15,11 +15,10 @@ constexpr std::string_view seenDuringPhase = "seenDuringPhase";
 class CRoom;
 namespace ShrineRessources
 {
-
 void initModule();
 void deInitModule();
 void initWorldMap(std::vector<CRoom*>& rooms);
-
+CRoom* roomFactory(const std::string_view& objectName);
 std::string moduleName();
 std::string questLog();
 

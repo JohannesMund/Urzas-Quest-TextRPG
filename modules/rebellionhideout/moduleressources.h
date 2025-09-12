@@ -33,6 +33,8 @@ void deInitModuleRebellionHideout();
 
 void initWorldMap(std::vector<CRoom*>& rooms);
 
+CRoom* roomFactory(const std::string_view& objectName);
+
 std::string moduleNameSandwichShop();
 std::string moduleNameRebellionHideout();
 

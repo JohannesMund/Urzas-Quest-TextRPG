@@ -37,6 +37,8 @@ public:
     static std::string getObjectNameFromJson(const nlohmann::json& json);
     static void addObjectNameToJson(nlohmann::json& json, const CGameStateObject* object);
 
+    static bool compareObjectName(const std::string_view& objectName, const nlohmann::json& json);
+
 private:
     const std::string _objectName;
 };

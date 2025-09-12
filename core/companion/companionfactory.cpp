@@ -1,53 +1,31 @@
 #include "companionfactory.h"
-
 #include "cattackercompanion.h"
 #include "cdefendercompanion.h"
 #include "cgamemanagement.h"
 #include "chealercompanion.h"
 #include "cscarymonstercompanion.h"
-#include "modules/leilarescue/companions/cguardcompanion.h"
-#include "modules/leilarescue/companions/cleilacompanion.h"
-#include "modules/leilarescue/moduleressources.h"
-
+#include "csupportcompanion.h"
 #include "ressources.h"
 
 #include <nlohmann/json.hpp>
 
-namespace
-{
-
-bool compareObjectName(const std::string_view& objectName, const nlohmann::json& json)
-{
-    const auto name = CGameStateObject::getObjectNameFromJson(json);
-    if (name.empty())
-    {
-        return false;
-    }
-
-    return name.compare(objectName) == 0;
-};
-
-}; // namespace
-
 CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& json)
 {
-    const auto isObjectName = [&json](const std::string_view& objectName)
-    { return compareObjectName(objectName, json); };
     CCompanion* newCompanion = nullptr;
 
-    if (isObjectName(TagNames::Companion::attackCompanion))
+    if (CGameStateObject::compareObjectName(TagNames::Companion::attackCompanion, json))
     {
         newCompanion = new CAttackerCompanion();
     }
-    else if (isObjectName(TagNames::Companion::defenderCompanion))
+    else if (CGameStateObject::compareObjectName(TagNames::Companion::defenderCompanion, json))
     {
         newCompanion = new CDefenderCompanion;
     }
-    else if (isObjectName(TagNames::Companion::healerCompanion))
+    else if (CGameStateObject::compareObjectName(TagNames::Companion::healerCompanion, json))
     {
         newCompanion = new CHealerCompanion;
     }
-    else if (isObjectName(TagNames::Companion::scaryMonsterCompanion))
+    else if (CGameStateObject::compareObjectName(TagNames::Companion::scaryMonsterCompanion, json))
     {
         newCompanion = new CScaryMonsterCompanion;
     }
@@ -63,7 +41,7 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
 CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nlohmann::json& json)
 {
     CSupportCompanion* newCompanion =
-        CGameManagement::getInstance()->getProgressionInstance()->callModuleSupportCompanionFaction(
+        CGameManagement::getInstance()->getProgressionInstance()->callModuleSupportCompanionFactory(
             CGameStateObject::getObjectNameFromJson(json));
     if (newCompanion != nullptr)
     {

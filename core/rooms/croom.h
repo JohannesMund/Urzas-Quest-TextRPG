@@ -1,6 +1,7 @@
 #pragma once
 #include "cencounter.h"
 #include "cmap.h"
+#include "roomfactory.h"
 
 #include <string>
 
@@ -9,6 +10,8 @@ class CTask;
 class CRoom : public CGameStateObject
 {
 public:
+    friend CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json);
+
     CRoom(const std::string_view& objectName);
     virtual ~CRoom();
 

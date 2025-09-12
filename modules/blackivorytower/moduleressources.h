@@ -21,6 +21,8 @@ namespace BlackIvoryTowerRessources
 
 static const unsigned int towerHeight = 25;
 
+CRoom* roomFactory(const std::string_view& objectName);
+
 void initModule();
 void deInitModule();
 void initWorldMap(std::vector<CRoom*>& rooms);
