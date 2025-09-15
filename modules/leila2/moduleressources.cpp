@@ -1,8 +1,11 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
+#include "ctask.h"
 #include "leila2/encounters/cleila2encounter.h"
 #include "leila2/encounters/cleila2goblinencounter.h"
+#include "leila2/tasks/cleila2capitaltask.h"
+#include "leila2/tasks/cleila2goblinvillagetask.h"
 #include "ressources.h"
 
 #include <format>
@@ -16,6 +19,19 @@ void Leila2Ressources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(encounterNameGuards());
     CGameManagement::getInstance()->unregisterEncounterByModuleName(encounterNameFindRibbon());
+}
+
+CTask* Leila2Ressources::taskFactory(const std::string_view& objectName)
+{
+    if (TagNames::Leila2::leilaCaptial.compare(objectName) == 0)
+    {
+        return new CLeila2CapitalTask();
+    }
+    if (TagNames::Leila2::goblinVillage.compare(objectName) == 0)
+    {
+        return new CLeila2GoblinVillageTask();
+    }
+    return nullptr;
 }
 
 std::string Leila2Ressources::moduleName()

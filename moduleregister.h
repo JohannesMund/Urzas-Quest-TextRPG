@@ -48,19 +48,34 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::EGameStage::eSeenBard,
                                 &RatFarmRessources::questLog,
                                 &RatFarmRessources::initModule,
-                                &RatFarmRessources::deInitModule);
+                                &RatFarmRessources::deInitModule,
+                                CGameProgression::noInitWorldMapFunction,
+                                CGameProgression::noSupportCompanionFactory,
+                                CGameProgression::noRoomFactory,
+                                CGameProgression::noItemFactory,
+                                &RatFarmRessources::taskFactory);
 
     progression->registerModule(SewerRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
                                 &SewerRessources::questLog,
                                 &SewerRessources::initModule,
-                                &SewerRessources::deInitModule);
+                                &SewerRessources::deInitModule,
+                                CGameProgression::noInitWorldMapFunction,
+                                CGameProgression::noSupportCompanionFactory,
+                                CGameProgression::noRoomFactory,
+                                CGameProgression::noItemFactory,
+                                &SewerRessources::taskFactory);
 
     progression->registerModule(LeilaRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
                                 &LeilaRessources::questLog,
                                 &LeilaRessources::initModule,
-                                &LeilaRessources::deInitModule);
+                                &LeilaRessources::deInitModule,
+                                CGameProgression::noInitWorldMapFunction,
+                                CGameProgression::noSupportCompanionFactory,
+                                CGameProgression::noRoomFactory,
+                                CGameProgression::noItemFactory,
+                                &LeilaRessources::taskFactory);
 
     progression->registerModule(FishingVillageRessources::moduleNameMakeBoat(),
                                 CGameProgression::EGameStage::eProvenAsHero,
@@ -108,7 +123,12 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::EGameStage::eLearnedAboutCult,
                                 &Leila2Ressources::questLog,
                                 &Leila2Ressources::initModule,
-                                &Leila2Ressources::deInitModule);
+                                &Leila2Ressources::deInitModule,
+                                CGameProgression::noInitWorldMapFunction,
+                                CGameProgression::noSupportCompanionFactory,
+                                CGameProgression::noRoomFactory,
+                                CGameProgression::noItemFactory,
+                                &Leila2Ressources::taskFactory);
 
     progression->registerModule(BlackIvoryTowerRessources::moduleName(),
                                 CGameProgression::EGameStage::eFoundCult,

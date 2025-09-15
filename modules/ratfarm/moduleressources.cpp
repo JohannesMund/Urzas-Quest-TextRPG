@@ -2,7 +2,9 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "cratfarmencounter.h"
+#include "cratfarmtask.h"
 #include "cratfarmturnip.h"
+#include "ctask.h"
 #include "randomizer.h"
 
 #include <format>
@@ -50,6 +52,15 @@ void RatFarmRessources::initModule()
 void RatFarmRessources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
+}
+
+CTask* RatFarmRessources::taskFactory(const std::string_view& objectName)
+{
+    if (TagNames::RatFarm::ratFarm.compare(objectName) == 0)
+    {
+        return new CRatFarmTask();
+    }
+    return nullptr;
 }
 
 std::string RatFarmRessources::getColoredBossString()

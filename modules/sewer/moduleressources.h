@@ -2,11 +2,13 @@
 
 #include <string>
 
+class CTask;
+
 namespace TagNames
 {
 namespace Sewer
 {
-constexpr std::string_view sever = "sewer";
+constexpr std::string_view sewer = "sewer";
 }
 } // namespace TagNames
 
@@ -15,6 +17,8 @@ namespace SewerRessources
 
 void initModule();
 void deInitModule();
+
+CTask* taskFactory(const std::string_view& objectName);
 
 std::string moduleName();
 std::string questLog();

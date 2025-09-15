@@ -2,6 +2,7 @@
 
 #include <string>
 
+class CTask;
 namespace TagNames
 {
 namespace Leila2
@@ -15,6 +16,7 @@ namespace Leila2Ressources
 {
 void initModule();
 void deInitModule();
+CTask* taskFactory(const std::string_view& objectName);
 
 std::string moduleName();
 std::string encounterNameGuards();

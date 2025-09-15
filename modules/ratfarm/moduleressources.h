@@ -3,8 +3,7 @@
 #include <string>
 #include <utility>
 
-#include <string>
-
+class CTask;
 namespace TagNames
 {
 namespace RatFarm
@@ -19,6 +18,8 @@ namespace RatFarmRessources
 
 void initModule();
 void deInitModule();
+
+CTask* taskFactory(const std::string_view& objectName);
 
 std::string moduleName();
 std::string questLog();

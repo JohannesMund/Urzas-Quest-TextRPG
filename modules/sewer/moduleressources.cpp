@@ -1,6 +1,8 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "csewerencounter.h"
+#include "csewertask.h"
+#include "ctask.h"
 #include "ctown.h"
 #include "randomizer.h"
 #include "ressources.h"
@@ -15,6 +17,15 @@ void SewerRessources::initModule()
 void SewerRessources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
+}
+
+CTask* SewerRessources::taskFactory(const std::string_view& objectName)
+{
+    if (TagNames::Sewer::sewer.compare(objectName) == 0)
+    {
+        return new CSewerTask();
+    }
+    return nullptr;
 }
 
 std::string SewerRessources::moduleName()
