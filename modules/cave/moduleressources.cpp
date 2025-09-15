@@ -3,6 +3,7 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "copencaveencounter.h"
+#include "copencavetask.h"
 #include "randomizer.h"
 #include "roomfactory.h"
 
@@ -126,7 +127,15 @@ CRoom* CaveRessources::roomFactory(const std::string_view& objectName)
     {
         return new CCave();
     }
+    return nullptr;
+}
 
+CTask* CaveRessources::taskFactory(const std::string_view& objectName)
+{
+    if (TagNames::Cave::openCave.compare(objectName) == 0)
+    {
+        return new COpenCaveTask();
+    }
     return nullptr;
 }
 

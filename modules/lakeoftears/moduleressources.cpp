@@ -1,7 +1,10 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
+#include "clakeoftearsbosstask.h"
 #include "clakeoftearsencounter.h"
+#include "clakeoftearstask.h"
 #include "colorize.h"
+#include "ctask.h"
 #include "ressources.h"
 
 #include <format>
@@ -20,6 +23,19 @@ void LakeTearsRessources::initModule()
 void LakeTearsRessources::deInitModule()
 {
     CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
+}
+
+CTask* LakeTearsRessources::taskFactory(const std::string_view& objectName)
+{
+    if (TagNames::LakeOfTears::lakeOfTears.compare(objectName) == 0)
+    {
+        return new CLakeOfTearsTask();
+    }
+    if (TagNames::LakeOfTears::lakeOfTearsBoss.compare(objectName) == 0)
+    {
+        return new CLakeOfTearsBossTask();
+    }
+    return nullptr;
 }
 
 std::string LakeTearsRessources::questLog()

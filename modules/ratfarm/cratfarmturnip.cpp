@@ -6,7 +6,7 @@
 
 #include <format>
 
-CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem("CRatFarmTurnip")
+CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem(TagNames::RatFarm::turnip)
 {
     std::string name;
 

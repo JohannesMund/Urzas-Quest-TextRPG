@@ -7,6 +7,7 @@
 #include "croom.h"
 #include "ctask.h"
 #include "ressources.h"
+#include "taskfactory.h"
 
 CRoom::CRoom(const std::string_view& objectName) : CGameStateObject(objectName)
 {
@@ -91,6 +92,11 @@ nlohmann::json CRoom::save() const
     o[TagNames::Room::showInFogOfWar] = _showInFogOfWar;
     o[TagNames::Room::seen] = _seen;
     o[TagNames::Room::description] = _description;
+
+    if (_task != nullptr)
+    {
+        TaskFactory::saveTaskToSaveGame(_task, o);
+    }
     return o;
 }
 
@@ -103,6 +109,11 @@ bool CRoom::load(const nlohmann::json& json)
     _showInFogOfWar = json.value<bool>(TagNames::Room::showInFogOfWar, false);
     _seen = json.value<bool>(TagNames::Room::seen, false);
     _description = json.value<std::string>(TagNames::Room::description, "");
+
+    if (json.contains(TagNames::Task::task))
+    {
+        _task = TaskFactory::loadTaskFromSaveGame(json[TagNames::Task::task]);
+    }
     return true;
 }
 

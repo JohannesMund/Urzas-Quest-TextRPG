@@ -18,12 +18,14 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 } // namespace TagNames
 
 class CRoom;
+class CTask;
 namespace CaveRessources
 {
 void initModule();
 void deInitModule();
 void initWorldMap(std::vector<CRoom*>& rooms);
 CRoom* roomFactory(const std::string_view& objectName);
+CTask* taskFactory(const std::string_view& objectName);
 
 std::string moduleName();
 std::string dungeonEncounterName();

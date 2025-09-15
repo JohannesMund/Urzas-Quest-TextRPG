@@ -19,7 +19,7 @@ public:
      * @brief CItem
      * Constructor
      */
-    CItem(const std::string& objectName);
+    CItem(const std::string_view& objectName);
 
     virtual ~CItem()
     {

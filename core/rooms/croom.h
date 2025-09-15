@@ -1,12 +1,12 @@
 #pragma once
 #include "cencounter.h"
 #include "cmap.h"
+#include "ctask.h"
 #include "roomfactory.h"
 
 #include <string>
 
 class CGameStateObject;
-class CTask;
 class CRoom : public CGameStateObject
 {
 public:

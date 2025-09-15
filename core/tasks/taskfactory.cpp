@@ -5,7 +5,6 @@
 
 CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
 {
-
     CTask* newTask = nullptr;
     if (CGameStateObject::compareObjectName(TagNames::Task::bountyHunt, json))
     {
@@ -32,6 +31,16 @@ CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
         }
         delete newTask;
     }
-
     return nullptr;
+}
+
+void TaskFactory::saveTaskToSaveGame(const CTask* task, nlohmann::json& json)
+{
+    nlohmann::json o = task->save();
+    if (o.empty())
+    {
+        return;
+    }
+    o[TagNames::Common::objectName] = task->getObjectName();
+    json[TagNames::Task::task] = o;
 }

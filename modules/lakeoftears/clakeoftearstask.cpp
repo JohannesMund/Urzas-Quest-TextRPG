@@ -18,7 +18,6 @@ CLakeOfTearsTask::CLakeOfTearsTask(const unsigned int steps) : CTask(TagNames::L
 
 void CLakeOfTearsTask::execute()
 {
-
     Console::printLn("You follow the stream upward, und test the water from time to time. the longer you follow the "
                      "river, the saltier the water becomes.");
     Console::br();
@@ -67,6 +66,19 @@ void CLakeOfTearsTask::execute()
     }
 
     _isFinished = true;
+}
+
+nlohmann::json CLakeOfTearsTask::save() const
+{
+    auto o = CTask::save();
+    o[TagNames::LakeOfTears::steps] = _steps;
+    return o;
+}
+
+bool CLakeOfTearsTask::load(const nlohmann::json& json)
+{
+    _steps = json.value<unsigned int>(TagNames::LakeOfTears::steps, 0);
+    return CTask::load(json);
 }
 
 void CLakeOfTearsTask::battle(const EEnemy enemyType)

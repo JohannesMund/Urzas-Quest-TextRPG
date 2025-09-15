@@ -8,7 +8,7 @@
 
 using namespace std;
 
-CItem::CItem(const std::string& objectName) : CGameStateObject(objectName)
+CItem::CItem(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }
 

@@ -5,6 +5,7 @@
 
 #include <string>
 
+class CRoom;
 /**
  * @brief The CTask class Represents a Task
  * Tasks are placed in a room and are executed, as soon as the room is entered
@@ -13,10 +14,14 @@
  * @sa CRoom::addTask()
  * @remark Derive from CTask to create a new task
  */
-
 class CTask : public CGameStateObject
 {
+    /**
+     * @remark explicitely allow the TaskFactory to use load() and save()
+     * we could also use static member functions to do this.
+     */
     friend CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json);
+    friend void TaskFactory::saveTaskToSaveGame(const CTask* task, nlohmann::json& json);
 
 public:
     /**

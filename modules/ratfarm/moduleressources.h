@@ -10,7 +10,8 @@ namespace TagNames
 namespace RatFarm
 {
 constexpr std::string_view ratFarm = ("ratFarm");
-}
+constexpr std::string_view turnip = ("turnip");
+} // namespace RatFarm
 } // namespace TagNames
 
 namespace RatFarmRessources

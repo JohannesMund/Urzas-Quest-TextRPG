@@ -70,7 +70,12 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &LakeTearsRessources::questLog,
                                 &LakeTearsRessources::initModule,
-                                &LakeTearsRessources::deInitModule);
+                                &LakeTearsRessources::deInitModule,
+                                CGameProgression::noInitWorldMapFunction,
+                                CGameProgression::noSupportCompanionFactory,
+                                CGameProgression::noRoomFactory,
+                                CGameProgression::noItemFactory,
+                                &LakeTearsRessources::taskFactory);
     progression->registerModule(CaveRessources::moduleName(),
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &CaveRessources::questLog,
@@ -78,7 +83,9 @@ void registerModules(CGameProgression* progression)
                                 &CaveRessources::deInitModule,
                                 &CaveRessources::initWorldMap,
                                 CGameProgression::noSupportCompanionFactory,
-                                &CaveRessources::roomFactory);
+                                &CaveRessources::roomFactory,
+                                CGameProgression::noItemFactory,
+                                &CaveRessources::taskFactory);
     progression->registerModule(RebellionHideoutRessources::moduleNameSandwichShop(),
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &RebellionHideoutRessources::questLogSandwichShop,
