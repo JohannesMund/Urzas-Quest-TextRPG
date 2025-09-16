@@ -205,7 +205,6 @@ void CFindGuardsTask::fightBossMonster()
 
 void CFindGuardsTask::collectStuff()
 {
-
     const auto listMissingParts = []()
     {
         const auto missing = CGuardStuff::listMissingParts();
