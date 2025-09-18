@@ -149,7 +149,8 @@ nlohmann::json CSandwichShop::save() const
     {
         CSaveFile::addGameObject(sandwiches, s);
     }
-    o[TagNames::RebellionHideout::sandwiches] = sandwiches;
+    o[TagNames::RebellionHideout::itemGeneratorsRegistered] = _itemGeneratorsRegistered;
+
     return o;
 }
 
@@ -169,6 +170,13 @@ bool CSandwichShop::load(const nlohmann::json& json)
                 i.value<int>(TagNames::RebellionHideout::count, 1)));
         }
     }
+
+    _itemGeneratorsRegistered = json.value<bool>(TagNames::RebellionHideout::itemGeneratorsRegistered, false);
+    if (_itemGeneratorsRegistered)
+    {
+        registerItemGenerators();
+    }
+
     return CRoom::load(json);
 }
 
@@ -273,10 +281,7 @@ void CSandwichShop::checkForShaggysSandwich()
                         "who is buying you crappy sandwiches?",
                         Ressources::Game::fiego(),
                         Ressources::Game::brock()));
-        CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 10);
-        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 10);
+        registerItemGenerators();
     }
 }
 
@@ -573,4 +578,13 @@ void CSandwichShop::replaceSandwichOfTheDay()
     {
         _sandwiches.push_back(CGameManagement::getItemFactoryInstance()->sandwichMaker());
     }
+}
+
+void CSandwichShop::registerItemGenerators()
+{
+    CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
+        RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 10);
+    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+        RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 10);
+    _itemGeneratorsRegistered = true;
 }

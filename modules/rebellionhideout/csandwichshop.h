@@ -45,10 +45,14 @@ private:
 
     void replaceSandwichOfTheDay();
 
+    void registerItemGenerators();
+
     unsigned long _turns = 0;
     bool _playerOwnsShop = false;
     bool _playerDiscoveredHideout = false;
     int _goldAvailable = 0;
+
+    bool _itemGeneratorsRegistered = false;
 
     std::vector<CSandwich*> _sandwiches;
     std::map<CSandwich::EIngredients, int> _ingredientStore;

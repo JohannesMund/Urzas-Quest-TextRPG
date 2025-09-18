@@ -3,10 +3,13 @@
 #include "colorize.h"
 #include "companions/cguardcompanion.h"
 #include "companions/cleilacompanion.h"
+#include "ctask.h"
 #include "ressources.h"
 #include "tasks/cfindguardstask.h"
+#include "tasks/cleilarescuecapitaltask.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
 void LeilaRescueRessources::initModule()
 {
@@ -20,6 +23,20 @@ void LeilaRescueRessources::deInitModule()
 void LeilaRescueRessources::questAccepted()
 {
     CGameManagement::getInstance()->placeTaskOnField(new CFindGuardsTask());
+}
+
+CTask* LeilaRescueRessources::taskFactory(const std::string_view& objectName)
+{
+    if (TagNames::LeilaRescue::findGuards.compare(objectName))
+    {
+        return new CFindGuardsTask(0);
+    }
+    if (TagNames::LeilaRescue::leilaRescueCapital.compare(objectName))
+    {
+        return new CLeilaRescueCapitalTask();
+    }
+
+    return nullptr;
 }
 
 CSupportCompanion* LeilaRescueRessources::companionFactory(const std::string_view& name)

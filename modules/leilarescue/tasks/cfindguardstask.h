@@ -11,6 +11,10 @@ public:
 
     void finishTask();
 
+protected:
+    virtual nlohmann::json save() const override;
+    virtual bool load(const nlohmann::json&) override;
+
 private:
     void findFirstGuard();
     void fightCannibalHorde();
@@ -18,16 +22,19 @@ private:
     void fightBossMonster();
     void collectStuff();
 
-    const unsigned int _number = 0;
+    void registerLootItemGenerator();
+    void unRegisterLootItemGenerator();
+
+    unsigned int _currentStep = 0;
     static constexpr unsigned int _maxNumber = 4;
 
     const unsigned int _mafiaStartingMoney = 10000;
     const unsigned int _maxMafiaMoney = 25000;
     const unsigned int _mafiaIntrest = 13;
     unsigned int _mafiaMoney = _mafiaStartingMoney;
+    bool _lootItemGeneratorReguistered = false;
 
     std::string nameOfCurrentGuard() const;
 
     bool _stuffCollectionStarted = false;
-
 };

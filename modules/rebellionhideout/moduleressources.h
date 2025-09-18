@@ -17,6 +17,7 @@ constexpr std::string_view playerDiscoveredHideout = "playerDiscoveredHideout";
 constexpr std::string_view sandwiches = "sandwiches";
 constexpr std::string_view ingredientStore = "ingredientStore";
 constexpr std::string_view ingredient = "ingredient";
+constexpr std::string_view itemGeneratorsRegistered = "itemGeneratorsRegistered";
 constexpr std::string_view count = TagNames::Common::count;
 } // namespace RebellionHideout
 } // namespace TagNames

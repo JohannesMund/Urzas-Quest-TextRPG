@@ -3,6 +3,7 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "cmobenemy.h"
+#include "colorize.h"
 #include "console.h"
 #include "exceptions.h"
 #include "randomizer.h"
@@ -178,8 +179,8 @@ CBattle::EBattleResult CBattle::hasWonAgainst(const std::optional<CBattle::EWeap
         return CBattle::EBattleResult::eWon;
     }
 
-    Console::printLnWithSpacer(std::format("Player: {}", weapon2String(*choice)),
-                               std::format("Enemy: {}", weapon2String(*other)));
+    Console::printLnWithSpacer(std::format("[{}Player: {}{}]", CC::fgYellow(), weapon2String(*choice), CC::ccReset()),
+                               std::format("[{}Enemy: {}{}]", CC::fgRed(), weapon2String(*other), CC::ccReset()));
 
     if (*choice == *other)
     {

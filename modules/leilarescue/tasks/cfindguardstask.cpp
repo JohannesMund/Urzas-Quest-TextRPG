@@ -17,13 +17,15 @@
 #include <cmath>
 #include <format>
 
-CFindGuardsTask::CFindGuardsTask(const unsigned int number) : CTask(TagNames::LeilaRescue::findGuards), _number(number)
+CFindGuardsTask::CFindGuardsTask(const unsigned int number) :
+    CTask(TagNames::LeilaRescue::findGuards),
+    _currentStep(number)
 {
 }
 
 void CFindGuardsTask::execute()
 {
-    switch (_number)
+    switch (_currentStep)
     {
     case 0:
     default:
@@ -47,9 +49,9 @@ void CFindGuardsTask::execute()
 void CFindGuardsTask::finishTask()
 {
     _isFinished = true;
-    if (_number < _maxNumber)
+    if (_currentStep < _maxNumber)
     {
-        CGameManagement::getInstance()->placeTaskOnField(new CFindGuardsTask(_number + 1));
+        CGameManagement::getInstance()->placeTaskOnField(new CFindGuardsTask(_currentStep + 1));
     }
     else
     {
@@ -61,6 +63,30 @@ void CFindGuardsTask::finishTask()
             Ressources::Game::leila()));
         CGameManagement::getInstance()->placeTask(new CLeilaRescueCapitalTask(), CCapital::townFilter());
     }
+}
+
+nlohmann::json CFindGuardsTask::save() const
+{
+    auto o = CTask::save();
+    o[TagNames::LeilaRescue::stuffCollectionStarted] = _stuffCollectionStarted;
+    o[TagNames::LeilaRescue::mafiaMoney] = _mafiaMoney;
+    o[TagNames::LeilaRescue::findGuardsStep] = _currentStep;
+    o[TagNames::LeilaRescue::lootItemGeneratorRegistered] = _lootItemGeneratorReguistered;
+    return o;
+}
+
+bool CFindGuardsTask::load(const nlohmann::json& json)
+{
+    _currentStep = json.value<unsigned int>(TagNames::LeilaRescue::findGuardsStep, 0);
+    _mafiaMoney = json.value<unsigned int>(TagNames::LeilaRescue::mafiaMoney, 0);
+    _stuffCollectionStarted = json.value<bool>(TagNames::LeilaRescue::stuffCollectionStarted, false);
+    _lootItemGeneratorReguistered = json.value<bool>(TagNames::LeilaRescue::lootItemGeneratorRegistered, false);
+
+    if (_lootItemGeneratorReguistered)
+    {
+        registerLootItemGenerator();
+    }
+    return CTask::load(json);
 }
 
 void CFindGuardsTask::findFirstGuard()
@@ -224,8 +250,7 @@ void CFindGuardsTask::collectStuff()
                                      "so you will have to find his guard-stuff.",
                                      nameOfCurrentGuard()));
 
-        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-            LeilaRescueRessources::moduleName(), []() { return new CGuardStuff(); }, 50);
+        registerLootItemGenerator();
         _stuffCollectionStarted = true;
 
         Console::br();
@@ -255,8 +280,7 @@ void CFindGuardsTask::collectStuff()
                 }
             }
 
-            CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(
-                LeilaRescueRessources::moduleName());
+            unRegisterLootItemGenerator();
         }
         else
         {
@@ -268,10 +292,23 @@ void CFindGuardsTask::collectStuff()
     }
 }
 
+void CFindGuardsTask::registerLootItemGenerator()
+{
+    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+        LeilaRescueRessources::moduleName(), []() { return new CGuardStuff(); }, 50);
+    _lootItemGeneratorReguistered = true;
+}
+
+void CFindGuardsTask::unRegisterLootItemGenerator()
+{
+    CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(LeilaRescueRessources::moduleName());
+    _lootItemGeneratorReguistered = false;
+}
+
 std::string CFindGuardsTask::nameOfCurrentGuard() const
 {
 
-    switch (_number)
+    switch (_currentStep)
     {
     case 0:
         return Ressources::Game::bimmel();
