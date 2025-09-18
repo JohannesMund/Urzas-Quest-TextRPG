@@ -77,11 +77,13 @@ void CPlayer::addGold(const int i)
 
 void CPlayer::addHp(const int i)
 {
+    Console::printLn(std::format("i: {}", i));
     if (i == 0)
     {
         return;
     }
 
+    _hp += i;
     if (_hp >= _maxHp)
     {
         Console::printLn(std::format("{}You are fully healed.{}", CC::fgLightGreen(), CC::ccReset()));
@@ -91,7 +93,6 @@ void CPlayer::addHp(const int i)
 
     Console::printLn(std::format("You {} {} Hitpoints.", lostOrGained(i), std::abs(i)));
 
-    _hp += i;
     if (_hp <= 0)
     {
         _hp = 0;

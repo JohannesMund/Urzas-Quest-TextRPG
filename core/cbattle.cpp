@@ -118,6 +118,7 @@ void CBattle::battleLoop()
         }
         if (!endRound)
         {
+            Console::hr();
             switch (hasWonAgainst(playersChoice, _enemy->peek()))
             {
             case CBattle::EBattleResult::eWon:
