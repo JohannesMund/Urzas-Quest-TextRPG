@@ -16,5 +16,5 @@ namespace LocalDirectory
  * @remark directory will be the same on the same pc
  * @remark directory will be created when it does njot exist
  */
-std::filesystem::path getLocalDirectoryPath(bool& bOk);
+std::filesystem::path getLocalDirectoryPath();
 }; // namespace LocalDirectory

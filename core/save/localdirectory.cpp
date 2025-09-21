@@ -1,6 +1,7 @@
 #include "localdirectory.h"
 #include "globals.h"
 #include "ressources.h"
+#include "save/exceptions.h"
 
 #include <format>
 
@@ -14,25 +15,24 @@
 
 namespace
 {
-bool checkAndExpandPath(std::filesystem::path& p)
+void checkAndExpandPath(std::filesystem::path& p)
 {
     if (!std::filesystem::exists(p))
     {
-        return false;
+        throw SaveFile::CSaveFileException("Local Directory does not exist");
     }
     p.append(std::format(".{}", Ressources::Settings::appName));
     if (!std::filesystem::exists(p))
     {
         if (!std::filesystem::create_directories(p))
         {
-            return false;
+            throw SaveFile::CSaveFileException("Cannot create program direcotr");
         }
     }
-    return true;
 }
 } // namespace
 
-std::filesystem::path LocalDirectory::getLocalDirectoryPath(bool& bOk)
+std::filesystem::path LocalDirectory::getLocalDirectoryPath()
 {
     std::filesystem::path result = {};
 #ifdef _USE_WINDOWS
@@ -46,6 +46,6 @@ std::filesystem::path LocalDirectory::getLocalDirectoryPath(bool& bOk)
     std::filesystem::path p{homeDir};
     result = p;
 #endif
-    bOk = checkAndExpandPath(result);
+    checkAndExpandPath(result);
     return result;
 }

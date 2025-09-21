@@ -30,7 +30,7 @@ public:
      * @remark calls the load() from the game object.
      * @remark game object must be initialized
      */
-    bool loadGameObject(CGameStateObject* obj);
+    void loadGameObject(CGameStateObject* obj);
 
     /**
      * @brief adds a game state object a given array
@@ -42,10 +42,11 @@ public:
      * @brief writes the save game
      * @remark existing file is overwritten
      */
-    bool dump();
+    void dump();
+    void load();
 
 private:
     void addObject(const std::string_view& key, const nlohmann::json& object);
-    std::optional<nlohmann::json> getObject(const std::string_view& key);
+    nlohmann::json getObject(const std::string_view& key);
     nlohmann::json _saveGame;
 };

@@ -10,12 +10,13 @@
 #include "companionfactory.h"
 #include "console.h"
 #include "croom.h"
-#include "csavefile.h"
 #include "ctask.h"
 #include "ctown.h"
 #include "exceptions.h"
 #include "randomizer.h"
 #include "rebellionhideout/cbagofingredients.h"
+#include "save/csavefile.h"
+#include "save/exceptions.h"
 
 #include <iostream>
 
@@ -372,10 +373,20 @@ bool CGameManagement::load()
         return false;
     }
 
-    CSaveFile saveGame;
-    saveGame.loadGameObject(&_player);
-    saveGame.loadGameObject(_companion);
-    return false;
+    try
+    {
+        CSaveFile saveGame;
+        saveGame.load();
+        saveGame.loadGameObject(&_player);
+        saveGame.loadGameObject(_companion);
+    }
+    catch (SaveFile::CSaveFileException& e)
+    {
+        Console::printLn("Error Loading Savegame:");
+        Console::printLn(std::format("{}{}{}", CC::fgRed(), e.what(), CC::ccReset()));
+        return false;
+    }
+    return true;
 }
 
 bool CGameManagement::saveGameAvailable()
@@ -398,13 +409,23 @@ bool CGameManagement::save()
         }
     }
 
-    CSaveFile savegame;
-    savegame.addGameObject(&_player);
-    savegame.addGameObject(&_inventory);
-    savegame.addGameObject(&_map);
-    savegame.addGameObject(_companion);
-    savegame.addGameObject(&_progression);
-    return savegame.dump();
+    try
+    {
+        CSaveFile savegame;
+        savegame.addGameObject(&_player);
+        savegame.addGameObject(&_inventory);
+        savegame.addGameObject(&_map);
+        savegame.addGameObject(_companion);
+        savegame.addGameObject(&_progression);
+        savegame.dump();
+    }
+
+    catch (const SaveFile::CSaveFileException& e)
+    {
+        std::cerr << e.what() << '\n';
+        return false;
+    }
+    return true;
 }
 
 CGameManagement::CGameManagement() :

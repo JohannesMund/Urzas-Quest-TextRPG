@@ -2,7 +2,6 @@ set(URZAS_QUEST_SOURCES_CORE
 	core/core.cmake
 
 	core/console.h core/console.cpp
-    core/localdirectory.h core/localdirectory.cpp
     core/colorize.h core/colorize.cpp
     core/cgamestateobject.h core/cgamestateobject.cpp
     core/cmenu.h core/cmenu.cpp
@@ -10,11 +9,14 @@ set(URZAS_QUEST_SOURCES_CORE
     core/enumiterator.h
     core/exceptions.h
     core/cgamemanagement.h core/cgamemanagement.cpp
-    core/csavefile.h core/csavefile.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
+
+    core/save/csavefile.h core/save/csavefile.cpp
+    core/save/localdirectory.h core/save/localdirectory.cpp
+    core/save/exceptions.h
 
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp
