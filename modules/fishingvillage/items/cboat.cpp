@@ -1,9 +1,11 @@
 #include "cboat.h"
+#include "../moduleressources.h"
 #include "colorize.h"
 
 #include <format>
 
-CBoat::CBoat() : CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood, "CBoat")
+CBoat::CBoat() :
+    CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood, TagNames::FishingVille::boat)
 {
     _namesByLevel = {
         std::format("{}Fragile {}Nutshell{}", CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset()),

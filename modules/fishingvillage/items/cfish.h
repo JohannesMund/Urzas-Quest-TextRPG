@@ -15,7 +15,9 @@ public:
     static CItem::ItemFilter fishFilter();
     static CItem::ItemFilter fishRarityFilter(const FishingVillageRessources::EFishLevel level);
 
+protected:
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
 
 private:
     FishingVillageRessources::EFishLevel _fishLevel;

@@ -7,13 +7,22 @@ namespace TagNames
 {
 namespace FishingVille
 {
-constexpr std::string_view fishingVille = "fishingVille";
-constexpr std::string_view buildEquipmentTask = "buildEquipment";
-constexpr std::string_view fishingVilleTask = "fishingVille";
+constexpr std::string_view fishingVille = "FishingVille";
+constexpr std::string_view buildEquipmentTask = "BuildEquipment";
+constexpr std::string_view fishingVilleTask = "FishingVille";
+constexpr std::string_view part = "Part";
+constexpr std::string_view fishLevel = "FishLevel";
+constexpr std::string_view boat = "Boat";
+constexpr std::string_view boatPart = "BoatPart";
+constexpr std::string_view fish = "Fish";
+constexpr std::string_view fishingRod = "FishingRod";
+constexpr std::string_view fishingRodPart = "FishingRodPart";
+
 } // namespace FishingVille
 } // namespace TagNames
 
 class CRoom;
+class CItem;
 namespace FishingVillageRessources
 {
 enum class EFishLevel
@@ -48,7 +57,9 @@ void deInitModuleMakeBoat();
 void deInitModuleFishLegend();
 
 void initWorldMap(std::vector<CRoom*>& rooms);
+
 CRoom* roomFactory(const std::string_view& objectName);
+CItem* itemFactory(const std::string_view& objectName);
 
 std::string fishingVilleName();
 

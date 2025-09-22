@@ -1,11 +1,12 @@
 #include "cboatpart.h"
+#include "../moduleressources.h"
 #include "colorize.h"
 #include "randomizer.h"
 
 #include <format>
 #include <nlohmann/json.hpp>
 
-CBoatPart::CBoatPart() : CJunkItem("CBoatPart")
+CBoatPart::CBoatPart() : CJunkItem(TagNames::FishingVille::boatPart)
 {
     switch (Randomizer::getRandom(3))
     {
@@ -70,6 +71,11 @@ std::string CBoatPart::nameForPart(const EPart part)
 nlohmann::json CBoatPart::save() const
 {
     nlohmann::json o = CItem::save();
-    o["part"] = _part;
+    o[TagNames::FishingVille::part] = _part;
     return o;
+}
+
+void CBoatPart::load(const nlohmann::json& json)
+{
+    _part = json.value<EPart>(TagNames::FishingVille::part, EPart::eBoard);
 }

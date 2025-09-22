@@ -1,11 +1,12 @@
 #include "cfishingrod.h"
+#include "../moduleressources.h"
 #include "colorize.h"
 #include "ressources.h"
 
 #include <format>
 
 CFishingRod::CFishingRod() :
-    CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood, "CFishingRod")
+    CEquipment(Ressources::Items::EType::eOther, Ressources::Items::EQuality::eGood, TagNames::FishingVille::fishingRod)
 {
     _namesByLevel = {
         std::format(

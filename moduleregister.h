@@ -49,7 +49,9 @@ void registerModules(CGameProgression* progression)
                                 &FishingVillageRessources::deInitModuleMakeRod,
                                 &FishingVillageRessources::initWorldMap,
                                 CGameProgression::noSupportCompanionFactory,
-                                &FishingVillageRessources::roomFactory);
+                                &FishingVillageRessources::roomFactory,
+                                &FishingVillageRessources::itemFactory);
+
     progression->registerModule(RatFarmRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
                                 &RatFarmRessources::questLog,

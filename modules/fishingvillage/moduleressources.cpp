@@ -2,7 +2,10 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "fishingvillage/cfishingvillage.h"
+#include "fishingvillage/items/cboat.h"
 #include "fishingvillage/items/cboatpart.h"
+#include "fishingvillage/items/cfish.h"
+#include "fishingvillage/items/cfishingrod.h"
 #include "fishingvillage/items/cfishingrodpart.h"
 #include "fishingvillage/tasks/cbuildequipmenttask.h"
 #include "fishingvillage/tasks/cfishingvilletowntask.h"
@@ -70,6 +73,33 @@ CRoom* FishingVillageRessources::roomFactory(const std::string_view& objectName)
     {
         return new CFishingVillage();
     }
+    return nullptr;
+}
+
+CItem* FishingVillageRessources::itemFactory(const std::string_view& objectName)
+{
+
+    if (TagNames::FishingVille::boat.compare(objectName) == 0)
+    {
+        return new CBoat();
+    }
+    if (TagNames::FishingVille::boatPart.compare(objectName) == 0)
+    {
+        return new CBoatPart();
+    }
+    if (TagNames::FishingVille::fish.compare(objectName) == 0)
+    {
+        return new CFish();
+    }
+    if (TagNames::FishingVille::fishingRod.compare(objectName) == 0)
+    {
+        return new CFishingRod();
+    }
+    if (TagNames::FishingVille::fishingRodPart.compare(objectName) == 0)
+    {
+        return new CFishingRodPart();
+    }
+
     return nullptr;
 }
 
