@@ -90,10 +90,10 @@ nlohmann::json CInjuredPet::save() const
     return o;
 }
 
-bool CInjuredPet::load(const nlohmann::json& json)
+void CInjuredPet::load(const nlohmann::json& json)
 {
     _petIsDead = json.value<bool>(TagNames::Room::petIsDead, false);
-    return CField::load(json);
+    CField::load(json);
 }
 
 char CInjuredPet::getMapSymbol() const

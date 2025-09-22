@@ -115,6 +115,7 @@ public:
     CSupportCompanion* callModuleSupportCompanionFactory(const std::string_view& name);
     CRoom* callModuleRoomFactory(const std::string_view& name);
     CTask* callModuleTaskFactory(const std::string_view& name);
+    CItem* callModuleItemFactory(const std::string_view& name);
 
 private:
     typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;

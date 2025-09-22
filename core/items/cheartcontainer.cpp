@@ -5,7 +5,7 @@
 
 #include <format>
 
-CHeartContainer::CHeartContainer() : CItem("CHeartContainer")
+CHeartContainer::CHeartContainer() : CItem(TagNames::Item::heartContainer)
 {
     _name = std::format("{}H{}eart Container", CC::fgRed(), CC::ccReset());
     _description = "A strange looking thing. A heart-shaped glass flask, filled with a deep red liquid.";

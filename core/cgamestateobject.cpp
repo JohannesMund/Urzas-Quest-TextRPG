@@ -1,4 +1,6 @@
 #include "cgamestateobject.h"
+#include "console.h"
+#include "save/exceptions.h"
 
 #include <nlohmann/json.hpp>
 

@@ -56,11 +56,11 @@ nlohmann::json CShrineOfTheAncients::save() const
     return o;
 }
 
-bool CShrineOfTheAncients::load(const nlohmann::json& json)
+void CShrineOfTheAncients::load(const nlohmann::json& json)
 {
     _seenDuringPhase =
         static_cast<CGameProgression::EGameStage>(json.value<unsigned int>(TagNames::Shrine::seenDuringPhase, 0));
-    return CRoom::load(json);
+    CRoom::load(json);
 }
 
 void CShrineOfTheAncients::visit()

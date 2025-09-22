@@ -414,7 +414,7 @@ nlohmann::json CMap::save() const
     return mapState;
 }
 
-bool CMap::load(const nlohmann::json& json)
+void CMap::load(const nlohmann::json& json)
 {
     _playerPosition.x = 0;
     _playerPosition.y = 0;
@@ -440,8 +440,6 @@ bool CMap::load(const nlohmann::json& json)
             _map.push_back(mapRow);
         }
     }
-
-    return false;
 }
 
 std::optional<CRoom*> CMap::roomAt(const EDirections dir) const

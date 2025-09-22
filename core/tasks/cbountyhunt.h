@@ -17,7 +17,7 @@ public:
 
 protected:
     virtual nlohmann::json save() const override;
-    virtual bool load(const nlohmann::json&) override;
+    virtual void load(const nlohmann::json&) override;
 
 private:
     std::string _name;

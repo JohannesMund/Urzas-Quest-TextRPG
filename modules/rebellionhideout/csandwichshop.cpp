@@ -154,7 +154,7 @@ nlohmann::json CSandwichShop::save() const
     return o;
 }
 
-bool CSandwichShop::load(const nlohmann::json& json)
+void CSandwichShop::load(const nlohmann::json& json)
 {
     _turns = json.value<unsigned long>(TagNames::RebellionHideout::turns, 0);
     _goldAvailable = json.value<int>(TagNames::RebellionHideout::gold, 0);
@@ -177,7 +177,7 @@ bool CSandwichShop::load(const nlohmann::json& json)
         registerItemGenerators();
     }
 
-    return CRoom::load(json);
+    CRoom::load(json);
 }
 
 void CSandwichShop::printHeader()

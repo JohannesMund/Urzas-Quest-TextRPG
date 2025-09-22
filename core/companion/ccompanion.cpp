@@ -62,11 +62,10 @@ nlohmann::json CCompanion::save() const
     return o;
 }
 
-bool CCompanion::load(const nlohmann::json& json)
+void CCompanion::load(const nlohmann::json& json)
 {
     _description = json.value<std::string>(TagNames::Companion::description, "");
     _level = json.value(TagNames::Companion::level, 0);
-    return true;
 }
 
 bool CCompanion::fireDefaultAction() const

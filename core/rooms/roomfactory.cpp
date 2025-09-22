@@ -4,55 +4,58 @@
 #include "cfield.h"
 #include "cgamemanagement.h"
 #include "cinjuredpet.h"
+#include "console.h"
 #include "croom.h"
 #include "cstartingroom.h"
 #include "ctown.h"
+#include "save/exceptions.h"
 
+#include <iostream>
 #include <nlohmann/json.hpp>
 
 CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
 {
     CRoom* newRoom = nullptr;
+
     if (CGameStateObject::compareObjectName(TagNames::Room::field, json))
     {
         newRoom = new CField();
     }
-    if (CGameStateObject::compareObjectName(TagNames::Room::town, json))
+    else if (CGameStateObject::compareObjectName(TagNames::Room::town, json))
     {
         newRoom = new CTown();
     }
-    if (CGameStateObject::compareObjectName(TagNames::Room::capital, json))
+    else if (CGameStateObject::compareObjectName(TagNames::Room::capital, json))
     {
         newRoom = new CCapital();
     }
-    if (CGameStateObject::compareObjectName(TagNames::Room::injuredPet, json))
+    else if (CGameStateObject::compareObjectName(TagNames::Room::injuredPet, json))
     {
         newRoom = new CInjuredPet();
     }
-    if (CGameStateObject::compareObjectName(TagNames::Room::startingRoom, json))
+    else if (CGameStateObject::compareObjectName(TagNames::Room::startingRoom, json))
     {
         newRoom = new CStartingRoom();
     }
-
-    if (newRoom != nullptr)
+    else
     {
-        if (newRoom->load(json) == true)
-        {
-            return newRoom;
-        }
-        delete newRoom;
-        return nullptr;
+        newRoom = CGameManagement::getInstance()->getProgressionInstance()->callModuleRoomFactory(
+            CGameStateObject::getObjectNameFromJson(json));
     }
 
-    newRoom = CGameManagement::getInstance()->getProgressionInstance()->callModuleRoomFactory(
-        CGameStateObject::getObjectNameFromJson(json));
     if (newRoom != nullptr)
     {
-        if (newRoom->load(json) == true)
+        try
         {
+            newRoom->load(json);
             return newRoom;
         }
-        delete newRoom;
+        catch (const SaveFile::CSaveFileException& e)
+        {
+            Console::printErr(e.what());
+            delete newRoom;
+            return nullptr;
+        }
     }
     return nullptr;
 }

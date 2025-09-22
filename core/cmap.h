@@ -85,7 +85,7 @@ public:
         CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
     virtual nlohmann::json save() const override;
-    virtual bool load(const nlohmann::json& json) override;
+    virtual void load(const nlohmann::json& json) override;
 
 protected:
     std::vector<std::vector<CRoom*>> _map;

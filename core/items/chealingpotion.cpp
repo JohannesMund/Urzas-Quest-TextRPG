@@ -7,7 +7,7 @@
 
 #include <format>
 
-CHealingPotion::CHealingPotion(const PotionSize& size) : CItem("CHealingPotion")
+CHealingPotion::CHealingPotion(const PotionSize& size) : CItem(TagNames::Item::healingPotion)
 {
     std::string name = "Potion of Healing";
     _description = "A fancy flask, made of glass with a shimmering, deep-red potion with shiny pink clouds inside. "

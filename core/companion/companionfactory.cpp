@@ -3,9 +3,11 @@
 #include "cdefendercompanion.h"
 #include "cgamemanagement.h"
 #include "chealercompanion.h"
+#include "console.h"
 #include "cscarymonstercompanion.h"
 #include "csupportcompanion.h"
 #include "ressources.h"
+#include "save/exceptions.h"
 
 #include <nlohmann/json.hpp>
 
@@ -32,14 +34,19 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
 
     if (newCompanion != nullptr)
     {
-        if (newCompanion->load(json) == true)
+        try
         {
+            newCompanion->load(json);
             return newCompanion;
         }
-        delete newCompanion;
-        return nullptr;
+        catch (const SaveFile::CSaveFileException& e)
+        {
+            Console::printErr(e.what());
+            delete newCompanion;
+            return nullptr;
+        }
     }
-    return newCompanion;
+    return nullptr;
 }
 
 CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nlohmann::json& json)
@@ -49,13 +56,18 @@ CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nloh
             CGameStateObject::getObjectNameFromJson(json));
     if (newCompanion != nullptr)
     {
-        if (newCompanion->load(json) == true)
+        try
         {
+            newCompanion->load(json);
             return newCompanion;
         }
-        delete newCompanion;
+        catch (const SaveFile::CSaveFileException& e)
+        {
+            Console::printErr(e.what());
+            delete newCompanion;
+        }
     }
-    return nullptr;
+    return newCompanion;
 }
 
 CCompanion* CompanionFactory::makeRandomCompanion()

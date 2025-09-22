@@ -366,7 +366,7 @@ nlohmann::json CPlayer::save() const
     return json;
 }
 
-bool CPlayer::load(const nlohmann::json& json)
+void CPlayer::load(const nlohmann::json& json)
 {
     _hp = json.value<int>(TagNames::Player::hp, 1);
     _maxHp = json.value<int>(TagNames::Player::maxHp, 1);
@@ -386,8 +386,6 @@ bool CPlayer::load(const nlohmann::json& json)
             }
         }
     }
-
-    return false;
 }
 
 void CPlayer::removeAllSupportCompanions()

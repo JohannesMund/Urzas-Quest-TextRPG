@@ -90,13 +90,13 @@ nlohmann::json CSupportCompanion::save() const
     return o;
 }
 
-bool CSupportCompanion::load(const nlohmann::json& json)
+void CSupportCompanion::load(const nlohmann::json& json)
 {
     _moduleName = json.value<std::string>(TagNames::Common::moduleName, "");
     if (_moduleName.empty())
     {
-        return false;
+        return;
     }
 
-    return CCompanion::load(json);
+    CCompanion::load(json);
 }

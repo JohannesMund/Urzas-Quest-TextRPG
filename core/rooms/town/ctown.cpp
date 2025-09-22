@@ -124,8 +124,8 @@ nlohmann::json CTown::save() const
     return o;
 }
 
-bool CTown::load(const nlohmann::json& json)
+void CTown::load(const nlohmann::json& json)
 {
     _name = json.value<std::string>(TagNames::Room::name, "");
-    return CRoom::load(json);
+    CRoom::load(json);
 }

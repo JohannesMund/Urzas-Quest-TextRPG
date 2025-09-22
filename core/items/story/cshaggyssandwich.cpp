@@ -20,7 +20,8 @@ CShaggysSandwich::CShaggysSandwich() :
                CSandwich::EIngredients::eMortardella, CSandwich::EIngredients::eMortardella,
                CSandwich::EIngredients::ePeperoni,    CSandwich::EIngredients::ePeperoni,
                CSandwich::EIngredients::eCheddar,     CSandwich::EIngredients::eCheddar,
-               CSandwich::EIngredients::eBacon,       CSandwich::EIngredients::eOlives})
+               CSandwich::EIngredients::eBacon,       CSandwich::EIngredients::eOlives},
+              TagNames::Item::Story::shaggysSandwich)
 {
     _name = std::format("{0}Sha{1}key {2}Sha{1}ggy{0}'s Sa{1}ndw{2}ich{3}",
                         CC::fgYellow(),

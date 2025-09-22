@@ -100,7 +100,7 @@ nlohmann::json CRoom::save() const
     return o;
 }
 
-bool CRoom::load(const nlohmann::json& json)
+void CRoom::load(const nlohmann::json& json)
 {
     _pathNorth = json.value<bool>(TagNames::Room::pathNorth, true);
     _pathEast = json.value<bool>(TagNames::Room::pathEast, true);
@@ -114,7 +114,6 @@ bool CRoom::load(const nlohmann::json& json)
     {
         _task = TaskFactory::loadTaskFromSaveGame(json[TagNames::Task::task]);
     }
-    return true;
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

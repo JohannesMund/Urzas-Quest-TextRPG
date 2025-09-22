@@ -97,11 +97,11 @@ nlohmann::json CBlackIvoryTower::save() const
     return o;
 }
 
-bool CBlackIvoryTower::load(const nlohmann::json& json)
+void CBlackIvoryTower::load(const nlohmann::json& json)
 {
     _isOpen = json.value<bool>(TagNames::BlackIvoryTower::isOpen, false);
     _hadADoener = json.value<bool>(TagNames::BlackIvoryTower::hadADoener, false);
-    return CRoom::load(json);
+    CRoom::load(json);
 }
 
 CMap::RoomFilter CBlackIvoryTower::towerFilter()

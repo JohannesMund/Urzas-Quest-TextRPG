@@ -29,9 +29,9 @@ public:
      * @return a json object with the state of the class
      */
     virtual nlohmann::json save() const = 0;
-    virtual bool load(const nlohmann::json&)
+    virtual void load(const nlohmann::json&)
     {
-        return true;
+        return;
     };
 
     static std::string getObjectNameFromJson(const nlohmann::json& json);

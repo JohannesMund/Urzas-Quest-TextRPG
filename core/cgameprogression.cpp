@@ -508,3 +508,17 @@ CTask* CGameProgression::callModuleTaskFactory(const std::string_view& name)
 
     return nullptr;
 }
+
+CItem* CGameProgression::callModuleItemFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto item = module.itemFactory(name);
+        if (item != nullptr)
+        {
+            return item;
+        }
+    }
+
+    return nullptr;
+}

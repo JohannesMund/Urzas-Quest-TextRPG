@@ -1,7 +1,9 @@
 #include "taskfactory.h"
 #include "cbountyhunt.h"
 #include "cgamemanagement.h"
+#include "console.h"
 #include "ctask.h"
+#include "save/exceptions.h"
 
 CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
 {
@@ -10,27 +12,27 @@ CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
     {
         newTask = new CBountyHunt("", 0);
     }
+    else
+    {
+        newTask = CGameManagement::getInstance()->getProgressionInstance()->callModuleTaskFactory(
+            CGameStateObject::getObjectNameFromJson(json));
+    }
 
     if (newTask != nullptr)
     {
-        if (newTask->load(json) == true)
+        try
         {
+            newTask->load(json);
             return newTask;
         }
-        delete newTask;
-        return nullptr;
+        catch (const SaveFile::CSaveFileException& e)
+        {
+            Console::printErr(e.what());
+            delete newTask;
+            return nullptr;
+        }
     }
 
-    newTask = CGameManagement::getInstance()->getProgressionInstance()->callModuleTaskFactory(
-        CGameStateObject::getObjectNameFromJson(json));
-    if (newTask != nullptr)
-    {
-        if (newTask->load(json) == true)
-        {
-            return newTask;
-        }
-        delete newTask;
-    }
     return nullptr;
 }
 

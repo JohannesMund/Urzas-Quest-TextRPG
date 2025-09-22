@@ -75,10 +75,10 @@ nlohmann::json CLakeOfTearsTask::save() const
     return o;
 }
 
-bool CLakeOfTearsTask::load(const nlohmann::json& json)
+void CLakeOfTearsTask::load(const nlohmann::json& json)
 {
     _steps = json.value<unsigned int>(TagNames::LakeOfTears::steps, 0);
-    return CTask::load(json);
+    CTask::load(json);
 }
 
 void CLakeOfTearsTask::battle(const EEnemy enemyType)

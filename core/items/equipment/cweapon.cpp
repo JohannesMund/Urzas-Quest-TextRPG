@@ -6,7 +6,7 @@
 #include <format>
 
 CWeapon::CWeapon(const Ressources::Items::EQuality quality) :
-    CEquipment(Ressources::Items::EType::eWeapon, quality, "CWeapon")
+    CEquipment(Ressources::Items::EType::eWeapon, quality, TagNames::Item::Equipment::weapon)
 {
     _hasBattleEffect = true;
     _hasBattleBuff = true;

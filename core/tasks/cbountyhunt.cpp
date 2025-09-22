@@ -71,9 +71,9 @@ nlohmann::json CBountyHunt::save() const
     return j;
 }
 
-bool CBountyHunt::load(const nlohmann::json& json)
+void CBountyHunt::load(const nlohmann::json& json)
 {
     _name = json.value<std::string>(TagNames::Task::name, "");
     _reward = json.value<unsigned int>(TagNames::Task::reward, 0);
-    return CTask::load(json);
+    CTask::load(json);
 }

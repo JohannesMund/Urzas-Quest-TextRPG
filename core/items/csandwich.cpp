@@ -6,7 +6,8 @@
 
 #include <format>
 
-CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients, const std::string objectName) : CItem(objectName)
+CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients, const std::string_view& objectName) :
+    CItem(objectName)
 {
     _ingredients = ingredients;
     _isSellable = false;

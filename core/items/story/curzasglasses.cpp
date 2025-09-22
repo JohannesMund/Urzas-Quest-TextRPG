@@ -7,7 +7,7 @@
 #include <format>
 #include <random>
 
-CUrzasGlasses::CUrzasGlasses() : CItem("CUrzasGlasses")
+CUrzasGlasses::CUrzasGlasses() : CItem(TagNames::Item::Story::urzasGlasses)
 {
 
     _name = std::format("{}Ur{}za{}s'{} G{}la{}ss{}es{}",

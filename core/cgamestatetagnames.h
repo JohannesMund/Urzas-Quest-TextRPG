@@ -5,35 +5,35 @@ namespace TagNames
 {
 namespace Common
 {
-constexpr std::string_view objectName = "objectName";
-constexpr std::string_view moduleName = "moduleName";
-constexpr std::string_view name = "name";
-constexpr std::string_view description = "description";
-constexpr std::string_view level = "level";
-constexpr std::string_view x = "coord-x";
-constexpr std::string_view y = "coord-y";
-constexpr std::string_view isOpen = "isOpen";
-constexpr std::string_view gold = "gold";
-constexpr std::string_view turns = "turns";
-constexpr std::string_view count = "count";
+constexpr std::string_view objectName = "ObjectName";
+constexpr std::string_view moduleName = "ModuleName";
+constexpr std::string_view name = "Name";
+constexpr std::string_view description = "Description";
+constexpr std::string_view level = "Level";
+constexpr std::string_view x = "Coord-X";
+constexpr std::string_view y = "Coord-Y";
+constexpr std::string_view isOpen = "IsOpen";
+constexpr std::string_view gold = "Gold";
+constexpr std::string_view turns = "Turns";
+constexpr std::string_view count = "Count";
 } // namespace Common
 
 namespace FileSpec
 {
-constexpr std::string_view fileSpec = "fileSpec";
-constexpr std::string_view version = "version";
+constexpr std::string_view fileSpec = "FileSpec";
+constexpr std::string_view version = "Version";
 constexpr std::string_view name = TagNames::Common::name;
 } // namespace FileSpec
 
 namespace Player
 {
 constexpr std::string_view player = "Player";
-constexpr std::string_view hp = "hp";
-constexpr std::string_view maxHp = "maxHp";
+constexpr std::string_view hp = "Hp";
+constexpr std::string_view maxHp = "MaxHp";
 constexpr std::string_view gold = TagNames::Common::gold;
-constexpr std::string_view xp = "xp";
-constexpr std::string_view initiative = "initiative";
-constexpr std::string_view supporters = "supporters";
+constexpr std::string_view xp = "Pp";
+constexpr std::string_view initiative = "Initiative";
+constexpr std::string_view supporters = "Supporters";
 constexpr std::string_view name = TagNames::Common::name;
 constexpr std::string_view level = TagNames::Common::level;
 } // namespace Player
@@ -52,8 +52,8 @@ constexpr std::string_view level = TagNames::Common::level;
 namespace Map
 {
 constexpr std::string_view map = "Map";
-constexpr std::string_view playerPosition = "playerPosition";
-constexpr std::string_view roomMatrix = "roomMatrix";
+constexpr std::string_view playerPosition = "PlayerPosition";
+constexpr std::string_view roomMatrix = "RoomMatrix";
 } // namespace Map
 
 namespace Room
@@ -62,30 +62,51 @@ constexpr std::string_view field = "Field";
 constexpr std::string_view town = "Town";
 constexpr std::string_view capital = "Capital";
 constexpr std::string_view injuredPet = "InjuredPet";
-constexpr std::string_view startingRoom = "startingRoom";
-
-constexpr std::string_view pathNorth = "pathNorth";
-constexpr std::string_view pathEast = "pathEast";
-constexpr std::string_view pathSouth = "pathSouth";
-constexpr std::string_view pathWest = "pathWest";
-constexpr std::string_view showInFogOfWar = "showInFogOfWar";
-constexpr std::string_view seen = "seen";
+constexpr std::string_view startingRoom = "StartingRoom";
+constexpr std::string_view pathNorth = "PathNorth";
+constexpr std::string_view pathEast = "PathEast";
+constexpr std::string_view pathSouth = "PathSouth";
+constexpr std::string_view pathWest = "PathWest";
+constexpr std::string_view showInFogOfWar = "ShowInFogOfWar";
+constexpr std::string_view seen = "Seen";
 constexpr std::string_view description = TagNames::Common::description;
 constexpr std::string_view name = TagNames::Common::name;
 constexpr std::string_view isOpen = TagNames::Common::isOpen;
-constexpr std::string_view petIsDead = "petIsDead";
+constexpr std::string_view petIsDead = "PetIsDead";
 } // namespace Room
 
 namespace Task
 {
 constexpr std::string_view task = "Task";
 constexpr std::string_view bountyHunt = "BountyHunt";
-
-constexpr std::string_view finished = "finished";
-constexpr std::string_view autoExecute = "autoExecute";
-constexpr std::string_view reward = "reward";
+constexpr std::string_view finished = "Finished";
+constexpr std::string_view autoExecute = "AutoExecute";
+constexpr std::string_view reward = "Reward";
 constexpr std::string_view name = TagNames::Common::name;
-
 } // namespace Task
+
+namespace Item
+{
+namespace Equipment
+{
+constexpr std::string_view armor = "Armor";
+constexpr std::string_view equipment = "Equipment";
+constexpr std::string_view shield = "Shield";
+constexpr std::string_view weapon = "Weapon";
+} // namespace Equipment
+namespace Story
+{
+constexpr std::string_view laylasRibbon = "LaylasRibbon";
+constexpr std::string_view shaggysSandwich = "ShaggysSandwich";
+constexpr std::string_view urzasGlasses = "UrzasGlasses";
+
+} // namespace Story
+constexpr std::string_view bomb = "Bomb";
+constexpr std::string_view healingPotion = "HealingPotion";
+constexpr std::string_view heartContainer = "HeartContainer";
+constexpr std::string_view junkItem = "junkItem";
+constexpr std::string_view phoenixFeather = "PhoenixFeather";
+constexpr std::string_view sandwich = "Sandwich";
+} // namespace Item
 
 } // namespace TagNames

@@ -6,7 +6,7 @@
 #include <format>
 CEquipment::CEquipment(const Ressources::Items::EType type,
                        const Ressources::Items::EQuality quality,
-                       const std::string& objectName) :
+                       const std::string_view& objectName) :
     CItem(objectName)
 {
     _level = 1;

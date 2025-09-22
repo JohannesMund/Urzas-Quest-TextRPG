@@ -3,6 +3,7 @@
 #include "ressources.h"
 
 #include <functional>
+#include <nlohmann/json_fwd.hpp>
 #include <string>
 #include <vector>
 
@@ -34,6 +35,8 @@ public:
                                    const unsigned int dropRate);
     void unregisterShopItemGeneratorByName(const std::string_view& moduleName);
 
+    static CItem* loadItemFromSavGame(const nlohmann::json& json);
+
 private:
     CItemFactory()
     {
@@ -62,7 +65,7 @@ private:
     struct ItemGenerator
     {
         std::string moduleName;
-        ItemGeneratorFunction lootGenerator;
+        ItemGeneratorFunction generatorFunction;
         unsigned int dropRate;
 
         static std::function<bool(const ItemGenerator&)> nameFilter(const std::string_view& moduleName)

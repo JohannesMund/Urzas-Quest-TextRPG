@@ -31,7 +31,7 @@ protected:
     virtual char getMapSymbol() const override;
 
     virtual nlohmann::json save() const override;
-    virtual bool load(const nlohmann::json& json) override;
+    virtual void load(const nlohmann::json& json) override;
 
 private:
     CShop _shop;

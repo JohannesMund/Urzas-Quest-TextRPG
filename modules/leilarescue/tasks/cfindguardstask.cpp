@@ -75,7 +75,7 @@ nlohmann::json CFindGuardsTask::save() const
     return o;
 }
 
-bool CFindGuardsTask::load(const nlohmann::json& json)
+void CFindGuardsTask::load(const nlohmann::json& json)
 {
     _currentStep = json.value<unsigned int>(TagNames::LeilaRescue::findGuardsStep, 0);
     _mafiaMoney = json.value<unsigned int>(TagNames::LeilaRescue::mafiaMoney, 0);
@@ -86,7 +86,7 @@ bool CFindGuardsTask::load(const nlohmann::json& json)
     {
         registerLootItemGenerator();
     }
-    return CTask::load(json);
+    CTask::load(json);
 }
 
 void CFindGuardsTask::findFirstGuard()

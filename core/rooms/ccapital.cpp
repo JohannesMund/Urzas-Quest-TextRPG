@@ -51,10 +51,10 @@ nlohmann::json CCapital::save() const
     return o;
 }
 
-bool CCapital::load(const nlohmann::json& json)
+void CCapital::load(const nlohmann::json& json)
 {
     _seen = json.value<bool>(TagNames::Room::isOpen, false);
-    return CTown::load(json);
+    CTown::load(json);
 }
 
 char CCapital::getMapSymbol() const

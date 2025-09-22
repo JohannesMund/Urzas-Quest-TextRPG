@@ -30,11 +30,10 @@ nlohmann::json CTask::save() const
     return j;
 }
 
-bool CTask::load(const nlohmann::json& json)
+void CTask::load(const nlohmann::json& json)
 {
     _isFinished = json.value<bool>(TagNames::Task::finished, false);
     _isAutoExecute = json.value<bool>(TagNames::Task::autoExecute, false);
-    return false;
 }
 
 CTask::CTask(const std::string_view& objectName) : CGameStateObject(objectName)

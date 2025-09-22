@@ -5,7 +5,7 @@
 
 #include <format>
 
-CPhoenixFeather::CPhoenixFeather() : CItem("CPhoenixFeather")
+CPhoenixFeather::CPhoenixFeather() : CItem(TagNames::Item::phoenixFeather)
 {
     _name = std::format("{}Ph{}oe{}ni{}x f{}ea{}th{}er{}",
                         CC::fgRed(),

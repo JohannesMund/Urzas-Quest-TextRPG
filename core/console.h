@@ -54,7 +54,9 @@ void cls(const bool bHud = true);
  * @param align the alignment
  * @param bReset auto true, reset colors at end of output.
  */
-void printLn(std::string text, const EAlignment align = EAlignment::eLeft, const bool bReset = true);
+void printLn(const std::string_view& text, const EAlignment align = EAlignment::eLeft, const bool bReset = true);
+
+void printErr(const std::string_view& text);
 
 /**
  * @brief printWithSpacer Prints two lines of text with a spacer inbetween

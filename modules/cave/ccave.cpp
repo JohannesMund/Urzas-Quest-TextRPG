@@ -94,10 +94,10 @@ nlohmann::json CCave::save() const
     return o;
 }
 
-bool CCave::load(const nlohmann::json& json)
+void CCave::load(const nlohmann::json& json)
 {
     _isOpen = json.value<bool>(TagNames::Cave::isOpen, false);
-    return CRoom::load(json);
+    CRoom::load(json);
 }
 
 void CCave::initDungeon()
