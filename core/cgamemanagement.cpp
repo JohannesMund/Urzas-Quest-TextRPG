@@ -18,8 +18,8 @@
 #include "save/csavefile.h"
 #include "save/exceptions.h"
 
+#include <format>
 #include <iostream>
-
 #include <string>
 #include <vector>
 
@@ -372,13 +372,15 @@ bool CGameManagement::load()
     {
         return false;
     }
-
     try
     {
         CSaveFile saveGame;
         saveGame.load();
         saveGame.loadGameObject(&_player);
+        saveGame.loadGameObject(&_inventory);
         saveGame.loadGameObject(_companion);
+        saveGame.loadGameObject(&_map);
+        saveGame.loadGameObject(&_progression);
     }
     catch (SaveFile::CSaveFileException& e)
     {

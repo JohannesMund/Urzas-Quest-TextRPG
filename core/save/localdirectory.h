@@ -7,6 +7,8 @@
  * Handles a local directory to store stuff (~/.UrzasQuestTextRPG)
  * @remark This code is not platform independent.
  * @remark  Windows and Linux are covered. Mac and Posix should work as well
+ * @remark throws exceptions
+ * @sa save/exceptions.h CSaveFileException
  */
 
 namespace LocalDirectory

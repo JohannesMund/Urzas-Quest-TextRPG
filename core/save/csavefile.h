@@ -7,6 +7,11 @@ class CGameStateObject;
 /**
  * @brief represents a save game
  * @remark provides a check whether a save game file is available
+ * @remark uses a file in the local directory
+ * @sa save/localDirectory.h
+ * @remark throws exceptions
+ * @sa save/exceptions.h CSaveFileException
+ *
  */
 class CSaveFile
 {
@@ -14,6 +19,7 @@ public:
     /**
      * @brief is a save game available?
      * @remark just looks in the destination folder whether there is a file with the right name
+     * @remark does not throw exceptions, if an error occurs, it is asumed, that no saveGame exists
      */
     static bool saveGameAvailable();
 
@@ -43,6 +49,10 @@ public:
      * @remark existing file is overwritten
      */
     void dump();
+
+    /**
+     * @brief loads a save game
+     */
     void load();
 
 private:
