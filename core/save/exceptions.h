@@ -13,7 +13,7 @@ public:
     }
     CSaveFileException(const std::string_view& what) : std::exception()
     {
-        _what = std::format("CSaveFile Exception: ", what);
+        _what = std::format("CSaveFile Exception: {}", what);
     }
     virtual const char* what() const throw()
     {

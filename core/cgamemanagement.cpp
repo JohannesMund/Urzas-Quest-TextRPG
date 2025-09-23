@@ -378,7 +378,11 @@ bool CGameManagement::load()
         saveGame.load();
         saveGame.loadGameObject(&_player);
         saveGame.loadGameObject(&_inventory);
-        saveGame.loadGameObject(_companion);
+        auto c = CompanionFactory::loadCompanionFromSaveGame(saveGame.root());
+        if (c != nullptr)
+        {
+            _companion = c;
+        }
         saveGame.loadGameObject(&_map);
         saveGame.loadGameObject(&_progression);
     }
@@ -417,7 +421,10 @@ bool CGameManagement::save()
         savegame.addGameObject(&_player);
         savegame.addGameObject(&_inventory);
         savegame.addGameObject(&_map);
-        savegame.addGameObject(_companion);
+        if (_companion->level() > 0)
+        {
+            savegame.addGameObject(_companion);
+        }
         savegame.addGameObject(&_progression);
         savegame.dump();
     }

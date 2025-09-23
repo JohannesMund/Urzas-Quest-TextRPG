@@ -204,7 +204,6 @@ private:
     void progressToStage(EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
-
     void registerModule(const Module& modules);
 
     EGameStage _currentStage = EGameStage::eNone;

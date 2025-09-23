@@ -41,6 +41,7 @@ constexpr std::string_view level = TagNames::Common::level;
 
 namespace Companion
 {
+constexpr std::string_view companion = "Companion";
 constexpr std::string_view attackCompanion = "AttackCompanion";
 constexpr std::string_view defenderCompanion = "DefenderCompanion";
 constexpr std::string_view healerCompanion = "HealerCompanion";

@@ -55,6 +55,8 @@ public:
      */
     void load();
 
+    nlohmann::json root() const;
+
 private:
     void addObject(const std::string_view& key, const nlohmann::json& object);
     nlohmann::json getObject(const std::string_view& key);

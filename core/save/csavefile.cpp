@@ -55,7 +55,7 @@ void CSaveFile::loadGameObject(CGameStateObject* obj)
     }
     catch (const SaveFile::CSaveFileException& e)
     {
-        throw;
+        throw e;
     }
 }
 
@@ -83,7 +83,7 @@ void CSaveFile::dump()
     }
     catch (const SaveFile::CSaveFileException& e)
     {
-        throw;
+        throw e;
     }
     catch (const nlohmann::json::exception& e)
     {
@@ -114,12 +114,17 @@ void CSaveFile::load()
     }
     catch (const SaveFile::CSaveFileException& e)
     {
-        throw;
+        throw e;
     }
     catch (const nlohmann::json::exception& e)
     {
         throw SaveFile::CSaveFileException(e);
     }
+}
+
+nlohmann::json CSaveFile::root() const
+{
+    return _saveGame;
 }
 
 void CSaveFile::addObject(const std::string_view& key, const nlohmann::json& object)
@@ -142,6 +147,6 @@ nlohmann::json CSaveFile::getObject(const std::string_view& key)
         return {};
     }
 
-    throw SaveFile::CSaveFileException(std::format("Key not found: ", key));
+    throw SaveFile::CSaveFileException(std::format("Key not found: {}", key));
     return {};
 }
