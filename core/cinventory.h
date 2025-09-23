@@ -91,6 +91,7 @@ private:
     void viewItem(CItem* item);
 
     virtual nlohmann::json save() const override;
+    void load(const nlohmann::json&) override;
 
     CItem* getItem(const unsigned int index);
     ItemList _inventory;

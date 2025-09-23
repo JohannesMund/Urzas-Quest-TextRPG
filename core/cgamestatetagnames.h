@@ -103,10 +103,11 @@ constexpr std::string_view shaggysSandwich = "ShaggysSandwich";
 constexpr std::string_view urzasGlasses = "UrzasGlasses";
 
 } // namespace Story
+constexpr std::string_view inventory = "Inventory";
 constexpr std::string_view bomb = "Bomb";
 constexpr std::string_view healingPotion = "HealingPotion";
 constexpr std::string_view heartContainer = "HeartContainer";
-constexpr std::string_view junkItem = "junkItem";
+constexpr std::string_view junkItem = "JunkItem";
 constexpr std::string_view phoenixFeather = "PhoenixFeather";
 constexpr std::string_view sandwich = "Sandwich";
 constexpr std::string_view part = "Part";

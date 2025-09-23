@@ -57,6 +57,7 @@ CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
             return nullptr;
         }
     }
+    throw SaveFile::CSaveFileException(std::format("Unknown Room: {}", CGameStateObject::getObjectNameFromJson(json)));
     return nullptr;
 }
 

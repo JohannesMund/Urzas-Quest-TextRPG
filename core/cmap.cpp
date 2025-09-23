@@ -426,6 +426,7 @@ void CMap::load(const nlohmann::json& json)
 
     if (json.contains(TagNames::Map::roomMatrix))
     {
+        _map.clear();
         for (auto row : json[TagNames::Map::roomMatrix])
         {
             std::vector<CRoom*> mapRow;

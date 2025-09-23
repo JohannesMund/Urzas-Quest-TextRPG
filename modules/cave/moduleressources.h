@@ -24,6 +24,7 @@ namespace CaveRessources
 void initModule();
 void deInitModule();
 void initWorldMap(std::vector<CRoom*>& rooms);
+
 CRoom* roomFactory(const std::string_view& objectName);
 CTask* taskFactory(const std::string_view& objectName);
 

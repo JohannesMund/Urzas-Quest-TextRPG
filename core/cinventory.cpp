@@ -394,8 +394,23 @@ nlohmann::json CInventory::save() const
     {
         CSaveFile::addGameObject(inventory, i);
     }
-    o["inventoy"] = inventory;
+    o[TagNames::Item::inventory] = inventory;
     return o;
+}
+
+void CInventory::load(const nlohmann::json& json)
+{
+    if (json.contains(TagNames::Item::inventory))
+    {
+        for (auto o : json[TagNames::Item::inventory])
+        {
+            auto item = CItemFactory::loadItemFromSavGame(o);
+            if (item != nullptr)
+            {
+                _inventory.push_back(item);
+            }
+        }
+    }
 }
 
 CItem* CInventory::getItem(const unsigned int index)
