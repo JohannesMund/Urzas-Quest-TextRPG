@@ -63,6 +63,15 @@ CTask* RatFarmRessources::taskFactory(const std::string_view& objectName)
     return nullptr;
 }
 
+CItem* RatFarmRessources::itemFactory(const std::string_view& objectName)
+{
+    if (TagNames::RatFarm::ratFarm.compare(objectName) == 0)
+    {
+        return new CRatFarmTurnip();
+    }
+    return nullptr;
+}
+
 std::string RatFarmRessources::getColoredBossString()
 {
     return std::format("{0}Go{1}d-M{2}ot{1}he{2}r o{0}f a{1}ll {0}Ra{2}ts{3}",

@@ -4,9 +4,11 @@
 #include "companions/cguardcompanion.h"
 #include "companions/cleilacompanion.h"
 #include "ctask.h"
+#include "items/cguardstuff.h"
 #include "ressources.h"
 #include "tasks/cfindguardstask.h"
 #include "tasks/cleilarescuecapitaltask.h"
+
 
 #include <format>
 #include <nlohmann/json.hpp>
@@ -27,15 +29,24 @@ void LeilaRescueRessources::questAccepted()
 
 CTask* LeilaRescueRessources::taskFactory(const std::string_view& objectName)
 {
-    if (TagNames::LeilaRescue::findGuards.compare(objectName))
+    if (TagNames::LeilaRescue::findGuards.compare(objectName) == 0)
     {
         return new CFindGuardsTask(0);
     }
-    if (TagNames::LeilaRescue::leilaRescueCapital.compare(objectName))
+    if (TagNames::LeilaRescue::leilaRescueCapital.compare(objectName) == 0)
     {
         return new CLeilaRescueCapitalTask();
     }
 
+    return nullptr;
+}
+
+CItem* LeilaRescueRessources::itemFactory(const std::string_view& objectName)
+{
+    if (TagNames::LeilaRescue::guardStuff.compare(objectName) == 0)
+    {
+        return new CGuardStuff();
+    }
     return nullptr;
 }
 

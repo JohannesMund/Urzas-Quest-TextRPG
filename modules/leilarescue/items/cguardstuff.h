@@ -29,6 +29,10 @@ public:
 
     typedef EnumIterator<EPart, EPart::eBatch, EPart::eUnknown> partIterator;
 
+protected:
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json&) override;
+
 private:
     EPart _part;
 };

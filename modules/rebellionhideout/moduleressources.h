@@ -9,20 +9,22 @@ namespace TagNames
 {
 namespace RebellionHideout
 {
-constexpr std::string_view rebellionHideout = "rebellionHideout";
+constexpr std::string_view rebellionHideout = "RebellionHideout";
+constexpr std::string_view bagOfIngredients = "BagOfIngredients";
 constexpr std::string_view gold = TagNames::Common::gold;
 constexpr std::string_view turns = TagNames::Common::turns;
-constexpr std::string_view playerOwnsShot = "playerOwnsShop";
-constexpr std::string_view playerDiscoveredHideout = "playerDiscoveredHideout";
-constexpr std::string_view sandwiches = "sandwiches";
-constexpr std::string_view ingredientStore = "ingredientStore";
-constexpr std::string_view ingredient = "ingredient";
-constexpr std::string_view itemGeneratorsRegistered = "itemGeneratorsRegistered";
+constexpr std::string_view playerOwnsShot = "PlayerOwnsShop";
+constexpr std::string_view playerDiscoveredHideout = "PlayerDiscoveredHideout";
+constexpr std::string_view sandwiches = "Sandwiches";
+constexpr std::string_view ingredientStore = "IngredientStore";
+constexpr std::string_view ingredient = "Ingredient";
+constexpr std::string_view itemGeneratorsRegistered = "ItemGeneratorsRegistered";
 constexpr std::string_view count = TagNames::Common::count;
 } // namespace RebellionHideout
 } // namespace TagNames
 
 class CRoom;
+class CItem;
 namespace RebellionHideoutRessources
 {
 
@@ -35,6 +37,7 @@ void deInitModuleRebellionHideout();
 void initWorldMap(std::vector<CRoom*>& rooms);
 
 CRoom* roomFactory(const std::string_view& objectName);
+CItem* itemFactory(const std::string_view& objectName);
 
 std::string moduleNameSandwichShop();
 std::string moduleNameRebellionHideout();

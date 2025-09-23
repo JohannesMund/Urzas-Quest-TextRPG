@@ -16,6 +16,7 @@ constexpr std::string_view isOpen = "IsOpen";
 constexpr std::string_view gold = "Gold";
 constexpr std::string_view turns = "Turns";
 constexpr std::string_view count = "Count";
+constexpr std::string_view size = "Size";
 } // namespace Common
 
 namespace FileSpec
@@ -107,6 +108,7 @@ constexpr std::string_view heartContainer = "HeartContainer";
 constexpr std::string_view junkItem = "junkItem";
 constexpr std::string_view phoenixFeather = "PhoenixFeather";
 constexpr std::string_view sandwich = "Sandwich";
+constexpr std::string_view part = "Part";
 } // namespace Item
 
 } // namespace TagNames

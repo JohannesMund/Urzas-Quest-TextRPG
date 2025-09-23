@@ -1,5 +1,6 @@
 #include "moduleressources.h"
 #include "colorize.h"
+#include "rebellionhideout/cbagofingredients.h"
 #include "rebellionhideout/csandwichshop.h"
 
 #include <format>
@@ -40,6 +41,15 @@ CRoom* RebellionHideoutRessources::roomFactory(const std::string_view& objectNam
     if (TagNames::RebellionHideout::rebellionHideout.compare(objectName) == 0)
     {
         return new CSandwichShop();
+    }
+    return nullptr;
+}
+
+CItem* RebellionHideoutRessources::itemFactory(const std::string_view& objectName)
+{
+    if (TagNames::RebellionHideout::bagOfIngredients.compare(objectName) == 0)
+    {
+        return new CBagOfIngredients();
     }
     return nullptr;
 }

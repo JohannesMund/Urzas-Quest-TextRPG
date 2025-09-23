@@ -55,9 +55,14 @@ void CRatFarmTurnip::useFromBattle(CEnemy*)
 
 nlohmann::json CRatFarmTurnip::save() const
 {
-    nlohmann::json o = CItem::save();
-    o["size"] = _size;
+    auto o = CItem::save();
+    o[TagNames::RatFarm::size] = _size;
     return o;
+}
+
+void CRatFarmTurnip::load(const nlohmann::json& json)
+{
+    _size = json.value<TurnipSize>(TagNames::RatFarm::size, TurnipSize::S);
 }
 
 void CRatFarmTurnip::use()

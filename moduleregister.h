@@ -60,7 +60,7 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noInitWorldMapFunction,
                                 CGameProgression::noSupportCompanionFactory,
                                 CGameProgression::noRoomFactory,
-                                CGameProgression::noItemFactory,
+                                &RatFarmRessources::itemFactory,
                                 &RatFarmRessources::taskFactory);
     progression->registerModule(SewerRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
@@ -117,7 +117,8 @@ void registerModules(CGameProgression* progression)
                                 &RebellionHideoutRessources::deInitModuleSandwichShop,
                                 &RebellionHideoutRessources::initWorldMap,
                                 CGameProgression::noSupportCompanionFactory,
-                                &RebellionHideoutRessources::roomFactory);
+                                &RebellionHideoutRessources::roomFactory,
+                                &RebellionHideoutRessources::itemFactory);
     /**
      * GameStage: LearnedAboutCult
      * Chapter 4

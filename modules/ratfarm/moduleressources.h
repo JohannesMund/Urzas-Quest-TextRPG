@@ -1,15 +1,19 @@
 #pragma once
 
+#include "cgamestatetagnames.h"
+
 #include <string>
 #include <utility>
 
 class CTask;
+class CItem;
 namespace TagNames
 {
 namespace RatFarm
 {
-constexpr std::string_view ratFarm = ("ratFarm");
-constexpr std::string_view turnip = ("turnip");
+constexpr std::string_view ratFarm = ("RatFarm");
+constexpr std::string_view turnip = ("Turnip");
+constexpr std::string_view size = TagNames::Common::size;
 } // namespace RatFarm
 } // namespace TagNames
 
@@ -20,6 +24,7 @@ void initModule();
 void deInitModule();
 
 CTask* taskFactory(const std::string_view& objectName);
+CItem* itemFactory(const std::string_view& objectName);
 
 std::string moduleName();
 std::string questLog();

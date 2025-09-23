@@ -1,9 +1,12 @@
 #include "cbagofingredients.h"
+#include "moduleressources.h"
 #include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
 
-CBagOfIngredients::CBagOfIngredients(const EBagSize size) : CSandwich(fill(size))
+CBagOfIngredients::CBagOfIngredients(const EBagSize size) :
+    CSandwich(fill(size), TagNames::RebellionHideout::bagOfIngredients)
 {
 
     _isBuyable = true;
