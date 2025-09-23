@@ -159,7 +159,7 @@ void CSandwichShop::load(const nlohmann::json& json)
     _turns = json.value<unsigned long>(TagNames::RebellionHideout::turns, 0);
     _goldAvailable = json.value<int>(TagNames::RebellionHideout::gold, 0);
     _playerOwnsShop = json.value<bool>(TagNames::RebellionHideout::playerOwnsShot, 0);
-    _playerDiscoveredHideout = json.value<unsigned long>(TagNames::RebellionHideout::playerDiscoveredHideout, 0);
+    _playerDiscoveredHideout = json.value<bool>(TagNames::RebellionHideout::playerDiscoveredHideout, false);
 
     if (json.contains(TagNames::RebellionHideout::ingredientStore))
     {
