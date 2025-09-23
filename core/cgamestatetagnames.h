@@ -26,6 +26,15 @@ constexpr std::string_view version = "Version";
 constexpr std::string_view name = TagNames::Common::name;
 } // namespace FileSpec
 
+namespace Progression
+{
+constexpr std::string_view currentStage = "CurrentStage";
+constexpr std::string_view turns = TagNames::Common::turns;
+constexpr std::string_view bodyCount = "BodyCount";
+constexpr std::string_view genocideCount = "GenocideCount";
+constexpr std::string_view finishedModules = "FinishedModules";
+} // namespace Progression
+
 namespace Player
 {
 constexpr std::string_view player = "Player";

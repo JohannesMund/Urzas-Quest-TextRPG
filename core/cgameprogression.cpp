@@ -24,7 +24,6 @@ void CGameProgression::initEncounters()
 
 void CGameProgression::initModules()
 {
-
     ModuleRegister::registerModules(this);
 }
 
@@ -452,19 +451,44 @@ void CGameProgression::reRegisterModuleForNextStage(const std::string_view& modu
 nlohmann::json CGameProgression::save() const
 {
     nlohmann::json o;
-    o["currentStage"] = _currentStage;
-    o["bodyCount"] = _bodyCount;
-    o["turns"] = _turns;
-    o["genocideCount"] = _genocideCount;
+    o[TagNames::Progression::currentStage] = _currentStage;
+    o[TagNames::Progression::bodyCount] = _bodyCount;
+    o[TagNames::Progression::turns] = _turns;
+    o[TagNames::Progression::genocideCount] = _genocideCount;
 
     nlohmann::json finishedModules = nlohmann::json::array();
     for (auto m : _finishedModules)
     {
         finishedModules.push_back(m);
     }
-    o["finishedModules"] = finishedModules;
+    o[TagNames::Progression::finishedModules] = finishedModules;
 
     return o;
+}
+
+void CGameProgression::load(const nlohmann::json& json)
+{
+    _turns = json.value<unsigned long>(TagNames::Progression::turns, 0);
+    _bodyCount = json.value<unsigned long>(TagNames::Progression::bodyCount, 0);
+    _genocideCount = json.value<unsigned long>(TagNames::Progression::genocideCount, 0);
+
+    _currentStage = json.value<EGameStage>(TagNames::Progression::currentStage, EGameStage::eStart);
+    for (auto s : gameStageIterator())
+    {
+        progressToStage(s);
+        if (s >= _currentStage)
+        {
+            break;
+        }
+    }
+
+    if (json.contains(TagNames::Progression::finishedModules))
+    {
+        for (auto m : json[TagNames::Progression::finishedModules])
+        {
+            _finishedModules.push_back(m);
+        }
+    }
 }
 
 CSupportCompanion* CGameProgression::callModuleSupportCompanionFactory(const std::string_view& name)

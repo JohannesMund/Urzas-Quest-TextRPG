@@ -378,13 +378,18 @@ bool CGameManagement::load()
         saveGame.load();
         saveGame.loadGameObject(&_player);
         saveGame.loadGameObject(&_inventory);
+
+        _progression.initEncounters();
+        _progression.initModules();
+
+        saveGame.loadGameObject(&_progression);
+
         auto c = CompanionFactory::loadCompanionFromSaveGame(saveGame.root());
         if (c != nullptr)
         {
             _companion = c;
         }
         saveGame.loadGameObject(&_map);
-        saveGame.loadGameObject(&_progression);
     }
     catch (SaveFile::CSaveFileException& e)
     {

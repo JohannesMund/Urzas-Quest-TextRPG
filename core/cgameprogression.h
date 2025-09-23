@@ -111,6 +111,7 @@ public:
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
 
     CSupportCompanion* callModuleSupportCompanionFactory(const std::string_view& name);
     CRoom* callModuleRoomFactory(const std::string_view& name);
