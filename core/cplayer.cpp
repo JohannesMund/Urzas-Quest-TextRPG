@@ -77,7 +77,6 @@ void CPlayer::addGold(const int i)
 
 void CPlayer::addHp(const int i)
 {
-    Console::printLn(std::format("i: {}", i));
     if (i == 0)
     {
         return;

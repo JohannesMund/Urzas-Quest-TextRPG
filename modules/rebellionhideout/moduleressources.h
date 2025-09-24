@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cgamestatetagnames.h"
+#include "save/jsontagnames.h"
 
 #include <string>
 #include <vector>

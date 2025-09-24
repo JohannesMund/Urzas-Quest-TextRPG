@@ -17,6 +17,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/save/csavefile.h core/save/csavefile.cpp
     core/save/localdirectory.h core/save/localdirectory.cpp
     core/save/exceptions.h
+    core/save/jsontagnames.h
 
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp

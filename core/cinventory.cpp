@@ -52,7 +52,7 @@ void CInventory::addItem(CItem* item)
         }
     }
 
-    Console::printLn(std::format("You optained {}", item->name()));
+    Console::printLn(std::format("You obtained {}", item->name()));
     _inventory.push_back(item);
 }
 

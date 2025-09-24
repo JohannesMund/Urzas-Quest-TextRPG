@@ -2,8 +2,8 @@
 #include "cbattle.h"
 #include "cbountyenemy.h"
 #include "cgamemanagement.h"
-#include "cgamestatetagnames.h"
 #include "console.h"
+#include "save/jsontagnames.h"
 
 #include <format>
 

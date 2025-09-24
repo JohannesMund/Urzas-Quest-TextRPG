@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "cgamestatetagnames.h"
+#include "save/jsontagnames.h"
 
 namespace TagNames
 {

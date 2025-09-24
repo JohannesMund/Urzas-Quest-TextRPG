@@ -1,8 +1,8 @@
 #pragma once
 
-#include "cgamestatetagnames.h"
 #include "citem.h"
 #include "enumiterator.h"
+#include "save/jsontagnames.h"
 
 #include <string>
 #include <vector>

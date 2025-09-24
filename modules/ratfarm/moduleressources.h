@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cgamestatetagnames.h"
+#include "save/jsontagnames.h"
 
 #include <string>
 #include <utility>
@@ -19,7 +19,6 @@ constexpr std::string_view size = TagNames::Common::size;
 
 namespace RatFarmRessources
 {
-
 void initModule();
 void deInitModule();
 
