@@ -233,7 +233,8 @@ void CGameManagement::executeTurn()
         {
             Console::cls(false);
             Console::hr();
-            Console::printLn("Quit game?", Console::EAlignment::eCenter);
+            Console::printLn("Quit game", Console::EAlignment::eCenter);
+            Console::printLn("Do you want to save your progress?", Console::EAlignment::eCenter);
             Console::hr();
 
             CMenu menu;
@@ -253,6 +254,7 @@ void CGameManagement::executeTurn()
             {
                 throw CGameOverException();
             }
+            Console::cls();
         }
 
         if (CMap::string2Direction(input.name) != CMap::EDirections::eNone)
@@ -409,6 +411,7 @@ bool CGameManagement::save()
 {
     if (saveGameAvailable())
     {
+        Console::cls(false);
         Console::hr();
         Console::printLn("A save game exists.", Console::EAlignment::eCenter);
         Console::printLn("Overwrite?", Console::EAlignment::eCenter);
