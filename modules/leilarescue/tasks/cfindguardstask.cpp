@@ -91,7 +91,6 @@ void CFindGuardsTask::load(const nlohmann::json& json)
 
 void CFindGuardsTask::findFirstGuard()
 {
-
     Console::printLn(std::format(
         "You find the first of the guards, you know the guy, you treated his wounds after his first beat-up by the "
         "rebellion. His name is {}. He recognizes you and after some short explainations, he agrees to help.",
@@ -181,9 +180,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
 
 void CFindGuardsTask::fightBossMonster()
 {
-
     CVenusFlyTrap boss;
-
     Console::printLn(
         "You are surprised, no, shocked, SCHOCKED! to find the next guard, and see that, and more important, how "
         "he managed to get himself into trouble.");

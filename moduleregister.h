@@ -9,10 +9,12 @@
 #include "modules/lakeoftears/moduleressources.h"
 #include "modules/leila/moduleressources.h"
 #include "modules/leila2/moduleressources.h"
+#include "modules/leilarescue/moduleressources.h"
 #include "modules/ratfarm/moduleressources.h"
 #include "modules/rebellionhideout/moduleressources.h"
 #include "modules/sewer/moduleressources.h"
 #include "modules/shrineoftheancients/moduleressources.h"
+
 
 #include "cgameprogression.h"
 
@@ -154,5 +156,16 @@ void registerModules(CGameProgression* progression)
                                 &BlackIvoryTowerRessources::initWorldMap,
                                 CGameProgression::noSupportCompanionFactory,
                                 &BlackIvoryTowerRessources::roomFactory);
+
+    progression->registerModule(LeilaRescueRessources::moduleName(),
+                                CGameProgression::EGameStage::eFoundCult,
+                                &LeilaRescueRessources::questLog,
+                                &LeilaRescueRessources::initModule,
+                                &LeilaRescueRessources::deInitModule,
+                                CGameProgression::noInitWorldMapFunction,
+                                &LeilaRescueRessources::companionFactory,
+                                CGameProgression::noRoomFactory,
+                                &LeilaRescueRessources::itemFactory,
+                                &LeilaRescueRessources::taskFactory);
 }
 } // namespace ModuleRegister
