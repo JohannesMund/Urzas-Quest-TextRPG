@@ -181,7 +181,7 @@ void CBlackIvoryTower::executeTopOffice()
             Ressources::Game::fiego(),
             Ressources::Game::brock()));
         Console::printLn(std::format(
-            "She also knows about {} and {}, Both accompanied her, when she left the rebellion, but she also hat to "
+            "She also knows about {} and {}, both accompanied her, when she left the rebellion, but she also had to "
             "part ways, since the crying became too much even for her. \"You met them?\" she asks \"Well, yes, I met "
             "them is your cautious answer, knowing the direction this talk is taking. \"How are they?\", you decide to "
             "stick with the answer that worked before: \"Well, they stopped crying.\" {} looks at you, as if she just "

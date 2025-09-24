@@ -55,6 +55,9 @@ public:
      */
     void load();
 
+    /**
+     * @brief returns the root element of the underlying json
+     */
     nlohmann::json root() const;
 
 private:

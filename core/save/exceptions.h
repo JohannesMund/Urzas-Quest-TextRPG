@@ -4,6 +4,13 @@
 
 namespace SaveFile
 {
+
+/**
+ * @brief An exception to be thrown by the saveGame
+ * @remark Does not inherit json exception
+ * @remark can be constructed around a json exception
+ */
+
 class CSaveFileException : public std::exception
 {
 public:
