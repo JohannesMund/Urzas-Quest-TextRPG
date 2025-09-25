@@ -22,17 +22,7 @@ CFishingVillage::CFishingVillage() : CRoom(TagNames::FishingVille::fishingVille)
 void CFishingVillage::execute()
 {
     CRoom::execute();
-
     printHeader();
-
-    Console::printLn(std::format(
-        "A smaly, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There "
-        "is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you "
-        "can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
-        FishingVillageRessources::fishingVilleName(),
-        Ressources::Game::fishingFritz(),
-        FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
-    Console::br();
 
     CMenu::Action input;
     do
