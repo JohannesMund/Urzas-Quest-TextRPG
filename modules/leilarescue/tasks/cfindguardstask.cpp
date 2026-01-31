@@ -55,7 +55,6 @@ void CFindGuardsTask::finishTask()
     }
     else
     {
-
         Console::printLn(std::format(
             "And with this, you managed to rescue all {} guards. The guys instantly start discussing how to "
             "approach the dungeon beneath the capital. So, up and away, time to head to the capital and  rescue {}.",
