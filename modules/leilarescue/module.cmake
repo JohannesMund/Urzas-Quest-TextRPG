@@ -12,4 +12,4 @@ set(URZAS_QUEST_SOURCES_MODULES ${URZAS_QUEST_SOURCES_MODULES}
     modules/leilarescue/dungeon/ccapitaldungeon.h modules/leilarescue/dungeon/ccapitaldungeon.cpp
     modules/leilarescue/dungeon/cleilaprisonroom.h modules/leilarescue/dungeon/cleilaprisonroom.cpp
     modules/leilarescue/dungeon/ccapitaldungeonbosstask.h modules/leilarescue/dungeon/ccapitaldungeonbosstask.cpp
- )
+)

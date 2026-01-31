@@ -6,7 +6,7 @@ include(GNUInstallDirs)
 cmake_minimum_required(VERSION 3.11)
 cmake_policy(SET CMP0135 NEW)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 26)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(TARGET_NAME UrzasQuest)
 
@@ -35,6 +35,23 @@ install(TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+
+add_custom_command(
+        TARGET ${TARGET_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_CURRENT_SOURCE_DIR}${CORE_RESSOURCE_DIR}
+                ${CMAKE_CURRENT_BINARY_DIR}/ressources/core)
+
+foreach(MODULE_RESSOURCE ${URZAS_QUEST_MODULE_RESSOURCES})
+  add_custom_command(
+        TARGET ${TARGET_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_SOURCE_DIR}/${MODULE_RESSOURCE}
+                ${CMAKE_CURRENT_BINARY_DIR}/ressources/modules)
+endforeach()
+
+
 
 target_link_libraries(${TARGET_NAME} PRIVATE nlohmann_json::nlohmann_json)
 
