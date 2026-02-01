@@ -37,6 +37,8 @@ public:
 
     static CItem* loadItemFromSavGame(const nlohmann::json& json);
 
+    static std::string coreTr(const std::string_view& textId);
+
 private:
     CItemFactory()
     {

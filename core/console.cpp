@@ -173,8 +173,9 @@ void Console::printLn(const std::string_view& text, const EAlignment align, cons
     }
 }
 
-void Console::printErr(const std::string_view& text)
+void Console::printErr(const std::string_view& title, const std::string_view& text)
 {
+    printLn(title);
     printLn(std::format("Error: {}{}{}", CC::fgRed(), text, CC::ccReset()));
 }
 

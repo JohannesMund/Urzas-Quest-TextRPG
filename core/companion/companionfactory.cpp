@@ -41,7 +41,7 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
         }
         catch (const SaveFile::CSaveFileException& e)
         {
-            Console::printErr(e.what());
+            Console::printErr("Load companion error:", e.what());
             delete newCompanion;
             return nullptr;
         }
@@ -63,7 +63,7 @@ CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nloh
         }
         catch (const SaveFile::CSaveFileException& e)
         {
-            Console::printErr(e.what());
+            Console::printErr("Load companion error", e.what());
             delete newCompanion;
         }
     }

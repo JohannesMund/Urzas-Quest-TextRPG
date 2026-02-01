@@ -52,7 +52,7 @@ CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
         }
         catch (const SaveFile::CSaveFileException& e)
         {
-            Console::printErr(e.what());
+            Console::printErr("Load room error", e.what());
             delete newRoom;
             return nullptr;
         }

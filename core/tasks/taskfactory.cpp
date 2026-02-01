@@ -27,7 +27,7 @@ CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
         }
         catch (const SaveFile::CSaveFileException& e)
         {
-            Console::printErr(e.what());
+            Console::printErr("Load task error", e.what());
             delete newTask;
             return nullptr;
         }

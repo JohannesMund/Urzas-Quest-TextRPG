@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 
+#include <nlohmann/json.hpp>
+
 class CTranslator
 {
     friend class CGameManagement;
@@ -23,8 +25,8 @@ public:
 private:
     CTranslator();
 
-    std::string getTranslatorFile(const std::string& moduleName);
-    std::map<std::string, std::string> _translationFiles;
+    nlohmann::json _translations;
 
-    bool checkTranslationFile(const std::string& file);
+    void checkTranslationFileExist(const std::string& file);
+    void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
 };

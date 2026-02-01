@@ -17,6 +17,7 @@
 #include "cweapon.h"
 #include "randomizer.h"
 #include "save/exceptions.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <nlohmann/json.hpp>
@@ -207,12 +208,17 @@ CItem* CItemFactory::loadItemFromSavGame(const nlohmann::json& json)
         }
         catch (const SaveFile::CSaveFileException& e)
         {
-            Console::printErr(e.what());
+            Console::printErr("Load item error", e.what());
             delete newItem;
             return nullptr;
         }
     }
     return nullptr;
+}
+
+std::string CItemFactory::coreTr(const std::string_view& textId)
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Item::item, textId);
 }
 
 CItem* CItemFactory::generateItem(const EItemType tp)

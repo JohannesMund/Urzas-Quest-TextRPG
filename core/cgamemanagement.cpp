@@ -395,8 +395,7 @@ bool CGameManagement::load()
     }
     catch (SaveFile::CSaveFileException& e)
     {
-        Console::printLn("Error Loading Savegame:");
-        Console::printLn(std::format("{}{}{}", CC::fgRed(), e.what(), CC::ccReset()));
+        Console::printErr("Error Loading Savegame", e.what());
         return false;
     }
     return true;
