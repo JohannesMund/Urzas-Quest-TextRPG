@@ -5,6 +5,7 @@
 #include "cmenu.h"
 #include "console.h"
 #include "save/csavefile.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <format>
@@ -411,6 +412,11 @@ void CInventory::load(const nlohmann::json& json)
             }
         }
     }
+}
+
+std::string CInventory::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Item::inventory, textId);
 }
 
 CItem* CInventory::getItem(const unsigned int index)

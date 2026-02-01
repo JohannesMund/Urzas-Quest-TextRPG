@@ -3,6 +3,12 @@
 
 namespace TagNames
 {
+
+namespace Translator
+{
+constexpr std::string_view core = "Core";
+}
+
 namespace Common
 {
 constexpr std::string_view objectName = "ObjectName";
@@ -28,6 +34,7 @@ constexpr std::string_view name = TagNames::Common::name;
 
 namespace Progression
 {
+constexpr std::string_view progression = "Progression";
 constexpr std::string_view currentStage = "CurrentStage";
 constexpr std::string_view turns = TagNames::Common::turns;
 constexpr std::string_view bodyCount = "BodyCount";
@@ -69,6 +76,7 @@ constexpr std::string_view roomMatrix = "RoomMatrix";
 
 namespace Room
 {
+constexpr std::string_view room = "Room";
 constexpr std::string_view field = "Field";
 constexpr std::string_view town = "Town";
 constexpr std::string_view capital = "Capital";
@@ -98,6 +106,7 @@ constexpr std::string_view name = TagNames::Common::name;
 
 namespace Item
 {
+constexpr std::string_view item = "Item";
 namespace Equipment
 {
 constexpr std::string_view armor = "Armor";

@@ -1,10 +1,19 @@
 #include "cgamestateobject.h"
 #include "console.h"
+#include "ressources/jsontagnames.h"
 #include "save/exceptions.h"
+#include "translator/ctranslator.h"
 
 #include <nlohmann/json.hpp>
 
-CGameStateObject::CGameStateObject(const std::string_view& objectName) : _objectName(objectName)
+CGameStateObject::CGameStateObject(const std::string_view& objectName, const std::string_view& moduleName) :
+    _objectName(objectName),
+    _translatorModuleName(moduleName)
+{
+}
+
+CGameStateObject::CGameStateObject(const std::string_view& objectName) :
+    CGameStateObject(objectName, TagNames::Translator::core)
 {
 }
 
@@ -36,4 +45,14 @@ bool CGameStateObject::compareObjectName(const std::string_view& objectName, con
         return false;
     }
     return name.compare(objectName) == 0;
+}
+
+void CGameStateObject::initTranslation(const std::string_view& moduleName)
+{
+    _translatorModuleName = moduleName;
+}
+
+std::string CGameStateObject::tr(const std::string_view& textId) const
+{
+    return CTranslator::translate(_translatorModuleName, _objectName, textId);
 }

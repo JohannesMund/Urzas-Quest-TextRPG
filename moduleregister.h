@@ -15,13 +15,16 @@
 #include "modules/sewer/moduleressources.h"
 #include "modules/shrineoftheancients/moduleressources.h"
 
-
 #include "cgameprogression.h"
+#include "translator/ctranslator.h"
 
 namespace ModuleRegister
 {
+
 void registerModules(CGameProgression* progression)
 {
+
+    auto t = CTranslator::getInstance();
 
     /**
      * GamwStage: Start
@@ -35,11 +38,15 @@ void registerModules(CGameProgression* progression)
                                 &ShrineRessources::initWorldMap,
                                 CGameProgression::noSupportCompanionFactory,
                                 &ShrineRessources::roomFactory);
+    t->registerModule(ShrineRessources::moduleName(), "shrineoftheancients");
+
     progression->registerModule(BardRessources::moduleName(),
                                 CGameProgression::EGameStage::eStart,
                                 &BardRessources::questLog,
                                 &BardRessources::initModule,
                                 &BardRessources::deInitModule);
+    t->registerModule(BardRessources::moduleName(), "bard");
+
     /**
      * GameStage: SeenBard
      * Chapter 2
@@ -53,6 +60,7 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noSupportCompanionFactory,
                                 &FishingVillageRessources::roomFactory,
                                 &FishingVillageRessources::itemFactory);
+    t->registerModule(FishingVillageRessources::moduleNameMakeRod(), "fishingvillage");
 
     progression->registerModule(RatFarmRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
@@ -64,6 +72,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noRoomFactory,
                                 &RatFarmRessources::itemFactory,
                                 &RatFarmRessources::taskFactory);
+    t->registerModule(RatFarmRessources::moduleName(), "ratfarm");
+
     progression->registerModule(SewerRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
                                 &SewerRessources::questLog,
@@ -74,6 +84,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noRoomFactory,
                                 CGameProgression::noItemFactory,
                                 &SewerRessources::taskFactory);
+    t->registerModule(SewerRessources::moduleName(), "sewer");
+
     progression->registerModule(LeilaRessources::moduleName(),
                                 CGameProgression::EGameStage::eSeenBard,
                                 &LeilaRessources::questLog,
@@ -84,6 +96,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noRoomFactory,
                                 CGameProgression::noItemFactory,
                                 &LeilaRessources::taskFactory);
+    t->registerModule(LeilaRessources::moduleName(), "leila");
+
     /**
      * GameStage: ProvenAsHero
      * Chapter 3
@@ -92,6 +106,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &FishingVillageRessources::questLogMAkeBoat,
                                 &FishingVillageRessources::initModuleMakeBoat);
+    t->registerModule(FishingVillageRessources::moduleNameMakeBoat(), "fishingvillage");
+
     progression->registerModule(LakeTearsRessources::moduleName(),
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &LakeTearsRessources::questLog,
@@ -102,6 +118,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noRoomFactory,
                                 CGameProgression::noItemFactory,
                                 &LakeTearsRessources::taskFactory);
+    t->registerModule(LakeTearsRessources::moduleName(), "lakeoftears");
+
     progression->registerModule(CaveRessources::moduleName(),
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &CaveRessources::questLog,
@@ -112,6 +130,8 @@ void registerModules(CGameProgression* progression)
                                 &CaveRessources::roomFactory,
                                 CGameProgression::noItemFactory,
                                 &CaveRessources::taskFactory);
+    t->registerModule(CaveRessources::moduleName(), "cave");
+
     progression->registerModule(RebellionHideoutRessources::moduleNameSandwichShop(),
                                 CGameProgression::EGameStage::eProvenAsHero,
                                 &RebellionHideoutRessources::questLogSandwichShop,
@@ -121,6 +141,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noSupportCompanionFactory,
                                 &RebellionHideoutRessources::roomFactory,
                                 &RebellionHideoutRessources::itemFactory);
+    t->registerModule(RebellionHideoutRessources::moduleNameSandwichShop(), "rebellionhideout");
+
     /**
      * GameStage: LearnedAboutCult
      * Chapter 4
@@ -129,11 +151,15 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::EGameStage::eLearnedAboutCult,
                                 &FishingVillageRessources::questLogFishLegend,
                                 &FishingVillageRessources::initModuleFishLegend);
+    t->registerModule(FishingVillageRessources::moduleNameFishLegend(), "fishingvillage");
+
     progression->registerModule(RebellionHideoutRessources::moduleNameRebellionHideout(),
                                 CGameProgression::EGameStage::eLearnedAboutCult,
                                 &RebellionHideoutRessources::questLogRebellionHideout,
                                 &RebellionHideoutRessources::initModuleRebellionHideout,
                                 &RebellionHideoutRessources::deInitModuleRebellionHideout);
+    t->registerModule(RebellionHideoutRessources::moduleNameRebellionHideout(), "rebellionhideout");
+
     progression->registerModule(Leila2Ressources::moduleName(),
                                 CGameProgression::EGameStage::eLearnedAboutCult,
                                 &Leila2Ressources::questLog,
@@ -144,6 +170,8 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noRoomFactory,
                                 CGameProgression::noItemFactory,
                                 &Leila2Ressources::taskFactory);
+    t->registerModule(Leila2Ressources::moduleName(), "leila2");
+
     /**
      * GameStage: FoundCult
      * Chapter 5
@@ -156,6 +184,7 @@ void registerModules(CGameProgression* progression)
                                 &BlackIvoryTowerRessources::initWorldMap,
                                 CGameProgression::noSupportCompanionFactory,
                                 &BlackIvoryTowerRessources::roomFactory);
+    t->registerModule(BlackIvoryTowerRessources::moduleName(), "blackivorytower");
 
     progression->registerModule(LeilaRescueRessources::moduleName(),
                                 CGameProgression::EGameStage::eFoundCult,
@@ -167,5 +196,6 @@ void registerModules(CGameProgression* progression)
                                 CGameProgression::noRoomFactory,
                                 &LeilaRescueRessources::itemFactory,
                                 &LeilaRescueRessources::taskFactory);
+    t->registerModule(LeilaRescueRessources::moduleName(), "leilarescue");
 }
 } // namespace ModuleRegister

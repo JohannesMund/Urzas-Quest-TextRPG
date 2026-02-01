@@ -12,6 +12,7 @@
 #include "ressources.h"
 #include "roomfactory.h"
 #include "save/csavefile.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <iostream>
@@ -463,6 +464,11 @@ std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords, const EDirections 
     SRoomCoords transposedCoords(coords);
     transposedCoords.transpose(dir);
     return roomAt(transposedCoords);
+}
+
+std::string CMap::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Map::map, textId);
 }
 
 CMap::SRoomCoords CMap::getPlayerPosition() const

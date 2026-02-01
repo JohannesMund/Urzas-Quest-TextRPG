@@ -7,6 +7,7 @@
 #include "console.h"
 #include "moduleregister.h"
 #include "randomizer.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <cmath>
@@ -413,6 +414,11 @@ void CGameProgression::reRegisterModule(const std::string_view& name, const EGam
 void CGameProgression::registerModule(const Module& module)
 {
     _registeredModules.push_back(module);
+}
+
+std::string CGameProgression::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Progression::progression, textId);
 }
 
 void CGameProgression::registerModule(

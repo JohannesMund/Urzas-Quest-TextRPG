@@ -11,6 +11,7 @@
 #include "randomizer.h"
 #include "ressources.h"
 #include "save/csavefile.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <cmath>
@@ -385,6 +386,11 @@ void CPlayer::load(const nlohmann::json& json)
             }
         }
     }
+}
+
+std::string CPlayer::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Player::player, textId);
 }
 
 void CPlayer::removeAllSupportCompanions()

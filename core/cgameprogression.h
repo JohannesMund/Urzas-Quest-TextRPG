@@ -217,4 +217,6 @@ private:
 
     std::vector<ModuleHint> _moduleHints;
     std::vector<ModuleQuest> _moduleQuests;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

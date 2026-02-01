@@ -2,7 +2,7 @@
 
 #include "citem.h"
 #include "enumiterator.h"
-#include "save/jsontagnames.h"
+#include "ressources/jsontagnames.h"
 
 #include <string>
 #include <vector>

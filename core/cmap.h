@@ -81,8 +81,7 @@ public:
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(
-        CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
@@ -96,4 +95,5 @@ protected:
     SRoomCoords _playerPosition;
 
     static const std::string saveObjectName;
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

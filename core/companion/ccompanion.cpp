@@ -2,6 +2,7 @@
 #include "cenemy.h"
 #include "console.h"
 #include "randomizer.h"
+#include "translator/ctranslator.h"
 
 #include <format>
 #include <nlohmann/json.hpp>
@@ -75,4 +76,9 @@ bool CCompanion::fireDefaultAction() const
         return false;
     }
     return Randomizer::getRandom(Ressources::Companion::companionLevelCap + 2 - _level) == 0;
+}
+
+std::string CCompanion::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Companion::companion, textId);
 }

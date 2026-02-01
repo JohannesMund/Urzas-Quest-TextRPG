@@ -211,4 +211,6 @@ protected:
     unsigned int _value = 0;
 
     bool _isConsumable = false;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

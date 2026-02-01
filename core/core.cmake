@@ -14,11 +14,15 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
 
+    core/ressources/jsontagnames.h
+    
     core/save/csavefile.h core/save/csavefile.cpp
     core/save/localdirectory.h core/save/localdirectory.cpp
     core/save/exceptions.h
-    core/save/jsontagnames.h
-
+    
+    core/translator/ctranslator.h core/translator/ctranslator.cpp
+    core/translator/exceptions.h
+    
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp
     core/companion/csupportcompanion.h core/companion/csupportcompanion.cpp
@@ -102,6 +106,8 @@ set(CORE_INCLUDE_DIRS
     /core/encounters 
     /core/dungeons 
     /core/dungeons/rooms
+    core/translator
+    core/save
 )
 
 

@@ -48,8 +48,6 @@ public:
 
     void print(const Scope& scope = Scope::eNone);
 
-    //    ItemList getItems(std::fun)
-
     ItemList getItemsWithBattleEffect() const;
     void useBattleEffect(CItem* item, CEnemy* enemy);
 
@@ -92,6 +90,8 @@ private:
 
     virtual nlohmann::json save() const override;
     void load(const nlohmann::json&) override;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 
     CItem* getItem(const unsigned int index);
     ItemList _inventory;

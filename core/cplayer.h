@@ -71,4 +71,7 @@ private:
 protected:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
+
+private:
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

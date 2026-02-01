@@ -8,6 +8,7 @@
 #include "ctask.h"
 #include "ressources.h"
 #include "taskfactory.h"
+#include "translator/ctranslator.h"
 
 CRoom::CRoom(const std::string_view& objectName) : CGameStateObject(objectName)
 {
@@ -114,6 +115,11 @@ void CRoom::load(const nlohmann::json& json)
     {
         _task = TaskFactory::loadTaskFromSaveGame(json[TagNames::Task::task]);
     }
+}
+
+std::string CRoom::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Room::room, textId);
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

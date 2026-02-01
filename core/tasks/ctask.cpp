@@ -1,4 +1,5 @@
 #include "ctask.h"
+#include "translator/ctranslator.h"
 
 #include <nlohmann/json.hpp>
 
@@ -34,6 +35,11 @@ void CTask::load(const nlohmann::json& json)
 {
     _isFinished = json.value<bool>(TagNames::Task::finished, false);
     _isAutoExecute = json.value<bool>(TagNames::Task::autoExecute, false);
+}
+
+std::string CTask::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::translate(TagNames::Translator::core, TagNames::Task::task, textId);
 }
 
 CTask::CTask(const std::string_view& objectName) : CGameStateObject(objectName)
