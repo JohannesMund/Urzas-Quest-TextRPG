@@ -19,7 +19,7 @@ protected:
     virtual void load(const nlohmann::json& json) override;
 
 private:
-    CGameProgression::EGameStage _seenDuringPhase = CGameProgression::EGameStage::eNone;
+    Module::EGameStage _seenDuringPhase = Module::EGameStage::eNone;
 
     void visit();
     void firstVisit();

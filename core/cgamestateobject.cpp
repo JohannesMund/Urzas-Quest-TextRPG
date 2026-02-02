@@ -46,13 +46,3 @@ bool CGameStateObject::compareObjectName(const std::string_view& objectName, con
     }
     return name.compare(objectName) == 0;
 }
-
-void CGameStateObject::initTranslation(const std::string_view& moduleName)
-{
-    _translatorModuleName = moduleName;
-}
-
-std::string CGameStateObject::tr(const std::string_view& textId) const
-{
-    return CTranslator::translate(_translatorModuleName, _objectName, textId);
-}

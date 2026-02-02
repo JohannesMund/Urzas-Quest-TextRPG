@@ -87,7 +87,9 @@ set(URZAS_QUEST_SOURCES_CORE
     core/dungeons/rooms/cdungeonroom.h core/dungeons/rooms/cdungeonroom.cpp
     core/dungeons/rooms/cdungeonroomnoroom.h core/dungeons/rooms/cdungeonroomnoroom.cpp
     core/dungeons/rooms/chealingwell.h core/dungeons/rooms/chealingwell.cpp
-    core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp    
+    core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp   
+    
+    core/module/moduleinfo.h
 )
 
 set(CORE_RESSOURCE_DIR

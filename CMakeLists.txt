@@ -47,8 +47,8 @@ foreach(MODULE_RESSOURCE ${URZAS_QUEST_MODULE_RESSOURCES})
   add_custom_command(
         TARGET ${TARGET_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_SOURCE_DIR}/${MODULE_RESSOURCE}
-                ${CMAKE_CURRENT_BINARY_DIR}/ressources/modules)
+                ${CMAKE_CURRENT_SOURCE_DIR}/modules/${MODULE_RESSOURCE}/${MODULE_RESSOURCE}.json
+                ${CMAKE_CURRENT_BINARY_DIR}/ressources/modules/${MODULE_RESSOURCE}.json)
 endforeach()
 
 

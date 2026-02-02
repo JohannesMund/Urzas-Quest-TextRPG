@@ -27,6 +27,11 @@ void CTranslator::loadTranslationFile(const std::string_view& moduleName, const 
         {
             throw Translator::CTranslatorException(std::format("Read file {} failed", file));
         }
+        if (f.peek() == std::ifstream::traits_type::eof())
+        {
+            throw Translator::CTranslatorException(std::format("file {} is empty", file));
+        }
+
         auto translation = nlohmann::json::parse(f);
         f.close();
 

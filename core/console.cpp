@@ -177,6 +177,7 @@ void Console::printErr(const std::string_view& title, const std::string_view& te
 {
     printLn(title);
     printLn(std::format("Error: {}{}{}", CC::fgRed(), text, CC::ccReset()));
+    Console::confirmToContinue();
 }
 
 std::optional<int> Console::getNumberInputWithEcho(const int min, const int max)

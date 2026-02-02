@@ -42,8 +42,6 @@ public:
     static bool compareObjectName(const std::string_view& objectName, const nlohmann::json& json);
 
 protected:
-    void initTranslation(const std::string_view& moduleName);
-    std::string tr(const std::string_view& textId) const;
     virtual std::string coreTr(const std::string_view& textId) const = 0;
 
 private:

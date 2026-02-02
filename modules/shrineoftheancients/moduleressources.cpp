@@ -3,36 +3,33 @@
 #include "croom.h"
 #include "cshrineoftheancients.h"
 
-void ShrineRessources::initModule()
-{
-}
-
-void ShrineRessources::deInitModule()
-{
-    CGameManagement::getProgressionInstance()->reRegisterModuleForNextStage(moduleName());
-}
-
-void ShrineRessources::initWorldMap(std::vector<CRoom*>& rooms)
-{
-    rooms.push_back(new CShrineOfTheAncients());
-}
-
-CRoom* ShrineRessources::roomFactory(const std::string_view& objectName)
-{
-    if (TagNames::Shrine::shrine.compare(objectName) == 0)
-    {
-        return new CShrineOfTheAncients();
-    }
-
-    return nullptr;
-}
-
 std::string ShrineRessources::moduleName()
 {
     return "ShrineOfTheAncients";
 }
 
-std::string ShrineRessources::questLog()
+Module::ModuleInfo ShrineInfo::moduleInfo()
 {
-    return "Visit the shrine of the ancients.";
+    const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
+    {
+        if (TagNames::Shrine::shrine.compare(objectName) == 0)
+        {
+            return new CShrineOfTheAncients();
+        }
+
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = ShrineRessources::moduleName();
+    moduleInfo.translatorFile = "shrineoftheancients";
+    moduleInfo.gameStage = Module::EGameStage::eStart,
+    moduleInfo.questLogFunction = []() { return "Visit the shrine of the ancients."; };
+    moduleInfo.deInitFunction = []()
+    { CGameManagement::getProgressionInstance()->reRegisterModuleForNextStage(ShrineRessources::moduleName()); };
+    moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CShrineOfTheAncients()); };
+    moduleInfo.roomFactory = roomFactory;
+
+    return moduleInfo;
 }
