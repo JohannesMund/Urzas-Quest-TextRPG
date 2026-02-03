@@ -468,7 +468,7 @@ std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords, const EDirections 
 
 std::string CMap::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Map::map, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Map::map, textId);
 }
 
 CMap::SRoomCoords CMap::getPlayerPosition() const

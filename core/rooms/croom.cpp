@@ -119,7 +119,7 @@ void CRoom::load(const nlohmann::json& json)
 
 std::string CRoom::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Room::room, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Room::room, textId);
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

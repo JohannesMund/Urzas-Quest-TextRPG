@@ -416,7 +416,7 @@ void CInventory::load(const nlohmann::json& json)
 
 std::string CInventory::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Item::inventory, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::inventory, textId);
 }
 
 CItem* CInventory::getItem(const unsigned int index)

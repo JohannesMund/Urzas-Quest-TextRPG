@@ -80,5 +80,5 @@ bool CCompanion::fireDefaultAction() const
 
 std::string CCompanion::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Companion::companion, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Companion::companion, textId);
 }

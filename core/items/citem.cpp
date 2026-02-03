@@ -105,7 +105,7 @@ nlohmann::json CItem::save() const
 
 std::string CItem::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Item::item, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::item, textId);
 }
 
 string CItem::name() const

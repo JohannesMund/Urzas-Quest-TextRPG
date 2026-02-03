@@ -218,7 +218,7 @@ CItem* CItemFactory::loadItemFromSavGame(const nlohmann::json& json)
 
 std::string CItemFactory::coreTr(const std::string_view& textId)
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Item::item, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::item, textId);
 }
 
 CItem* CItemFactory::generateItem(const EItemType tp)

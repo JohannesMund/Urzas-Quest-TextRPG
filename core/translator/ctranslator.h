@@ -5,22 +5,55 @@
 
 #include <nlohmann/json.hpp>
 
+/**
+ * @brief The CTranslator class provides translation of strings throughout the whole program
+ * @remark Translations are provided by json files. json files must be copied by cmake
+ * @remark Modules provide their own translation file. Module translations must be registered @sa registerModule
+ */
+
 class CTranslator
 {
-    friend class CGameManagement;
+    /**
+     * only CGameProhression shall register translations
+     */
+    friend class CGameProgression;
 
 public:
+    /**
+     * Singleton to avoid costly loading of json pbjects
+     */
     static CTranslator* getInstance()
     {
         static CTranslator t;
         return &t;
     };
 
-    void registerModule(const std::string_view& moduleName, const std::string_view& fileName);
+    /**
+     * @brief provides a translation and applies format args
+     * @remarks uses CTranslator::translate
+     * @param[in] moduleName the moduleName which provides the translations or "core"
+     * @param[in] objecName section in the translation. organisation is up to the module
+     * @param[in] textId text to be translated
+     * @param[in] formatArgs format args to be used by std::format
+     * @return the translated text with formatting or the textId if an error occured @sa formatArgs
+     */
+    template <typename... Args>
+    static std::string tr(const std::string_view& moduleName,
+                          const std::string_view& objectName,
+                          const std::string_view& textId,
+                          Args&&... formatArgs);
 
-    static std::string translate(const std::string_view& moduleName,
-                                 const std::string_view& objectName,
-                                 const std::string_view& textId);
+    /**
+     * @brief provides a translation
+     * @remarks uses CTranslator::translate
+     * @param[in] moduleName the moduleName which provides the translations or "core"
+     * @param[in] objecName section in the translation. organisation is up to the module
+     * @param[in] textId text to be translated
+     * @return the translated text or the textId if an error occured
+     */
+    static std::string tr(const std::string_view& moduleName,
+                          const std::string_view& objectName,
+                          const std::string_view& textId);
 
 private:
     CTranslator();
@@ -29,4 +62,9 @@ private:
 
     void checkTranslationFileExist(const std::string& file);
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
+    void registerModule(const std::string_view& moduleName, const std::string_view& fileName);
+
+    static std::optional<std::string> translate(const std::string_view& moduleName,
+                                                const std::string_view& objectName,
+                                                const std::string_view& textId);
 };

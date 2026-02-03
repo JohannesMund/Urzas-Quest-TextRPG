@@ -39,7 +39,7 @@ void CTask::load(const nlohmann::json& json)
 
 std::string CTask::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Task::task, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Task::task, textId);
 }
 
 CTask::CTask(const std::string_view& objectName) : CGameStateObject(objectName)

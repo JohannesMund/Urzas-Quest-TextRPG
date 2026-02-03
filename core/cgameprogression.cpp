@@ -175,8 +175,7 @@ bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName)
 {
     return std::count_if(_moduleQuests.begin(),
                          _moduleQuests.end(),
-                         [moduleName](const ModuleQuest& quest)
-                         {
+                         [moduleName](const ModuleQuest& quest) {
                              return ModuleQuest::moduleQuestNameFilter(moduleName)(quest) &&
                                     ModuleQuest::moduleQuestAcceptedFilter()(quest);
                          }) != 0;
@@ -426,7 +425,7 @@ void CGameProgression::registerModule(const Module::ModuleInfo& module)
 
 std::string CGameProgression::coreTr(const std::string_view& textId) const
 {
-    return CTranslator::translate(TagNames::Translator::core, TagNames::Progression::progression, textId);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Progression::progression, textId);
 }
 
 void CGameProgression::reRegisterModuleForNextStage(const std::string_view& moduleName)

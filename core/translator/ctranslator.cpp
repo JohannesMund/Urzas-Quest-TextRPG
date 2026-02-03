@@ -43,20 +43,9 @@ void CTranslator::loadTranslationFile(const std::string_view& moduleName, const 
     }
 }
 
-CTranslator::CTranslator()
-{
-
-    loadTranslationFile("core", "ressources/core/ressources.json");
-}
-
-void CTranslator::registerModule(const std::string_view& moduleName, const std::string_view& fileName)
-{
-    loadTranslationFile(moduleName, std::format("./ressources/modules/{}.json", fileName));
-}
-
-std::string CTranslator::translate(const std::string_view& moduleName,
-                                   const std::string_view& objectName,
-                                   const std::string_view& textId)
+std::optional<std::string> CTranslator::translate(const std::string_view& moduleName,
+                                                  const std::string_view& objectName,
+                                                  const std::string_view& textId)
 {
     try
     {
@@ -88,5 +77,42 @@ std::string CTranslator::translate(const std::string_view& moduleName,
     {
         Console::printErr("Translation error", e.what());
     }
-    return std::string(textId);
+    return {};
+}
+
+CTranslator::CTranslator()
+{
+
+    loadTranslationFile("core", "ressources/core/ressources.json");
+}
+
+void CTranslator::registerModule(const std::string_view& moduleName, const std::string_view& fileName)
+{
+    loadTranslationFile(moduleName, std::format("./ressources/modules/{}.json", fileName));
+}
+
+std::string CTranslator::tr(const std::string_view& moduleName,
+                            const std::string_view& objectName,
+                            const std::string_view& textId)
+{
+    const auto r = translate(moduleName, objectName, textId);
+    if (!r.has_value())
+    {
+        return std::string(textId);
+    }
+    return *r;
+}
+
+template <typename... Args>
+std::string CTranslator::tr(const std::string_view& moduleName,
+                            const std::string_view& objectName,
+                            const std::string_view& textId,
+                            Args&&... formatArgs)
+{
+    const auto r = translate(moduleName, objectName, textId);
+    if (!r.has_value())
+    {
+        return std::string(textId);
+    }
+    return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
 }
