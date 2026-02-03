@@ -20,12 +20,11 @@ void CLeila2GoblinVillageTask::execute()
 {
     Console::printLn(std::format("Here you are, a tiny {0} village. Complete with little huts, a huge bonfire and, "
                                  "of course, a mob of {0}s.",
-                                 Leila2Ressources::greenskin()));
+                                 Leila2::greenskin()));
     Console::printLn(std::format("{} is tied up to a pole in front of the bonfire. She surely is taking her \"damsel "
                                  "in distress\" - role to the limits ",
                                  Ressources::Game::leila()));
-    Console::printLn(
-        std::format("Without further ado, you charge the {}s, to end this.", Leila2Ressources::greenskin()));
+    Console::printLn(std::format("Without further ado, you charge the {}s, to end this.", Leila2::greenskin()));
     Console::confirmToContinue();
 
     CGoblinHorde horde;
@@ -40,7 +39,7 @@ void CLeila2GoblinVillageTask::execute()
     Console::printLn(std::format(
         "You look at the slain {}s, and realize, that this not over yet. You still have a boss battle in front of you. "
         "\"I am coming for your rescue, princess\" You scream once again, a little less motivated, and attack.",
-        Leila2Ressources::greenskin(),
+        Leila2::greenskin(),
         Ressources::Game::princessLeila()));
     CBattle battle2(&boss);
     battle2.fight();

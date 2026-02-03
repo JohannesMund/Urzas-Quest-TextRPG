@@ -92,7 +92,7 @@ void CShrineOfTheAncients::firstVisit()
 {
 
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
-    CGameManagement::getProgressionInstance()->reportModuleFinished(ShrineRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(Shrine::moduleName());
 
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {

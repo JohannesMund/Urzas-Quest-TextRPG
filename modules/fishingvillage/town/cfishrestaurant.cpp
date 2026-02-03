@@ -23,7 +23,7 @@ void CFishRestaurant::execute()
     {
         Console::cls();
 
-        Console::printLn(std::format("{}'s Inn", FishingVillageRessources::fishingVilleName()),
+        Console::printLn(std::format("{}'s Inn", FishingVillage::fishingVilleName()),
                          Console::EAlignment::eCenter);
         Console::printLn(
             std::format("Serving the best fresh fish since 833 ad. dragonis", Ressources::Game::fishingFritz()),
@@ -60,10 +60,10 @@ void CFishRestaurant::execute()
 
 void CFishRestaurant::makeDishOfTheDay()
 {
-    _dishOfTheDayLevel = FishingVillageRessources::getRandomRarity(FishingVillageRessources::rodLevelCap,
-                                                                   FishingVillageRessources::boatLevelCap);
+    _dishOfTheDayLevel = FishingVillage::getRandomRarity(FishingVillage::rodLevelCap,
+                                                                   FishingVillage::boatLevelCap);
 
-    auto fish = FishingVillageRessources::getFish(_dishOfTheDayLevel);
+    auto fish = FishingVillage::getFish(_dishOfTheDayLevel);
 
     switch (Randomizer::getRandom(5))
     {
@@ -83,7 +83,7 @@ void CFishRestaurant::makeDishOfTheDay()
 
 int CFishRestaurant::priceOfTheDay() const
 {
-    return FishingVillageRessources::getFishPrice(_dishOfTheDayLevel) * 2;
+    return FishingVillage::getFishPrice(_dishOfTheDayLevel) * 2;
 }
 
 void CFishRestaurant::eat() const
@@ -93,20 +93,20 @@ void CFishRestaurant::eat() const
 
     switch (_dishOfTheDayLevel)
     {
-    case FishingVillageRessources::EFishLevel::eCommon:
+    case FishingVillage::EFishLevel::eCommon:
     default:
         CGameManagement::getPlayerInstance()->addHp(1);
         break;
-    case FishingVillageRessources::EFishLevel::eUncommon:
+    case FishingVillage::EFishLevel::eUncommon:
         CGameManagement::getPlayerInstance()->addHp(2 + Randomizer::getRandom(2));
         break;
-    case FishingVillageRessources::EFishLevel::eRare:
+    case FishingVillage::EFishLevel::eRare:
         CGameManagement::getPlayerInstance()->addHp(3 + Randomizer::getRandom(3));
         break;
-    case FishingVillageRessources::EFishLevel::eUltraRare:
+    case FishingVillage::EFishLevel::eUltraRare:
         CGameManagement::getPlayerInstance()->addHp(5 + Randomizer::getRandom(5));
         break;
-    case FishingVillageRessources::EFishLevel::eLegend:
+    case FishingVillage::EFishLevel::eLegend:
         CGameManagement::getPlayerInstance()->fullHeal();
         Console::printLn("This meal is a mind blowing experience");
         CGameManagement::getPlayerInstance()->levelUp();

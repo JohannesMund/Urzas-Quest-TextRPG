@@ -9,7 +9,7 @@ CCaveDungeonMap::CCaveDungeonMap(const unsigned int width, const unsigned int he
 CDungeonRoom* CCaveDungeonMap::makeDefaultRoom() const
 {
     auto dungeonRoom = new CDungeonRoom();
-    dungeonRoom->setDescription(CaveRessources::getRandomDescription());
-    dungeonRoom->setModuleName(CaveRessources::moduleName());
+    dungeonRoom->setDescription(Cave::getRandomDescription());
+    dungeonRoom->setModuleName(Cave::moduleName());
     return dungeonRoom;
 }

@@ -1,9 +1,10 @@
 #pragma once
 
+#include "moduleinfo.h"
+#include "ressources/jsontagnames.h"
+
 #include <string>
 #include <vector>
-
-#include "ressources/jsontagnames.h"
 
 namespace TagNames
 {
@@ -16,21 +17,17 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 } // namespace TagNames
 
 class CRoom;
-namespace BlackIvoryTowerRessources
+namespace BlackIvoryTower
 {
 
 static const unsigned int towerHeight = 25;
 
-CRoom* roomFactory(const std::string_view& objectName);
-
-void initModule();
-void deInitModule();
-void initWorldMap(std::vector<CRoom*>& rooms);
-std::string questLog();
+std::string moduleName();
+Module::ModuleInfo moduleInfo();
 
 std::string darkIvoryTower();
 
 std::string lunatic();
 std::string lunatics();
-std::string moduleName();
-} // namespace BlackIvoryTowerRessources
+
+} // namespace BlackIvoryTower

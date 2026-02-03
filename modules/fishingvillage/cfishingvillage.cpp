@@ -85,7 +85,7 @@ void CFishingVillage::printHeader()
 {
     Console::cls();
 
-    Console::printLn(FishingVillageRessources::fishingVilleName(), Console::EAlignment::eCenter);
+    Console::printLn(FishingVillage::fishingVilleName(), Console::EAlignment::eCenter);
     Console::printLn("Local recreation area", Console::EAlignment::eCenter);
     Console::br();
 
@@ -93,9 +93,9 @@ void CFishingVillage::printHeader()
         "A smaly, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There "
         "is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you "
         "can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
-        FishingVillageRessources::fishingVilleName(),
+        FishingVillage::fishingVilleName(),
         Ressources::Game::fishingFritz(),
-        FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
+        FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
     Console::br();
 }
 

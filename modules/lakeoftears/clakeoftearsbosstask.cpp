@@ -56,5 +56,5 @@ void CLakeOfTearsBossTask::execute()
     battle.fight();
 
     _isFinished = true;
-    CGameManagement::getProgressionInstance()->reportModuleFinished(LakeTearsRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(LakeOfTears::moduleName());
 }

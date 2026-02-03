@@ -3,12 +3,12 @@
 #include "croom.h"
 #include "cshrineoftheancients.h"
 
-std::string ShrineRessources::moduleName()
+std::string Shrine::moduleName()
 {
     return "ShrineOfTheAncients";
 }
 
-Module::ModuleInfo ShrineInfo::moduleInfo()
+Module::ModuleInfo Shrine::moduleInfo()
 {
     const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
     {
@@ -21,13 +21,12 @@ Module::ModuleInfo ShrineInfo::moduleInfo()
     };
 
     Module::ModuleInfo moduleInfo = Module::ModuleInfo();
-
-    moduleInfo.moduleName = ShrineRessources::moduleName();
+    moduleInfo.moduleName = moduleName();
     moduleInfo.translatorFile = "shrineoftheancients";
     moduleInfo.gameStage = Module::EGameStage::eStart,
     moduleInfo.questLogFunction = []() { return "Visit the shrine of the ancients."; };
     moduleInfo.deInitFunction = []()
-    { CGameManagement::getProgressionInstance()->reRegisterModuleForNextStage(ShrineRessources::moduleName()); };
+    { CGameManagement::getProgressionInstance()->reRegisterModuleForNextStage(moduleName()); };
     moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CShrineOfTheAncients()); };
     moduleInfo.roomFactory = roomFactory;
 

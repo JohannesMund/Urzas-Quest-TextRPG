@@ -1,10 +1,11 @@
 #pragma once
 
+#include "moduleinfo.h"
+#include "ressources/jsontagnames.h"
+
 #include <string>
 #include <utility>
 #include <vector>
-
-#include "ressources/jsontagnames.h"
 
 namespace TagNames
 {
@@ -19,19 +20,13 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 
 class CRoom;
 class CTask;
-namespace CaveRessources
+namespace Cave
 {
-void initModule();
-void deInitModule();
-void initWorldMap(std::vector<CRoom*>& rooms);
 
-CRoom* roomFactory(const std::string_view& objectName);
-CTask* taskFactory(const std::string_view& objectName);
-
+Module::ModuleInfo moduleInfo();
 std::string moduleName();
-std::string dungeonEncounterName();
 
-std::string questLog();
+std::string dungeonEncounterName();
 
 static const unsigned int fightChance = 15;
 
@@ -49,4 +44,4 @@ std::string getMapRoomDescription();
 std::string getColoredBossString();
 std::string getBossWeapon();
 
-} // namespace CaveRessources
+} // namespace Cave

@@ -14,101 +14,27 @@
 #include <algorithm>
 #include <format>
 
-std::string FishingVillageRessources::moduleNameMakeRod()
+std::string FishingVillageMakeRod::moduleName()
 {
     return "FishingVillage_MakeRod";
 }
 
-std::string FishingVillageRessources::moduleNameMakeBoat()
+std::string FishingVillageMakeBoat::moduleName()
 {
     return "FishingVillage_MakeBoat";
 }
 
-std::string FishingVillageRessources::moduleNameFishLegend()
+std::string FishingVillageFishLegend::moduleName()
 {
     return "FishingVillage_FishLegend";
 }
 
-void FishingVillageRessources::initModuleMakeRod()
-{
-    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-        moduleNameMakeRod(), []() { return new CFishingRodPart(); }, 50);
-    CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeRod()),
-                                              CFishingVillage::fishingVillageFilter());
-}
-
-void FishingVillageRessources::initModuleMakeBoat()
-{
-    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-        moduleNameMakeBoat(), []() { return new CBoatPart(); }, 50);
-    CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleNameMakeBoat()),
-                                              CFishingVillage::fishingVillageFilter());
-}
-
-void FishingVillageRessources::initModuleFishLegend()
-{
-    CGameManagement::getInstance()->placeTaskOnTown(new CFishingVilleTownTask());
-}
-
-void FishingVillageRessources::deInitModuleMakeBoat()
-{
-}
-
-void FishingVillageRessources::deInitModuleFishLegend()
-{
-}
-
-void FishingVillageRessources::deInitModuleMakeRod()
-{
-}
-
-void FishingVillageRessources::initWorldMap(std::vector<CRoom*>& rooms)
-{
-    rooms.push_back(new CFishingVillage());
-}
-
-CRoom* FishingVillageRessources::roomFactory(const std::string_view& objectName)
-{
-    if (TagNames::FishingVille::fishingVille.compare(objectName) == 0)
-    {
-        return new CFishingVillage();
-    }
-    return nullptr;
-}
-
-CItem* FishingVillageRessources::itemFactory(const std::string_view& objectName)
-{
-
-    if (TagNames::FishingVille::boat.compare(objectName) == 0)
-    {
-        return new CBoat();
-    }
-    if (TagNames::FishingVille::boatPart.compare(objectName) == 0)
-    {
-        return new CBoatPart();
-    }
-    if (TagNames::FishingVille::fish.compare(objectName) == 0)
-    {
-        return new CFish();
-    }
-    if (TagNames::FishingVille::fishingRod.compare(objectName) == 0)
-    {
-        return new CFishingRod();
-    }
-    if (TagNames::FishingVille::fishingRodPart.compare(objectName) == 0)
-    {
-        return new CFishingRodPart();
-    }
-
-    return nullptr;
-}
-
-std::string FishingVillageRessources::fishingVilleName()
+std::string FishingVillage::fishingVilleName()
 {
     return std::format("{}Middlesbron {}Cove{}", CC::fgLightGreen(), CC::fgLightBlue(), CC::ccReset());
 }
 
-std::string FishingVillageRessources::getFish(const EFishLevel level)
+std::string FishingVillage::getFish(const EFishLevel level)
 {
     switch (level)
     {
@@ -135,30 +61,29 @@ std::string FishingVillageRessources::getFish(const EFishLevel level)
     }
 }
 
-int FishingVillageRessources::getFishPrice(const EFishLevel level)
+int FishingVillage::getFishPrice(const EFishLevel level)
 {
     switch (level)
     {
-    case FishingVillageRessources::EFishLevel::eCommon:
+    case FishingVillage::EFishLevel::eCommon:
     default:
         return 10;
-    case FishingVillageRessources::EFishLevel::eUncommon:
+    case FishingVillage::EFishLevel::eUncommon:
         return 25;
-    case FishingVillageRessources::EFishLevel::eRare:
+    case FishingVillage::EFishLevel::eRare:
         return 50;
-    case FishingVillageRessources::EFishLevel::eUltraRare:
+    case FishingVillage::EFishLevel::eUltraRare:
         return 500;
-    case FishingVillageRessources::EFishLevel::eLegend:
+    case FishingVillage::EFishLevel::eLegend:
         return 100000;
     }
 }
 
-FishingVillageRessources::EFishLevel FishingVillageRessources::getRandomRarity(const unsigned int rodLevel,
-                                                                               const unsigned int boatLevel)
+FishingVillage::EFishLevel FishingVillage::getRandomRarity(const unsigned int rodLevel, const unsigned int boatLevel)
 {
-    std::vector<FishingVillageRessources::EFishLevel> fishes;
+    std::vector<FishingVillage::EFishLevel> fishes;
 
-    auto add = [&fishes](const unsigned int number, const FishingVillageRessources::EFishLevel level)
+    auto add = [&fishes](const unsigned int number, const FishingVillage::EFishLevel level)
     {
         for (auto i = 0U; i < number; i++)
         {
@@ -166,11 +91,11 @@ FishingVillageRessources::EFishLevel FishingVillageRessources::getRandomRarity(c
         }
     };
 
-    add(50, FishingVillageRessources::EFishLevel::eCommon);
-    add(25, FishingVillageRessources::EFishLevel::eUncommon);
-    add(10, FishingVillageRessources::EFishLevel::eRare);
-    add(5, FishingVillageRessources::EFishLevel::eUltraRare);
-    add(1, FishingVillageRessources::EFishLevel::eLegend);
+    add(50, FishingVillage::EFishLevel::eCommon);
+    add(25, FishingVillage::EFishLevel::eUncommon);
+    add(10, FishingVillage::EFishLevel::eRare);
+    add(5, FishingVillage::EFishLevel::eUltraRare);
+    add(1, FishingVillage::EFishLevel::eLegend);
 
     auto calcBonus = [](unsigned int level) -> unsigned int
     {
@@ -187,17 +112,96 @@ FishingVillageRessources::EFishLevel FishingVillageRessources::getRandomRarity(c
     return fishes.at(rnd);
 }
 
-std::string FishingVillageRessources::questLogMakeRod()
+Module::ModuleInfo FishingVillageMakeRod::moduleInfo()
 {
-    return "Build a fishing rod";
+    const auto itemFactory = [](const std::string_view& objectName) -> CItem*
+    {
+        if (TagNames::FishingVille::boat.compare(objectName) == 0)
+        {
+            return new CBoat();
+        }
+        if (TagNames::FishingVille::boatPart.compare(objectName) == 0)
+        {
+            return new CBoatPart();
+        }
+        if (TagNames::FishingVille::fish.compare(objectName) == 0)
+        {
+            return new CFish();
+        }
+        if (TagNames::FishingVille::fishingRod.compare(objectName) == 0)
+        {
+            return new CFishingRod();
+        }
+        if (TagNames::FishingVille::fishingRodPart.compare(objectName) == 0)
+        {
+            return new CFishingRodPart();
+        }
+
+        return nullptr;
+    };
+
+    const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
+    {
+        if (TagNames::FishingVille::fishingVille.compare(objectName) == 0)
+        {
+            return new CFishingVillage();
+        }
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "fishingvillage";
+    moduleInfo.gameStage = Module::EGameStage::eSeenBard;
+
+    moduleInfo.questLogFunction = []() { return "Build a fishing rod"; };
+    moduleInfo.initFunction = []()
+    {
+        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+            moduleName(), []() { return new CFishingRodPart(); }, 50);
+        CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleName()),
+                                                  CFishingVillage::fishingVillageFilter());
+    };
+
+    moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CFishingVillage()); };
+    moduleInfo.roomFactory = roomFactory;
+    moduleInfo.itemFactory = itemFactory;
+
+    return moduleInfo;
 }
 
-std::string FishingVillageRessources::questLogMAkeBoat()
+Module::ModuleInfo FishingVillageMakeBoat::moduleInfo()
 {
-    return "Build a boat";
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "fishingvillage";
+    moduleInfo.gameStage = Module::EGameStage::eProvenAsHero;
+
+    moduleInfo.questLogFunction = []() { return "Build a boat"; };
+    moduleInfo.initFunction = []()
+    {
+        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+            moduleName(), []() { return new CBoatPart(); }, 50);
+        CGameManagement::getInstance()->placeTask(new CBuildEquipmentTask(moduleName()),
+                                                  CFishingVillage::fishingVillageFilter());
+    };
+
+    return moduleInfo;
 }
 
-std::string FishingVillageRessources::questLogFishLegend()
+Module::ModuleInfo FishingVillageFishLegend::moduleInfo()
 {
-    return std::format("Catch the legendary {}", getFish(EFishLevel::eLegend));
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "fishingvillage";
+    moduleInfo.gameStage = Module::EGameStage::eLearnedAboutCult;
+
+    moduleInfo.questLogFunction = []()
+    { return std::format("Catch the legendary {}", getFish(FishingVillage::EFishLevel::eLegend)); };
+    moduleInfo.initFunction = []() { CGameManagement::getInstance()->placeTaskOnTown(new CFishingVilleTownTask()); };
+
+    return moduleInfo;
 }

@@ -5,71 +5,70 @@
 
 #include <format>
 
-void RebellionHideoutRessources::initModuleSandwichShop()
+Module::ModuleInfo SandwichShop::moduleInfo()
 {
-}
-
-void RebellionHideoutRessources::deInitModuleSandwichShop()
-{
-}
-
-void RebellionHideoutRessources::initModuleRebellionHideout()
-{
-}
-
-void RebellionHideoutRessources::deInitModuleRebellionHideout()
-{
-}
-
-std::string RebellionHideoutRessources::questLogRebellionHideout()
-{
-    return "Find the rebellion hideout";
-}
-
-std::string RebellionHideoutRessources::questLogSandwichShop()
-{
-    return "Own a sandwich shop";
-}
-
-void RebellionHideoutRessources::initWorldMap(std::vector<CRoom*>& rooms)
-{
-    rooms.push_back(new CSandwichShop());
-}
-
-CRoom* RebellionHideoutRessources::roomFactory(const std::string_view& objectName)
-{
-    if (TagNames::RebellionHideout::rebellionHideout.compare(objectName) == 0)
+    const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
     {
-        return new CSandwichShop();
-    }
-    return nullptr;
-}
+        if (TagNames::RebellionHideout::rebellionHideout.compare(objectName) == 0)
+        {
+            return new CSandwichShop();
+        }
+        return nullptr;
+    };
 
-CItem* RebellionHideoutRessources::itemFactory(const std::string_view& objectName)
-{
-    if (TagNames::RebellionHideout::bagOfIngredients.compare(objectName) == 0)
+    const auto itemFactory = [](const std::string_view& objectName) -> CItem*
     {
-        return new CBagOfIngredients();
-    }
-    return nullptr;
+        if (TagNames::RebellionHideout::bagOfIngredients.compare(objectName) == 0)
+        {
+            return new CBagOfIngredients();
+        }
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "rebellionhideout";
+    moduleInfo.gameStage = Module::EGameStage::eProvenAsHero,
+
+    moduleInfo.questLogFunction = []() { return "Own a sandwich shop"; };
+
+    moduleInfo.roomFactory = roomFactory;
+    moduleInfo.itemFactory = itemFactory;
+    moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CSandwichShop()); };
+
+    return moduleInfo;
 }
 
-std::string RebellionHideoutRessources::moduleNameSandwichShop()
+Module::ModuleInfo RebellionHideout::moduleInfo()
+{
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "rebellionhideout";
+    moduleInfo.gameStage = Module::EGameStage::eLearnedAboutCult,
+
+    moduleInfo.questLogFunction = []() { return "Find the rebellion hideout"; };
+
+    return moduleInfo;
+}
+
+std::string SandwichShop::moduleName()
 {
     return "SandwichShop";
 }
 
-std::string RebellionHideoutRessources::sandwichShopName()
+std::string SandwichShop::sandwichShopName()
 {
     return std::format("{}<-SOOP{}WAY->{}", CC::fgLightYellow(), CC::fgGreen(), CC::ccReset());
 }
 
-std::string RebellionHideoutRessources::mrSoop()
+std::string SandwichShop::mrSoop()
 {
     return std::format("{}Mr. {}Soop{}", CC::fgGreen(), CC::fgLightYellow(), CC::ccReset());
 }
 
-std::string RebellionHideoutRessources::moduleNameRebellionHideout()
+std::string RebellionHideout::moduleName()
 {
     return "RebellionHideout";
 }

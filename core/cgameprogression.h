@@ -2,7 +2,7 @@
 
 #include "cgamestateobject.h"
 #include "enumiterator.h"
-#include "module/moduleinfo.h"
+#include "moduleinfo.h"
 #include "ressources.h"
 #include <functional>
 #include <string>
@@ -56,20 +56,7 @@ public:
     unsigned long genocideCount() const;
     unsigned long turns() const;
 
-    void registerModule(
-        const std::string_view& name,
-        const Module::EGameStage neededForStage,
-        std::function<std::string()> questLogFunction = &Module::noQuestLogFunction,
-        std::function<void()> initFunction = &Module::noInitDeInitFunction,
-        std::function<void()> deInitFunction = &Module::noInitDeInitFunction,
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &Module::noInitWorldMapFunction,
-        std::function<CSupportCompanion*(const std::string_view& name)> supportCompanionsFactory =
-            &Module::noSupportCompanionFactory,
-        std::function<CRoom*(const std::string_view& name)> roomsFactory = &Module::noRoomFactory,
-        std::function<CItem*(const std::string_view& name)> itemsFactory = &Module::noItemFactory,
-        std::function<CTask*(const std::string_view& name)> taskFactory = &Module::noTaskFactory);
     void registerModule(const Module::ModuleInfo& modules);
-
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
     virtual nlohmann::json save() const override;

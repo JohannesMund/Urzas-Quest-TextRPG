@@ -1,5 +1,6 @@
 #pragma once
 
+#include "moduleinfo.h"
 #include "ressources/jsontagnames.h"
 
 #include <string>
@@ -17,16 +18,11 @@ constexpr std::string_view size = TagNames::Common::size;
 } // namespace RatFarm
 } // namespace TagNames
 
-namespace RatFarmRessources
+namespace RatFarm
 {
-void initModule();
-void deInitModule();
-
-CTask* taskFactory(const std::string_view& objectName);
-CItem* itemFactory(const std::string_view& objectName);
 
 std::string moduleName();
-std::string questLog();
+Module::ModuleInfo moduleInfo();
 
 const unsigned int ratCount = 15;
 
@@ -39,4 +35,4 @@ namespace TurnipFactory
 {
 void addTurnips(unsigned int cnt);
 }
-} // namespace RatFarmRessources
+} // namespace RatFarm

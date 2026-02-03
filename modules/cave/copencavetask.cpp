@@ -21,5 +21,5 @@ void COpenCaveTask::execute()
 
 std::string COpenCaveTask::moduleName() const
 {
-    return CaveRessources::moduleName();
+    return Cave::moduleName();
 }

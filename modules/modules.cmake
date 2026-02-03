@@ -16,6 +16,8 @@ set(MODULE_LIST
     shrineoftheancients
 )
 
+set(URZAS_QUEST_SOURCES_MODULES modules/moduleinfo.h)
+
 foreach(MODULE ${MODULE_LIST})
     set(MODULE_CMAKE_FILE modules/${MODULE}/module.cmake)
     set(URZAS_QUEST_SOURCES_MODULES ${URZAS_QUEST_SOURCES_MODULES} ${MODULE_CMAKE_FILE})

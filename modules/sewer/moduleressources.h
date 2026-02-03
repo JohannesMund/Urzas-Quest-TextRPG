@@ -1,5 +1,7 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 
 class CTask;
@@ -12,16 +14,11 @@ constexpr std::string_view sewer = "sewer";
 }
 } // namespace TagNames
 
-namespace SewerRessources
+namespace Sewer
 {
 
-void initModule();
-void deInitModule();
-
-CTask* taskFactory(const std::string_view& objectName);
-
+Module::ModuleInfo moduleInfo();
 std::string moduleName();
-std::string questLog();
 
 std::string encounterName();
 std::string dungeonEncounterName();
@@ -45,4 +42,4 @@ std::string getBossWeapon();
 
 std::string hotdog();
 
-} // namespace SewerRessources
+} // namespace Sewer

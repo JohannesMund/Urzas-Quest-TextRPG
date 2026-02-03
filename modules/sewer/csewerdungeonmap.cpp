@@ -9,7 +9,7 @@ CSewerDungeonMap::CSewerDungeonMap(const unsigned int width, const unsigned int 
 CDungeonRoom* CSewerDungeonMap::makeDefaultRoom() const
 {
     auto dungeonRoom = new CDungeonRoom();
-    dungeonRoom->setDescription(SewerRessources::getRandomDescription());
-    dungeonRoom->setModuleName(SewerRessources::moduleName());
+    dungeonRoom->setDescription(Sewer::getRandomDescription());
+    dungeonRoom->setModuleName(Sewer::moduleName());
     return dungeonRoom;
 }

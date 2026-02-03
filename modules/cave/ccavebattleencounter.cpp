@@ -14,8 +14,8 @@ void CCaveBattleEncounter::execute(const std::string_view& moduleName)
     CEncounter::execute(moduleName);
 
     CMobEnemy enemy;
-    enemy.setWeapon(CaveRessources::getRandomEnemyWeapon());
-    enemy.setName(CaveRessources::getRandomEnemyName());
+    enemy.setWeapon(Cave::getRandomEnemyWeapon());
+    enemy.setName(Cave::getRandomEnemyName());
 
     CBattle battle(&enemy);
     battle.fight();
@@ -23,11 +23,11 @@ void CCaveBattleEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CCaveBattleEncounter::encounterChance(const EEncounterType&, const std::string_view& moduleName) const
 {
-    if (moduleName.compare(CaveRessources::moduleName()) != 0)
+    if (moduleName.compare(Cave::moduleName()) != 0)
     {
         return 0;
     }
-    return CaveRessources::fightChance;
+    return Cave::fightChance;
 }
 
 std::string CCaveBattleEncounter::name() const
@@ -37,5 +37,5 @@ std::string CCaveBattleEncounter::name() const
 
 std::string CCaveBattleEncounter::moduleName() const
 {
-    return CaveRessources::dungeonEncounterName();
+    return Cave::dungeonEncounterName();
 }

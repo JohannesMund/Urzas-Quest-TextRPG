@@ -9,35 +9,38 @@
 
 #include <format>
 
-void LeilaRessources::initModule()
+Module::ModuleInfo Leila::moduleInfo()
 {
-    CGameManagement::getInstance()->registerEncounter(new CLeilaEncounter());
-}
-
-void LeilaRessources::deInitModule()
-{
-    CGameManagement::getInstance()->unregisterEncounterByModuleName(LeilaRessources::moduleName());
-}
-
-CTask* LeilaRessources::taskFactory(const std::string_view& objectName)
-{
-    if (TagNames::Leila::leila.compare(objectName) == 0)
+    const auto taskFactory = [](const std::string_view& objectName) -> CTask*
     {
-        return new CLeilaTask();
-    }
-    if (TagNames::Leila::leilaTown.compare(objectName) == 0)
-    {
-        return new CLeilaTownTask();
-    }
-    return nullptr;
+        if (TagNames::Leila::leila.compare(objectName) == 0)
+        {
+            return new CLeilaTask();
+        }
+        if (TagNames::Leila::leilaTown.compare(objectName) == 0)
+        {
+            return new CLeilaTownTask();
+        }
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "leila";
+    moduleInfo.gameStage = Module::EGameStage::eSeenBard,
+
+    moduleInfo.initFunction = []() { CGameManagement::getInstance()->registerEncounter(new CLeilaEncounter()); };
+    moduleInfo.deInitFunction = []() { CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName()); };
+    moduleInfo.questLogFunction = []()
+    { return std::format("Rescue the beautiful {}.", Ressources::Game::princessLeila()); };
+
+    moduleInfo.taskFactory = taskFactory;
+
+    return moduleInfo;
 }
 
-std::string LeilaRessources::moduleName()
+std::string Leila::moduleName()
 {
     return "RescuePrincessLayla";
-}
-
-std::string LeilaRessources::questLog()
-{
-    return std::format("Rescue the beautiful {}.", Ressources::Game::princessLeila());
 }

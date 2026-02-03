@@ -291,13 +291,13 @@ void CFindGuardsTask::collectStuff()
 void CFindGuardsTask::registerLootItemGenerator()
 {
     CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-        LeilaRescueRessources::moduleName(), []() { return new CGuardStuff(); }, 50);
+        LeilaRescue::moduleName(), []() { return new CGuardStuff(); }, 50);
     _lootItemGeneratorReguistered = true;
 }
 
 void CFindGuardsTask::unRegisterLootItemGenerator()
 {
-    CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(LeilaRescueRessources::moduleName());
+    CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(LeilaRescue::moduleName());
     _lootItemGeneratorReguistered = false;
 }
 

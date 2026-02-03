@@ -14,7 +14,7 @@ void CSewerDungeon::execute()
     CSewerBattleEncounter* encounter = new CSewerBattleEncounter();
     CGameManagement::getInstance()->registerEncounter(encounter);
     dungeonLoop();
-    CGameManagement::getInstance()->unregisterEncounterByModuleName(SewerRessources::dungeonEncounterName());
+    CGameManagement::getInstance()->unregisterEncounterByModuleName(Sewer::dungeonEncounterName());
 }
 
 void CSewerDungeon::loopHook()

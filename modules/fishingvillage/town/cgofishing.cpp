@@ -124,7 +124,7 @@ void CGoFishing::catchAFish()
     {
         Console::printLn(std::format("You catch nothing. But as a legendary {} you too would not let yourself beeing "
                                      "caught by crappy equipment like yours.",
-                                     FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
+                                     FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
     }
     else if (i < 50)
     {

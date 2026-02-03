@@ -1,5 +1,7 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 
 class CTask;
@@ -13,13 +15,8 @@ constexpr std::string_view leilaTown = "LeilaTownTask";
 } // namespace Leila
 } // namespace TagNames
 
-namespace LeilaRessources
+namespace Leila
 {
-void initModule();
-void deInitModule();
-CTask* taskFactory(const std::string_view& objectName);
-
 std::string moduleName();
-std::string questLog();
-
-} // namespace LeilaRessources
+Module::ModuleInfo moduleInfo();
+} // namespace Leila

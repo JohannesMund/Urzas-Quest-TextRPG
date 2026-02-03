@@ -36,7 +36,7 @@ void CLeila2GoblinEncounter::execute(const std::string_view&)
         std::format("{} gets hit by a club and is drawn into the woods. You run towards her, but all you can see is "
                     "some {}, running away on a wild boar, with the lady of your over his shoulders.",
                     Ressources::Game::princessLeila(),
-                    Leila2Ressources::greenskin()));
+                    Leila2::greenskin()));
     Console::printLn(std::format("At least you are able to recover her {}. You pick it up and put it in your pocket. "
                                  "Maybe this will make you her hero, when you give it back to her.",
                                  Ressources::Game::leilasRibbon()));
@@ -60,5 +60,5 @@ std::string CLeila2GoblinEncounter::name() const
 
 std::string CLeila2GoblinEncounter::moduleName() const
 {
-    return Leila2Ressources::encounterNameFindRibbon();
+    return Leila2::encounterNameFindRibbon();
 }

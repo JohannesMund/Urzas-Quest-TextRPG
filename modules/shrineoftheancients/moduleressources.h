@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "module/moduleinfo.h"
+#include "moduleinfo.h"
 
 namespace TagNames
 {
@@ -15,12 +15,8 @@ constexpr std::string_view seenDuringPhase = "seenDuringPhase";
 } // namespace TagNames
 
 class CRoom;
-namespace ShrineRessources
+namespace Shrine
 {
 std::string moduleName();
-} // namespace ShrineRessources
-
-namespace ShrineInfo
-{
 Module::ModuleInfo moduleInfo();
-}
+} // namespace Shrine

@@ -31,7 +31,7 @@ void CCapitalDungeonBossTask::execute()
 
         *_bossDefeated = true;
         _isFinished = true;
-        CGameManagement::getPlayerInstance()->removeSupportCompanionsByModuleName(LeilaRescueRessources::moduleName());
-        CGameManagement::getProgressionInstance()->reportModuleFinished(LeilaRescueRessources::moduleName());
+        CGameManagement::getPlayerInstance()->removeSupportCompanionsByModuleName(LeilaRescue::moduleName());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(LeilaRescue::moduleName());
     }
 }

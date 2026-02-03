@@ -1,7 +1,7 @@
 #pragma once
 
+#include "moduleinfo.h"
 #include "ressources/jsontagnames.h"
-
 #include <string>
 #include <vector>
 
@@ -25,27 +25,18 @@ constexpr std::string_view count = TagNames::Common::count;
 
 class CRoom;
 class CItem;
-namespace RebellionHideoutRessources
+namespace RebellionHideout
 {
+Module::ModuleInfo moduleInfo();
+std::string moduleName();
+} // namespace RebellionHideout
 
-void initModuleSandwichShop();
-void initModuleRebellionHideout();
-
-void deInitModuleSandwichShop();
-void deInitModuleRebellionHideout();
-
-void initWorldMap(std::vector<CRoom*>& rooms);
-
-CRoom* roomFactory(const std::string_view& objectName);
-CItem* itemFactory(const std::string_view& objectName);
-
-std::string moduleNameSandwichShop();
-std::string moduleNameRebellionHideout();
-
-std::string questLogSandwichShop();
-std::string questLogRebellionHideout();
+namespace SandwichShop
+{
+Module::ModuleInfo moduleInfo();
+std::string moduleName();
 
 std::string sandwichShopName();
 std::string mrSoop();
 
-} // namespace RebellionHideoutRessources
+} // namespace SandwichShop

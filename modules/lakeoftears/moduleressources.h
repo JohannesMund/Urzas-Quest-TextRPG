@@ -1,5 +1,7 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 
 class CTask;
@@ -13,15 +15,10 @@ constexpr std::string_view steps = "steps";
 } // namespace LakeOfTears
 } // namespace TagNames
 
-namespace LakeTearsRessources
+namespace LakeOfTears
 {
-void initModule();
-void deInitModule();
-CTask* taskFactory(const std::string_view& objectName);
-
+Module::ModuleInfo moduleInfo();
 std::string moduleName();
-std::string questLog();
 
 std::string getColoredsBossString();
-
-} // namespace LakeTearsRessources
+} // namespace LakeOfTears

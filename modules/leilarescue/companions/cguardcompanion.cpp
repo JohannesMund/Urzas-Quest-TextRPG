@@ -7,7 +7,7 @@
 #include <format>
 
 CGuardCompanion::CGuardCompanion(const std::string_view& name) :
-    CSupportCompanion(LeilaRescueRessources::moduleName(), TagNames::LeilaRescue::guardCompanion)
+    CSupportCompanion(LeilaRescue::moduleName(), TagNames::LeilaRescue::guardCompanion)
 {
     if (Randomizer::getRandom(1))
     {

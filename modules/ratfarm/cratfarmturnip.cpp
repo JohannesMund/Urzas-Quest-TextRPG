@@ -12,23 +12,23 @@ CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem(TagNames::RatFarm
 
     _description = std::format(
         "A {0} from the famous {1} farm in {1} ville, harvested by lady {1}. Probably the best {0} in the world.",
-        RatFarmRessources::getTurnip(),
-        RatFarmRessources::getCarrot());
+        RatFarm::getTurnip(),
+        RatFarm::getCarrot());
 
     switch (size)
     {
     case TurnipSize::S:
-        _name = std::format("half-eaten {}", RatFarmRessources::getTurnip());
+        _name = std::format("half-eaten {}", RatFarm::getTurnip());
         _description.append(" This one is half-eaten by a rat. delicious!");
         _value = 5;
         break;
     case TurnipSize::M:
     default:
-        _name = RatFarmRessources::getTurnip();
+        _name = RatFarm::getTurnip();
         _value = 15;
         break;
     case TurnipSize::L:
-        _name = std::format("Big {}", RatFarmRessources::getTurnip());
+        _name = std::format("Big {}", RatFarm::getTurnip());
         _description.append(" This one is big and beautiful!");
         _value = 25;
         break;

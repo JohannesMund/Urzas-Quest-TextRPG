@@ -7,8 +7,8 @@
 
 CCaveBoss::CCaveBoss() : CEnemy()
 {
-    _name = CaveRessources::getColoredBossString();
-    _weapon = CaveRessources::getBossWeapon();
+    _name = Cave::getColoredBossString();
+    _weapon = Cave::getBossWeapon();
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;

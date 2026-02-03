@@ -29,6 +29,6 @@ void CCaveBossTask::execute()
 
         *_bossDefeated = true;
         _isFinished = true;
-        CGameManagement::getProgressionInstance()->reportModuleFinished(CaveRessources::moduleName());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(Cave::moduleName());
     }
 }

@@ -1,4 +1,6 @@
 #pragma once
+
+#include "moduleinfo.h"
 #include "ressources/jsontagnames.h"
 
 #include <string>
@@ -25,23 +27,16 @@ constexpr std::string_view part = TagNames::Item::part;
 } // namespace LeilaRescue
 } // namespace TagNames
 
-namespace LeilaRescueRessources
+namespace LeilaRescue
 {
-void initModule();
-void deInitModule();
+std::string moduleName();
+Module::ModuleInfo moduleInfo();
 
 void questAccepted();
-
-CTask* taskFactory(const std::string_view& objectName);
-CItem* itemFactory(const std::string_view& objectName);
-CSupportCompanion* companionFactory(const std::string_view& name);
-
-std::string moduleName();
-std::string questLog();
 
 std::string questText();
 
 std::string getColoredBossString();
 std::string getBossWeapon();
 
-} // namespace LeilaRescueRessources
+} // namespace LeilaRescue

@@ -10,63 +10,71 @@
 
 #include <format>
 
-void Leila2Ressources::initModule()
-{
-    CGameManagement::getInstance()->registerEncounter(new CLeila2Encounter());
-}
-
-void Leila2Ressources::deInitModule()
-{
-    CGameManagement::getInstance()->unregisterEncounterByModuleName(encounterNameGuards());
-    CGameManagement::getInstance()->unregisterEncounterByModuleName(encounterNameFindRibbon());
-}
-
-CTask* Leila2Ressources::taskFactory(const std::string_view& objectName)
-{
-    if (TagNames::Leila2::leilaCaptial.compare(objectName) == 0)
-    {
-        return new CLeila2CapitalTask();
-    }
-    if (TagNames::Leila2::goblinVillage.compare(objectName) == 0)
-    {
-        return new CLeila2GoblinVillageTask();
-    }
-    return nullptr;
-}
-
-std::string Leila2Ressources::moduleName()
+std::string Leila2::moduleName()
 {
     return "RescuePrincessLaylaAgain";
 }
 
-std::string Leila2Ressources::encounterNameGuards()
+Module::ModuleInfo Leila2::moduleInfo()
+{
+
+    const auto taskFactory = [](const std::string_view& objectName) -> CTask*
+    {
+        if (TagNames::Leila2::leilaCaptial.compare(objectName) == 0)
+        {
+            return new CLeila2CapitalTask();
+        }
+        if (TagNames::Leila2::goblinVillage.compare(objectName) == 0)
+        {
+            return new CLeila2GoblinVillageTask();
+        }
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "leila2";
+    moduleInfo.gameStage = Module::EGameStage::eLearnedAboutCult,
+
+    moduleInfo.initFunction = []() { CGameManagement::getInstance()->registerEncounter(new CLeila2Encounter()); };
+    moduleInfo.deInitFunction = []()
+    {
+        CGameManagement::getInstance()->unregisterEncounterByModuleName(encounterNameGuards());
+        CGameManagement::getInstance()->unregisterEncounterByModuleName(encounterNameFindRibbon());
+    };
+    moduleInfo.questLogFunction = []()
+    {
+        return std::format("Guard your favourite damsel in distress, {}, to the capital.",
+                           Ressources::Game::princessLeila());
+    };
+    moduleInfo.taskFactory = taskFactory;
+
+    return moduleInfo;
+}
+
+std::string Leila2::encounterNameGuards()
 {
     return "RescuePrincessLaylaAgainGuards";
 }
 
-std::string Leila2Ressources::encounterNameFindRibbon()
+std::string Leila2::encounterNameFindRibbon()
 {
 
     return "RescuePrincessLaylaFindRibbon";
 }
 
-std::string Leila2Ressources::questLog()
-{
-    return std::format("Guard your favourite damsel in distress, {}, to the capital.",
-                       Ressources::Game::princessLeila());
-}
-
-std::string Leila2Ressources::mork()
+std::string Leila2::mork()
 {
     return std::format("{}M{}ork{}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());
 }
 
-std::string Leila2Ressources::gork()
+std::string Leila2::gork()
 {
     return std::format("{}G{}ork{}", CC::fgLightGreen(), CC::fgGreen(), CC::ccReset());
 }
 
-std::string Leila2Ressources::greenskin()
+std::string Leila2::greenskin()
 {
     return std::format("{}G{}reenskin{}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());
 }

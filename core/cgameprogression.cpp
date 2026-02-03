@@ -175,7 +175,8 @@ bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName)
 {
     return std::count_if(_moduleQuests.begin(),
                          _moduleQuests.end(),
-                         [moduleName](const ModuleQuest& quest) {
+                         [moduleName](const ModuleQuest& quest)
+                         {
                              return ModuleQuest::moduleQuestNameFilter(moduleName)(quest) &&
                                     ModuleQuest::moduleQuestAcceptedFilter()(quest);
                          }) != 0;
@@ -335,7 +336,7 @@ void CGameProgression::progressToStage(Module::EGameStage stage)
             Console::EAlignment::eCenter);
         Console::printLn(
             std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
-                        BardRessources::encounterName()),
+                        Bard::encounterName()),
             Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
@@ -418,44 +419,14 @@ void CGameProgression::reRegisterModule(const std::string_view& name, const Modu
 
 void CGameProgression::registerModule(const Module::ModuleInfo& module)
 {
-    /*
     CTranslator* t = CTranslator::getInstance();
     t->registerModule(module.moduleName, module.translatorFile);
-    */
     _registeredModules.push_back(module);
 }
 
 std::string CGameProgression::coreTr(const std::string_view& textId) const
 {
     return CTranslator::translate(TagNames::Translator::core, TagNames::Progression::progression, textId);
-}
-
-void CGameProgression::registerModule(
-    const std::string_view& name,
-    const Module::EGameStage neededForStage,
-    std::function<std::string()> questLogFunction,
-    std::function<void()> initFunction,
-    std::function<void()> deInitFunction,
-    std::function<void(std::vector<CRoom*>&)> initWorldMapFunction,
-    std::function<CSupportCompanion*(const std::string_view& name)> supportCompanionFactory,
-    std::function<CRoom*(const std::string_view& name)> roomsFactory,
-    std::function<CItem*(const std::string_view& name)> itemFactory,
-    std::function<CTask*(const std::string_view& name)> taskFactory)
-
-{
-    Module::ModuleInfo module;
-    module.moduleName = name;
-    module.gameStage = neededForStage;
-    module.questLogFunction = questLogFunction;
-    module.initFunction = initFunction;
-    module.deInitFunction = deInitFunction;
-    module.initWorldMapFunction = initWorldMapFunction;
-    module.supportCompantonFactory = supportCompanionFactory;
-    module.itemFactory = itemFactory;
-    module.roomFactory = roomsFactory;
-    module.taskFactory = taskFactory;
-
-    registerModule(module);
 }
 
 void CGameProgression::reRegisterModuleForNextStage(const std::string_view& moduleName)

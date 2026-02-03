@@ -6,7 +6,7 @@
 
 #include <format>
 
-CLeilaBossOrks::CLeilaBossOrks() : CTwoEnemies(Leila2Ressources::mork(), Leila2Ressources::gork())
+CLeilaBossOrks::CLeilaBossOrks() : CTwoEnemies(Leila2::mork(), Leila2::gork())
 {
     _name = "";
     _weapon = "Trunk and Rock";
