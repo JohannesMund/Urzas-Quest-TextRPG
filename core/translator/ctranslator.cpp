@@ -114,5 +114,14 @@ std::string CTranslator::tr(const std::string_view& moduleName,
     {
         return std::string(textId);
     }
-    return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
+
+    try
+    {
+        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
+    }
+    catch (const std::exception& e)
+    {
+        Console::printErr("Formattimg error error", std::format("{} threw {}", *r, e.what()));
+        return *r;
+    }
 }

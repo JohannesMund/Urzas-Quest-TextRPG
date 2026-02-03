@@ -9,6 +9,7 @@
  * @brief The CTranslator class provides translation of strings throughout the whole program
  * @remark Translations are provided by json files. json files must be copied by cmake
  * @remark Modules provide their own translation file. Module translations must be registered @sa registerModule
+ * @remark Note, that cmake expectes a ressource file and will not execute successfully if none exists.
  */
 
 class CTranslator
@@ -31,6 +32,8 @@ public:
     /**
      * @brief provides a translation and applies format args
      * @remarks uses CTranslator::translate
+     * @remarks this function should be used rather than formatting translated strings by hand, because formatting
+     * errors are handled here.
      * @param[in] moduleName the moduleName which provides the translations or "core"
      * @param[in] objecName section in the translation. organisation is up to the module
      * @param[in] textId text to be translated
