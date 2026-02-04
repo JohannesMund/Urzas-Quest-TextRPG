@@ -1,28 +1,30 @@
 set(URZAS_QUEST_SOURCES_CORE	
 	core/core.cmake
 
-	core/console.h core/console.cpp
-    core/colorize.h core/colorize.cpp
+	
     core/cgamestateobject.h core/cgamestateobject.cpp
     core/cmenu.h core/cmenu.cpp
-    core/randomizer.h core/randomizer.cpp
-    core/enumiterator.h
-    core/exceptions.h
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
+   
+    core/utils/enumiterator.h
+    core/utils/localdirectory.h core/utils/localdirectory.cpp
+    core/utils/randomizer.h core/utils/randomizer.cpp
+    core/utils/console.h core/utils/console.cpp
+    core/utils/colorize.h core/utils/colorize.cpp
+    core/utils/exceptions.h
+
+    core/utils/save/csavefile.h core/utils/save/csavefile.cpp    
+    core/utils/save/exceptions.h
+
+    core/utils/translator/ctranslator.h core/utils/translator/ctranslator.cpp
+    core/utils/translator/exceptions.h
 
     core/ressources/jsontagnames.h
-    
-    core/save/csavefile.h core/save/csavefile.cpp
-    core/save/localdirectory.h core/save/localdirectory.cpp
-    core/save/exceptions.h
-    
-    core/translator/ctranslator.h core/translator/ctranslator.cpp
-    core/translator/exceptions.h
-    
+        
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp
     core/companion/csupportcompanion.h core/companion/csupportcompanion.cpp
@@ -106,8 +108,9 @@ set(CORE_INCLUDE_DIRS
     /core/encounters 
     /core/dungeons 
     /core/dungeons/rooms
-    core/translator
-    core/save
+    /core/translator
+    /core/save
+    /core/utils
 )
 
 

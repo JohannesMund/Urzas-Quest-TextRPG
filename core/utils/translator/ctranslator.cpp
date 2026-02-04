@@ -1,5 +1,8 @@
 #include "ctranslator.h"
 #include "console.h"
+#include "localdirectory.h"
+#include "ressources/jsontagnames.h"
+#include "save/exceptions.h"
 #include "translator/exceptions.h"
 
 #include <cassert>
@@ -57,6 +60,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
             throw Translator::CTranslatorException(std::format("Translator module {} not loaded", path));
         }
 
+        path.append("/").append(TagNames::Translator::translation);
         path.append("/").append(objectName);
 
         if (!t.contains(path))
@@ -68,6 +72,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
 
         if (!t.contains(path))
         {
+            CTranslator::getInstance()->updateTranslationFile(moduleName, objectName, textId);
             throw Translator::CTranslatorException(std::format("Translator string {} not found", path));
         }
 
@@ -80,9 +85,50 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
     return {};
 }
 
+void CTranslator::updateTranslationFile(const std::string_view& moduleName,
+                                        const std::string_view& objectName,
+                                        const std::string_view& textId)
+{
+    if (!_translations.contains(moduleName))
+    {
+        // We do not want to create new ressource files.
+        return;
+    }
+
+    auto j = _translations[moduleName];
+
+    if (!j[TagNames::Translator::translation].contains(objectName))
+    {
+        j[TagNames::Translator::translation][objectName] = nlohmann::json();
+    }
+
+    j[TagNames::Translator::translation][objectName][textId] = nlohmann::json();
+
+    try
+    {
+        auto path = LocalDirectory::getLocalDirectoryPath();
+        path.append(std::format("{}_updated.json", moduleName));
+        std::ofstream f;
+        f.open(path, std::ofstream::out | std::ofstream::trunc);
+        if (!f.is_open())
+        {
+            throw Translator::CTranslatorException(std::format("Write file {} failed", path.string()));
+        }
+        f << j.dump(2).c_str() << std::flush;
+        f.close();
+    }
+    catch (const Translator::CTranslatorException& e)
+    {
+        Console::printErr("Save file error", e.what());
+    }
+    catch (const nlohmann::json::exception& e)
+    {
+        Console::printErr("Dump json error", e.what());
+    }
+}
+
 CTranslator::CTranslator()
 {
-
     loadTranslationFile("core", "ressources/core/ressources.json");
 }
 
@@ -117,6 +163,7 @@ std::string CTranslator::tr(const std::string_view& moduleName,
 
     try
     {
+        return *r;
         return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
     }
     catch (const std::exception& e)

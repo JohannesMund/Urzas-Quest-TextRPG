@@ -70,4 +70,8 @@ private:
     static std::optional<std::string> translate(const std::string_view& moduleName,
                                                 const std::string_view& objectName,
                                                 const std::string_view& textId);
+
+    void updateTranslationFile(const std::string_view& moduleName,
+                               const std::string_view& objectName,
+                               const std::string_view& textId);
 };
