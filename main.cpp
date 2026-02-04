@@ -1,4 +1,5 @@
 #include "cgamemanagement.h"
+#include "clog.h"
 #include "console.h"
 #include "ressources.h"
 
@@ -21,6 +22,8 @@ int main()
     Console::printLn("~or~", Console::EAlignment::eCenter);
     Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
     Console::hr();
+
+    CLog::info() << "Bratwurst" << std::endl << std::flush;
 
     std::string acceptableChars;
     Console::printLn("[S]tart a new game", Console::EAlignment::eCenter);

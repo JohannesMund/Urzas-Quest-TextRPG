@@ -16,6 +16,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/utils/console.h core/utils/console.cpp
     core/utils/colorize.h core/utils/colorize.cpp
     core/utils/exceptions.h
+    core/utils/clog.h core/utils/clog.cpp
 
     core/utils/save/csavefile.h core/utils/save/csavefile.cpp    
     core/utils/save/exceptions.h

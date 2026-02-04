@@ -1,4 +1,5 @@
 #include "ctranslator.h"
+#include "clog.h"
 #include "console.h"
 #include "localdirectory.h"
 #include "ressources/jsontagnames.h"
@@ -14,7 +15,7 @@ void CTranslator::checkTranslationFileExist(const std::string& file)
 {
     if (!std::filesystem::exists(file))
     {
-        Translator::CTranslatorException(std::format("Translator file {} does not exist", file));
+        throw Translator::CTranslatorException(std::format("Translator file {} does not exist", file));
     }
 }
 
@@ -42,7 +43,7 @@ void CTranslator::loadTranslationFile(const std::string_view& moduleName, const 
     }
     catch (Translator::CTranslatorException& e)
     {
-        Console::printErr(std::format("Error lading Translation file {}", file), e.what());
+        CLog::error() << "Error lading Translation file " << file << ": " << e.what() << std::endl << std::flush;
     }
 }
 
@@ -80,7 +81,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
     }
     catch (const Translator::CTranslatorException& e)
     {
-        Console::printErr("Translation error", e.what());
+        CLog::error() << "Translation error in " << moduleName << ": " << e.what() << std::endl << std::flush;
     }
     return {};
 }
@@ -108,6 +109,10 @@ void CTranslator::updateTranslationFile(const std::string_view& moduleName,
     {
         auto path = LocalDirectory::getLocalDirectoryPath();
         path.append(std::format("{}_updated.json", moduleName));
+
+        CLog::info() << "Added Translation " << textId << " to " << moduleName << "/" << objectName << std::endl
+                     << std::flush;
+
         std::ofstream f;
         f.open(path, std::ofstream::out | std::ofstream::trunc);
         if (!f.is_open())
@@ -119,11 +124,12 @@ void CTranslator::updateTranslationFile(const std::string_view& moduleName,
     }
     catch (const Translator::CTranslatorException& e)
     {
-        Console::printErr("Save file error", e.what());
+        CLog::error() << "Error saving file: " << e.what() << std::endl << std::flush;
     }
     catch (const nlohmann::json::exception& e)
     {
-        Console::printErr("Dump json error", e.what());
+        CLog::error() << "Error dumping json: " << e.what() << std::endl << std::flush;
+        ;
     }
 }
 
@@ -167,7 +173,7 @@ std::string CTranslator::tr(const std::string_view& moduleName,
     }
     catch (const std::exception& e)
     {
-        Console::printErr("Formattimg error error", std::format("{} threw {}", *r, e.what()));
+        CLog::error() << "Formatting error, std::dormat threw: " << e.what() << std::endl << std::flush;
         return *r;
     }
 }
