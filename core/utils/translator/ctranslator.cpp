@@ -6,7 +6,6 @@
 #include "save/exceptions.h"
 #include "translator/exceptions.h"
 
-#include <cassert>
 #include <format>
 #include <fstream>
 #include <nlohmann/json.hpp>
@@ -129,7 +128,6 @@ void CTranslator::updateTranslationFile(const std::string_view& moduleName,
     catch (const nlohmann::json::exception& e)
     {
         CLog::error() << "Error dumping json: " << e.what() << std::endl << std::flush;
-        ;
     }
 }
 
