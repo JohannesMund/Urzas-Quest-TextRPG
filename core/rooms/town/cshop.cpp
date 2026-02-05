@@ -28,7 +28,8 @@ CShop::~CShop()
 
 void CShop::execute()
 {
-    if (CGameManagement::getProgressionInstance()->turns() - _turns > Ressources::Config::turnsUntilShopRefresh)
+    if (CGameManagement::getProgressionInstance()->turns() - _turns >
+        CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
     {
         replaceShopItems();
     }

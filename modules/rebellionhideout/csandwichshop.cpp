@@ -31,7 +31,8 @@ CSandwichShop::CSandwichShop() : CRoom(TagNames::RebellionHideout::rebellionHide
 void CSandwichShop::execute()
 {
     CRoom::execute();
-    if (CGameManagement::getProgressionInstance()->turns() - _turns > Ressources::Config::turnsUntilShopRefresh)
+    if (CGameManagement::getProgressionInstance()->turns() - _turns >
+        CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
     {
         replaceSandwichOfTheDay();
     }

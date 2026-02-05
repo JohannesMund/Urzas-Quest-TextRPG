@@ -1,6 +1,5 @@
 set(URZAS_QUEST_SOURCES_CORE	
 	core/core.cmake
-
 	
     core/cgamestateobject.h core/cgamestateobject.cpp
     core/cmenu.h core/cmenu.cpp
@@ -9,7 +8,9 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cplayer.h core/cplayer.cpp
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
-   
+    core/defaultsettings.h
+    core/jsontagnames.h
+
     core/utils/enumiterator.h
     core/utils/localdirectory.h core/utils/localdirectory.cpp
     core/utils/randomizer.h core/utils/randomizer.cpp
@@ -18,13 +19,13 @@ set(URZAS_QUEST_SOURCES_CORE
     core/utils/exceptions.h
     core/utils/clog.h core/utils/clog.cpp
 
-    core/utils/save/csavefile.h core/utils/save/csavefile.cpp    
-    core/utils/save/exceptions.h
+    core/utils/save/cgamesettings.h core/utils/save/cgamesettings.cpp
+    core/utils/save/csavefile.h core/utils/save/csavefile.cpp
+    core/utils/save/saveexceptions.h core/utils/save/savetagnames.h
+    core/utils/save/defaults.h
 
     core/utils/translator/ctranslator.h core/utils/translator/ctranslator.cpp
-    core/utils/translator/exceptions.h
-
-    core/ressources/jsontagnames.h
+    core/utils/translator/translatorexceptions.h core/utils/translator/translatortagnames.h
         
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp

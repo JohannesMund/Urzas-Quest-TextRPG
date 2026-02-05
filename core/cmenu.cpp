@@ -131,6 +131,11 @@ CMenu::Action CMenu::reject()
     return {"Reject", "[R]eject", 'r'};
 }
 
+CMenu::Action CMenu::ret()
+{
+    return {"Return", "[R]eturn", 'r'};
+}
+
 CMenu::Action CMenu::findActionByInput() const
 {
     auto input = Console::getAcceptableInput(_acceptableNavs);

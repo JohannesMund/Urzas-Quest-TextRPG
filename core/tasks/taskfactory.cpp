@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "console.h"
 #include "ctask.h"
-#include "save/exceptions.h"
+#include "save/saveexceptions.h"
 
 CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
 {

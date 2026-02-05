@@ -165,6 +165,7 @@ void CFishingFritz::getInformation() const
 {
     CMenu menu;
     CMenu::ActionList actions;
+    const auto informationCost = CGameManagement::getGameSettingsInstance()->informationCost();
 
     if (CGameManagement::getProgressionInstance()->moduleHintsAvailable())
     {
@@ -181,13 +182,12 @@ void CFishingFritz::getInformation() const
                         "Gold{} to get this information.\"",
                         Ressources::Game::fishingFritz(),
                         CC::fgLightYellow(),
-                        Ressources::Config::informationCost,
+                        informationCost,
                         CC::ccReset()));
 
-        if (CGameManagement::getPlayerInstance()->gold() > Ressources::Config::informationCost)
+        if (CGameManagement::getPlayerInstance()->gold() > informationCost)
         {
-            actions.push_back(
-                menu.createAction(std::format("Get information ({} Gold)", Ressources::Config::informationCost), 'G'));
+            actions.push_back(menu.createAction(std::format("Get information ({} Gold)", informationCost), 'G'));
         }
         else
         {
@@ -200,7 +200,8 @@ void CFishingFritz::getInformation() const
     if (menu.execute().key == 'g')
     {
         auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
-        CGameManagement::getPlayerInstance()->spendGold(Ressources::Config::informationCost);
+        CGameManagement::getPlayerInstance()->spendGold(informationCost);
+
         Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
                                      Ressources::Game::fishingFritz()));
         Console::br();

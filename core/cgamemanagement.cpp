@@ -16,7 +16,7 @@
 #include "randomizer.h"
 #include "rebellionhideout/cbagofingredients.h"
 #include "save/csavefile.h"
-#include "save/exceptions.h"
+#include "save/saveexceptions.h"
 
 #include <format>
 #include <iostream>
@@ -32,7 +32,6 @@ CGameManagement* CGameManagement::getInstance()
         static CGameManagement instance;
         _instance = &instance;
     }
-
     return _instance;
 }
 
@@ -61,6 +60,11 @@ CItemFactory* CGameManagement::getItemFactoryInstance()
     return getInstance()->getItemFactory();
 }
 
+CGameSettings* CGameManagement::getGameSettingsInstance()
+{
+    return CGameSettings::Settings();
+}
+
 void CGameManagement::placeTask(CTask* task, CMap::RoomFilter filter)
 {
     _map.setTaskToRandomRoom(task, filter);
@@ -74,6 +78,11 @@ void CGameManagement::placeTaskOnField(CTask* task)
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
     _map.setTaskToRandomRoom(task, CTown::townFilter());
+}
+
+void CGameManagement::loadGameSettings()
+{
+    //_settings.reloadSettings();
 }
 
 void CGameManagement::startGame()
@@ -97,7 +106,7 @@ void CGameManagement::executeRandomEncounter(const CEncounter::EEncounterType ty
         return;
     }
 
-    if (Randomizer::getRandom(100) > Ressources::Config::encounterChance)
+    if (Randomizer::getRandom(100) > CGameSettings::Settings()->encounterChance())
     {
         return;
     }
@@ -219,7 +228,7 @@ void CGameManagement::executeTurn()
 
         menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
 
-        if (Ressources::Config::superCowPowers)
+        if (getGameSettingsInstance()->superCowPowers())
         {
             menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
         }
@@ -445,7 +454,7 @@ bool CGameManagement::save()
 }
 
 CGameManagement::CGameManagement() :
-    _map(CMap(Ressources::Config::fieldWidth, Ressources::Config::fieldHeight)),
+    _map(CMap(CGameSettings::Settings()->fieldWidth(), CGameSettings::Settings()->fieldHeight())),
     _inventory(&_itemFactory)
 {
     _companion = CompanionFactory::makeRandomCompanion();

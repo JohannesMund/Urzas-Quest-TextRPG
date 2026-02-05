@@ -7,7 +7,7 @@
 #include "cscarymonstercompanion.h"
 #include "csupportcompanion.h"
 #include "ressources.h"
-#include "save/exceptions.h"
+#include "save/saveexceptions.h"
 
 #include <nlohmann/json.hpp>
 

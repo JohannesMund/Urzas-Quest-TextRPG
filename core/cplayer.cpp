@@ -21,10 +21,10 @@
 
 CPlayer::CPlayer() : CGameStateObject(TagNames::Player::player)
 {
-    _maxHp = Ressources::Config::maxHp;
-    _hp = Ressources::Config::maxHp;
-    _gold = Ressources::Config::gold;
-    _initiative = Ressources::Config::initiative;
+    _maxHp = CGameManagement::getGameSettingsInstance()->maxHp();
+    _hp = CGameManagement::getGameSettingsInstance()->maxHp();
+    _gold = CGameManagement::getGameSettingsInstance()->gold();
+    _initiative = CGameManagement::getGameSettingsInstance()->initiative();
 }
 
 void CPlayer::print() const
@@ -135,9 +135,9 @@ void CPlayer::addMaxHp(const int i)
     _maxHp += i;
     _hp += i;
 
-    if (_maxHp < Ressources::Config::maxHpMin)
+    if (_maxHp < CGameManagement::getGameSettingsInstance()->maxHpMin())
     {
-        _maxHp = Ressources::Config::maxHpMin;
+        _maxHp = CGameManagement::getGameSettingsInstance()->maxHpMin();
     }
     if (i < 0 && _hp > _maxHp)
     {
@@ -248,7 +248,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
 
         CMenu::ActionList tools;
         tools.push_back(menu.createAction("Inventory"));
-        if (Ressources::Config::superCowPowers)
+        if (CGameManagement::getGameSettingsInstance()->superCowPowers())
         {
             tools.push_back(menu.createAction("Win"));
         }

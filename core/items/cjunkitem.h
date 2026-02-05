@@ -1,7 +1,7 @@
 #pragma once
 
 #include "citem.h"
-#include "ressources/jsontagnames.h"
+#include "save/savetagnames.h"
 
 class CJunkItem : public CItem
 {

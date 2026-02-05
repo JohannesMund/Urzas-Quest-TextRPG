@@ -1,6 +1,7 @@
 #include "console.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
+#include "defaultsettings.h"
 #include "globals.h"
 #include "ressources.h"
 
@@ -73,7 +74,7 @@ void Console::br()
 
 void Console::hr()
 {
-    for (unsigned int i = 0; i < Ressources::Settings::consoleWidth; i++)
+    for (unsigned int i = 0; i < Settings::consoleWidth; i++)
     {
         cout << "=";
     }
@@ -118,12 +119,12 @@ void Console::printLn(const std::string_view& text, const EAlignment align, cons
 
     std::string s(text);
 
-    if (CC::colorizedSize(s) > Ressources::Settings::consoleWidth)
+    if (CC::colorizedSize(s) > Settings::consoleWidth)
     {
         size_t written = 0;
         while (written < s.size())
         {
-            auto substring = CC::colorizedSubString(s, written, Ressources::Settings::consoleWidth);
+            auto substring = CC::colorizedSubString(s, written, Settings::consoleWidth);
 
             if ((written + substring.size()) >= s.size())
             {
@@ -151,7 +152,7 @@ void Console::printLn(const std::string_view& text, const EAlignment align, cons
         if (align == EAlignment::eCenter)
         {
             bool toggle = false;
-            while (CC::colorizedSize(s) < Ressources::Settings::consoleWidth)
+            while (CC::colorizedSize(s) < Settings::consoleWidth)
             {
                 s.insert(toggle ? 0 : s.size(), 1, ' ');
                 toggle = !toggle;
@@ -159,7 +160,7 @@ void Console::printLn(const std::string_view& text, const EAlignment align, cons
         }
         else if (align == EAlignment::eRight)
         {
-            while (CC::colorizedSize(s) < Ressources::Settings::consoleWidth)
+            while (CC::colorizedSize(s) < Settings::consoleWidth)
             {
                 s.insert(0, 1, ' ');
             }
@@ -211,7 +212,7 @@ std::optional<int> Console::getNumberInputWithEcho(const int min, const int max)
 
 void Console::printLnWithSpacer(const std::string& text1, const std::string& text2)
 {
-    if (CC::colorizedSize(text1) + CC::colorizedSize(text2) > Ressources::Settings::consoleWidth)
+    if (CC::colorizedSize(text1) + CC::colorizedSize(text2) > Settings::consoleWidth)
     {
         printLn(text1);
         printLn(text2, EAlignment::eRight);
@@ -219,7 +220,7 @@ void Console::printLnWithSpacer(const std::string& text1, const std::string& tex
     }
 
     std::string out(text1);
-    while (CC::colorizedSize(out) + CC::colorizedSize(text2) < Ressources::Settings::consoleWidth)
+    while (CC::colorizedSize(out) + CC::colorizedSize(text2) < Settings::consoleWidth)
     {
         out.append(" ");
     }

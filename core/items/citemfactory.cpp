@@ -16,7 +16,7 @@
 #include "curzasglasses.h"
 #include "cweapon.h"
 #include "randomizer.h"
-#include "save/exceptions.h"
+#include "save/saveexceptions.h"
 #include "translator/ctranslator.h"
 
 #include <algorithm>

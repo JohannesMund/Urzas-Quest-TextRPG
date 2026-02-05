@@ -2,9 +2,8 @@
 #include "clog.h"
 #include "console.h"
 #include "localdirectory.h"
-#include "ressources/jsontagnames.h"
-#include "save/exceptions.h"
-#include "translator/exceptions.h"
+#include "translator/translatorexceptions.h"
+#include "translatortagnames.h"
 
 #include <format>
 #include <fstream>

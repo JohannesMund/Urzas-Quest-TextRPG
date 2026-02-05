@@ -1,5 +1,7 @@
 #pragma once
 
+#include "save/savetagnames.h"
+
 #include <functional>
 #include <string>
 #include <vector>

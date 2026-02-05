@@ -1,7 +1,6 @@
 #include "cgamestateobject.h"
 #include "console.h"
-#include "ressources/jsontagnames.h"
-#include "save/exceptions.h"
+#include "save/saveexceptions.h"
 #include "translator/ctranslator.h"
 
 #include <nlohmann/json.hpp>

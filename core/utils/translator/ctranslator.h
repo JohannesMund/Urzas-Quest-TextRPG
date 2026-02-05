@@ -5,6 +5,8 @@
 
 #include <nlohmann/json.hpp>
 
+#include "translatortagnames.h"
+
 /**
  * @brief The CTranslator class provides translation of strings throughout the whole program
  * @remark Translations are provided by json files. json files must be copied by cmake

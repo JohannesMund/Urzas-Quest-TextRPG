@@ -1,7 +1,8 @@
 #include "localdirectory.h"
+#include "defaultsettings.h"
 #include "globals.h"
 #include "ressources.h"
-#include "save/exceptions.h"
+#include "save/saveexceptions.h"
 
 #include <format>
 
@@ -21,7 +22,7 @@ void checkAndExpandPath(std::filesystem::path& p)
     {
         throw SaveFile::CSaveFileException("Local Directory does not exist");
     }
-    p.append(std::format(".{}", Ressources::Settings::appName));
+    p.append(std::format(".{}", Settings::appName));
     if (!std::filesystem::exists(p))
     {
         if (!std::filesystem::create_directories(p))

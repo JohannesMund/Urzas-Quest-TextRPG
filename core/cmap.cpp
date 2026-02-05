@@ -1,6 +1,7 @@
 #include "cmap.h"
 #include "cave/ccave.h"
 #include "ccapital.h"
+#include "cgamemanagement.h"
 #include "cinjuredpet.h"
 #include "colorize.h"
 #include "console.h"
@@ -26,6 +27,7 @@ const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eN
 
 CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject(TagNames::Map::map)
 {
+
     for (unsigned int x = 0; x < height; x++)
     {
         std::vector<CRoom*> row;
@@ -58,12 +60,16 @@ void CMap::init(std::vector<CRoom*>& rooms)
     rooms.push_back(RoomFactory::makeInjuredPet());
     rooms.push_back(RoomFactory::makeCapital());
 
-    for (unsigned int i = 0; i < Ressources::Config::numberOfTowns; i++)
+    const auto numberOfTowns = CGameManagement::getGameSettingsInstance()->numberOfTowns();
+    const auto fieldWidth = CGameManagement::getGameSettingsInstance()->fieldWidth();
+    const auto fieldHeight = CGameManagement::getGameSettingsInstance()->fieldHeight();
+
+    for (unsigned int i = 0; i < numberOfTowns; i++)
     {
         rooms.push_back(RoomFactory::makeTown());
     }
 
-    while (rooms.size() < (Ressources::Config::fieldWidth * Ressources::Config::fieldHeight) - 1)
+    while (rooms.size() < (fieldWidth * fieldHeight) - 1)
     {
         rooms.push_back(RoomFactory::makeRoom());
     }

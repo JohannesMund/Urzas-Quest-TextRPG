@@ -1,5 +1,6 @@
 #include "clog.h"
 
+#include "defaultsettings.h"
 #include "localdirectory.h"
 #include "ressources.h"
 
@@ -27,6 +28,6 @@ std::ofstream& CLog::makeEntry(const std::string_view& scope)
 CLog::CLog()
 {
     auto path = LocalDirectory::getLocalDirectoryPath();
-    path.append(Ressources::Settings::logFileName);
+    path.append(Settings::logFileName);
     _os.open(path, std::ofstream::out | std::ofstream::app);
 }

@@ -72,7 +72,7 @@ void CDungeon::dungeonLoop()
         }
 
         CMenu::ActionList superCowHalf = {};
-        if (Ressources::Config::superCowPowers)
+        if (CGameManagement::getGameSettingsInstance()->superCowPowers())
         {
             superCowHalf.push_back(menu.createAction("Reveal"));
         }

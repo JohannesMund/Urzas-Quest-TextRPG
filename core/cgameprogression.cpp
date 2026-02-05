@@ -175,7 +175,8 @@ bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName)
 {
     return std::count_if(_moduleQuests.begin(),
                          _moduleQuests.end(),
-                         [moduleName](const ModuleQuest& quest) {
+                         [moduleName](const ModuleQuest& quest)
+                         {
                              return ModuleQuest::moduleQuestNameFilter(moduleName)(quest) &&
                                     ModuleQuest::moduleQuestAcceptedFilter()(quest);
                          }) != 0;

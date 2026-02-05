@@ -1,7 +1,6 @@
 #pragma once
 
 #include "moduleinfo.h"
-#include "ressources/jsontagnames.h"
 
 #include <string>
 

@@ -1,11 +1,12 @@
 #include "csavefile.h"
-#include "../exceptions.h"
 #include "cgamestateobject.h"
 #include "console.h"
+#include "defaultsettings.h"
+#include "exceptions.h"
 #include "globals.h"
 #include "localdirectory.h"
 #include "ressources.h"
-#include "save/exceptions.h"
+#include "saveexceptions.h"
 
 #include <chrono>
 #include <ctime>
@@ -15,11 +16,13 @@
 CSaveFile::CSaveFile()
 {
     addObject(TagNames::FileSpec::fileSpec,
-              {{TagNames::FileSpec::name, "UrzasQuest TextRPG"}, {TagNames::FileSpec::version, 1}});
+              {{TagNames::FileSpec::name, "UrzasQuest TextRPG"},
+               {TagNames::FileSpec::version, 1},
+               {TagNames::FileSpec::fileType, TagNames::FileSpec::typeSave}});
 
     nlohmann::json gameState;
     auto now = std::chrono::time_point_cast<std::chrono::seconds>(std::chrono::system_clock::now());
-    gameState["DateTime"] = std::format("{:%Y-%m-%d %H:%M:%S}", now);
+    gameState[TagNames::FileSpec::dateTime] = std::format("{:%Y-%m-%d %H:%M:%S}", now);
     addObject("GameState", gameState);
 }
 
@@ -28,7 +31,7 @@ bool CSaveFile::saveGameAvailable()
     try
     {
         auto path = LocalDirectory::getLocalDirectoryPath();
-        path.append(Ressources::Settings::saveFileName);
+        path.append(Settings::saveFileName);
         return std::filesystem::exists(path);
     }
     catch (const SaveFile::CSaveFileException&)
@@ -71,7 +74,7 @@ void CSaveFile::dump()
     try
     {
         auto path = LocalDirectory::getLocalDirectoryPath();
-        path.append(Ressources::Settings::saveFileName);
+        path.append(Settings::saveFileName);
         std::ofstream f;
         f.open(path, std::ofstream::out | std::ofstream::trunc);
         if (!f.is_open())
@@ -101,7 +104,7 @@ void CSaveFile::load()
         }
 
         auto path = LocalDirectory::getLocalDirectoryPath();
-        path.append(Ressources::Settings::saveFileName);
+        path.append(Settings::saveFileName);
 
         std::ifstream f;
         f.open(path);
