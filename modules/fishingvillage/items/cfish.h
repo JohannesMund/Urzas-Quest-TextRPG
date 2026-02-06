@@ -19,8 +19,6 @@ protected:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 
-    virtual nlohmann::json save() const override;
-
 private:
     FishingVillage::EFishLevel _fishLevel;
 };
