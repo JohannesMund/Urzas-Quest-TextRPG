@@ -4,7 +4,7 @@
 #include "cjunkitem.h"
 #include "cmenu.h"
 #include "console.h"
-#include "save/csavefile.h"
+#include "csavefile.h"
 #include "translator/ctranslator.h"
 
 #include <algorithm>

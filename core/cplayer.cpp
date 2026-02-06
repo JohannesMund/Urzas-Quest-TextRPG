@@ -7,10 +7,10 @@
 #include "colorize.h"
 #include "companionfactory.h"
 #include "console.h"
+#include "csavefile.h"
 #include "csupportcompanion.h"
 #include "randomizer.h"
 #include "ressources.h"
-#include "save/csavefile.h"
 #include "translator/ctranslator.h"
 
 #include <algorithm>

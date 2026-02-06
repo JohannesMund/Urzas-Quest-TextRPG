@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "console.h"
 #include "ctask.h"
-#include "save/saveexceptions.h"
+#include "json/jsonexceptions.h"
 
 CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
 {
@@ -25,7 +25,7 @@ CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
             newTask->load(json);
             return newTask;
         }
-        catch (const SaveFile::CSaveFileException& e)
+        catch (const Json::CJsonException& e)
         {
             Console::printErr("Load task error", e.what());
             delete newTask;

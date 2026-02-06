@@ -9,12 +9,12 @@
 #include "randomizer.h"
 #include "translator/ctranslator.h"
 
+#include "clog.h"
 #include <algorithm>
 #include <cmath>
 #include <format>
 #include <ranges>
 #include <utility>
-
 void CGameProgression::initEncounters()
 {
     CGameManagement::getInstance()->registerEncounter(new CMysteriousChest());
@@ -419,8 +419,17 @@ void CGameProgression::reRegisterModule(const std::string_view& name, const Modu
 
 void CGameProgression::registerModule(const Module::ModuleInfo& module)
 {
-    CTranslator* t = CTranslator::getInstance();
-    t->registerModule(module.moduleName, module.translatorFile);
+    try
+    {
+        CTranslator* t = CTranslator::getInstance();
+        t->registerModule(module.moduleName, module.translatorFile);
+    }
+    catch (const std::exception& e)
+    {
+        CLog::error() << "Error loading translation file " << module.translatorFile << std::endl << std::flush;
+        CLog::error() << e.what() << std::endl << std::flush;
+    }
+
     _registeredModules.push_back(module);
 }
 

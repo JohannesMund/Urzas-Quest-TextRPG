@@ -3,10 +3,16 @@
 #include "cmenu.h"
 #include "console.h"
 #include "ressources.h"
+#include "translator/ctranslator.h"
 
 #include <iostream>
 
 using namespace std;
+
+std::string tr(const std::string_view& s)
+{
+    return CTranslator::getInstance()->tr("core", "startMenu", s);
+}
 
 void printTitle()
 {
@@ -57,7 +63,7 @@ void printOptionsMenu()
     CMenu menu;
     CMenu::ActionList startMenuActions;
 
-    menu.addMenuGroup({menu.createAction("Language options", 'L')}, {CMenu::ret()});
+    menu.addMenuGroup({menu.createAction(tr("Language options"), 'l')}, {CMenu::ret()});
 
     auto in = menu.execute();
 
@@ -73,13 +79,13 @@ CMenu::Action printTitleMenu()
     CMenu menu;
     if (CGameManagement::saveGameAvailable())
     {
-        menu.addMenuGroup({menu.createAction("Start a new game", 's')}, {menu.createAction("Load game", 'l')});
+        menu.addMenuGroup({menu.createAction(tr("Start a new game"), 's')}, {menu.createAction(tr("Load game"), 'l')});
     }
     else
     {
-        menu.addMenuGroup({menu.createAction("Start a new game", 's')});
+        menu.addMenuGroup({menu.createAction(tr("Start a new game"), 's')});
     }
-    menu.addMenuGroup({menu.createAction("Options", 'O')}, {menu.createAction("Quit game", 'q')});
+    menu.addMenuGroup({menu.createAction(tr("Options"), 'O')}, {menu.createAction(tr("Quit game"), 'q')});
     return menu.execute();
 }
 

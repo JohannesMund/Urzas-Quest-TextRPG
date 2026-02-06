@@ -1,8 +1,10 @@
 #pragma once
 
+#include "json/cjsondocument.h"
+
 #include <nlohmann/json.hpp>
 
-class CGameSettings
+class CGameSettings : public CJsonDocument
 {
 public:
     static CGameSettings* Settings()
@@ -12,10 +14,8 @@ public:
     }
 
     std::vector<std::string_view> supportedLanguages() const;
-    std::string_view currentLanguage() const;
+    std::string currentLanguage() const;
     void setCurrentLanguage(const std::string_view& lang);
-
-    void reloadSettings();
 
     int maxHp() const;
     int maxHpMin() const;
@@ -34,9 +34,4 @@ public:
 
 private:
     CGameSettings();
-
-    void dump();
-    bool settingsAvailable();
-
-    nlohmann::json _settings;
 };

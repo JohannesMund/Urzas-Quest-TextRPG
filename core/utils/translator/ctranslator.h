@@ -3,9 +3,8 @@
 #include <map>
 #include <string>
 
+#include "ctranslationfile.h"
 #include <nlohmann/json.hpp>
-
-#include "translatortagnames.h"
 
 /**
  * @brief The CTranslator class provides translation of strings throughout the whole program
@@ -63,17 +62,12 @@ public:
 private:
     CTranslator();
 
-    nlohmann::json _translations;
+    std::map<std::string_view, CTranslationFile> _translations;
 
-    void checkTranslationFileExist(const std::string& file);
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
     void registerModule(const std::string_view& moduleName, const std::string_view& fileName);
 
     static std::optional<std::string> translate(const std::string_view& moduleName,
                                                 const std::string_view& objectName,
                                                 const std::string_view& textId);
-
-    void updateTranslationFile(const std::string_view& moduleName,
-                               const std::string_view& objectName,
-                               const std::string_view& textId);
 };

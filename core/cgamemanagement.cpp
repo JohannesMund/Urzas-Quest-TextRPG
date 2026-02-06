@@ -10,13 +10,13 @@
 #include "companionfactory.h"
 #include "console.h"
 #include "croom.h"
+#include "csavefile.h"
 #include "ctask.h"
 #include "ctown.h"
 #include "exceptions.h"
 #include "randomizer.h"
 #include "rebellionhideout/cbagofingredients.h"
-#include "save/csavefile.h"
-#include "save/saveexceptions.h"
+#include "json/jsonexceptions.h"
 
 #include <format>
 #include <iostream>
@@ -402,7 +402,7 @@ bool CGameManagement::load()
         }
         saveGame.loadGameObject(&_map);
     }
-    catch (SaveFile::CSaveFileException& e)
+    catch (Json::CJsonException& e)
     {
         Console::printErr("Error Loading Savegame", e.what());
         return false;
@@ -445,7 +445,7 @@ bool CGameManagement::save()
         savegame.dump();
     }
 
-    catch (const SaveFile::CSaveFileException& e)
+    catch (const Json::CJsonException& e)
     {
         std::cerr << e.what() << '\n';
         return false;

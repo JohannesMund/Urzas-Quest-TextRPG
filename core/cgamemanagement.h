@@ -3,11 +3,11 @@
 #include "ccompanion.h"
 #include "cencounter.h"
 #include "cgameprogression.h"
+#include "cgamesettings.h"
 #include "cinventory.h"
 #include "citemfactory.h"
 #include "cmap.h"
 #include "cplayer.h"
-#include "save/cgamesettings.h"
 
 #include <string>
 

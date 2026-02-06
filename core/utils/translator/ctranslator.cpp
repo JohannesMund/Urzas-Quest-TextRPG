@@ -3,43 +3,21 @@
 #include "console.h"
 #include "localdirectory.h"
 #include "translator/translatorexceptions.h"
-#include "translatortagnames.h"
+#include "json/jsontagnames.h"
 
 #include <format>
 #include <fstream>
+#include <iostream>
 #include <nlohmann/json.hpp>
-
-void CTranslator::checkTranslationFileExist(const std::string& file)
-{
-    if (!std::filesystem::exists(file))
-    {
-        throw Translator::CTranslatorException(std::format("Translator file {} does not exist", file));
-    }
-}
 
 void CTranslator::loadTranslationFile(const std::string_view& moduleName, const std::string& file)
 {
     try
     {
-        checkTranslationFileExist(file);
-
-        std::ifstream f;
-        f.open(file);
-        if (!f.is_open())
-        {
-            throw Translator::CTranslatorException(std::format("Read file {} failed", file));
-        }
-        if (f.peek() == std::ifstream::traits_type::eof())
-        {
-            throw Translator::CTranslatorException(std::format("file {} is empty", file));
-        }
-
-        auto translation = nlohmann::json::parse(f);
-        f.close();
-
-        _translations[moduleName] = translation;
+        CTranslationFile fl(file);
+        _translations.emplace(moduleName, fl);
     }
-    catch (Translator::CTranslatorException& e)
+    catch (const std::exception& e)
     {
         CLog::error() << "Error lading Translation file " << file << ": " << e.what() << std::endl << std::flush;
     }
@@ -52,30 +30,12 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
     try
     {
         auto t = CTranslator::getInstance()->_translations;
-        std::string path{moduleName};
-
-        if (!t.contains(path))
+        if (!t.contains(moduleName))
         {
-            throw Translator::CTranslatorException(std::format("Translator module {} not loaded", path));
+            throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
         }
 
-        path.append("/").append(TagNames::Translator::translation);
-        path.append("/").append(objectName);
-
-        if (!t.contains(path))
-        {
-            throw Translator::CTranslatorException(std::format("Translator object {} not found", path));
-        }
-
-        path.append("/").append(textId);
-
-        if (!t.contains(path))
-        {
-            CTranslator::getInstance()->updateTranslationFile(moduleName, objectName, textId);
-            throw Translator::CTranslatorException(std::format("Translator string {} not found", path));
-        }
-
-        return t[path].get<std::string>();
+        return t.at(moduleName).getTranslation(objectName, textId);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -84,60 +44,14 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
     return {};
 }
 
-void CTranslator::updateTranslationFile(const std::string_view& moduleName,
-                                        const std::string_view& objectName,
-                                        const std::string_view& textId)
-{
-    if (!_translations.contains(moduleName))
-    {
-        // We do not want to create new ressource files.
-        return;
-    }
-
-    auto j = _translations[moduleName];
-
-    if (!j[TagNames::Translator::translation].contains(objectName))
-    {
-        j[TagNames::Translator::translation][objectName] = nlohmann::json();
-    }
-
-    j[TagNames::Translator::translation][objectName][textId] = nlohmann::json();
-
-    try
-    {
-        auto path = LocalDirectory::getLocalDirectoryPath();
-        path.append(std::format("{}_updated.json", moduleName));
-
-        CLog::info() << "Added Translation " << textId << " to " << moduleName << "/" << objectName << std::endl
-                     << std::flush;
-
-        std::ofstream f;
-        f.open(path, std::ofstream::out | std::ofstream::trunc);
-        if (!f.is_open())
-        {
-            throw Translator::CTranslatorException(std::format("Write file {} failed", path.string()));
-        }
-        f << j.dump(2).c_str() << std::flush;
-        f.close();
-    }
-    catch (const Translator::CTranslatorException& e)
-    {
-        CLog::error() << "Error saving file: " << e.what() << std::endl << std::flush;
-    }
-    catch (const nlohmann::json::exception& e)
-    {
-        CLog::error() << "Error dumping json: " << e.what() << std::endl << std::flush;
-    }
-}
-
 CTranslator::CTranslator()
 {
-    loadTranslationFile("core", "ressources/core/ressources.json");
+    registerModule("core", "core");
 }
 
 void CTranslator::registerModule(const std::string_view& moduleName, const std::string_view& fileName)
 {
-    loadTranslationFile(moduleName, std::format("./ressources/modules/{}.json", fileName));
+    loadTranslationFile(moduleName, std::format("{}.json", fileName));
 }
 
 std::string CTranslator::tr(const std::string_view& moduleName,
@@ -156,7 +70,7 @@ template <typename... Args>
 std::string CTranslator::tr(const std::string_view& moduleName,
                             const std::string_view& objectName,
                             const std::string_view& textId,
-                            Args&&... formatArgs)
+                            Args&&...)
 {
     const auto r = translate(moduleName, objectName, textId);
     if (!r.has_value())
@@ -166,11 +80,12 @@ std::string CTranslator::tr(const std::string_view& moduleName,
 
     try
     {
-        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
+        return *r;
+        // return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
     }
     catch (const std::exception& e)
     {
-        CLog::error() << "Formatting error, std::dormat threw: " << e.what() << std::endl << std::flush;
+        CLog::error() << "Formatting error, std::format threw: " << e.what() << std::endl << std::flush;
         return *r;
     }
 }

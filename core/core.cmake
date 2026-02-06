@@ -9,23 +9,25 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
     core/defaultsettings.h
-    core/jsontagnames.h
+    
 
     core/utils/enumiterator.h
     core/utils/localdirectory.h core/utils/localdirectory.cpp
     core/utils/randomizer.h core/utils/randomizer.cpp
     core/utils/console.h core/utils/console.cpp
-    core/utils/colorize.h core/utils/colorize.cpp
-    core/utils/exceptions.h
+    core/utils/colorize.h core/utils/colorize.cpp    
     core/utils/clog.h core/utils/clog.cpp
+    core/utils/exceptions.h 
+    core/utils/cgamesettings.h core/utils/cgamesettings.cpp    
+    core/utils/csavefile.h core/utils/csavefile.cpp     
 
-    core/utils/save/cgamesettings.h core/utils/save/cgamesettings.cpp
-    core/utils/save/csavefile.h core/utils/save/csavefile.cpp
-    core/utils/save/saveexceptions.h core/utils/save/savetagnames.h
-    core/utils/save/defaults.h
+    core/utils/json/cjsondocument.h core/utils/json/cjsondocument.cpp
+    core/utils/json/jsonexceptions.h
+    core/utils/json/jsontagnames.h
 
     core/utils/translator/ctranslator.h core/utils/translator/ctranslator.cpp
-    core/utils/translator/translatorexceptions.h core/utils/translator/translatortagnames.h
+    core/utils/translator/ctranslationfile.h core/utils/translator/ctranslationfile.cpp
+    core/utils/translator/translatorexceptions.h
         
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp

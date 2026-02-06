@@ -16,8 +16,8 @@
 #include "curzasglasses.h"
 #include "cweapon.h"
 #include "randomizer.h"
-#include "save/saveexceptions.h"
 #include "translator/ctranslator.h"
+#include "json/jsonexceptions.h"
 
 #include <algorithm>
 #include <nlohmann/json.hpp>
@@ -206,7 +206,7 @@ CItem* CItemFactory::loadItemFromSavGame(const nlohmann::json& json)
             newItem->load(json);
             return newItem;
         }
-        catch (const SaveFile::CSaveFileException& e)
+        catch (const Json::CJsonException& e)
         {
             Console::printErr("Load item error", e.what());
             delete newItem;

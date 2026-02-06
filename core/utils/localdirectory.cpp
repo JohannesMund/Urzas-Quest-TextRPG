@@ -2,7 +2,7 @@
 #include "defaultsettings.h"
 #include "globals.h"
 #include "ressources.h"
-#include "save/saveexceptions.h"
+#include "json/jsonexceptions.h"
 
 #include <format>
 
@@ -20,14 +20,14 @@ void checkAndExpandPath(std::filesystem::path& p)
 {
     if (!std::filesystem::exists(p))
     {
-        throw SaveFile::CSaveFileException("Local Directory does not exist");
+        throw Json::CJsonException("Local Directory does not exist");
     }
     p.append(std::format(".{}", Settings::appName));
     if (!std::filesystem::exists(p))
     {
         if (!std::filesystem::create_directories(p))
         {
-            throw SaveFile::CSaveFileException("Cannot create program direcotr");
+            throw Json::CJsonException("Cannot create program direcotr");
         }
     }
 }

@@ -2,7 +2,7 @@
 #include <format>
 #include <nlohmann/json.hpp>
 
-namespace SaveFile
+namespace Json
 {
 
 /**
@@ -11,16 +11,16 @@ namespace SaveFile
  * @remark can be constructed around a json exception
  */
 
-class CSaveFileException : public std::exception
+class CJsonException : public std::exception
 {
 public:
-    CSaveFileException(const nlohmann::json::exception& e) : std::exception()
+    CJsonException(const nlohmann::json::exception& e) : std::exception()
     {
         _what = std::format("Json Exception: ", e.what());
     }
-    CSaveFileException(const std::string_view& what) : std::exception()
+    CJsonException(const std::string_view& what) : std::exception()
     {
-        _what = std::format("CSaveFile Exception: {}", what);
+        _what = std::format("Json Exception: {}", what);
     }
     virtual const char* what() const throw()
     {
@@ -31,4 +31,4 @@ private:
     std::string _what;
 };
 
-} // namespace SaveFile
+} // namespace Json

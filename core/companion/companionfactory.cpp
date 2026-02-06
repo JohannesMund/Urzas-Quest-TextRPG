@@ -7,7 +7,7 @@
 #include "cscarymonstercompanion.h"
 #include "csupportcompanion.h"
 #include "ressources.h"
-#include "save/saveexceptions.h"
+#include "json/jsonexceptions.h"
 
 #include <nlohmann/json.hpp>
 
@@ -39,7 +39,7 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
             newCompanion->load(json);
             return newCompanion;
         }
-        catch (const SaveFile::CSaveFileException& e)
+        catch (const Json::CJsonException& e)
         {
             Console::printErr("Load companion error:", e.what());
             delete newCompanion;
@@ -61,7 +61,7 @@ CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nloh
             newCompanion->load(json);
             return newCompanion;
         }
-        catch (const SaveFile::CSaveFileException& e)
+        catch (const Json::CJsonException& e)
         {
             Console::printErr("Load companion error", e.what());
             delete newCompanion;

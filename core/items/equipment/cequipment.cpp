@@ -1,7 +1,7 @@
 #include "cequipment.h"
 #include "console.h"
+#include "csavefile.h"
 #include "randomizer.h"
-#include "save/csavefile.h"
 
 #include <format>
 CEquipment::CEquipment(const Ressources::Items::EType type,

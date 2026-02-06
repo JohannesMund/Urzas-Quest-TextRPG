@@ -8,7 +8,7 @@
 #include "croom.h"
 #include "cstartingroom.h"
 #include "ctown.h"
-#include "save/saveexceptions.h"
+#include "json/jsonexceptions.h"
 
 #include <iostream>
 #include <nlohmann/json.hpp>
@@ -50,14 +50,14 @@ CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
             newRoom->load(json);
             return newRoom;
         }
-        catch (const SaveFile::CSaveFileException& e)
+        catch (const Json::CJsonException& e)
         {
             Console::printErr("Load room error", e.what());
             delete newRoom;
             return nullptr;
         }
     }
-    throw SaveFile::CSaveFileException(std::format("Unknown Room: {}", CGameStateObject::getObjectNameFromJson(json)));
+    throw Json::CJsonException(std::format("Unknown Room: {}", CGameStateObject::getObjectNameFromJson(json)));
     return nullptr;
 }
 

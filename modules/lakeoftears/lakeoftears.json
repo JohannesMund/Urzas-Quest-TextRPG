@@ -1,7 +1,9 @@
 {
   "FileSpec": {
     "Name": "UrzasQuest TextRPG",
-    "Version": 1
+    "Version": 1,
+    "DateTime": "2026-02-06 13:18:26",
+    "FileType": "Translation"
   },
   "Translations": {}
 }

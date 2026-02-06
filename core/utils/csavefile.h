@@ -1,5 +1,6 @@
 #pragma once
 
+#include "json/cjsondocument.h"
 #include <nlohmann/json.hpp>
 
 class CGameStateObject;
@@ -13,7 +14,7 @@ class CGameStateObject;
  * @sa save/exceptions.h CSaveFileException
  *
  */
-class CSaveFile
+class CSaveFile : public CJsonDocument
 {
 public:
     /**
@@ -43,25 +44,4 @@ public:
      * @remark adds the objectName to the obj
      */
     static void addGameObject(nlohmann::json& gameObjectArray, const CGameStateObject* obj);
-
-    /**
-     * @brief writes the save game
-     * @remark existing file is overwritten
-     */
-    void dump();
-
-    /**
-     * @brief loads a save game
-     */
-    void load();
-
-    /**
-     * @brief returns the root element of the underlying json
-     */
-    nlohmann::json root() const;
-
-private:
-    void addObject(const std::string_view& key, const nlohmann::json& object);
-    nlohmann::json getObject(const std::string_view& key);
-    nlohmann::json _saveGame;
 };
