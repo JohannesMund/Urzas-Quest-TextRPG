@@ -61,8 +61,9 @@ public:
 
 private:
     CTranslator();
+    ~CTranslator();
 
-    std::map<std::string_view, CTranslationFile> _translations;
+    std::map<std::string_view, CTranslationFile*> _translations;
 
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
     void registerModule(const std::string_view& moduleName, const std::string_view& fileName);

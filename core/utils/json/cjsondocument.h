@@ -7,6 +7,7 @@ class CJsonDocument
 public:
     CJsonDocument(const std::string_view& fileName, const std::string_view& type);
     CJsonDocument(const std::string_view& fileName, const std::string_view& filePath, const std::string_view& type);
+    virtual ~CJsonDocument(){};
 
     virtual void dump() const;
 
@@ -14,7 +15,7 @@ public:
 
     void load();
 
-    nlohmann::json root() const;
+    const nlohmann::json root() const;
 
     int get(const std::string_view& key, const int d) const;
     bool get(const std::string_view& key, const bool d) const;
@@ -27,6 +28,7 @@ protected:
 
     nlohmann::json makeHeader() const;
     void dumpAs(const std::string_view& fileName) const;
+    bool checkDocType(const nlohmann::json& doc) const;
 
     nlohmann::json _document;
 

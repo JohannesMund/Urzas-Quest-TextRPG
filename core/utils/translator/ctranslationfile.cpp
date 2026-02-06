@@ -73,19 +73,39 @@ void CTranslationFile::addTranslation(const std::string_view& objectName, const 
 {
     if (!_document.contains(objectName))
     {
-        _document[objectName] = nlohmann::json::array();
+        _document.emplace(objectName, nlohmann::json::array());
     }
-    _document[objectName].push_back({{TagNames::Translator::source, textId}});
+    _document[objectName].push_back(makeTranslationObject(textId));
+
     dump();
 }
 
 std::string CTranslationFile::currentLanguageTag()
 {
     auto lang = CGameManagement::getGameSettingsInstance()->currentLanguage();
-    if (lang.compare("en") == 0)
+    if (CGameSettings::isSourceLanguage(lang))
     {
         return std::string(TagNames::Translator::source);
     }
 
+    if (!CGameSettings::isSupportedLanguage(lang))
+    {
+        return std::string(TagNames::Translator::source);
+    }
     return std::string(lang);
+}
+
+nlohmann::json CTranslationFile::makeTranslationObject(const std::string_view& textId)
+{
+    nlohmann::json o;
+
+    o.emplace(TagNames::Translator::source, textId);
+    for (auto lang : CGameSettings::supportedLanguages())
+    {
+        if (!CGameSettings::isSourceLanguage(lang))
+        {
+            o.emplace(lang, "");
+        }
+    }
+    return o;
 }

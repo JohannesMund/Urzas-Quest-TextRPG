@@ -1,6 +1,7 @@
 set(URZAS_QUEST_SOURCES_CORE	
 	core/core.cmake
-	
+	core/ressources/core.json
+    
     core/cgamestateobject.h core/cgamestateobject.cpp
     core/cmenu.h core/cmenu.cpp
     core/cgamemanagement.h core/cgamemanagement.cpp
@@ -10,7 +11,6 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cbattle.h core/cbattle.cpp
     core/defaultsettings.h
     
-
     core/utils/enumiterator.h
     core/utils/localdirectory.h core/utils/localdirectory.cpp
     core/utils/randomizer.h core/utils/randomizer.cpp

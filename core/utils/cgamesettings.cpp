@@ -19,9 +19,20 @@ CGameSettings::CGameSettings() : CJsonDocument(Settings::settingsFileName, TagNa
     }
 }
 
-std::vector<std::string_view> CGameSettings::supportedLanguages() const
+std::vector<std::string_view> CGameSettings::supportedLanguages()
 {
     return Settings::supportedLanguages;
+}
+
+bool CGameSettings::isSourceLanguage(const std::string_view& lang)
+{
+    return lang.compare(Settings::sourceLanguage) == 0;
+}
+
+bool CGameSettings::isSupportedLanguage(const std::string_view& lang)
+{
+    return std::find(CGameSettings::supportedLanguages().begin(), CGameSettings::supportedLanguages().end(), lang) !=
+           CGameSettings::supportedLanguages().end();
 }
 
 std::string CGameSettings::currentLanguage() const

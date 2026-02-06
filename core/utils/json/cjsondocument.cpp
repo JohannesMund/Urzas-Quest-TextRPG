@@ -47,7 +47,7 @@ void CJsonDocument::dumpAs(const std::string_view& fileName) const
     try
     {
         std::ofstream f;
-        f.open(fileName, std::ofstream::out | std::ofstream::trunc);
+        f.open(std::string(fileName), std::ofstream::out | std::ofstream::trunc);
         if (!f.is_open())
         {
             throw Json::CJsonException(std::format("Write file {} failed", fileName));
@@ -56,7 +56,6 @@ void CJsonDocument::dumpAs(const std::string_view& fileName) const
         nlohmann::json doc;
         doc[TagNames::FileSpec::fileSpec] = makeHeader();
         doc[_type] = _document;
-
         f << doc.dump(2).c_str() << std::flush;
         f.close();
     }
@@ -68,6 +67,19 @@ void CJsonDocument::dumpAs(const std::string_view& fileName) const
     {
         throw Json::CJsonException(e);
     }
+}
+
+bool CJsonDocument::checkDocType(const nlohmann::json& doc) const
+{
+    if (!doc.contains(TagNames::FileSpec::fileSpec))
+    {
+        return false;
+    }
+    if (!doc[TagNames::FileSpec::fileSpec].contains(TagNames::FileSpec::fileType))
+    {
+        return false;
+    }
+    return doc[TagNames::FileSpec::fileSpec][TagNames::FileSpec::fileType].get<std::string>().compare(_type) == 0;
 }
 
 bool CJsonDocument::exists() const
@@ -110,7 +122,7 @@ void CJsonDocument::load()
     }
 }
 
-nlohmann::json CJsonDocument::root() const
+const nlohmann::json CJsonDocument::root() const
 {
     return _document;
 }
@@ -165,7 +177,7 @@ std::string CJsonDocument::get(const std::string_view& key, const std::string_vi
 
 void CJsonDocument::addObject(const std::string_view& key, const nlohmann::json& object)
 {
-    _document[_type][key] = object;
+    _document[key] = object;
 }
 
 nlohmann::json CJsonDocument::getObject(const std::string_view& key) const

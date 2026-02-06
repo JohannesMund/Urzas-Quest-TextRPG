@@ -13,7 +13,10 @@ public:
         return &s;
     }
 
-    std::vector<std::string_view> supportedLanguages() const;
+    static std::vector<std::string_view> supportedLanguages();
+    static bool isSourceLanguage(const std::string_view& lang);
+    static bool isSupportedLanguage(const std::string_view& lang);
+
     std::string currentLanguage() const;
     void setCurrentLanguage(const std::string_view& lang);
 

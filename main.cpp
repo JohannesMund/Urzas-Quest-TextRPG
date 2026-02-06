@@ -36,9 +36,7 @@ void printLanguageMenu()
     CMenu menu;
     CMenu::ActionList languageActions;
 
-    auto l = CGameManagement::getGameSettingsInstance()->supportedLanguages();
-
-    for (const auto s : l)
+    for (const auto s : CGameSettings::supportedLanguages())
     {
         languageActions.push_back(menu.createAction(s));
     }

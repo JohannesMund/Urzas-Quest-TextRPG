@@ -7,6 +7,7 @@ constexpr std::string_view settingsFileName = "settings.json";
 constexpr std::string_view logFileName = "log.txt";
 constexpr std::string_view appName = "UruzsQuestTextRPG";
 const std::vector<std::string_view> supportedLanguages = {"en", "de"};
+constexpr std::string_view sourceLanguage = "en";
 } // namespace Settings
 
 namespace Config

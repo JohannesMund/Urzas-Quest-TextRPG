@@ -13,8 +13,7 @@ void CTranslator::loadTranslationFile(const std::string_view& moduleName, const 
 {
     try
     {
-        CTranslationFile fl(file);
-        _translations.emplace(moduleName, fl);
+        _translations.emplace(moduleName, new CTranslationFile(file));
     }
     catch (const std::exception& e)
     {
@@ -34,7 +33,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
             throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
         }
 
-        return t.at(moduleName).getTranslation(objectName, textId);
+        return t.at(moduleName)->getTranslation(objectName, textId);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -46,6 +45,14 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
 CTranslator::CTranslator()
 {
     registerModule("core", "core");
+}
+
+CTranslator::~CTranslator()
+{
+    for (auto p : _translations)
+    {
+        delete p.second;
+    }
 }
 
 void CTranslator::registerModule(const std::string_view& moduleName, const std::string_view& fileName)
