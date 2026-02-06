@@ -7,7 +7,6 @@
 
 #include <format>
 #include <fstream>
-#include <iostream>
 #include <nlohmann/json.hpp>
 
 void CTranslator::loadTranslationFile(const std::string_view& moduleName, const std::string& file)
@@ -70,7 +69,7 @@ template <typename... Args>
 std::string CTranslator::tr(const std::string_view& moduleName,
                             const std::string_view& objectName,
                             const std::string_view& textId,
-                            Args&&...)
+                            Args&&... formatArgs)
 {
     const auto r = translate(moduleName, objectName, textId);
     if (!r.has_value())
@@ -80,8 +79,7 @@ std::string CTranslator::tr(const std::string_view& moduleName,
 
     try
     {
-        return *r;
-        // return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
+        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
     }
     catch (const std::exception& e)
     {

@@ -5,6 +5,7 @@
 #include "json/jsontagnames.h"
 
 #include <format>
+#include <iostream>
 #include <localdirectory.h>
 
 const std::string CTranslationFile::getTranslation(const std::string_view& objectName, const std::string_view& textId)
