@@ -46,8 +46,6 @@ public:
     void removeSupporCompanionsByName(const std::string_view& name);
     void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
 
-    virtual nlohmann::json save() const override;
-
 private:
     CPlayer();
 
@@ -69,4 +67,11 @@ private:
 
     void removeAllSupportCompanions();
     std::vector<CSupportCompanion*> _supporters;
+
+protected:
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
+
+private:
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

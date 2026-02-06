@@ -2,17 +2,25 @@
 #include "carmor.h"
 #include "cbomb.h"
 #include "cequipment.h"
+#include "cgamemanagement.h"
 #include "chealingpotion.h"
 #include "cheartcontainer.h"
 #include "citem.h"
 #include "cjunkitem.h"
+#include "claylasribbon.h"
+#include "console.h"
 #include "cphoenixfeather.h"
 #include "csandwich.h"
+#include "cshaggyssandwich.h"
 #include "cshield.h"
+#include "curzasglasses.h"
 #include "cweapon.h"
 #include "randomizer.h"
+#include "translator/ctranslator.h"
+#include "json/jsonexceptions.h"
 
 #include <algorithm>
+#include <nlohmann/json.hpp>
 #include <vector>
 
 CItem* CItemFactory::generateShopItem()
@@ -97,7 +105,7 @@ void CItemFactory::registerLootItemGenerator(const std::string_view& moduleName,
 {
     ItemGenerator generator;
     generator.moduleName = moduleName;
-    generator.lootGenerator = generatorFunction;
+    generator.generatorFunction = generatorFunction;
     generator.dropRate = dropRate;
 
     _lootGenerators.push_back(generator);
@@ -118,7 +126,7 @@ void CItemFactory::registerShopItemGenerator(const std::string_view& moduleName,
 {
     ItemGenerator generator;
     generator.moduleName = moduleName;
-    generator.lootGenerator = generatorFunction;
+    generator.generatorFunction = generatorFunction;
     generator.dropRate = dropRate;
 
     _shopGenerators.push_back(generator);
@@ -131,6 +139,86 @@ void CItemFactory::unregisterShopItemGeneratorByName(const std::string_view& mod
     {
         _shopGenerators.erase(it);
     }
+}
+
+CItem* CItemFactory::loadItemFromSavGame(const nlohmann::json& json)
+{
+    CItem* newItem = nullptr;
+    // Equipment
+    if (CGameStateObject::compareObjectName(TagNames::Item::Equipment::armor, json))
+    {
+        newItem = new CArmor(Ressources::Items::EQuality::eJunk);
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::Equipment::shield, json))
+    {
+        newItem = new CShield(Ressources::Items::EQuality::eJunk);
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::Equipment::weapon, json))
+    {
+        newItem = new CWeapon(Ressources::Items::EQuality::eJunk);
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::Story::laylasRibbon, json))
+    {
+        newItem = new CLaylasRibbon();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::Story::shaggysSandwich, json))
+    {
+        newItem = new CShaggysSandwich();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::Story::urzasGlasses, json))
+    {
+        newItem = new CUrzasGlasses();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::bomb, json))
+    {
+        newItem = new CBomb();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::healingPotion, json))
+    {
+        newItem = new CHealingPotion();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::heartContainer, json))
+    {
+        newItem = new CHeartContainer();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::junkItem, json))
+    {
+        newItem = new CJunkItem();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::phoenixFeather, json))
+    {
+        newItem = new CPhoenixFeather();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::sandwich, json))
+    {
+        newItem = new CSandwich({});
+    }
+    else
+    {
+        newItem = CGameManagement::getInstance()->getProgressionInstance()->callModuleItemFactory(
+            CGameStateObject::getObjectNameFromJson(json));
+    }
+
+    if (newItem != nullptr)
+    {
+        try
+        {
+            newItem->load(json);
+            return newItem;
+        }
+        catch (const Json::CJsonException& e)
+        {
+            Console::printErr("Load item error", e.what());
+            delete newItem;
+            return nullptr;
+        }
+    }
+    return nullptr;
+}
+
+std::string CItemFactory::coreTr(const std::string_view& textId)
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::item, textId);
 }
 
 CItem* CItemFactory::generateItem(const EItemType tp)
@@ -195,7 +283,7 @@ CItem* CItemFactory::itemFromGeneratorList(const ItemGeneratorList& list,
 
     if (randomIndex < indices.size())
     {
-        return list.at(indices.at(randomIndex)).lootGenerator();
+        return list.at(indices.at(randomIndex)).generatorFunction();
     }
 
     return defaultGenerator();

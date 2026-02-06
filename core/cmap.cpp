@@ -1,6 +1,7 @@
 #include "cmap.h"
 #include "cave/ccave.h"
 #include "ccapital.h"
+#include "cgamemanagement.h"
 #include "cinjuredpet.h"
 #include "colorize.h"
 #include "console.h"
@@ -12,6 +13,7 @@
 #include "randomizer.h"
 #include "ressources.h"
 #include "roomfactory.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <iostream>
@@ -23,8 +25,9 @@ const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eN
                                                                 {EDirections::eEast, "East"},
                                                                 {EDirections::eNone, "None"}};
 
-CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject("Map")
+CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject(TagNames::Map::map)
 {
+
     for (unsigned int x = 0; x < height; x++)
     {
         std::vector<CRoom*> row;
@@ -57,12 +60,16 @@ void CMap::init(std::vector<CRoom*>& rooms)
     rooms.push_back(RoomFactory::makeInjuredPet());
     rooms.push_back(RoomFactory::makeCapital());
 
-    for (unsigned int i = 0; i < Ressources::Config::numberOfTowns; i++)
+    const auto numberOfTowns = CGameManagement::getGameSettingsInstance()->numberOfTowns();
+    const auto fieldWidth = CGameManagement::getGameSettingsInstance()->fieldWidth();
+    const auto fieldHeight = CGameManagement::getGameSettingsInstance()->fieldHeight();
+
+    for (unsigned int i = 0; i < numberOfTowns; i++)
     {
         rooms.push_back(RoomFactory::makeTown());
     }
 
-    while (rooms.size() < (Ressources::Config::fieldWidth * Ressources::Config::fieldHeight) - 1)
+    while (rooms.size() < (fieldWidth * fieldHeight) - 1)
     {
         rooms.push_back(RoomFactory::makeRoom());
     }
@@ -391,12 +398,11 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
-
 nlohmann::json CMap::save() const
-
 {
     nlohmann::json mapState;
-    mapState["playerPosition"] = {{"x", _playerPosition.x}, {"y", _playerPosition.y}};
+    mapState[TagNames::Map::playerPosition] = {{TagNames::Common::x, _playerPosition.x},
+                                               {TagNames::Common::y, _playerPosition.y}};
 
     nlohmann::json rooms = nlohmann::json::array();
 
@@ -411,8 +417,37 @@ nlohmann::json CMap::save() const
         rooms.push_back(rowArray);
     }
 
-    mapState["map"] = rooms;
+    mapState[TagNames::Map::roomMatrix] = rooms;
     return mapState;
+}
+
+void CMap::load(const nlohmann::json& json)
+{
+    _playerPosition.x = 0;
+    _playerPosition.y = 0;
+    if (json.contains(TagNames::Map::playerPosition))
+    {
+        _playerPosition.x = json[TagNames::Map::playerPosition].value<unsigned int>(TagNames::Common::x, 0);
+        _playerPosition.y = json[TagNames::Map::playerPosition].value<unsigned int>(TagNames::Common::y, 0);
+    }
+
+    if (json.contains(TagNames::Map::roomMatrix))
+    {
+        _map.clear();
+        for (auto row : json[TagNames::Map::roomMatrix])
+        {
+            std::vector<CRoom*> mapRow;
+            for (auto room : row)
+            {
+                auto r = RoomFactory::loadRoomFromSaveGame(room);
+                if (r != nullptr)
+                {
+                    mapRow.push_back(r);
+                }
+            }
+            _map.push_back(mapRow);
+        }
+    }
 }
 
 std::optional<CRoom*> CMap::roomAt(const EDirections dir) const
@@ -435,6 +470,11 @@ std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords, const EDirections 
     SRoomCoords transposedCoords(coords);
     transposedCoords.transpose(dir);
     return roomAt(transposedCoords);
+}
+
+std::string CMap::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Map::map, textId);
 }
 
 CMap::SRoomCoords CMap::getPlayerPosition() const

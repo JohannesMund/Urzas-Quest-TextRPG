@@ -8,7 +8,7 @@
 #include "ressources.h"
 #include <format>
 
-CLeila2CapitalTask::CLeila2CapitalTask()
+CLeila2CapitalTask::CLeila2CapitalTask() : CTask(TagNames::Leila2::leilaCaptial)
 {
 }
 
@@ -57,6 +57,6 @@ void CLeila2CapitalTask::execute()
     Console::printLn("You start thinking about abducting the princess yourself.");
     Console::br();
     Console::confirmToContinue();
-    CGameManagement::getProgressionInstance()->reportModuleFinished(Leila2Ressources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(Leila2::moduleName());
     _isFinished = true;
 }

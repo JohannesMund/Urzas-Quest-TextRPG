@@ -3,15 +3,20 @@
 #include <string>
 #include <vector>
 
-class CRoom;
-namespace ShrineRessources
+#include "moduleinfo.h"
+
+namespace TagNames
 {
+namespace Shrine
+{
+constexpr std::string_view shrine = "Shrine";
+constexpr std::string_view seenDuringPhase = "seenDuringPhase";
+} // namespace Shrine
+} // namespace TagNames
 
-void initModule();
-void deInitModule();
-void initWorldMap(std::vector<CRoom*>& rooms);
-
+class CRoom;
+namespace Shrine
+{
 std::string moduleName();
-std::string questLog();
-
-} // namespace ShrineRessources
+Module::ModuleInfo moduleInfo();
+} // namespace Shrine

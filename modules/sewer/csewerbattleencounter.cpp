@@ -14,8 +14,8 @@ void CSewerBattleEncounter::execute(const std::string_view& moduleName)
     CEncounter::execute(moduleName);
 
     CMobEnemy enemy;
-    enemy.setWeapon(SewerRessources::getRandomEnemyWeapon());
-    enemy.setName(SewerRessources::getRandomEnemyName());
+    enemy.setWeapon(Sewer::getRandomEnemyWeapon());
+    enemy.setName(Sewer::getRandomEnemyName());
 
     CBattle battle(&enemy);
     battle.fight();
@@ -23,11 +23,11 @@ void CSewerBattleEncounter::execute(const std::string_view& moduleName)
 
 unsigned int CSewerBattleEncounter::encounterChance(const EEncounterType&, const std::string_view& moduleName) const
 {
-    if (moduleName.compare(SewerRessources::moduleName()) != 0)
+    if (moduleName.compare(Sewer::moduleName()) != 0)
     {
         return 0;
     }
-    return SewerRessources::fightChance;
+    return Sewer::fightChance;
 }
 
 std::string CSewerBattleEncounter::name() const
@@ -37,5 +37,5 @@ std::string CSewerBattleEncounter::name() const
 
 std::string CSewerBattleEncounter::moduleName() const
 {
-    return SewerRessources::dungeonEncounterName();
+    return Sewer::dungeonEncounterName();
 }

@@ -13,7 +13,7 @@
 
 #include <format>
 
-CBlackIvoryTower::CBlackIvoryTower() : CField()
+CBlackIvoryTower::CBlackIvoryTower() : CRoom(TagNames::BlackIvoryTower::blackIvoryTower)
 {
     _encounterType = CEncounter::EEncounterType::eNone;
     _isRandomTaskPossible = false;
@@ -23,7 +23,7 @@ CBlackIvoryTower::CBlackIvoryTower() : CField()
 void CBlackIvoryTower::execute()
 {
 
-    CField::execute();
+    CRoom::execute();
 
     printHeader(0);
     Console::printLn(std::format("The tower is at least 250 feet hight and {}pich black{}, the walls are plated with "
@@ -89,6 +89,21 @@ char CBlackIvoryTower::getMapSymbol() const
     return 'I';
 }
 
+nlohmann::json CBlackIvoryTower::save() const
+{
+    auto o = CRoom::save();
+    o[TagNames::BlackIvoryTower::isOpen] = _isOpen;
+    o[TagNames::BlackIvoryTower::hadADoener] = _hadADoener;
+    return o;
+}
+
+void CBlackIvoryTower::load(const nlohmann::json& json)
+{
+    _isOpen = json.value<bool>(TagNames::BlackIvoryTower::isOpen, false);
+    _hadADoener = json.value<bool>(TagNames::BlackIvoryTower::hadADoener, false);
+    CRoom::load(json);
+}
+
 CMap::RoomFilter CBlackIvoryTower::towerFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CBlackIvoryTower*>(room) != nullptr; };
@@ -132,7 +147,7 @@ void CBlackIvoryTower::climb()
 
 void CBlackIvoryTower::executeTopOffice()
 {
-    printHeader(BlackIvoryTowerRessources::towerHeight);
+    printHeader(BlackIvoryTower::towerHeight);
     Console::printLn("Finally, the top floor!");
     Console::printLn(
         std::format("The winding stair case seemed like forever! This is the office in the top floor. Obviously, the "
@@ -146,7 +161,7 @@ void CBlackIvoryTower::executeTopOffice()
         Console::printLn(std::format("{} is here, and does not look very amused. \"How dare you, coming here, and kill "
                                      "all my {}?\", she asks, and without waiting for an answer, she attacks.",
                                      Ressources::Game::darkMobi(),
-                                     BlackIvoryTowerRessources::lunatics()));
+                                     BlackIvoryTower::lunatics()));
         Console::br();
         Console::confirmToContinue();
 
@@ -156,17 +171,17 @@ void CBlackIvoryTower::executeTopOffice()
         battle.fight();
 
         _isOpen = true;
-        CGameManagement::getProgressionInstance()->reportModuleFinished(BlackIvoryTowerRessources::moduleName());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(BlackIvoryTower::moduleName());
         Console::printLn(std::format(
             "You task was to talk to {0}, not to kill her, so you let her live, and you start talking. As "
             "expected, {0} is not very excited about the death of her {1}, but she is a former member of "
             "the rebellion, and still well-disposed towards {2} and {3}, since they have a common past together",
             Ressources::Game::darkMobi(),
-            BlackIvoryTowerRessources::lunatics(),
+            BlackIvoryTower::lunatics(),
             Ressources::Game::fiego(),
             Ressources::Game::brock()));
         Console::printLn(std::format(
-            "She also knows about {} and {}, Both accompanied her, when she left the rebellion, but she also hat to "
+            "She also knows about {} and {}, both accompanied her, when she left the rebellion, but she also had to "
             "part ways, since the crying became too much even for her. \"You met them?\" she asks \"Well, yes, I met "
             "them is your cautious answer, knowing the direction this talk is taking. \"How are they?\", you decide to "
             "stick with the answer that worked before: \"Well, they stopped crying.\" {} looks at you, as if she just "
@@ -200,7 +215,7 @@ void CBlackIvoryTower::executeTopOffice()
             "and wounds, he wears bandages and has a black eye. When he sees you, he looks pretty scared. You cannot "
             "stop thinking, that you have seen him before.",
             Ressources::Game::mobi(),
-            BlackIvoryTowerRessources::lunatics()));
+            BlackIvoryTower::lunatics()));
         Console::printLn("With fear in his eyes and a shaking voice, he offers you a free döner.");
 
         CMenu menu;
@@ -221,11 +236,11 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
                      "and if you would not cout the floors for yourself you would not have the slightest idea, whether "
                      "you are on the 1st, or the 100th floor.");
 
-    if (stage < (BlackIvoryTowerRessources::towerHeight / 5))
+    if (stage < (BlackIvoryTower::towerHeight / 5))
     {
         Console::printLn("Looking out of one of the small windows, you can see that you are not very high.");
     }
-    else if (stage < (BlackIvoryTowerRessources::towerHeight / 5) * 4)
+    else if (stage < (BlackIvoryTower::towerHeight / 5) * 4)
     {
         Console::printLn(
             std::format("Looking out of one of the small windows, you get a great view over the land. You can see "
@@ -266,7 +281,7 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
     {
         Console::printLn(
             std::format("Here we go, One of the {} is guarding this floor. He attacks directly, when he sees you!",
-                        BlackIvoryTowerRessources::lunatics()));
+                        BlackIvoryTower::lunatics()));
         CLunatic lunatic;
         CBattle battle(&lunatic);
         battle.fight();
@@ -278,13 +293,13 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
 void CBlackIvoryTower::printHeader(const unsigned int stage) const
 {
     Console::cls();
-    Console::printLn(BlackIvoryTowerRessources::darkIvoryTower(), Console::EAlignment::eCenter);
+    Console::printLn(BlackIvoryTower::darkIvoryTower(), Console::EAlignment::eCenter);
 
     if (stage == 0)
     {
         Console::printLn("Ground floor", Console::EAlignment::eCenter);
     }
-    else if (stage >= BlackIvoryTowerRessources::towerHeight)
+    else if (stage >= BlackIvoryTower::towerHeight)
     {
         if (_isOpen)
         {
@@ -310,7 +325,7 @@ void CBlackIvoryTower::haveADoener()
                     "generous splash of the (as he sais) home made garlic sauce. The {0} tries to act professional, "
                     "but in his eyes, you can see the sheer terror. If only you could remember, why he is so scared of "
                     "you. Probably that is, because you are a friend of his boss.",
-                    BlackIvoryTowerRessources::lunatic()));
+                    BlackIvoryTower::lunatic()));
     if (_hadADoener)
     {
         Console::printLn("You already know what to expect. Döner is great, Döner is tasty and for sure, Döner makes "

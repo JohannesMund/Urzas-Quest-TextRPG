@@ -8,7 +8,7 @@
 #include "ressources.h"
 
 #include <format>
-CShrineOfTheAncients::CShrineOfTheAncients() : CRoom("CShrineOfTheAnchients")
+CShrineOfTheAncients::CShrineOfTheAncients() : CRoom(TagNames::Shrine::shrine)
 {
     _description = "";
     _encounterType = CEncounter::EEncounterType::eNone;
@@ -29,6 +29,7 @@ void CShrineOfTheAncients::execute()
         visit();
     }
     Console::br();
+
     CMenu menu;
     menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
     if (menu.execute() == CMenu::exit())
@@ -48,26 +49,39 @@ std::string CShrineOfTheAncients::bgColor() const
     return CC::bgLightGray();
 }
 
+nlohmann::json CShrineOfTheAncients::save() const
+{
+    auto o = CRoom::save();
+    o[TagNames::Shrine::seenDuringPhase] = _seenDuringPhase;
+    return o;
+}
+
+void CShrineOfTheAncients::load(const nlohmann::json& json)
+{
+    _seenDuringPhase = static_cast<Module::EGameStage>(json.value<unsigned int>(TagNames::Shrine::seenDuringPhase, 0));
+    CRoom::load(json);
+}
+
 void CShrineOfTheAncients::visit()
 {
     Console::printLn(std::format("Once again, you approach the {}.", ancientShrine()));
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
-    case CGameProgression::EGameStage::eNone:
-    case CGameProgression::EGameStage::eStart:
-    case CGameProgression::EGameStage::eSeenBard:
+    case Module::EGameStage::eNone:
+    case Module::EGameStage::eStart:
+    case Module::EGameStage::eSeenBard:
         Console::printLn("And as before, the old man does not even realize, that "
                          "you are there.");
         break;
-    case CGameProgression::EGameStage::eProvenAsHero:
+    case Module::EGameStage::eProvenAsHero:
         Console::printLn("This time, the old man stands directly next to the "
                          "entry, and smiles at you. Obviousely, "
                          "your are still no hero.");
         break;
-    case CGameProgression::EGameStage::eLearnedAboutCult:
-    case CGameProgression::EGameStage::eFoundCult:
-    case CGameProgression::EGameStage::eFoundUrza:
-    case CGameProgression::EGameStage::eFinale:
+    case Module::EGameStage::eLearnedAboutCult:
+    case Module::EGameStage::eFoundCult:
+    case Module::EGameStage::eFoundUrza:
+    case Module::EGameStage::eFinale:
         Console::printLn(
             "This time, grampa stands in the opened gate. He smiles, but you are probably still not ready.");
         break;
@@ -78,26 +92,26 @@ void CShrineOfTheAncients::firstVisit()
 {
 
     _seenDuringPhase = CGameManagement::getProgressionInstance()->currentGameStage();
-    CGameManagement::getProgressionInstance()->reportModuleFinished(ShrineRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(Shrine::moduleName());
 
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
-    case CGameProgression::EGameStage::eNone:
-    case CGameProgression::EGameStage::eStart:
+    case Module::EGameStage::eNone:
+    case Module::EGameStage::eStart:
         firstVisitStart();
         break;
-    case CGameProgression::EGameStage::eSeenBard:
+    case Module::EGameStage::eSeenBard:
         firstVisitSeenBard();
         break;
-    case CGameProgression::EGameStage::eProvenAsHero:
+    case Module::EGameStage::eProvenAsHero:
         firstVisitProvenAsHero();
         break;
-    case CGameProgression::EGameStage::eLearnedAboutCult:
+    case Module::EGameStage::eLearnedAboutCult:
         firstVisitLearnedAboutCult();
         break;
-    case CGameProgression::EGameStage::eFoundCult:
-    case CGameProgression::EGameStage::eFoundUrza:
-    case CGameProgression::EGameStage::eFinale:
+    case Module::EGameStage::eFoundCult:
+    case Module::EGameStage::eFoundUrza:
+    case Module::EGameStage::eFinale:
         Console::printLn("Not implemented");
         Console::confirmToContinue();
         break;

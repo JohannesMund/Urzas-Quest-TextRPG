@@ -5,7 +5,7 @@
 #include "console.h"
 #include "moduleressources.h"
 
-CCaveBossTask::CCaveBossTask(bool* bossDefeated) : CTask(), _bossDefeated(bossDefeated)
+CCaveBossTask::CCaveBossTask(bool* bossDefeated) : CTask(TagNames::Cave::caveBoss), _bossDefeated(bossDefeated)
 {
 }
 
@@ -29,6 +29,6 @@ void CCaveBossTask::execute()
 
         *_bossDefeated = true;
         _isFinished = true;
-        CGameManagement::getProgressionInstance()->reportModuleFinished(CaveRessources::moduleName());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(Cave::moduleName());
     }
 }

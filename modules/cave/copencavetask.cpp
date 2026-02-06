@@ -4,7 +4,7 @@
 #include "cmap.h"
 #include "moduleressources.h"
 
-COpenCaveTask ::COpenCaveTask()
+COpenCaveTask::COpenCaveTask() : CTask(TagNames::Cave::openCave)
 {
     _isAutoExecute = true;
 }
@@ -21,5 +21,5 @@ void COpenCaveTask::execute()
 
 std::string COpenCaveTask::moduleName() const
 {
-    return CaveRessources::moduleName();
+    return Cave::moduleName();
 }

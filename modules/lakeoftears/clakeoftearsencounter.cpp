@@ -61,5 +61,5 @@ std::string CLakeOfTearsEncounter::name() const
 
 std::string CLakeOfTearsEncounter::moduleName() const
 {
-    return LakeTearsRessources::moduleName();
+    return LakeOfTears::moduleName();
 }

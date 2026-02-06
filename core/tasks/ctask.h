@@ -1,7 +1,11 @@
 #pragma once
 
+#include "cgamestateobject.h"
+#include "taskfactory.h"
+
 #include <string>
 
+class CRoom;
 /**
  * @brief The CTask class Represents a Task
  * Tasks are placed in a room and are executed, as soon as the room is entered
@@ -10,14 +14,20 @@
  * @sa CRoom::addTask()
  * @remark Derive from CTask to create a new task
  */
-
-class CTask
+class CTask : public CGameStateObject
 {
+    /**
+     * @remark explicitely allow the TaskFactory to use load() and save()
+     * we could also use static member functions to do this.
+     */
+    friend CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json);
+    friend void TaskFactory::saveTaskToSaveGame(const CTask* task, nlohmann::json& json);
+
 public:
     /**
      * @brief CTask Constructor
      */
-    CTask();
+    CTask(const std::string_view& objectName);
     /**
      * @brief ~CTask Destructor
      */
@@ -62,6 +72,11 @@ public:
     virtual std::string moduleName() const;
 
 protected:
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json&) override;
+
     bool _isFinished = false;
     bool _isAutoExecute = true;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

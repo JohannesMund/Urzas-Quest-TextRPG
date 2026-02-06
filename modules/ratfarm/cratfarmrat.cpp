@@ -48,5 +48,5 @@ void CRatFarmRat::battleAction(bool&)
 void CRatFarmRat::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(CEnemy::basicXP(_level));
-    RatFarmRessources::TurnipFactory::addTurnips(Randomizer::getRandom(2));
+    RatFarm::TurnipFactory::addTurnips(Randomizer::getRandom(2));
 }

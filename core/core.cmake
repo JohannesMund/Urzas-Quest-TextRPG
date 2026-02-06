@@ -1,21 +1,34 @@
 set(URZAS_QUEST_SOURCES_CORE	
 	core/core.cmake
-
-	core/console.h core/console.cpp
-    core/localdirectory.h core/localdirectory.cpp
-    core/colorize.h core/colorize.cpp
+	core/ressources/core.json
+    
     core/cgamestateobject.h core/cgamestateobject.cpp
     core/cmenu.h core/cmenu.cpp
-    core/randomizer.h core/randomizer.cpp
-    core/enumiterator.h
-    core/exceptions.h
     core/cgamemanagement.h core/cgamemanagement.cpp
-    core/csavefile.h core/csavefile.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
+    core/defaultsettings.h
+    
+    core/utils/enumiterator.h
+    core/utils/localdirectory.h core/utils/localdirectory.cpp
+    core/utils/randomizer.h core/utils/randomizer.cpp
+    core/utils/console.h core/utils/console.cpp
+    core/utils/colorize.h core/utils/colorize.cpp    
+    core/utils/clog.h core/utils/clog.cpp
+    core/utils/exceptions.h 
+    core/utils/cgamesettings.h core/utils/cgamesettings.cpp    
+    core/utils/csavefile.h core/utils/csavefile.cpp     
 
+    core/utils/json/cjsondocument.h core/utils/json/cjsondocument.cpp
+    core/utils/json/jsonexceptions.h
+    core/utils/json/jsontagnames.h
+
+    core/utils/translator/ctranslator.h core/utils/translator/ctranslator.cpp
+    core/utils/translator/ctranslationfile.h core/utils/translator/ctranslationfile.cpp
+    core/utils/translator/translatorexceptions.h
+        
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp
     core/companion/csupportcompanion.h core/companion/csupportcompanion.cpp
@@ -46,6 +59,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/enemies/ctwoenemies.h core/enemies/ctwoenemies.cpp
     core/enemies/cenemyhorde.h core/enemies/cenemyhorde.cpp
 
+    core/tasks/taskfactory.h core/tasks/taskfactory.cpp
     core/tasks/ctask.h core/tasks/ctask.cpp
     core/tasks/cbountyhunt.h core/tasks/cbountyhunt.cpp
 
@@ -79,8 +93,11 @@ set(URZAS_QUEST_SOURCES_CORE
     core/dungeons/rooms/cdungeonroom.h core/dungeons/rooms/cdungeonroom.cpp
     core/dungeons/rooms/cdungeonroomnoroom.h core/dungeons/rooms/cdungeonroomnoroom.cpp
     core/dungeons/rooms/chealingwell.h core/dungeons/rooms/chealingwell.cpp
-    core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp    
+    core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp           
 )
+
+set(CORE_RESSOURCE_DIR
+    /core/ressources/)
 
 set(CORE_INCLUDE_DIRS 
     /core 
@@ -95,6 +112,9 @@ set(CORE_INCLUDE_DIRS
     /core/encounters 
     /core/dungeons 
     /core/dungeons/rooms
+    /core/translator
+    /core/save
+    /core/utils
 )
 
 

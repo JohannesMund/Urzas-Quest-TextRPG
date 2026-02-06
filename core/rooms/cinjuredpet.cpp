@@ -6,7 +6,7 @@
 
 #include <format>
 
-CInjuredPet::CInjuredPet() : CField()
+CInjuredPet::CInjuredPet() : CField(TagNames::Room::injuredPet)
 {
     _showInFogOfWar = true;
 
@@ -81,6 +81,19 @@ void CInjuredPet::execute()
 
     _encounterType = CEncounter::EEncounterType::eField;
     _isRandomTaskPossible = true;
+}
+
+nlohmann::json CInjuredPet::save() const
+{
+    auto o = CField::save();
+    o[TagNames::Room::petIsDead] = _petIsDead;
+    return o;
+}
+
+void CInjuredPet::load(const nlohmann::json& json)
+{
+    _petIsDead = json.value<bool>(TagNames::Room::petIsDead, false);
+    CField::load(json);
 }
 
 char CInjuredPet::getMapSymbol() const

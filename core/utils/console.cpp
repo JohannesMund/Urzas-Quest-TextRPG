@@ -1,6 +1,7 @@
 #include "console.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
+#include "defaultsettings.h"
 #include "globals.h"
 #include "ressources.h"
 
@@ -73,7 +74,7 @@ void Console::br()
 
 void Console::hr()
 {
-    for (unsigned int i = 0; i < Ressources::Settings::consoleWidth; i++)
+    for (unsigned int i = 0; i < Settings::consoleWidth; i++)
     {
         cout << "=";
     }
@@ -113,16 +114,19 @@ void Console::setEcho(const bool on)
 #endif
 }
 
-void Console::printLn(std::string text, const EAlignment align, const bool bReset)
+void Console::printLn(const std::string_view& text, const EAlignment align, const bool bReset)
 {
-    if (CC::colorizedSize(text) > Ressources::Settings::consoleWidth)
+
+    std::string s(text);
+
+    if (CC::colorizedSize(s) > Settings::consoleWidth)
     {
         size_t written = 0;
-        while (written < text.size())
+        while (written < s.size())
         {
-            auto substring = CC::colorizedSubString(text, written, Ressources::Settings::consoleWidth);
+            auto substring = CC::colorizedSubString(s, written, Settings::consoleWidth);
 
-            if ((written + substring.size()) >= text.size())
+            if ((written + substring.size()) >= s.size())
             {
                 printLn(substring, align);
                 return;
@@ -148,26 +152,33 @@ void Console::printLn(std::string text, const EAlignment align, const bool bRese
         if (align == EAlignment::eCenter)
         {
             bool toggle = false;
-            while (CC::colorizedSize(text) < Ressources::Settings::consoleWidth)
+            while (CC::colorizedSize(s) < Settings::consoleWidth)
             {
-                text.insert(toggle ? 0 : text.size(), 1, ' ');
+                s.insert(toggle ? 0 : s.size(), 1, ' ');
                 toggle = !toggle;
             }
         }
         else if (align == EAlignment::eRight)
         {
-            while (CC::colorizedSize(text) < Ressources::Settings::consoleWidth)
+            while (CC::colorizedSize(s) < Settings::consoleWidth)
             {
-                text.insert(0, 1, ' ');
+                s.insert(0, 1, ' ');
             }
         }
-        cout << text;
+        cout << s;
         if (bReset)
         {
             cout << CC::ccReset();
         }
         cout << endl;
     }
+}
+
+void Console::printErr(const std::string_view& title, const std::string_view& text)
+{
+    printLn(title);
+    printLn(std::format("Error: {}{}{}", CC::fgRed(), text, CC::ccReset()));
+    Console::confirmToContinue();
 }
 
 std::optional<int> Console::getNumberInputWithEcho(const int min, const int max)
@@ -201,7 +212,7 @@ std::optional<int> Console::getNumberInputWithEcho(const int min, const int max)
 
 void Console::printLnWithSpacer(const std::string& text1, const std::string& text2)
 {
-    if (CC::colorizedSize(text1) + CC::colorizedSize(text2) > Ressources::Settings::consoleWidth)
+    if (CC::colorizedSize(text1) + CC::colorizedSize(text2) > Settings::consoleWidth)
     {
         printLn(text1);
         printLn(text2, EAlignment::eRight);
@@ -209,7 +220,7 @@ void Console::printLnWithSpacer(const std::string& text1, const std::string& tex
     }
 
     std::string out(text1);
-    while (CC::colorizedSize(out) + CC::colorizedSize(text2) < Ressources::Settings::consoleWidth)
+    while (CC::colorizedSize(out) + CC::colorizedSize(text2) < Settings::consoleWidth)
     {
         out.append(" ");
     }

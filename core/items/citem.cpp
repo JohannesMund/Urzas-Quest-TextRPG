@@ -1,6 +1,7 @@
 #include "citem.h"
 #include "cequipment.h"
 #include "console.h"
+#include "translator/ctranslator.h"
 
 #include <cmath>
 #include <format>
@@ -8,7 +9,7 @@
 
 using namespace std;
 
-CItem::CItem(const std::string& objectName) : CGameStateObject(objectName)
+CItem::CItem(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }
 
@@ -100,6 +101,11 @@ nlohmann::json CItem::save() const
     o["isConsumable"] = _isConsumable;
 
     return o;
+}
+
+std::string CItem::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::item, textId);
 }
 
 string CItem::name() const

@@ -116,6 +116,11 @@ public:
      */
     static Action exit();
 
+    /**
+     * @brief exitAction Predefined Action "[R]eturn"
+     */
+    static Action ret();
+
 private:
     Action findActionByInput() const;
     std::string halfGroup2String(const std::vector<Action>& l) const;

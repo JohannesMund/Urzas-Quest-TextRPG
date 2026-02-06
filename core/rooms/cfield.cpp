@@ -2,7 +2,7 @@
 #include "cgamemanagement.h"
 #include "cgamestateobject.h"
 
-CField::CField() : CRoom("CField")
+CField::CField(const std::string_view& objectName) : CRoom(objectName)
 {
     _encounterType = CEncounter::EEncounterType::eField;
 }

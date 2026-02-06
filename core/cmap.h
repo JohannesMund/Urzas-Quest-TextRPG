@@ -2,10 +2,10 @@
 
 #include <functional>
 #include <map>
+#include <nlohmann/json.hpp>
 #include <optional>
 #include <string>
 #include <vector>
-#include <nlohmann/json.hpp>
 
 #include "cgamestateobject.h"
 
@@ -84,8 +84,7 @@ public:
     void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
     virtual nlohmann::json save() const override;
-
-    nlohmann::json saveMapState() const;
+    virtual void load(const nlohmann::json& json) override;
 
 protected:
     std::vector<std::vector<CRoom*>> _map;
@@ -96,4 +95,5 @@ protected:
     SRoomCoords _playerPosition;
 
     static const std::string saveObjectName;
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

@@ -88,7 +88,7 @@ unsigned int CLeila2Encounter::encounterChance(const EEncounterType&, const std:
 
 std::string CLeila2Encounter::name() const
 {
-    return Leila2Ressources::encounterNameGuards();
+    return Leila2::encounterNameGuards();
 }
 
 std::string CLeila2Encounter::moduleName() const

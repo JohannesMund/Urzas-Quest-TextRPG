@@ -15,7 +15,7 @@ class CItem;
 class CTown : public CRoom
 {
 public:
-    CTown(const std::string& objectName = "CTown");
+    CTown(const std::string_view& objectName = TagNames::Room::town);
 
     virtual void execute() override;
 
@@ -26,11 +26,12 @@ public:
 
     static CMap::RoomFilter townFilter();
 
-    virtual nlohmann::json save() const override;
-
 protected:
     std::string _name;
     virtual char getMapSymbol() const override;
+
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
 
 private:
     CShop _shop;

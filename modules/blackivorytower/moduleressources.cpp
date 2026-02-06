@@ -8,43 +8,50 @@
 
 #include <format>
 
-void BlackIvoryTowerRessources::initModule()
-{
-}
-
-void BlackIvoryTowerRessources::deInitModule()
-{
-}
-
-void BlackIvoryTowerRessources::initWorldMap(std::vector<CRoom*>& rooms)
-{
-    rooms.push_back(new CBlackIvoryTower());
-}
-
-std::string BlackIvoryTowerRessources::questLog()
-{
-    return std::format("Climb up the {}", darkIvoryTower());
-}
-
-std::string BlackIvoryTowerRessources::darkIvoryTower()
+std::string BlackIvoryTower::darkIvoryTower()
 {
     return std::format("{0}Dark {1}Ivory {0}Tower of the {2}", CC::fgDarkGray(), CC::fgLightGray(), lunatics());
 
     return std::string();
 }
 
-std::string BlackIvoryTowerRessources::lunatic()
+std::string BlackIvoryTower::lunatic()
 {
     return std::format(
         "{}Lu{}na{}ti{}c{}", CC::fgYellow(), CC::fgLightRed(), CC::fgLightGreen(), CC::fgLightCyan(), CC::ccReset());
 }
 
-std::string BlackIvoryTowerRessources::lunatics()
+std::string BlackIvoryTower::lunatics()
 {
     return std::format("{}{}s{}", lunatic(), CC::fgLightCyan(), CC::ccReset());
 }
 
-std::string BlackIvoryTowerRessources::moduleName()
+std::string BlackIvoryTower::moduleName()
 {
     return "BlackIvoryTowerofLunatics";
+}
+
+Module::ModuleInfo BlackIvoryTower::moduleInfo()
+{
+    const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
+    {
+        if (TagNames::BlackIvoryTower::blackIvoryTower.compare(objectName) == 0)
+        {
+            return new CBlackIvoryTower();
+        }
+
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "blackivorytower";
+    moduleInfo.gameStage = Module::EGameStage::eFoundCult;
+
+    moduleInfo.questLogFunction = []() { return std::format("Climb up the {}", darkIvoryTower()); };
+    moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CBlackIvoryTower()); };
+    moduleInfo.roomFactory = roomFactory;
+
+    return moduleInfo;
 }

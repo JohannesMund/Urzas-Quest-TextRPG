@@ -6,7 +6,8 @@
 
 #include <format>
 
-CGuardCompanion::CGuardCompanion(const std::string_view& name) : CSupportCompanion(LeilaRescueRessources::moduleName())
+CGuardCompanion::CGuardCompanion(const std::string_view& name) :
+    CSupportCompanion(LeilaRescue::moduleName(), TagNames::LeilaRescue::guardCompanion)
 {
     if (Randomizer::getRandom(1))
     {
@@ -85,4 +86,3 @@ void CGuardCompanion::leaveText() const
                                  "rebellion hindeout and do rebellion things.",
                                  name()));
 }
-

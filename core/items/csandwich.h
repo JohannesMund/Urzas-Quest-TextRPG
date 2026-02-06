@@ -2,6 +2,7 @@
 
 #include "citem.h"
 #include "enumiterator.h"
+#include "json/jsontagnames.h"
 
 #include <string>
 #include <vector>
@@ -30,7 +31,7 @@ public:
     typedef EnumIterator<EIngredients, EIngredients::eUnknown, EIngredients::eOlives> ingredientIterator;
     using IngredientsList = std::vector<EIngredients>;
 
-    CSandwich(const IngredientsList& ingredients, const std::string objectName = "CSandwich");
+    CSandwich(const IngredientsList& ingredients, const std::string_view& objectName = TagNames::Item::sandwich);
 
     virtual std::string description() const override;
     virtual void useFromInventory() override;

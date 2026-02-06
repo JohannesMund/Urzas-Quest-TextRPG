@@ -46,10 +46,8 @@ void CFishingFritz::execute()
                 defaultActionList.push_back(menu.createAction(sellYourFish(), 'S'));
             }
 
-            if (CGameManagement::getProgressionInstance()->isModuleActive(
-                    FishingVillageRessources::moduleNameFishLegend()) ||
-                CGameManagement::getProgressionInstance()->isModuleFinished(
-                    FishingVillageRessources ::moduleNameFishLegend()))
+            if (CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageFishLegend::moduleName()) ||
+                CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageFishLegend::moduleName()))
             {
                 defaultActionList.push_back(menu.createAction("Ask for Information", 'A'));
             }
@@ -88,13 +86,13 @@ void CFishingFritz::printHeader() const
 
 bool CFishingFritz::isOpen() const
 {
-    return CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageRessources::moduleNameMakeRod()) ||
-           CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageRessources::moduleNameMakeRod());
+    return CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageMakeRod::moduleName()) ||
+           CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageMakeRod::moduleName());
 }
 
 void CFishingFritz::ask()
 {
-    if (CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageRessources::moduleNameFishLegend()))
+    if (CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageFishLegend::moduleName()))
     {
         getInformation();
     }
@@ -121,21 +119,21 @@ void CFishingFritz::checkFish()
             "{} looks at you suspicious and tells you, that he knows a lot, but not, wether he can trust you. the only "
             "people he can trust, are prople who are able to bring him {}. The legendary fish that can be caught in {}",
             Ressources::Game::fishingFritz(),
-            FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend),
-            FishingVillageRessources::fishingVilleName()));
+            FishingVillage::getFish(FishingVillage::EFishLevel::eLegend),
+            FishingVillage::fishingVilleName()));
         Console::printLn("looks, as if you have another task.");
         Console::confirmToContinue();
         return;
     }
 
     auto fishes = CGameManagement::getInventoryInstance()->getItemsByFilter(
-        CFish::fishRarityFilter(FishingVillageRessources::EFishLevel::eLegend));
+        CFish::fishRarityFilter(FishingVillage::EFishLevel::eLegend));
     if (!fishes.empty())
     {
         Console::printLn(std::format("{} Smiles at you. Well he smiles more at the {} than he smiles at you. But at "
                                      "least he smiles for the first time since... For the first time.",
                                      Ressources::Game::fishingFritz(),
-                                     FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
+                                     FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
         Console::printLn(
             "Of course, he cannot pay you for the fish, but at least he is willing to give you information.");
         Console::printLn(std::format("{0} is a legend. But {1} and {2} are heroes, and they surely can tell you more "
@@ -150,8 +148,7 @@ void CFishingFritz::checkFish()
 
         CGameManagement::getInventoryInstance()->removeItem(fishes.at(0));
 
-        CGameManagement::getProgressionInstance()->reportModuleFinished(
-            FishingVillageRessources::moduleNameFishLegend());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageFishLegend::moduleName());
     }
     else
     {
@@ -159,7 +156,7 @@ void CFishingFritz::checkFish()
             std::format("{} looks grumpy at you and shakes his head. No fish, no information. A deal is a deal.",
                         Ressources::Game::fishingFritz()));
         Console::printLn(std::format("How hard can it be to catch a {}?",
-                                     FishingVillageRessources::getFish(FishingVillageRessources::EFishLevel::eLegend)));
+                                     FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
     }
     Console::confirmToContinue();
 }
@@ -168,6 +165,7 @@ void CFishingFritz::getInformation() const
 {
     CMenu menu;
     CMenu::ActionList actions;
+    const auto informationCost = CGameManagement::getGameSettingsInstance()->informationCost();
 
     if (CGameManagement::getProgressionInstance()->moduleHintsAvailable())
     {
@@ -184,13 +182,12 @@ void CFishingFritz::getInformation() const
                         "Gold{} to get this information.\"",
                         Ressources::Game::fishingFritz(),
                         CC::fgLightYellow(),
-                        Ressources::Config::informationCost,
+                        informationCost,
                         CC::ccReset()));
 
-        if (CGameManagement::getPlayerInstance()->gold() > Ressources::Config::informationCost)
+        if (CGameManagement::getPlayerInstance()->gold() > informationCost)
         {
-            actions.push_back(
-                menu.createAction(std::format("Get information ({} Gold)", Ressources::Config::informationCost), 'G'));
+            actions.push_back(menu.createAction(std::format("Get information ({} Gold)", informationCost), 'G'));
         }
         else
         {
@@ -203,7 +200,8 @@ void CFishingFritz::getInformation() const
     if (menu.execute().key == 'g')
     {
         auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
-        CGameManagement::getPlayerInstance()->spendGold(Ressources::Config::informationCost);
+        CGameManagement::getPlayerInstance()->spendGold(informationCost);
+
         Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
                                      Ressources::Game::fishingFritz()));
         Console::br();
@@ -273,12 +271,12 @@ void CFishingFritz::enhance() const
 
 bool CFishingFritz::isMakeRodActive() const
 {
-    return CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageRessources::moduleNameMakeRod());
+    return CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageMakeRod::moduleName());
 }
 
 bool CFishingFritz::isMakeBoatActive() const
 {
-    return CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageRessources::moduleNameMakeBoat());
+    return CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageMakeBoat::moduleName());
 }
 
 bool CFishingFritz::hasFish() const

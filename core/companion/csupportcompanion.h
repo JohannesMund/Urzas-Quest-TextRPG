@@ -6,7 +6,7 @@ class CSupportCompanion : public CCompanion
 {
 
 public:
-    CSupportCompanion(const std::string_view& moduleName);
+    CSupportCompanion(const std::string_view& moduleName, const std::string_view& objectName);
 
     static std::function<bool(const CSupportCompanion*)> companionModuleNameFilter(const std::string_view& moduleName);
     static std::function<bool(const CSupportCompanion*)> companionNameFilter(const std::string_view& name);
@@ -25,6 +25,7 @@ public:
     virtual void leaveText() const;
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
 
 private:
     std::string _moduleName;

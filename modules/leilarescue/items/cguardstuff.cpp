@@ -1,4 +1,5 @@
 #include "cguardstuff.h"
+#include "../moduleressources.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "randomizer.h"
@@ -79,7 +80,6 @@ std::string CGuardStuff::nameForPart(const EPart part)
     case EPart::eFirstAidKit:
         return std::format("{}Guard's {}First-Aid Kit{}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
         break;
-
     }
 }
 
@@ -112,4 +112,16 @@ std::vector<std::string> CGuardStuff::listMissingParts()
         }
     }
     return missingStuff;
+}
+
+nlohmann::json CGuardStuff::save() const
+{
+    auto o = CJunkItem::save();
+    o[TagNames::LeilaRescue::part] = _part;
+    return o;
+}
+
+void CGuardStuff::load(const nlohmann::json& json)
+{
+    _part = json.value<EPart>(TagNames::LeilaRescue::part, CGuardStuff::EPart::eBatch);
 }

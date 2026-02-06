@@ -5,7 +5,7 @@
 
 #include <format>
 
-CHealerCompanion::CHealerCompanion() : CCompanion("CHealerCompanion")
+CHealerCompanion::CHealerCompanion() : CCompanion(TagNames::Companion::healerCompanion)
 {
 }
 

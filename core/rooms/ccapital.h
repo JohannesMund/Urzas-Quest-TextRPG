@@ -14,7 +14,9 @@ public:
 
     static CMap::RoomFilter capitalFilter();
 
+protected:
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
 
 private:
     virtual char getMapSymbol() const override;

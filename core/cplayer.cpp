@@ -5,23 +5,26 @@
 #include "citem.h"
 #include "cmenu.h"
 #include "colorize.h"
+#include "companionfactory.h"
 #include "console.h"
 #include "csavefile.h"
 #include "csupportcompanion.h"
 #include "randomizer.h"
 #include "ressources.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <cmath>
 #include <format>
+#include <nlohmann/json.hpp>
 #include <string>
 
-CPlayer::CPlayer() : CGameStateObject("Player")
+CPlayer::CPlayer() : CGameStateObject(TagNames::Player::player)
 {
-    _maxHp = Ressources::Config::maxHp;
-    _hp = Ressources::Config::maxHp;
-    _gold = Ressources::Config::gold;
-    _initiative = Ressources::Config::initiative;
+    _maxHp = CGameManagement::getGameSettingsInstance()->maxHp();
+    _hp = CGameManagement::getGameSettingsInstance()->maxHp();
+    _gold = CGameManagement::getGameSettingsInstance()->gold();
+    _initiative = CGameManagement::getGameSettingsInstance()->initiative();
 }
 
 void CPlayer::print() const
@@ -80,6 +83,7 @@ void CPlayer::addHp(const int i)
         return;
     }
 
+    _hp += i;
     if (_hp >= _maxHp)
     {
         Console::printLn(std::format("{}You are fully healed.{}", CC::fgLightGreen(), CC::ccReset()));
@@ -89,7 +93,6 @@ void CPlayer::addHp(const int i)
 
     Console::printLn(std::format("You {} {} Hitpoints.", lostOrGained(i), std::abs(i)));
 
-    _hp += i;
     if (_hp <= 0)
     {
         _hp = 0;
@@ -132,9 +135,9 @@ void CPlayer::addMaxHp(const int i)
     _maxHp += i;
     _hp += i;
 
-    if (_maxHp < Ressources::Config::maxHpMin)
+    if (_maxHp < CGameManagement::getGameSettingsInstance()->maxHpMin())
     {
-        _maxHp = Ressources::Config::maxHpMin;
+        _maxHp = CGameManagement::getGameSettingsInstance()->maxHpMin();
     }
     if (i < 0 && _hp > _maxHp)
     {
@@ -245,7 +248,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
 
         CMenu::ActionList tools;
         tools.push_back(menu.createAction("Inventory"));
-        if (Ressources::Config::superCowPowers)
+        if (CGameManagement::getGameSettingsInstance()->superCowPowers())
         {
             tools.push_back(menu.createAction("Win"));
         }
@@ -344,23 +347,50 @@ void CPlayer::removeSupportCompanionsByModuleName(const std::string_view& module
 
 nlohmann::json CPlayer::save() const
 {
-    nlohmann::json o;
+    nlohmann::json json;
 
-    o["hp"] = _hp;
-    o["maxHp"] = _maxHp;
-    o["gold"] = _gold;
-    o["level"] = _level;
-    o["xp"] = _xp;
-    o["initiative"] = _initiative;
+    json[TagNames::Player::hp] = _hp;
+    json[TagNames::Player::maxHp] = _maxHp;
+    json[TagNames::Player::gold] = _gold;
+    json[TagNames::Player::level] = _level;
+    json[TagNames::Player::xp] = _xp;
+    json[TagNames::Player::initiative] = _initiative;
 
     nlohmann::json supporters = nlohmann::json::array();
     for (auto s : _supporters)
     {
         CSaveFile::addGameObject(supporters, s);
     }
-    o["supporters"] = supporters;
+    json[TagNames::Player::supporters] = supporters;
 
-    return o;
+    return json;
+}
+
+void CPlayer::load(const nlohmann::json& json)
+{
+    _hp = json.value<int>(TagNames::Player::hp, 1);
+    _maxHp = json.value<int>(TagNames::Player::maxHp, 1);
+    _gold = json.value<int>(TagNames::Player::gold, 0);
+    _level = json.value<unsigned int>(TagNames::Player::level, 0);
+    _xp = json.value<unsigned int>(TagNames::Player::xp, 0);
+    _initiative = json.value<unsigned int>(TagNames::Player::initiative, 1);
+
+    if (json.contains("supporters") and json["supporters"].is_array())
+    {
+        for (auto s : json[TagNames::Player::supporters])
+        {
+            auto c = CompanionFactory::loadSupportCompanionFromSaveGame(s);
+            if (c != nullptr)
+            {
+                _supporters.push_back(c);
+            }
+        }
+    }
+}
+
+std::string CPlayer::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Player::player, textId);
 }
 
 void CPlayer::removeAllSupportCompanions()

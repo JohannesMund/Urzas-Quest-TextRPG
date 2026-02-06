@@ -1,0 +1,32 @@
+{
+  "FileSpec": {
+    "DateTime": "2026-02-06 20:36:28",
+    "FileType": "Translation",
+    "Name": "UrzasQuest TextRPG",
+    "Version": 1
+  },
+  "Translation": {
+    "startMenu": [
+      {
+        "Source": "Start a new game",
+        "de": "Neues Spiel starten"
+      },
+      {
+        "Source": "Load game",
+        "de": "Spiel laden"
+      },
+      {
+        "Source": "Options",
+        "de": "Optionen"
+      },
+      {
+        "Source": "Quit game",
+        "de": "Spiel beenden"
+      },
+      {
+        "Source": "Language options",
+        "de": "Sprachoptionen"
+      }
+    ]
+  }
+}

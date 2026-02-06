@@ -11,7 +11,7 @@
 #include <format>
 #include <string>
 
-CLakeOfTearsBossTask::CLakeOfTearsBossTask() : CTask()
+CLakeOfTearsBossTask::CLakeOfTearsBossTask() : CTask(TagNames::LakeOfTears::lakeOfTearsBoss)
 {
 }
 
@@ -56,5 +56,5 @@ void CLakeOfTearsBossTask::execute()
     battle.fight();
 
     _isFinished = true;
-    CGameManagement::getProgressionInstance()->reportModuleFinished(LakeTearsRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(LakeOfTears::moduleName());
 }

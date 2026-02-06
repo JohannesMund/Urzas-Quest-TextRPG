@@ -10,7 +10,7 @@
 
 CSewerBossRoom::CSewerBossRoom(bool* isBossDefeated)
 {
-    _description = SewerRessources::getBossRoomDescription();
+    _description = Sewer::getBossRoomDescription();
     _showInFogOfWar = true;
     _bossDefeated = isBossDefeated;
     _seen = true;
@@ -56,7 +56,7 @@ void CSewerBossRoom::execute()
         Console::br();
 
         *_bossDefeated = true;
-        CGameManagement::getProgressionInstance()->reportModuleFinished(SewerRessources::moduleName());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(Sewer::moduleName());
     }
 }
 

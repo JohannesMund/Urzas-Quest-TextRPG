@@ -6,7 +6,7 @@
 #include <format>
 #include <nlohmann/json.hpp>
 
-CBomb::CBomb(const BombSize& size) : CItem("CBomb")
+CBomb::CBomb(const BombSize& size) : CItem(TagNames::Item::bomb)
 {
     std::string name;
     switch (size)

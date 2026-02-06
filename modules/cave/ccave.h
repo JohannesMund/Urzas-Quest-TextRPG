@@ -2,7 +2,7 @@
 
 #include "cfield.h"
 
-class CCave : public CField
+class CCave : public CRoom
 {
 public:
     CCave();
@@ -17,6 +17,10 @@ public:
     static CMap::RoomFilter caveFilter();
 
     virtual bool isTaskPossible(const std::string_view& moduleName) const override;
+
+protected:
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
 
 private:
     void initDungeon();

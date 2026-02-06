@@ -5,6 +5,7 @@
 #include "cmenu.h"
 #include "console.h"
 #include "csavefile.h"
+#include "translator/ctranslator.h"
 
 #include <algorithm>
 #include <format>
@@ -52,7 +53,7 @@ void CInventory::addItem(CItem* item)
         }
     }
 
-    Console::printLn(std::format("You optained {}", item->name()));
+    Console::printLn(std::format("You obtained {}", item->name()));
     _inventory.push_back(item);
 }
 
@@ -394,8 +395,28 @@ nlohmann::json CInventory::save() const
     {
         CSaveFile::addGameObject(inventory, i);
     }
-    o["inventoy"] = inventory;
+    o[TagNames::Item::inventory] = inventory;
     return o;
+}
+
+void CInventory::load(const nlohmann::json& json)
+{
+    if (json.contains(TagNames::Item::inventory))
+    {
+        for (auto o : json[TagNames::Item::inventory])
+        {
+            auto item = CItemFactory::loadItemFromSavGame(o);
+            if (item != nullptr)
+            {
+                _inventory.push_back(item);
+            }
+        }
+    }
+}
+
+std::string CInventory::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::inventory, textId);
 }
 
 CItem* CInventory::getItem(const unsigned int index)

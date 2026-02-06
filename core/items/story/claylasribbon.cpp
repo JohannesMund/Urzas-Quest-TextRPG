@@ -4,7 +4,7 @@
 
 #include <format>
 
-CLaylasRibbon::CLaylasRibbon() : CItem("CLaylasRibbon")
+CLaylasRibbon::CLaylasRibbon() : CItem(TagNames::Item::Story::laylasRibbon)
 {
     _name = std::format("{}s {}", Ressources::Game::princessLeila(), Ressources::Game::leilasRibbon());
     _description = std::format("The ribbon of {}. She gave it to you as a lucky charm and to protect you. You will "

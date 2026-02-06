@@ -1,33 +1,51 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "csewerencounter.h"
+#include "csewertask.h"
+#include "ctask.h"
 #include "ctown.h"
 #include "randomizer.h"
 #include "ressources.h"
 
 #include <format>
 
-void SewerRessources::initModule()
+Module::ModuleInfo Sewer::moduleInfo()
 {
-    CGameManagement::getInstance()->registerEncounter(new CSewerEncounter());
+    const auto taskFactory = [](const std::string_view& objectName) -> CTask*
+    {
+        if (TagNames::Sewer::sewer.compare(objectName) == 0)
+        {
+            return new CSewerTask();
+        }
+        return nullptr;
+    };
+
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
+
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "sewer";
+    moduleInfo.gameStage = Module::EGameStage::eSeenBard,
+
+    moduleInfo.initFunction = []() { CGameManagement::getInstance()->registerEncounter(new CSewerEncounter()); };
+    moduleInfo.deInitFunction = []() { CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName()); };
+    moduleInfo.questLogFunction = []() { return "Rescue the missing children from the cities sewers."; };
+
+    moduleInfo.taskFactory = taskFactory;
+
+    return moduleInfo;
 }
 
-void SewerRessources::deInitModule()
-{
-    CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
-}
-
-std::string SewerRessources::moduleName()
+std::string Sewer::moduleName()
 {
     return "sewer";
 }
 
-std::string SewerRessources::encounterName()
+std::string Sewer::encounterName()
 {
     return "The Sewer";
 }
 
-std::string SewerRessources::getRandomDescription()
+std::string Sewer::getRandomDescription()
 {
     return Randomizer::getRandomStringFromVector(
         {std::format("It is wet, it is moldy and the smell is disgusting, you don't even want to think about what' it "
@@ -35,7 +53,8 @@ std::string SewerRessources::getRandomDescription()
                      "the water you are... oh! was this a {}?",
                      hotdog()),
 
-         "There is a big hole in the wall, and even more stinking, dirty water fills the sewers. You are pretty sure, "
+         "There is a big hole in the wall, and even more stinking, dirty water fills the sewers. You are pretty "
+         "sure, "
          "that there are things living down here, you did not even know existed.",
 
          std::format("Funny, what people are throwing away. There is a lotof pretty-ok stuff. But you should not have "
@@ -43,14 +62,16 @@ std::string SewerRessources::getRandomDescription()
                      "{}!",
                      hotdog()),
 
-         "You expected more rats, but this seems more like a the cockroach kind of sewer. At least, you have seen lots "
+         "You expected more rats, but this seems more like a the cockroach kind of sewer. At least, you have seen "
+         "lots "
          "and lots of cockroaches.",
 
-         "There is suspiciously much slime here. it comes out of pipes, drops from the walls and the ceiling. Some of "
+         "There is suspiciously much slime here. it comes out of pipes, drops from the walls and the ceiling. Some "
+         "of "
          "it seems to be acidic. You wonder, when it will attack you."});
 }
 
-std::string SewerRessources::getRandomEnemyName()
+std::string Sewer::getRandomEnemyName()
 {
     return Randomizer::getRandomStringFromVector({"Cockroach",
                                                   "Spider",
@@ -62,18 +83,19 @@ std::string SewerRessources::getRandomEnemyName()
                                                   std::format("{}blue Slime{}", CC::fgLightBlue(), CC::ccReset())});
 }
 
-std::string SewerRessources::getRandomEnemyWeapon()
+std::string Sewer::getRandomEnemyWeapon()
 {
     return Randomizer::getRandomStringFromVector({"spiderweb", "tickeling legs", "teeth", "slime", "slime", "slime"});
 }
 
-std::string SewerRessources::getWellDescription(const int i)
+std::string Sewer::getWellDescription(const int i)
 {
     switch (i)
     {
     case 1:
     default:
-        return "This must be the outlet of the local healer. there is a stream of a red fluid, that looks suspiciously "
+        return "This must be the outlet of the local healer. there is a stream of a red fluid, that looks "
+               "suspiciously "
                "like a healing potion.";
     case 2:
         return std::format("There is a puddle of suspiciously clear liquid here. it looks magically. You could use "
@@ -82,7 +104,7 @@ std::string SewerRessources::getWellDescription(const int i)
     }
 }
 
-std::string SewerRessources::getWellQuestion(const int i)
+std::string Sewer::getWellQuestion(const int i)
 {
     switch (i)
     {
@@ -94,7 +116,7 @@ std::string SewerRessources::getWellQuestion(const int i)
     }
 }
 
-std::string SewerRessources::getWellEffect(const int i)
+std::string Sewer::getWellEffect(const int i)
 {
     switch (i)
     {
@@ -107,13 +129,13 @@ std::string SewerRessources::getWellEffect(const int i)
     }
 }
 
-std::string SewerRessources::getMapRoomDescription()
+std::string Sewer::getMapRoomDescription()
 {
     return "Another pile of rubbish. But this one is different. There are a lot of official looking papers here. "
            "Browsing through them, you find a map of the towns' sewer system.";
 }
 
-std::string SewerRessources::getBossRoomDescription()
+std::string Sewer::getBossRoomDescription()
 {
     return std::format("This corner is so different than the rest of the Sewers. Not only is it clean, and not stinky "
                        "here. It is like some kind of... Chapel. It looks totally bizarre, to have such a place in the "
@@ -123,27 +145,22 @@ std::string SewerRessources::getBossRoomDescription()
                        Ressources::Game::urza());
 }
 
-std::string SewerRessources::getColoredBossString()
+std::string Sewer::getColoredBossString()
 {
     return std::format("P{0}apa {1}R{0}oach{1}", CC::fgYellow(), CC::ccReset());
 }
 
-std::string SewerRessources::getBossWeapon()
+std::string Sewer::getBossWeapon()
 {
     return std::format("L{0}ast {1}R{0}essort{1}", CC::fgYellow(), CC::ccReset());
 }
 
-std::string SewerRessources::dungeonEncounterName()
+std::string Sewer::dungeonEncounterName()
 {
     return "SewerDungeon";
 }
 
-std::string SewerRessources::hotdog()
+std::string Sewer::hotdog()
 {
     return std::format("{0}H{1}o{2}t{0}dog{3}", CC::fgYellow(), CC::fgLightRed(), CC::fgLightYellow(), CC::ccReset());
-}
-
-std::string SewerRessources::questLog()
-{
-    return "Rescue the missing children from the cities sewers.";
 }

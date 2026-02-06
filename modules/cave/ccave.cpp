@@ -11,7 +11,7 @@
 
 #include <format>
 
-CCave::CCave()
+CCave::CCave() : CRoom(TagNames::Cave::cave)
 {
     _showInFogOfWar = true;
     _encounterType = CEncounter::EEncounterType::eNone;
@@ -20,16 +20,16 @@ CCave::CCave()
 
 void CCave::execute()
 {
-    CField::execute();
+    CRoom::execute();
 
     if (_isOpen)
     {
-        if (CGameManagement::getProgressionInstance()->isModuleFinished(CaveRessources::moduleName()))
+        if (CGameManagement::getProgressionInstance()->isModuleFinished(Cave::moduleName()))
         {
             Console::printLn(
                 std::format("You remember this cave, you remember {} who lurked inside this cave. You also "
                             "remember, that this guy should no longer be a problem. Or is he? ",
-                            CaveRessources::getColoredBossString()));
+                            Cave::getColoredBossString()));
             Console::printLn("Do you want to have a look, whether there is another Boss?");
             initDungeon();
         }
@@ -81,10 +81,23 @@ bool CCave::isTaskPossible(const std::string_view& moduleName) const
 {
     if (!moduleName.empty())
     {
-        return moduleName.compare(CaveRessources::moduleName()) == 0;
+        return moduleName.compare(Cave::moduleName()) == 0;
     }
 
-    return CField::isTaskPossible(moduleName);
+    return CRoom::isTaskPossible(moduleName);
+}
+
+nlohmann::json CCave::save() const
+{
+    auto o = CRoom::save();
+    o[TagNames::Cave::isOpen] = _isOpen;
+    return o;
+}
+
+void CCave::load(const nlohmann::json& json)
+{
+    _isOpen = json.value<bool>(TagNames::Cave::isOpen, false);
+    CRoom::load(json);
 }
 
 void CCave::initDungeon()
@@ -93,19 +106,16 @@ void CCave::initDungeon()
     if (CMenu::executeYesNoMenu() == CMenu::yes())
     {
         std::vector<CRoom*> rooms;
-        rooms.push_back(CDungeon::makeHealingWell(CaveRessources::getWellDescription(1),
-                                                  CaveRessources::getWellQuestion(1),
-                                                  CaveRessources::getWellEffect(1)));
+        rooms.push_back(
+            CDungeon::makeHealingWell(Cave::getWellDescription(1), Cave::getWellQuestion(1), Cave::getWellEffect(1)));
 
-        rooms.push_back(CDungeon::makeHealingWell(CaveRessources::getWellDescription(2),
-                                                  CaveRessources::getWellQuestion(2),
-                                                  CaveRessources::getWellEffect(2)));
+        rooms.push_back(
+            CDungeon::makeHealingWell(Cave::getWellDescription(2), Cave::getWellQuestion(2), Cave::getWellEffect(2)));
 
-        rooms.push_back(CDungeon::makeHealingWell(CaveRessources::getWellDescription(3),
-                                                  CaveRessources::getWellQuestion(3),
-                                                  CaveRessources::getWellEffect(3)));
+        rooms.push_back(
+            CDungeon::makeHealingWell(Cave::getWellDescription(3), Cave::getWellQuestion(3), Cave::getWellEffect(3)));
 
-        auto mapRoom = CDungeon::makeMapRoom(CaveRessources::getMapRoomDescription());
+        auto mapRoom = CDungeon::makeMapRoom(Cave::getMapRoomDescription());
         rooms.push_back(static_cast<CRoom*>(mapRoom));
 
         CCaveDungeonMap map(25, 10);

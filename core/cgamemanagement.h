@@ -3,6 +3,7 @@
 #include "ccompanion.h"
 #include "cencounter.h"
 #include "cgameprogression.h"
+#include "cgamesettings.h"
 #include "cinventory.h"
 #include "citemfactory.h"
 #include "cmap.h"
@@ -11,6 +12,7 @@
 #include <string>
 
 class CTask;
+class CGameSettings;
 class CGameManagement
 {
 public:
@@ -23,6 +25,7 @@ public:
     static CCompanion* getCompanionInstance();
     static CGameProgression* getProgressionInstance();
     static CItemFactory* getItemFactoryInstance();
+    static CGameSettings* getGameSettingsInstance();
 
     void placeTask(CTask* task, CMap::RoomFilter);
     void placeTaskOnField(CTask* task);
@@ -37,6 +40,7 @@ public:
 
     void printHUD();
 
+    void loadGameSettings();
     void startGame();
     void loadGame();
 

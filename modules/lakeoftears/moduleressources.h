@@ -1,15 +1,24 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 
-namespace LakeTearsRessources
+class CTask;
+namespace TagNames
 {
-void initModule();
-void deInitModule();
+namespace LakeOfTears
+{
+constexpr std::string_view lakeOfTears = "lakeOfTears";
+constexpr std::string_view lakeOfTearsBoss = "lakeOfTearsBoss";
+constexpr std::string_view steps = "steps";
+} // namespace LakeOfTears
+} // namespace TagNames
 
+namespace LakeOfTears
+{
+Module::ModuleInfo moduleInfo();
 std::string moduleName();
-std::string questLog();
 
 std::string getColoredsBossString();
-
-} // namespace LakeTearsRessources
+} // namespace LakeOfTears

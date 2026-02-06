@@ -8,7 +8,7 @@
 
 #include <format>
 
-CFishingVilleTownTask::CFishingVilleTownTask()
+CFishingVilleTownTask::CFishingVilleTownTask() : CTask(TagNames::FishingVille::fishingVilleTask)
 {
     _isAutoExecute = true;
 }

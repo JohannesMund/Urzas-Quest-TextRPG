@@ -1,15 +1,18 @@
 #pragma once
 #include "cencounter.h"
 #include "cmap.h"
+#include "ctask.h"
+#include "roomfactory.h"
 
 #include <string>
 
 class CGameStateObject;
-class CTask;
 class CRoom : public CGameStateObject
 {
 public:
-    CRoom(const std::string& objectName);
+    friend CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json);
+
+    CRoom(const std::string_view& objectName);
     virtual ~CRoom();
 
     void blockPath(const CMap::EDirections dir, const bool block);
@@ -60,4 +63,7 @@ protected:
     std::string _moduleName;
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

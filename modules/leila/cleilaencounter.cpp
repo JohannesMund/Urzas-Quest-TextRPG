@@ -70,5 +70,5 @@ std::string CLeilaEncounter::name() const
 
 std::string CLeilaEncounter::moduleName() const
 {
-    return LeilaRessources::moduleName();
+    return Leila::moduleName();
 }

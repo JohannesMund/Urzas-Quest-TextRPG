@@ -1,11 +1,12 @@
 #include "cfishingrodpart.h"
+#include "../moduleressources.h"
 #include "colorize.h"
 #include "randomizer.h"
 
 #include <format>
 #include <nlohmann/json.hpp>
 
-CFishingRodPart::CFishingRodPart() : CJunkItem("CFishingRodPart")
+CFishingRodPart::CFishingRodPart() : CJunkItem(TagNames::FishingVille::fishingRodPart)
 {
     switch (Randomizer::getRandom(3))
     {
@@ -69,6 +70,11 @@ std::string CFishingRodPart::nameForPart(const EPart part)
 nlohmann::json CFishingRodPart::save() const
 {
     nlohmann::json o = CItem::save();
-    o["part"] = _part;
+    o[TagNames::FishingVille::part] = _part;
     return o;
+}
+
+void CFishingRodPart::load(const nlohmann::json& json)
+{
+    _part = json.value<EPart>(TagNames::FishingVille::part, EPart::eHook);
 }

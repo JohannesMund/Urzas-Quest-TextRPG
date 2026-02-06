@@ -2,13 +2,13 @@
 #include "cenemy.h"
 #include "console.h"
 #include "randomizer.h"
+#include "translator/ctranslator.h"
 
 #include <format>
 #include <nlohmann/json.hpp>
 #include <string>
 
-
-CCompanion::CCompanion(const std::string& objectName) : CGameStateObject(objectName)
+CCompanion::CCompanion(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }
 
@@ -58,9 +58,15 @@ void CCompanion::evolve()
 nlohmann::json CCompanion::save() const
 {
     nlohmann::json o;
-    o["description"] = _description;
-    o["level"] = _level;
+    o[TagNames::Companion::description] = _description;
+    o[TagNames::Companion::level] = _level;
     return o;
+}
+
+void CCompanion::load(const nlohmann::json& json)
+{
+    _description = json.value<std::string>(TagNames::Companion::description, "");
+    _level = json.value(TagNames::Companion::level, 0);
 }
 
 bool CCompanion::fireDefaultAction() const
@@ -70,4 +76,9 @@ bool CCompanion::fireDefaultAction() const
         return false;
     }
     return Randomizer::getRandom(Ressources::Companion::companionLevelCap + 2 - _level) == 0;
+}
+
+std::string CCompanion::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Companion::companion, textId);
 }

@@ -4,7 +4,7 @@
 
 #include <format>
 
-CDefenderCompanion::CDefenderCompanion() : CCompanion("CDefenderCompanion")
+CDefenderCompanion::CDefenderCompanion() : CCompanion(TagNames::Companion::defenderCompanion)
 {
 }
 

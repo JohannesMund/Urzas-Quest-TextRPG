@@ -8,7 +8,7 @@
 
 #include <format>
 
-CLeilaTownTask::CLeilaTownTask()
+CLeilaTownTask::CLeilaTownTask() : CTask(TagNames::Leila::leilaTown)
 {
     _isAutoExecute = false;
 }
@@ -45,7 +45,7 @@ void CLeilaTownTask::execute()
     Console::br();
 
     CGameManagement::getPlayerInstance()->loseGold(CGameManagement::getPlayerInstance()->gold());
-    CGameManagement::getProgressionInstance()->reportModuleFinished(LeilaRessources::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(Leila::moduleName());
     _isFinished = true;
 }
 

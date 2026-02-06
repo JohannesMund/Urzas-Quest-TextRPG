@@ -7,8 +7,8 @@
 
 CSewerBoss::CSewerBoss()
 {
-    _name = SewerRessources::getColoredBossString();
-    _weapon = SewerRessources::getBossWeapon();
+    _name = Sewer::getColoredBossString();
+    _weapon = Sewer::getBossWeapon();
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;

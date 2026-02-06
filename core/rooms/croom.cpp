@@ -7,8 +7,10 @@
 #include "croom.h"
 #include "ctask.h"
 #include "ressources.h"
+#include "taskfactory.h"
+#include "translator/ctranslator.h"
 
-CRoom::CRoom(const std::string& objectName) : CGameStateObject(objectName)
+CRoom::CRoom(const std::string_view& objectName) : CGameStateObject(objectName)
 {
     _description = Ressources::Rooms::getRandomDescription();
     _encounterType = CEncounter::EEncounterType::eNone;
@@ -84,16 +86,40 @@ void CRoom::executeTask()
 nlohmann::json CRoom::save() const
 {
     nlohmann::json o;
+    o[TagNames::Room::pathNorth] = _pathNorth;
+    o[TagNames::Room::pathEast] = _pathEast;
+    o[TagNames::Room::pathSouth] = _pathSouth;
+    o[TagNames::Room::pathWest] = _pathWest;
+    o[TagNames::Room::showInFogOfWar] = _showInFogOfWar;
+    o[TagNames::Room::seen] = _seen;
+    o[TagNames::Room::description] = _description;
 
-    o["pathNorth"] = _pathNorth;
-    o["pathEast"] = _pathEast;
-    o["pathSouth"] = _pathSouth;
-    o["pathWest"] = _pathWest;
-    o["showInFogOfWar"] = _showInFogOfWar;
-    o["seen"] = _seen;
-    o["description"] = _description;
-
+    if (_task != nullptr)
+    {
+        TaskFactory::saveTaskToSaveGame(_task, o);
+    }
     return o;
+}
+
+void CRoom::load(const nlohmann::json& json)
+{
+    _pathNorth = json.value<bool>(TagNames::Room::pathNorth, true);
+    _pathEast = json.value<bool>(TagNames::Room::pathEast, true);
+    _pathSouth = json.value<bool>(TagNames::Room::pathSouth, true);
+    _pathWest = json.value<bool>(TagNames::Room::pathWest, true);
+    _showInFogOfWar = json.value<bool>(TagNames::Room::showInFogOfWar, false);
+    _seen = json.value<bool>(TagNames::Room::seen, false);
+    _description = json.value<std::string>(TagNames::Room::description, "");
+
+    if (json.contains(TagNames::Task::task))
+    {
+        _task = TaskFactory::loadTaskFromSaveGame(json[TagNames::Task::task]);
+    }
+}
+
+std::string CRoom::coreTr(const std::string_view& textId) const
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Room::room, textId);
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

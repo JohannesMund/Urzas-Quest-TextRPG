@@ -6,7 +6,6 @@ class CStartingRoom : public CField
 {
 public:
     CStartingRoom();
-
     virtual void execute() override;
 
 private:

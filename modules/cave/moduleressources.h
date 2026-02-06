@@ -1,21 +1,31 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 #include <utility>
 #include <vector>
 
+namespace TagNames
+{
+namespace Cave
+{
+constexpr std::string_view cave = "Cave";
+constexpr std::string_view caveBoss = "CaveBoss";
+constexpr std::string_view openCave = "openCave";
+constexpr std::string_view isOpen = TagNames::Common::isOpen;
+} // namespace Cave
+} // namespace TagNames
+
 class CRoom;
-namespace CaveRessources
+class CTask;
+namespace Cave
 {
 
-void initModule();
-void deInitModule();
-void initWorldMap(std::vector<CRoom*>& rooms);
-
+Module::ModuleInfo moduleInfo();
 std::string moduleName();
-std::string dungeonEncounterName();
 
-std::string questLog();
+std::string dungeonEncounterName();
 
 static const unsigned int fightChance = 15;
 
@@ -33,4 +43,4 @@ std::string getMapRoomDescription();
 std::string getColoredBossString();
 std::string getBossWeapon();
 
-} // namespace CaveRessources
+} // namespace Cave

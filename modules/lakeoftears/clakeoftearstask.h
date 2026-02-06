@@ -9,6 +9,10 @@ public:
 
     virtual void execute() override;
 
+protected:
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json&) override;
+
 private:
     enum class EEnemy
     {
@@ -18,7 +22,7 @@ private:
         eSnail
     };
 
-    const unsigned int _steps = 0;
+    unsigned int _steps = 0;
 
     void battle(const EEnemy enemy);
 };

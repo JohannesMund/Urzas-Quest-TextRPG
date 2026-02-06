@@ -12,7 +12,7 @@
 #include <format>
 #include <ranges>
 
-CSandwichShop::CSandwichShop() : CRoom("CSandwichShop")
+CSandwichShop::CSandwichShop() : CRoom(TagNames::RebellionHideout::rebellionHideout)
 {
     for (const auto i : CSandwich::ingredientIterator())
     {
@@ -31,7 +31,8 @@ CSandwichShop::CSandwichShop() : CRoom("CSandwichShop")
 void CSandwichShop::execute()
 {
     CRoom::execute();
-    if (CGameManagement::getProgressionInstance()->turns() - _turns > Ressources::Config::turnsUntilShopRefresh)
+    if (CGameManagement::getProgressionInstance()->turns() - _turns >
+        CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
     {
         replaceSandwichOfTheDay();
     }
@@ -131,31 +132,59 @@ CMap::RoomFilter CSandwichShop::sandwichShopFilter()
 nlohmann::json CSandwichShop::save() const
 {
     nlohmann::json o = CRoom::save();
-    o["turns"] = _turns;
-    o["playerOwnsShop"] = _playerOwnsShop;
-    o["playerDiscoveredHideout"] = _playerDiscoveredHideout;
-    o["goldAvailable"] = _goldAvailable;
+    o[TagNames::RebellionHideout::turns] = _turns;
+    o[TagNames::RebellionHideout::playerOwnsShot] = _playerOwnsShop;
+    o[TagNames::RebellionHideout::playerDiscoveredHideout] = _playerDiscoveredHideout;
+    o[TagNames::RebellionHideout::gold] = _goldAvailable;
 
     nlohmann::json ingredients = nlohmann::json::array();
     for (auto i : _ingredientStore)
     {
-        ingredients.push_back(i);
+        ingredients.push_back(
+            {{TagNames::RebellionHideout::ingredient, i.first}, {TagNames::RebellionHideout::count, i.second}});
     }
-    o["ingredientStore"] = ingredients;
+    o[TagNames::RebellionHideout::ingredientStore] = ingredients;
 
     nlohmann::json sandwiches = nlohmann::json::array();
     for (auto s : _sandwiches)
     {
         CSaveFile::addGameObject(sandwiches, s);
     }
-    o["sandwiches"] = sandwiches;
+    o[TagNames::RebellionHideout::itemGeneratorsRegistered] = _itemGeneratorsRegistered;
+
     return o;
+}
+
+void CSandwichShop::load(const nlohmann::json& json)
+{
+    _turns = json.value<unsigned long>(TagNames::RebellionHideout::turns, 0);
+    _goldAvailable = json.value<int>(TagNames::RebellionHideout::gold, 0);
+    _playerOwnsShop = json.value<bool>(TagNames::RebellionHideout::playerOwnsShot, 0);
+    _playerDiscoveredHideout = json.value<bool>(TagNames::RebellionHideout::playerDiscoveredHideout, false);
+
+    if (json.contains(TagNames::RebellionHideout::ingredientStore))
+    {
+        for (auto i : json[TagNames::RebellionHideout::ingredientStore])
+        {
+            _ingredientStore.insert(std::make_pair(
+                static_cast<CSandwich::EIngredients>(i.value<int>(TagNames::RebellionHideout::ingredient, 0)),
+                i.value<int>(TagNames::RebellionHideout::count, 1)));
+        }
+    }
+
+    _itemGeneratorsRegistered = json.value<bool>(TagNames::RebellionHideout::itemGeneratorsRegistered, false);
+    if (_itemGeneratorsRegistered)
+    {
+        registerItemGenerators();
+    }
+
+    CRoom::load(json);
 }
 
 void CSandwichShop::printHeader()
 {
     Console::cls();
-    Console::printLn(std::format("{}", RebellionHideoutRessources::sandwichShopName()), Console::EAlignment::eCenter);
+    Console::printLn(std::format("{}", SandwichShop::sandwichShopName()), Console::EAlignment::eCenter);
     Console::printLn("Ye olde Sandwich Shoppe, est. 489 ad. dragonis", Console::EAlignment::eCenter);
     Console::br();
 
@@ -166,7 +195,7 @@ void CSandwichShop::printHeader()
                         "to make the perfect sandwich, but after years and years of making and selling "
                         "sandwiches lost all of his spirits. His sandwiches are still great though, but he reduced the "
                         "menu to one single sandwich of the day, written on the sign next to the counter",
-                        RebellionHideoutRessources::mrSoop()));
+                        SandwichShop::mrSoop()));
     }
     else
     {
@@ -228,31 +257,31 @@ void CSandwichShop::checkForShaggysSandwich()
         sandwich = list.at(0)->name();
 
         Console::printLn(std::format(
-            "As soon as you enter, you realize, that {0} acts stange, he snoops around your bag, he seems nervous and "
-            "shakey. Eventually, he grabs into your bag and picks {1}. His eyes start to sparkle. \"This is it, this "
+            "As soon as you enter, you realize, that {0} acts stange, he snoops around your bag, he seems nervous "
+            "and "
+            "shakey. Eventually, he grabs into your bag and picks {1}. His eyes start to sparkle. \"This is it, "
+            "this "
             "is {1}, the legendary sandwich, the perfect sandwich. I searched for this my whole life, no i finally "
             "found it! The only reason, i opened this sandwich shop was to find this sandwich!\" {0} literally has "
-            "little hearts in his eyes, when i takes your {1} and runs to the exit. \"Ever wanted to own a Sandwich "
-            "shop?\" he asks you before he leaves. \"its yours!\" are the last words  you hear from him. Guess, you "
+            "little hearts in his eyes, when i takes your {1} and runs to the exit. \"Ever wanted to own a "
+            "Sandwich "
+            "shop?\" he asks you before he leaves. \"its yours!\" are the last words  you hear from him. Guess, "
+            "you "
             "are proud owner of a sandwich shop now.",
-            RebellionHideoutRessources::mrSoop(),
+            SandwichShop::mrSoop(),
             sandwich));
         Console::confirmToContinue();
 
         _playerOwnsShop = true;
         CGameManagement::getInventoryInstance()->removeItem(CShaggysSandwich::shaggysSandwichFilter());
-        CGameManagement::getProgressionInstance()->reportModuleFinished(
-            RebellionHideoutRessources::moduleNameSandwichShop());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(SandwichShop::moduleName());
         CGameManagement::getProgressionInstance()->registerModuleHint(
-            RebellionHideoutRessources::moduleNameRebellionHideout(),
+            RebellionHideout::moduleName(),
             std::format("You want to know where {} and {} are hiding? Are you really that blind? Did you ever woner "
                         "who is buying you crappy sandwiches?",
                         Ressources::Game::fiego(),
                         Ressources::Game::brock()));
-        CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeShopItem, 10);
-        CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
-            RebellionHideoutRessources::moduleNameSandwichShop(), &CBagOfIngredients::makeLootItem, 10);
+        registerItemGenerators();
     }
 }
 
@@ -281,8 +310,7 @@ bool CSandwichShop::seenRebellionHideoutHint()
         return false;
     }
 
-    return CGameManagement::getProgressionInstance()->areModuleHintsSeen(
-        RebellionHideoutRessources::moduleNameRebellionHideout());
+    return CGameManagement::getProgressionInstance()->areModuleHintsSeen(RebellionHideout::moduleName());
 }
 
 void CSandwichShop::revolutionaryThoughts()
@@ -399,20 +427,19 @@ void CSandwichShop::observe()
 {
     Console::cls();
     _playerDiscoveredHideout = true;
-    CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(
-        RebellionHideoutRessources::moduleNameRebellionHideout());
-    CGameManagement::getProgressionInstance()->reportModuleFinished(
-        RebellionHideoutRessources::moduleNameRebellionHideout());
+    CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(RebellionHideout::moduleName());
+    CGameManagement::getProgressionInstance()->reportModuleFinished(RebellionHideout::moduleName());
 
     Console::printLn(
         "You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
-        "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich shop even "
+        "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich shop "
+        "even "
         "has an employees bathroom, you have no employees), but the toilet is pushed aside, and two guys "
         "appear. They seem to be hungry, and immediately rush to the sandwiches.");
     Console::printLn(
         std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
                     "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
-                    RebellionHideoutRessources::mrSoop()));
+                    SandwichShop::mrSoop()));
     Console::br();
     Console::printLn("A little bit proud, that they call you a sandwich legend, you leave your hideout. \"Who are you "
                      "two, and why are you hiding in my sandwich store?\"");
@@ -500,10 +527,13 @@ void CSandwichShop::talkToRebellion()
     else
     {
         Console::printLn(std::format(
-            "As you arrive, {} and {} are brainstorming the next actions, the rebellion will take. They are a little "
+            "As you arrive, {} and {} are brainstorming the next actions, the rebellion will take. They are a "
+            "little "
             "bit uncreative right now, all they come up with is kidnapping {} over and over again. As much as you "
-            "would appreciate her beeing around, as much you don't want to kidnap her without any good reason to do "
-            "so, so they make clear, that you dont approve any kidnapping operations for now. With this option out of "
+            "would appreciate her beeing around, as much you don't want to kidnap her without any good reason to "
+            "do "
+            "so, so they make clear, that you dont approve any kidnapping operations for now. With this option out "
+            "of "
             "the way, There seems nothing to be done for now.",
             Ressources::Game::fiego(),
             Ressources::Game::brock(),
@@ -545,4 +575,13 @@ void CSandwichShop::replaceSandwichOfTheDay()
     {
         _sandwiches.push_back(CGameManagement::getItemFactoryInstance()->sandwichMaker());
     }
+}
+
+void CSandwichShop::registerItemGenerators()
+{
+    CGameManagement::getItemFactoryInstance()->registerShopItemGenerator(
+        SandwichShop::moduleName(), &CBagOfIngredients::makeShopItem, 10);
+    CGameManagement::getItemFactoryInstance()->registerLootItemGenerator(
+        SandwichShop::moduleName(), &CBagOfIngredients::makeLootItem, 10);
+    _itemGeneratorsRegistered = true;
 }

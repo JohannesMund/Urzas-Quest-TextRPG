@@ -11,7 +11,7 @@
 
 #include <format>
 
-CLeilaTask::CLeilaTask()
+CLeilaTask::CLeilaTask() : CTask(TagNames::Leila::leila)
 {
 }
 

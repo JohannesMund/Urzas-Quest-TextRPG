@@ -16,7 +16,9 @@ public:
     virtual void useFromInventory() override;
     virtual void useFromBattle(CEnemy*) override;
 
+protected:
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json&) override;
 
 private:
     void use();

@@ -5,27 +5,28 @@
 #include "ressources.h"
 
 #include <format>
-std::string BardRessources::moduleName()
+std::string Bard::moduleName()
 {
     return "DancingBard";
 }
 
-std::string BardRessources::encounterName()
+std::string Bard::encounterName()
 {
     return Ressources::Game::dancingBard();
 }
 
-void BardRessources::initModule()
+Module::ModuleInfo Bard::moduleInfo()
 {
-    CGameManagement::getInstance()->registerEncounter(new CDancingBard());
-}
+    Module::ModuleInfo moduleInfo = Module::ModuleInfo();
 
-void BardRessources::deInitModule()
-{
-    CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName());
-}
+    moduleInfo.moduleName = moduleName();
+    moduleInfo.translatorFile = "bard";
+    moduleInfo.gameStage = Module::EGameStage::eStart,
 
-std::string BardRessources::questLog()
-{
-    return std::format("Watch a show of the {} when he performes in a town.", encounterName());
+    moduleInfo.initFunction = []() { CGameManagement::getInstance()->registerEncounter(new CDancingBard()); };
+    moduleInfo.deInitFunction = []() { CGameManagement::getInstance()->unregisterEncounterByModuleName(moduleName()); };
+    moduleInfo.questLogFunction = []()
+    { return std::format("Watch a show of the {} when he performes in a town.", encounterName()); };
+
+    return moduleInfo;
 }

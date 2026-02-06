@@ -65,12 +65,12 @@ unsigned int CSewerEncounter::encounterChance(const EEncounterType&, const std::
 
 std::string CSewerEncounter::name() const
 {
-    return SewerRessources::encounterName();
+    return Sewer::encounterName();
 }
 
 std::string CSewerEncounter::moduleName() const
 {
-    return SewerRessources::moduleName();
+    return Sewer::moduleName();
 }
 
 bool CSewerEncounter::canBeExecuted(const EEncounterType& tp) const

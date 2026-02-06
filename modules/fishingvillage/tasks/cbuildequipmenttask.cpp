@@ -10,7 +10,9 @@
 
 #include <format>
 
-CBuildEquipmentTask::CBuildEquipmentTask(const std::string_view& moduleName) : CTask(), _moduleName(moduleName)
+CBuildEquipmentTask::CBuildEquipmentTask(const std::string_view& moduleName) :
+    CTask(TagNames::FishingVille::buildEquipmentTask),
+    _moduleName(moduleName)
 {
     _isAutoExecute = false;
 }
@@ -18,7 +20,7 @@ CBuildEquipmentTask::CBuildEquipmentTask(const std::string_view& moduleName) : C
 void CBuildEquipmentTask::execute()
 {
 
-    if (_moduleName.compare(FishingVillageRessources::moduleNameMakeRod()) == 0)
+    if (_moduleName.compare(FishingVillageMakeRod::moduleName()) == 0)
     {
         buildRod();
     }
@@ -30,7 +32,7 @@ void CBuildEquipmentTask::execute()
 
 std::string CBuildEquipmentTask::taskNav() const
 {
-    if (_moduleName.compare(FishingVillageRessources::moduleNameMakeRod()) == 0)
+    if (_moduleName.compare(FishingVillageMakeRod::moduleName()) == 0)
     {
         return "Build your Fishing Rod";
     }
@@ -46,7 +48,7 @@ void CBuildEquipmentTask::buildBoat()
                                  Ressources::Game::fishingFritz()));
 
     Console::printLn(std::format("{0}x {1}, {0}x {2} and {0}x {3}",
-                                 FishingVillageRessources::necessaryBoatParts,
+                                 FishingVillage::necessaryBoatParts,
                                  CBoatPart::nameForPart(CBoatPart::EPart::eBoard),
                                  CBoatPart::nameForPart(CBoatPart::EPart::eNail),
                                  CBoatPart::nameForPart(CBoatPart::EPart::eRope)));
@@ -61,7 +63,7 @@ void CBuildEquipmentTask::buildBoat()
         if (items.size())
         {
             count = items.at(0).first;
-            if (count >= FishingVillageRessources::necessaryBoatParts)
+            if (count >= FishingVillage::necessaryBoatParts)
             {
                 partsComplete++;
             }
@@ -79,7 +81,7 @@ void CBuildEquipmentTask::buildBoat()
 
         for (const auto& part : {CBoatPart::EPart::eBoard, CBoatPart::EPart::eNail, CBoatPart::EPart::eRope})
         {
-            for (int i = 0; i < FishingVillageRessources::necessaryRodParts; i++)
+            for (int i = 0; i < FishingVillage::necessaryRodParts; i++)
             {
                 CGameManagement::getInventoryInstance()->removeItem(CBoatPart::nameForPart(part));
             }
@@ -87,9 +89,9 @@ void CBuildEquipmentTask::buildBoat()
         Console::br();
         CGameManagement::getInventoryInstance()->addItem(boat);
         Console::br();
-        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageRessources::moduleNameMakeBoat());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageMakeBoat::moduleName());
         CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(
-            FishingVillageRessources::moduleNameMakeBoat());
+            FishingVillageMakeBoat::moduleName());
 
         _isFinished = true;
     }
@@ -109,7 +111,7 @@ void CBuildEquipmentTask::buildRod()
                                  Ressources::Game::fishingFritz()));
 
     Console::printLn(std::format("{0}x {1}, {0}x {2} and {0}x {3}",
-                                 FishingVillageRessources::necessaryRodParts,
+                                 FishingVillage::necessaryRodParts,
                                  CFishingRodPart::nameForPart(CFishingRodPart::EPart::eRod),
                                  CFishingRodPart::nameForPart(CFishingRodPart::EPart::eThread),
                                  CFishingRodPart::nameForPart(CFishingRodPart::EPart::eHook)));
@@ -125,7 +127,7 @@ void CBuildEquipmentTask::buildRod()
         if (items.size())
         {
             count = items.at(0).first;
-            if (count >= FishingVillageRessources::necessaryRodParts)
+            if (count >= FishingVillage::necessaryRodParts)
             {
                 partsComplete++;
             }
@@ -144,7 +146,7 @@ void CBuildEquipmentTask::buildRod()
         for (const auto& part :
              {CFishingRodPart::EPart::eRod, CFishingRodPart::EPart::eThread, CFishingRodPart::EPart::eHook})
         {
-            for (int i = 0; i < FishingVillageRessources::necessaryRodParts; i++)
+            for (int i = 0; i < FishingVillage::necessaryRodParts; i++)
             {
                 CGameManagement::getInventoryInstance()->removeItem(CFishingRodPart::nameForPart(part));
             }
@@ -152,9 +154,9 @@ void CBuildEquipmentTask::buildRod()
         Console::br();
         CGameManagement::getInventoryInstance()->addItem(rod);
         Console::br();
-        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageRessources::moduleNameMakeRod());
+        CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageMakeRod::moduleName());
         CGameManagement::getItemFactoryInstance()->unregisterLootItemGeneratorByName(
-            FishingVillageRessources::moduleNameMakeRod());
+            FishingVillageMakeRod::moduleName());
         _isFinished = true;
     }
     else

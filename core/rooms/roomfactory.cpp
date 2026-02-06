@@ -2,9 +2,64 @@
 #include "cave/ccave.h"
 #include "ccapital.h"
 #include "cfield.h"
+#include "cgamemanagement.h"
 #include "cinjuredpet.h"
+#include "console.h"
 #include "croom.h"
+#include "cstartingroom.h"
 #include "ctown.h"
+#include "json/jsonexceptions.h"
+
+#include <iostream>
+#include <nlohmann/json.hpp>
+
+CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
+{
+    CRoom* newRoom = nullptr;
+
+    if (CGameStateObject::compareObjectName(TagNames::Room::field, json))
+    {
+        newRoom = new CField();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Room::town, json))
+    {
+        newRoom = new CTown();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Room::capital, json))
+    {
+        newRoom = new CCapital();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Room::injuredPet, json))
+    {
+        newRoom = new CInjuredPet();
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Room::startingRoom, json))
+    {
+        newRoom = new CStartingRoom();
+    }
+    else
+    {
+        newRoom = CGameManagement::getInstance()->getProgressionInstance()->callModuleRoomFactory(
+            CGameStateObject::getObjectNameFromJson(json));
+    }
+
+    if (newRoom != nullptr)
+    {
+        try
+        {
+            newRoom->load(json);
+            return newRoom;
+        }
+        catch (const Json::CJsonException& e)
+        {
+            Console::printErr("Load room error", e.what());
+            delete newRoom;
+            return nullptr;
+        }
+    }
+    throw Json::CJsonException(std::format("Unknown Room: {}", CGameStateObject::getObjectNameFromJson(json)));
+    return nullptr;
+}
 
 CRoom* RoomFactory::makeRoom()
 {

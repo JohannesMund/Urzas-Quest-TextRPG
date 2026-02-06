@@ -16,5 +16,5 @@ private:
     void eat() const;
 
     std::string _dishOfTheDay;
-    FishingVillageRessources::EFishLevel _dishOfTheDayLevel;
+    FishingVillage::EFishLevel _dishOfTheDayLevel;
 };

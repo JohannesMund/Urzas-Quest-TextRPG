@@ -43,5 +43,5 @@ std::string COpenCaveEncounter::name() const
 
 std::string COpenCaveEncounter::moduleName() const
 {
-    return CaveRessources::moduleName();
+    return Cave::moduleName();
 }

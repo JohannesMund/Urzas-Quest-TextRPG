@@ -7,7 +7,7 @@
 #include <format>
 
 CArmor::CArmor(const Ressources::Items::EQuality quality) :
-    CEquipment(Ressources::Items::EType::eArmor, quality, "CArmor")
+    CEquipment(Ressources::Items::EType::eArmor, quality, TagNames::Item::Equipment::armor)
 {
     _hasBattleEffect = true;
     _hasShieldingAction = true;

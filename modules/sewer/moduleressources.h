@@ -1,15 +1,24 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 
-namespace SewerRessources
+class CTask;
+
+namespace TagNames
+{
+namespace Sewer
+{
+constexpr std::string_view sewer = "sewer";
+}
+} // namespace TagNames
+
+namespace Sewer
 {
 
-void initModule();
-void deInitModule();
-
+Module::ModuleInfo moduleInfo();
 std::string moduleName();
-std::string questLog();
 
 std::string encounterName();
 std::string dungeonEncounterName();
@@ -33,4 +42,4 @@ std::string getBossWeapon();
 
 std::string hotdog();
 
-} // namespace SewerRessources
+} // namespace Sewer

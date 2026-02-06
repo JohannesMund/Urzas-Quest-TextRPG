@@ -2,12 +2,12 @@
 
 #include <string>
 
-namespace BardRessources
-{
-void initModule();
-void deInitModule();
-std::string questLog();
+#include "moduleinfo.h"
 
+namespace Bard
+{
 std::string moduleName();
 std::string encounterName();
+
+Module::ModuleInfo moduleInfo();
 } // namespace BardRessources

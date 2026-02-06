@@ -1,13 +1,22 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 
-namespace LeilaRessources
+class CTask;
+namespace TagNames
 {
-void initModule();
-void deInitModule();
+namespace Leila
+{
+constexpr std::string_view leila = "LeilaTask";
+constexpr std::string_view leilaTown = "LeilaTownTask";
 
+} // namespace Leila
+} // namespace TagNames
+
+namespace Leila
+{
 std::string moduleName();
-std::string questLog();
-
-} // namespace LeilaRessources
+Module::ModuleInfo moduleInfo();
+} // namespace Leila

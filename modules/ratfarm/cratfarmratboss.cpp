@@ -10,7 +10,7 @@
 
 CRatFarmRatBoss::CRatFarmRatBoss()
 {
-    _name = RatFarmRessources::getColoredBossString();
+    _name = RatFarm::getColoredBossString();
 
     _weapon = std::format("{}Still teeth, but yellow{}", CC::fgYellow(), CC::ccReset());
     _extendedWeaponChoice = true;
@@ -34,5 +34,5 @@ void CRatFarmRatBoss::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(CEnemy::basicXP(_level) * 3);
     Console::printLn("You will be surprised, what you find!");
-    RatFarmRessources::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 5);
+    RatFarm::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 5);
 }

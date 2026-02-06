@@ -19,7 +19,7 @@ public:
      * @brief CItem
      * Constructor
      */
-    CItem(const std::string& objectName);
+    CItem(const std::string_view& objectName);
 
     virtual ~CItem()
     {
@@ -211,4 +211,6 @@ protected:
     unsigned int _value = 0;
 
     bool _isConsumable = false;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

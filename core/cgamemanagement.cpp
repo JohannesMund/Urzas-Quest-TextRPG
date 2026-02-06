@@ -16,9 +16,10 @@
 #include "exceptions.h"
 #include "randomizer.h"
 #include "rebellionhideout/cbagofingredients.h"
+#include "json/jsonexceptions.h"
 
+#include <format>
 #include <iostream>
-
 #include <string>
 #include <vector>
 
@@ -31,7 +32,6 @@ CGameManagement* CGameManagement::getInstance()
         static CGameManagement instance;
         _instance = &instance;
     }
-
     return _instance;
 }
 
@@ -60,6 +60,11 @@ CItemFactory* CGameManagement::getItemFactoryInstance()
     return getInstance()->getItemFactory();
 }
 
+CGameSettings* CGameManagement::getGameSettingsInstance()
+{
+    return CGameSettings::Settings();
+}
+
 void CGameManagement::placeTask(CTask* task, CMap::RoomFilter filter)
 {
     _map.setTaskToRandomRoom(task, filter);
@@ -73,6 +78,11 @@ void CGameManagement::placeTaskOnField(CTask* task)
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
     _map.setTaskToRandomRoom(task, CTown::townFilter());
+}
+
+void CGameManagement::loadGameSettings()
+{
+    //_settings.reloadSettings();
 }
 
 void CGameManagement::startGame()
@@ -96,7 +106,7 @@ void CGameManagement::executeRandomEncounter(const CEncounter::EEncounterType ty
         return;
     }
 
-    if (Randomizer::getRandom(100) > Ressources::Config::encounterChance)
+    if (Randomizer::getRandom(100) > CGameSettings::Settings()->encounterChance())
     {
         return;
     }
@@ -218,7 +228,7 @@ void CGameManagement::executeTurn()
 
         menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
 
-        if (Ressources::Config::superCowPowers)
+        if (getGameSettingsInstance()->superCowPowers())
         {
             menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
         }
@@ -232,18 +242,18 @@ void CGameManagement::executeTurn()
         {
             Console::cls(false);
             Console::hr();
-            Console::printLn("Quit game?", Console::EAlignment::eCenter);
+            Console::printLn("Quit game", Console::EAlignment::eCenter);
+            Console::printLn("Do you want to save your progress?", Console::EAlignment::eCenter);
             Console::hr();
-            Console::br();
-            CMenu menu;
 
+            CMenu menu;
             CMenu::Action saveAction = {"Save", "[S]ave", 's'};
             CMenu::Action cancelAction = {"Cancel", "[C]cancel", 'c'};
             CMenu::Action quitAction = {"Quit without saving", "[Q]uit without saving", 'q'};
-
             menu.addMenuGroup({saveAction, quitAction});
             menu.addMenuGroup({cancelAction});
             auto reply = menu.execute();
+
             if (reply == quitAction)
             {
                 throw CGameOverException();
@@ -253,6 +263,7 @@ void CGameManagement::executeTurn()
             {
                 throw CGameOverException();
             }
+            Console::cls();
         }
 
         if (CMap::string2Direction(input.name) != CMap::EDirections::eNone)
@@ -372,7 +383,31 @@ bool CGameManagement::load()
     {
         return false;
     }
-    return false;
+    try
+    {
+        CSaveFile saveGame;
+        saveGame.load();
+        saveGame.loadGameObject(&_player);
+        saveGame.loadGameObject(&_inventory);
+
+        _progression.initEncounters();
+        _progression.initModules();
+
+        saveGame.loadGameObject(&_progression);
+
+        auto c = CompanionFactory::loadCompanionFromSaveGame(saveGame.root());
+        if (c != nullptr)
+        {
+            _companion = c;
+        }
+        saveGame.loadGameObject(&_map);
+    }
+    catch (Json::CJsonException& e)
+    {
+        Console::printErr("Error Loading Savegame", e.what());
+        return false;
+    }
+    return true;
 }
 
 bool CGameManagement::saveGameAvailable()
@@ -384,11 +419,11 @@ bool CGameManagement::save()
 {
     if (saveGameAvailable())
     {
+        Console::cls(false);
         Console::hr();
         Console::printLn("A save game exists.", Console::EAlignment::eCenter);
         Console::printLn("Overwrite?", Console::EAlignment::eCenter);
         Console::hr();
-        Console::br();
 
         if (CMenu::executeYesNoMenu() != CMenu::yes())
         {
@@ -396,17 +431,30 @@ bool CGameManagement::save()
         }
     }
 
-    CSaveFile savegame;
-    savegame.addGameObject(_player);
-    savegame.addGameObject(_inventory);
-    savegame.addGameObject(_map);
-    savegame.addGameObject(_companion);
-    savegame.addGameObject(_progression);
-    return savegame.dump();
+    try
+    {
+        CSaveFile savegame;
+        savegame.addGameObject(&_player);
+        savegame.addGameObject(&_inventory);
+        savegame.addGameObject(&_map);
+        if (_companion->level() > 0)
+        {
+            savegame.addGameObject(_companion);
+        }
+        savegame.addGameObject(&_progression);
+        savegame.dump();
+    }
+
+    catch (const Json::CJsonException& e)
+    {
+        std::cerr << e.what() << '\n';
+        return false;
+    }
+    return true;
 }
 
 CGameManagement::CGameManagement() :
-    _map(CMap(Ressources::Config::fieldWidth, Ressources::Config::fieldHeight)),
+    _map(CMap(CGameSettings::Settings()->fieldWidth(), CGameSettings::Settings()->fieldHeight())),
     _inventory(&_itemFactory)
 {
     _companion = CompanionFactory::makeRandomCompanion();

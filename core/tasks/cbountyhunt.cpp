@@ -3,12 +3,16 @@
 #include "cbountyenemy.h"
 #include "cgamemanagement.h"
 #include "console.h"
+#include "json/jsontagnames.h"
 
 #include <format>
 
 bool CBountyHunt::huntActive = false;
 
-CBountyHunt::CBountyHunt(const std::string& name, const unsigned int reward) : CTask(), _name(name), _reward(reward)
+CBountyHunt::CBountyHunt(const std::string& name, const unsigned int reward) :
+    CTask(TagNames::Task::bountyHunt),
+    _name(name),
+    _reward(reward)
 {
     huntActive = true;
 }
@@ -57,4 +61,19 @@ void CBountyHunt::execute()
 std::string CBountyHunt::name() const
 {
     return _name;
+}
+
+nlohmann::json CBountyHunt::save() const
+{
+    auto j = CTask::save();
+    j[TagNames::Task::name] = _name;
+    j[TagNames::Task::reward] = _reward;
+    return j;
+}
+
+void CBountyHunt::load(const nlohmann::json& json)
+{
+    _name = json.value<std::string>(TagNames::Task::name, "");
+    _reward = json.value<unsigned int>(TagNames::Task::reward, 0);
+    CTask::load(json);
 }

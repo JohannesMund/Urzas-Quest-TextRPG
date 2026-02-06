@@ -1,27 +1,42 @@
 #pragma once
 
+#include "moduleinfo.h"
+
 #include <string>
 #include <vector>
 
-class CRoom;
-namespace RebellionHideoutRessources
+namespace TagNames
 {
+namespace RebellionHideout
+{
+constexpr std::string_view rebellionHideout = "RebellionHideout";
+constexpr std::string_view bagOfIngredients = "BagOfIngredients";
+constexpr std::string_view gold = TagNames::Common::gold;
+constexpr std::string_view turns = TagNames::Common::turns;
+constexpr std::string_view playerOwnsShot = "PlayerOwnsShop";
+constexpr std::string_view playerDiscoveredHideout = "PlayerDiscoveredHideout";
+constexpr std::string_view sandwiches = "Sandwiches";
+constexpr std::string_view ingredientStore = "IngredientStore";
+constexpr std::string_view ingredient = "Ingredient";
+constexpr std::string_view itemGeneratorsRegistered = "ItemGeneratorsRegistered";
+constexpr std::string_view count = TagNames::Common::count;
+} // namespace RebellionHideout
+} // namespace TagNames
 
-void initModuleSandwichShop();
-void initModuleRebellionHideout();
+class CRoom;
+class CItem;
+namespace RebellionHideout
+{
+Module::ModuleInfo moduleInfo();
+std::string moduleName();
+} // namespace RebellionHideout
 
-void deInitModuleSandwichShop();
-void deInitModuleRebellionHideout();
-
-void initWorldMap(std::vector<CRoom*>& rooms);
-
-std::string moduleNameSandwichShop();
-std::string moduleNameRebellionHideout();
-
-std::string questLogSandwichShop();
-std::string questLogRebellionHideout();
+namespace SandwichShop
+{
+Module::ModuleInfo moduleInfo();
+std::string moduleName();
 
 std::string sandwichShopName();
 std::string mrSoop();
 
-} // namespace RebellionHideoutRessources
+} // namespace SandwichShop

@@ -2,49 +2,28 @@
 
 #include "cgamestateobject.h"
 #include "enumiterator.h"
+#include "moduleinfo.h"
 #include "ressources.h"
-
 #include <functional>
 #include <string>
 #include <vector>
 
 class CRoom;
-
+class CSupportCompanion;
+class CItem;
+class CTask;
 class CGameProgression : public CGameStateObject
 {
     friend class CGameManagement;
 
 public:
-    enum class EGameStage
-    {
-        eNone,
-        eStart,
-        eSeenBard,
-        eProvenAsHero,
-        eLearnedAboutCult,
-        eFoundCult,
-        eFoundUrza,
-        eFinale
-    };
-
     struct ModuleQuestInfo
     {
         std::string moduleName;
         std::string questText;
     };
 
-    static void noInitDeInitFunction()
-    {
-    }
-    static void noInitWorldMapFunction(std::vector<CRoom*>&)
-    {
-    }
-    static std::string noQuestLogFunction()
-    {
-        return std::string{};
-    }
-
-    EGameStage currentGameStage() const;
+    Module::EGameStage currentGameStage() const;
     std::vector<std::string> getQuestLog() const;
 
     void reportModuleFinished(const std::string_view& moduleName);
@@ -77,38 +56,18 @@ public:
     unsigned long genocideCount() const;
     unsigned long turns() const;
 
-    void registerModule(const std::string_view& name,
-                        const EGameStage neededForStage,
-                        std::function<std::string()> questLogFunction = &noQuestLogFunction,
-                        std::function<void()> initFunction = &noInitDeInitFunction,
-                        std::function<void()> deInitFunction = &noInitDeInitFunction,
-                        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction = &noInitWorldMapFunction);
+    void registerModule(const Module::ModuleInfo& modules);
     void reRegisterModuleForNextStage(const std::string_view& moduleName);
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
+
+    CSupportCompanion* callModuleSupportCompanionFactory(const std::string_view& name);
+    CRoom* callModuleRoomFactory(const std::string_view& name);
+    CTask* callModuleTaskFactory(const std::string_view& name);
+    CItem* callModuleItemFactory(const std::string_view& name);
 
 private:
-    typedef EnumIterator<EGameStage, EGameStage::eNone, EGameStage::eFinale> gameStageIterator;
-
-    struct Module
-    {
-        std::string moduleName;
-        EGameStage gameStage;
-        std::function<std::string()> questLogFunction;
-        std::function<void()> initFunction;
-        std::function<void()> deInitFunction;
-        std::function<void(std::vector<CRoom*>&)> initWorldMapFunction;
-
-        static std::function<bool(const Module)> moduleRegisterNameFilter(const std::string_view& name)
-        {
-            return [name](const auto module) { return module.moduleName.compare(name) == 0; };
-        }
-        static std::function<bool(const Module)> moduleRegisterStageFilter(const EGameStage& stage)
-        {
-            return [stage](auto module) { return module.gameStage == stage; };
-        }
-    };
-
     struct ModuleHint
     {
         std::string moduleName;
@@ -147,6 +106,8 @@ private:
         }
     };
 
+    typedef EnumIterator<Module::EGameStage, Module::EGameStage::eNone, Module::EGameStage::eFinale> gameStageIterator;
+
     CGameProgression();
 
     void initEncounters();
@@ -166,20 +127,20 @@ private:
     void initStage();
     void initWorldMap(std::vector<CRoom*>& rooms) const;
 
-    void progressToStage(EGameStage stage);
+    void progressToStage(Module::EGameStage stage);
 
-    void reRegisterModule(const std::string_view& name, const EGameStage neededForStage);
+    void reRegisterModule(const std::string_view& name, const Module::EGameStage neededForStage);
 
-    void registerModule(const Module& modules);
-
-    EGameStage _currentStage = EGameStage::eNone;
+    Module::EGameStage _currentStage = Module::EGameStage::eNone;
     unsigned long _bodyCount = 0;
     unsigned long _turns = 0;
     unsigned long _genocideCount = 0;
 
     std::vector<std::string> _finishedModules;
-    std::vector<Module> _registeredModules;
+    std::vector<Module::ModuleInfo> _registeredModules;
 
     std::vector<ModuleHint> _moduleHints;
     std::vector<ModuleQuest> _moduleQuests;
+
+    virtual std::string coreTr(const std::string_view& textId) const override;
 };

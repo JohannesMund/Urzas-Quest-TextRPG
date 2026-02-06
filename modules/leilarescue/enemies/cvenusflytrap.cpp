@@ -7,8 +7,8 @@
 
 CVenusFlyTrap::CVenusFlyTrap() : CEnemy()
 {
-    _name = LeilaRescueRessources::getColoredBossString();
-    _weapon = LeilaRescueRessources::getBossWeapon();
+    _name = LeilaRescue::getColoredBossString();
+    _weapon = LeilaRescue::getBossWeapon();
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;

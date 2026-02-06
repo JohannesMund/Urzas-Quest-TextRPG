@@ -7,13 +7,14 @@
 #include "console.h"
 #include "moduleregister.h"
 #include "randomizer.h"
+#include "translator/ctranslator.h"
 
+#include "clog.h"
 #include <algorithm>
 #include <cmath>
 #include <format>
 #include <ranges>
 #include <utility>
-
 void CGameProgression::initEncounters()
 {
     CGameManagement::getInstance()->registerEncounter(new CMysteriousChest());
@@ -24,20 +25,19 @@ void CGameProgression::initEncounters()
 
 void CGameProgression::initModules()
 {
-
     ModuleRegister::registerModules(this);
 }
 
 void CGameProgression::startGame()
 {
-    progressToStage(EGameStage::eStart);
+    progressToStage(Module::EGameStage::eStart);
 }
 
 CGameProgression::CGameProgression() : CGameStateObject("Progression")
 {
 }
 
-CGameProgression::EGameStage CGameProgression::currentGameStage() const
+Module::EGameStage CGameProgression::currentGameStage() const
 {
     return _currentStage;
 }
@@ -46,7 +46,8 @@ std::vector<std::string> CGameProgression::getQuestLog() const
 {
     std::vector<std::string> entries;
 
-    for (const auto& m : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)))
+    for (const auto& m :
+         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
     {
         auto log = m.questLogFunction();
         if (log.empty())
@@ -174,7 +175,8 @@ bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName)
 {
     return std::count_if(_moduleQuests.begin(),
                          _moduleQuests.end(),
-                         [moduleName](const ModuleQuest& quest) {
+                         [moduleName](const ModuleQuest& quest)
+                         {
                              return ModuleQuest::moduleQuestNameFilter(moduleName)(quest) &&
                                     ModuleQuest::moduleQuestAcceptedFilter()(quest);
                          }) != 0;
@@ -217,8 +219,9 @@ bool CGameProgression::areModuleQuestsAvailable() const
 
 bool CGameProgression::isModuleActive(const std::string_view& moduleName) const
 {
-    for (auto& module : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)) |
-                            std::views::filter(Module::moduleRegisterNameFilter(moduleName)))
+    for (auto& module : _registeredModules |
+                            std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)) |
+                            std::views::filter(Module::ModuleInfo::moduleRegisterNameFilter(moduleName)))
     {
         if (isModuleFinished(module.moduleName))
         {
@@ -288,7 +291,8 @@ void CGameProgression::unFinishModule(const std::string_view& moduleName)
 
 bool CGameProgression::canProgress()
 {
-    for (auto& module : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)))
+    for (auto& module :
+         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
     {
         if (!isModuleFinished(module.moduleName))
         {
@@ -298,9 +302,10 @@ bool CGameProgression::canProgress()
     return true;
 }
 
-void CGameProgression::progressToStage(EGameStage stage)
+void CGameProgression::progressToStage(Module::EGameStage stage)
 {
-    for (const auto& module : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)))
+    for (const auto& module :
+         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
     {
         module.deInitFunction();
         unregisterModuleHintsByModuleName(module.moduleName);
@@ -308,7 +313,8 @@ void CGameProgression::progressToStage(EGameStage stage)
 
     _currentStage = stage;
 
-    for (const auto& module : _registeredModules | std::views::filter(Module::moduleRegisterStageFilter(_currentStage)))
+    for (const auto& module :
+         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
     {
         module.initFunction();
     }
@@ -317,9 +323,9 @@ void CGameProgression::progressToStage(EGameStage stage)
     Console::hr();
     switch (_currentStage)
     {
-    case EGameStage::eStart:
+    case Module::EGameStage::eStart:
         return;
-    case EGameStage::eSeenBard:
+    case Module::EGameStage::eSeenBard:
         Console::printLn("Chapter 1", Console::EAlignment::eCenter);
         Console::hr();
         Console::printLn("You have seen quite some things, since you awoke in this strange world.",
@@ -330,14 +336,14 @@ void CGameProgression::progressToStage(EGameStage stage)
             Console::EAlignment::eCenter);
         Console::printLn(
             std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
-                        BardRessources::encounterName()),
+                        Bard::encounterName()),
             Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn("You will have to find out.", Console::EAlignment::eCenter);
         break;
-    case EGameStage::eProvenAsHero:
+    case Module::EGameStage::eProvenAsHero:
         Console::printLn("Chapter 2", Console::EAlignment::eCenter);
         Console::br();
         Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.",
@@ -351,7 +357,7 @@ void CGameProgression::progressToStage(EGameStage stage)
         Console::br();
         Console::printLn("Well, you are getting closer.", Console::EAlignment::eCenter);
         break;
-    case EGameStage::eLearnedAboutCult:
+    case Module::EGameStage::eLearnedAboutCult:
         Console::printLn("Chapter 3", Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(
@@ -371,7 +377,7 @@ void CGameProgression::progressToStage(EGameStage stage)
                                      Ressources::Game::princessLeila()),
                          Console::EAlignment::eCenter);
         break;
-    case EGameStage::eFoundCult:
+    case Module::EGameStage::eFoundCult:
         Console::printLn("Chapter 4", Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(std::format("Here you are. Proud Memner of the Rebellion.", Ressources::Game::urza()),
@@ -399,38 +405,37 @@ void CGameProgression::progressToStage(EGameStage stage)
     Console::confirmToContinue();
 }
 
-void CGameProgression::reRegisterModule(const std::string_view& name, const EGameStage neededForStage)
+void CGameProgression::reRegisterModule(const std::string_view& name, const Module::EGameStage neededForStage)
 {
     unFinishModule(name);
 
-    auto it =
-        std::find_if(_registeredModules.begin(), _registeredModules.end(), Module::moduleRegisterNameFilter(name));
+    auto it = std::find_if(
+        _registeredModules.begin(), _registeredModules.end(), Module::ModuleInfo::moduleRegisterNameFilter(name));
     if (it != _registeredModules.cend())
     {
         (*it).gameStage = neededForStage;
     }
 }
 
-void CGameProgression::registerModule(const Module& module)
+void CGameProgression::registerModule(const Module::ModuleInfo& module)
 {
+    try
+    {
+        CTranslator* t = CTranslator::getInstance();
+        t->registerModule(module.moduleName, module.translatorFile);
+    }
+    catch (const std::exception& e)
+    {
+        CLog::error() << "Error loading translation file " << module.translatorFile << std::endl << std::flush;
+        CLog::error() << e.what() << std::endl << std::flush;
+    }
+
     _registeredModules.push_back(module);
 }
 
-void CGameProgression::registerModule(const std::string_view& name,
-                                      const EGameStage neededForStage,
-                                      std::function<std::string()> questLogFunction,
-                                      std::function<void()> initFunction,
-                                      std::function<void()> deInitFunction,
-                                      std::function<void(std::vector<CRoom*>&)> initWorldMapFunction)
+std::string CGameProgression::coreTr(const std::string_view& textId) const
 {
-    Module module;
-    module.moduleName = name;
-    module.gameStage = neededForStage;
-    module.questLogFunction = questLogFunction;
-    module.initFunction = initFunction;
-    module.deInitFunction = deInitFunction;
-    module.initWorldMapFunction = initWorldMapFunction;
-    registerModule(module);
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Progression::progression, textId);
 }
 
 void CGameProgression::reRegisterModuleForNextStage(const std::string_view& moduleName)
@@ -441,17 +446,98 @@ void CGameProgression::reRegisterModuleForNextStage(const std::string_view& modu
 nlohmann::json CGameProgression::save() const
 {
     nlohmann::json o;
-    o["currentStage"] = _currentStage;
-    o["bodyCount"] = _bodyCount;
-    o["turns"] = _turns;
-    o["genocideCount"] = _genocideCount;
+    o[TagNames::Progression::currentStage] = _currentStage;
+    o[TagNames::Progression::bodyCount] = _bodyCount;
+    o[TagNames::Progression::turns] = _turns;
+    o[TagNames::Progression::genocideCount] = _genocideCount;
 
     nlohmann::json finishedModules = nlohmann::json::array();
     for (auto m : _finishedModules)
     {
         finishedModules.push_back(m);
     }
-    o["finishedModules"] = finishedModules;
+    o[TagNames::Progression::finishedModules] = finishedModules;
 
     return o;
+}
+
+void CGameProgression::load(const nlohmann::json& json)
+{
+    _turns = json.value<unsigned long>(TagNames::Progression::turns, 0);
+    _bodyCount = json.value<unsigned long>(TagNames::Progression::bodyCount, 0);
+    _genocideCount = json.value<unsigned long>(TagNames::Progression::genocideCount, 0);
+
+    _currentStage = json.value<Module::EGameStage>(TagNames::Progression::currentStage, Module::EGameStage::eStart);
+    for (auto s : gameStageIterator())
+    {
+        progressToStage(s);
+        if (s >= _currentStage)
+        {
+            break;
+        }
+    }
+
+    if (json.contains(TagNames::Progression::finishedModules))
+    {
+        for (auto m : json[TagNames::Progression::finishedModules])
+        {
+            _finishedModules.push_back(m);
+        }
+    }
+}
+
+CSupportCompanion* CGameProgression::callModuleSupportCompanionFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto companion = module.supportCompantonFactory(name);
+        if (companion != nullptr)
+        {
+            return companion;
+        }
+    }
+
+    return nullptr;
+}
+
+CRoom* CGameProgression::callModuleRoomFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto room = module.roomFactory(name);
+        if (room != nullptr)
+        {
+            return room;
+        }
+    }
+
+    return nullptr;
+}
+
+CTask* CGameProgression::callModuleTaskFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto task = module.taskFactory(name);
+        if (task != nullptr)
+        {
+            return task;
+        }
+    }
+
+    return nullptr;
+}
+
+CItem* CGameProgression::callModuleItemFactory(const std::string_view& name)
+{
+    for (const auto& module : _registeredModules)
+    {
+        auto item = module.itemFactory(name);
+        if (item != nullptr)
+        {
+            return item;
+        }
+    }
+
+    return nullptr;
 }
