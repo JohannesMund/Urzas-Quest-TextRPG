@@ -105,19 +105,22 @@ void CInventory::print(const Scope& scope)
 {
     Console::printLn("You look through your backpack and find the following:");
     selectItemFromInventory(scope);
-    CMenu::Action input;
+    CMenuAction input;
     do
     {
         Console::hr();
         CMenu menu;
-        menu.addMenuGroup({menu.createAction("Use Item"), menu.createAction("View Item")}, {CMenu::exit()});
+        CMenuAction useAction = menu.createAction("Use Item");
+        CMenuAction viewAction = menu.createAction("View Item");
+
+        menu.addMenuGroup({useAction, viewAction}, {CMenu::exit()});
         input = menu.execute();
 
-        if (input.key == 'u')
+        if (input == useAction)
         {
             printUsableItems(Scope::eInventory);
         }
-        if (input.key == 'v')
+        if (input == viewAction)
         {
             printViewableItems();
         }

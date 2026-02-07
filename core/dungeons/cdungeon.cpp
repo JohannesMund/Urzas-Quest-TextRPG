@@ -58,12 +58,35 @@ void CDungeon::dungeonLoop()
 
         CMenu menu;
         CMenu::ActionList navs;
-        for (auto nav : _map->getDirectionNavs())
+
+        CMenuAction northAction = menu.createAction(CMap::direction2String(CMap::EDirections::eNorth));
+        if (_map->navAvailable(CMap::EDirections::eNorth))
         {
-            navs.push_back(menu.createAction(nav));
+            navs.push_back(northAction);
         }
 
-        menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
+        CMenuAction eastAction = menu.createAction(CMap::direction2String(CMap::EDirections::eEast));
+        if (_map->navAvailable(CMap::EDirections::eEast))
+        {
+            navs.push_back(eastAction);
+        }
+
+        CMenuAction southAction = menu.createAction(CMap::direction2String(CMap::EDirections::eSouth));
+        if (_map->navAvailable(CMap::EDirections::eSouth))
+        {
+            navs.push_back(southAction);
+        }
+
+        CMenuAction westAction = menu.createAction(CMap::direction2String(CMap::EDirections::eWest));
+        if (_map->navAvailable(CMap::EDirections::eWest))
+        {
+            navs.push_back(westAction);
+        }
+
+        CMenuAction mapAction = menu.createAction("Map");
+        CMenuAction inventoryAction = menu.createAction("Inventory");
+
+        menu.addMenuGroup(navs, {mapAction, inventoryAction});
 
         CMenu::ActionList exitActionHalf = {};
         if (_map->isExitAvailable())
@@ -72,9 +95,10 @@ void CDungeon::dungeonLoop()
         }
 
         CMenu::ActionList superCowHalf = {};
+        CMenuAction revealAction = menu.createAction("Reveal");
         if (CGameManagement::getGameSettingsInstance()->superCowPowers())
         {
-            superCowHalf.push_back(menu.createAction("Reveal"));
+            superCowHalf.push_back(revealAction);
         }
 
         menu.addMenuGroup(superCowHalf, exitActionHalf);
@@ -83,23 +107,38 @@ void CDungeon::dungeonLoop()
         {
             auto input = menu.execute();
 
-            if (CMap::string2Direction(input.name) != CMap::EDirections::eNone)
+            if (input == northAction)
             {
-                _map->movePlayer(CMap::string2Direction(input.name));
+                _map->movePlayer(CMap::EDirections::eNorth);
+                break;
+            }
+            if (input == eastAction)
+            {
+                _map->movePlayer(CMap::EDirections::eEast);
+                break;
+            }
+            if (input == southAction)
+            {
+                _map->movePlayer(CMap::EDirections::eSouth);
+                break;
+            }
+            if (input == westAction)
+            {
+                _map->movePlayer(CMap::EDirections::eWest);
                 break;
             }
 
-            if (input.key == 'm')
+            if (input == mapAction)
             {
                 Console::cls();
                 _map->printMap();
             }
-            if (input.key == 'i')
+            if (input == inventoryAction)
             {
                 Console::cls();
                 CGameManagement::getInventoryInstance()->print(CInventory::Scope::eList);
             }
-            if (input.key == 'r')
+            if (input == revealAction)
             {
                 Console::cls();
                 _map->reveal();

@@ -9,11 +9,6 @@
 
 using namespace std;
 
-std::string tr(const std::string_view& s)
-{
-    return CTranslator::getInstance()->tr("core", "startMenu", s);
-}
-
 void printTitle()
 {
     Console::hr();
@@ -50,7 +45,7 @@ void printLanguageMenu()
         return;
     }
 
-    CGameManagement::getGameSettingsInstance()->setCurrentLanguage(in.name);
+    CGameManagement::getGameSettingsInstance()->setCurrentLanguage(in.getName());
 }
 
 void printOptionsMenu()
@@ -61,30 +56,13 @@ void printOptionsMenu()
     CMenu menu;
     CMenu::ActionList startMenuActions;
 
-    menu.addMenuGroup({menu.createAction(tr("Language options"), 'l')}, {CMenu::ret()});
+    const auto languageAction = menu.createAction("Language options", 'l');
+    menu.addMenuGroup({languageAction}, {CMenu::ret()});
 
-    auto in = menu.execute();
-
-    if (in.key == 'l')
+    if (menu.execute() == languageAction)
     {
         printLanguageMenu();
     }
-}
-
-CMenu::Action printTitleMenu()
-{
-    printTitle();
-    CMenu menu;
-    if (CGameManagement::saveGameAvailable())
-    {
-        menu.addMenuGroup({menu.createAction(tr("Start a new game"), 's')}, {menu.createAction(tr("Load game"), 'l')});
-    }
-    else
-    {
-        menu.addMenuGroup({menu.createAction(tr("Start a new game"), 's')});
-    }
-    menu.addMenuGroup({menu.createAction(tr("Options"), 'O')}, {menu.createAction(tr("Quit game"), 'q')});
-    return menu.execute();
 }
 
 int main()
@@ -94,27 +72,43 @@ int main()
     while (true)
     {
         Console::cls(false);
-        auto in = printTitleMenu();
-        cout << endl;
+        printTitle();
 
-        if (in.key == 's')
+        CMenu menu;
+        const auto newGameAction = menu.createAction("Start a new game", 's');
+        const auto loadGameAction = menu.createAction("Load game", 'l');
+        const auto optionsAction = menu.createAction("Options", 'O');
+        const auto quitAction = menu.createAction("Quit game", 'q');
+
+        if (CGameManagement::saveGameAvailable())
+        {
+            menu.addMenuGroup({newGameAction}, {loadGameAction});
+        }
+        else
+        {
+            menu.addMenuGroup({newGameAction});
+        }
+        menu.addMenuGroup({optionsAction}, {quitAction});
+        auto in = menu.execute();
+
+        if (in == newGameAction)
         {
             CGameManagement::getInstance()->startGame();
             break;
         }
 
-        if (in.key == 'l')
+        if (in == loadGameAction)
         {
             CGameManagement::getInstance()->loadGame();
             break;
         }
 
-        if (in.key == 'o')
+        if (in == optionsAction)
         {
             printOptionsMenu();
         }
 
-        if (in.key == 'q')
+        if (in == quitAction)
         {
             break;
         }

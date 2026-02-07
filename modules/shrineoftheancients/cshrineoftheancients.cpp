@@ -30,7 +30,7 @@ void CShrineOfTheAncients::execute()
     }
     Console::br();
 
-    CMenu menu;
+    CMenu menu(Shrine::moduleName());
     menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
     if (menu.execute() == CMenu::exit())
     {
@@ -149,10 +149,10 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     Console::printLn("What should you ask him?");
     Console::br();
 
-    CMenu menu;
-    CMenu::Action askAboutUrza = menu.createAction(Ressources::Game::whoTheFuckIsUrza(), 'w');
+    CMenu menu(Shrine::moduleName());
+    CMenuAction askAboutUrza = menu.createAction(Ressources::Game::whoTheFuckIsUrza(), 'w');
     menu.addMenuGroup({askAboutUrza}, {menu.createAction("Nothing")});
-    if (menu.execute().key != 'w')
+    if (menu.execute() == askAboutUrza)
     {
         Console::printLn("\"No, not this time\", you think to yourself, and leave.");
     }
@@ -181,10 +181,10 @@ void CShrineOfTheAncients::firstVisitProvenAsHero()
     Console::printLn("And you have only one question in you mind?");
     Console::br();
 
-    CMenu menu;
-    CMenu::Action askAboutUrza = menu.createAction(Ressources::Game::urzaWhoTheFuckIsUrza(), 'w');
+    CMenu menu(Shrine::moduleName());
+    CMenuAction askAboutUrza = menu.createAction(Ressources::Game::urzaWhoTheFuckIsUrza(), 'w');
     menu.addMenuGroup({askAboutUrza}, {menu.createAction("Nothing")});
-    if (menu.execute().key != 'w')
+    if (menu.execute() == askAboutUrza)
     {
         Console::printLn("Maybe, proven to be a hero is enough.");
     }
@@ -206,9 +206,10 @@ void CShrineOfTheAncients::firstVisitLearnedAboutCult()
     Console::printLn("Do you want to tell him??");
     Console::br();
 
-    CMenu menu;
-    menu.addMenuGroup({menu.createAction("Sure thing!")}, {menu.createAction("Not yet")});
-    if (menu.execute().key != 's')
+    CMenu menu(Shrine::moduleName());
+    CMenuAction notYetAction = menu.createAction("Not yet");
+    menu.addMenuGroup({menu.createAction("Sure thing!")}, {notYetAction});
+    if (menu.execute() == notYetAction)
     {
         Console::printLn("Maybe next time.");
     }

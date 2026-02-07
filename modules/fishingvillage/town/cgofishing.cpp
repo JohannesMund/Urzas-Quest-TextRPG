@@ -21,15 +21,17 @@ void CGoFishing::execute()
 {
     init();
 
-    CMenu menu;
+    CMenu menu(FishingVillageMakeRod::moduleName());
 
     CMenu::ActionList actions;
+    CMenuAction catchAction = menu.createAction("Catch fish");
+
     if (_fishingRod != nullptr || _boat != nullptr)
     {
-        actions.push_back(menu.createAction("Catch fish"));
+        actions.push_back(catchAction);
     }
     menu.addMenuGroup(actions, {CMenu::exit()});
-    CMenu::Action input;
+    CMenuAction input;
 
     do
     {
@@ -40,7 +42,7 @@ void CGoFishing::execute()
         printItemLevels();
 
         input = menu.execute();
-        if (input.key == 'c')
+        if (input == catchAction)
         {
             catchAFish();
         }

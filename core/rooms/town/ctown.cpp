@@ -31,24 +31,28 @@ void CTown::execute()
     Console::br();
     CRoom::execute();
 
-    CMenu::Action input;
+    CMenuAction input;
     do
     {
         Console::hr();
 
         CMenu menu;
-        CMenu::ActionList navs = {menu.createAction("Blacksmith"),
-                                  menu.createAction("Church"),
-                                  menu.createAction("Tavern"),
-                                  menu.createAction("Shop")};
+        CMenuAction blacksmithAction = menu.createAction("Blacksmith");
+        CMenuAction churchAction = menu.createAction("Church");
+        CMenuAction tavernAction = menu.createAction("Tavern");
+        CMenuAction shopAction = menu.createAction("Shop");
+        CMenuAction farmAction = menu.createAction("Farm");
+
+        CMenu::ActionList navs = {blacksmithAction, churchAction, tavernAction, shopAction};
+
         if (CGameManagement::getCompanionInstance()->hasCompanion())
         {
-            navs.push_back(menu.createAction("Farm"));
+            navs.push_back(farmAction);
         }
 
         menu.addMenuGroup(navs, {CMenu::exit()});
 
-        std::optional<CMenu::Action> taskAction = {};
+        std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
             taskAction = menu.createAction(_task->taskNav());
@@ -57,23 +61,23 @@ void CTown::execute()
 
         input = menu.execute();
 
-        if (input.key == 'b')
+        if (input == blacksmithAction)
         {
             _blackSmith.execute();
         }
-        if (input.key == 'c')
+        if (input == churchAction)
         {
             _church.execute();
         }
-        if (input.key == 's')
+        if (input == shopAction)
         {
             _shop.execute();
         }
-        if (input.key == 't')
+        if (input == tavernAction)
         {
             _tavern.execute();
         }
-        if (input.key == 'f')
+        if (input == farmAction)
         {
             _farm.execute();
         }

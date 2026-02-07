@@ -13,8 +13,9 @@ CBlackSmith::CBlackSmith()
 void CBlackSmith::execute()
 {
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Enhance Item")}, {CMenu::exit()});
-    CMenu::Action input;
+    CMenuAction enhanceAction = menu.createAction("Enhance Item");
+    menu.addMenuGroup({enhanceAction}, {CMenu::exit()});
+    CMenuAction input;
 
     do
     {
@@ -27,7 +28,7 @@ void CBlackSmith::execute()
 
         input = menu.execute();
 
-        if (input.key == 'e')
+        if (input == enhanceAction)
         {
             enhanceItem();
         }

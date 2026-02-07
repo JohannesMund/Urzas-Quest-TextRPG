@@ -26,10 +26,12 @@ void CBattle::fight()
     Console::hr();
 
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Fight"), menu.createAction("Run")});
+    CMenuAction fightAction = menu.createAction("Fight");
+    CMenuAction runAction = menu.createAction("Run");
+    menu.addMenuGroup({fightAction, runAction});
 
     auto input = menu.execute();
-    if (input.key == 'r')
+    if (input == runAction)
     {
         Console::printLn(std::format("You are too scared of {}, so you decide to run away.", _enemy->name()));
 

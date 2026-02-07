@@ -25,9 +25,13 @@ void CLeilaTask::execute()
     Console::br();
     Console::printLn("This is gonna be rough!");
 
-    CMenu menu;
-    menu.addMenuGroup({menu.createAction("Attack"), menu.createAction("Not yet")});
-    if (menu.execute().key == 'n')
+    CMenu menu(Leila::moduleName());
+
+    CMenuAction attackAction = menu.createAction("Attack");
+    CMenuAction notYetAction = menu.createAction("Not yet");
+
+    menu.addMenuGroup({attackAction, notYetAction});
+    if (menu.execute() == notYetAction)
     {
         Console::printLn(
             std::format("Not yet, you need preparation, but you will definitively come back {} is really hot!",

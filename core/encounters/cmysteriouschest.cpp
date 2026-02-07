@@ -23,9 +23,12 @@ void CMysteriousChest::execute(const std::string_view&)
     Console::printLn("But after all, this is a chest. we should open it!");
 
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Open the chest")}, {menu.createAction("Go away")});
+    CMenuAction openAction = menu.createAction("Open the chest");
+    CMenuAction goAction = menu.createAction("Go away");
 
-    if (menu.execute().key == 'g')
+    menu.addMenuGroup({openAction}, {goAction});
+
+    if (menu.execute() == goAction)
     {
         Console::br();
         Console::printLn(

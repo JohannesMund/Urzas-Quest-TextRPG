@@ -11,9 +11,10 @@ CChurch::CChurch()
 void CChurch::execute()
 {
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Get Blessing", 'b')}, {CMenu::exit()});
-    CMenu::Action input;
+    CMenuAction blessingAction = menu.createAction("Get Blessing", 'b');
+    menu.addMenuGroup({blessingAction}, {CMenu::exit()});
 
+    CMenuAction input;
     do
     {
         Console::cls();
@@ -23,7 +24,7 @@ void CChurch::execute()
 
         input = menu.execute();
 
-        if (input.key == 'b')
+        if (input == blessingAction)
         {
             Console::printLn(
                 "The priest chants his prayers and a godly light surrounds you. Your wounds close, your pain "

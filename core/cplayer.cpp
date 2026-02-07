@@ -238,44 +238,52 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
     while (true)
     {
         CMenu menu;
-        CMenu::ActionList weapons = {
-            menu.createAction("Rock"), menu.createAction("Paper"), menu.createAction("Scissors")};
+        CMenuAction rockAction = menu.createAction("Rock");
+        CMenuAction paperAction = menu.createAction("Paper");
+        CMenuAction scissorsAction = menu.createAction("Scissors");
+        CMenuAction lizardAction = menu.createAction("Lizard");
+        CMenuAction spockAction = menu.createAction("Spock");
+
+        CMenu::ActionList weapons = {rockAction, paperAction, scissorsAction};
         if (enemy->hasExtendedWeaponChoice())
         {
-            weapons.push_back(menu.createAction("Lizard"));
-            weapons.push_back(menu.createAction("Spock"));
+            weapons.push_back(lizardAction);
+            weapons.push_back(spockAction);
         }
 
+        CMenuAction inventoryAction = menu.createAction("Inventory");
+        CMenuAction winAction = menu.createAction("Win");
+
         CMenu::ActionList tools;
-        tools.push_back(menu.createAction("Inventory"));
+        tools.push_back(inventoryAction);
         if (CGameManagement::getGameSettingsInstance()->superCowPowers())
         {
-            tools.push_back(menu.createAction("Win"));
+            tools.push_back(winAction);
         }
         menu.addMenuGroup(weapons, tools);
         auto input = menu.execute();
 
-        if (input.key == 'r')
+        if (input == rockAction)
         {
             return CBattle::EWeapons::eRock;
         }
-        if (input.key == 'p')
+        if (input == paperAction)
         {
             return CBattle::EWeapons::ePaper;
         }
-        if (input.key == 's')
+        if (input == scissorsAction)
         {
             return CBattle::EWeapons::eScissors;
         }
-        if (input.key == 'l')
+        if (input == lizardAction)
         {
             return CBattle::EWeapons::eLizard;
         }
-        if (input.key == 'o')
+        if (input == spockAction)
         {
             return CBattle::EWeapons::eSpock;
         }
-        if (input.key == 'i')
+        if (input == inventoryAction)
         {
             auto item = CGameManagement::getInventoryInstance()->selectItemFromInventory(CInventory::Scope::eBattle);
             if (item.has_value())
@@ -283,7 +291,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
                 (*item)->useFromBattle(enemy);
             }
         }
-        if (input.key == 'w')
+        if (input == winAction)
         {
             Console::printLn("You use your godlike Powers.");
             enemy->dealDamage(9999);

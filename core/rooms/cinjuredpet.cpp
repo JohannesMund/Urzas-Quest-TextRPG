@@ -41,9 +41,12 @@ void CInjuredPet::execute()
     Console::hr();
 
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Look"), menu.createAction("Go away")});
+    CMenuAction lookAction = menu.createAction("Look");
+    CMenuAction goAction = menu.createAction("Go away");
+
+    menu.addMenuGroup({lookAction, goAction});
     auto input = menu.execute();
-    if (input.key == 'g')
+    if (input == goAction)
     {
         Console::printLn("Better safe than sorry! You decide to ignore the pittyful screams and leave.");
         Console::printLn("The screams vanish shortly after.");
@@ -59,8 +62,10 @@ void CInjuredPet::execute()
     Console::hr();
 
     menu.clear();
-    menu.addMenuGroup({menu.createAction("Help"), menu.createAction("Go away")});
-    if (menu.execute().key == 'g')
+    CMenuAction helpAction = menu.createAction("Help");
+
+    menu.addMenuGroup({helpAction, goAction});
+    if (menu.execute() == goAction)
     {
         Console::printLn("Better safe than sorry! You decide to ignore the pittyful little animal and leave.");
         Console::printLn("The screams vanish shortly after.");

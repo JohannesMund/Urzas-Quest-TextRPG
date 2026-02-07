@@ -14,14 +14,17 @@ CTavern::CTavern()
 
 void CTavern::execute()
 {
-    CMenu::Action input;
     CMenu menu;
+
+    CMenuAction input;
+    CMenuAction rumorsAction = menu.createAction("Rumors");
+    CMenuAction bountyHuntAction = menu.createAction("Bounty Hunt");
     CMenu::ActionList navs;
-    navs.push_back(menu.createAction("Rumors"));
+    navs.push_back(rumorsAction);
 
     if (!CBountyHunt::isHuntActive())
     {
-        navs.push_back(menu.createAction("Bounty Hunt"));
+        navs.push_back(bountyHuntAction);
     }
     menu.addMenuGroup(navs, {CMenu::exit()});
 
@@ -34,7 +37,7 @@ void CTavern::execute()
 
         input = menu.execute();
 
-        if (input.key == 'r')
+        if (input == rumorsAction)
         {
             Console::printLn("You walk around in the tavern, talk to the people and listen to some conversations, "
                              "Obviously, the one thing, everybody seems to be talking about is:");
@@ -44,7 +47,7 @@ void CTavern::execute()
             Console::confirmToContinue();
         }
 
-        if (input.key == 'b')
+        if (input == bountyHuntAction)
         {
             bountyHunt();
             Console::confirmToContinue();

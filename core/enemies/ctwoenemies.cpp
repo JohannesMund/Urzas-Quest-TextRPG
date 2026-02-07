@@ -3,7 +3,6 @@
 #include "cmenu.h"
 #include "console.h"
 
-
 #include <format>
 
 CTwoEnemies::CTwoEnemies(std::string name1, std::string name2) : CEnemy()
@@ -28,8 +27,10 @@ void CTwoEnemies::preBattleAction()
     _lastHp = _hp;
     Console::printLn("Who do you attack?");
     CMenu menu;
-    menu.addMenuGroup({menu.createAction(_name1, '1')}, {menu.createAction(_name2, '2')});
-    if (menu.execute().key == 'b')
+    CMenuAction enemy1Action = menu.createAction(_name1, '1');
+    CMenuAction enemy2Action = menu.createAction(_name2, '2');
+    menu.addMenuGroup({enemy1Action}, {enemy2Action});
+    if (menu.execute() == enemy1Action)
     {
         _currentTarget = EWho::eEnemy1;
     }
