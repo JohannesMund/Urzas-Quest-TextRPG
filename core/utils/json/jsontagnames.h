@@ -7,7 +7,12 @@ namespace Translator
 {
 constexpr std::string_view translation = "Translations";
 constexpr std::string_view core = "Core";
+constexpr std::string_view menuActions = "MenuActions";
 constexpr std::string_view source = "Source";
+constexpr std::string_view menuAction = "MenuAction";
+constexpr std::string_view menuActionKey = "MenuActionKey";
+constexpr std::string_view status = "Status";
+constexpr std::string_view untranslated = "untranslated";
 } // namespace Translator
 
 namespace Common

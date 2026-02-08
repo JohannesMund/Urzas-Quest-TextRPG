@@ -37,7 +37,7 @@ void CSandwichShop::execute()
         replaceSandwichOfTheDay();
     }
 
-    CMenu::Action input;
+    CMenuAction input;
     do
     {
         printHeader();
@@ -45,68 +45,75 @@ void CSandwichShop::execute()
         checkForShaggysSandwich();
         showSandwichOfTheDay();
 
-        CMenu menu;
+        CMenu menu(RebellionHideout::moduleName());
+
+        CMenuAction makeAction = menu.createAction({"Make a sandwich", 'M'});
+        CMenuAction deliverAction = menu.createAction({"Deliver ingredients", 'D'});
+        CMenuAction observeAction = menu.createAction({"Observe, who buys your sandwiches", 'O'});
+        CMenuAction rebellionAction = menu.createAction({"Talk to the rebellion", 'T'});
+        CMenuAction revolutionaryAction = menu.createAction({"View revolutionary thoughts", 'V'});
+        CMenuAction eatAction = menu.createShopAction({"Eat Sandwich of the Day"}, _sandwiches.at(0)->buyValue());
+
         CMenu::ActionList actions;
 
         if (_playerOwnsShop)
         {
             if (_sandwiches.size() < 5)
             {
-                actions.push_back(menu.createAction("Make a sandwich", 'M'));
+                actions.push_back(makeAction);
             }
             if (CGameManagement::getInventoryInstance()->hasItem(CBagOfIngredients::CBagOfIngredientsFilter()))
             {
-                actions.push_back(menu.createAction("Deliver ingredients", 'D'));
+                actions.push_back(deliverAction);
             }
 
             if (seenRebellionHideoutHint())
             {
-                actions.push_back(menu.createAction("Observe, who buys your sandwiches", 'O'));
+                actions.push_back(observeAction);
             }
 
             if (_playerDiscoveredHideout)
             {
-                actions.push_back(menu.createAction("Talk to the rebellion", 'T'));
+                actions.push_back(rebellionAction);
             }
             else
             {
-                actions.push_back(menu.createAction("View revolutionary thoughts", 'V'));
+                actions.push_back(revolutionaryAction);
             }
         }
         else
         {
             if (CGameManagement::getPlayerInstance()->gold() >= _sandwiches.at(0)->buyValue())
             {
-                actions.push_back(menu.createAction(
-                    std::format("Eat Sandwich of the Day ({} Gold)", _sandwiches.at(0)->buyValue()), 'E'));
+                actions.push_back(eatAction);
             }
-            actions.push_back(menu.createAction("View revolutionary thoughts", 'V'));
+            actions.push_back(revolutionaryAction);
         }
 
         menu.addMenuGroup(actions, {CMenu::exit()});
 
         input = menu.execute();
-        if (input.key == 'e')
+        if (input == eatAction)
         {
             eatSandwichOfTheDay();
         }
-        if (input.key == 'm')
+        if (input == makeAction)
         {
             makeASandwich();
         }
-        if (input.key == 'd')
+        if (input == deliverAction)
         {
             deliverIngredients();
         }
-        if (input.key == 'o')
+        if (input == observeAction)
         {
             observe();
         }
-        if (input.key == 't')
+        if (input == rebellionAction)
         {
             talkToRebellion();
         }
-        if (input.key == 'v')
+        if (input == revolutionaryAction)
         {
             revolutionaryThoughts();
         }

@@ -1,6 +1,7 @@
 #include "ctranslator.h"
 #include "clog.h"
 #include "console.h"
+#include "defaultsettings.h"
 #include "localdirectory.h"
 #include "translator/translatorexceptions.h"
 #include "json/jsontagnames.h"
@@ -8,6 +9,15 @@
 #include <format>
 #include <fstream>
 #include <nlohmann/json.hpp>
+
+void CTranslator::checkTranslation(const std::string_view& moduleName)
+{
+    auto t = CTranslator::getInstance()->_translations;
+    if (!t.contains(std::string(moduleName)))
+    {
+        throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
+    }
+}
 
 void CTranslator::loadTranslationFile(const std::string_view& moduleName, const std::string& file)
 {
@@ -28,12 +38,23 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
     try
     {
         auto t = CTranslator::getInstance()->_translations;
-        if (!t.contains(moduleName))
-        {
-            throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
-        }
+        return t.at(std::string(moduleName))->getTranslation(objectName, textId);
+    }
+    catch (const Translator::CTranslatorException& e)
+    {
+        CLog::error() << "Translation error in " << moduleName << ": " << e.what() << std::endl << std::flush;
+    }
+    return {};
+}
 
-        return t.at(moduleName)->getTranslation(objectName, textId);
+std::optional<Menu::MenuAction> CTranslator::translate(const std::string_view& moduleName,
+                                                       const std::string_view& objectName,
+                                                       const Menu::MenuAction& action)
+{
+    try
+    {
+        auto t = CTranslator::getInstance()->_translations;
+        return t.at(std::string(moduleName))->getTranslation(objectName, action);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -44,7 +65,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
 
 CTranslator::CTranslator()
 {
-    registerModule("core", "core");
+    registerModule(TagNames::Translator::core, Settings::translationCoreFileBaseName);
 }
 
 CTranslator::~CTranslator()
@@ -68,6 +89,18 @@ std::string CTranslator::tr(const std::string_view& moduleName,
     if (!r.has_value())
     {
         return std::string(textId);
+    }
+    return *r;
+}
+
+Menu::MenuAction CTranslator::tr(const std::string_view& moduleName,
+                                 const std::string_view& objectName,
+                                 const Menu::MenuAction& action)
+{
+    const auto r = translate(moduleName, objectName, action);
+    if (!r.has_value())
+    {
+        return action;
     }
     return *r;
 }

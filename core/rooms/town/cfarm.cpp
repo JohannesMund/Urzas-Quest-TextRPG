@@ -11,10 +11,11 @@ CFarm::CFarm()
 
 void CFarm::execute()
 {
-    CMenu::Action input;
+    CMenuAction input;
     do
     {
         CMenu menu;
+        CMenuAction trainAction;
 
         Console::cls();
         Console::printLn(std::format("Every good town needs a farm. {} has a beautiful one! {} immediately rushes away "
@@ -37,9 +38,9 @@ void CFarm::execute()
             if (getTrainingCost() <= CGameManagement::getPlayerInstance()->gold())
             {
                 Console::printLn("This sounds like a bargain!");
-                ;
-                menu.addMenuGroup({menu.createAction(std::format("Train ({} Gold)", getTrainingCost()))},
-                                  {CMenu::exit()});
+
+                trainAction = menu.createShopAction({"Train"}, getTrainingCost());
+                menu.addMenuGroup({trainAction}, {CMenu::exit()});
             }
             else
             {
@@ -54,7 +55,7 @@ void CFarm::execute()
 
         input = menu.execute();
 
-        if (input.key == 't')
+        if (input == trainAction)
         {
             train();
             Console::confirmToContinue();

@@ -34,9 +34,11 @@ void CLeila2Encounter::execute(const std::string_view&)
     Console::br();
     Console::printLn("Do you want to help?");
 
-    CMenu menu;
-    menu.addMenuGroup({menu.createAction("Help"), menu.createAction("Ignore")});
-    if (menu.execute().key == 'i')
+    CMenu menu(Leila2::moduleName());
+    CMenuAction ignoreAction = menu.createAction({"Ignore"});
+    CMenuAction helpAction = menu.createAction({"Help"});
+    menu.addMenuGroup({helpAction, ignoreAction});
+    if (menu.execute() == ignoreAction)
     {
         Console::printLn("This event is story-relevat, thats clear, so you can just ignore it for now, and wait until "
                          "it happens again.");

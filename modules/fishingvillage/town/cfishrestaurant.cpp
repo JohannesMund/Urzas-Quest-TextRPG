@@ -17,14 +17,13 @@ void CFishRestaurant::execute()
 {
     makeDishOfTheDay();
 
-    CMenu::Action input;
+    CMenuAction input;
 
     do
     {
         Console::cls();
 
-        Console::printLn(std::format("{}'s Inn", FishingVillage::fishingVilleName()),
-                         Console::EAlignment::eCenter);
+        Console::printLn(std::format("{}'s Inn", FishingVillage::fishingVilleName()), Console::EAlignment::eCenter);
         Console::printLn(
             std::format("Serving the best fresh fish since 833 ad. dragonis", Ressources::Game::fishingFritz()),
             Console::EAlignment::eCenter);
@@ -33,11 +32,13 @@ void CFishRestaurant::execute()
         Console::printLn(std::format("~ {} ~", _dishOfTheDay), Console::EAlignment::eCenter);
         Console::br();
 
-        CMenu menu;
+        CMenu menu(FishingVillageMakeRod::moduleName());
+        CMenuAction dishOfTheDayAction;
 
         if (CGameManagement::getPlayerInstance()->gold() >= priceOfTheDay())
         {
-            menu.addMenuGroup({menu.createAction(std::format("Eat dish of the day ({} Gold)", priceOfTheDay()), 'E')});
+            dishOfTheDayAction = menu.createShopAction({"Eat dish of the day", 'E'}, priceOfTheDay());
+            menu.addMenuGroup({dishOfTheDayAction});
         }
         else
         {
@@ -50,7 +51,7 @@ void CFishRestaurant::execute()
         menu.addMenuGroup({}, {CMenu::exit()});
 
         input = menu.execute();
-        if (input.key == 'e')
+        if (input == dishOfTheDayAction)
         {
             eat();
         }
@@ -60,8 +61,7 @@ void CFishRestaurant::execute()
 
 void CFishRestaurant::makeDishOfTheDay()
 {
-    _dishOfTheDayLevel = FishingVillage::getRandomRarity(FishingVillage::rodLevelCap,
-                                                                   FishingVillage::boatLevelCap);
+    _dishOfTheDayLevel = FishingVillage::getRandomRarity(FishingVillage::rodLevelCap, FishingVillage::boatLevelCap);
 
     auto fish = FishingVillage::getFish(_dishOfTheDayLevel);
 

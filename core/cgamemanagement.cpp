@@ -221,24 +221,50 @@ void CGameManagement::executeTurn()
         Console::hr();
         CMenu menu;
         CMenu::ActionList navs;
-        for (auto nav : _map.getDirectionNavs())
+
+        CMenuAction northAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eNorth))});
+        if (_map.navAvailable(CMap::EDirections::eNorth))
         {
-            navs.push_back(menu.createAction(nav));
+            navs.push_back(northAction);
         }
 
-        menu.addMenuGroup(navs, {menu.createAction("Map"), menu.createAction("Inventory")});
+        CMenuAction eastAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eEast))});
+        if (_map.navAvailable(CMap::EDirections::eEast))
+        {
+            navs.push_back(eastAction);
+        }
+
+        CMenuAction southAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eSouth))});
+        if (_map.navAvailable(CMap::EDirections::eSouth))
+        {
+            navs.push_back(southAction);
+        }
+
+        CMenuAction westAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eWest))});
+        if (_map.navAvailable(CMap::EDirections::eWest))
+        {
+            navs.push_back(westAction);
+        }
+
+        CMenuAction mapAction = menu.createAction({"Map"});
+        CMenuAction inventoryAction = menu.createAction({"Inventory"});
+
+        menu.addMenuGroup(navs, {mapAction, inventoryAction});
+
+        CMenuAction troubleAction = menu.createAction({"Look for trouble"});
+        CMenuAction quitAction = menu.createAction({"Quit Game"});
 
         if (getGameSettingsInstance()->superCowPowers())
         {
-            menu.addMenuGroup({menu.createAction("Look for trouble")}, {menu.createAction("Quit Game")});
+            menu.addMenuGroup({troubleAction}, {quitAction});
         }
         else
         {
-            menu.addMenuGroup({}, {menu.createAction("Quit Game")});
+            menu.addMenuGroup({}, {quitAction});
         }
 
         auto input = menu.execute();
-        if (input.key == 'q')
+        if (input == quitAction)
         {
             Console::cls(false);
             Console::hr();
@@ -247,11 +273,13 @@ void CGameManagement::executeTurn()
             Console::hr();
 
             CMenu menu;
-            CMenu::Action saveAction = {"Save", "[S]ave", 's'};
-            CMenu::Action cancelAction = {"Cancel", "[C]cancel", 'c'};
-            CMenu::Action quitAction = {"Quit without saving", "[Q]uit without saving", 'q'};
-            menu.addMenuGroup({saveAction, quitAction});
+            CMenuAction saveAction = menu.createAction({"Save", 's'});
+            CMenuAction cancelAction = menu.createAction({"Cancel", 'c'});
+            CMenuAction quitAction = menu.createAction({"Quit without saving", 'q'});
+
+            menu.addMenuGroup({saveAction}, {quitAction});
             menu.addMenuGroup({cancelAction});
+
             auto reply = menu.execute();
 
             if (reply == quitAction)
@@ -266,13 +294,28 @@ void CGameManagement::executeTurn()
             Console::cls();
         }
 
-        if (CMap::string2Direction(input.name) != CMap::EDirections::eNone)
+        if (input == northAction)
         {
-            _map.movePlayer(CMap::string2Direction(input.name));
+            _map.movePlayer(CMap::EDirections::eNorth);
+            return;
+        }
+        if (input == eastAction)
+        {
+            _map.movePlayer(CMap::EDirections::eEast);
+            return;
+        }
+        if (input == southAction)
+        {
+            _map.movePlayer(CMap::EDirections::eSouth);
+            return;
+        }
+        if (input == westAction)
+        {
+            _map.movePlayer(CMap::EDirections::eWest);
             return;
         }
 
-        if (input.key == 'l')
+        if (input == troubleAction)
         {
             lookForTrouble();
             if (_player.isDead())
@@ -281,12 +324,12 @@ void CGameManagement::executeTurn()
             }
             Console::confirmToContinue();
         }
-        if (input.key == 'm')
+        if (input == mapAction)
         {
             Console::cls();
             _map.printMap();
         }
-        if (input.key == 'i')
+        if (input == inventoryAction)
         {
             Console::cls();
             _inventory.print(CInventory::Scope::eList);

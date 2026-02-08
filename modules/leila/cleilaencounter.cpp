@@ -21,9 +21,11 @@ void CLeilaEncounter::execute(const std::string_view&)
     Console::br();
     Console::printLn("Do you want to help?");
 
-    CMenu menu;
-    menu.addMenuGroup({menu.createAction("Help"), menu.createAction("Ignore")});
-    if (menu.execute().key == 'i')
+    CMenu menu(Leila::moduleName());
+    CMenuAction helpAction = menu.createAction({"Help"});
+    CMenuAction ignoreAction = menu.createAction({"Ignore"});
+    menu.addMenuGroup({helpAction, ignoreAction});
+    if (menu.execute() == ignoreAction)
     {
         Console::printLn("You dont feel very heroic today. Maybe another time, you are sure, you will see this exact "
                          "scene again (especially, if this event is story-relevant.");
@@ -42,8 +44,8 @@ void CLeilaEncounter::execute(const std::string_view&)
     Console::printLn("Will you do it?");
 
     menu.clear();
-    menu.addMenuGroup({menu.createAction("Hell Yeah!"), menu.createAction("No")});
-    if (menu.execute().key == 'n')
+    menu.addMenuGroup({menu.createAction({"Hell Yeah!"}), CMenu::no()});
+    if (menu.execute() == CMenu::no())
     {
         Console::printLn("You dont feel very heroic today, and usually, princesses in need are not very hot. Maybe "
                          "another time, you are sure, you will see this exact "

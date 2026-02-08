@@ -18,16 +18,19 @@ CFishingFritz::CFishingFritz()
 
 void CFishingFritz::execute()
 {
-    CMenu::Action input;
+    CMenuAction input;
 
     do
     {
         printHeader();
 
-        CMenu menu;
+        CMenu menu(FishingVillageMakeRod::moduleName());
 
-        CMenu::ActionList moduleActionList;
         CMenu::ActionList defaultActionList;
+
+        CMenuAction sellAction = menu.createAction({sellYourFish(), 'S'});
+        CMenuAction askAction = menu.createAction({"Ask for Information", 'A'});
+        CMenuAction enhanceAction = menu.createAction({"Enhance Equipment", 'E'});
 
         if (!isOpen())
         {
@@ -43,31 +46,30 @@ void CFishingFritz::execute()
         {
             if (hasFish())
             {
-                defaultActionList.push_back(menu.createAction(sellYourFish(), 'S'));
+                defaultActionList.push_back(sellAction);
             }
 
             if (CGameManagement::getProgressionInstance()->isModuleActive(FishingVillageFishLegend::moduleName()) ||
                 CGameManagement::getProgressionInstance()->isModuleFinished(FishingVillageFishLegend::moduleName()))
             {
-                defaultActionList.push_back(menu.createAction("Ask for Information", 'A'));
+                defaultActionList.push_back(askAction);
             }
 
-            defaultActionList.push_back(menu.createAction("Enhance Equipment", 'E'));
+            defaultActionList.push_back(enhanceAction);
         }
 
-        menu.addMenuGroup(moduleActionList);
         menu.addMenuGroup(defaultActionList, {CMenu::exit()});
         input = menu.execute();
 
-        if (input.key == 'a')
+        if (input == askAction)
         {
             ask();
         }
-        if (input.key == 's')
+        if (input == sellAction)
         {
             sell();
         }
-        if (input.key == 'e')
+        if (input == enhanceAction)
         {
             enhance();
         }
@@ -163,9 +165,11 @@ void CFishingFritz::checkFish()
 
 void CFishingFritz::getInformation() const
 {
-    CMenu menu;
+    CMenu menu(FishingVillageMakeRod::moduleName());
     CMenu::ActionList actions;
     const auto informationCost = CGameManagement::getGameSettingsInstance()->informationCost();
+
+    CMenuAction askAction;
 
     if (CGameManagement::getProgressionInstance()->moduleHintsAvailable())
     {
@@ -187,7 +191,8 @@ void CFishingFritz::getInformation() const
 
         if (CGameManagement::getPlayerInstance()->gold() > informationCost)
         {
-            actions.push_back(menu.createAction(std::format("Get information ({} Gold)", informationCost), 'G'));
+            askAction = menu.createShopAction({"Get information", 'G'}, informationCost);
+            actions.push_back(askAction);
         }
         else
         {
@@ -197,7 +202,7 @@ void CFishingFritz::getInformation() const
     }
 
     menu.addMenuGroup(actions, {CMenu::exit()});
-    if (menu.execute().key == 'g')
+    if (menu.execute() == askAction)
     {
         auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
         CGameManagement::getPlayerInstance()->spendGold(informationCost);

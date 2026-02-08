@@ -34,7 +34,7 @@ void CShop::execute()
         replaceShopItems();
     }
 
-    CMenu::Action input;
+    CMenuAction input;
     do
     {
         Console::cls();
@@ -46,6 +46,11 @@ void CShop::execute()
         Console::hr();
 
         CMenu menu;
+
+        CMenuAction junkAction;
+        CMenuAction buyAction = menu.createAction({"Buy items"});
+        CMenuAction sellAction = menu.createAction({"Sell items"});
+
         auto junkItems = CGameManagement::getInventoryInstance()->getJunkItems();
         if (junkItems.size())
         {
@@ -57,20 +62,21 @@ void CShop::execute()
                     value += j->value();
                 }
             }
-            menu.addMenuGroup({menu.createAction(std::format("Sell your Junk ({} Gold)", value), 'j')});
+            junkAction = menu.createShopAction({"Sell your Junk", 'j'}, value);
+            menu.addMenuGroup({junkAction});
         }
 
-        menu.addMenuGroup({menu.createAction("Buy items"), menu.createAction("Sell items")}, {CMenu::exit()});
+        menu.addMenuGroup({buyAction, sellAction}, {CMenu::exit()});
         input = menu.execute();
-        if (input.key == 'j')
+        if (input == junkAction)
         {
             sellJunk(junkItems);
         }
-        if (input.key == 'b')
+        if (input == buyAction)
         {
             buyItems();
         }
-        if (input.key == 's')
+        if (input == sellAction)
         {
             sellItems();
         }

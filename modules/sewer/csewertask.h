@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ctask.h"
+#include "menuaction.h"
 
 class CSewerTask : public CTask
 {
@@ -9,7 +10,7 @@ public:
 
     virtual void execute() override;
 
-    virtual std::string taskNav() const override;
+    virtual Menu::MenuAction taskNav() const override;
 
 private:
     void executeDungeon();

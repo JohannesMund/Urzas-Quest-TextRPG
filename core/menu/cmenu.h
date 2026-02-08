@@ -1,48 +1,31 @@
 #pragma once
 
+#include "cmenuaction.h"
+
 #include <string>
 #include <vector>
 
 /**
  * @brief The CMenu class Represents a menu to capture user inputs
  */
-
+class CGameStateObject;
 class CMenu
 {
 
 public:
     /**
-     * @brief The Action class
-     * Represents one Action (Name (e.g. Exit), Displaystring (e.g. E[x]it) (Hot-)key (e.g. 'x')
-     */
-    struct Action
-    {
-        std::string name;
-        std::string display;
-        unsigned char key = 0;
-        bool operator==(const Action& other) const
-        {
-            return key == other.key;
-        }
-        bool operator!=(const Action& other) const
-        {
-            return key != other.key;
-        }
-    };
-
-    /**
      * define for a group of actions
      * is always a pair:
      * [A]ccept [R]eject <---> E[x]it
      */
-    using ActionList = std::vector<Action>;
+    using ActionList = std::vector<CMenuAction>;
     using MenuGroup = std::pair<ActionList, ActionList>;
 
     /**
      * @brief CMenu Constructor
      */
+    CMenu(const std::string_view& moduleName);
     CMenu();
-
     /**
      * @brief addMenuGroup adds a Menu group
      * @remark actions should be created using createAction or a static preefined action
@@ -51,14 +34,14 @@ public:
      * @param list2 the right part of the menu
      * @remark either list can be empty
      */
-    void addMenuGroup(const std::vector<Action>& list1, const std::vector<Action>& list2 = {});
+    void addMenuGroup(const ActionList& list1, const ActionList& list2 = {});
 
     /**
      * @brief execute Executes the menu
      * Displays the menu, wait for the user input, return the selected action
      * @return the selected action
      */
-    Action execute();
+    CMenuAction execute();
 
     /**
      * @brief createAction Creates an action
@@ -66,9 +49,17 @@ public:
      * @param name the Name of the action (e.g. Exit)
      * @param key the hotkey, can be 0, the hotkey is determined according to the name and the hotkeys already used in
      * the menu
+     * @remark the actiom will be translated(
+     * @remark the key might be changed by the menu. never compare the key after execute, always compare the action.
      * @return the new action
      */
-    Action createAction(const std::string_view& name, const unsigned char key = 0);
+    CMenuAction createAction(const Menu::MenuAction& action);
+    /**
+     * @brief overload
+     * @remark uses createAction to create a shop action (i.e. Buy (100 Gold)
+     * @param[in] cost the number to be added in the brackets
+     */
+    CMenuAction createShopAction(const Menu::MenuAction& action, const int cost);
 
     /**
      * @brief clear
@@ -82,7 +73,7 @@ public:
      * @sa noAction()
      * @return the selection of the player
      */
-    static Action executeYesNoMenu();
+    static CMenuAction executeYesNoMenu();
 
     /**
      * @brief executeAcceptRejectMenu execute a menu with Accept/Reject
@@ -90,40 +81,40 @@ public:
      * @sa rejectAction()
      * @return the selection of the player
      */
-    static Action executeAcceptRejectMenu();
+    static CMenuAction executeAcceptRejectMenu();
 
     /**
      * @brief yesAction Predefined Action "[Y]es"
      */
-    static Action yes();
+    static CMenuAction yes();
     /**
      * @brief noAction Predefined Action "[N]o"
      */
-    static Action no();
+    static CMenuAction no();
 
     /**
      * @brief acceptAction Predefined Action "[A]ccept"
      */
-    static Action accept();
+    static CMenuAction accept();
 
     /**
      * @brief rejectAction Predefined Action "[R]eject"
      */
-    static Action reject();
+    static CMenuAction reject();
 
     /**
      * @brief exitAction Predefined Action "E[x]it"
      */
-    static Action exit();
+    static CMenuAction exit();
 
     /**
      * @brief exitAction Predefined Action "[R]eturn"
      */
-    static Action ret();
+    static CMenuAction ret();
 
 private:
-    Action findActionByInput() const;
-    std::string halfGroup2String(const std::vector<Action>& l) const;
+    CMenuAction findActionByInput() const;
+    std::string halfGroup2String(const ActionList& l) const;
 
     bool isNavPossible(const unsigned char c) const;
     std::string makeDisplayString(const std::string_view s, const unsigned char c) const;
@@ -132,4 +123,7 @@ private:
 
     std::string _acceptableNavs;
     std::vector<MenuGroup> _menu;
+    const std::string _moduleName;
+
+    Menu::MenuAction tr(const Menu::MenuAction& action);
 };

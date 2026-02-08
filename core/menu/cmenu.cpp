@@ -1,16 +1,22 @@
 #include "cmenu.h"
+#include "cgamestateobject.h"
 #include "colorize.h"
 #include "console.h"
+#include "ctranslator.h"
+#include "jsontagnames.h"
 
 #include <algorithm>
 #include <cctype>
 #include <format>
 
-CMenu::CMenu()
+CMenu::CMenu() : CMenu(TagNames::Translator::core)
+{
+}
+CMenu::CMenu(const std::string_view& moduleName) : _moduleName(moduleName)
 {
 }
 
-void CMenu::addMenuGroup(const std::vector<Action>& list1, const std::vector<Action>& list2)
+void CMenu::addMenuGroup(const CMenu::ActionList& list1, const CMenu::ActionList& list2)
 {
     if (list1.empty() && list2.empty())
     {
@@ -22,17 +28,17 @@ void CMenu::addMenuGroup(const std::vector<Action>& list1, const std::vector<Act
     for (const auto& a : list1)
     {
         grp.first.push_back(a);
-        addNav(a.key);
+        addNav(a._key);
     }
     for (const auto& a : list2)
     {
         grp.second.push_back(a);
-        addNav(a.key);
+        addNav(a._key);
     }
     _menu.push_back(grp);
 }
 
-CMenu::Action CMenu::execute()
+CMenuAction CMenu::execute()
 {
     for (const auto& group : _menu)
     {
@@ -60,30 +66,32 @@ CMenu::Action CMenu::execute()
     return findActionByInput();
 }
 
-CMenu::Action CMenu::createAction(const std::string_view& s, const unsigned char c)
+CMenuAction CMenu::createAction(const Menu::MenuAction& action)
 {
-    Action menuAction;
-    menuAction.name = s;
+    Menu::MenuAction a = tr(action);
 
-    if (c != 0 && isNavPossible(c))
+    if (a.key != 0 && isNavPossible(a.key))
     {
-        menuAction.display = makeDisplayString(s, c);
-        menuAction.key = std::tolower(c);
-        addNav(std::tolower(c));
-        return menuAction;
+        const auto display = makeDisplayString(a.name, a.key);
+        addNav(std::tolower(a.key));
+        return CMenuAction(a.name, display, std::tolower(a.key));
     }
 
-    for (unsigned char cc : s)
+    for (unsigned char cc : a.name)
     {
         if (isNavPossible(cc))
         {
-            menuAction.display = makeDisplayString(s, cc);
-            menuAction.key = std::tolower(cc);
+            const auto display = makeDisplayString(a.name, cc);
             addNav(std::tolower(cc));
-            return menuAction;
+            return CMenuAction(a.name, display, std::tolower(cc));
         }
     }
     return {};
+}
+
+CMenuAction CMenu::createShopAction(const Menu::MenuAction& action, const int cost)
+{
+    return createAction({std::format("{} ({} Gold)", action.name, cost), action.key});
 }
 
 void CMenu::clear()
@@ -92,51 +100,51 @@ void CMenu::clear()
     _acceptableNavs.clear();
 }
 
-CMenu::Action CMenu::executeYesNoMenu()
+CMenuAction CMenu::executeYesNoMenu()
 {
     CMenu menu;
     menu.addMenuGroup({CMenu::yes(), CMenu::no()});
     return menu.execute();
 }
 
-CMenu::Action CMenu::executeAcceptRejectMenu()
+CMenuAction CMenu::executeAcceptRejectMenu()
 {
     CMenu menu;
     menu.addMenuGroup({CMenu::accept(), CMenu::reject()});
     return menu.execute();
 }
 
-CMenu::Action CMenu::yes()
+CMenuAction CMenu::yes()
 {
-    return {"Yes", "[Y]es", 'y'};
+    return CMenuAction("Yes", "[Y]es", 'y');
 }
 
-CMenu::Action CMenu::no()
+CMenuAction CMenu::no()
 {
-    return {"No", "[N]o", 'n'};
+    return CMenuAction("No", "[N]o", 'n');
 }
 
-CMenu::Action CMenu::exit()
+CMenuAction CMenu::exit()
 {
-    return {"Exit", "E[x]it", 'x'};
+    return CMenuAction("Exit", "E[x]it", 'x');
 }
 
-CMenu::Action CMenu::accept()
+CMenuAction CMenu::accept()
 {
-    return {"Accept", "[A]ccept", 'a'};
+    return CMenuAction("Accept", "[A]ccept", 'a');
 }
 
-CMenu::Action CMenu::reject()
+CMenuAction CMenu::reject()
 {
-    return {"Reject", "[R]eject", 'r'};
+    return CMenuAction("Reject", "[R]eject", 'r');
 }
 
-CMenu::Action CMenu::ret()
+CMenuAction CMenu::ret()
 {
-    return {"Return", "[R]eturn", 'r'};
+    return CMenuAction("Return", "[R]eturn", 'r');
 }
 
-CMenu::Action CMenu::findActionByInput() const
+CMenuAction CMenu::findActionByInput() const
 {
     auto input = Console::getAcceptableInput(_acceptableNavs);
     for (const auto& group : _menu)
@@ -145,7 +153,7 @@ CMenu::Action CMenu::findActionByInput() const
         {
             for (const auto& actiom : halfGroup)
             {
-                if (actiom.key == input)
+                if (actiom._key == input)
                 {
                     return actiom;
                 }
@@ -155,12 +163,12 @@ CMenu::Action CMenu::findActionByInput() const
     return {};
 }
 
-std::string CMenu::halfGroup2String(const std::vector<Action>& l) const
+std::string CMenu::halfGroup2String(const CMenu::ActionList& l) const
 {
     std::string s;
     for (const auto& a : l)
     {
-        s.append(a.display);
+        s.append(a._display);
         s.append(" ");
     }
     return s;
@@ -210,4 +218,9 @@ void CMenu::addNav(const unsigned char c)
             _acceptableNavs.push_back(c);
         }
     }
+}
+
+Menu::MenuAction CMenu::tr(const Menu::MenuAction& action)
+{
+    return CTranslator::tr(_moduleName, TagNames::Translator::menuActions, action);
 }

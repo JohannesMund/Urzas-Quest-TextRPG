@@ -60,6 +60,7 @@ public:
     };
 
     static EDirections string2Direction(const std::string_view s);
+    static std::string_view direction2String(const EDirections d);
 
     CMap(const unsigned int width, const unsigned int height);
     ~CMap();
@@ -75,7 +76,6 @@ public:
 
     void printRoom(const SRoomCoords& coords, const int line);
     void printMap();
-    std::vector<std::string_view> getDirectionNavs();
     std::string mapSymbol(const SRoomCoords& coords);
 
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;

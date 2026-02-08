@@ -30,13 +30,13 @@ void CBuildEquipmentTask::execute()
     }
 }
 
-std::string CBuildEquipmentTask::taskNav() const
+Menu::MenuAction CBuildEquipmentTask::taskNav() const
 {
     if (_moduleName.compare(FishingVillageMakeRod::moduleName()) == 0)
     {
-        return "Build your Fishing Rod";
+        return {"Build your Fishing Rod"};
     }
-    return "Build your Boat";
+    return {"Build your Boat"};
 }
 
 void CBuildEquipmentTask::buildBoat()

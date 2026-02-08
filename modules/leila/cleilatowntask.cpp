@@ -49,7 +49,7 @@ void CLeilaTownTask::execute()
     _isFinished = true;
 }
 
-std::string CLeilaTownTask::taskNav() const
+Menu::MenuAction CLeilaTownTask::taskNav() const
 {
-    return std::format("Ask about {} and {}", Ressources::Game::fiego(), Ressources::Game::brock());
+    return {std::format("Ask about {} and {}", Ressources::Game::fiego(), Ressources::Game::brock())};
 }

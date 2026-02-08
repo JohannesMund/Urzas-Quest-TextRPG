@@ -2,8 +2,7 @@ set(URZAS_QUEST_SOURCES_CORE
 	core/core.cmake
 	core/ressources/core.json
     
-    core/cgamestateobject.h core/cgamestateobject.cpp
-    core/cmenu.h core/cmenu.cpp
+    
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
@@ -11,6 +10,14 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cbattle.h core/cbattle.cpp
     core/defaultsettings.h
     
+    core/gamestate/cgamestateobject.h core/gamestate/cgamestateobject.cpp
+    core/gamestate/cgamesettings.h core/gamestate/cgamesettings.cpp    
+    core/gamestate/csavefile.h core/gamestate/csavefile.cpp     
+
+    core/menu/cmenu.h core/menu/cmenu.cpp
+    core/menu/cmenuaction.h core/menu/cmenuaction.cpp
+    core/menu/menuaction.h
+
     core/utils/enumiterator.h
     core/utils/localdirectory.h core/utils/localdirectory.cpp
     core/utils/randomizer.h core/utils/randomizer.cpp
@@ -18,8 +25,6 @@ set(URZAS_QUEST_SOURCES_CORE
     core/utils/colorize.h core/utils/colorize.cpp    
     core/utils/clog.h core/utils/clog.cpp
     core/utils/exceptions.h 
-    core/utils/cgamesettings.h core/utils/cgamesettings.cpp    
-    core/utils/csavefile.h core/utils/csavefile.cpp     
 
     core/utils/json/cjsondocument.h core/utils/json/cjsondocument.cpp
     core/utils/json/jsonexceptions.h
@@ -101,20 +106,22 @@ set(CORE_RESSOURCE_DIR
 
 set(CORE_INCLUDE_DIRS 
     /core 
-    /core/companion 
+    /core/companion
+    /core/dungeons 
+    /core/dungeons/rooms
+    /core/encounters
+    /core/enemies 
+    /core/gamestate 
     /core/items 
     /core/items/equipment 
     /core/items/story 
-    /core/enemies 
+    /core/menu
     /core/rooms 
     /core/rooms/town 
     /core/tasks 
-    /core/encounters 
-    /core/dungeons 
-    /core/dungeons/rooms
-    /core/translator
-    /core/save
-    /core/utils
+    /core/utils 
+    /core/utils/json
+    /core/utils/translator
 )
 
 

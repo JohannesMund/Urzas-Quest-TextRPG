@@ -6,26 +6,226 @@
     "Version": 1
   },
   "Translation": {
-    "startMenu": [
+    "MenuActions": [
       {
-        "Source": "Start a new game",
-        "de": "Neues Spiel starten"
+        "Source": {
+          "MenuAction": "Start a new game",
+          "MenuActionKey": 115
+        },
+        "de": {
+          "MenuAction": "Neues Spiel",
+          "MenuActionKey": 110
+        }
       },
       {
-        "Source": "Load game",
-        "de": "Spiel laden"
+        "Source": {
+          "MenuAction": "Load game",
+          "MenuActionKey": 108
+        },
+        "de": {
+          "MenuAction": "Spiel laden",
+          "MenuActionKey": 115
+        }
       },
       {
-        "Source": "Options",
-        "de": "Optionen"
+        "Source": {
+          "MenuAction": "Options",
+          "MenuActionKey": 79
+        },
+        "de": {
+          "MenuAction": "Optionen",
+          "MenuActionKey": 79
+        }
       },
       {
-        "Source": "Quit game",
-        "de": "Spiel beenden"
+        "Source": {
+          "MenuAction": "Quit game",
+          "MenuActionKey": 113
+        },
+        "de": {
+          "MenuAction": "Beenden",
+          "MenuActionKey": 98
+        }
       },
       {
-        "Source": "Language options",
-        "de": "Sprachoptionen"
+        "Source": {
+          "MenuAction": "Language options",
+          "MenuActionKey": 108
+        },
+        "de": {
+          "MenuAction": "Sprachoptionen",
+          "MenuActionKey": 115
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "en",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "en",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "de",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "de",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Take it",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Nehmen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Leave it",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Lass es",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "North",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Norden",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "East",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Osten",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "South",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Süden",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "West",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Westen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Map",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Karte",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Inventory",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Inventar",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Look for trouble",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Kravall bürsten",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Quit Game",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Beenden",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Use Item",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Benutzen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "View Item",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Anschauen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Save",
+          "MenuActionKey": 115
+        },
+        "de": {
+          "MenuAction": "Speichern",
+          "MenuActionKey": 115
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Cancel",
+          "MenuActionKey": 99
+        },
+        "de": {
+          "MenuAction": "Abbrechen",
+          "MenuActionKey": 97
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Quit without saving",
+          "MenuActionKey": 113
+        },
+        "de": {
+          "MenuAction": "Ohne speichern beenden",
+          "MenuActionKey": 79
+        }
       }
     ]
   }

@@ -96,14 +96,18 @@ void CMap::init(std::vector<CRoom*>& rooms)
 
 CMap::EDirections CMap::string2Direction(const std::string_view s)
 {
-    for (const auto& [key, value] : _dirMap)
+    auto it = std::find_if(_dirMap.begin(), _dirMap.end(), [&s](const auto p) { return p.second == s; });
+    if (it != _dirMap.end())
     {
-        if (key != EDirections::eNone && value == s)
-        {
-            return key;
-        }
+        return it->first;
     }
+
     return EDirections::eNone;
+}
+
+std::string_view CMap::direction2String(const EDirections d)
+{
+    return _dirMap.at(d);
 }
 
 void CMap::setStartingPosition(const SRoomCoords& coords)
@@ -313,22 +317,6 @@ void CMap::printMap()
             }
         }
     }
-}
-
-std::vector<std::string_view> CMap::getDirectionNavs()
-{
-    std::vector<std::string_view> v;
-
-    for (const auto& nav :
-         {CMap::EDirections::eNorth, CMap::EDirections::eEast, CMap::EDirections::eSouth, CMap::EDirections::eWest})
-    {
-        if (navAvailable(nav))
-        {
-            v.push_back(_dirMap.at(nav));
-        }
-    }
-
-    return v;
 }
 
 std::string CMap::mapSymbol(const SRoomCoords& coords)

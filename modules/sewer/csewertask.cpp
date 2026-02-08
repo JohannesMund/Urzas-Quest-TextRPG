@@ -52,9 +52,9 @@ void CSewerTask::execute()
     _isFinished = true;
 }
 
-std::string CSewerTask::taskNav() const
+Menu::MenuAction CSewerTask::taskNav() const
 {
-    return Sewer::encounterName();
+    return {Sewer::encounterName()};
 }
 
 void CSewerTask::executeDungeon()

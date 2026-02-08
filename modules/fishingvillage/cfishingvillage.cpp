@@ -24,18 +24,21 @@ void CFishingVillage::execute()
     CRoom::execute();
     printHeader();
 
-    CMenu::Action input;
+    CMenuAction input;
     do
     {
-        CMenu menu;
-        menu.addMenuGroup({menu.createAction(CC::unColorizeString(Ressources::Game::fishingFritz()), 'f'),
-                           menu.createAction("Restaurant", 'R'),
-                           menu.createAction("Go Fishing", 'G')});
+        CMenu menu(FishingVillageMakeRod::moduleName());
 
-        std::optional<CMenu::Action> taskAction = {};
+        CMenuAction fritzAction = menu.createAction({CC::unColorizeString(Ressources::Game::fishingFritz()), 'f'});
+        CMenuAction restaurantAction = menu.createAction({"Restaurant", 'R'});
+        CMenuAction fishingAction = menu.createAction({"Go Fishing", 'G'});
+
+        menu.addMenuGroup({fritzAction, restaurantAction, fishingAction});
+
+        std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
-            taskAction = menu.createAction(_task->taskNav());
+            taskAction = menu.createAction({_task->taskNav()});
             menu.addMenuGroup({taskAction.value()}, {CMenu::exit()});
         }
         else
@@ -44,15 +47,15 @@ void CFishingVillage::execute()
         }
 
         input = menu.execute();
-        if (input.key == 'f')
+        if (input == fritzAction)
         {
             _fishingFritz.execute();
         }
-        if (input.key == 'r')
+        if (input == restaurantAction)
         {
             _fishRestaurant.execute();
         }
-        if (input.key == 'g')
+        if (input == fishingAction)
         {
             _goFishing.execute();
         }

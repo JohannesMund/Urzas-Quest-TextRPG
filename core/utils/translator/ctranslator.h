@@ -59,11 +59,17 @@ public:
                           const std::string_view& objectName,
                           const std::string_view& textId);
 
+    static Menu::MenuAction tr(const std::string_view& moduleName,
+                               const std::string_view& objectName,
+                               const Menu::MenuAction& action);
+
 private:
     CTranslator();
     ~CTranslator();
 
-    std::map<std::string_view, CTranslationFile*> _translations;
+    std::map<std::string, CTranslationFile*> _translations;
+
+    void checkTranslation(const std::string_view& moduleName);
 
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
     void registerModule(const std::string_view& moduleName, const std::string_view& fileName);
@@ -71,4 +77,8 @@ private:
     static std::optional<std::string> translate(const std::string_view& moduleName,
                                                 const std::string_view& objectName,
                                                 const std::string_view& textId);
+
+    static std::optional<Menu::MenuAction> translate(const std::string_view& moduleName,
+                                                     const std::string_view& objectName,
+                                                     const Menu::MenuAction& action);
 };

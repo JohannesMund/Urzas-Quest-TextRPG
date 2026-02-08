@@ -26,8 +26,11 @@ void CStartingRoom::execute()
                                                                           Ressources::Items::EQuality::eJunk);
 
     CMenu menu;
-    menu.addMenuGroup({menu.createAction("Take it"), menu.createAction("Leave it")});
-    CMenu::Action input;
+    CMenuAction takeAction = menu.createAction({"Take it"});
+    CMenuAction leaveAction = menu.createAction({"Leave it"});
+    menu.addMenuGroup({takeAction, leaveAction});
+
+    CMenuAction input;
 
     Console::br();
     Console::printLn("You whake up, somewhere.");
@@ -41,7 +44,7 @@ void CStartingRoom::execute()
     do
     {
         input = menu.execute();
-        if (input.key == 't')
+        if (input == takeAction)
         {
             Console::br();
             Console::printLn(std::format("You take the {} and equip it. It looks good on you.", sword->name()));
@@ -56,7 +59,7 @@ void CStartingRoom::execute()
                 "Than you start thinking. You are still defenseless. Maybe you should re-think your decision.");
             Console::br();
         }
-    } while (input.key != 't');
+    } while (input != takeAction);
 
     auto shield = CGameManagement::getItemFactoryInstance()->makeEquipment(Ressources::Items::EType::eShield,
                                                                            Ressources::Items::EQuality::eJunk);
@@ -71,7 +74,7 @@ void CStartingRoom::execute()
     do
     {
         input = menu.execute();
-        if (input.key == 't')
+        if (input == takeAction)
         {
             Console::br();
             Console::printLn(std::format("You take the {} and equip it. Now you feel complete.", shield->name()));
@@ -84,7 +87,7 @@ void CStartingRoom::execute()
                              "shorten this, ok?");
             Console::br();
         }
-    } while (input.key != 't');
+    } while (input != takeAction);
 
     Console::br();
     Console::printLn(
