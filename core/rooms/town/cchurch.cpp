@@ -11,7 +11,7 @@ CChurch::CChurch()
 void CChurch::execute()
 {
     CMenu menu;
-    CMenuAction blessingAction = menu.createAction("Get Blessing", 'b');
+    CMenuAction blessingAction = menu.createAction({"Get Blessing", 'b'});
     menu.addMenuGroup({blessingAction}, {CMenu::exit()});
 
     CMenuAction input;

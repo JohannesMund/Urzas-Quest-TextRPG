@@ -16,6 +16,7 @@ set(URZAS_QUEST_SOURCES_CORE
 
     core/menu/cmenu.h core/menu/cmenu.cpp
     core/menu/cmenuaction.h core/menu/cmenuaction.cpp
+    core/menu/menuaction.h
 
     core/utils/enumiterator.h
     core/utils/localdirectory.h core/utils/localdirectory.cpp
@@ -24,7 +25,6 @@ set(URZAS_QUEST_SOURCES_CORE
     core/utils/colorize.h core/utils/colorize.cpp    
     core/utils/clog.h core/utils/clog.cpp
     core/utils/exceptions.h 
-
 
     core/utils/json/cjsondocument.h core/utils/json/cjsondocument.cpp
     core/utils/json/jsonexceptions.h
@@ -120,6 +120,7 @@ set(CORE_INCLUDE_DIRS
     /core/rooms/town 
     /core/tasks 
     /core/utils 
+    /core/utils/json
     /core/utils/translator
 )
 

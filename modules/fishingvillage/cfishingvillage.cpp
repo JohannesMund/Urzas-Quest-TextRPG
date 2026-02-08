@@ -29,16 +29,16 @@ void CFishingVillage::execute()
     {
         CMenu menu(FishingVillageMakeRod::moduleName());
 
-        CMenuAction fritzAction = menu.createAction(CC::unColorizeString(Ressources::Game::fishingFritz()), 'f');
-        CMenuAction restaurantAction = menu.createAction("Restaurant", 'R');
-        CMenuAction fishingAction = menu.createAction("Go Fishing", 'G');
+        CMenuAction fritzAction = menu.createAction({CC::unColorizeString(Ressources::Game::fishingFritz()), 'f'});
+        CMenuAction restaurantAction = menu.createAction({"Restaurant", 'R'});
+        CMenuAction fishingAction = menu.createAction({"Go Fishing", 'G'});
 
         menu.addMenuGroup({fritzAction, restaurantAction, fishingAction});
 
         std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
-            taskAction = menu.createAction(_task->taskNav());
+            taskAction = menu.createAction({_task->taskNav()});
             menu.addMenuGroup({taskAction.value()}, {CMenu::exit()});
         }
         else

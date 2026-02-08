@@ -37,11 +37,11 @@ void CTown::execute()
         Console::hr();
 
         CMenu menu;
-        CMenuAction blacksmithAction = menu.createAction("Blacksmith");
-        CMenuAction churchAction = menu.createAction("Church");
-        CMenuAction tavernAction = menu.createAction("Tavern");
-        CMenuAction shopAction = menu.createAction("Shop");
-        CMenuAction farmAction = menu.createAction("Farm");
+        CMenuAction blacksmithAction = menu.createAction({"Blacksmith"});
+        CMenuAction churchAction = menu.createAction({"Church"});
+        CMenuAction tavernAction = menu.createAction({"Tavern"});
+        CMenuAction shopAction = menu.createAction({"Shop"});
+        CMenuAction farmAction = menu.createAction({"Farm"});
 
         CMenu::ActionList navs = {blacksmithAction, churchAction, tavernAction, shopAction};
 
@@ -55,7 +55,7 @@ void CTown::execute()
         std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
-            taskAction = menu.createAction(_task->taskNav());
+            taskAction = menu.createAction({_task->taskNav()});
             menu.addMenuGroup({taskAction.value()});
         }
 

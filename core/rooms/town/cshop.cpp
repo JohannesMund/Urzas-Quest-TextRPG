@@ -48,8 +48,8 @@ void CShop::execute()
         CMenu menu;
 
         CMenuAction junkAction;
-        CMenuAction buyAction = menu.createAction("Buy items");
-        CMenuAction sellAction = menu.createAction("Sell items");
+        CMenuAction buyAction = menu.createAction({"Buy items"});
+        CMenuAction sellAction = menu.createAction({"Sell items"});
 
         auto junkItems = CGameManagement::getInventoryInstance()->getJunkItems();
         if (junkItems.size())
@@ -62,7 +62,7 @@ void CShop::execute()
                     value += j->value();
                 }
             }
-            junkAction = menu.createShopAction("Sell your Junk", value, 'j');
+            junkAction = menu.createShopAction({"Sell your Junk", 'j'}, value);
             menu.addMenuGroup({junkAction});
         }
 

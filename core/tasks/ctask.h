@@ -1,6 +1,8 @@
 #pragma once
 
 #include "cgamestateobject.h"
+#include "cmenuaction.h"
+#include "menuaction.h"
 #include "taskfactory.h"
 
 #include <string>
@@ -62,7 +64,7 @@ public:
      * @sa isAutoExecute()
      * @remark only used, when _isAutoExecute == false
      */
-    virtual std::string taskNav() const;
+    virtual Menu::MenuAction taskNav() const;
 
     /**
      * @brief moduleName

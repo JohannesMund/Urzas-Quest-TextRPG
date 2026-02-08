@@ -47,12 +47,12 @@ void CSandwichShop::execute()
 
         CMenu menu(RebellionHideout::moduleName());
 
-        CMenuAction makeAction = menu.createAction("Make a sandwich", 'M');
-        CMenuAction deliverAction = menu.createAction("Deliver ingredients", 'D');
-        CMenuAction observeAction = menu.createAction("Observe, who buys your sandwiches", 'O');
-        CMenuAction rebellionAction = menu.createAction("Talk to the rebellion", 'T');
-        CMenuAction revolutionaryAction = menu.createAction("View revolutionary thoughts", 'V');
-        CMenuAction eatAction = menu.createShopAction("Eat Sandwich of the Day", _sandwiches.at(0)->buyValue(), 'E');
+        CMenuAction makeAction = menu.createAction({"Make a sandwich", 'M'});
+        CMenuAction deliverAction = menu.createAction({"Deliver ingredients", 'D'});
+        CMenuAction observeAction = menu.createAction({"Observe, who buys your sandwiches", 'O'});
+        CMenuAction rebellionAction = menu.createAction({"Talk to the rebellion", 'T'});
+        CMenuAction revolutionaryAction = menu.createAction({"View revolutionary thoughts", 'V'});
+        CMenuAction eatAction = menu.createShopAction({"Eat Sandwich of the Day"}, _sandwiches.at(0)->buyValue());
 
         CMenu::ActionList actions;
 

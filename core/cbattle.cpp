@@ -26,8 +26,8 @@ void CBattle::fight()
     Console::hr();
 
     CMenu menu;
-    CMenuAction fightAction = menu.createAction("Fight");
-    CMenuAction runAction = menu.createAction("Run");
+    CMenuAction fightAction = menu.createAction({"Fight"});
+    CMenuAction runAction = menu.createAction({"Run"});
     menu.addMenuGroup({fightAction, runAction});
 
     auto input = menu.execute();

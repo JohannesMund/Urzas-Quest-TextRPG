@@ -33,7 +33,7 @@ void printLanguageMenu()
 
     for (const auto s : CGameSettings::supportedLanguages())
     {
-        languageActions.push_back(menu.createAction(s));
+        languageActions.push_back(menu.createAction({std::string(s)}));
     }
 
     menu.addMenuGroup(languageActions, {CMenu::ret()});
@@ -56,7 +56,7 @@ void printOptionsMenu()
     CMenu menu;
     CMenu::ActionList startMenuActions;
 
-    const auto languageAction = menu.createAction("Language options", 'l');
+    const auto languageAction = menu.createAction({"Language options", 'l'});
     menu.addMenuGroup({languageAction}, {CMenu::ret()});
 
     if (menu.execute() == languageAction)
@@ -75,10 +75,10 @@ int main()
         printTitle();
 
         CMenu menu;
-        const auto newGameAction = menu.createAction("Start a new game", 's');
-        const auto loadGameAction = menu.createAction("Load game", 'l');
-        const auto optionsAction = menu.createAction("Options", 'O');
-        const auto quitAction = menu.createAction("Quit game", 'q');
+        const auto newGameAction = menu.createAction({"Start a new game", 's'});
+        const auto loadGameAction = menu.createAction({"Load game", 'l'});
+        const auto optionsAction = menu.createAction({"Options", 'O'});
+        const auto quitAction = menu.createAction({"Quit game", 'q'});
 
         if (CGameManagement::saveGameAvailable())
         {

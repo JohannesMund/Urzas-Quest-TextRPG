@@ -28,9 +28,9 @@ void CFishingFritz::execute()
 
         CMenu::ActionList defaultActionList;
 
-        CMenuAction sellAction = menu.createAction(sellYourFish(), 'S');
-        CMenuAction askAction = menu.createAction("Ask for Information", 'A');
-        CMenuAction enhanceAction = menu.createAction("Enhance Equipment", 'E');
+        CMenuAction sellAction = menu.createAction({sellYourFish(), 'S'});
+        CMenuAction askAction = menu.createAction({"Ask for Information", 'A'});
+        CMenuAction enhanceAction = menu.createAction({"Enhance Equipment", 'E'});
 
         if (!isOpen())
         {
@@ -191,7 +191,7 @@ void CFishingFritz::getInformation() const
 
         if (CGameManagement::getPlayerInstance()->gold() > informationCost)
         {
-            askAction = menu.createShopAction("Get information", informationCost, 'G');
+            askAction = menu.createShopAction({"Get information", 'G'}, informationCost);
             actions.push_back(askAction);
         }
         else

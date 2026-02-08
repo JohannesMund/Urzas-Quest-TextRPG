@@ -13,7 +13,7 @@ CBlackSmith::CBlackSmith()
 void CBlackSmith::execute()
 {
     CMenu menu;
-    CMenuAction enhanceAction = menu.createAction("Enhance Item");
+    CMenuAction enhanceAction = menu.createAction({"Enhance Item"});
     menu.addMenuGroup({enhanceAction}, {CMenu::exit()});
     CMenuAction input;
 

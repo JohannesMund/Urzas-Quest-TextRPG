@@ -24,7 +24,7 @@ void CGoFishing::execute()
     CMenu menu(FishingVillageMakeRod::moduleName());
 
     CMenu::ActionList actions;
-    CMenuAction catchAction = menu.createAction("Catch fish");
+    CMenuAction catchAction = menu.createAction({"Catch fish"});
 
     if (_fishingRod != nullptr || _boat != nullptr)
     {

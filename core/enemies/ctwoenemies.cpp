@@ -27,8 +27,8 @@ void CTwoEnemies::preBattleAction()
     _lastHp = _hp;
     Console::printLn("Who do you attack?");
     CMenu menu;
-    CMenuAction enemy1Action = menu.createAction(_name1, '1');
-    CMenuAction enemy2Action = menu.createAction(_name2, '2');
+    CMenuAction enemy1Action = menu.createAction({_name1, '1'});
+    CMenuAction enemy2Action = menu.createAction({_name2, '2'});
     menu.addMenuGroup({enemy1Action}, {enemy2Action});
     if (menu.execute() == enemy1Action)
     {

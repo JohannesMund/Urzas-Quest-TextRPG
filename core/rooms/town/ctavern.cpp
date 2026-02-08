@@ -17,8 +17,8 @@ void CTavern::execute()
     CMenu menu;
 
     CMenuAction input;
-    CMenuAction rumorsAction = menu.createAction("Rumors");
-    CMenuAction bountyHuntAction = menu.createAction("Bounty Hunt");
+    CMenuAction rumorsAction = menu.createAction({"Rumors"});
+    CMenuAction bountyHuntAction = menu.createAction({"Bounty Hunt"});
     CMenu::ActionList navs;
     navs.push_back(rumorsAction);
 

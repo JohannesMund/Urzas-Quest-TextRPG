@@ -51,8 +51,8 @@ public:
      * the menu
      * @return the new action
      */
-    CMenuAction createAction(const std::string_view& name, const unsigned char key = 0);
-    CMenuAction createShopAction(const std::string_view& name, const int cost, const unsigned char key = 0);
+    CMenuAction createAction(const Menu::MenuAction& action);
+    CMenuAction createShopAction(const Menu::MenuAction& action, const int cost);
 
     /**
      * @brief clear

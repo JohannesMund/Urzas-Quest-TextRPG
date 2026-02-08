@@ -26,8 +26,8 @@ void CStartingRoom::execute()
                                                                           Ressources::Items::EQuality::eJunk);
 
     CMenu menu;
-    CMenuAction takeAction = menu.createAction("Take it");
-    CMenuAction leaveAction = menu.createAction("Leave it");
+    CMenuAction takeAction = menu.createAction({"Take it"});
+    CMenuAction leaveAction = menu.createAction({"Leave it"});
     menu.addMenuGroup({takeAction, leaveAction});
 
     CMenuAction input;

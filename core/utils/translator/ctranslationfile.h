@@ -15,6 +15,6 @@ private:
 
     static std::string currentLanguageTag();
     nlohmann::json makeTranslationObject(const std::string_view& textId);
-
+    nlohmann::json makeMenuActionTranslationObject(const std::string_view& textId, const unsigned char key);
     std::string _fileBaseName;
 };

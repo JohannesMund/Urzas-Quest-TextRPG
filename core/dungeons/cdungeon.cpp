@@ -59,32 +59,32 @@ void CDungeon::dungeonLoop()
         CMenu menu;
         CMenu::ActionList navs;
 
-        CMenuAction northAction = menu.createAction(CMap::direction2String(CMap::EDirections::eNorth));
+        CMenuAction northAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eNorth))});
         if (_map->navAvailable(CMap::EDirections::eNorth))
         {
             navs.push_back(northAction);
         }
 
-        CMenuAction eastAction = menu.createAction(CMap::direction2String(CMap::EDirections::eEast));
+        CMenuAction eastAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eEast))});
         if (_map->navAvailable(CMap::EDirections::eEast))
         {
             navs.push_back(eastAction);
         }
 
-        CMenuAction southAction = menu.createAction(CMap::direction2String(CMap::EDirections::eSouth));
+        CMenuAction southAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eSouth))});
         if (_map->navAvailable(CMap::EDirections::eSouth))
         {
             navs.push_back(southAction);
         }
 
-        CMenuAction westAction = menu.createAction(CMap::direction2String(CMap::EDirections::eWest));
+        CMenuAction westAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eWest))});
         if (_map->navAvailable(CMap::EDirections::eWest))
         {
             navs.push_back(westAction);
         }
 
-        CMenuAction mapAction = menu.createAction("Map");
-        CMenuAction inventoryAction = menu.createAction("Inventory");
+        CMenuAction mapAction = menu.createAction({"Map"});
+        CMenuAction inventoryAction = menu.createAction({"Inventory"});
 
         menu.addMenuGroup(navs, {mapAction, inventoryAction});
 
@@ -95,7 +95,7 @@ void CDungeon::dungeonLoop()
         }
 
         CMenu::ActionList superCowHalf = {};
-        CMenuAction revealAction = menu.createAction("Reveal");
+        CMenuAction revealAction = menu.createAction({"Reveal"});
         if (CGameManagement::getGameSettingsInstance()->superCowPowers())
         {
             superCowHalf.push_back(revealAction);

@@ -39,7 +39,7 @@ void CFarm::execute()
             {
                 Console::printLn("This sounds like a bargain!");
 
-                trainAction = menu.createShopAction("Train", getTrainingCost());
+                trainAction = menu.createShopAction({"Train"}, getTrainingCost());
                 menu.addMenuGroup({trainAction}, {CMenu::exit()});
             }
             else

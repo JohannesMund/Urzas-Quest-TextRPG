@@ -13,7 +13,7 @@ bool CTask::isAutoExecute() const
     return _isAutoExecute;
 }
 
-std::string CTask::taskNav() const
+Menu::MenuAction CTask::taskNav() const
 {
     return {};
 }

@@ -37,7 +37,7 @@ void CFishRestaurant::execute()
 
         if (CGameManagement::getPlayerInstance()->gold() >= priceOfTheDay())
         {
-            dishOfTheDayAction = menu.createShopAction("Eat dish of the day", priceOfTheDay(), 'E');
+            dishOfTheDayAction = menu.createShopAction({"Eat dish of the day", 'E'}, priceOfTheDay());
             menu.addMenuGroup({dishOfTheDayAction});
         }
         else

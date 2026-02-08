@@ -31,7 +31,7 @@ void CShrineOfTheAncients::execute()
     Console::br();
 
     CMenu menu(Shrine::moduleName());
-    menu.addMenuGroup({menu.createAction("Think about yourself")}, {CMenu::exit()});
+    menu.addMenuGroup({menu.createAction({"Think about yourself"})}, {CMenu::exit()});
     if (menu.execute() == CMenu::exit())
     {
         return;
@@ -150,8 +150,8 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     Console::br();
 
     CMenu menu(Shrine::moduleName());
-    CMenuAction askAboutUrza = menu.createAction(Ressources::Game::whoTheFuckIsUrza(), 'w');
-    menu.addMenuGroup({askAboutUrza}, {menu.createAction("Nothing")});
+    CMenuAction askAboutUrza = menu.createAction({Ressources::Game::whoTheFuckIsUrza(), 'w'});
+    menu.addMenuGroup({askAboutUrza}, {menu.createAction({"Nothing"})});
     if (menu.execute() == askAboutUrza)
     {
         Console::printLn("\"No, not this time\", you think to yourself, and leave.");
@@ -182,8 +182,8 @@ void CShrineOfTheAncients::firstVisitProvenAsHero()
     Console::br();
 
     CMenu menu(Shrine::moduleName());
-    CMenuAction askAboutUrza = menu.createAction(Ressources::Game::urzaWhoTheFuckIsUrza(), 'w');
-    menu.addMenuGroup({askAboutUrza}, {menu.createAction("Nothing")});
+    CMenuAction askAboutUrza = menu.createAction({Ressources::Game::urzaWhoTheFuckIsUrza(), 'w'});
+    menu.addMenuGroup({askAboutUrza}, {menu.createAction({"Nothing"})});
     if (menu.execute() == askAboutUrza)
     {
         Console::printLn("Maybe, proven to be a hero is enough.");
@@ -207,8 +207,8 @@ void CShrineOfTheAncients::firstVisitLearnedAboutCult()
     Console::br();
 
     CMenu menu(Shrine::moduleName());
-    CMenuAction notYetAction = menu.createAction("Not yet");
-    menu.addMenuGroup({menu.createAction("Sure thing!")}, {notYetAction});
+    CMenuAction notYetAction = menu.createAction({"Not yet"});
+    menu.addMenuGroup({menu.createAction({"Sure thing!"})}, {notYetAction});
     if (menu.execute() == notYetAction)
     {
         Console::printLn("Maybe next time.");

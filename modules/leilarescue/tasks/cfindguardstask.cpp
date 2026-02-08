@@ -142,7 +142,7 @@ void CFindGuardsTask::rescueGuardFromMafia()
                     CC::ccReset()));
 
     CMenu menu(LeilaRescue::moduleName());
-    auto pay = menu.createShopAction("Pay the dude", _mafiaMoney, 'G');
+    auto pay = menu.createShopAction({"Pay the dude", 'G'}, _mafiaMoney);
     if (CGameManagement::getPlayerInstance()->gold() >= (int)_mafiaMoney)
     {
         Console::printLn("A lot of money for such a mess of a guy. But... you need his help.");
@@ -196,8 +196,8 @@ void CFindGuardsTask::fightBossMonster()
     Console::printLn("But seriously, is that really \"Flea-eater\"?");
 
     CMenu menu(LeilaRescue::moduleName());
-    CMenuAction checkAction = menu.createAction("Check");
-    CMenuAction retreatAction = menu.createAction("Retreat");
+    CMenuAction checkAction = menu.createAction({"Check"});
+    CMenuAction retreatAction = menu.createAction({"Retreat"});
     menu.addMenuGroup({checkAction, retreatAction});
     Console::br();
 
@@ -345,8 +345,8 @@ void CFindGuardsTask::fightCannibalHorde()
     Console::printLn("It is already smelling like bacon, so you should hurry, if you want to rescue this guard alive.");
 
     CMenu menu(LeilaRescue::moduleName());
-    CMenuAction attackAction = menu.createAction("Attack");
-    CMenuAction retreatAction = menu.createAction("Retreat");
+    CMenuAction attackAction = menu.createAction({"Attack"});
+    CMenuAction retreatAction = menu.createAction({"Retreat"});
 
     menu.addMenuGroup({attackAction, retreatAction});
 

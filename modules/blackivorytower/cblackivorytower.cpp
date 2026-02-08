@@ -59,7 +59,7 @@ void CBlackIvoryTower::execute()
 
     CMenuAction input;
     CMenu menu(BlackIvoryTower::moduleName());
-    CMenuAction climbAction = menu.createAction("Climb");
+    CMenuAction climbAction = menu.createAction({"Climb"});
     menu.addMenuGroup({climbAction}, {CMenu::exit()});
 
     do
@@ -119,9 +119,9 @@ void CBlackIvoryTower::climb()
 
         CMenu menu(BlackIvoryTower::moduleName());
 
-        CMenuAction downAction = menu.createAction("Down", 'd');
-        CMenuAction upAction = menu.createAction("Up", 'u');
-        CMenuAction officeAction = menu.createAction("Visit Office", 'V');
+        CMenuAction downAction = menu.createAction({"Down", 'd'});
+        CMenuAction upAction = menu.createAction({"Up", 'u'});
+        CMenuAction officeAction = menu.createAction({"Visit Office", 'V'});
 
         CMenu::ActionList downActionList = {downAction};
         CMenu::ActionList upActionList = {};
@@ -225,7 +225,7 @@ void CBlackIvoryTower::executeTopOffice()
         Console::printLn("With fear in his eyes and a shaking voice, he offers you a free döner.");
 
         CMenu menu(BlackIvoryTower::moduleName());
-        CMenuAction doenerAction = menu.createAction("Have a Döner", 'H');
+        CMenuAction doenerAction = menu.createAction({"Have a Döner", 'H'});
 
         menu.addMenuGroup({doenerAction}, {CMenu::exit()});
         if (menu.execute() == doenerAction)

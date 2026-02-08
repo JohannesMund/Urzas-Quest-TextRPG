@@ -41,8 +41,8 @@ void CInjuredPet::execute()
     Console::hr();
 
     CMenu menu;
-    CMenuAction lookAction = menu.createAction("Look");
-    CMenuAction goAction = menu.createAction("Go away");
+    CMenuAction lookAction = menu.createAction({"Look"});
+    CMenuAction goAction = menu.createAction({"Go away"});
 
     menu.addMenuGroup({lookAction, goAction});
     auto input = menu.execute();
@@ -62,7 +62,7 @@ void CInjuredPet::execute()
     Console::hr();
 
     menu.clear();
-    CMenuAction helpAction = menu.createAction("Help");
+    CMenuAction helpAction = menu.createAction({"Help"});
 
     menu.addMenuGroup({helpAction, goAction});
     if (menu.execute() == goAction)

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "menuaction.h"
+
 #include <string>
 
 class CMenuAction

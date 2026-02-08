@@ -222,37 +222,37 @@ void CGameManagement::executeTurn()
         CMenu menu;
         CMenu::ActionList navs;
 
-        CMenuAction northAction = menu.createAction(CMap::direction2String(CMap::EDirections::eNorth));
+        CMenuAction northAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eNorth))});
         if (_map.navAvailable(CMap::EDirections::eNorth))
         {
             navs.push_back(northAction);
         }
 
-        CMenuAction eastAction = menu.createAction(CMap::direction2String(CMap::EDirections::eEast));
+        CMenuAction eastAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eEast))});
         if (_map.navAvailable(CMap::EDirections::eEast))
         {
             navs.push_back(eastAction);
         }
 
-        CMenuAction southAction = menu.createAction(CMap::direction2String(CMap::EDirections::eSouth));
+        CMenuAction southAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eSouth))});
         if (_map.navAvailable(CMap::EDirections::eSouth))
         {
             navs.push_back(southAction);
         }
 
-        CMenuAction westAction = menu.createAction(CMap::direction2String(CMap::EDirections::eWest));
+        CMenuAction westAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eWest))});
         if (_map.navAvailable(CMap::EDirections::eWest))
         {
             navs.push_back(westAction);
         }
 
-        CMenuAction mapAction = menu.createAction("Map");
-        CMenuAction inventoryAction = menu.createAction("Inventory");
+        CMenuAction mapAction = menu.createAction({"Map"});
+        CMenuAction inventoryAction = menu.createAction({"Inventory"});
 
         menu.addMenuGroup(navs, {mapAction, inventoryAction});
 
-        CMenuAction troubleAction = menu.createAction("Look for trouble");
-        CMenuAction quitAction = menu.createAction("Quit Game");
+        CMenuAction troubleAction = menu.createAction({"Look for trouble"});
+        CMenuAction quitAction = menu.createAction({"Quit Game"});
 
         if (getGameSettingsInstance()->superCowPowers())
         {
@@ -273,9 +273,9 @@ void CGameManagement::executeTurn()
             Console::hr();
 
             CMenu menu;
-            CMenuAction saveAction = menu.createAction("Save", 's');
-            CMenuAction cancelAction = menu.createAction("Cancel", 'c');
-            CMenuAction quitAction = menu.createAction("Quit without saving", 'q');
+            CMenuAction saveAction = menu.createAction({"Save", 's'});
+            CMenuAction cancelAction = menu.createAction({"Cancel", 'c'});
+            CMenuAction quitAction = menu.createAction({"Quit without saving", 'q'});
 
             menu.addMenuGroup({saveAction, quitAction});
             menu.addMenuGroup({cancelAction});

@@ -109,3 +109,22 @@ nlohmann::json CTranslationFile::makeTranslationObject(const std::string_view& t
     }
     return o;
 }
+
+nlohmann::json CTranslationFile::makeMenuActionTranslationObject(const std::string_view& textId,
+                                                                 const unsigned char key)
+{
+    nlohmann::json o;
+
+    nlohmann::json source = {{TagNames::Translator::menuAction, textId}, {TagNames::Translator::menuActionKey, key}};
+    nlohmann::json empty = {{TagNames::Translator::menuAction, ""}, {TagNames::Translator::menuActionKey, 0}};
+
+    o.emplace(TagNames::Translator::source, source);
+    for (auto lang : CGameSettings::supportedLanguages())
+    {
+        if (!CGameSettings::isSourceLanguage(lang))
+        {
+            o.emplace(lang, empty);
+        }
+    }
+    return o;
+}

@@ -33,8 +33,8 @@ void CDeadHero::execute(const std::string_view& moduleName)
     Console::br();
 
     CMenu menu;
-    CMenuAction searchAction = menu.createAction("Search the body");
-    CMenuAction goAction = menu.createAction("Go away");
+    CMenuAction searchAction = menu.createAction({"Search the body"});
+    CMenuAction goAction = menu.createAction({"Go away"});
     menu.addMenuGroup({searchAction}, {goAction});
     if (menu.execute() == goAction)
     {
@@ -52,7 +52,7 @@ void CDeadHero::execute(const std::string_view& moduleName)
     Console::printLn("You wonder, if you should take it.");
 
     menu.clear();
-    CMenuAction takeAction = menu.createAction("Take t-shirt");
+    CMenuAction takeAction = menu.createAction({"Take t-shirt"});
     menu.addMenuGroup({takeAction}, {goAction});
     if (menu.execute() == goAction)
     {

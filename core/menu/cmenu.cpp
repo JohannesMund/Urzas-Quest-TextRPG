@@ -64,31 +64,30 @@ CMenuAction CMenu::execute()
     return findActionByInput();
 }
 
-CMenuAction CMenu::createAction(const std::string_view& s, const unsigned char c)
+CMenuAction CMenu::createAction(const Menu::MenuAction& action)
 {
-
-    if (c != 0 && isNavPossible(c))
+    if (action.key != 0 && isNavPossible(action.key))
     {
-        const auto display = makeDisplayString(s, c);
-        addNav(std::tolower(c));
-        return CMenuAction(s, display, std::tolower(c));
+        const auto display = makeDisplayString(action.name, action.key);
+        addNav(std::tolower(action.key));
+        return CMenuAction(action.name, display, std::tolower(action.key));
     }
 
-    for (unsigned char cc : s)
+    for (unsigned char cc : action.name)
     {
         if (isNavPossible(cc))
         {
-            const auto display = makeDisplayString(s, cc);
+            const auto display = makeDisplayString(action.name, cc);
             addNav(std::tolower(cc));
-            return CMenuAction(s, display, std::tolower(cc));
+            return CMenuAction(action.name, display, std::tolower(cc));
         }
     }
     return {};
 }
 
-CMenuAction CMenu::createShopAction(const std::string_view& name, const int cost, const unsigned char key)
+CMenuAction CMenu::createShopAction(const Menu::MenuAction& action, const int cost)
 {
-    return createAction(std::format("{} ({} Gold)", name, cost), key);
+    return createAction({std::format("{} ({} Gold)", action.name, cost), action.key});
 }
 
 void CMenu::clear()
