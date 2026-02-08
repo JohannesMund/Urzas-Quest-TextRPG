@@ -8,7 +8,7 @@
 #include <iostream>
 #include <localdirectory.h>
 
-const std::string CTranslationFile::getTranslation(const std::string_view& objectName, const std::string_view& textId)
+std::string CTranslationFile::getTranslation(const std::string_view& objectName, const std::string_view& textId)
 {
     if (!_document.contains(objectName))
     {
@@ -36,6 +36,36 @@ const std::string CTranslationFile::getTranslation(const std::string_view& objec
     }
 
     return translation;
+}
+
+Menu::MenuAction CTranslationFile::getTranslation(const std::string_view& objectName, const Menu::MenuAction& action)
+{
+    if (!_document.contains(objectName))
+    {
+        addTranslation(objectName, action);
+        throw Translator::CTranslatorException(std::format("Object {} does not exist", objectName));
+    }
+
+    auto t = findInArray(objectName, action);
+    if (t.empty())
+    {
+        addTranslation(objectName, action);
+        throw Translator::CTranslatorException(std::format("Text {} does not exist", action.name));
+    }
+
+    auto lang = currentLanguageTag();
+    if (!t.contains(lang))
+    {
+        throw Translator::CTranslatorException(std::format("Language {} not supported", lang));
+    }
+
+    auto translation = t[lang];
+    if (translation.empty())
+    {
+        throw Translator::CTranslatorException(std::format("translation for {} missing", action.name));
+    }
+
+    return Menu::MenuAction::fromJson(translation);
 }
 
 CTranslationFile::CTranslationFile(const std::string_view& fileName) :
@@ -66,7 +96,27 @@ nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName,
     {
         return {};
     }
-    return jIt.value();
+    return *jIt;
+}
+
+nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName, const Menu::MenuAction& action)
+{
+    const auto jIt = std::find_if(
+        _document[objectName].begin(),
+        _document[objectName].end(),
+        [&action](const nlohmann::json& jObject)
+        {
+            return jObject.contains(TagNames::Translator::source) &&
+                   jObject[TagNames::Translator::source].contains(TagNames::Translator::menuAction) &&
+                   jObject[TagNames::Translator::source][TagNames::Translator::menuAction].get<std::string>() ==
+                       action.name;
+        });
+
+    if (jIt == _document[objectName].end())
+    {
+        return {};
+    }
+    return *jIt;
 }
 
 void CTranslationFile::addTranslation(const std::string_view& objectName, const std::string_view& textId)
@@ -76,6 +126,17 @@ void CTranslationFile::addTranslation(const std::string_view& objectName, const 
         _document.emplace(objectName, nlohmann::json::array());
     }
     _document[objectName].push_back(makeTranslationObject(textId));
+
+    dump();
+}
+
+void CTranslationFile::addTranslation(const std::string_view& objectName, const Menu::MenuAction& action)
+{
+    if (!_document.contains(objectName))
+    {
+        _document.emplace(objectName, nlohmann::json::array());
+    }
+    _document[objectName].push_back(makeTranslationObject(action));
 
     dump();
 }
@@ -98,7 +159,7 @@ std::string CTranslationFile::currentLanguageTag()
 nlohmann::json CTranslationFile::makeTranslationObject(const std::string_view& textId)
 {
     nlohmann::json o;
-
+    emplaceUntranslated(o);
     o.emplace(TagNames::Translator::source, textId);
     for (auto lang : CGameSettings::supportedLanguages())
     {
@@ -110,21 +171,26 @@ nlohmann::json CTranslationFile::makeTranslationObject(const std::string_view& t
     return o;
 }
 
-nlohmann::json CTranslationFile::makeMenuActionTranslationObject(const std::string_view& textId,
-                                                                 const unsigned char key)
+nlohmann::json CTranslationFile::makeTranslationObject(const Menu::MenuAction& action)
 {
     nlohmann::json o;
 
-    nlohmann::json source = {{TagNames::Translator::menuAction, textId}, {TagNames::Translator::menuActionKey, key}};
-    nlohmann::json empty = {{TagNames::Translator::menuAction, ""}, {TagNames::Translator::menuActionKey, 0}};
+    nlohmann::json source = action.toJson();
+    Menu::MenuAction empty;
 
+    emplaceUntranslated(o);
     o.emplace(TagNames::Translator::source, source);
     for (auto lang : CGameSettings::supportedLanguages())
     {
         if (!CGameSettings::isSourceLanguage(lang))
         {
-            o.emplace(lang, empty);
+            o.emplace(lang, empty.toJson());
         }
     }
     return o;
+}
+
+void CTranslationFile::emplaceUntranslated(nlohmann::json& o)
+{
+    o.emplace(TagNames::Translator::status, TagNames::Translator::untranslated);
 }

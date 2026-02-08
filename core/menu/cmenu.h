@@ -49,9 +49,16 @@ public:
      * @param name the Name of the action (e.g. Exit)
      * @param key the hotkey, can be 0, the hotkey is determined according to the name and the hotkeys already used in
      * the menu
+     * @remark the actiom will be translated(
+     * @remark the key might be changed by the menu. never compare the key after execute, always compare the action.
      * @return the new action
      */
     CMenuAction createAction(const Menu::MenuAction& action);
+    /**
+     * @brief overload
+     * @remark uses createAction to create a shop action (i.e. Buy (100 Gold)
+     * @param[in] cost the number to be added in the brackets
+     */
     CMenuAction createShopAction(const Menu::MenuAction& action, const int cost);
 
     /**
@@ -116,5 +123,7 @@ private:
 
     std::string _acceptableNavs;
     std::vector<MenuGroup> _menu;
-    const std::string _objectName;
+    const std::string _moduleName;
+
+    Menu::MenuAction tr(const Menu::MenuAction& action);
 };

@@ -4,6 +4,12 @@
 
 #include <string>
 
+/**
+ * @brief represents a menu actiom
+ * @sa CMenu
+ * @remarks private costructor, must be created by CMenu
+ * @sa CMenu::makeMenuAction
+ */
 class CMenuAction
 {
     friend class CMenu;
@@ -18,10 +24,25 @@ public:
         return _key != other._key;
     }
 
+    /**
+     * @brief creates a invalid action
+     * @remarks to be used to have a CMenuAction instance before beeing able to initialize it
+     */
     CMenuAction();
 
+    /**
+     * @brief returns the name
+     */
     std::string_view getName() const;
+
+    /**
+     * @brief returns the key
+     */
     unsigned char getKey() const;
+
+    /**
+     * @brief checks, if the action is valid
+     */
     bool isValid() const;
 
 private:

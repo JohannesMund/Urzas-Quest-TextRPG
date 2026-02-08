@@ -2,6 +2,8 @@
 #include "cgamestateobject.h"
 #include "colorize.h"
 #include "console.h"
+#include "ctranslator.h"
+#include "jsontagnames.h"
 
 #include <algorithm>
 #include <cctype>
@@ -10,7 +12,7 @@
 CMenu::CMenu() : CMenu(TagNames::Translator::core)
 {
 }
-CMenu::CMenu(const std::string_view& moduleName) : _objectName(moduleName)
+CMenu::CMenu(const std::string_view& moduleName) : _moduleName(moduleName)
 {
 }
 
@@ -66,20 +68,22 @@ CMenuAction CMenu::execute()
 
 CMenuAction CMenu::createAction(const Menu::MenuAction& action)
 {
-    if (action.key != 0 && isNavPossible(action.key))
+    Menu::MenuAction a = tr(action);
+
+    if (a.key != 0 && isNavPossible(a.key))
     {
-        const auto display = makeDisplayString(action.name, action.key);
-        addNav(std::tolower(action.key));
-        return CMenuAction(action.name, display, std::tolower(action.key));
+        const auto display = makeDisplayString(a.name, a.key);
+        addNav(std::tolower(a.key));
+        return CMenuAction(a.name, display, std::tolower(a.key));
     }
 
-    for (unsigned char cc : action.name)
+    for (unsigned char cc : a.name)
     {
         if (isNavPossible(cc))
         {
-            const auto display = makeDisplayString(action.name, cc);
+            const auto display = makeDisplayString(a.name, cc);
             addNav(std::tolower(cc));
-            return CMenuAction(action.name, display, std::tolower(cc));
+            return CMenuAction(a.name, display, std::tolower(cc));
         }
     }
     return {};
@@ -214,4 +218,9 @@ void CMenu::addNav(const unsigned char c)
             _acceptableNavs.push_back(c);
         }
     }
+}
+
+Menu::MenuAction CMenu::tr(const Menu::MenuAction& action)
+{
+    return CTranslator::tr(_moduleName, TagNames::Translator::menuActions, action);
 }

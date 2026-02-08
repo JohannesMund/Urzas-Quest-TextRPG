@@ -7,6 +7,9 @@
 
 namespace Menu
 {
+/**
+ * @brief a translatable MenuAction
+ */
 struct MenuAction
 {
     std::string name;
