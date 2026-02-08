@@ -13,7 +13,7 @@
 void CTranslator::checkTranslation(const std::string_view& moduleName)
 {
     auto t = CTranslator::getInstance()->_translations;
-    if (!t.contains(moduleName))
+    if (!t.contains(std::string(moduleName)))
     {
         throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
     }
@@ -38,7 +38,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
     try
     {
         auto t = CTranslator::getInstance()->_translations;
-        return t.at(moduleName)->getTranslation(objectName, textId);
+        return t.at(std::string(moduleName))->getTranslation(objectName, textId);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -54,7 +54,7 @@ std::optional<Menu::MenuAction> CTranslator::translate(const std::string_view& m
     try
     {
         auto t = CTranslator::getInstance()->_translations;
-        return t.at(moduleName)->getTranslation(objectName, action);
+        return t.at(std::string(moduleName))->getTranslation(objectName, action);
     }
     catch (const Translator::CTranslatorException& e)
     {

@@ -277,7 +277,7 @@ void CGameManagement::executeTurn()
             CMenuAction cancelAction = menu.createAction({"Cancel", 'c'});
             CMenuAction quitAction = menu.createAction({"Quit without saving", 'q'});
 
-            menu.addMenuGroup({saveAction, quitAction});
+            menu.addMenuGroup({saveAction}, {quitAction});
             menu.addMenuGroup({cancelAction});
 
             auto reply = menu.execute();
