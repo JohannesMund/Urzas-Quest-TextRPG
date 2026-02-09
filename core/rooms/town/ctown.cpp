@@ -55,7 +55,7 @@ void CTown::execute()
         std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
-            taskAction = menu.createAction({_task->taskNav()});
+            taskAction = menu.createAction({_task->taskNav()}, false);
             menu.addMenuGroup({taskAction.value()});
         }
 

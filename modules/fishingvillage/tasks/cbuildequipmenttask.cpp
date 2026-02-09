@@ -1,5 +1,6 @@
 #include "cbuildequipmenttask.h"
 #include "cgamemanagement.h"
+#include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
 #include "fishingvillage/items/cboat.h"
@@ -34,9 +35,9 @@ Menu::MenuAction CBuildEquipmentTask::taskNav() const
 {
     if (_moduleName.compare(FishingVillageMakeRod::moduleName()) == 0)
     {
-        return {"Build your Fishing Rod"};
+        return CMenu::tr(FishingVillageMakeRod::moduleName(), {"Build your Fishing Rod"});
     }
-    return {"Build your Boat"};
+    return CMenu::tr(FishingVillageMakeRod::moduleName(), {"Build your Boat"});
 }
 
 void CBuildEquipmentTask::buildBoat()

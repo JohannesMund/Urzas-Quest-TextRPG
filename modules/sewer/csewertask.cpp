@@ -54,7 +54,7 @@ void CSewerTask::execute()
 
 Menu::MenuAction CSewerTask::taskNav() const
 {
-    return {Sewer::encounterName()};
+    return CMenu::tr(Sewer::moduleName(), {Sewer::encounterName()});
 }
 
 void CSewerTask::executeDungeon()
