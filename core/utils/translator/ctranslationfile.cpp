@@ -165,7 +165,7 @@ nlohmann::json CTranslationFile::makeTranslationObject(const std::string_view& t
     {
         if (!CGameSettings::isSourceLanguage(lang))
         {
-            o.emplace(lang, "");
+            o.emplace(lang, textId);
         }
     }
     return o;
@@ -176,7 +176,6 @@ nlohmann::json CTranslationFile::makeTranslationObject(const Menu::MenuAction& a
     nlohmann::json o;
 
     nlohmann::json source = action.toJson();
-    Menu::MenuAction empty;
 
     emplaceUntranslated(o);
     o.emplace(TagNames::Translator::source, source);
@@ -184,7 +183,7 @@ nlohmann::json CTranslationFile::makeTranslationObject(const Menu::MenuAction& a
     {
         if (!CGameSettings::isSourceLanguage(lang))
         {
-            o.emplace(lang, empty.toJson());
+            o.emplace(lang, action.toJson());
         }
     }
     return o;

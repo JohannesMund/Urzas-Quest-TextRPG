@@ -40,8 +40,18 @@ void CMenu::addMenuGroup(const CMenu::ActionList& list1, const CMenu::ActionList
 
 CMenuAction CMenu::execute()
 {
+    _acceptableNavs.clear();
     for (const auto& group : _menu)
     {
+        for (const auto& a : group.first)
+        {
+            _acceptableNavs.push_back(a._key);
+        }
+        for (const auto& a : group.second)
+        {
+            _acceptableNavs.push_back(a._key);
+        }
+
         if (group.first.empty())
         {
             if (group.second.empty())
