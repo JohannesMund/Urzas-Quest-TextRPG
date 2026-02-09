@@ -83,6 +83,8 @@ private:
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
     void registerModule(const std::string_view& moduleName, const std::string_view& fileName);
 
+    static CTranslationFile* getTranslationFile(const std::string_view& moduleName);
+
     static std::optional<std::string> translate(const std::string_view& moduleName,
                                                 const std::string_view& objectName,
                                                 const std::string_view& textId);

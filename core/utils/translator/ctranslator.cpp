@@ -37,8 +37,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
 {
     try
     {
-        auto t = CTranslator::getInstance()->_translations;
-        return t.at(std::string(moduleName))->getTranslation(objectName, textId);
+        return getTranslationFile(moduleName)->getTranslation(objectName, textId);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -53,8 +52,7 @@ std::optional<Menu::MenuAction> CTranslator::translate(const std::string_view& m
 {
     try
     {
-        auto t = CTranslator::getInstance()->_translations;
-        return t.at(std::string(moduleName))->getTranslation(objectName, action);
+        return getTranslationFile(moduleName)->getTranslation(objectName, action);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -79,6 +77,17 @@ CTranslator::~CTranslator()
 void CTranslator::registerModule(const std::string_view& moduleName, const std::string_view& fileName)
 {
     loadTranslationFile(moduleName, std::format("{}.json", fileName));
+}
+
+CTranslationFile* CTranslator::getTranslationFile(const std::string_view& moduleName)
+{
+    std::string mod(moduleName);
+    auto t = CTranslator::getInstance()->_translations;
+    if (!t.contains(std::string(mod)))
+    {
+        throw Translator::CTranslatorException(std::format("No translation for module {} loaded", mod));
+    }
+    return t.at(std::string(moduleName));
 }
 
 std::string CTranslator::tr(const std::string_view& moduleName,
@@ -119,6 +128,7 @@ std::string CTranslator::tr(const std::string_view& moduleName,
 
     try
     {
+
         return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
     }
     catch (const std::exception& e)
