@@ -20,11 +20,13 @@ public:
     std::string currentLanguage() const;
     void setCurrentLanguage(const std::string_view& lang);
 
+    bool superCowPowers() const;
+    bool updateTranslations() const;
+
     int maxHp() const;
     int maxHpMin() const;
     int gold() const;
     unsigned int initiative() const;
-    bool superCowPowers() const;
 
     unsigned int turnsUntilShopRefresh() const;
     unsigned int numberOfTowns() const;
@@ -36,5 +38,7 @@ public:
     int informationCost() const;
 
 private:
+    nlohmann::json getDebugObject() const;
+
     CGameSettings();
 };

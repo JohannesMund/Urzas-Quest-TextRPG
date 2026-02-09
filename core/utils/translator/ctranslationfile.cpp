@@ -121,6 +121,11 @@ nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName,
 
 void CTranslationFile::addTranslation(const std::string_view& objectName, const std::string_view& textId)
 {
+
+    if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
+    {
+        return;
+    }
     if (!_document.contains(objectName))
     {
         _document.emplace(objectName, nlohmann::json::array());

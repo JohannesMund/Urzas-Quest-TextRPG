@@ -4,6 +4,8 @@
 #include <iostream>
 class CLog
 {
+    friend int main();
+
 public:
     ~CLog();
 
@@ -25,6 +27,7 @@ public:
 private:
     static std::ofstream& makeEntry(const std::string_view& scope);
 
+    static void rollover();
     CLog();
     std::ofstream _os;
 };

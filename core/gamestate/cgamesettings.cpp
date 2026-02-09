@@ -7,6 +7,16 @@
 
 #include <fstream>
 
+nlohmann::json CGameSettings::getDebugObject() const
+{
+    if (_document.contains(TagNames::GameSettings::debugSettings))
+    {
+        return getObject(TagNames::GameSettings::debugSettings);
+    }
+
+    return nlohmann::json();
+}
+
 CGameSettings::CGameSettings() : CJsonDocument(Settings::settingsFileName, TagNames::FileSpec::typeSettings)
 {
     try
@@ -67,7 +77,12 @@ unsigned int CGameSettings::initiative() const
 
 bool CGameSettings::superCowPowers() const
 {
-    return get(TagNames::GameSettings::superCowPowers, Config::superCowPowers);
+    return get(getDebugObject(), TagNames::GameSettings::superCowPowers, Config::Debug::superCowPowers);
+}
+
+bool CGameSettings::updateTranslations() const
+{
+    return get(getDebugObject(), TagNames::GameSettings::updateTranslations, Config::Debug::updateTranslations);
 }
 
 unsigned int CGameSettings::turnsUntilShopRefresh() const

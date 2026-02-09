@@ -210,11 +210,11 @@
       {
         "Source": {
           "MenuAction": "Cancel",
-          "MenuActionKey": 99
+          "MenuActionKey": 67
         },
         "de": {
           "MenuAction": "Abbrechen",
-          "MenuActionKey": 97
+          "MenuActionKey": 65
         }
       },
       {
@@ -225,6 +225,87 @@
         "de": {
           "MenuAction": "Ohne speichern beenden",
           "MenuActionKey": 79
+        }
+      },
+           {
+        "Source": {
+          "MenuAction": "Fight",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Kämpfen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Run",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Weglaufen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Rock",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Stein",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Paper",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Papier",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Scissors",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Schere",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Lizard",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Echse",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Spock",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Spock",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Win",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Sieg",
+          "MenuActionKey": 0
         }
       }
     ]

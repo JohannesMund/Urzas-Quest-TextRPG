@@ -175,6 +175,54 @@ std::string CJsonDocument::get(const std::string_view& key, const std::string_vi
     }
 }
 
+bool CJsonDocument::get(const nlohmann::json& o, const std::string_view& key, const bool d) const
+{
+    try
+    {
+        return getObject(o, key).get<bool>();
+    }
+    catch (const std::exception&)
+    {
+        return d;
+    }
+}
+
+int CJsonDocument::get(const nlohmann::json& o, const std::string_view& key, const int d) const
+{
+    try
+    {
+        return getObject(o, key).get<int>();
+    }
+    catch (const std::exception&)
+    {
+        return d;
+    }
+}
+
+unsigned int CJsonDocument::get(const nlohmann::json& o, const std::string_view& key, const unsigned int d) const
+{
+    try
+    {
+        return getObject(o, key).get<unsigned int>();
+    }
+    catch (const std::exception&)
+    {
+        return d;
+    }
+}
+
+std::string CJsonDocument::get(const nlohmann::json& o, const std::string_view& key, const std::string_view& d) const
+{
+    try
+    {
+        return getObject(o, key).get<std::string>();
+    }
+    catch (const std::exception&)
+    {
+        return std::string(d);
+    }
+}
+
 void CJsonDocument::addObject(const std::string_view& key, const nlohmann::json& object)
 {
     _document[key] = object;
@@ -187,6 +235,25 @@ nlohmann::json CJsonDocument::getObject(const std::string_view& key) const
         if (_document.contains(key))
         {
             return _document[key];
+        }
+    }
+    catch (const nlohmann::json::exception& e)
+    {
+        throw Json::CJsonException(e);
+        return {};
+    }
+
+    throw Json::CJsonException(std::format("Key not found: {}", key));
+    return {};
+}
+
+nlohmann::json CJsonDocument::getObject(const nlohmann::json& o, const std::string_view& key) const
+{
+    try
+    {
+        if (o.contains(key))
+        {
+            return o[key];
         }
     }
     catch (const nlohmann::json::exception& e)

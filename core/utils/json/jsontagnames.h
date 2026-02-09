@@ -48,8 +48,10 @@ constexpr std::string_view name = TagNames::Common::name;
 namespace GameSettings
 {
 constexpr std::string_view gameSettings = "GameSettings";
+constexpr std::string_view debugSettings = "DebugSettings";
 
 constexpr std::string_view superCowPowers = "SuperCow";
+constexpr std::string_view updateTranslations = "UpdateTranslations";
 
 constexpr std::string_view fieldWidth = "FieldWidth";
 constexpr std::string_view fieldHeight = "FieldHeight";
