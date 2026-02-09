@@ -32,6 +32,7 @@ std::string CTranslationFile::getTranslation(const std::string_view& objectName,
     auto translation = t[lang];
     if (translation.empty())
     {
+        updateTranslation(t, lang, textId);
         throw Translator::CTranslatorException(std::format("translation for {} missing", textId));
     }
 
@@ -56,6 +57,7 @@ Menu::MenuAction CTranslationFile::getTranslation(const std::string_view& object
     auto lang = currentLanguageTag();
     if (!t.contains(lang))
     {
+        updateTranslation(t, lang, action);
         throw Translator::CTranslatorException(std::format("Language {} not supported", lang));
     }
 
@@ -146,6 +148,30 @@ void CTranslationFile::addTranslation(const std::string_view& objectName, const 
     dump();
 }
 
+void CTranslationFile::updateTranslation(nlohmann::json& o,
+                                         const std::string_view& language,
+                                         const std::string_view& textId)
+{
+    if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
+    {
+        return;
+    }
+    emplaceIncomplete(o);
+    o[language] = textId;
+}
+
+void CTranslationFile::updateTranslation(nlohmann::json& o,
+                                         const std::string_view& language,
+                                         const Menu::MenuAction& action)
+{
+    if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
+    {
+        return;
+    }
+    emplaceIncomplete(o);
+    o[language] = action.toJson();
+}
+
 std::string CTranslationFile::currentLanguageTag()
 {
     auto lang = CGameManagement::getGameSettingsInstance()->currentLanguage();
@@ -197,4 +223,9 @@ nlohmann::json CTranslationFile::makeTranslationObject(const Menu::MenuAction& a
 void CTranslationFile::emplaceUntranslated(nlohmann::json& o)
 {
     o.emplace(TagNames::Translator::status, TagNames::Translator::untranslated);
+}
+
+void CTranslationFile::emplaceIncomplete(nlohmann::json& o)
+{
+    o.emplace(TagNames::Translator::status, TagNames::Translator::incomplete);
 }

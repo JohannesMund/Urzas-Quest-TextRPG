@@ -59,6 +59,15 @@ public:
                           const std::string_view& objectName,
                           const std::string_view& textId);
 
+    /**
+     * @brief provides a translation for a MenuAction
+     * @remarks uses CTranslator::translate
+     * @remark used, to apply a custom hotkey to a MenuAction (i.e. [A]ction)
+     * @param[in] moduleName the moduleName which provides the translations or "core"
+     * @param[in] objecName section in the translation. organisation is up to the module
+     * @param[in] action MenuAction to be translated
+     * @return the translated action or the action if an error occured
+     */
     static Menu::MenuAction tr(const std::string_view& moduleName,
                                const std::string_view& objectName,
                                const Menu::MenuAction& action);
