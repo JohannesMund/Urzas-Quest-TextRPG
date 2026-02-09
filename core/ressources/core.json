@@ -302,9 +302,8 @@
           "MenuAction": "Win",
           "MenuActionKey": 0
         },
-        "Status": "untranslated",
         "de": {
-          "MenuAction": "Sieg",
+          "MenuAction": "Gewinnen",
           "MenuActionKey": 0
         }
       }

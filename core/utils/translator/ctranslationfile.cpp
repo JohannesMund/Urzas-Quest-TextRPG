@@ -123,7 +123,6 @@ nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName,
 
 void CTranslationFile::addTranslation(const std::string_view& objectName, const std::string_view& textId)
 {
-
     if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
     {
         return;
@@ -133,7 +132,6 @@ void CTranslationFile::addTranslation(const std::string_view& objectName, const 
         _document.emplace(objectName, nlohmann::json::array());
     }
     _document[objectName].push_back(makeTranslationObject(textId));
-
     dump();
 }
 
@@ -144,7 +142,6 @@ void CTranslationFile::addTranslation(const std::string_view& objectName, const 
         _document.emplace(objectName, nlohmann::json::array());
     }
     _document[objectName].push_back(makeTranslationObject(action));
-
     dump();
 }
 
@@ -158,6 +155,7 @@ void CTranslationFile::updateTranslation(nlohmann::json& o,
     }
     emplaceIncomplete(o);
     o[language] = textId;
+    dump();
 }
 
 void CTranslationFile::updateTranslation(nlohmann::json& o,
@@ -170,6 +168,7 @@ void CTranslationFile::updateTranslation(nlohmann::json& o,
     }
     emplaceIncomplete(o);
     o[language] = action.toJson();
+    dump();
 }
 
 std::string CTranslationFile::currentLanguageTag()
