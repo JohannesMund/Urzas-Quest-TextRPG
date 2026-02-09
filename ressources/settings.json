@@ -1,0 +1,26 @@
+{
+    "FileSpec": {
+        "DateTime": "2026-02-09 09:43:55",
+        "FileType": "Settings",
+        "Name": "UrzasQuest TextRPG",
+        "Version": 1
+    },
+    "Settings": {
+        "DebugSettings": {
+            "SuperCow": true,
+            "UpdateTranslations": true
+        },
+        "MaxHp": 10,
+        "MaxHpMin": 3,
+        "Gold": 100,
+        "Initiative": 5,
+        "FieldWidth": 26,
+        "FieldHeight": 10,
+        "EncounterChance": 10,
+        "FightChance": 15,
+        "NumberOfTowns": 4,
+        "TurnsUntilShowRefresh": 100,
+        "InformationCost": 1000,
+        "CurrentLanguage": "en"
+    }
+}
