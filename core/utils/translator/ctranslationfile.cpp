@@ -84,14 +84,15 @@ void CTranslationFile::dump() const
     dumpAs(path.string());
 }
 
-nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName, const std::string_view& textId)
+template <typename T>
+nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName, const T& translatable)
 {
     const auto jIt = std::find_if(_document[objectName].begin(),
                                   _document[objectName].end(),
-                                  [&textId](const nlohmann::json& jObject)
+                                  [&translatable](const nlohmann::json& jObject)
                                   {
                                       return jObject.contains(TagNames::Translator::source) &&
-                                             jObject[TagNames::Translator::source].get<std::string>() == textId;
+                                             compareTranslatable(jObject[TagNames::Translator::source], translatable);
                                   });
 
     if (jIt == _document[objectName].end())
@@ -101,27 +102,8 @@ nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName,
     return *jIt;
 }
 
-nlohmann::json CTranslationFile::findInArray(const std::string_view& objectName, const Menu::MenuAction& action)
-{
-    const auto jIt = std::find_if(
-        _document[objectName].begin(),
-        _document[objectName].end(),
-        [&action](const nlohmann::json& jObject)
-        {
-            return jObject.contains(TagNames::Translator::source) &&
-                   jObject[TagNames::Translator::source].contains(TagNames::Translator::menuAction) &&
-                   jObject[TagNames::Translator::source][TagNames::Translator::menuAction].get<std::string>() ==
-                       action.name;
-        });
-
-    if (jIt == _document[objectName].end())
-    {
-        return {};
-    }
-    return *jIt;
-}
-
-void CTranslationFile::addTranslation(const std::string_view& objectName, const std::string_view& textId)
+template <typename T>
+void CTranslationFile::addTranslation(const std::string_view& objectName, const T& translatable)
 {
     if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
     {
@@ -131,43 +113,19 @@ void CTranslationFile::addTranslation(const std::string_view& objectName, const 
     {
         _document.emplace(objectName, nlohmann::json::array());
     }
-    _document[objectName].push_back(makeTranslationObject(textId));
+    _document[objectName].push_back(makeTranslationObject(translatable));
     dump();
 }
 
-void CTranslationFile::addTranslation(const std::string_view& objectName, const Menu::MenuAction& action)
-{
-    if (!_document.contains(objectName))
-    {
-        _document.emplace(objectName, nlohmann::json::array());
-    }
-    _document[objectName].push_back(makeTranslationObject(action));
-    dump();
-}
-
-void CTranslationFile::updateTranslation(nlohmann::json& o,
-                                         const std::string_view& language,
-                                         const std::string_view& textId)
+template <typename T>
+void CTranslationFile::updateTranslation(nlohmann::json& o, const std::string_view& language, const T& translatable)
 {
     if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
     {
         return;
     }
     emplaceIncomplete(o);
-    o[language] = textId;
-    dump();
-}
-
-void CTranslationFile::updateTranslation(nlohmann::json& o,
-                                         const std::string_view& language,
-                                         const Menu::MenuAction& action)
-{
-    if (!CGameManagement::getGameSettingsInstance()->updateTranslations())
-    {
-        return;
-    }
-    emplaceIncomplete(o);
-    o[language] = action.toJson();
+    o[language] = makeTranslatable(translatable);
     dump();
 }
 
@@ -217,6 +175,27 @@ nlohmann::json CTranslationFile::makeTranslationObject(const Menu::MenuAction& a
         }
     }
     return o;
+}
+
+nlohmann::json CTranslationFile::makeTranslatable(const std::string_view& textId)
+{
+    return nlohmann::json(textId);
+}
+
+nlohmann::json CTranslationFile::makeTranslatable(const Menu::MenuAction& action)
+{
+    return action.toJson();
+}
+
+bool CTranslationFile::compareTranslatable(const nlohmann::json& object, const std::string_view& textId)
+{
+
+    return object.get<std::string>() == textId;
+}
+
+bool CTranslationFile::compareTranslatable(const nlohmann::json& object, const Menu::MenuAction& action)
+{
+    return object[TagNames::Translator::source][TagNames::Translator::menuAction].get<std::string>() == action.name;
 }
 
 void CTranslationFile::emplaceUntranslated(nlohmann::json& o)

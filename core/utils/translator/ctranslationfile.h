@@ -25,20 +25,26 @@ private:
 
     static std::string currentLanguageTag();
 
-    void emplaceUntranslated(nlohmann::json& o);
-    void emplaceIncomplete(nlohmann::json& o);
+    template <typename T>
+    void addTranslation(const std::string_view& objectName, const T& translatable);
 
-    void addTranslation(const std::string_view& objectName, const std::string_view& textId);
-    void addTranslation(const std::string_view& objectName, const Menu::MenuAction& action);
+    template <typename T>
+    void updateTranslation(nlohmann::json& o, const std::string_view& language, const T& translatable);
 
-    void updateTranslation(nlohmann::json& o, const std::string_view& language, const std::string_view& textId);
-    void updateTranslation(nlohmann::json& o, const std::string_view& language, const Menu::MenuAction& action);
+    template <typename T>
+    nlohmann::json findInArray(const std::string_view& objectName, const T& translatable);
 
     nlohmann::json makeTranslationObject(const std::string_view& textId);
     nlohmann::json makeTranslationObject(const Menu::MenuAction& action);
 
-    nlohmann::json findInArray(const std::string_view& objectName, const std::string_view& textId);
-    nlohmann::json findInArray(const std::string_view& objectName, const Menu::MenuAction& action);
+    nlohmann::json makeTranslatable(const std::string_view& textId);
+    nlohmann::json makeTranslatable(const Menu::MenuAction& action);
+
+    static bool compareTranslatable(const nlohmann::json& object, const std::string_view& textId);
+    static bool compareTranslatable(const nlohmann::json& object, const Menu::MenuAction& action);
+
+    void emplaceUntranslated(nlohmann::json& o);
+    void emplaceIncomplete(nlohmann::json& o);
 
     std::string _fileBaseName;
 };
