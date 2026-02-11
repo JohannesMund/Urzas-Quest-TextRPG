@@ -195,7 +195,7 @@ bool CTranslationFile::compareTranslatable(const nlohmann::json& object, const s
 
 bool CTranslationFile::compareTranslatable(const nlohmann::json& object, const Menu::MenuAction& action)
 {
-    return object[TagNames::Translator::source][TagNames::Translator::menuAction].get<std::string>() == action.name;
+    return Menu::MenuAction::fromJson(object).name == action.name;
 }
 
 void CTranslationFile::emplaceUntranslated(nlohmann::json& o)

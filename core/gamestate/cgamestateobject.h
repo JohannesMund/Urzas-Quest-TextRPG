@@ -45,6 +45,10 @@ public:
 protected:
     virtual std::string coreTr(const std::string_view& textId) const = 0;
 
+    std::string tr(const std::string_view& textId) const;
+    template <typename... Args>
+    std::string tr(const std::string_view& textId, Args&&... formatArgs) const;
+
 private:
     const std::string _objectName;
 
