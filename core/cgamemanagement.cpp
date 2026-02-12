@@ -275,14 +275,14 @@ void CGameManagement::executeTurn()
             CMenu quitGameMenu;
             CMenuAction saveAction = quitGameMenu.createAction({"Save", 's'});
             CMenuAction cancelAction = quitGameMenu.createAction({"Cancel", 'C'});
-            CMenuAction quitAction = quitGameMenu.createAction({"Quit without saving", 'q'});
+            CMenuAction reallyQuitAction = quitGameMenu.createAction({"Quit without saving", 'q'});
 
-            quitGameMenu.addMenuGroup({saveAction}, {quitAction});
+            quitGameMenu.addMenuGroup({saveAction}, {reallyQuitAction});
             quitGameMenu.addMenuGroup({cancelAction});
 
             auto reply = quitGameMenu.execute();
 
-            if (reply == quitAction)
+            if (reply == reallyQuitAction)
             {
                 throw CGameOverException();
             }
