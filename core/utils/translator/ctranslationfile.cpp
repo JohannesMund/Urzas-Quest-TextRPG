@@ -129,17 +129,6 @@ void CTranslationFile::updateTranslation(nlohmann::json& o, const std::string_vi
     dump();
 }
 
-void CTranslationFile::addTranslation(const std::string_view& objectName, const Menu::MenuAction& action)
-{
-    if (!_document.contains(objectName))
-    {
-        _document.emplace(objectName, nlohmann::json::array());
-    }
-    _document[objectName].push_back(makeTranslationObject(action));
-
-    dump();
-}
-
 std::string CTranslationFile::currentLanguageTag()
 {
     auto lang = CGameManagement::getGameSettingsInstance()->currentLanguage();
