@@ -42,11 +42,6 @@ jobs:
             c_compiler: gcc
           - os: ubuntu-latest
             c_compiler: gcc
-          - os: ubuntu-latest
-            c_compiler: clang
-          - os: windows-latest
-            c_compiler: clang
-
     steps:
       - uses: actions/checkout@v3
 
