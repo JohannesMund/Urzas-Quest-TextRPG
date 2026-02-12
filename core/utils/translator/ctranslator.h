@@ -101,20 +101,13 @@ inline std::string CTranslator::tr(const std::string_view& moduleName,
                                    const std::string_view& textId,
                                    Args&&... formatArgs)
 {
-
-    const auto r = translate(moduleName, objectName, textId);
-    if (!r.has_value())
-    {
-        return std::string(textId);
-    }
-
     try
     {
-        return std::vformat(*r, std::make_format_args(formatArgs...));
+        return std::vformat(tr(moduleName, objectName, textId), std::make_format_args(formatArgs...));
     }
     catch (const std::exception& e)
     {
-        CLog::error() << "Formatting error, std::format threw: " << e.what() << std::endl << std::flush;
-        return *r;
+        CLog::error() << "Formatting error, std::vformat threw: " << e.what() << std::endl << std::flush;
+        return std::string(textId);
     }
 }
