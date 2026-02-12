@@ -1,5 +1,5 @@
 #include "ctranslator.h"
-#include "clog.h"
+
 #include "console.h"
 #include "defaultsettings.h"
 #include "localdirectory.h"
@@ -112,28 +112,4 @@ Menu::MenuAction CTranslator::tr(const std::string_view& moduleName,
         return action;
     }
     return *r;
-}
-
-template <typename... Args>
-std::string CTranslator::tr(const std::string_view& moduleName,
-                            const std::string_view& objectName,
-                            const std::string_view& textId,
-                            Args&&... formatArgs)
-{
-    const auto r = translate(moduleName, objectName, textId);
-    if (!r.has_value())
-    {
-        return std::string(textId);
-    }
-
-    try
-    {
-
-        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
-    }
-    catch (const std::exception& e)
-    {
-        CLog::error() << "Formatting error, std::format threw: " << e.what() << std::endl << std::flush;
-        return *r;
-    }
 }

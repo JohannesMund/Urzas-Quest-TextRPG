@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ctranslator.h"
+
 #include <functional>
 #include <string>
 
@@ -95,4 +97,25 @@ protected:
      * An Or-Conjunction of EEncounterType values, used to determin in what context an encounter can occur,
      */
     unsigned int _type;
+
+    virtual std::string coreTr(const std::string_view& textId) const;
+    template <typename... Args>
+    std::string coreTr(const std::string_view& textId, Args&&... formatArgs) const;
+
+    virtual std::string tr(const std::string_view& textId) const;
+
+    template <typename... Args>
+    std::string tr(const std::string_view& textId, Args&&... formatArgs) const;
 };
+
+template <typename... Args>
+inline std::string CEncounter::coreTr(const std::string_view& textId, Args&&... formatArgs) const
+{
+    return CTranslator::tr(TagNames::Translator::core, name(), textId, formatArgs...);
+}
+
+template <typename... Args>
+inline std::string CEncounter::tr(const std::string_view& textId, Args&&... formatArgs) const
+{
+    return CTranslator::tr(moduleName(), name(), textId, formatArgs...);
+}

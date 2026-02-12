@@ -1,10 +1,11 @@
 #pragma once
 
-#include <map>
-#include <string>
-
+#include "clog.h"
 #include "ctranslationfile.h"
+
+#include <map>
 #include <nlohmann/json.hpp>
+#include <string>
 
 /**
  * @brief The CTranslator class provides translation of strings throughout the whole program
@@ -93,3 +94,28 @@ private:
                                                      const std::string_view& objectName,
                                                      const Menu::MenuAction& action);
 };
+
+template <typename... Args>
+inline std::string CTranslator::tr(const std::string_view& moduleName,
+                                   const std::string_view& objectName,
+                                   const std::string_view& textId,
+                                   Args&&... formatArgs)
+{
+
+    const auto r = translate(moduleName, objectName, textId);
+    if (!r.has_value())
+    {
+        return std::string(textId);
+    }
+
+    try
+    {
+
+        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
+    }
+    catch (const std::exception& e)
+    {
+        CLog::error() << "Formatting error, std::format threw: " << e.what() << std::endl << std::flush;
+        return *r;
+    }
+}

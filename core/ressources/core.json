@@ -306,6 +306,36 @@
           "MenuAction": "Gewinnen",
           "MenuActionKey": 0
         }
+      },
+      {
+        "Source": {
+          "MenuAction": "Search the body",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Die Leiche durchsuchen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Go away",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Weggehen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Take t-shirt",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "T-Shirt nehmen",
+          "MenuActionKey": 0
+        }
       }
     ]
   }
