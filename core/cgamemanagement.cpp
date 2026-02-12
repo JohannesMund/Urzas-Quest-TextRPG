@@ -272,15 +272,15 @@ void CGameManagement::executeTurn()
             Console::printLn("Do you want to save your progress?", Console::EAlignment::eCenter);
             Console::hr();
 
-            CMenu menu;
-            CMenuAction saveAction = menu.createAction({"Save", 's'});
-            CMenuAction cancelAction = menu.createAction({"Cancel", 'C'});
-            CMenuAction quitAction = menu.createAction({"Quit without saving", 'q'});
+            CMenu quitGameMenu;
+            CMenuAction saveAction = quitGameMenu.createAction({"Save", 's'});
+            CMenuAction cancelAction = quitGameMenu.createAction({"Cancel", 'C'});
+            CMenuAction quitAction = quitGameMenu.createAction({"Quit without saving", 'q'});
 
-            menu.addMenuGroup({saveAction}, {quitAction});
-            menu.addMenuGroup({cancelAction});
+            quitGameMenu.addMenuGroup({saveAction}, {quitAction});
+            quitGameMenu.addMenuGroup({cancelAction});
 
-            auto reply = menu.execute();
+            auto reply = quitGameMenu.execute();
 
             if (reply == quitAction)
             {
