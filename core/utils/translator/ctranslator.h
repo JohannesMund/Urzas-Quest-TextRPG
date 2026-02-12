@@ -99,7 +99,7 @@ template <typename... Args>
 inline std::string CTranslator::tr(const std::string_view& moduleName,
                                    const std::string_view& objectName,
                                    const std::string_view& textId,
-                                   Args&&... formatArgs)
+                                   Args&&...)
 {
 
     const auto r = translate(moduleName, objectName, textId);
@@ -110,8 +110,8 @@ inline std::string CTranslator::tr(const std::string_view& moduleName,
 
     try
     {
-
-        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
+        return *r;
+        // return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
     }
     catch (const std::exception& e)
     {

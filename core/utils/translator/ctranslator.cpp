@@ -1,5 +1,4 @@
 #include "ctranslator.h"
-
 #include "console.h"
 #include "defaultsettings.h"
 #include "localdirectory.h"
