@@ -32,6 +32,24 @@
                 "de": "Warum einen wertvollen Gegenstand verschwenden, wenn er dich schützen kann. Du nimmst das T-Shirt und rüstest es aus. Du bist nun ein Held in glänzender Rüstung, die dich beschüten wird."
             }
         ],
+        "Inventory": [
+            {
+                "Source": "You obtained {}",
+                "de": "Du erhälst {}"
+            },
+            {
+                "Source": "You look through your backpack and find the following:",
+                "de": "Du schaust durch deinen Rucksack und findest das Folgende:"
+            },
+            {
+                "Source": "Select item to use",
+                "de": "Wähle ein Item aus, um es zu benutzen"
+            },
+            {
+                "Source": "Select item to view",                
+                "de": "Wähle ein Item aus, um es anzuschauen"
+            }
+        ],
         "MenuActions": [
             {
                 "Source": {

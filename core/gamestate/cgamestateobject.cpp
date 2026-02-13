@@ -1,7 +1,6 @@
 #include "cgamestateobject.h"
 #include "console.h"
-#include "translator/ctranslator.h"
-#include "json/jsontagnames.h"
+#include "jsontagnames.h"
 
 #include <nlohmann/json.hpp>
 
@@ -49,10 +48,4 @@ bool CGameStateObject::compareObjectName(const std::string_view& objectName, con
 std::string CGameStateObject::tr(const std::string_view& textId) const
 {
     return CTranslator::tr(_translatorModuleName, _objectName, textId);
-}
-
-template <typename... Args>
-std::string CGameStateObject::tr(const std::string_view& textId, Args&&... formatArgs) const
-{
-    auto s = CTranslator::tr(_translatorModuleName, _objectName, textId, formatArgs...);
 }

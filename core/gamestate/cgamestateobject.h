@@ -1,7 +1,9 @@
 #pragma once
 
-#include "json/jsontagnames.h"
+#include "ctranslator.h"
+#include "jsontagnames.h"
 
+#include <format>
 #include <nlohmann/json_fwd.hpp>
 #include <string>
 
@@ -44,6 +46,8 @@ public:
 
 protected:
     virtual std::string coreTr(const std::string_view& textId) const = 0;
+    template <typename... Args>
+    std::string coreTr(const std::string_view& textId, Args&&... formatArgs) const;
 
     std::string tr(const std::string_view& textId) const;
     template <typename... Args>
@@ -54,3 +58,15 @@ private:
 
     std::string _translatorModuleName;
 };
+
+template <typename... Args>
+inline std::string CGameStateObject::coreTr(const std::string_view& textId, Args&&... formatArgs) const
+{
+    return std::vformat(coreTr(textId), std::make_format_args(formatArgs...));
+}
+
+template <typename... Args>
+inline std::string CGameStateObject::tr(const std::string_view& textId, Args&&... formatArgs) const
+{
+    return CTranslator::tr(_translatorModuleName, _objectName, textId, formatArgs...);
+}

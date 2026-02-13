@@ -68,7 +68,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/tasks/ctask.h core/tasks/ctask.cpp
     core/tasks/cbountyhunt.h core/tasks/cbountyhunt.cpp
 
-    core/cinventory.h core/cinventory.cpp
+    core/items/cinventory.h core/items/cinventory.cpp
     core/items/equipment/cequipment.h core/items/equipment/cequipment.cpp
     core/items/equipment/cweapon.h core/items/equipment/cweapon.cpp
     core/items/equipment/cshield.h core/items/equipment/cshield.cpp
