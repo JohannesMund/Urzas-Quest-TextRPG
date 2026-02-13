@@ -7,6 +7,8 @@ cmake_minimum_required(VERSION 3.11)
 cmake_policy(SET CMP0135 NEW)
 
 
+set(CMAKE_TLS_VERIFY 0)
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(TARGET_NAME UrzasQuest)
