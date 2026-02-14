@@ -4,14 +4,7 @@
 
 #include <nlohmann/json.hpp>
 
-CGameStateObject::CGameStateObject(const std::string_view& objectName, const std::string_view& moduleName) :
-    _objectName(objectName),
-    _translatorModuleName(moduleName)
-{
-}
-
-CGameStateObject::CGameStateObject(const std::string_view& objectName) :
-    CGameStateObject(objectName, TagNames::Translator::core)
+CGameStateObject::CGameStateObject(const std::string_view& objectName) : _objectName(objectName)
 {
 }
 
@@ -43,9 +36,4 @@ bool CGameStateObject::compareObjectName(const std::string_view& objectName, con
         return false;
     }
     return name.compare(objectName) == 0;
-}
-
-std::string CGameStateObject::tr(const std::string_view& textId) const
-{
-    return CTranslator::tr(_translatorModuleName, _objectName, textId);
 }

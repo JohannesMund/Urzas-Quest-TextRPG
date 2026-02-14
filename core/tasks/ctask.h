@@ -80,5 +80,6 @@ protected:
     bool _isFinished = false;
     bool _isAutoExecute = true;
 
-    virtual std::string coreTr(const std::string_view& textId) const override;
+    virtual std::string_view translatorObjectName() const override;
+    virtual std::string_view translatorModuleName() const override;
 };

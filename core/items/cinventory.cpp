@@ -36,25 +36,24 @@ void CInventory::addItem(CItem* item)
         auto it = std::find_if(_inventory.begin(), _inventory.end(), equipment->equipmentTypeFilter());
         if (it != _inventory.end())
         {
-            Console::printLn(CGameStateObject::coreTr(
+            Console::printLn(coreTr(
                 "Your already have a {} do you want to replace it with {}", equipment->typeName(), equipment->name()));
 
             if (CMenu::executeYesNoMenu() == CMenu::no())
             {
-                Console::printLn(
-                    CGameStateObject::coreTr("You decide to keep {} and reject {}.", (*it)->name(), item->name()));
+                Console::printLn(coreTr("You decide to keep {} and reject {}.", (*it)->name(), item->name()));
                 delete item;
                 return;
             }
 
-            Console::printLn(CGameStateObject::coreTr("You decide to throw away you {}.", (*it)->name()));
+            Console::printLn(coreTr("You decide to throw away you {}.", (*it)->name()));
 
             delete *it;
             _inventory.erase(it);
         }
     }
 
-    Console::printLn(CGameStateObject::coreTr("You obtained {}", item->name()));
+    Console::printLn(coreTr("You obtained {}", item->name()));
     _inventory.push_back(item);
 }
 
@@ -362,7 +361,7 @@ void CInventory::printUsableItems(const Scope& scope)
     if (item.has_value())
     {
         Console::hr();
-        Console::printLn(CGameStateObject::coreTr("You decide to use: {}", (*item)->name()));
+        Console::printLn(coreTr("You decide to use: {}", (*item)->name()));
         (*item)->useFromInventory();
         if ((*item)->isConsumable())
         {
@@ -418,9 +417,14 @@ void CInventory::load(const nlohmann::json& json)
     }
 }
 
-std::string CInventory::coreTr(const std::string_view& textId) const
+std::string_view CInventory::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::inventory, textId);
+    return TagNames::Item::inventory;
+}
+
+std::string_view CInventory::translatorModuleName() const
+{
+    return std::string_view();
 }
 
 CItem* CInventory::getItem(const unsigned int index)

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ctranslatable.h"
 #include "ctranslator.h"
 #include "jsontagnames.h"
 
@@ -13,7 +14,7 @@
  * @remark GamestateObjects also provide the means for translation (i.e. the file and the section, where translations
  * can be found)
  */
-class CGameStateObject
+class CGameStateObject : public CTranslatable
 {
 public:
     /**
@@ -21,7 +22,6 @@ public:
      * @remark Must be a unique name for each class.
      * @remark Every base class must implement this.
      */
-    CGameStateObject(const std::string_view& objectName, const std::string_view& moduleName);
     CGameStateObject(const std::string_view& objectName);
     /**
      * @brief returns the object name
@@ -44,29 +44,6 @@ public:
 
     static bool compareObjectName(const std::string_view& objectName, const nlohmann::json& json);
 
-protected:
-    virtual std::string coreTr(const std::string_view& textId) const = 0;
-    template <typename... Args>
-    std::string coreTr(const std::string_view& textId, Args&&... formatArgs) const;
-
-    std::string tr(const std::string_view& textId) const;
-    template <typename... Args>
-    std::string tr(const std::string_view& textId, Args&&... formatArgs) const;
-
 private:
     const std::string _objectName;
-
-    std::string _translatorModuleName;
 };
-
-template <typename... Args>
-inline std::string CGameStateObject::coreTr(const std::string_view& textId, Args&&... formatArgs) const
-{
-    return std::vformat(coreTr(textId), std::make_format_args(formatArgs...));
-}
-
-template <typename... Args>
-inline std::string CGameStateObject::tr(const std::string_view& textId, Args&&... formatArgs) const
-{
-    return CTranslator::tr(_translatorModuleName, _objectName, textId, formatArgs...);
-}

@@ -396,9 +396,14 @@ void CPlayer::load(const nlohmann::json& json)
     }
 }
 
-std::string CPlayer::coreTr(const std::string_view& textId) const
+std::string_view CPlayer::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, TagNames::Player::player, textId);
+    return TagNames::Player::player;
+}
+
+std::string_view CPlayer::translatorModuleName() const
+{
+    return std::string_view();
 }
 
 void CPlayer::removeAllSupportCompanions()

@@ -43,5 +43,5 @@ protected:
     std::string _description;
     unsigned int _level = 0;
 
-    virtual std::string coreTr(const std::string_view& textId) const override;
+    virtual std::string_view translatorObjectName() const override;
 };

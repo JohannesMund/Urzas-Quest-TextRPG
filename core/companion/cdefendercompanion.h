@@ -13,4 +13,7 @@ public:
     virtual void battleAction(CEnemy* enemy, bool& endRound) override;
     virtual void postBattle(CEnemy* enemy) override;
     virtual int shield(const int i) override;
+
+protected:
+    virtual std::string_view translatorModuleName() const override;
 };
