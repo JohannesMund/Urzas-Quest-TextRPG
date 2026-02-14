@@ -122,11 +122,6 @@ std::string CRoom::translatorObjectName() const
     return std::string(TagNames::Room::room);
 }
 
-std::string CRoom::translatorModuleName() const
-{
-    return std::string();
-}
-
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)
 {
     switch (dir)

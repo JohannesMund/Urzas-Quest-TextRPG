@@ -84,6 +84,11 @@ CMap::RoomFilter CFishingVillage::fishingVillageFilter()
     return [](const CRoom* room) { return dynamic_cast<const CFishingVillage*>(room) != nullptr; };
 }
 
+std::string CFishingVillage::translatorModuleName() const
+{
+    return FishingVillageMakeRod::moduleName();
+}
+
 void CFishingVillage::printHeader()
 {
     Console::cls();

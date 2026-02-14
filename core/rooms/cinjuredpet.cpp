@@ -88,6 +88,11 @@ void CInjuredPet::execute()
     _isRandomTaskPossible = true;
 }
 
+std::string CInjuredPet::translatorModuleName() const
+{
+    return std::string();
+}
+
 nlohmann::json CInjuredPet::save() const
 {
     auto o = CField::save();

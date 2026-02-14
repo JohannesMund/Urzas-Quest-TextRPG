@@ -13,6 +13,9 @@ public:
 
     virtual bool isMapRevealed() const;
 
+protected:
+    virtual std::string translatorModuleName() const override;
+
 private:
     bool _isMapRevealed = false;
 

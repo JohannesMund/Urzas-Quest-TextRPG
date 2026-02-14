@@ -66,5 +66,4 @@ protected:
     virtual void load(const nlohmann::json& json) override;
 
     virtual std::string translatorObjectName() const override;
-    virtual std::string translatorModuleName() const override;
 };

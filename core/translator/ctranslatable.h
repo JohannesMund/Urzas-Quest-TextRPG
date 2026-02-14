@@ -3,7 +3,6 @@
 #include "ctranslator.h"
 
 #include <format>
-#include <nlohmann/json_fwd.hpp>
 #include <string>
 
 /**
@@ -65,8 +64,7 @@ private:
 template <typename... Args>
 inline std::string CTranslatable::coreTr(const std::string_view& textId, Args&&... formatArgs) const
 {
-    return std::vformat(CTranslator::tr(TagNames::Translator::core, translatorObjectName(), textId),
-                        std::make_format_args(formatArgs...));
+    return CTranslator::tr(TagNames::Translator::core, translatorObjectName(), textId, formatArgs...);
 }
 
 template <typename... Args>

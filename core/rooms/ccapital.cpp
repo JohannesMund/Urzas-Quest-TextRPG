@@ -44,6 +44,11 @@ CMap::RoomFilter CCapital::capitalFilter()
     return [](const CRoom* room) { return dynamic_cast<const CCapital*>(room) != nullptr; };
 }
 
+std::string CCapital::translatorModuleName() const
+{
+    return std::string();
+}
+
 nlohmann::json CCapital::save() const
 {
     nlohmann::json o = CTown::save();

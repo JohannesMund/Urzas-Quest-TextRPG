@@ -116,6 +116,11 @@ CMap::RoomFilter CTown::townFilter()
     return [](const CRoom* room) { return dynamic_cast<const CTown*>(room) != nullptr; };
 }
 
+std::string CTown::translatorModuleName() const
+{
+    return std::string();
+}
+
 char CTown::getMapSymbol() const
 {
     return 'T';

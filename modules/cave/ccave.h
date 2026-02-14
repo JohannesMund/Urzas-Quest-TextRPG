@@ -19,6 +19,8 @@ public:
     virtual bool isTaskPossible(const std::string_view& moduleName) const override;
 
 protected:
+    virtual std::string translatorModuleName() const override;
+
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 

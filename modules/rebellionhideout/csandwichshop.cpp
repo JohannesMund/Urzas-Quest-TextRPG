@@ -136,6 +136,11 @@ CMap::RoomFilter CSandwichShop::sandwichShopFilter()
     return [](const CRoom* room) { return dynamic_cast<const CSandwichShop*>(room) != nullptr; };
 }
 
+std::string CSandwichShop::translatorModuleName() const
+{
+    return RebellionHideout::moduleName();
+}
+
 nlohmann::json CSandwichShop::save() const
 {
     nlohmann::json o = CRoom::save();

@@ -29,6 +29,11 @@ std::string FishingVillageFishLegend::moduleName()
     return "FishingVillage_FishLegend";
 }
 
+std::string FishingVillage::moduleName()
+{
+    return "FishingVillage";
+}
+
 std::string FishingVillage::fishingVilleName()
 {
     return std::format("{}Middlesbron {}Cove{}", CC::fgLightGreen(), CC::fgLightBlue(), CC::ccReset());
