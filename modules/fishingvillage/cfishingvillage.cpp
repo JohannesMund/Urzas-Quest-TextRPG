@@ -38,7 +38,7 @@ void CFishingVillage::execute()
         std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
-            taskAction = menu.createAction({_task->taskNav()});
+            taskAction = menu.createAction({_task->taskNav()}, false);
             menu.addMenuGroup({taskAction.value()}, {CMenu::exit()});
         }
         else
@@ -82,6 +82,11 @@ std::string CFishingVillage::fgColor() const
 CMap::RoomFilter CFishingVillage::fishingVillageFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CFishingVillage*>(room) != nullptr; };
+}
+
+std::string CFishingVillage::translatorModuleName() const
+{
+    return FishingVillageMakeRod::moduleName();
 }
 
 void CFishingVillage::printHeader()

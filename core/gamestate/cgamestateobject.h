@@ -1,7 +1,10 @@
 #pragma once
 
-#include "json/jsontagnames.h"
+#include "ctranslatable.h"
+#include "ctranslator.h"
+#include "jsontagnames.h"
 
+#include <format>
 #include <nlohmann/json_fwd.hpp>
 #include <string>
 
@@ -11,7 +14,7 @@
  * @remark GamestateObjects also provide the means for translation (i.e. the file and the section, where translations
  * can be found)
  */
-class CGameStateObject
+class CGameStateObject : public CTranslatable
 {
 public:
     /**
@@ -19,7 +22,6 @@ public:
      * @remark Must be a unique name for each class.
      * @remark Every base class must implement this.
      */
-    CGameStateObject(const std::string_view& objectName, const std::string_view& moduleName);
     CGameStateObject(const std::string_view& objectName);
     /**
      * @brief returns the object name
@@ -42,11 +44,6 @@ public:
 
     static bool compareObjectName(const std::string_view& objectName, const nlohmann::json& json);
 
-protected:
-    virtual std::string coreTr(const std::string_view& textId) const = 0;
-
 private:
     const std::string _objectName;
-
-    std::string _translatorModuleName;
 };

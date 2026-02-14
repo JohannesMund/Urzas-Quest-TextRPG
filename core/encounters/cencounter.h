@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ctranslatable.h"
+
 #include <functional>
 #include <string>
 
@@ -12,7 +14,7 @@
  * @remark Derive from CEncounter to create a new encounter
  */
 
-class CEncounter
+class CEncounter : public CTranslatable
 {
 public:
     enum EEncounterType
@@ -95,4 +97,7 @@ protected:
      * An Or-Conjunction of EEncounterType values, used to determin in what context an encounter can occur,
      */
     unsigned int _type;
+
+private:
+    virtual std::string translatorObjectName() const;
 };

@@ -25,3 +25,8 @@ std::string CBattleEncounter::name() const
 {
     return "Battle";
 }
+
+std::string CBattleEncounter::translatorModuleName() const
+{
+    return std::string();
+}

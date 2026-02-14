@@ -22,6 +22,11 @@ CMap::RoomFilter CField::fieldFilter()
     return [](const CRoom* room) { return dynamic_cast<const CField*>(room) != nullptr; };
 }
 
+std::string CField::translatorModuleName() const
+{
+    return std::string();
+}
+
 char CField::getMapSymbol() const
 {
     return ' ';

@@ -1,232 +1,406 @@
 {
-  "FileSpec": {
-    "DateTime": "2026-02-06 20:36:28",
-    "FileType": "Translation",
-    "Name": "UrzasQuest TextRPG",
-    "Version": 1
-  },
-  "Translation": {
-    "MenuActions": [
-      {
-        "Source": {
-          "MenuAction": "Start a new game",
-          "MenuActionKey": 115
-        },
-        "de": {
-          "MenuAction": "Neues Spiel",
-          "MenuActionKey": 110
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Load game",
-          "MenuActionKey": 108
-        },
-        "de": {
-          "MenuAction": "Spiel laden",
-          "MenuActionKey": 115
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Options",
-          "MenuActionKey": 79
-        },
-        "de": {
-          "MenuAction": "Optionen",
-          "MenuActionKey": 79
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Quit game",
-          "MenuActionKey": 113
-        },
-        "de": {
-          "MenuAction": "Beenden",
-          "MenuActionKey": 98
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Language options",
-          "MenuActionKey": 108
-        },
-        "de": {
-          "MenuAction": "Sprachoptionen",
-          "MenuActionKey": 115
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "en",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "en",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "de",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "de",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Take it",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Nehmen",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Leave it",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Lass es",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "North",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Norden",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "East",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Osten",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "South",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Süden",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "West",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Westen",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Map",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Karte",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Inventory",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Inventar",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Look for trouble",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Kravall bürsten",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Quit Game",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Beenden",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Use Item",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Benutzen",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "View Item",
-          "MenuActionKey": 0
-        },
-        "de": {
-          "MenuAction": "Anschauen",
-          "MenuActionKey": 0
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Save",
-          "MenuActionKey": 115
-        },
-        "de": {
-          "MenuAction": "Speichern",
-          "MenuActionKey": 115
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Cancel",
-          "MenuActionKey": 99
-        },
-        "de": {
-          "MenuAction": "Abbrechen",
-          "MenuActionKey": 97
-        }
-      },
-      {
-        "Source": {
-          "MenuAction": "Quit without saving",
-          "MenuActionKey": 113
-        },
-        "de": {
-          "MenuAction": "Ohne speichern beenden",
-          "MenuActionKey": 79
-        }
-      }
-    ]
-  }
+    "FileSpec": {
+        "DateTime": "2026-02-13 07:34:56",
+        "FileType": "Translation",
+        "Name": "UrzasQuest TextRPG",
+        "Version": 1
+    },
+    "Translation": {
+        "Dead Hero": [
+            {
+                "Source": "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you.",
+                "de": "Du bahnst dir deinen Weg durch die Welt der Abenteuer, als du einen Körper neben einem Baum liegen siegst. Es scheint ein Held zu sein, so wie du. Er trägt das gleiche {} wie du, und er trägt das gleiche {} wie du. Aber, er hat wohl eher nicht soviel Glück wie du."
+            },
+            {
+                "Source": "He is dead. Definitely dead. He lies in a puddle of his own blood, the limbs broken, all his treasure gone (if he even had som treasure at all). All of his treasure?",
+                "de": "Er ist tot. Definitiv tot. Er liegt mit gebrochenen Gliedmaßen in einer Blutpfpütze, alle seine Schätze sind weg (wenn er überhaupt schätze hatte4). Alle seine Schätze?"
+            },
+            {
+                "Source": "Maybe, just maybe you should have a look.",
+                "de": "Vielleicht, nur vielleicht, solltest du mal nachschauen."
+            },
+            {
+                "Source": "You approach the body, and one thing is for sure: This guy is dead. The opponent must have had enormous claws (or a Nokia 3210). But one thing survived the fight. His shirt seems pretty unharmed. It could be very usefull for you too.",
+                "de": "Du begutachtest den Körper, und eine sache ist sicher: Der Dude ist tot. Sein Gegner muß enorme Klauen gehabt haben (oder ein Nokia 3210). Aber eine sache hat den Kampf überlebt. Sein Shirt sieht recht unversehrt aus. Das könnte auch für dich sehr nützlich sein."
+            },
+            {
+                "Source": "You wonder, if you should take it.",
+                "de": "Du überlegst, es mitzunehmen."
+            },
+            {
+                "Source": "Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now have a shiny new armor to protect you.",
+                "de": "Warum einen wertvollen Gegenstand verschwenden, wenn er dich schützen kann. Du nimmst das T-Shirt und rüstest es aus. Du bist nun ein Held in glänzender Rüstung, die dich beschüten wird."
+            }
+        ],
+        "Inventory": [
+            {
+                "Source": "You obtained {}",
+                "de": "Du erhälst {}"
+            },
+            {
+                "Source": "You look through your backpack and find the following:",
+                "de": "Du schaust durch deinen Rucksack und findest das Folgende:"
+            },
+            {
+                "Source": "Select item to use",
+                "de": "Wähle ein Item aus, um es zu benutzen"
+            },
+            {
+                "Source": "Select item to view",                
+                "de": "Wähle ein Item aus, um es anzuschauen"
+            }
+        ],
+        "MenuActions": [
+            {
+                "Source": {
+                    "MenuAction": "Start a new game",
+                    "MenuActionKey": 115
+                },
+                "de": {
+                    "MenuAction": "Neues Spiel",
+                    "MenuActionKey": 110
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Load game",
+                    "MenuActionKey": 108
+                },
+                "de": {
+                    "MenuAction": "Spiel laden",
+                    "MenuActionKey": 115
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Options",
+                    "MenuActionKey": 79
+                },
+                "de": {
+                    "MenuAction": "Optionen",
+                    "MenuActionKey": 79
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Quit game",
+                    "MenuActionKey": 113
+                },
+                "de": {
+                    "MenuAction": "Beenden",
+                    "MenuActionKey": 98
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Language options",
+                    "MenuActionKey": 108
+                },
+                "de": {
+                    "MenuAction": "Sprachoptionen",
+                    "MenuActionKey": 115
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "en",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "en",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "de",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "de",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Take it",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Nehmen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Leave it",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Lass es",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "North",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Norden",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "East",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Osten",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "South",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Süden",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "West",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Westen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Map",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Karte",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Inventory",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Inventar",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Look for trouble",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Kravall bürsten",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Quit Game",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Beenden",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Use Item",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Benutzen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "View Item",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Anschauen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Save",
+                    "MenuActionKey": 115
+                },
+                "de": {
+                    "MenuAction": "Speichern",
+                    "MenuActionKey": 115
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Cancel",
+                    "MenuActionKey": 67
+                },
+                "de": {
+                    "MenuAction": "Abbrechen",
+                    "MenuActionKey": 65
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Quit without saving",
+                    "MenuActionKey": 113
+                },
+                "de": {
+                    "MenuAction": "Ohne speichern beenden",
+                    "MenuActionKey": 79
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Fight",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Kämpfen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Run",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Weglaufen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Rock",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Stein",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Paper",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Papier",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Scissors",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Schere",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Lizard",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Echse",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Spock",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Spock",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Win",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Gewinnen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Search the body",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Die Leiche durchsuchen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Go away",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Weggehen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Take t-shirt",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "T-Shirt nehmen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Look",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Nachsehen",
+                    "MenuActionKey": 0
+                }
+            },
+            {
+                "Source": {
+                    "MenuAction": "Help",
+                    "MenuActionKey": 0
+                },
+                "de": {
+                    "MenuAction": "Helfen",
+                    "MenuActionKey": 0
+                }
+            }
+        ]
+    }
 }

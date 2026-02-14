@@ -36,6 +36,8 @@ enum class EFishLevel
     eLegend
 };
 
+std::string moduleName();
+
 static const unsigned int rodLevelCap = 5;
 static const unsigned int boatLevelCap = 5;
 

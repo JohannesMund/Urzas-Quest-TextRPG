@@ -22,6 +22,11 @@ bool CDungeonRoom::isSpecialRoom() const
     return false;
 }
 
+std::string CDungeonRoom::translatorModuleName() const
+{
+    return std::string();
+}
+
 char CDungeonRoom::getMapSymbol() const
 {
     return ' ';

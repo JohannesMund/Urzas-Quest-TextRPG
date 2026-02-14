@@ -56,3 +56,8 @@ int CHealerCompanion::shield(const int i)
 {
     return i;
 }
+
+std::string CHealerCompanion::translatorModuleName() const
+{
+    return std::string();
+}

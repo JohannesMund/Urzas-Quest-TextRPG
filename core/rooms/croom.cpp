@@ -117,9 +117,9 @@ void CRoom::load(const nlohmann::json& json)
     }
 }
 
-std::string CRoom::coreTr(const std::string_view& textId) const
+std::string CRoom::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, TagNames::Room::room, textId);
+    return std::string(TagNames::Room::room);
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

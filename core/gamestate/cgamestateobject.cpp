@@ -1,18 +1,10 @@
 #include "cgamestateobject.h"
 #include "console.h"
-#include "translator/ctranslator.h"
-#include "json/jsontagnames.h"
+#include "jsontagnames.h"
 
 #include <nlohmann/json.hpp>
 
-CGameStateObject::CGameStateObject(const std::string_view& objectName, const std::string_view& moduleName) :
-    _objectName(objectName),
-    _translatorModuleName(moduleName)
-{
-}
-
-CGameStateObject::CGameStateObject(const std::string_view& objectName) :
-    CGameStateObject(objectName, TagNames::Translator::core)
+CGameStateObject::CGameStateObject(const std::string_view& objectName) : _objectName(objectName)
 {
 }
 

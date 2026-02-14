@@ -1,11 +1,11 @@
 #include "cleilatowntask.h"
 #include "cgamemanagement.h"
+#include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
 #include "ctown.h"
 #include "moduleressources.h"
 #include "ressources.h"
-
 #include <format>
 
 CLeilaTownTask::CLeilaTownTask() : CTask(TagNames::Leila::leilaTown)
@@ -51,5 +51,7 @@ void CLeilaTownTask::execute()
 
 Menu::MenuAction CLeilaTownTask::taskNav() const
 {
-    return {std::format("Ask about {} and {}", Ressources::Game::fiego(), Ressources::Game::brock())};
+    const auto navText =
+        CC::unColorizeString(std::format("Ask about {} and {}", Ressources::Game::fiego(), Ressources::Game::brock()));
+    return CMenu::tr(Leila::moduleName(), {navText});
 }

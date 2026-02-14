@@ -67,6 +67,8 @@ void printOptionsMenu()
 
 int main()
 {
+    CLog::rollover();
+
     Console::setEcho(false);
 
     while (true)

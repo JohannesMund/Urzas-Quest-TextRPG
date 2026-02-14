@@ -100,3 +100,8 @@ void CSupportCompanion::load(const nlohmann::json& json)
 
     CCompanion::load(json);
 }
+
+std::string CSupportCompanion::translatorModuleName() const
+{
+    return _moduleName;
+}

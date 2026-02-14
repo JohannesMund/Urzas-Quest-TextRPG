@@ -20,6 +20,11 @@ bool CDungeonMapRoom::isMapRevealed() const
     return _isMapRevealed;
 }
 
+std::string CDungeonMapRoom::translatorModuleName() const
+{
+    return std::string();
+}
+
 char CDungeonMapRoom::getMapSymbol() const
 {
     return 'm';

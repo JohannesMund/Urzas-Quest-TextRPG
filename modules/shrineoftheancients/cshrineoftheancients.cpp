@@ -49,6 +49,11 @@ std::string CShrineOfTheAncients::bgColor() const
     return CC::bgLightGray();
 }
 
+std::string CShrineOfTheAncients::translatorModuleName() const
+{
+    return Shrine::moduleName();
+}
+
 nlohmann::json CShrineOfTheAncients::save() const
 {
     auto o = CRoom::save();

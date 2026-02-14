@@ -1,10 +1,11 @@
 #pragma once
 
-#include <map>
-#include <string>
-
+#include "clog.h"
 #include "ctranslationfile.h"
+
+#include <map>
 #include <nlohmann/json.hpp>
+#include <string>
 
 /**
  * @brief The CTranslator class provides translation of strings throughout the whole program
@@ -59,6 +60,15 @@ public:
                           const std::string_view& objectName,
                           const std::string_view& textId);
 
+    /**
+     * @brief provides a translation for a MenuAction
+     * @remarks uses CTranslator::translate
+     * @remark used, to apply a custom hotkey to a MenuAction (i.e. [A]ction)
+     * @param[in] moduleName the moduleName which provides the translations or "core"
+     * @param[in] objecName section in the translation. organisation is up to the module
+     * @param[in] action MenuAction to be translated
+     * @return the translated action or the action if an error occured
+     */
     static Menu::MenuAction tr(const std::string_view& moduleName,
                                const std::string_view& objectName,
                                const Menu::MenuAction& action);
@@ -74,6 +84,8 @@ private:
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
     void registerModule(const std::string_view& moduleName, const std::string_view& fileName);
 
+    static CTranslationFile* getTranslationFile(const std::string_view& moduleName);
+
     static std::optional<std::string> translate(const std::string_view& moduleName,
                                                 const std::string_view& objectName,
                                                 const std::string_view& textId);
@@ -82,3 +94,20 @@ private:
                                                      const std::string_view& objectName,
                                                      const Menu::MenuAction& action);
 };
+
+template <typename... Args>
+inline std::string CTranslator::tr(const std::string_view& moduleName,
+                                   const std::string_view& objectName,
+                                   const std::string_view& textId,
+                                   Args&&... formatArgs)
+{
+    try
+    {
+        return std::vformat(tr(moduleName, objectName, textId), std::make_format_args(formatArgs...));
+    }
+    catch (const std::exception& e)
+    {
+        CLog::error() << "Formatting error, std::vformat threw: " << e.what() << std::endl << std::flush;
+        return std::string(textId);
+    }
+}

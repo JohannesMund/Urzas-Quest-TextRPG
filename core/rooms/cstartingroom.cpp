@@ -100,6 +100,11 @@ void CStartingRoom::execute()
     _isRandomTaskPossible = true;
 }
 
+std::string CStartingRoom::translatorModuleName() const
+{
+    return std::string();
+}
+
 char CStartingRoom::getMapSymbol() const
 {
     return '*';

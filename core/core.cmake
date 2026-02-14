@@ -30,9 +30,10 @@ set(URZAS_QUEST_SOURCES_CORE
     core/utils/json/jsonexceptions.h
     core/utils/json/jsontagnames.h
 
-    core/utils/translator/ctranslator.h core/utils/translator/ctranslator.cpp
-    core/utils/translator/ctranslationfile.h core/utils/translator/ctranslationfile.cpp
-    core/utils/translator/translatorexceptions.h
+    core/translator/ctranslator.h core/translator/ctranslator.cpp
+    core/translator/ctranslatable.h core/translator/ctranslatable.cpp
+    core/translator/ctranslationfile.h core/translator/ctranslationfile.cpp
+    core/translator/translatorexceptions.h
         
     core/companion/companionfactory.h core/companion/companionfactory.cpp
     core/companion/ccompanion.h core/companion/ccompanion.cpp
@@ -68,7 +69,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/tasks/ctask.h core/tasks/ctask.cpp
     core/tasks/cbountyhunt.h core/tasks/cbountyhunt.cpp
 
-    core/cinventory.h core/cinventory.cpp
+    core/items/cinventory.h core/items/cinventory.cpp
     core/items/equipment/cequipment.h core/items/equipment/cequipment.cpp
     core/items/equipment/cweapon.h core/items/equipment/cweapon.cpp
     core/items/equipment/cshield.h core/items/equipment/cshield.cpp
@@ -121,7 +122,7 @@ set(CORE_INCLUDE_DIRS
     /core/tasks 
     /core/utils 
     /core/utils/json
-    /core/utils/translator
+    /core/translator
 )
 
 

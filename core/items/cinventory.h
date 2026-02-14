@@ -91,7 +91,8 @@ private:
     virtual nlohmann::json save() const override;
     void load(const nlohmann::json&) override;
 
-    virtual std::string coreTr(const std::string_view& textId) const override;
+    virtual std::string translatorObjectName() const override;
+    virtual std::string translatorModuleName() const override;
 
     CItem* getItem(const unsigned int index);
     ItemList _inventory;
