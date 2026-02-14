@@ -117,14 +117,14 @@ void CRoom::load(const nlohmann::json& json)
     }
 }
 
-std::string_view CRoom::translatorObjectName() const
+std::string CRoom::translatorObjectName() const
 {
-    return TagNames::Room::room;
+    return std::string(TagNames::Room::room);
 }
 
-std::string_view CRoom::translatorModuleName() const
+std::string CRoom::translatorModuleName() const
 {
-    return std::string_view();
+    return std::string();
 }
 
 void CRoom::blockPath(const CMap::EDirections dir, const bool block)

@@ -83,3 +83,8 @@ std::string CDeadHero::name() const
 {
     return "Dead Hero";
 }
+
+std::string CDeadHero::translatorModuleName() const
+{
+    return std::string();
+}

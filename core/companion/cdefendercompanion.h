@@ -15,5 +15,5 @@ public:
     virtual int shield(const int i) override;
 
 protected:
-    virtual std::string_view translatorModuleName() const override;
+    virtual std::string translatorModuleName() const override;
 };

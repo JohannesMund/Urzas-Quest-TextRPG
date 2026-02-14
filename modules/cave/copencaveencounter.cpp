@@ -45,3 +45,8 @@ std::string COpenCaveEncounter::moduleName() const
 {
     return Cave::moduleName();
 }
+
+std::string COpenCaveEncounter::translatorModuleName() const
+{
+    return Cave::moduleName();
+}

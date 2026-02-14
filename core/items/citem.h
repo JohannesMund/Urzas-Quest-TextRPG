@@ -212,6 +212,6 @@ protected:
 
     bool _isConsumable = false;
 
-    virtual std::string_view translatorObjectName() const override;
-    virtual std::string_view translatorModuleName() const override;
+    virtual std::string translatorObjectName() const override;
+    virtual std::string translatorModuleName() const override;
 };

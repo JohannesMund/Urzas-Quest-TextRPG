@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ctranslator.h"
+#include "ctranslatable.h"
 
 #include <functional>
 #include <string>
@@ -14,7 +14,7 @@
  * @remark Derive from CEncounter to create a new encounter
  */
 
-class CEncounter
+class CEncounter : public CTranslatable
 {
 public:
     enum EEncounterType
@@ -98,24 +98,6 @@ protected:
      */
     unsigned int _type;
 
-    virtual std::string coreTr(const std::string_view& textId) const;
-    template <typename... Args>
-    std::string coreTr(const std::string_view& textId, Args&&... formatArgs) const;
-
-    virtual std::string tr(const std::string_view& textId) const;
-
-    template <typename... Args>
-    std::string tr(const std::string_view& textId, Args&&... formatArgs) const;
+private:
+    virtual std::string translatorObjectName() const;
 };
-
-template <typename... Args>
-inline std::string CEncounter::coreTr(const std::string_view& textId, Args&&... formatArgs) const
-{
-    return CTranslator::tr(TagNames::Translator::core, name(), textId, formatArgs...);
-}
-
-template <typename... Args>
-inline std::string CEncounter::tr(const std::string_view& textId, Args&&... formatArgs) const
-{
-    return CTranslator::tr(moduleName(), name(), textId, formatArgs...);
-}

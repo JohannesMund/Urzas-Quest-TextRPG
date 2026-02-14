@@ -37,14 +37,14 @@ void CTask::load(const nlohmann::json& json)
     _isAutoExecute = json.value<bool>(TagNames::Task::autoExecute, false);
 }
 
-std::string_view CTask::translatorObjectName() const
+std::string CTask::translatorObjectName() const
 {
-    return TagNames::Task::task;
+    return std::string(TagNames::Task::task);
 }
 
-std::string_view CTask::translatorModuleName() const
+std::string CTask::translatorModuleName() const
 {
-    return std::string_view();
+    return std::string();
 }
 
 CTask::CTask(const std::string_view& objectName) : CGameStateObject(objectName)

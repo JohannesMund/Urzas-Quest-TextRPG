@@ -417,14 +417,14 @@ void CInventory::load(const nlohmann::json& json)
     }
 }
 
-std::string_view CInventory::translatorObjectName() const
+std::string CInventory::translatorObjectName() const
 {
-    return TagNames::Item::inventory;
+    return std::string(TagNames::Item::inventory);
 }
 
-std::string_view CInventory::translatorModuleName() const
+std::string CInventory::translatorModuleName() const
 {
-    return std::string_view();
+    return std::string();
 }
 
 CItem* CInventory::getItem(const unsigned int index)

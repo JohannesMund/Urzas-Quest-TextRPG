@@ -106,3 +106,8 @@ bool CEquipmentDealer::canBeExecuted(const EEncounterType& tp) const
     }
     return CEncounter::canBeExecuted(tp);
 }
+
+std::string CEquipmentDealer::translatorModuleName() const
+{
+    return std::string();
+}

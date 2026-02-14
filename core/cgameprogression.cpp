@@ -416,14 +416,14 @@ void CGameProgression::reRegisterModule(const std::string_view& name, const Modu
     }
 }
 
-std::string_view CGameProgression::translatorObjectName() const
+std::string CGameProgression::translatorObjectName() const
 {
-    return TagNames::Progression::progression;
+    return std::string(TagNames::Progression::progression);
 }
 
-std::string_view CGameProgression::translatorModuleName() const
+std::string CGameProgression::translatorModuleName() const
 {
-    return std::string_view();
+    return std::string();
 }
 
 void CGameProgression::registerModule(const Module::ModuleInfo& module)

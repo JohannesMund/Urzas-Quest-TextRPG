@@ -103,14 +103,14 @@ nlohmann::json CItem::save() const
     return o;
 }
 
-std::string_view CItem::translatorObjectName() const
+std::string CItem::translatorObjectName() const
 {
-    return TagNames::Item::item;
+    return std::string(TagNames::Item::item);
 }
 
-std::string_view CItem::translatorModuleName() const
+std::string CItem::translatorModuleName() const
 {
-    return std::string_view();
+    return std::string();
 }
 
 string CItem::name() const

@@ -19,8 +19,8 @@ protected:
     std::string tr(const std::string_view& textId) const;
 
 private:
-    virtual std::string_view translatorObjectName() const = 0;
-    virtual std::string_view translatorModuleName() const = 0;
+    virtual std::string translatorObjectName() const = 0;
+    virtual std::string translatorModuleName() const = 0;
 };
 
 template <typename... Args>

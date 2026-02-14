@@ -33,12 +33,7 @@ bool CEncounter::canBeExecuted(const EEncounterType& type) const
     return !(_isSingleExecution && _hasBeenExecuted);
 }
 
-std::string CEncounter::coreTr(const std::string_view& textId) const
+std::string CEncounter::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, name(), textId);
-}
-
-std::string CEncounter::tr(const std::string_view& textId) const
-{
-    return CTranslator::tr(moduleName(), name(), textId);
+    return name();
 }

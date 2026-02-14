@@ -88,3 +88,8 @@ std::string CMysteriousChest::name() const
 {
     return "Myterious Chest";
 }
+
+std::string CMysteriousChest::translatorModuleName() const
+{
+    return std::string();
+}

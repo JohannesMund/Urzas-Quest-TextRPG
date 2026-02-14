@@ -28,7 +28,7 @@ public:
     virtual void load(const nlohmann::json& json) override;
 
 protected:
-    virtual std::string_view translatorModuleName() const override;
+    virtual std::string translatorModuleName() const override;
 
 private:
     std::string _moduleName;

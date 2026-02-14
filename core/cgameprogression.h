@@ -142,6 +142,6 @@ private:
     std::vector<ModuleHint> _moduleHints;
     std::vector<ModuleQuest> _moduleQuests;
 
-    virtual std::string_view translatorObjectName() const override;
-    virtual std::string_view translatorModuleName() const override;
+    virtual std::string translatorObjectName() const override;
+    virtual std::string translatorModuleName() const override;
 };
