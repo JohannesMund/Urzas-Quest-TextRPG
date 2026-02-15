@@ -9,4 +9,7 @@ public:
 
     virtual void spoilsOfWar() const override;
     virtual void postBattle() override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

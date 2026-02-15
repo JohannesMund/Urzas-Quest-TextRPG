@@ -71,6 +71,11 @@ void CMobEnemy::setWeapon(const std::string& weapon)
     _weapon = weapon;
 }
 
+std::string CMobEnemy::translatorModuleName() const
+{
+    return std::string();
+}
+
 void CMobEnemy::specialAttack()
 {
     Console::printLn("Special Attack!");

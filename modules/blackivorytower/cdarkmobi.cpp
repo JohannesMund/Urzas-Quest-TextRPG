@@ -35,3 +35,8 @@ void CDarkMobi::battleAction(bool& endRound)
 void CDarkMobi::postBattle()
 {
 }
+
+std::string CDarkMobi::translatorModuleName() const
+{
+    return BlackIvoryTower::moduleName();
+}

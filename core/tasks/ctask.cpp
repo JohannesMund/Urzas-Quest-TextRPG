@@ -44,7 +44,7 @@ std::string CTask::translatorObjectName() const
 
 std::string CTask::translatorModuleName() const
 {
-    return std::string();
+    return moduleName();
 }
 
 CTask::CTask(const std::string_view& objectName) : CGameStateObject(objectName)

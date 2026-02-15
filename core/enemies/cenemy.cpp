@@ -141,6 +141,11 @@ void CEnemy::printBossBattleHeader() const
     Console::br();
 }
 
+std::string CEnemy::translatorObjectName() const
+{
+    return std::string(TagNames::Translator::enemy);
+}
+
 unsigned int CEnemy::basicXP(const unsigned int level)
 {
     return Randomizer::getRandom(level * 75) + level * 75;

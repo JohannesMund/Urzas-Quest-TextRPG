@@ -2,6 +2,7 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
+#include "leila2/moduleressources.h"
 #include "randomizer.h"
 
 #include <format>
@@ -35,4 +36,9 @@ void CGoblinHorde::spoilsOfWar() const
 void CGoblinHorde::postBattle()
 {
     CGameManagement::getProgressionInstance()->increaseGenocideCount();
+}
+
+std::string CGoblinHorde::translatorModuleName() const
+{
+    return Leila2::moduleName();
 }

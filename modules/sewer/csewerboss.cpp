@@ -54,3 +54,8 @@ void CSewerBoss::battleAction(bool& endRound)
 void CSewerBoss::postBattle()
 {
 }
+
+std::string CSewerBoss::translatorModuleName() const
+{
+    return Sewer::moduleName();
+}

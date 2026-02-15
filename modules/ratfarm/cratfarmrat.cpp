@@ -50,3 +50,8 @@ void CRatFarmRat::spoilsOfWar() const
     CGameManagement::getPlayerInstance()->addXp(CEnemy::basicXP(_level));
     RatFarm::TurnipFactory::addTurnips(Randomizer::getRandom(2));
 }
+
+std::string CRatFarmRat::translatorModuleName() const
+{
+    return RatFarm::moduleName();
+}

@@ -35,3 +35,8 @@ void CCapitalDungeonBossTask::execute()
         CGameManagement::getProgressionInstance()->reportModuleFinished(LeilaRescue::moduleName());
     }
 }
+
+std::string CCapitalDungeonBossTask::translatorModuleName() const
+{
+    return LeilaRescue::moduleName();
+}
