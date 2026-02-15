@@ -15,6 +15,9 @@ public:
 
     virtual ItemFilter equipmentTypeFilter() const override;
 
+protected:
+    virtual std::string translatorModuleName() const override;
+
 private:
     virtual unsigned int shieldDamage() const;
 };

@@ -73,3 +73,8 @@ nlohmann::json CBomb::save() const
     o["size"] = _size;
     return o;
 }
+
+std::string CBomb::translatorModuleName() const
+{
+    return std::string();
+}

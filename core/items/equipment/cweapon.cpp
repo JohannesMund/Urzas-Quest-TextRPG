@@ -37,6 +37,11 @@ CItem::ItemFilter CWeapon::equipmentTypeFilter() const
     return [](const CItem* item) -> bool { return dynamic_cast<const CWeapon*>(item) != nullptr; };
 }
 
+std::string CWeapon::translatorModuleName() const
+{
+    return std::string();
+}
+
 unsigned int CWeapon::extraDamage() const
 {
     switch (_quality)

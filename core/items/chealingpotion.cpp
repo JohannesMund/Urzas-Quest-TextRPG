@@ -63,6 +63,11 @@ nlohmann::json CHealingPotion::save() const
     return o;
 }
 
+std::string CHealingPotion::translatorModuleName() const
+{
+    return std::string();
+}
+
 void CHealingPotion::use()
 {
     unsigned int hp;

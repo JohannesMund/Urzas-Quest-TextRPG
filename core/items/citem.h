@@ -213,5 +213,4 @@ protected:
     bool _isConsumable = false;
 
     virtual std::string translatorObjectName() const override;
-    virtual std::string translatorModuleName() const override;
 };

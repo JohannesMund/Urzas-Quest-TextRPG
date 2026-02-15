@@ -92,6 +92,11 @@ nlohmann::json CSandwich::save() const
     return o;
 }
 
+std::string CSandwich::translatorModuleName() const
+{
+    return std::string();
+}
+
 std::string CSandwich::description() const
 {
     std::string desc = "A ";

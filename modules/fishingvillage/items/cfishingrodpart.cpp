@@ -67,6 +67,11 @@ std::string CFishingRodPart::nameForPart(const EPart part)
     }
 }
 
+std::string CFishingRodPart::translatorModuleName() const
+{
+    return FishingVillageMakeRod::moduleName();
+}
+
 nlohmann::json CFishingRodPart::save() const
 {
     nlohmann::json o = CItem::save();

@@ -59,6 +59,12 @@ private:
      * @remark must be implemented and returm a non empty string if translations shall be done on module scope
      */
     virtual std::string translatorModuleName() const = 0;
+
+    /**
+     * @brief check, whether translatorModuleName is avaulable for module scoped tr
+     * @remark asserts, because it needs to be fixed.
+     */
+    std::string getTranslatorModuleName() const;
 };
 
 template <typename... Args>
@@ -70,5 +76,5 @@ inline std::string CTranslatable::coreTr(const std::string_view& textId, Args&&.
 template <typename... Args>
 inline std::string CTranslatable::tr(const std::string_view& textId, Args&&... formatArgs) const
 {
-    return CTranslator::tr(translatorModuleName(), translatorObjectName(), textId, formatArgs...);
+    return CTranslator::tr(getTranslatorModuleName(), translatorObjectName(), textId, formatArgs...);
 }

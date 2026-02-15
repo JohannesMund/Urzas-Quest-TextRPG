@@ -66,3 +66,8 @@ void CUrzasGlasses::battleBuff(CEnemy* enemy, bool& endRound)
                                      CBattle::weapon2String(notSelected.at(0))));
     }
 }
+
+std::string CUrzasGlasses::translatorModuleName() const
+{
+    return std::string();
+}

@@ -46,6 +46,11 @@ CItem::ItemFilter CArmor::equipmentTypeFilter() const
     return [](const CItem* item) -> bool { return dynamic_cast<const CArmor*>(item) != nullptr; };
 }
 
+std::string CArmor::translatorModuleName() const
+{
+    return std::string();
+}
+
 unsigned int CArmor::shieldAmount() const
 {
     switch (_quality)

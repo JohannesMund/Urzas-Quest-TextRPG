@@ -53,6 +53,11 @@ void CRatFarmTurnip::useFromBattle(CEnemy*)
     use();
 }
 
+std::string CRatFarmTurnip::translatorModuleName() const
+{
+    return RatFarm::moduleName();
+}
+
 nlohmann::json CRatFarmTurnip::save() const
 {
     auto o = CItem::save();

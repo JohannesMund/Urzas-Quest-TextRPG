@@ -9,4 +9,7 @@ public:
     CJunkItem(const std::string_view& objectName = TagNames::Item::junkItem);
 
     static ItemFilter junkItemFilter();
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

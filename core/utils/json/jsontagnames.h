@@ -15,6 +15,7 @@ constexpr std::string_view status = "Status";
 constexpr std::string_view untranslated = "untranslated";
 constexpr std::string_view incomplete = "incomplete";
 constexpr std::string_view enemy = "Enemy";
+constexpr std::string_view equipment = "Equipment";
 } // namespace Translator
 
 namespace Common

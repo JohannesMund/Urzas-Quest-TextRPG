@@ -108,11 +108,6 @@ std::string CItem::translatorObjectName() const
     return std::string(TagNames::Item::item);
 }
 
-std::string CItem::translatorModuleName() const
-{
-    return std::string();
-}
-
 string CItem::name() const
 {
     return _name;

@@ -9,4 +9,7 @@ public:
 
     virtual void battleEffect(CEnemy* enemy) override;
     virtual int shield(const unsigned int i) override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

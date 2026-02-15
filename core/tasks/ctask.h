@@ -68,8 +68,10 @@ public:
 
     /**
      * @brief moduleName
-     * @return a moduleName for the task. handed over to the room, when attempting to place the task
+     * @return a moduleName for the task. handed over to the room, when attempting to place the task, also used for
+     * translations
      * @sa CRoom::isTaskPossible()
+     * @sa translatorModuleName()
      */
     virtual std::string moduleName() const;
 
