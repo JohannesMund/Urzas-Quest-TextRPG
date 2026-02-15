@@ -78,8 +78,7 @@ private:
     ~CTranslator();
 
     std::map<std::string, CTranslationFile*> _translations;
-
-    void checkTranslation(const std::string_view& moduleName);
+    std::map<std::string, std::string> _moduleAssignment;
 
     void loadTranslationFile(const std::string_view& moduleName, const std::string& file);
     void registerModule(const std::string_view& moduleName, const std::string_view& fileName);

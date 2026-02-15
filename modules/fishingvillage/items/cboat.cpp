@@ -38,5 +38,5 @@ unsigned int CBoat::upgradeCost() const
 
 std::string CBoat::translatorModuleName() const
 {
-    return FishingVillageMakeRod::moduleName();
+    return FishingVillageMakeBoat::moduleName();
 }

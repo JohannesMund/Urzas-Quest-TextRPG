@@ -70,7 +70,7 @@ std::string CBoatPart::nameForPart(const EPart part)
 
 std::string CBoatPart::translatorModuleName() const
 {
-    return FishingVillageMakeRod::moduleName();
+    return FishingVillageMakeBoat::moduleName();
 }
 
 nlohmann::json CBoatPart::save() const

@@ -9,20 +9,15 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-void CTranslator::checkTranslation(const std::string_view& moduleName)
-{
-    auto t = CTranslator::getInstance()->_translations;
-    if (!t.contains(std::string(moduleName)))
-    {
-        throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
-    }
-}
-
 void CTranslator::loadTranslationFile(const std::string_view& moduleName, const std::string& file)
 {
     try
     {
-        _translations.emplace(moduleName, new CTranslationFile(file));
+        if (!_translations.contains(file))
+        {
+            _translations.emplace(file, new CTranslationFile(file));
+        }
+        _moduleAssignment.emplace(moduleName, file);
     }
     catch (const std::exception& e)
     {
@@ -81,12 +76,19 @@ void CTranslator::registerModule(const std::string_view& moduleName, const std::
 CTranslationFile* CTranslator::getTranslationFile(const std::string_view& moduleName)
 {
     std::string mod(moduleName);
-    auto t = CTranslator::getInstance()->_translations;
-    if (!t.contains(std::string(mod)))
+    const auto assignments = CTranslator::getInstance()->_moduleAssignment;
+    if (!assignments.contains(mod))
     {
         throw Translator::CTranslatorException(std::format("No translation for module {} loaded", mod));
     }
-    return t.at(std::string(moduleName));
+    const auto file = assignments.at(mod);
+
+    auto translations = CTranslator::getInstance()->_translations;
+    if (!translations.contains(file))
+    {
+        throw Translator::CTranslatorException(std::format("translation file {} not loaded", file));
+    }
+    return translations.at(file);
 }
 
 std::string CTranslator::tr(const std::string_view& moduleName,

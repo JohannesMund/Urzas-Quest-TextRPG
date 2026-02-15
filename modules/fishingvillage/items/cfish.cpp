@@ -50,7 +50,7 @@ CItem::ItemFilter CFish::fishRarityFilter(const FishingVillage::EFishLevel level
 
 std::string CFish::translatorModuleName() const
 {
-    return FishingVillageMakeRod::moduleName();
+    return FishingVillageFishLegend::moduleName();
 }
 
 nlohmann::json CFish::save() const
