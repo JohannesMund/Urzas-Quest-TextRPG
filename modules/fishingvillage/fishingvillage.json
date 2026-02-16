@@ -1,9 +1,100 @@
 {
   "FileSpec": {
-    "DateTime": "2026-02-06 20:36:28",
+    "DateTime": "2026-02-16 14:21:11",
     "FileType": "Translation",
     "Name": "UrzasQuest TextRPG",
     "Version": 1
   },
-  "Translation": {}
+  "Translation": {
+    "MenuActions": [
+      {
+        "Source": {
+          "MenuAction": "Fishing Fritz",
+          "MenuActionKey": 102
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Fishing Fritz",
+          "MenuActionKey": 102
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Restaurant",
+          "MenuActionKey": 82
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Restaurant",
+          "MenuActionKey": 82
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Go Fishing",
+          "MenuActionKey": 71
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Go Fishing",
+          "MenuActionKey": 71
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "",
+          "MenuActionKey": 83
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "",
+          "MenuActionKey": 83
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Ask for Information",
+          "MenuActionKey": 65
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Ask for Information",
+          "MenuActionKey": 65
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Enhance Equipment",
+          "MenuActionKey": 69
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Enhance Equipment",
+          "MenuActionKey": 69
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Eat dish of the day (100 Gold)",
+          "MenuActionKey": 69
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Eat dish of the day (100 Gold)",
+          "MenuActionKey": 69
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Catch fish",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Catch fish",
+          "MenuActionKey": 0
+        }
+      }
+    ]
+  }
 }

@@ -428,7 +428,7 @@
                 "de": "Eine einzelne Socke. Eine einzelne, dreckige Socke. Nutzlos ohne die andere Socke. Wer zur Hölle wirft eine einzelne Socke weg??"
             },
             {
-                "Source": "{}The other {}S{}o{}ck{}e{}",
+                "Source": "{}The other {}S{}o{}c{}k{}",
                 "de": "{}Die andere {}S{}o{}c{}k{}"
             },
             {
@@ -497,7 +497,6 @@
             },
             {
                 "Source": "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a forest fairy? In this case, her name is probably \"Holla\".",
-                "Status": "untranslated",
                 "de": "Ein tiefer, finsterer Wald. Bäume und Büsche umgeben dich. Der Boden ist matschig und feucht. War da eine Fee? Vielleicht sogar eine Waldfee? In dem Falle, ihr Name ist sehr wahrscheinlich \"Holla\"."
             },
             {
@@ -538,17 +537,14 @@
             },
             {
                 "Source": "Stick, shaped like a sword",
-                "Status": "untranslated",
                 "de": "Stock in Schwertform"
             },
             {
                 "Source": "Sword, shaped like a stick",
-                "Status": "untranslated",
                 "de": "Schwert in Stockform"
             },
             {
                 "Source": "Stick-Sword",
-                "Status": "untranslated",
                 "de": "Stockschwert"
             },
             {
@@ -570,6 +566,240 @@
             {
                 "Source": "A wooden board. It can protect you from... well, not much but it offers a little protection.",
                 "de": "Ein hölzernes Brett. Es beschützt dich vor... naja, erlicherweise nicht vor Vielem, aber es bietet ein wenig Schutz"
+            },
+            {
+                "Source": "Bob, the Cowboy",
+                "de": "Bob, der Cowboy"
+            },
+            {
+                "Source": "Eddie, the Cowboy",
+                "de": "Eddie, der Cowboy"
+            },
+            {
+                "Source": "Angry Rat",
+                "de": "wütende Ratte"
+            },
+            {
+                "Source": "Stinky Bat",                
+                "de": "Stinkige Fledermaus"
+            },
+            {
+                "Source": "Greedy Vulture",
+                "de": "gieriger Geier"
+            },
+            {
+                "Source": "Huge Barbarian",
+                "de": "gigantischer Barbar"
+            },
+            {
+                "Source": "Pussy, the Octopus",                
+                "de": "Pussy, der Octopus"
+            },
+            {
+                "Source": "Tentacool",                
+                "de": "Tentacool"
+            },
+            {
+                "Source": "Tentacruel",
+                "de": "Tentacruel"
+            },
+            {
+                "Source": "Kang",
+                "de": "Kang"
+            },
+            {
+                "Source": "Kodos",                
+                "de": "Kodos"
+            },
+            {
+                "Source": "shabby board with a rusty nail hammered through",
+                "de": "schäbiges Brett mit einem rostigen Nagel"
+            },
+            {
+                "Source": "sharp teeth",
+                "de": "spitze Zähne"
+            },
+            {
+                "Source": "sheer muscle power",
+                "de": "schiere Muskelkraft"
+            },
+            {
+                "Source": "a club with spikes",
+                "de": "Eine Stachelkeule"
+            },
+            {
+                "Source": "a Nokia 3210",                
+                "de": "ein Nokia 3210"
+            },
+            {
+                "Source": "tantacles",
+                "de": "Tentakel"
+            },
+            {
+                "Source": "laser gun",                
+                "de": "Laserkanone"
+            },
+            {
+                "Source": "The {}Guard{} looks at you, and shakes his head. \"Not on the list!\", is all he says. \"What list?\" you ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here. You think about it for a short while, and realize, that you don't even have a name. so what should they even write on their list? So probably, everything is in perfect order.",
+                "de": "Die {}Wache{} schaut dich an und schüttelt den Kopf. \"Nicht auf der Liste!\", ist alles, was er zu Sagen hat. \"Welche Liste?\" fragst du. \"Die, auf der du nicht draufstehst.\", ist die Antwort, die klarstellt, dass man leute wie dich hier nicht sonderlich gut leiden kann. Du denkst kurz nach und dir wird auch klar, dass du ja noch nicht einmal einen namen hast. Was sollten sie also auch auf ihre Liste draufschreiben? Also wahrscheinlich ist alles in bester Ordnung."
+            },
+            {
+                "Source": "Chick",
+                "de": "Kücken"
+            },
+            {
+                "Source": "Sparrow",
+                "de": "Spatz"
+            },
+            {
+                "Source": "Parrot",
+                "de": "Papagei"
+            },
+            {
+                "Source": "Griffon",
+                "de": "Greif"
+            },
+            {
+                "Source": "Phoenix",
+                "de": "Phönix"
+            },
+            {
+                "Source": "Whelp",
+                "de": "Welpe"
+            },
+            {
+                "Source": "Dog",
+                "de": "Hund"
+            },
+            {
+                "Source": "Wolf",
+                "de": "Wolf"
+            },
+            {
+                "Source": "Ice wolf",                
+                "de": "Eiswolf"
+            },
+            {
+                "Source": "Cerberus",
+                "de": "Zerberus"
+            },
+            {
+                "Source": "Kitten",
+                "de": "Kätzchen"
+            },
+            {
+                "Source": "Cat",
+                "de": "Katze"
+            },
+            {
+                "Source": "Lynx",
+                "de": "Luchs"
+            },
+            {
+                "Source": "Tiger",
+                "de": "Tiger"
+            },
+            {
+                "Source": "Sphinx",
+                "de": "Sphinx"
+            },
+            {
+                "Source": "Baby Dragon",
+                "de": "Babydrache"
+            },
+            {
+                "Source": "Young Dragon",
+                "de": "junger Drache"
+            },
+            {
+                "Source": "Adult Dragon",
+                "de": "erwachsener Drache"
+            },
+            {
+                "Source": "Old Dragon",
+                "de": "alter Drache"
+            },
+            {
+                "Source": "Ancient Hellfire Dragon",
+                "de": "uralter Hellfiredrache"
+            },
+            {
+                "Source": "Ripped T-Shirt",
+                "de": "zerrissenes T-Shirt"
+            },
+            {
+                "Source": "White T-Shirt",
+                "de": "weißes T-Shirt"
+            },
+            {
+                "Source": "Fashionable T-Shirt",
+                "de": "modisches T-Shirt"
+            },
+            {
+                "Source": "Looks like mere clothing, but should offer a little protection.",
+                "de": "Sieht aus, wie einfache Kleidung. Sollte ein bisschen Schutz bieten."
+            },
+            {
+                "Source": "F{0}ishing{1} F{0}ritz{2}",
+                "de": "F{0}ischers{1} F{0}ritz{2}"
+            }
+        ],
+        "Room": [
+            {
+                "Source": "You whake up, somewhere.",
+                "de": "Du wachst auf, irgendwo."
+            },
+            {
+                "Source": "You have not the slightest idea, where you are.",            
+                "de": "Du hast nicht die geringste Ahnung, wo du bist."
+            },
+            {
+                "Source": "You look around, and realize, that you are utterly defenseless. You need something to defend yourself. Hidden beneath one of the bushes, you see someting:",
+                "de": "Du schaust dich um, und stellst fest, dass du komplett schutzlos bist. Du brauchst irgendetwas um dich zu verteidigen. Versteckt unter einem Busch siehst du etwas:"
+            },
+            {
+                "Source": "This seems to be a decent weapon, at least for now.",
+                "de": "Scheint eine gescheite Waffe zu sein, zumindest vorläufig."
+            },
+            {
+                "Source": "You take the {} and equip it. It looks good on you.",
+                "de": "Du mist den {} und rüstest es aus. Es sieht gut an dir aus."
+            },
+            {
+                "Source": "Having the sword, you look further. You still do not feel like a big, sturdy warrior. Something is missing.",
+                "de": "Mit einem Schwert in der Hand schaust du weiter. Du fühlst dich immernoch nicht wie ein großer, starker Krieger. Irgendetwas fehlt."
+            },
+            {
+                "Source": "Wait, is that...?",
+                "de": "Moment, ist das...?"
+            },
+            {
+                "Source": "You take the {} and equip it. Now you feel complete.",
+                "de": "Du nimmst das {} und rüstest es aus. jetzt fühlst du dich komplett."
+            },
+            {
+                "Source": "Now, that you are equipped, it is time to start your adventure. You look around where you are and find:",
+                "de": "Jetzt, wo du ausgerüstet bist, ist es an der Zeit, dein Abenteuer zu starten. Du schaust dich um und siehst:"
+            },
+            {
+                "Source": "A suspicious noise is coming out of one of the bushes, you should have a look. Or maybe, you better be carful and ignore it.",
+                "de": "Ein verdächtiges Geräusch kommt aus einem der Büsche. Du solltest einen Blick riskieren. Oder, vielleicht, besser vorsichtig sein und es ignorieren."
+            },
+            {
+                "Source": "You follow the sounds, and find a tiny {} lying beneath a bush, desperately looking for help",
+                "de": "Du folgst den Geräuschen und findest ein winziges {} unter einem Busch, verzweifelt nach Hilfe suchend"
+            },
+            {
+                "Source": "You decide to help the {}. a little water, a bandage for the broken limb and some herbs and soon the little fellow is back on track.",
+                "de": "Du beschließt {} zu helfen. Ein bisschen Wasser, eine Bandage für die gebrochenen Gliedmaßen und ein paar Kräuter und schon ist der kleine Kerl wieder zurück am Start."
+            },
+            {
+                "Source": "As soon as you leave, you realize, that {} follows you. Looks like, you have found a new friend.",                
+                "de": "Sowie du beschlossen hast, zu gehen, stellst du fest, dass {} dir folgt. Anscheinend hast du einen nagelneuen Freund gefunden."
+            },
+            {
+                "Source": "With a smile, you remember how you found {} here",
+                "de": "Mit einem Lächeln erinnerst du dich, wie du {} hier gefunden hast."
             }
         ]
     }
