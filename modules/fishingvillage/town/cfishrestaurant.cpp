@@ -6,7 +6,6 @@
 #include "fishingvillage/moduleressources.h"
 #include "randomizer.h"
 
-#include <format>
 #include <vector>
 
 CFishRestaurant::CFishRestaurant()
@@ -23,12 +22,11 @@ void CFishRestaurant::execute()
     {
         Console::cls();
 
-        Console::printLn(std::format("{}'s Inn", FishingVillage::fishingVilleName()), Console::EAlignment::eCenter);
-        Console::printLn(
-            std::format("Serving the best fresh fish since 833 ad. dragonis", Ressources::Game::fishingFritz()),
-            Console::EAlignment::eCenter);
+        Console::printLn(tr("{}'s Inn", FishingVillage::fishingVilleName()), Console::EAlignment::eCenter);
+        Console::printLn(tr("Serving the best fresh fish since 833 ad. dragonis", Ressources::Game::fishingFritz()),
+                         Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("dish of the day:", Console::EAlignment::eCenter);
+        Console::printLn(tr("Dish of the day:"), Console::EAlignment::eCenter);
         Console::printLn(std::format("~ {} ~", _dishOfTheDay), Console::EAlignment::eCenter);
         Console::br();
 
@@ -42,10 +40,9 @@ void CFishRestaurant::execute()
         }
         else
         {
-            Console::printLn(
-                std::format("The price for the dish of the day is: {} Gold. You are sure, that it is woth the "
-                            "prize, but you just cannot afford.",
-                            priceOfTheDay()));
+            Console::printLn(tr("The price for the dish of the day is: {} Gold. You are sure, that it is woth the "
+                                "prize, but you just cannot afford.",
+                                priceOfTheDay()));
         }
 
         menu.addMenuGroup({}, {CMenu::exit()});
@@ -79,15 +76,15 @@ void CFishRestaurant::makeDishOfTheDay()
     {
     case 0:
     default:
-        _dishOfTheDay = std::format("steamed {}", fish);
+        _dishOfTheDay = tr("steamed {}", fish);
     case 1:
-        _dishOfTheDay = std::format("fried {}", fish);
+        _dishOfTheDay = tr("fried {}", fish);
     case 2:
-        _dishOfTheDay = std::format("{} sashimi", fish);
+        _dishOfTheDay = tr("{} sashimi", fish);
     case 3:
-        _dishOfTheDay = std::format("{} bouillabaisse", fish);
+        _dishOfTheDay = tr("{} bouillabaisse", fish);
     case 4:
-        _dishOfTheDay = std::format("grilled {} filet", fish);
+        _dishOfTheDay = tr("grilled {} filet", fish);
     }
 }
 
@@ -98,7 +95,7 @@ int CFishRestaurant::priceOfTheDay() const
 
 void CFishRestaurant::eat() const
 {
-    Console::printLn("You get a plate with a steaming hot fish meal, and it tastes amazing!");
+    Console::printLn(tr("You get a plate with a steaming hot fish meal, and it tastes amazing!"));
     CGameManagement::getPlayerInstance()->spendGold(priceOfTheDay());
 
     switch (_dishOfTheDayLevel)
@@ -118,7 +115,7 @@ void CFishRestaurant::eat() const
         break;
     case FishingVillage::EFishLevel::eLegend:
         CGameManagement::getPlayerInstance()->fullHeal();
-        Console::printLn("This meal is a mind blowing experience");
+        Console::printLn(tr("This meal is a mind blowing experience"));
         CGameManagement::getPlayerInstance()->levelUp();
         break;
     }

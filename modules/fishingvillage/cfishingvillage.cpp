@@ -97,7 +97,7 @@ void CFishingVillage::printHeader()
     Console::printLn("Local recreation area", Console::EAlignment::eCenter);
     Console::br();
 
-    Console::printLn(std::format(
+    Console::printLn(tr(
         "A smaly, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There "
         "is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you "
         "can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",

@@ -1,806 +1,935 @@
 {
-    "FileSpec": {
-        "DateTime": "2026-02-13 07:34:56",
-        "FileType": "Translation",
-        "Name": "UrzasQuest TextRPG",
-        "Version": 1
-    },
-    "Translation": {
-        "Dead Hero": [
-            {
-                "Source": "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you.",
-                "de": "Du bahnst dir deinen Weg durch die Welt der Abenteuer, als du einen Körper neben einem Baum liegen siegst. Es scheint ein Held zu sein, so wie du. Er trägt das gleiche {} wie du, und er trägt das gleiche {} wie du. Aber, er hat wohl eher nicht soviel Glück wie du."
-            },
-            {
-                "Source": "He is dead. Definitely dead. He lies in a puddle of his own blood, the limbs broken, all his treasure gone (if he even had som treasure at all). All of his treasure?",
-                "de": "Er ist tot. Definitiv tot. Er liegt mit gebrochenen Gliedmaßen in einer Blutpfpütze, alle seine Schätze sind weg (wenn er überhaupt schätze hatte4). Alle seine Schätze?"
-            },
-            {
-                "Source": "Maybe, just maybe you should have a look.",
-                "de": "Vielleicht, nur vielleicht, solltest du mal nachschauen."
-            },
-            {
-                "Source": "You approach the body, and one thing is for sure: This guy is dead. The opponent must have had enormous claws (or a Nokia 3210). But one thing survived the fight. His shirt seems pretty unharmed. It could be very usefull for you too.",
-                "de": "Du begutachtest den Körper, und eine sache ist sicher: Der Dude ist tot. Sein Gegner muß enorme Klauen gehabt haben (oder ein Nokia 3210). Aber eine sache hat den Kampf überlebt. Sein Shirt sieht recht unversehrt aus. Das könnte auch für dich sehr nützlich sein."
-            },
-            {
-                "Source": "You wonder, if you should take it.",
-                "de": "Du überlegst, es mitzunehmen."
-            },
-            {
-                "Source": "Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now have a shiny new armor to protect you.",
-                "de": "Warum einen wertvollen Gegenstand verschwenden, wenn er dich schützen kann. Du nimmst das T-Shirt und rüstest es aus. Du bist nun ein Held in glänzender Rüstung, die dich beschüten wird."
-            }
-        ],
-        "Inventory": [
-            {
-                "Source": "You obtained {}",
-                "de": "Du erhälst {}"
-            },
-            {
-                "Source": "You look through your backpack and find the following:",
-                "de": "Du schaust durch deinen Rucksack und findest das Folgende:"
-            },
-            {
-                "Source": "Select item to use",
-                "de": "Wähle ein Item aus, um es zu benutzen"
-            },
-            {
-                "Source": "Select item to view",
-                "de": "Wähle ein Item aus, um es anzuschauen"
-            }
-        ],
-        "MenuActions": [
-            {
-                "Source": {
-                    "MenuAction": "Start a new game",
-                    "MenuActionKey": 115
-                },
-                "de": {
-                    "MenuAction": "Neues Spiel",
-                    "MenuActionKey": 110
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Load game",
-                    "MenuActionKey": 108
-                },
-                "de": {
-                    "MenuAction": "Spiel laden",
-                    "MenuActionKey": 115
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Options",
-                    "MenuActionKey": 79
-                },
-                "de": {
-                    "MenuAction": "Optionen",
-                    "MenuActionKey": 79
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Quit game",
-                    "MenuActionKey": 113
-                },
-                "de": {
-                    "MenuAction": "Beenden",
-                    "MenuActionKey": 98
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Language options",
-                    "MenuActionKey": 108
-                },
-                "de": {
-                    "MenuAction": "Sprachoptionen",
-                    "MenuActionKey": 115
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "en",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "en",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "de",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "de",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Take it",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Nehmen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Leave it",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Lass es",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "North",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Norden",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "East",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Osten",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "South",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Süden",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "West",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Westen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Map",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Karte",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Inventory",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Inventar",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Look for trouble",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Kravall bürsten",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Quit Game",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Beenden",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Use Item",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Benutzen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "View Item",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Anschauen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Save",
-                    "MenuActionKey": 115
-                },
-                "de": {
-                    "MenuAction": "Speichern",
-                    "MenuActionKey": 115
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Cancel",
-                    "MenuActionKey": 67
-                },
-                "de": {
-                    "MenuAction": "Abbrechen",
-                    "MenuActionKey": 65
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Quit without saving",
-                    "MenuActionKey": 113
-                },
-                "de": {
-                    "MenuAction": "Ohne speichern beenden",
-                    "MenuActionKey": 79
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Fight",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Kämpfen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Run",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Weglaufen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Rock",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Stein",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Paper",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Papier",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Scissors",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Schere",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Lizard",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Echse",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Spock",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Spock",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Win",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Gewinnen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Search the body",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Die Leiche durchsuchen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Go away",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Weggehen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Take t-shirt",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "T-Shirt nehmen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Look",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Nachsehen",
-                    "MenuActionKey": 0
-                }
-            },
-            {
-                "Source": {
-                    "MenuAction": "Help",
-                    "MenuActionKey": 0
-                },
-                "de": {
-                    "MenuAction": "Helfen",
-                    "MenuActionKey": 0
-                }
-            }
-        ],
-        "Ressources": [
-            {
-                "Source": "{}Ur{}za{}",
-                "de": "{}Ur{}za{}"
-            },
-            {
-                "Source": "{}wh{}o t{}he f{}uck {}is {}?{}",
-                "de": "{}we{}r z{}um f{}ick {}ist {}?{}"
-            },
-            {
-                "Source": "{}Stick{}",
-                "de": "{}Stock{}"
-            },
-            {
-                "Source": "A stick, just a stick. Maybe magical? There is no label stating \"Godly Magic Stick of the Whale\". On the other hand, there no label stating, that this stick is not a \"Godly Magic Stick of the Whale\".",
-                "de": "Ein Stock, nur ein Stock. Vielleicht magisch? Da ist kein Aufkleber \"Göttlicher Stock des Wals\". Andererseits, da ist auch kein Aufkleber, der sagt, dass das kein \"Göttlicher Stock des Wals\" ist."
-            },
-            {
-                "Source": "{}S{}o{}c{}k{}",
-                "de": "{}S{}o{}ck{}e{}"
-            },
-            {
-                "Source": "A single sock. A single dirty sock. Useless without the other one. Who on earth throws away a single Sock??",
-                "de": "Eine einzelne Socke. Eine einzelne, dreckige Socke. Nutzlos ohne die andere Socke. Wer zur Hölle wirft eine einzelne Socke weg??"
-            },
-            {
-                "Source": "{}The other {}S{}o{}c{}k{}",
-                "de": "{}Die andere {}S{}o{}c{}k{}"
-            },
-            {
-                "Source": "There it is, the other sock. A single dirty sock. Now you have both but who on earth throws away two single Socks seperately??",
-                "de": "Da ist sie, die andere Socke. Eine einzelne, dreckige Socke. Jetzt hast du beide, aber wer zur Hölle wirft zwei einzelne Socken seperat weg??"
-            },
-            {
-                "Source": "{}Rock{}",
-                "de": "{}Stein{}"
-            },
-            {
-                "Source": "This is a good rock, so good, that it might be used in an epic \"Rock Paper Sicsors\" battle.",
-                "de": "Das ist ein guter Stein, so gut, dass er in einer epischen \"Stein Schere Papier\" - Schlacht benutz werden könnte."
-            },
-            {
-                "Source": "{}Boot{}",
-                "de": "{}Stiefel{}"
-            },
-            {
-                "Source": "An old, single boot made from leather.Good, expensive leather. But is damaged and dirty. And it is just a single boot.",
-                "de": "Ein alter, einzelner Stiefel, hergestellt aus Leder. Gutem, teurem Leder. Aber er ist beschädigt und dreckig. Und es ist nur ein einzelner Stiefel."
-            },
-            {
-                "Source": "V{0}a{1}s{0}e{1}",
-                "de": "V{0}a{1}s{0}e{1}"
-            },
-            {
-                "Source": "This is one beautiful vase. It will look nice on your table. or on a sideboard. you could fill it with flowers. Or you just throw it away, for somone else to find ist.",
-                "de": "Das ist eine schöne Vase. Die wird toll auf deinem Tisch aussehen. Oder Deinem Sideboard. Du könntest sie mit Blumen füllen. Oder, du könntest sie einfach wegwerfen, so dass sie jemand anderes finden kann."
-            },
-            {
-                "Source": "Flask",
-                "de": "Flasche"
-            },
-            {
-                "Source": "An empty flask. Like the ones filled with magic potions, only without the potion. This one is filled with nothing.",
-                "de": "Eine leere Flasch. So wie die, die mit magischen Tränken gefüllt sind, Nur halt ohne den Trank. Diese hier ist mit nichts gefüllt."
-            },
-            {
-                "Source": "{0}Col{1}l{2}ec{0}tio{1}n o{0}f l{3}eav{1}es{4}",
-                "de": "{0}Blä{1}t{2}te{0}rs{1}am{0}ml{3}un{1}g{4}"
-            },
-            {
-                "Source": "A collection of especially beautiful leaves.",
-                "de": "Eine Sammlung von ganz besonders hübschen Blättern."
-            },
-            {
-                "Source": "{}Ring{}",
-                "de": "{}Ring{}"
-            },
-            {
-                "Source": "{0}L{1}eila{2}",
-                "de": "{0}L{1}eila{2}"
-            },
-            {
-                "Source": "{}Princess {}{}",
-                "de": "{}Prinzessin {}{}"
-            },
-            {
-                "Source": "A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for proposing to {}.",
-                "de": "Ein Ring, wahrscheinlich aus einem Kaugummiautomaten (Was ist ein Kaugummitautomat?), wie auch immer, nicht dafür geeignet um {} einen Antrag zu machen."
-            },
-            {
-                "Source": "A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you like sheep? I like sheep. There is one.",
-                "de": "Eine Wiese. Mit Gras. Viel Gras. Habe ich das Gras erwähnt? Oooh, da ist ein Schaf! magst du Schafe? Ich mag Schafe. Da ist eins."
-            },
-            {
-                "Source": "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a forest fairy? In this case, her name is probably \"Holla\".",
-                "de": "Ein tiefer, finsterer Wald. Bäume und Büsche umgeben dich. Der Boden ist matschig und feucht. War da eine Fee? Vielleicht sogar eine Waldfee? In dem Falle, ihr Name ist sehr wahrscheinlich \"Holla\"."
-            },
-            {
-                "Source": "The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is just a lake. On second glance, not even a big one.",
-                "de": "Das Ufer eines Sees. Das ist ein riesiger See, so riesig, dass man ihn \"Gigantensee\" nennen könnte. Aber am Ende ist es nur ein See. Auf den zweiten Blick nicht einmal ein großer."
-            },
-            {
-                "Source": "The City of Elves. Built high in the treetops of ancient Trees",
-                "de": "Die Stadt der Elfen. Gebaut hoch oben in den Wipfel uralter Bäume"
-            },
-            {
-                "Source": "Deep Caves, carved in huge mountains built this citiy of the dwarfs",
-                "de": "Tiefe Höhlen, in riesige Gebirge gegraben bilden die Stadt der Zwerge"
-            },
-            {
-                "Source": "An Oasis surrounded by a huge desert.",
-                "de": "Eine Oase, umgeben von einer riesigen Wüste."
-            },
-            {
-                "Source": "City of man, capital of the land.",
-                "de": "Stadt der Menschen, Hauptstadt des Landes."
-            },
-            {
-                "Source": "The Home of the trolls. Everything is dirty and stinky here.",
-                "de": "Die Heimat der Trolle. Alles hier ist ein wenig schmuddelig und müffelt streng.."
-            },
-            {
-                "Source": "The mysterous city, where the pepper grows. Many legendary heroes have been sent here. But on second sight, it is just a city.",
-                "de": "Eine mysteriöse Stadt, wo der Pfeffer wächst. Viele legendäre Helden wurden hier her gesandt. Aber auf den zweiten Blick ist es nur eine weitere Stadt."
-            },
-            {
-                "Source": "The capital of the land. Big houses, the Kings' Castle, a Kathedral, everything a glorious capital needs.",
-                "de": "Die Hauptstadt des Landes. Große Häuser, das Schloss des Königs, eine Kathetrale, alles was eine glorreiche Hauptstadt so braucht."
-            },
-            {
-                "Source": "Drerachi, The Dream City",
-                "de": "Drerachi, Stadt der Träume"
-            },
-            {
-                "Source": "Stick, shaped like a sword",
-                "de": "Stock in Schwertform"
-            },
-            {
-                "Source": "Sword, shaped like a stick",
-                "de": "Schwert in Stockform"
-            },
-            {
-                "Source": "Stick-Sword",
-                "de": "Stockschwert"
-            },
-            {
-                "Source": "A stick, shaped like a sword. Or a sword, shaped like a stick? It is a sword-stick",
-                "de": "Ein Stock, geformt wie ein Schert. Oder ein Schwert, geformt wie ein Stock? Es ist ein Stockschwert"
-            },
-            {
-                "Source": "wheathered wooden board",
-                "de": "verwittertes Holzbrett"
-            },
-            {
-                "Source": "wooden board",
-                "de": "Holzbrett"
-            },
-            {
-                "Source": "robust wooden board",
-                "de": "robustes Holzbrett"
-            },
-            {
-                "Source": "A wooden board. It can protect you from... well, not much but it offers a little protection.",
-                "de": "Ein hölzernes Brett. Es beschützt dich vor... naja, erlicherweise nicht vor Vielem, aber es bietet ein wenig Schutz"
-            },
-            {
-                "Source": "Bob, the Cowboy",
-                "de": "Bob, der Cowboy"
-            },
-            {
-                "Source": "Eddie, the Cowboy",
-                "de": "Eddie, der Cowboy"
-            },
-            {
-                "Source": "Angry Rat",
-                "de": "wütende Ratte"
-            },
-            {
-                "Source": "Stinky Bat",                
-                "de": "Stinkige Fledermaus"
-            },
-            {
-                "Source": "Greedy Vulture",
-                "de": "gieriger Geier"
-            },
-            {
-                "Source": "Huge Barbarian",
-                "de": "gigantischer Barbar"
-            },
-            {
-                "Source": "Pussy, the Octopus",                
-                "de": "Pussy, der Octopus"
-            },
-            {
-                "Source": "Tentacool",                
-                "de": "Tentacool"
-            },
-            {
-                "Source": "Tentacruel",
-                "de": "Tentacruel"
-            },
-            {
-                "Source": "Kang",
-                "de": "Kang"
-            },
-            {
-                "Source": "Kodos",                
-                "de": "Kodos"
-            },
-            {
-                "Source": "shabby board with a rusty nail hammered through",
-                "de": "schäbiges Brett mit einem rostigen Nagel"
-            },
-            {
-                "Source": "sharp teeth",
-                "de": "spitze Zähne"
-            },
-            {
-                "Source": "sheer muscle power",
-                "de": "schiere Muskelkraft"
-            },
-            {
-                "Source": "a club with spikes",
-                "de": "Eine Stachelkeule"
-            },
-            {
-                "Source": "a Nokia 3210",                
-                "de": "ein Nokia 3210"
-            },
-            {
-                "Source": "tantacles",
-                "de": "Tentakel"
-            },
-            {
-                "Source": "laser gun",                
-                "de": "Laserkanone"
-            },
-            {
-                "Source": "The {}Guard{} looks at you, and shakes his head. \"Not on the list!\", is all he says. \"What list?\" you ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here. You think about it for a short while, and realize, that you don't even have a name. so what should they even write on their list? So probably, everything is in perfect order.",
-                "de": "Die {}Wache{} schaut dich an und schüttelt den Kopf. \"Nicht auf der Liste!\", ist alles, was er zu Sagen hat. \"Welche Liste?\" fragst du. \"Die, auf der du nicht draufstehst.\", ist die Antwort, die klarstellt, dass man leute wie dich hier nicht sonderlich gut leiden kann. Du denkst kurz nach und dir wird auch klar, dass du ja noch nicht einmal einen namen hast. Was sollten sie also auch auf ihre Liste draufschreiben? Also wahrscheinlich ist alles in bester Ordnung."
-            },
-            {
-                "Source": "Chick",
-                "de": "Kücken"
-            },
-            {
-                "Source": "Sparrow",
-                "de": "Spatz"
-            },
-            {
-                "Source": "Parrot",
-                "de": "Papagei"
-            },
-            {
-                "Source": "Griffon",
-                "de": "Greif"
-            },
-            {
-                "Source": "Phoenix",
-                "de": "Phönix"
-            },
-            {
-                "Source": "Whelp",
-                "de": "Welpe"
-            },
-            {
-                "Source": "Dog",
-                "de": "Hund"
-            },
-            {
-                "Source": "Wolf",
-                "de": "Wolf"
-            },
-            {
-                "Source": "Ice wolf",                
-                "de": "Eiswolf"
-            },
-            {
-                "Source": "Cerberus",
-                "de": "Zerberus"
-            },
-            {
-                "Source": "Kitten",
-                "de": "Kätzchen"
-            },
-            {
-                "Source": "Cat",
-                "de": "Katze"
-            },
-            {
-                "Source": "Lynx",
-                "de": "Luchs"
-            },
-            {
-                "Source": "Tiger",
-                "de": "Tiger"
-            },
-            {
-                "Source": "Sphinx",
-                "de": "Sphinx"
-            },
-            {
-                "Source": "Baby Dragon",
-                "de": "Babydrache"
-            },
-            {
-                "Source": "Young Dragon",
-                "de": "junger Drache"
-            },
-            {
-                "Source": "Adult Dragon",
-                "de": "erwachsener Drache"
-            },
-            {
-                "Source": "Old Dragon",
-                "de": "alter Drache"
-            },
-            {
-                "Source": "Ancient Hellfire Dragon",
-                "de": "uralter Hellfiredrache"
-            },
-            {
-                "Source": "Ripped T-Shirt",
-                "de": "zerrissenes T-Shirt"
-            },
-            {
-                "Source": "White T-Shirt",
-                "de": "weißes T-Shirt"
-            },
-            {
-                "Source": "Fashionable T-Shirt",
-                "de": "modisches T-Shirt"
-            },
-            {
-                "Source": "Looks like mere clothing, but should offer a little protection.",
-                "de": "Sieht aus, wie einfache Kleidung. Sollte ein bisschen Schutz bieten."
-            },
-            {
-                "Source": "F{0}ishing{1} F{0}ritz{2}",
-                "de": "F{0}ischers{1} F{0}ritz{2}"
-            }
-        ],
-        "Room": [
-            {
-                "Source": "You whake up, somewhere.",
-                "de": "Du wachst auf, irgendwo."
-            },
-            {
-                "Source": "You have not the slightest idea, where you are.",            
-                "de": "Du hast nicht die geringste Ahnung, wo du bist."
-            },
-            {
-                "Source": "You look around, and realize, that you are utterly defenseless. You need something to defend yourself. Hidden beneath one of the bushes, you see someting:",
-                "de": "Du schaust dich um, und stellst fest, dass du komplett schutzlos bist. Du brauchst irgendetwas um dich zu verteidigen. Versteckt unter einem Busch siehst du etwas:"
-            },
-            {
-                "Source": "This seems to be a decent weapon, at least for now.",
-                "de": "Scheint eine gescheite Waffe zu sein, zumindest vorläufig."
-            },
-            {
-                "Source": "You take the {} and equip it. It looks good on you.",
-                "de": "Du mist den {} und rüstest es aus. Es sieht gut an dir aus."
-            },
-            {
-                "Source": "Having the sword, you look further. You still do not feel like a big, sturdy warrior. Something is missing.",
-                "de": "Mit einem Schwert in der Hand schaust du weiter. Du fühlst dich immernoch nicht wie ein großer, starker Krieger. Irgendetwas fehlt."
-            },
-            {
-                "Source": "Wait, is that...?",
-                "de": "Moment, ist das...?"
-            },
-            {
-                "Source": "You take the {} and equip it. Now you feel complete.",
-                "de": "Du nimmst das {} und rüstest es aus. jetzt fühlst du dich komplett."
-            },
-            {
-                "Source": "Now, that you are equipped, it is time to start your adventure. You look around where you are and find:",
-                "de": "Jetzt, wo du ausgerüstet bist, ist es an der Zeit, dein Abenteuer zu starten. Du schaust dich um und siehst:"
-            },
-            {
-                "Source": "A suspicious noise is coming out of one of the bushes, you should have a look. Or maybe, you better be carful and ignore it.",
-                "de": "Ein verdächtiges Geräusch kommt aus einem der Büsche. Du solltest einen Blick riskieren. Oder, vielleicht, besser vorsichtig sein und es ignorieren."
-            },
-            {
-                "Source": "You follow the sounds, and find a tiny {} lying beneath a bush, desperately looking for help",
-                "de": "Du folgst den Geräuschen und findest ein winziges {} unter einem Busch, verzweifelt nach Hilfe suchend"
-            },
-            {
-                "Source": "You decide to help the {}. a little water, a bandage for the broken limb and some herbs and soon the little fellow is back on track.",
-                "de": "Du beschließt {} zu helfen. Ein bisschen Wasser, eine Bandage für die gebrochenen Gliedmaßen und ein paar Kräuter und schon ist der kleine Kerl wieder zurück am Start."
-            },
-            {
-                "Source": "As soon as you leave, you realize, that {} follows you. Looks like, you have found a new friend.",                
-                "de": "Sowie du beschlossen hast, zu gehen, stellst du fest, dass {} dir folgt. Anscheinend hast du einen nagelneuen Freund gefunden."
-            },
-            {
-                "Source": "With a smile, you remember how you found {} here",
-                "de": "Mit einem Lächeln erinnerst du dich, wie du {} hier gefunden hast."
-            }
-        ]
-    }
+  "FileSpec": {
+    "DateTime": "2026-02-13 07:34:56",
+    "FileType": "Translation",
+    "Name": "UrzasQuest TextRPG",
+    "Version": 1
+  },
+  "Translation": {
+    "Dead Hero": [
+      {
+        "Source": "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you.",
+        "de": "Du bahnst dir deinen Weg durch die Welt der Abenteuer, als du einen Körper neben einem Baum liegen siegst. Es scheint ein Held zu sein, so wie du. Er trägt das gleiche {} wie du, und er trägt das gleiche {} wie du. Aber, er hat wohl eher nicht soviel Glück wie du."
+      },
+      {
+        "Source": "He is dead. Definitely dead. He lies in a puddle of his own blood, the limbs broken, all his treasure gone (if he even had som treasure at all). All of his treasure?",
+        "de": "Er ist tot. Definitiv tot. Er liegt mit gebrochenen Gliedmaßen in einer Blutpfpütze, alle seine Schätze sind weg (wenn er überhaupt schätze hatte4). Alle seine Schätze?"
+      },
+      {
+        "Source": "Maybe, just maybe you should have a look.",
+        "de": "Vielleicht, nur vielleicht, solltest du mal nachschauen."
+      },
+      {
+        "Source": "You approach the body, and one thing is for sure: This guy is dead. The opponent must have had enormous claws (or a Nokia 3210). But one thing survived the fight. His shirt seems pretty unharmed. It could be very usefull for you too.",
+        "de": "Du begutachtest den Körper, und eine sache ist sicher: Der Dude ist tot. Sein Gegner muß enorme Klauen gehabt haben (oder ein Nokia 3210). Aber eine sache hat den Kampf überlebt. Sein Shirt sieht recht unversehrt aus. Das könnte auch für dich sehr nützlich sein."
+      },
+      {
+        "Source": "You wonder, if you should take it.",
+        "de": "Du überlegst, es mitzunehmen."
+      },
+      {
+        "Source": "Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now have a shiny new armor to protect you.",
+        "de": "Warum einen wertvollen Gegenstand verschwenden, wenn er dich schützen kann. Du nimmst das T-Shirt und rüstest es aus. Du bist nun ein Held in glänzender Rüstung, die dich beschüten wird."
+      }
+    ],
+    "Inventory": [
+      {
+        "Source": "You obtained {}",
+        "de": "Du erhälst {}"
+      },
+      {
+        "Source": "You look through your backpack and find the following:",
+        "de": "Du schaust durch deinen Rucksack und findest das Folgende:"
+      },
+      {
+        "Source": "Select item to use",
+        "de": "Wähle ein Item aus, um es zu benutzen"
+      },
+      {
+        "Source": "Select item to view",
+        "de": "Wähle ein Item aus, um es anzuschauen"
+      }
+    ],
+    "MenuActions": [
+      {
+        "Source": {
+          "MenuAction": "Start a new game",
+          "MenuActionKey": 115
+        },
+        "de": {
+          "MenuAction": "Neues Spiel",
+          "MenuActionKey": 110
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Load game",
+          "MenuActionKey": 108
+        },
+        "de": {
+          "MenuAction": "Spiel laden",
+          "MenuActionKey": 115
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Options",
+          "MenuActionKey": 79
+        },
+        "de": {
+          "MenuAction": "Optionen",
+          "MenuActionKey": 79
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Quit game",
+          "MenuActionKey": 113
+        },
+        "de": {
+          "MenuAction": "Beenden",
+          "MenuActionKey": 98
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Language options",
+          "MenuActionKey": 108
+        },
+        "de": {
+          "MenuAction": "Sprachoptionen",
+          "MenuActionKey": 115
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "en",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "en",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "de",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "de",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Take it",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Nehmen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Leave it",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Lass es",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "North",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Norden",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "East",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Osten",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "South",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Süden",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "West",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Westen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Map",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Karte",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Inventory",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Inventar",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Look for trouble",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Kravall bürsten",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Quit Game",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Beenden",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Use Item",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Benutzen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "View Item",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Anschauen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Save",
+          "MenuActionKey": 115
+        },
+        "de": {
+          "MenuAction": "Speichern",
+          "MenuActionKey": 115
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Cancel",
+          "MenuActionKey": 67
+        },
+        "de": {
+          "MenuAction": "Abbrechen",
+          "MenuActionKey": 65
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Quit without saving",
+          "MenuActionKey": 113
+        },
+        "de": {
+          "MenuAction": "Ohne speichern beenden",
+          "MenuActionKey": 79
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Fight",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Kämpfen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Run",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Weglaufen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Rock",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Stein",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Paper",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Papier",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Scissors",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Schere",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Lizard",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Echse",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Spock",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Spock",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Win",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Gewinnen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Search the body",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Die Leiche durchsuchen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Go away",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Weggehen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Take t-shirt",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "T-Shirt nehmen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Look",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Nachsehen",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Help",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Helfen",
+          "MenuActionKey": 0
+        }
+      }
+    ],
+    "Ressources": [
+      {
+        "Source": "{}Ur{}za{}",
+        "de": "{}Ur{}za{}"
+      },
+      {
+        "Source": "{}wh{}o t{}he f{}uck {}is {}?{}",
+        "de": "{}we{}r z{}um f{}ick {}ist {}?{}"
+      },
+      {
+        "Source": "{}Stick{}",
+        "de": "{}Stock{}"
+      },
+      {
+        "Source": "A stick, just a stick. Maybe magical? There is no label stating \"Godly Magic Stick of the Whale\". On the other hand, there no label stating, that this stick is not a \"Godly Magic Stick of the Whale\".",
+        "de": "Ein Stock, nur ein Stock. Vielleicht magisch? Da ist kein Aufkleber \"Göttlicher Stock des Wals\". Andererseits, da ist auch kein Aufkleber, der sagt, dass das kein \"Göttlicher Stock des Wals\" ist."
+      },
+      {
+        "Source": "{}S{}o{}c{}k{}",
+        "de": "{}S{}o{}ck{}e{}"
+      },
+      {
+        "Source": "A single sock. A single dirty sock. Useless without the other one. Who on earth throws away a single Sock??",
+        "de": "Eine einzelne Socke. Eine einzelne, dreckige Socke. Nutzlos ohne die andere Socke. Wer zur Hölle wirft eine einzelne Socke weg??"
+      },
+      {
+        "Source": "{}The other {}S{}o{}c{}k{}",
+        "de": "{}Die andere {}S{}o{}c{}k{}"
+      },
+      {
+        "Source": "There it is, the other sock. A single dirty sock. Now you have both but who on earth throws away two single Socks seperately??",
+        "de": "Da ist sie, die andere Socke. Eine einzelne, dreckige Socke. Jetzt hast du beide, aber wer zur Hölle wirft zwei einzelne Socken seperat weg??"
+      },
+      {
+        "Source": "{}Rock{}",
+        "de": "{}Stein{}"
+      },
+      {
+        "Source": "This is a good rock, so good, that it might be used in an epic \"Rock Paper Sicsors\" battle.",
+        "de": "Das ist ein guter Stein, so gut, dass er in einer epischen \"Stein Schere Papier\" - Schlacht benutz werden könnte."
+      },
+      {
+        "Source": "{}Boot{}",
+        "de": "{}Stiefel{}"
+      },
+      {
+        "Source": "An old, single boot made from leather.Good, expensive leather. But is damaged and dirty. And it is just a single boot.",
+        "de": "Ein alter, einzelner Stiefel, hergestellt aus Leder. Gutem, teurem Leder. Aber er ist beschädigt und dreckig. Und es ist nur ein einzelner Stiefel."
+      },
+      {
+        "Source": "V{0}a{1}s{0}e{1}",
+        "de": "V{0}a{1}s{0}e{1}"
+      },
+      {
+        "Source": "This is one beautiful vase. It will look nice on your table. or on a sideboard. you could fill it with flowers. Or you just throw it away, for somone else to find ist.",
+        "de": "Das ist eine schöne Vase. Die wird toll auf deinem Tisch aussehen. Oder Deinem Sideboard. Du könntest sie mit Blumen füllen. Oder, du könntest sie einfach wegwerfen, so dass sie jemand anderes finden kann."
+      },
+      {
+        "Source": "Flask",
+        "de": "Flasche"
+      },
+      {
+        "Source": "An empty flask. Like the ones filled with magic potions, only without the potion. This one is filled with nothing.",
+        "de": "Eine leere Flasch. So wie die, die mit magischen Tränken gefüllt sind, Nur halt ohne den Trank. Diese hier ist mit nichts gefüllt."
+      },
+      {
+        "Source": "{0}Col{1}l{2}ec{0}tio{1}n o{0}f l{3}eav{1}es{4}",
+        "de": "{0}Blä{1}t{2}te{0}rs{1}am{0}ml{3}un{1}g{4}"
+      },
+      {
+        "Source": "A collection of especially beautiful leaves.",
+        "de": "Eine Sammlung von ganz besonders hübschen Blättern."
+      },
+      {
+        "Source": "{}Ring{}",
+        "de": "{}Ring{}"
+      },
+      {
+        "Source": "{0}L{1}eila{2}",
+        "de": "{0}L{1}eila{2}"
+      },
+      {
+        "Source": "{}Princess {}{}",
+        "de": "{}Prinzessin {}{}"
+      },
+      {
+        "Source": "A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for proposing to {}.",
+        "de": "Ein Ring, wahrscheinlich aus einem Kaugummiautomaten (Was ist ein Kaugummitautomat?), wie auch immer, nicht dafür geeignet um {} einen Antrag zu machen."
+      },
+      {
+        "Source": "A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you like sheep? I like sheep. There is one.",
+        "de": "Eine Wiese. Mit Gras. Viel Gras. Habe ich das Gras erwähnt? Oooh, da ist ein Schaf! magst du Schafe? Ich mag Schafe. Da ist eins."
+      },
+      {
+        "Source": "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a forest fairy? In this case, her name is probably \"Holla\".",
+        "de": "Ein tiefer, finsterer Wald. Bäume und Büsche umgeben dich. Der Boden ist matschig und feucht. War da eine Fee? Vielleicht sogar eine Waldfee? In dem Falle, ihr Name ist sehr wahrscheinlich \"Holla\"."
+      },
+      {
+        "Source": "The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is just a lake. On second glance, not even a big one.",
+        "de": "Das Ufer eines Sees. Das ist ein riesiger See, so riesig, dass man ihn \"Gigantensee\" nennen könnte. Aber am Ende ist es nur ein See. Auf den zweiten Blick nicht einmal ein großer."
+      },
+      {
+        "Source": "The City of Elves. Built high in the treetops of ancient Trees",
+        "de": "Die Stadt der Elfen. Gebaut hoch oben in den Wipfel uralter Bäume"
+      },
+      {
+        "Source": "Deep Caves, carved in huge mountains built this citiy of the dwarfs",
+        "de": "Tiefe Höhlen, in riesige Gebirge gegraben bilden die Stadt der Zwerge"
+      },
+      {
+        "Source": "An Oasis surrounded by a huge desert.",
+        "de": "Eine Oase, umgeben von einer riesigen Wüste."
+      },
+      {
+        "Source": "City of man, capital of the land.",
+        "de": "Stadt der Menschen, Hauptstadt des Landes."
+      },
+      {
+        "Source": "The Home of the trolls. Everything is dirty and stinky here.",
+        "de": "Die Heimat der Trolle. Alles hier ist ein wenig schmuddelig und müffelt streng.."
+      },
+      {
+        "Source": "The mysterous city, where the pepper grows. Many legendary heroes have been sent here. But on second sight, it is just a city.",
+        "de": "Eine mysteriöse Stadt, wo der Pfeffer wächst. Viele legendäre Helden wurden hier her gesandt. Aber auf den zweiten Blick ist es nur eine weitere Stadt."
+      },
+      {
+        "Source": "The capital of the land. Big houses, the Kings' Castle, a Kathedral, everything a glorious capital needs.",
+        "de": "Die Hauptstadt des Landes. Große Häuser, das Schloss des Königs, eine Kathetrale, alles was eine glorreiche Hauptstadt so braucht."
+      },
+      {
+        "Source": "Drerachi, The Dream City",
+        "de": "Drerachi, Stadt der Träume"
+      },
+      {
+        "Source": "Stick, shaped like a sword",
+        "de": "Stock in Schwertform"
+      },
+      {
+        "Source": "Sword, shaped like a stick",
+        "de": "Schwert in Stockform"
+      },
+      {
+        "Source": "Stick-Sword",
+        "de": "Stockschwert"
+      },
+      {
+        "Source": "A stick, shaped like a sword. Or a sword, shaped like a stick? It is a sword-stick",
+        "de": "Ein Stock, geformt wie ein Schert. Oder ein Schwert, geformt wie ein Stock? Es ist ein Stockschwert"
+      },
+      {
+        "Source": "wheathered wooden board",
+        "de": "verwittertes Holzbrett"
+      },
+      {
+        "Source": "wooden board",
+        "de": "Holzbrett"
+      },
+      {
+        "Source": "robust wooden board",
+        "de": "robustes Holzbrett"
+      },
+      {
+        "Source": "A wooden board. It can protect you from... well, not much but it offers a little protection.",
+        "de": "Ein hölzernes Brett. Es beschützt dich vor... naja, erlicherweise nicht vor Vielem, aber es bietet ein wenig Schutz"
+      },
+      {
+        "Source": "Bob, the Cowboy",
+        "de": "Bob, der Cowboy"
+      },
+      {
+        "Source": "Eddie, the Cowboy",
+        "de": "Eddie, der Cowboy"
+      },
+      {
+        "Source": "Angry Rat",
+        "de": "wütende Ratte"
+      },
+      {
+        "Source": "Stinky Bat",
+        "de": "Stinkige Fledermaus"
+      },
+      {
+        "Source": "Greedy Vulture",
+        "de": "gieriger Geier"
+      },
+      {
+        "Source": "Huge Barbarian",
+        "de": "gigantischer Barbar"
+      },
+      {
+        "Source": "Pussy, the Octopus",
+        "de": "Pussy, der Octopus"
+      },
+      {
+        "Source": "Tentacool",
+        "de": "Tentacool"
+      },
+      {
+        "Source": "Tentacruel",
+        "de": "Tentacruel"
+      },
+      {
+        "Source": "Kang",
+        "de": "Kang"
+      },
+      {
+        "Source": "Kodos",
+        "de": "Kodos"
+      },
+      {
+        "Source": "shabby board with a rusty nail hammered through",
+        "de": "schäbiges Brett mit einem rostigen Nagel"
+      },
+      {
+        "Source": "sharp teeth",
+        "de": "spitze Zähne"
+      },
+      {
+        "Source": "sheer muscle power",
+        "de": "schiere Muskelkraft"
+      },
+      {
+        "Source": "a club with spikes",
+        "de": "Eine Stachelkeule"
+      },
+      {
+        "Source": "a Nokia 3210",
+        "de": "ein Nokia 3210"
+      },
+      {
+        "Source": "tantacles",
+        "de": "Tentakel"
+      },
+      {
+        "Source": "laser gun",
+        "de": "Laserkanone"
+      },
+      {
+        "Source": "The {}Guard{} looks at you, and shakes his head. \"Not on the list!\", is all he says. \"What list?\" you ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here. You think about it for a short while, and realize, that you don't even have a name. so what should they even write on their list? So probably, everything is in perfect order.",
+        "de": "Die {}Wache{} schaut dich an und schüttelt den Kopf. \"Nicht auf der Liste!\", ist alles, was er zu Sagen hat. \"Welche Liste?\" fragst du. \"Die, auf der du nicht draufstehst.\", ist die Antwort, die klarstellt, dass man leute wie dich hier nicht sonderlich gut leiden kann. Du denkst kurz nach und dir wird auch klar, dass du ja noch nicht einmal einen namen hast. Was sollten sie also auch auf ihre Liste draufschreiben? Also wahrscheinlich ist alles in bester Ordnung."
+      },
+      {
+        "Source": "Chick",
+        "de": "Kücken"
+      },
+      {
+        "Source": "Sparrow",
+        "de": "Spatz"
+      },
+      {
+        "Source": "Parrot",
+        "de": "Papagei"
+      },
+      {
+        "Source": "Griffon",
+        "de": "Greif"
+      },
+      {
+        "Source": "Phoenix",
+        "de": "Phönix"
+      },
+      {
+        "Source": "Whelp",
+        "de": "Welpe"
+      },
+      {
+        "Source": "Dog",
+        "de": "Hund"
+      },
+      {
+        "Source": "Wolf",
+        "de": "Wolf"
+      },
+      {
+        "Source": "Ice wolf",
+        "de": "Eiswolf"
+      },
+      {
+        "Source": "Cerberus",
+        "de": "Zerberus"
+      },
+      {
+        "Source": "Kitten",
+        "de": "Kätzchen"
+      },
+      {
+        "Source": "Cat",
+        "de": "Katze"
+      },
+      {
+        "Source": "Lynx",
+        "de": "Luchs"
+      },
+      {
+        "Source": "Tiger",
+        "de": "Tiger"
+      },
+      {
+        "Source": "Sphinx",
+        "de": "Sphinx"
+      },
+      {
+        "Source": "Baby Dragon",
+        "de": "Babydrache"
+      },
+      {
+        "Source": "Young Dragon",
+        "de": "junger Drache"
+      },
+      {
+        "Source": "Adult Dragon",
+        "de": "erwachsener Drache"
+      },
+      {
+        "Source": "Old Dragon",
+        "de": "alter Drache"
+      },
+      {
+        "Source": "Ancient Hellfire Dragon",
+        "de": "uralter Hellfiredrache"
+      },
+      {
+        "Source": "Ripped T-Shirt",
+        "de": "zerrissenes T-Shirt"
+      },
+      {
+        "Source": "White T-Shirt",
+        "de": "weißes T-Shirt"
+      },
+      {
+        "Source": "Fashionable T-Shirt",
+        "de": "modisches T-Shirt"
+      },
+      {
+        "Source": "Looks like mere clothing, but should offer a little protection.",
+        "de": "Sieht aus, wie einfache Kleidung. Sollte ein bisschen Schutz bieten."
+      },
+      {
+        "Source": "F{0}ishing{1} F{0}ritz{2}",
+        "de": "F{0}ischers{1} F{0}ritz{2}"
+      },
+      {
+        "Source": "The king has stupid ears.",
+        "de": "Der König hat doofe Ohren."
+      },
+      {
+        "Source": "There is a huge treasure hidden beneath the mountain.",
+        "de": "Da ist ein riesiger Schatz unter den Bergen versteckt."
+      },
+      {
+        "Source": "The mayor of this town has an affair with a donkey.",
+        "de": "Der Bürgermeister der Stadt hat einer Affaire mit einem Esel."
+      },
+      {
+        "Source": "Fat Eddie",
+        "de": "Fetter Eddie"
+      },
+      {
+        "Source": "Blackmailing the Mayor",
+        "de": "Erpressen des Bürgermeisters"
+      },
+      {
+        "Source": "Robo Devil",
+        "de": "Roboteufel"
+      },
+      {
+        "Source": "Stealing people's hands",
+        "de": "Stehlen der Hände der Leute"
+      },
+      {
+        "Source": "Evil Wizard",
+        "de": "Böser Zauberer"
+      },
+      {
+        "Source": "Doing evil wizard things",
+        "de": "Tun von Böser Zauberer-dinge"
+      },
+      {
+        "Source": "Robin Would",
+        "de": "Robin Would"
+      },
+      {
+        "Source": "Stealing from the rich",
+        "de": "Von den Reichen stehlen"
+      },
+      {
+        "Source": "Taffy, the Pirate",
+        "de": "Taffy, der Pirat"
+      },
+      {
+        "Source": "Crimes against the world government",
+        "de": "Verbrechen gegen die Weltregierung"
+      }
+    ],
+    "Room": [
+      {
+        "Source": "You whake up, somewhere.",
+        "de": "Du wachst auf, irgendwo."
+      },
+      {
+        "Source": "You have not the slightest idea, where you are.",
+        "de": "Du hast nicht die geringste Ahnung, wo du bist."
+      },
+      {
+        "Source": "You look around, and realize, that you are utterly defenseless. You need something to defend yourself. Hidden beneath one of the bushes, you see someting:",
+        "de": "Du schaust dich um, und stellst fest, dass du komplett schutzlos bist. Du brauchst irgendetwas um dich zu verteidigen. Versteckt unter einem Busch siehst du etwas:"
+      },
+      {
+        "Source": "This seems to be a decent weapon, at least for now.",
+        "de": "Scheint eine gescheite Waffe zu sein, zumindest vorläufig."
+      },
+      {
+        "Source": "You take the {} and equip it. It looks good on you.",
+        "de": "Du mist den {} und rüstest es aus. Es sieht gut an dir aus."
+      },
+      {
+        "Source": "Having the sword, you look further. You still do not feel like a big, sturdy warrior. Something is missing.",
+        "de": "Mit einem Schwert in der Hand schaust du weiter. Du fühlst dich immernoch nicht wie ein großer, starker Krieger. Irgendetwas fehlt."
+      },
+      {
+        "Source": "Wait, is that...?",
+        "de": "Moment, ist das...?"
+      },
+      {
+        "Source": "You take the {} and equip it. Now you feel complete.",
+        "de": "Du nimmst das {} und rüstest es aus. jetzt fühlst du dich komplett."
+      },
+      {
+        "Source": "Now, that you are equipped, it is time to start your adventure. You look around where you are and find:",
+        "de": "Jetzt, wo du ausgerüstet bist, ist es an der Zeit, dein Abenteuer zu starten. Du schaust dich um und siehst:"
+      },
+      {
+        "Source": "A suspicious noise is coming out of one of the bushes, you should have a look. Or maybe, you better be carful and ignore it.",
+        "de": "Ein verdächtiges Geräusch kommt aus einem der Büsche. Du solltest einen Blick riskieren. Oder, vielleicht, besser vorsichtig sein und es ignorieren."
+      },
+      {
+        "Source": "You follow the sounds, and find a tiny {} lying beneath a bush, desperately looking for help",
+        "de": "Du folgst den Geräuschen und findest ein winziges {} unter einem Busch, verzweifelt nach Hilfe suchend"
+      },
+      {
+        "Source": "You decide to help the {}. a little water, a bandage for the broken limb and some herbs and soon the little fellow is back on track.",
+        "de": "Du beschließt {} zu helfen. Ein bisschen Wasser, eine Bandage für die gebrochenen Gliedmaßen und ein paar Kräuter und schon ist der kleine Kerl wieder zurück am Start."
+      },
+      {
+        "Source": "As soon as you leave, you realize, that {} follows you. Looks like, you have found a new friend.",
+        "de": "Sowie du beschlossen hast, zu gehen, stellst du fest, dass {} dir folgt. Anscheinend hast du einen nagelneuen Freund gefunden."
+      },
+      {
+        "Source": "With a smile, you remember how you found {} here",
+        "de": "Mit einem Lächeln erinnerst du dich, wie du {} hier gefunden hast."
+      }
+    ],
+    "Town": [
+      {
+        "Source": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air.",
+        "Status": "untranslated",
+        "de": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air."
+      },
+      {
+        "Source": "A grumpy old man, probably the blacksmith looks at you suspiciously and asks what he can do for you.",
+        "Status": "untranslated",
+        "de": "A grumpy old man, probably the blacksmith looks at you suspiciously and asks what he can do for you."
+      },
+      {
+        "Source": "You look through your pockets and find the following items, that can be enhanced:",
+        "Status": "untranslated",
+        "de": "You look through your pockets and find the following items, that can be enhanced:"
+      },
+      {
+        "Source": "[   ] {} ({} Gold)",
+        "Status": "untranslated",
+        "de": "[   ] {} ({} Gold)"
+      },
+      {
+        "Source": "The church of {}. An old church, but nice and clean. The priest is an old, friedly man.",
+        "Status": "untranslated",
+        "de": "The church of {}. An old church, but nice and clean. The priest is an old, friedly man."
+      },
+      {
+        "Source": "The priest chants his prayers and a godly light surrounds you. Your wounds close, your pain vanishes.",
+        "Status": "untranslated",
+        "de": "The priest chants his prayers and a godly light surrounds you. Your wounds close, your pain vanishes."
+      },
+      {
+        "Source": "You are fully healed.",
+        "Status": "untranslated",
+        "de": "You are fully healed."
+      },
+      {
+        "Source": "Aaah, the tavern. Time for a rest, time for a cool ale! The tavern is crowded with hard drunkards and easy girls. The place to be in any fantasy setting.",
+        "Status": "untranslated",
+        "de": "Aaah, the tavern. Time for a rest, time for a cool ale! The tavern is crowded with hard drunkards and easy girls. The place to be in any fantasy setting."
+      },
+      {
+        "Source": "You walk around in the tavern, talk to the people and listen to some conversations, Obviously, the one thing, everybody seems to be talking about is:",
+        "Status": "untranslated",
+        "de": "You walk around in the tavern, talk to the people and listen to some conversations, Obviously, the one thing, everybody seems to be talking about is:"
+      },
+      {
+        "Source": "You approach the big board on the wall with the headline \"Wanted\". The worst criminals of the countra are displayed here, and big rewards are for those who can catch one of those villains.",
+        "Status": "untranslated",
+        "de": "You approach the big board on the wall with the headline \"Wanted\". The worst criminals of the countra are displayed here, and big rewards are for those who can catch one of those villains."
+      },
+      {
+        "Source": "wanted for:",
+        "Status": "untranslated",
+        "de": "wanted for:"
+      },
+      {
+        "Source": "Reward: {} Gold",
+        "Status": "untranslated",
+        "de": "Reward: {} Gold"
+      },
+      {
+        "Source": "This guy shure looks dangerous, but the reward should be worth it. But the guy looks dangerous.",
+        "Status": "untranslated",
+        "de": "This guy shure looks dangerous, but the reward should be worth it. But the guy looks dangerous."
+      },
+      {
+        "Source": "You feel brave and relentless, and decide to hunt this sucker down. You rip of his poster, ask around for his whereabouts and start your hunt",
+        "Status": "untranslated",
+        "de": "You feel brave and relentless, and decide to hunt this sucker down. You rip of his poster, ask around for his whereabouts and start your hunt"
+      },
+      {
+        "Source": "The shop of {} looks like any shop in any generic D&D game. Even the clerc looks stereotypical. The shop is filled with junk,but who knows, maybe you will find something cool here? Or make some food money selling your precious valuables?",
+        "Status": "untranslated",
+        "de": "The shop of {} looks like any shop in any generic D&D game. Even the clerc looks stereotypical. The shop is filled with junk,but who knows, maybe you will find something cool here? Or make some food money selling your precious valuables?"
+      }
+    ]
+  }
 }

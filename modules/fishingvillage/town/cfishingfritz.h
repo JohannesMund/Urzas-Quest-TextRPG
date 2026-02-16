@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cinventory.h"
 #include "ctranslatable.h"
 
 #include <string>
@@ -33,6 +34,8 @@ private:
     bool isMakeBoatActive() const;
     bool hasFish() const;
     std::string sellYourFish() const;
+
+    void checkAndPrint(CInventory::EnhancableEquipmentList& equipmentList, CEquipment* item) const;
 
     bool _firstVisit = true;
 };

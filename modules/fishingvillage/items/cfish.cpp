@@ -21,8 +21,8 @@ CFish::CFish(const FishingVillage::EFishLevel level) : CItem(TagNames::FishingVi
     _isBuyable = false;
 
     _fishLevel = level;
-    _description =
-        "A beautiful fish, caught by yourself. Can be sold for money. Money can be exchanged for goods and services.";
+    _description = tr(
+        "A beautiful fish, caught by yourself. Can be sold for money. Money can be exchanged for goods and services.");
 }
 
 FishingVillage::EFishLevel CFish::fishLevel() const

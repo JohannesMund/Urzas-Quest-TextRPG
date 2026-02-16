@@ -1,11 +1,85 @@
 {
   "FileSpec": {
-    "DateTime": "2026-02-16 14:21:11",
+    "DateTime": "2026-02-16 19:56:06",
     "FileType": "Translation",
     "Name": "UrzasQuest TextRPG",
     "Version": 1
   },
   "Translation": {
+    "FishRestaurant": [
+      {
+        "Source": "fried {}",
+        "Status": "untranslated",
+        "de": "fried {}"
+      },
+      {
+        "Source": "{} sashimi",
+        "Status": "untranslated",
+        "de": "{} sashimi"
+      },
+      {
+        "Source": "{} bouillabaisse",
+        "Status": "untranslated",
+        "de": "{} bouillabaisse"
+      },
+      {
+        "Source": "grilled {} filet",
+        "Status": "untranslated",
+        "de": "grilled {} filet"
+      },
+      {
+        "Source": "{}'s Inn",
+        "Status": "untranslated",
+        "de": "{}'s Inn"
+      },
+      {
+        "Source": "Serving the best fresh fish since 833 ad. dragonis",
+        "Status": "untranslated",
+        "de": "Serving the best fresh fish since 833 ad. dragonis"
+      },
+      {
+        "Source": "Dish of the day:",
+        "Status": "untranslated",
+        "de": "Dish of the day:"
+      },
+      {
+        "Source": "You get a plate with a steaming hot fish meal, and it tastes amazing!",
+        "Status": "untranslated",
+        "de": "You get a plate with a steaming hot fish meal, and it tastes amazing!"
+      },
+      {
+        "Source": "The price for the dish of the day is: {} Gold. You are sure, that it is woth the prize, but you just cannot afford.",
+        "Status": "untranslated",
+        "de": "The price for the dish of the day is: {} Gold. You are sure, that it is woth the prize, but you just cannot afford."
+      },
+      {
+        "Source": "steamed {}",
+        "Status": "untranslated",
+        "de": "steamed {}"
+      }
+    ],
+    "FishingFritz": [
+      {
+        "Source": "Fishing fresh fish since 832 ad. dragonis",
+        "Status": "untranslated",
+        "de": "Fishing fresh fish since 832 ad. dragonis"
+      },
+      {
+        "Source": "{}'s fishing shop is an old, ramshackle hut. It is good, that the weather here is always sunny and clear, because this hut would probably collapse, when hit by a medium strong wind. Also, it will offer not much protection against rain, snow, or even cold.",
+        "Status": "untranslated",
+        "de": "{}'s fishing shop is an old, ramshackle hut. It is good, that the weather here is always sunny and clear, because this hut would probably collapse, when hit by a medium strong wind. Also, it will offer not much protection against rain, snow, or even cold."
+      },
+      {
+        "Source": "There is a sign on the locked door reding:",
+        "Status": "untranslated",
+        "de": "There is a sign on the locked door reding:"
+      },
+      {
+        "Source": "\"Gone fishing, come back later\"",
+        "Status": "untranslated",
+        "de": "\"Gone fishing, come back later\""
+      }
+    ],
     "MenuActions": [
       {
         "Source": {
@@ -94,6 +168,58 @@
           "MenuAction": "Catch fish",
           "MenuActionKey": 0
         }
+      },
+      {
+        "Source": {
+          "MenuAction": "Eat dish of the day (50 Gold)",
+          "MenuActionKey": 69
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Eat dish of the day (50 Gold)",
+          "MenuActionKey": 69
+        }
+      }
+    ],
+    "Ressources": [
+      {
+        "Source": "{0}yellow {1}red {2}feathered {0}d{1}r{0}a{1}g{0}o{1}n {0}f{1}i{0}s{1}h{2}",
+        "Status": "untranslated",
+        "de": "{0}yellow {1}red {2}feathered {0}d{1}r{0}a{1}g{0}o{1}n {0}f{1}i{0}s{1}h{2}"
+      },
+      {
+        "Source": "{}Carp{}",
+        "Status": "untranslated",
+        "de": "{}Carp{}"
+      },
+      {
+        "Source": "{0}M{1}a{1}g{0}i{1}c{0}a{1}r{0}p{2}",
+        "Status": "untranslated",
+        "de": "{0}M{1}a{1}g{0}i{1}c{0}a{1}r{0}p{2}"
+      }
+    ],
+    "Room": [
+      {
+        "Source": "A smaly, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
+        "Status": "untranslated",
+        "de": "A smaly, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch."
+      }
+    ],
+    "goFishing": [
+      {
+        "Source": "If you had a fishing rod, you could use it for fishing",
+        "Status": "untranslated",
+        "de": "If you had a fishing rod, you could use it for fishing"
+      },
+      {
+        "Source": "If you had a boat, you could use it to get out into the lake and catch bigger and better fish.",
+        "Status": "untranslated",
+        "de": "If you had a boat, you could use it to get out into the lake and catch bigger and better fish."
+      },
+      {
+        "Source": "unfortunately you have neither",
+        "Status": "untranslated",
+        "de": "unfortunately you have neither"
       }
     ]
   }
