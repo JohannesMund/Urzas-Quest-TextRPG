@@ -1,18 +1,17 @@
 set(URZAS_QUEST_SOURCES_CORE	
 	core/core.cmake
 	core/ressources/core.json
-    
-    
+        
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
     core/cplayer.h core/cplayer.cpp
     core/cmap.h core/cmap.cpp
     core/cbattle.h core/cbattle.cpp
-    core/defaultsettings.h
-    
+        
     core/gamestate/cgamestateobject.h core/gamestate/cgamestateobject.cpp
     core/gamestate/cgamesettings.h core/gamestate/cgamesettings.cpp    
     core/gamestate/csavefile.h core/gamestate/csavefile.cpp     
+    core/gamestate/defaultsettings.h
 
     core/menu/cmenu.h core/menu/cmenu.cpp
     core/menu/cmenuaction.h core/menu/cmenuaction.cpp

@@ -77,6 +77,16 @@ void CFishingFritz::execute()
     } while (input != CMenu::exit());
 }
 
+std::string CFishingFritz::translatorModuleName() const
+{
+    return FishingVillageFishLegend::moduleName();
+}
+
+std::string CFishingFritz::translatorObjectName() const
+{
+    return std::string(TagNames::FishingVille::fishingFritz);
+}
+
 void CFishingFritz::printHeader() const
 {
     Console::cls();

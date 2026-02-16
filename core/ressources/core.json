@@ -46,7 +46,7 @@
                 "de": "Wähle ein Item aus, um es zu benutzen"
             },
             {
-                "Source": "Select item to view",                
+                "Source": "Select item to view",
                 "de": "Wähle ein Item aus, um es anzuschauen"
             }
         ],
@@ -400,6 +400,176 @@
                     "MenuAction": "Helfen",
                     "MenuActionKey": 0
                 }
+            }
+        ],
+        "Ressources": [
+            {
+                "Source": "{}Ur{}za{}",
+                "de": "{}Ur{}za{}"
+            },
+            {
+                "Source": "{}wh{}o t{}he f{}uck {}is {}?{}",
+                "de": "{}we{}r z{}um f{}ick {}ist {}?{}"
+            },
+            {
+                "Source": "{}Stick{}",
+                "de": "{}Stock{}"
+            },
+            {
+                "Source": "A stick, just a stick. Maybe magical? There is no label stating \"Godly Magic Stick of the Whale\". On the other hand, there no label stating, that this stick is not a \"Godly Magic Stick of the Whale\".",
+                "de": "Ein Stock, nur ein Stock. Vielleicht magisch? Da ist kein Aufkleber \"Göttlicher Stock des Wals\". Andererseits, da ist auch kein Aufkleber, der sagt, dass das kein \"Göttlicher Stock des Wals\" ist."
+            },
+            {
+                "Source": "{}S{}o{}c{}k{}",
+                "de": "{}S{}o{}ck{}e{}"
+            },
+            {
+                "Source": "A single sock. A single dirty sock. Useless without the other one. Who on earth throws away a single Sock??",
+                "de": "Eine einzelne Socke. Eine einzelne, dreckige Socke. Nutzlos ohne die andere Socke. Wer zur Hölle wirft eine einzelne Socke weg??"
+            },
+            {
+                "Source": "{}The other {}S{}o{}ck{}e{}",
+                "de": "{}Die andere {}S{}o{}c{}k{}"
+            },
+            {
+                "Source": "There it is, the other sock. A single dirty sock. Now you have both but who on earth throws away two single Socks seperately??",
+                "de": "Da ist sie, die andere Socke. Eine einzelne, dreckige Socke. Jetzt hast du beide, aber wer zur Hölle wirft zwei einzelne Socken seperat weg??"
+            },
+            {
+                "Source": "{}Rock{}",
+                "de": "{}Stein{}"
+            },
+            {
+                "Source": "This is a good rock, so good, that it might be used in an epic \"Rock Paper Sicsors\" battle.",
+                "de": "Das ist ein guter Stein, so gut, dass er in einer epischen \"Stein Schere Papier\" - Schlacht benutz werden könnte."
+            },
+            {
+                "Source": "{}Boot{}",
+                "de": "{}Stiefel{}"
+            },
+            {
+                "Source": "An old, single boot made from leather.Good, expensive leather. But is damaged and dirty. And it is just a single boot.",
+                "de": "Ein alter, einzelner Stiefel, hergestellt aus Leder. Gutem, teurem Leder. Aber er ist beschädigt und dreckig. Und es ist nur ein einzelner Stiefel."
+            },
+            {
+                "Source": "V{0}a{1}s{0}e{1}",
+                "de": "V{0}a{1}s{0}e{1}"
+            },
+            {
+                "Source": "This is one beautiful vase. It will look nice on your table. or on a sideboard. you could fill it with flowers. Or you just throw it away, for somone else to find ist.",
+                "de": "Das ist eine schöne Vase. Die wird toll auf deinem Tisch aussehen. Oder Deinem Sideboard. Du könntest sie mit Blumen füllen. Oder, du könntest sie einfach wegwerfen, so dass sie jemand anderes finden kann."
+            },
+            {
+                "Source": "Flask",
+                "de": "Flasche"
+            },
+            {
+                "Source": "An empty flask. Like the ones filled with magic potions, only without the potion. This one is filled with nothing.",
+                "de": "Eine leere Flasch. So wie die, die mit magischen Tränken gefüllt sind, Nur halt ohne den Trank. Diese hier ist mit nichts gefüllt."
+            },
+            {
+                "Source": "{0}Col{1}l{2}ec{0}tio{1}n o{0}f l{3}eav{1}es{4}",
+                "de": "{0}Blä{1}t{2}te{0}rs{1}am{0}ml{3}un{1}g{4}"
+            },
+            {
+                "Source": "A collection of especially beautiful leaves.",
+                "de": "Eine Sammlung von ganz besonders hübschen Blättern."
+            },
+            {
+                "Source": "{}Ring{}",
+                "de": "{}Ring{}"
+            },
+            {
+                "Source": "{0}L{1}eila{2}",
+                "de": "{0}L{1}eila{2}"
+            },
+            {
+                "Source": "{}Princess {}{}",
+                "de": "{}Prinzessin {}{}"
+            },
+            {
+                "Source": "A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for proposing to {}.",
+                "de": "Ein Ring, wahrscheinlich aus einem Kaugummiautomaten (Was ist ein Kaugummitautomat?), wie auch immer, nicht dafür geeignet um {} einen Antrag zu machen."
+            },
+            {
+                "Source": "A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you like sheep? I like sheep. There is one.",
+                "de": "Eine Wiese. Mit Gras. Viel Gras. Habe ich das Gras erwähnt? Oooh, da ist ein Schaf! magst du Schafe? Ich mag Schafe. Da ist eins."
+            },
+            {
+                "Source": "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a forest fairy? In this case, her name is probably \"Holla\".",
+                "Status": "untranslated",
+                "de": "Ein tiefer, finsterer Wald. Bäume und Büsche umgeben dich. Der Boden ist matschig und feucht. War da eine Fee? Vielleicht sogar eine Waldfee? In dem Falle, ihr Name ist sehr wahrscheinlich \"Holla\"."
+            },
+            {
+                "Source": "The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is just a lake. On second glance, not even a big one.",
+                "de": "Das Ufer eines Sees. Das ist ein riesiger See, so riesig, dass man ihn \"Gigantensee\" nennen könnte. Aber am Ende ist es nur ein See. Auf den zweiten Blick nicht einmal ein großer."
+            },
+            {
+                "Source": "The City of Elves. Built high in the treetops of ancient Trees",
+                "de": "Die Stadt der Elfen. Gebaut hoch oben in den Wipfel uralter Bäume"
+            },
+            {
+                "Source": "Deep Caves, carved in huge mountains built this citiy of the dwarfs",
+                "de": "Tiefe Höhlen, in riesige Gebirge gegraben bilden die Stadt der Zwerge"
+            },
+            {
+                "Source": "An Oasis surrounded by a huge desert.",
+                "de": "Eine Oase, umgeben von einer riesigen Wüste."
+            },
+            {
+                "Source": "City of man, capital of the land.",
+                "de": "Stadt der Menschen, Hauptstadt des Landes."
+            },
+            {
+                "Source": "The Home of the trolls. Everything is dirty and stinky here.",
+                "de": "Die Heimat der Trolle. Alles hier ist ein wenig schmuddelig und müffelt streng.."
+            },
+            {
+                "Source": "The mysterous city, where the pepper grows. Many legendary heroes have been sent here. But on second sight, it is just a city.",
+                "de": "Eine mysteriöse Stadt, wo der Pfeffer wächst. Viele legendäre Helden wurden hier her gesandt. Aber auf den zweiten Blick ist es nur eine weitere Stadt."
+            },
+            {
+                "Source": "The capital of the land. Big houses, the Kings' Castle, a Kathedral, everything a glorious capital needs.",
+                "de": "Die Hauptstadt des Landes. Große Häuser, das Schloss des Königs, eine Kathetrale, alles was eine glorreiche Hauptstadt so braucht."
+            },
+            {
+                "Source": "Drerachi, The Dream City",
+                "de": "Drerachi, Stadt der Träume"
+            },
+            {
+                "Source": "Stick, shaped like a sword",
+                "Status": "untranslated",
+                "de": "Stock in Schwertform"
+            },
+            {
+                "Source": "Sword, shaped like a stick",
+                "Status": "untranslated",
+                "de": "Schwert in Stockform"
+            },
+            {
+                "Source": "Stick-Sword",
+                "Status": "untranslated",
+                "de": "Stockschwert"
+            },
+            {
+                "Source": "A stick, shaped like a sword. Or a sword, shaped like a stick? It is a sword-stick",
+                "de": "Ein Stock, geformt wie ein Schert. Oder ein Schwert, geformt wie ein Stock? Es ist ein Stockschwert"
+            },
+            {
+                "Source": "wheathered wooden board",
+                "de": "verwittertes Holzbrett"
+            },
+            {
+                "Source": "wooden board",
+                "de": "Holzbrett"
+            },
+            {
+                "Source": "robust wooden board",
+                "de": "robustes Holzbrett"
+            },
+            {
+                "Source": "A wooden board. It can protect you from... well, not much but it offers a little protection.",
+                "de": "Ein hölzernes Brett. Es beschützt dich vor... naja, erlicherweise nicht vor Vielem, aber es bietet ein wenig Schutz"
             }
         ]
     }

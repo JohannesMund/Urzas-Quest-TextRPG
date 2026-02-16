@@ -59,6 +59,16 @@ void CFishRestaurant::execute()
     } while (input != CMenu::exit());
 }
 
+std::string CFishRestaurant::translatorModuleName() const
+{
+    return FishingVillageFishLegend::moduleName();
+}
+
+std::string CFishRestaurant::translatorObjectName() const
+{
+    return std::string(TagNames::FishingVille::fishRestaurant);
+}
+
 void CFishRestaurant::makeDishOfTheDay()
 {
     _dishOfTheDayLevel = FishingVillage::getRandomRarity(FishingVillage::rodLevelCap, FishingVillage::boatLevelCap);

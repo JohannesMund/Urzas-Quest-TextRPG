@@ -50,6 +50,16 @@ void CGoFishing::execute()
     } while (input != CMenu::exit());
 }
 
+std::string CGoFishing::translatorModuleName() const
+{
+    return FishingVillageFishLegend::moduleName();
+}
+
+std::string CGoFishing::translatorObjectName() const
+{
+    return std::string(TagNames::FishingVille::goFishing);
+}
+
 void CGoFishing::init()
 {
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFishingRod::fishingRodFilter());

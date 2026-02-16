@@ -1,13 +1,19 @@
 #pragma once
 
+#include "ctranslatable.h"
+
 #include <string>
 
-class CFishingFritz
+class CFishingFritz : public CTranslatable
 {
 public:
     CFishingFritz();
 
     void execute();
+
+protected:
+    virtual std::string translatorModuleName() const override;
+    virtual std::string translatorObjectName() const override;
 
 private:
     void printHeader() const;
