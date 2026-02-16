@@ -17,6 +17,7 @@ constexpr std::string_view incomplete = "incomplete";
 constexpr std::string_view ressources = "Ressources";
 constexpr std::string_view enemy = "Enemy";
 constexpr std::string_view equipment = "Equipment";
+constexpr std::string_view town = "Town";
 } // namespace Translator
 
 namespace Common

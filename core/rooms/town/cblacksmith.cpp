@@ -4,8 +4,6 @@
 #include "cmenu.h"
 #include "console.h"
 
-#include <format>
-
 CBlackSmith::CBlackSmith()
 {
 }
@@ -20,10 +18,10 @@ void CBlackSmith::execute()
     do
     {
         Console::cls();
-        Console::printLn(
-            "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air.");
-        Console::printLn(
-            "A grumpy old man, probably the blacksmith looks at you suspiciously and asks what he can do for you.");
+        Console::printLn(coreTr(
+            "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air."));
+        Console::printLn(coreTr(
+            "A grumpy old man, probably the blacksmith looks at you suspiciously and asks what he can do for you."));
         Console::hr();
 
         input = menu.execute();
@@ -41,12 +39,12 @@ void CBlackSmith::enhanceItem()
     auto items = CGameManagement::getInventoryInstance()->getEnhancableEquipment();
     if (items.size() == 0)
     {
-        Console::printLn("You look through your pockets and find no enhancable items.");
+        Console::printLn(coreTr("You look through your pockets and find no enhancable items."));
         return;
     }
 
     std::vector<CEquipment*> enhancableItems;
-    Console::printLn("You look through your pockets and find the following items, that can be enhanced:");
+    Console::printLn(coreTr("You look through your pockets and find the following items, that can be enhanced:"));
     for (auto item : items)
     {
 
@@ -61,11 +59,11 @@ void CBlackSmith::enhanceItem()
         if (cost <= CGameManagement::getPlayerInstance()->gold())
         {
             enhancableItems.push_back(item);
-            Console::printLn(std::format("[{:3}] {} ({} Gold)", enhancableItems.size(), item->name(), cost));
+            Console::printLn(coreTr("[{:3}] {} ({} Gold)", enhancableItems.size(), item->name(), cost));
         }
         else
         {
-            Console::printLn(std::format("[   ] {} ({} Gold)", item->name(), cost));
+            Console::printLn(coreTr("[   ] {} ({} Gold)", item->name(), cost));
         }
     }
 
