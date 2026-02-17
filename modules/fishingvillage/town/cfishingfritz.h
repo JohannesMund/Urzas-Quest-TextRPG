@@ -33,7 +33,7 @@ private:
     bool isMakeRodActive() const;
     bool isMakeBoatActive() const;
     bool hasFish() const;
-    std::string sellYourFish() const;
+    int fishValue() const;
 
     void checkAndPrint(CInventory::EnhancableEquipmentList& equipmentList, CEquipment* item) const;
 

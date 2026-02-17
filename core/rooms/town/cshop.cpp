@@ -40,7 +40,7 @@ void CShop::execute()
         Console::cls();
         Console::printLn(
             coreTr("The shop of {} looks like any shop in any generic D&D game. Even the clerc looks "
-                   "stereotypical. The shop is filled with junk,but who knows, maybe you will find something cool "
+                   "stereotypical. The shop is filled with junk, but who knows, maybe you will find something cool "
                    "here? Or make some food money selling your precious valuables?",
                    _cityName));
         Console::hr();

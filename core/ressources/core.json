@@ -856,79 +856,69 @@
     ],
     "Town": [
       {
-        "Source": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air.",
-        "Status": "untranslated",
-        "de": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air."
+        "Source": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air.",        
+        "de": "Die Schmiede der Stadt. Es ist heiß, es ist schmutzig, der Krach eines Hammers, der auf einem Amboss trommelt tönt durch die Luft."
       },
       {
         "Source": "A grumpy old man, probably the blacksmith looks at you suspiciously and asks what he can do for you.",
-        "Status": "untranslated",
-        "de": "A grumpy old man, probably the blacksmith looks at you suspiciously and asks what he can do for you."
+        "de": "Ein grummeliger, alter Mann, wahrscheinlich der Schmied, schaut dich mißtrauisch an, und fragt dich, was du willst."
       },
       {
         "Source": "You look through your pockets and find the following items, that can be enhanced:",
-        "Status": "untranslated",
-        "de": "You look through your pockets and find the following items, that can be enhanced:"
+        "de": "Du schaust in deinen Taschen nach Gegenständen, die verbessert werden können:"
       },
       {
         "Source": "[   ] {} ({} Gold)",
-        "Status": "untranslated",
         "de": "[   ] {} ({} Gold)"
       },
       {
-        "Source": "The church of {}. An old church, but nice and clean. The priest is an old, friedly man.",
-        "Status": "untranslated",
-        "de": "The church of {}. An old church, but nice and clean. The priest is an old, friedly man."
+        "Source": "The church of {}. An old church, but nice and clean. The priest is an old, friendly man.",
+        "de": "Die Kirche von {}. Eine alte Kirche, aber hübsch und sauber. Der Priester ist ein alter, freundlicher Mann."
       },
       {
         "Source": "The priest chants his prayers and a godly light surrounds you. Your wounds close, your pain vanishes.",
-        "Status": "untranslated",
-        "de": "The priest chants his prayers and a godly light surrounds you. Your wounds close, your pain vanishes."
+        "de": "Der Priester spricht seine Gebete und ein göttliches Licht umgiebt dich. Deine Wunden schließen sich, deine Schmerzen verschwinden."
       },
       {
-        "Source": "You are fully healed.",
-        "Status": "untranslated",
-        "de": "You are fully healed."
+        "Source": "You are fully healed.",       
+        "de": "Du wurdest vollständig geheilt."
       },
       {
         "Source": "Aaah, the tavern. Time for a rest, time for a cool ale! The tavern is crowded with hard drunkards and easy girls. The place to be in any fantasy setting.",
-        "Status": "untranslated",
-        "de": "Aaah, the tavern. Time for a rest, time for a cool ale! The tavern is crowded with hard drunkards and easy girls. The place to be in any fantasy setting."
+        "de": "Aaah, die Teverne. Zeit für eine Rast, Zeit für ein kühles Ale! Die Taverne ist voll mit Trinkern und leichten Mädchen. Der Place to be in jedem Fantasysetting."
       },
       {
         "Source": "You walk around in the tavern, talk to the people and listen to some conversations, Obviously, the one thing, everybody seems to be talking about is:",
-        "Status": "untranslated",
-        "de": "You walk around in the tavern, talk to the people and listen to some conversations, Obviously, the one thing, everybody seems to be talking about is:"
+        "de": "Du läust in der Taverne umher, sprichst mit Leuten und schnappst Unterhaltungen auf, Augenscheinlich, die eine Sache,  über die jedermann spricht ist:"
       },
       {
-        "Source": "You approach the big board on the wall with the headline \"Wanted\". The worst criminals of the countra are displayed here, and big rewards are for those who can catch one of those villains.",
-        "Status": "untranslated",
-        "de": "You approach the big board on the wall with the headline \"Wanted\". The worst criminals of the countra are displayed here, and big rewards are for those who can catch one of those villains."
+        "Source": "You approach the big board on the wall with the headline \"Wanted\". The worst criminals of the country are displayed here, and big rewards are for those who can catch one of those villains.",
+        "de": "Du gehst rüber zu der Tafel mit der Überschrift \"Gesucht\". Die schlimmsten der Schlimmsten Kriminellen des Landes sind hier gelistet, und große Belohnungen werden denen versprochen, die einen dieser Bösewichte fangen können."
+      },
+      {
+        "Source": "The most interesting one is:",
+        "de": "Der interessanteste is:"
       },
       {
         "Source": "wanted for:",
-        "Status": "untranslated",
-        "de": "wanted for:"
+        "de": "gesucht wegen:"
       },
       {
         "Source": "Reward: {} Gold",
         "Status": "untranslated",
-        "de": "Reward: {} Gold"
+        "de": "Belohnung: {} Gold"
       },
       {
         "Source": "This guy shure looks dangerous, but the reward should be worth it. But the guy looks dangerous.",
-        "Status": "untranslated",
-        "de": "This guy shure looks dangerous, but the reward should be worth it. But the guy looks dangerous."
+        "de": "Der Typ sieht finster aus, aber die Belohnung sollte es wert sein. Totzdem, der Typ sieht wirklich finster aus."
       },
       {
         "Source": "You feel brave and relentless, and decide to hunt this sucker down. You rip of his poster, ask around for his whereabouts and start your hunt",
-        "Status": "untranslated",
-        "de": "You feel brave and relentless, and decide to hunt this sucker down. You rip of his poster, ask around for his whereabouts and start your hunt"
+        "de": "Du fühlst dich mutig und unaufhaltsam, Du wirst den Penner zur Strecke bringen. Du reißt das Poster ab, fragst nach seinem Aufenthaltsort und beginnst deine Jagd."
       },
       {
         "Source": "The shop of {} looks like any shop in any generic D&D game. Even the clerc looks stereotypical. The shop is filled with junk,but who knows, maybe you will find something cool here? Or make some food money selling your precious valuables?",
-        "Status": "untranslated",
-        "de": "The shop of {} looks like any shop in any generic D&D game. Even the clerc looks stereotypical. The shop is filled with junk,but who knows, maybe you will find something cool here? Or make some food money selling your precious valuables?"
+        "de": "Das Geschäft von {} sieht aus wie jeder andere Laden in jedem D&D Spiel. Sogar der Verkäufer erfüllt alle sterotype. Der Laden ist voll mit Abfall, aber wer weiß, vielleicht findest du ja was cooles? Vielleicht könntest du auch ein wenig Geld für Essen machen, indem du einige deiner wertvollen Schätze verkaufst?"
       }
     ]
   }

@@ -18,7 +18,7 @@ void CChurch::execute()
     {
         Console::cls();
         Console::printLn(coreTr(
-            "The church of {}. An old church, but nice and clean. The priest is an old, friedly man.", _cityName));
+            "The church of {}. An old church, but nice and clean. The priest is an old, friendly man.", _cityName));
         Console::hr();
 
         input = menu.execute();

@@ -14,7 +14,6 @@ constexpr std::string_view seenDuringPhase = "seenDuringPhase";
 } // namespace Shrine
 } // namespace TagNames
 
-class CRoom;
 namespace Shrine
 {
 std::string moduleName();

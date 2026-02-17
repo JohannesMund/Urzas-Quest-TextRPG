@@ -27,8 +27,14 @@ void CFishingFritz::execute()
         CMenu menu(FishingVillageMakeRod::moduleName());
 
         CMenu::ActionList defaultActionList;
+        CMenuAction sellAction;
 
-        CMenuAction sellAction = menu.createAction({sellYourFish(), 'S'});
+        const auto val = fishValue();
+        if (val > 0)
+        {
+            sellAction = menu.createShopAction({"Sell your fish", 'S'}, val);
+        }
+
         CMenuAction askAction = menu.createAction({"Ask for Information", 'A'});
         CMenuAction enhanceAction = menu.createAction({"Enhance Equipment", 'E'});
 
@@ -39,7 +45,7 @@ void CFishingFritz::execute()
                    "sunny and clear, because this hut would probably collapse, when hit by a medium strong "
                    "wind. Also, it will offer not much protection against rain, snow, or even cold.",
                    Ressources::Game::fishingFritz()));
-            Console::printLn(tr("There is a sign on the locked door reding:"));
+            Console::printLn(tr("There is a sign on the locked door reading:"));
             Console::printLn(tr("\"Gone fishing, come back later\""), Console::EAlignment::eCenter);
         }
         else
@@ -73,7 +79,6 @@ void CFishingFritz::execute()
         {
             enhance();
         }
-
     } while (input != CMenu::exit());
 }
 
@@ -277,12 +282,12 @@ bool CFishingFritz::hasFish() const
     return CGameManagement::getInventoryInstance()->hasItem(CFish::fishFilter());
 }
 
-std::string CFishingFritz::sellYourFish() const
+int CFishingFritz::fishValue() const
 {
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFish::fishFilter());
     if (items.size() == 0)
     {
-        return "";
+        return 0;
     }
 
     unsigned int value = 0U;
@@ -291,7 +296,7 @@ std::string CFishingFritz::sellYourFish() const
         value += item->value();
     }
 
-    return tr("Sell your fish ({} Gold)", value);
+    return value;
 }
 
 void CFishingFritz::checkAndPrint(CInventory::EnhancableEquipmentList& equipmentList, CEquipment* item) const

@@ -60,8 +60,8 @@ void CTavern::bountyHunt()
 {
     Console::printLn(
         coreTr("You approach the big board on the wall with the headline \"Wanted\". The worst criminals of the "
-               "countra are displayed here, and big rewards are for those who can catch one of those villains."));
-    Console::printLn("The most interesting one is:");
+               "country are displayed here, and big rewards are for those who can catch one of those villains."));
+    Console::printLn(coreTr("The most interesting one is:"));
     Console::br();
     auto bounty = Ressources::Enemies::getRandomBountyName();
     Console::printLn(bounty.first, Console::EAlignment::eCenter);
