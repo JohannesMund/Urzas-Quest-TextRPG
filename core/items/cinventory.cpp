@@ -36,24 +36,24 @@ void CInventory::addItem(CItem* item)
         auto it = std::find_if(_inventory.begin(), _inventory.end(), equipment->equipmentTypeFilter());
         if (it != _inventory.end())
         {
-            Console::printLn(std::format(
+            Console::printLn(coreTr(
                 "Your already have a {} do you want to replace it with {}", equipment->typeName(), equipment->name()));
 
             if (CMenu::executeYesNoMenu() == CMenu::no())
             {
-                Console::printLn(std::format("You decide to keep {} and reject {}.", (*it)->name(), item->name()));
+                Console::printLn(coreTr("You decide to keep {} and reject {}.", (*it)->name(), item->name()));
                 delete item;
                 return;
             }
 
-            Console::printLn(std::format("You decide to throw away you {}.", (*it)->name()));
+            Console::printLn(coreTr("You decide to throw away you {}.", (*it)->name()));
 
             delete *it;
             _inventory.erase(it);
         }
     }
 
-    Console::printLn(std::format("You obtained {}", item->name()));
+    Console::printLn(coreTr("You obtained {}", item->name()));
     _inventory.push_back(item);
 }
 
@@ -103,7 +103,7 @@ void CInventory::removeItem(CItem::ItemFilter filter)
 
 void CInventory::print(const Scope& scope)
 {
-    Console::printLn("You look through your backpack and find the following:");
+    Console::printLn(coreTr("You look through your backpack and find the following:"));
     selectItemFromInventory(scope);
     CMenuAction input;
     do
@@ -355,13 +355,13 @@ bool CInventory::usableInScope(const CItem* item, const Scope& scope)
 
 void CInventory::printUsableItems(const Scope& scope)
 {
-    Console::printLn("Select item to use");
+    Console::printLn(coreTr("Select item to use"));
     Console::hr();
     auto item = selectItemFromInventory(scope);
     if (item.has_value())
     {
         Console::hr();
-        Console::printLn(std::format("You decide to use: {}", (*item)->name()));
+        Console::printLn(coreTr("You decide to use: {}", (*item)->name()));
         (*item)->useFromInventory();
         if ((*item)->isConsumable())
         {
@@ -372,7 +372,7 @@ void CInventory::printUsableItems(const Scope& scope)
 
 void CInventory::printViewableItems()
 {
-    Console::printLn("Select item to view");
+    Console::printLn(coreTr("Select item to view"));
     Console::hr();
     auto item = selectItemFromInventory(Scope::eView);
     if (item.has_value())
@@ -417,9 +417,14 @@ void CInventory::load(const nlohmann::json& json)
     }
 }
 
-std::string CInventory::coreTr(const std::string_view& textId) const
+std::string CInventory::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::inventory, textId);
+    return std::string(TagNames::Item::inventory);
+}
+
+std::string CInventory::translatorModuleName() const
+{
+    return std::string();
 }
 
 CItem* CInventory::getItem(const unsigned int index)

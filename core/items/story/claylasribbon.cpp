@@ -22,3 +22,8 @@ int CLaylasRibbon::shield(const unsigned int i)
     Console::printLn(std::format("{} protects you with the love of {}", _name, Ressources::Game::princessLeila()));
     return i - 1;
 }
+
+std::string CLaylasRibbon::translatorModuleName() const
+{
+    return std::string();
+}

@@ -68,8 +68,10 @@ public:
 
     /**
      * @brief moduleName
-     * @return a moduleName for the task. handed over to the room, when attempting to place the task
+     * @return a moduleName for the task. handed over to the room, when attempting to place the task, also used for
+     * translations
      * @sa CRoom::isTaskPossible()
+     * @sa translatorModuleName()
      */
     virtual std::string moduleName() const;
 
@@ -80,5 +82,6 @@ protected:
     bool _isFinished = false;
     bool _isAutoExecute = true;
 
-    virtual std::string coreTr(const std::string_view& textId) const override;
+    virtual std::string translatorObjectName() const override;
+    virtual std::string translatorModuleName() const override;
 };

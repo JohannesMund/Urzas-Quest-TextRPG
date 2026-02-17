@@ -39,3 +39,8 @@ std::string CSewerBattleEncounter::moduleName() const
 {
     return Sewer::dungeonEncounterName();
 }
+
+std::string CSewerBattleEncounter::translatorModuleName() const
+{
+    return Sewer::moduleName();
+}

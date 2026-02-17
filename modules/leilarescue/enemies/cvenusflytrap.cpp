@@ -47,3 +47,8 @@ void CVenusFlyTrap::battleAction(bool& endRound)
     }
     CEnemy::battleAction(endRound);
 }
+
+std::string CVenusFlyTrap::translatorModuleName() const
+{
+    return LeilaRescue::moduleName();
+}

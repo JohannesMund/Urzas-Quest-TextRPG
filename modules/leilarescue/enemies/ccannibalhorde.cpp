@@ -3,6 +3,7 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
+#include "leilarescue/moduleressources.h"
 #include "randomizer.h"
 
 #include <format>
@@ -39,4 +40,9 @@ void CCannibalHorde::spoilsOfWar() const
 void CCannibalHorde::postBattle()
 {
     CGameManagement::getProgressionInstance()->increaseGenocideCount();
+}
+
+std::string CCannibalHorde::translatorModuleName() const
+{
+    return LeilaRescue::moduleName();
 }

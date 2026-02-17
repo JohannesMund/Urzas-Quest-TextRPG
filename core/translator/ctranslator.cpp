@@ -1,5 +1,4 @@
 #include "ctranslator.h"
-#include "clog.h"
 #include "console.h"
 #include "defaultsettings.h"
 #include "localdirectory.h"
@@ -10,20 +9,15 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-void CTranslator::checkTranslation(const std::string_view& moduleName)
-{
-    auto t = CTranslator::getInstance()->_translations;
-    if (!t.contains(std::string(moduleName)))
-    {
-        throw Translator::CTranslatorException(std::format("Translator module {} not loaded", moduleName));
-    }
-}
-
 void CTranslator::loadTranslationFile(const std::string_view& moduleName, const std::string& file)
 {
     try
     {
-        _translations.emplace(moduleName, new CTranslationFile(file));
+        if (!_translations.contains(file))
+        {
+            _translations.emplace(file, new CTranslationFile(file));
+        }
+        _moduleAssignment.emplace(moduleName, file);
     }
     catch (const std::exception& e)
     {
@@ -37,8 +31,7 @@ std::optional<std::string> CTranslator::translate(const std::string_view& module
 {
     try
     {
-        auto t = CTranslator::getInstance()->_translations;
-        return t.at(std::string(moduleName))->getTranslation(objectName, textId);
+        return getTranslationFile(moduleName)->getTranslation(objectName, textId);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -53,8 +46,7 @@ std::optional<Menu::MenuAction> CTranslator::translate(const std::string_view& m
 {
     try
     {
-        auto t = CTranslator::getInstance()->_translations;
-        return t.at(std::string(moduleName))->getTranslation(objectName, action);
+        return getTranslationFile(moduleName)->getTranslation(objectName, action);
     }
     catch (const Translator::CTranslatorException& e)
     {
@@ -81,6 +73,24 @@ void CTranslator::registerModule(const std::string_view& moduleName, const std::
     loadTranslationFile(moduleName, std::format("{}.json", fileName));
 }
 
+CTranslationFile* CTranslator::getTranslationFile(const std::string_view& moduleName)
+{
+    std::string mod(moduleName);
+    const auto assignments = CTranslator::getInstance()->_moduleAssignment;
+    if (!assignments.contains(mod))
+    {
+        throw Translator::CTranslatorException(std::format("No translation for module {} loaded", mod));
+    }
+    const auto file = assignments.at(mod);
+
+    auto translations = CTranslator::getInstance()->_translations;
+    if (!translations.contains(file))
+    {
+        throw Translator::CTranslatorException(std::format("translation file {} not loaded", file));
+    }
+    return translations.at(file);
+}
+
 std::string CTranslator::tr(const std::string_view& moduleName,
                             const std::string_view& objectName,
                             const std::string_view& textId)
@@ -103,27 +113,4 @@ Menu::MenuAction CTranslator::tr(const std::string_view& moduleName,
         return action;
     }
     return *r;
-}
-
-template <typename... Args>
-std::string CTranslator::tr(const std::string_view& moduleName,
-                            const std::string_view& objectName,
-                            const std::string_view& textId,
-                            Args&&... formatArgs)
-{
-    const auto r = translate(moduleName, objectName, textId);
-    if (!r.has_value())
-    {
-        return std::string(textId);
-    }
-
-    try
-    {
-        return std::format(std::runtime_format(*r), std::make_format_args(formatArgs...));
-    }
-    catch (const std::exception& e)
-    {
-        CLog::error() << "Formatting error, std::format threw: " << e.what() << std::endl << std::flush;
-        return *r;
-    }
 }

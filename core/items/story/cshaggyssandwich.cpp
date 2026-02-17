@@ -34,3 +34,8 @@ CItem::ItemFilter CShaggysSandwich::shaggysSandwichFilter()
 {
     return [](const CItem* item) { return dynamic_cast<const CShaggysSandwich*>(item) != nullptr; };
 }
+
+std::string CShaggysSandwich::translatorModuleName() const
+{
+    return std::string();
+}

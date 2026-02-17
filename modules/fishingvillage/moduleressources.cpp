@@ -14,6 +14,16 @@
 #include <algorithm>
 #include <format>
 
+namespace
+{
+template <typename... Args>
+std::string tr(const std::string_view& textId, Args&&... formatArgs)
+{
+    return CTranslator::tr(
+        FishingVillageMakeRod::moduleName(), TagNames::Translator::ressources, textId, formatArgs...);
+}
+} // namespace
+
 std::string FishingVillageMakeRod::moduleName()
 {
     return "FishingVillage_MakeRod";
@@ -29,6 +39,11 @@ std::string FishingVillageFishLegend::moduleName()
     return "FishingVillage_FishLegend";
 }
 
+std::string FishingVillage::moduleName()
+{
+    return "FishingVillage";
+}
+
 std::string FishingVillage::fishingVilleName()
 {
     return std::format("{}Middlesbron {}Cove{}", CC::fgLightGreen(), CC::fgLightBlue(), CC::ccReset());
@@ -39,25 +54,25 @@ std::string FishingVillage::getFish(const EFishLevel level)
     switch (level)
     {
     case EFishLevel::eCommon:
-        return std::format("{}Red Snapper{}", CC::fgLightRed(), CC::ccReset());
+        return tr("{}Red Snapper{}", CC::fgLightRed(), CC::ccReset());
 
     case EFishLevel::eUncommon:
-        return std::format("{}Carp{}", CC::fgYellow(), CC::ccReset());
+        return tr("{}Carp{}", CC::fgYellow(), CC::ccReset());
     case EFishLevel::eRare:
-        return std::format("{}T{}r{}o{}u{}t{}",
-                           CC::fgRed(),
-                           CC::fgYellow(),
-                           CC::fgLightYellow(),
-                           CC::fgLightGreen(),
-                           CC::fgLightBlue(),
-                           CC::ccReset());
+        return tr("{}T{}r{}o{}u{}t{}",
+                  CC::fgRed(),
+                  CC::fgYellow(),
+                  CC::fgLightYellow(),
+                  CC::fgLightGreen(),
+                  CC::fgLightBlue(),
+                  CC::ccReset());
     case EFishLevel::eUltraRare:
-        return std::format("{0}M{1}a{1}g{0}i{1}c{0}a{1}r{0}p{2}", CC::fgRed(), CC::fgWhite(), CC::ccReset());
+        return tr("{0}M{1}a{1}g{0}i{1}c{0}a{1}r{0}p{2}", CC::fgRed(), CC::fgWhite(), CC::ccReset());
     case EFishLevel::eLegend:
-        return std::format("{0}yellow {1}red {2}feathered {0}d{1}r{0}a{1}g{0}o{1}n {0}f{1}i{0}s{1}h{2}",
-                           CC::fgRed(),
-                           CC::fgLightYellow(),
-                           CC::ccReset());
+        return tr("{0}yellow {1}red {2}feathered {0}d{1}r{0}a{1}g{0}o{1}n {0}f{1}i{0}s{1}h{2}",
+                  CC::fgRed(),
+                  CC::fgLightYellow(),
+                  CC::ccReset());
     }
 }
 

@@ -47,6 +47,8 @@ public:
     virtual nlohmann::json save() const override;
 
 protected:
+    virtual std::string translatorObjectName() const override;
+
     bool doesEquipmentEffectFire() const;
     unsigned int qualityModifier() const;
 

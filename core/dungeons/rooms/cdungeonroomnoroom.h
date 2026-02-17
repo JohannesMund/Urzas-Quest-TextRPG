@@ -21,4 +21,7 @@ public:
 
     virtual bool isSpecialRoom() const override;
     virtual bool isEmptyRoom() const override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

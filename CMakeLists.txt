@@ -6,7 +6,10 @@ include(GNUInstallDirs)
 cmake_minimum_required(VERSION 3.11)
 cmake_policy(SET CMP0135 NEW)
 
-set(CMAKE_CXX_STANDARD 26)
+
+set(CMAKE_TLS_VERIFY 0)
+
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(TARGET_NAME UrzasQuest)
 
@@ -36,7 +39,6 @@ install(TARGETS ${TARGET_NAME}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-
 add_custom_command(
         TARGET ${TARGET_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -44,6 +46,7 @@ add_custom_command(
                 ${CMAKE_CURRENT_BINARY_DIR}/ressources)
 
 foreach(MODULE_RESSOURCE ${URZAS_QUEST_MODULE_RESSOURCES})
+  message(STATUS "${CMAKE_CURRENT_BINARY_DIR}/ressources/${MODULE_RESSOURCE}.json")
   add_custom_command(
         TARGET ${TARGET_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy

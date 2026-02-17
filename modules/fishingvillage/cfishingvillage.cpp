@@ -38,7 +38,7 @@ void CFishingVillage::execute()
         std::optional<CMenuAction> taskAction = {};
         if (hasTask() && !_task->isAutoExecute())
         {
-            taskAction = menu.createAction({_task->taskNav()});
+            taskAction = menu.createAction({_task->taskNav()}, false);
             menu.addMenuGroup({taskAction.value()}, {CMenu::exit()});
         }
         else
@@ -84,6 +84,11 @@ CMap::RoomFilter CFishingVillage::fishingVillageFilter()
     return [](const CRoom* room) { return dynamic_cast<const CFishingVillage*>(room) != nullptr; };
 }
 
+std::string CFishingVillage::translatorModuleName() const
+{
+    return FishingVillageMakeRod::moduleName();
+}
+
 void CFishingVillage::printHeader()
 {
     Console::cls();
@@ -92,8 +97,8 @@ void CFishingVillage::printHeader()
     Console::printLn("Local recreation area", Console::EAlignment::eCenter);
     Console::br();
 
-    Console::printLn(std::format(
-        "A smaly, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There "
+    Console::printLn(tr(
+        "A small, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There "
         "is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you "
         "can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
         FishingVillage::fishingVilleName(),

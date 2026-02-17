@@ -13,6 +13,9 @@ public:
 
     virtual bool isSpecialRoom() const override;
 
+protected:
+    virtual std::string translatorModuleName() const override;
+
 private:
     virtual char getMapSymbol() const override;
 

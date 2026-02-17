@@ -14,5 +14,7 @@ public:
     static CMap::RoomFilter fieldFilter();
 
 protected:
+    virtual std::string translatorModuleName() const override;
+
     virtual char getMapSymbol() const override;
 };

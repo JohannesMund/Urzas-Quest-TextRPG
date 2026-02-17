@@ -27,5 +27,10 @@ struct MenuAction
         o[TagNames::Translator::menuActionKey] = key;
         return o;
     }
+
+    bool operator==(const MenuAction& other) const
+    {
+        return key == other.key && name == other.name;
+    }
 };
 } // namespace Menu

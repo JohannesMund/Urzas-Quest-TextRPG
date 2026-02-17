@@ -48,18 +48,19 @@ public:
      * according to the input string, display string and hotkey is created
      * @param name the Name of the action (e.g. Exit)
      * @param key the hotkey, can be 0, the hotkey is determined according to the name and the hotkeys already used in
+     * @param translate translate the action (default: true)
      * the menu
      * @remark the actiom will be translated(
      * @remark the key might be changed by the menu. never compare the key after execute, always compare the action.
      * @return the new action
      */
-    CMenuAction createAction(const Menu::MenuAction& action);
+    CMenuAction createAction(const Menu::MenuAction& action, const bool translate = true);
     /**
      * @brief overload
      * @remark uses createAction to create a shop action (i.e. Buy (100 Gold)
      * @param[in] cost the number to be added in the brackets
      */
-    CMenuAction createShopAction(const Menu::MenuAction& action, const int cost);
+    CMenuAction createShopAction(const Menu::MenuAction& action, const int cost, const bool translate = true);
 
     /**
      * @brief clear
@@ -112,6 +113,12 @@ public:
      */
     static CMenuAction ret();
 
+    /**
+     * @brief translation for MenuActions
+     * @remark make sure not to translate actions twice.
+     */
+    static Menu::MenuAction tr(const std::string_view& moduleName, const Menu::MenuAction& action);
+
 private:
     CMenuAction findActionByInput() const;
     std::string halfGroup2String(const ActionList& l) const;
@@ -120,6 +127,7 @@ private:
     std::string makeDisplayString(const std::string_view s, const unsigned char c) const;
 
     void addNav(const unsigned char c = 0);
+    void resetNavs();
 
     std::string _acceptableNavs;
     std::vector<MenuGroup> _menu;

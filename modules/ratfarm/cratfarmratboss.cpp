@@ -36,3 +36,8 @@ void CRatFarmRatBoss::spoilsOfWar() const
     Console::printLn("You will be surprised, what you find!");
     RatFarm::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 5);
 }
+
+std::string CRatFarmRatBoss::translatorModuleName() const
+{
+    return RatFarm::moduleName();
+}

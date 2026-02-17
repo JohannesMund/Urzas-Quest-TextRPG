@@ -13,6 +13,8 @@ public:
     void setWeapon(const std::string& weapon);
 
 protected:
+    virtual std::string translatorModuleName() const override;
+
     void specialAttack();
     unsigned int _specialAttackChance = 0;
 };

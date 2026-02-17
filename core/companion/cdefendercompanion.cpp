@@ -57,3 +57,8 @@ int CDefenderCompanion::shield(const int i)
 
     return i;
 }
+
+std::string CDefenderCompanion::translatorModuleName() const
+{
+    return std::string();
+}

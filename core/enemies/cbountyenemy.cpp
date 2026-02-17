@@ -34,3 +34,8 @@ void CBountyEnemy::battleAction(bool& endRound)
 {
     CEnemy::battleAction(endRound);
 }
+
+std::string CBountyEnemy::translatorModuleName() const
+{
+    return std::string();
+}

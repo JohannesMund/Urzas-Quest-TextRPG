@@ -68,6 +68,11 @@ std::string CBoatPart::nameForPart(const EPart part)
     }
 }
 
+std::string CBoatPart::translatorModuleName() const
+{
+    return FishingVillageMakeBoat::moduleName();
+}
+
 nlohmann::json CBoatPart::save() const
 {
     nlohmann::json o = CItem::save();

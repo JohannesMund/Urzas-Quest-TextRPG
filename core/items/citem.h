@@ -212,5 +212,5 @@ protected:
 
     bool _isConsumable = false;
 
-    virtual std::string coreTr(const std::string_view& textId) const override;
+    virtual std::string translatorObjectName() const override;
 };

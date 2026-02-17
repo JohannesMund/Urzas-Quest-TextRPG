@@ -1,13 +1,20 @@
 #pragma once
 
+#include "cinventory.h"
+#include "ctranslatable.h"
+
 #include <string>
 
-class CFishingFritz
+class CFishingFritz : public CTranslatable
 {
 public:
     CFishingFritz();
 
     void execute();
+
+protected:
+    virtual std::string translatorModuleName() const override;
+    virtual std::string translatorObjectName() const override;
 
 private:
     void printHeader() const;
@@ -26,7 +33,9 @@ private:
     bool isMakeRodActive() const;
     bool isMakeBoatActive() const;
     bool hasFish() const;
-    std::string sellYourFish() const;
+    int fishValue() const;
+
+    void checkAndPrint(CInventory::EnhancableEquipmentList& equipmentList, CEquipment* item) const;
 
     bool _firstVisit = true;
 };

@@ -36,3 +36,8 @@ void CPhoenixFeather::deathEffect()
         CGameManagement::getPlayerInstance()->addHp(Randomizer::getRandom(4) + 2);
     }
 }
+
+std::string CPhoenixFeather::translatorModuleName() const
+{
+    return std::string();
+}

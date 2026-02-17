@@ -61,3 +61,8 @@ int CAttackerCompanion::shield(const int i)
 {
     return i;
 }
+
+std::string CAttackerCompanion::translatorModuleName() const
+{
+    return std::string();
+}

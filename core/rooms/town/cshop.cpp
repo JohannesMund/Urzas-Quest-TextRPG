@@ -39,10 +39,10 @@ void CShop::execute()
     {
         Console::cls();
         Console::printLn(
-            std::format("The shop of {} looks like any shop in any generic D&D game. Even the clerc looks "
-                        "stereotypical. The shop is filled with junk,but who knows, maybe you will find something cool "
-                        "here? Or make some food money selling your precious valuables?",
-                        _cityName));
+            coreTr("The shop of {} looks like any shop in any generic D&D game. Even the clerc looks "
+                   "stereotypical. The shop is filled with junk, but who knows, maybe you will find something cool "
+                   "here? Or make some food money selling your precious valuables?",
+                   _cityName));
         Console::hr();
 
         CMenu menu;
@@ -99,7 +99,7 @@ void CShop::sellJunk(CInventory::JunkItemList& junkItems)
 
 void CShop::buyItems()
 {
-    Console::printLn("Browsing through the shop, you identify some items you might want to buy:");
+    Console::printLn(coreTr("Browsing through the shop, you identify some items you might want to buy:"));
 
     std::vector<CItem*> buyableItems;
     for (auto i : _shopItems)
@@ -107,11 +107,11 @@ void CShop::buyItems()
         if (i->buyValue() <= CGameManagement::getPlayerInstance()->gold())
         {
             buyableItems.push_back(i);
-            Console::printLn(std::format("[{:3}] {} ({} Gold)", buyableItems.size(), i->name(), i->buyValue()));
+            Console::printLn(coreTr("[{:3}] {} ({} Gold)", buyableItems.size(), i->name(), i->buyValue()));
         }
         else
         {
-            Console::printLn(std::format("[   ] {} ({} Gold)", i->name(), i->buyValue()));
+            Console::printLn(coreTr("[   ] {} ({} Gold)", i->name(), i->buyValue()));
         }
     }
 
@@ -130,19 +130,19 @@ void CShop::sellItems()
     auto sellableItems = CGameManagement::getInventoryInstance()->getSellableItems();
     if (sellableItems.size() == 0)
     {
-        Console::printLn("You look through your backpack and find, that you don't have any valuables to sell");
+        Console::printLn(coreTr("You look through your backpack and find, that you don't have any valuables to sell"));
         Console::confirmToContinue();
         return;
     }
 
-    Console::printLn("You look through your backpack for valuables to sell:");
+    Console::printLn(coreTr("You look through your backpack for valuables to sell:"));
     auto index = 0;
 
     for (const auto& item : sellableItems)
     {
         index++;
         Console::printLn(
-            std::format("[{:3}] {} x{} ({} Gold)", index, item.second->name(), item.first, item.second->value()));
+            coreTr("[{:3}] {} x{} ({} Gold)", index, item.second->name(), item.first, item.second->value()));
     }
 
     auto input = Console::getNumberInputWithEcho(1, sellableItems.size());
@@ -177,7 +177,7 @@ void CShop::sellItem(CItem* item, const unsigned int stock)
 
     if (stock > 1)
     {
-        Console::printLn("How Many?");
+        Console::printLn(coreTr("How Many?"));
         auto amount = Console::getNumberInputWithEcho(1, stock);
         if (!amount.has_value())
         {

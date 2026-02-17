@@ -55,3 +55,8 @@ std::string CLeilaBossOrks::name() const
 {
     return std::format("{} and {} from {}Ork{}", _name1, _name2, CC::fgLightGreen(), CC::ccReset());
 }
+
+std::string CLeilaBossOrks::translatorModuleName() const
+{
+    return Leila2::moduleName();
+}

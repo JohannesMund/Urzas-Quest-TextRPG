@@ -73,3 +73,8 @@ int CScaryMonsterCompanion::shield(const int i)
 {
     return i;
 }
+
+std::string CScaryMonsterCompanion::translatorModuleName() const
+{
+    return std::string();
+}

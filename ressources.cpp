@@ -1,115 +1,133 @@
 #include "ressources.h"
 #include "colorize.h"
+#include "ctranslator.h"
 #include "randomizer.h"
 
 #include <algorithm>
 #include <format>
 #include <map>
 
+namespace
+{
+template <typename... Args>
+std::string tr(const std::string_view& textId, Args&&... formatArgs)
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Translator::ressources, textId, formatArgs...);
+}
+std::string tr(const std::string_view& textId)
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Translator::ressources, textId);
+}
+
+} // namespace
+
 std::string Ressources::Rooms::getRandomDescription()
 {
     return Randomizer::getRandomStringFromVector(
-        {"A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you "
-         "like "
-         "sheep? I like sheep. There is one.",
+        {tr("A Meadow. With grass. A lot of grass. It is green. Did i mention the grass? Oh, there is a sheep. Do you "
+            "like "
+            "sheep? I like sheep. There is one."),
 
-         "A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a "
-         "forest "
-         "fairy? In this case, her name is probably \"Holla\".",
+         tr("A deep, dark Forest. Trees and Bushes around you. The ground is muddy and wet. Was that a fairy? Maybe a "
+            "forest "
+            "fairy? In this case, her name is probably \"Holla\"."),
 
-         "The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is "
-         "just "
-         "a "
-         "lake. On second glance, not even a big one."});
+         tr("The shore of a lake. This is one big lake, so big, that it should be called \"Lake Enormous\". But it is "
+            "just "
+            "a "
+            "lake. On second glance, not even a big one.")});
 }
 
 std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
 {
     std::vector<std::pair<std::string, std::string>> items = {
-        {{std::format("{}Stick{}", CC::fgYellow(), CC::ccReset())},
-         {"A stick, just a stick. Maybe magical? There is no label stating \"Godly Magic Stick of the "
-          "Whale\". On the "
-          "other hand, there no label stating, that this stick is not a \"Godly Magic Stick of the Whale\"."}},
+        {{tr("{}Stick{}", CC::fgYellow(), CC::ccReset())},
+         {tr("A stick, just a stick. Maybe magical? There is no label stating \"Godly Magic Stick of the "
+             "Whale\". On the "
+             "other hand, there no label stating, that this stick is not a \"Godly Magic Stick of the Whale\".")}},
         {{sock()},
-         {"A single sock. A single dirty sock. Useless without the other one. Who on earth throws away a "
-          "single Sock??"}},
+         {tr("A single sock. A single dirty sock. Useless without the other one. Who on earth throws away a "
+             "single Sock??")}},
         {{otherSock()},
-         {"There it is, the other sock. A single dirty sock. Now you have both but who on earth throws away two single "
-          "Socks seperately??"}},
-        {{std::format("{}Rock{}", CC::fgCyan(), CC::ccReset())},
-         {"This is a good rock, so good, that it might be used in an epic \"Rock Paper Sicsors\" battle."}},
-        {{std::format("{}Boot{}", CC::fgYellow(), CC::ccReset())},
-         {"An old, single boot made from leather.Good, expensive leather. But is damaged and dirty. And it is just "
-          "a single boot."}},
-        {{std::format("V{0}a{1}s{0}e{1}", CC::fgBlue(), CC::ccReset())},
-         {"This is one beautiful vase. It will look nice on your table. or on a sideboard. you could fill it with "
-          "flowers. Or you just throw it away, for somone else to find ist."}},
-        {{"Flask"},
-         {"An empty flask. Like the ones filled with magic potions, only without the potion. This one is filled with "
-          "nothing."}},
-        {{std::format("{0}Col{1}l{2}ec{0}tio{1}n o{0}f l{3}eav{1}es{4}",
-                      CC::fgYellow(),
-                      CC::fgLightYellow(),
-                      CC::fgLightGreen(),
-                      CC::fgLightRed(),
-                      CC::ccReset())},
-         {"A collection of especially beautiful leaves."}},
-        {{std::format("{}Ring{}", CC::fgYellow(), CC::ccReset())},
-         {std::format("A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for "
-                      "proposing to {}.",
-                      Game::princessLeila())}}};
+         {tr("There it is, the other sock. A single dirty sock. Now you have both but who on earth throws away two "
+             "single "
+             "Socks seperately??")}},
+        {{tr("{}Rock{}", CC::fgCyan(), CC::ccReset())},
+         {tr("This is a good rock, so good, that it might be used in an epic \"Rock Paper Sicsors\" battle.")}},
+        {{tr("{}Boot{}", CC::fgYellow(), CC::ccReset())},
+         {tr("An old, single boot made from leather.Good, expensive leather. But is damaged and dirty. And it is just "
+             "a single boot.")}},
+        {{tr("V{0}a{1}s{0}e{1}", CC::fgBlue(), CC::ccReset())},
+         {tr("This is one beautiful vase. It will look nice on your table. or on a sideboard. you could fill it with "
+             "flowers. Or you just throw it away, for somone else to find ist.")}},
+        {{tr("Flask")},
+         {tr("An empty flask. Like the ones filled with magic potions, only without the potion. This one is filled "
+             "with "
+             "nothing.")}},
+        {{tr("{0}Col{1}l{2}ec{0}tio{1}n o{0}f l{3}eav{1}es{4}",
+             CC::fgYellow(),
+             CC::fgLightYellow(),
+             CC::fgLightGreen(),
+             CC::fgLightRed(),
+             CC::ccReset())},
+         {tr("A collection of especially beautiful leaves.")}},
+        {{tr("{}Ring{}", CC::fgYellow(), CC::ccReset())},
+         {tr("A ring, probably from a bubblegum machine (What is a bubble gum machine?), anyway, nothing for "
+             "proposing to {}.",
+             Game::princessLeila())}}};
 
     return items.at(Randomizer::getRandom((unsigned int)items.size()));
 }
 
 std::string Ressources::Enemies::getRandomEnemyName()
 {
-    return Randomizer::getRandomStringFromVector({"Bob, the Cowboy",
-                                                  "Eddie, the Cowboy",
-                                                  "Angry Rat",
-                                                  "Stinky Bat",
-                                                  "Greedy Vulture",
-                                                  "Huge Barbarian",
-                                                  "Pussy, the Octopus",
-                                                  "Tentacool",
-                                                  "Tentacruel",
-                                                  "Kang",
-                                                  "Kodos"});
+    return Randomizer::getRandomStringFromVector({tr("Bob, the Cowboy"),
+                                                  tr("Eddie, the Cowboy"),
+                                                  tr("Angry Rat"),
+                                                  tr("Stinky Bat"),
+                                                  tr("Greedy Vulture"),
+                                                  tr("Huge Barbarian"),
+                                                  tr("Pussy, the Octopus"),
+                                                  tr("Tentacool"),
+                                                  tr("Tentacruel"),
+                                                  tr("Kang"),
+                                                  tr("Kodos")});
 }
 
 std::string Ressources::Enemies::getRandomEnemyWeapon()
 {
-    return Randomizer::getRandomStringFromVector({"shabby board with a rusty nail hammered through",
-                                                  "sharp teeth",
-                                                  "sheer muscle power",
-                                                  "a club with spikes",
-                                                  "a Nokia 3210",
-                                                  "tantacles",
-                                                  "laser gun"});
+    return Randomizer::getRandomStringFromVector({tr("shabby board with a rusty nail hammered through"),
+                                                  tr("sharp teeth"),
+                                                  tr("sheer muscle power"),
+                                                  tr("a club with spikes"),
+                                                  tr("a Nokia 3210"),
+                                                  tr("tantacles"),
+                                                  tr("laser gun")});
 }
 
 std::pair<std::string, std::string> Ressources::Rooms::getRandomTown()
 {
     std::vector<std::pair<std::string, std::string>> towns = {
-        {"Hafnarfjodur", "The City of Elves. Built high in the treetops of ancient Trees"},
-        {"Peridotspring", "Deep Caves, carved in huge mountains built this citiy of the dwarfs"},
-        {"Wallachia", "An Oasis surrounded by a huge desert."},
-        {"Bruchtal", "City of man, capital of the land."},
-        {"Mudpool", "The Home of the trolls. Everything is dirty and stinky here."},
+        {"Hafnarfjodur", tr("The City of Elves. Built high in the treetops of ancient Trees")},
+        {"Peridotspring", tr("Deep Caves, carved in huge mountains built this citiy of the dwarfs")},
+        {"Wallachia", tr("An Oasis surrounded by a huge desert.")},
+        {"Bruchtal", tr("City of man, capital of the land.")},
+        {"Mudpool", tr("The Home of the trolls. Everything is dirty and stinky here.")},
         {"Timbuktu",
-         "The mysterous city, where the pepper grows. Many legendary heroes have been sent here. But on second sight, "
-         "it is just a city."}};
+         tr("The mysterous city, where the pepper grows. Many legendary heroes have been sent here. But on second "
+            "sight, "
+            "it is just a city.")}};
     return towns.at((unsigned int)Randomizer::getRandom(towns.size()));
 }
 
 std::string Ressources::Companion::nameForCompanionType(const ECompanionType& tp, const unsigned int level)
 {
     std::map<ECompanionType, std::vector<std::string>> companions = {
-        {ECompanionType::eHealer, {"Chick", "Sparrow", "Parrot", "Griffon", "Phoenix"}},
-        {ECompanionType::eDefender, {"Whelp", "Dog", "Wolf", "Ice wolf", "Cerberus"}},
-        {ECompanionType::eAttacker, {"Kitten", "Cat", "Lynx", "Tiger", "Sphinx"}},
+        {ECompanionType::eHealer, {tr("Chick"), tr("Sparrow"), tr("Parrot"), tr("Griffon"), tr("Phoenix")}},
+        {ECompanionType::eDefender, {tr("Whelp"), tr("Dog"), tr("Wolf"), tr("Ice wolf"), tr("Cerberus")}},
+        {ECompanionType::eAttacker, {tr("Kitten"), tr("Cat"), tr("Lynx"), tr("Tiger"), tr("Sphinx")}},
         {ECompanionType::eScaryMonster,
-         {"Baby Dragon", "Young Dragon", "Adult Dragon", "Old Dragon", "Ancient Hellfire Dragon"}}};
+         {tr("Baby Dragon"), tr("Young Dragon"), tr("Adult Dragon"), tr("Old Dragon"), tr("Ancient Hellfire Dragon")}}};
 
     return companions.at(tp).at(std::min(companionLevelCap, std::max(level, 1U)) - 1);
 }
@@ -162,56 +180,56 @@ std::string Ressources::Companion::typeAsString(const ECompanionType& tp)
 std::pair<std::string, std::string> Ressources::Enemies::getRandomBountyName()
 {
     std::vector<std::pair<std::string, std::string>> names = {
-        {"Fat Eddie", "Blackmailing the Mayor"},
-        {"Robo Devil", "Stealing people's hands"},
-        {"Evil Wizard", "Doing evil wizard things"},
-        {"Robin Would", "Stealing from the rich"},
-        {"Taffy, the Pirate", "Crimes against the world government"}};
+        {tr("Fat Eddie"), tr("Blackmailing the Mayor")},
+        {tr("Robo Devil"), tr("Stealing people's hands")},
+        {tr("Evil Wizard"), tr("Doing evil wizard things")},
+        {tr("Robin Would"), tr("Stealing from the rich")},
+        {tr("Taffy, the Pirate"), tr("Crimes against the world government")}};
     return names.at((unsigned int)Randomizer::getRandom(names.size()));
 }
 
 std::string Ressources::Rooms::getRandomRumor()
 {
-    return Randomizer::getRandomStringFromVector({"The king has stupid ears.",
-                                                  "There is a huge treasure hidden beneath the mountain.",
-                                                  "The mayor of this town has an affair with a donkey."});
+    return Randomizer::getRandomStringFromVector({tr("The king has stupid ears."),
+                                                  tr("There is a huge treasure hidden beneath the mountain."),
+                                                  tr("The mayor of this town has an affair with a donkey.")});
 }
 
 std::string Ressources::Game::whoTheFuckIsUrza()
 {
-    return std::format("{}wh{}o t{}he f{}uck {}is {}?{}",
-                       CC::fgLightYellow(),
-                       CC::fgYellow(),
-                       CC::fgLightGreen(),
-                       CC::fgLightYellow(),
-                       CC::fgGreen(),
-                       urza(),
-                       CC::ccReset());
+    return tr("{}wh{}o t{}he f{}uck {}is {}?{}",
+              CC::fgLightYellow(),
+              CC::fgYellow(),
+              CC::fgLightGreen(),
+              CC::fgLightYellow(),
+              CC::fgGreen(),
+              urza(),
+              CC::ccReset());
 }
 
 std::string Ressources::Game::urza()
 {
-    return std::format("{}Ur{}za{}", CC::fgLightGreen(), CC::fgYellow(), CC::ccReset());
+    return tr("{}Ur{}za{}", CC::fgLightGreen(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::urzaWhoTheFuckIsUrza()
 {
-    return std::format("{} {}", urza(), whoTheFuckIsUrza());
+    return tr("{} {}", urza(), whoTheFuckIsUrza());
 }
 
 std::string Ressources::Items::sock()
 {
-    return std::format("{}S{}o{}c{}k{}", CC::fgRed(), CC::fgYellow(), CC::fgRed(), CC::fgYellow(), CC::ccReset());
+    return tr("{}S{}o{}c{}k{}", CC::fgRed(), CC::fgYellow(), CC::fgRed(), CC::fgYellow(), CC::ccReset());
 }
 std::string Ressources::Items::otherSock()
 {
-    return std::format("{}The other {}S{}o{}c{}k{}",
-                       CC::fgRed(),
-                       CC::fgYellow(),
-                       CC::fgRed(),
-                       CC::fgYellow(),
-                       CC::fgRed(),
-                       CC::ccReset());
+    return tr("{}The other {}S{}o{}c{}k{}",
+              CC::fgRed(),
+              CC::fgYellow(),
+              CC::fgRed(),
+              CC::fgYellow(),
+              CC::fgRed(),
+              CC::ccReset());
 }
 
 namespace
@@ -235,9 +253,9 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
     {
     case Ressources::Items::EQuality::eJunk:
     default:
-        names = {"Stick, shaped like a sword", "Sword, shaped like a stick", "Stick-Sword"};
+        names = {tr("Stick, shaped like a sword"), tr("Sword, shaped like a stick"), tr("Stick-Sword")};
         colorizeNames(names, CC::fgGreen(), CC::fgYellow());
-        description = "A stick, shaped like a sword. Or a sword, shaped like a stick? It is a sword-stick";
+        description = tr("A stick, shaped like a sword. Or a sword, shaped like a stick? It is a sword-stick");
         break;
     case Ressources::Items::EQuality::eFair:
     {
@@ -245,19 +263,19 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
         {
         case 0:
         default:
-            names = {"Trunk", "Club", "Big Club", "Metal-plated Club"};
+            names = {tr("Trunk"), tr("Club"), tr("Big Club"), tr("Metal-plated Club")};
             colorizeNames(names, CC::fgYellow(), CC::fgLightYellow());
-            description = "A big trunk, used as club. Clubby cluby ouchie ouchie";
+            description = tr("A big trunk, used as club. Clubby cluby ouchie ouchie");
             break;
         case 1:
-            names = {"Steak Knife", "Dagger", "Polished Dagger", "Pointy Dagger"};
+            names = {tr("Steak Knife"), tr("Dagger"), tr("Polished Dagger"), tr("Pointy Dagger")};
             colorizeNames(names, CC::fgLightBlue(), CC::fgLightCyan());
-            description = "A good steak knife. Usable as a dagger.";
+            description = tr("A good steak knife. Usable as a dagger.");
             break;
         case 2:
-            names = {"Fighting Stick", "Fighting Staff", "Enhanced Fighting Staff", "Battle staff"};
+            names = {tr("Fighting Stick"), tr("Fighting Staff"), tr("Enhanced Fighting Staff"), tr("Battle staff")};
             colorizeNames(names, CC::fgLightYellow(), CC::fgYellow());
-            description = "A Stick, usable for fighting";
+            description = tr("A Stick, usable for fighting");
             break;
         }
         break;
@@ -268,29 +286,29 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
         {
         case 0:
         default:
-            names = {"Sword", "Sword +1", "Sword +2", "Sword +3", "Sword +4"};
+            names = {tr("Sword"), tr("Sword +1"), tr("Sword +2"), tr("Sword +3"), tr("Sword +4")};
             colorizeNames(names, CC::fgRed(), CC::fgYellow());
-            description = "This is one good sword. Made for a glorious knight";
+            description = tr("This is one good sword. Made for a glorious knight");
             break;
         case 1:
-            names = {"Mace", "Mace +1", "Mace +2", "Mace +3", "Mace +4"};
+            names = {tr("Mace"), tr("Mace +1"), tr("Mace +2"), tr("Mace +3"), tr("Mace +4")};
             colorizeNames(names, CC::fgBlue(), CC::fgLightBlue());
-            description = "A Mace, like the onse used by the battle clerics of the king.";
+            description = tr("A Mace, like the onse used by the battle clerics of the king.");
             break;
         case 2:
-            names = {"Halberd", "Halberd +1", "Halberd +2", "Halberd +3", "Halberd +4"};
+            names = {tr("Halberd"), tr("Halberd +1"), tr("Halberd +2"), tr("Halberd +3"), tr("Halberd +4")};
             colorizeNames(names, CC::fgLightRed(), CC::fgLightGray());
-            description = "A large Halberd, made for the Kings guards";
+            description = tr("A large Halberd, made for the Kings guards");
             break;
         case 3:
-            names = {"Dagger", "Dagger +1", "Dagger +2", "Dagger +3", "Dagger +4"};
+            names = {tr("Dagger"), tr("Dagger +1"), tr("Dagger +2"), tr("Dagger +3"), tr("Dagger +4")};
             colorizeNames(names, CC::fgLightGray(), CC::fgDarkGray());
-            description = "An awesomne, hand-crafted Dagger, fast and deadly";
+            description = tr("An awesomne, hand-crafted Dagger, fast and deadly");
             break;
         case 4:
-            names = {"Whip", "Whip +1", "Whip +2", "Whip +3", "Whip +4"};
+            names = {tr("Whip"), tr("Whip +1"), tr("Whip +2"), tr("Whip +3"), tr("Whip +4")};
             colorizeNames(names, CC::fgLightMagenta(), CC::fgRed());
-            description = "Who fights with a whip? Everybody should, considering the reach of this beast";
+            description = tr("Who fights with a whip? Everybody should, considering the reach of this beast");
             break;
         }
         break;
@@ -301,73 +319,74 @@ std::pair<std::vector<std::string>, std::string> getRandomSwordNamesAndDescripti
         {
         case 0:
         default:
-            names = {"godly Stick of the Whale",
-                     "godly Stick of the Whale +1",
-                     "godly Stick of the Whale +2",
-                     "godly Stick of the Whale +3",
-                     "godly Stick of the Whale +4",
-                     "godly Stick of the Whale +5",
-                     "godly Stick of the Whale +6",
-                     "godly Stick of the Whale +7",
-                     "godly Stick of the Whale +8"};
+            names = {tr("godly Stick of the Whale"),
+                     tr("godly Stick of the Whale +1"),
+                     tr("godly Stick of the Whale +2"),
+                     tr("godly Stick of the Whale +3"),
+                     tr("godly Stick of the Whale +4"),
+                     tr("godly Stick of the Whale +5"),
+                     tr("godly Stick of the Whale +6"),
+                     tr("godly Stick of the Whale +7"),
+                     tr("godly Stick of the Whale +8")};
             colorizeNames(names, CC::fgBlue(), CC::fgLightBlue());
-            description = "Its a stick, but other than the other sticks, it has a label \"godly Stick of the Whale\"";
+            description =
+                tr("Its a stick, but other than the other sticks, it has a label \"godly Stick of the Whale\"");
             break;
         case 1:
-            names = {"antique Sword of the Ancients",
-                     "antique Sword of the Ancients +1",
-                     "antique Sword of the Ancients +2",
-                     "antique Sword of the Ancients +3",
-                     "antique Sword of the Ancients +4",
-                     "antique Sword of the Ancients +5",
-                     "antique Sword of the Ancients +6",
-                     "antique Sword of the Ancients +7",
-                     "antique Sword of the Ancients +8"};
+            names = {tr("antique Sword of the Ancients"),
+                     tr("antique Sword of the Ancients +1"),
+                     tr("antique Sword of the Ancients +2"),
+                     tr("antique Sword of the Ancients +3"),
+                     tr("antique Sword of the Ancients +4"),
+                     tr("antique Sword of the Ancients +5"),
+                     tr("antique Sword of the Ancients +6"),
+                     tr("antique Sword of the Ancients +7"),
+                     tr("antique Sword of the Ancients +8")};
             colorizeNames(names, CC::fgYellow(), CC::fgLightYellow());
-            description = "This is one really really old and magic sword.";
+            description = tr("This is one really really old and magic sword.");
             break;
         case 2:
             names = {
-                "Trident of the Demon king",
-                "Trident of the Demon king +1",
-                "Trident of the Demon king +2",
-                "Trident of the Demon king +3",
-                "Trident of the Demon king +4",
-                "Trident of the Demon king +5",
-                "Trident of the Demon king +6",
-                "Trident of the Demon king +7",
-                "Trident of the Demon king +8",
+                tr("Trident of the Demon king"),
+                tr("Trident of the Demon king +1"),
+                tr("Trident of the Demon king +2"),
+                tr("Trident of the Demon king +3"),
+                tr("Trident of the Demon king +4"),
+                tr("Trident of the Demon king +5"),
+                tr("Trident of the Demon king +6"),
+                tr("Trident of the Demon king +7"),
+                tr("Trident of the Demon king +8"),
             };
             colorizeNames(names, CC::fgRed(), CC::fgDarkGray());
-            description =
-                std::format("A cool trident, the spikes seem to glow, and they are hot! well, not as hot as {}.",
-                            Ressources::Game::leila());
+            description = tr("A cool trident, the spikes seem to glow, and they are hot! well, not as hot as {}.",
+                             Ressources::Game::leila());
             break;
         case 3:
-            names = {"Whip of the beast tamer",
-                     "Whip of the beast tamer +1",
-                     "Whip of the beast tamer +2",
-                     "Whip of the beast tamer +3",
-                     "Whip of the beast tamer +4",
-                     "Whip of the beast tamer +5",
-                     "Whip of the beast tamer +6",
-                     "Whip of the beast tamer +7",
-                     "Whip of the beast tamer +8"};
+            names = {tr("Whip of the beast tamer"),
+                     tr("Whip of the beast tamer +1"),
+                     tr("Whip of the beast tamer +2"),
+                     tr("Whip of the beast tamer +3"),
+                     tr("Whip of the beast tamer +4"),
+                     tr("Whip of the beast tamer +5"),
+                     tr("Whip of the beast tamer +6"),
+                     tr("Whip of the beast tamer +7"),
+                     tr("Whip of the beast tamer +8")};
             colorizeNames(names, CC::fgLightGray(), CC::fgYellow());
-            description = "This whip has certainly tamed many beasts. Who knows, maybe it works on a certain princess?";
+            description =
+                tr("This whip has certainly tamed many beasts. Who knows, maybe it works on a certain princess?");
             break;
         case 4:
-            names = {"Holy mace of the Nephalim",
-                     "Holy mace of the Nephalim +1",
-                     "Holy mace of the Nephalim +2",
-                     "Holy mace of the Nephalim +3",
-                     "Holy mace of the Nephalim +4",
-                     "Holy mace of the Nephalim +5",
-                     "Holy mace of the Nephalim +6",
-                     "Holy mace of the Nephalim +7",
-                     "Holy mace of the Nephalim +8"};
+            names = {tr("Holy mace of the Nephalim"),
+                     tr("Holy mace of the Nephalim +1"),
+                     tr("Holy mace of the Nephalim +2"),
+                     tr("Holy mace of the Nephalim +3"),
+                     tr("Holy mace of the Nephalim +4"),
+                     tr("Holy mace of the Nephalim +5"),
+                     tr("Holy mace of the Nephalim +6"),
+                     tr("Holy mace of the Nephalim +7"),
+                     tr("Holy mace of the Nephalim +8")};
             colorizeNames(names, CC::fgLightYellow(), CC::fgLightGray());
-            description = "A mace, so holy, you can stick a tail on it, and call it a beaver.";
+            description = tr("A mace, so holy, you can stick a tail on it, and call it a beaver.");
             break;
         }
         break;
@@ -387,9 +406,10 @@ std::pair<std::vector<std::string>, std::string> getRandomShieldNamesAndDescript
     {
     case Ressources::Items::EQuality::eJunk:
     default:
-        names = {"wheathered wooden board", "wooden board", "robust wooden board"};
+        names = {tr("wheathered wooden board"), tr("wooden board"), tr("robust wooden board")};
         colorizeNames(names, CC::fgYellow(), CC::fgLightRed());
-        description = "A wooden board. It can protect you from... well, not much but it offers a little protection.";
+        description =
+            tr("A wooden board. It can protect you from... well, not much but it offers a little protection.");
         break;
     case Ressources::Items::EQuality::eFair:
     {
@@ -397,19 +417,25 @@ std::pair<std::vector<std::string>, std::string> getRandomShieldNamesAndDescript
         {
         case 0:
         default:
-            names = {"Damaged Buckler", "Repaired Buckler", "Buckler", "Shiny Buckler"};
+            names = {tr("Damaged Buckler"), tr("Repaired Buckler"), tr("Buckler"), tr("Shiny Buckler")};
             colorizeNames(names, CC::fgYellow(), CC::fgCyan());
-            description = "A Buckler, a small, round, savage shield.";
+            description = tr("A Buckler, a small, round, savage shield.");
             break;
         case 1:
-            names = {"Ripped Leather Shield", "Repaired Leather Shield", "Leather Shield", "Shiny Leather Shield"};
+            names = {tr("Ripped Leather Shield"),
+                     tr("Repaired Leather Shield"),
+                     tr("Leather Shield"),
+                     tr("Shiny Leather Shield")};
             colorizeNames(names, CC::fgRed(), CC::fgYellow());
-            description = "A shield made of leather, light and sturdy.";
+            description = tr("A shield made of leather, light and sturdy.");
             break;
         case 2:
-            names = {"Brittle Wooden Shield", "Repaired Wooden Shield", "Wooden Shield", "Shiny Wooden Shield"};
+            names = {tr("Brittle Wooden Shield"),
+                     tr("Repaired Wooden Shield"),
+                     tr("Wooden Shield"),
+                     tr("Shiny Wooden Shield")};
             colorizeNames(names, CC::fgLightGray(), CC::fgGreen());
-            description = "A (more or less) robust shield, made of wood.";
+            description = tr("A (more or less) robust shield, made of wood.");
             break;
         }
         break;
@@ -421,29 +447,49 @@ std::pair<std::vector<std::string>, std::string> getRandomShieldNamesAndDescript
         {
         case 0:
         default:
-            names = {"Round Shield", "Round Shield + 1", "Round Shield +2", "Round Shield +3", "Round Shield +4"};
+            names = {tr("Round Shield"),
+                     tr("Round Shield + 1"),
+                     tr("Round Shield +2"),
+                     tr("Round Shield +3"),
+                     tr("Round Shield +4")};
             colorizeNames(names, CC::fgYellow(), CC::fgCyan());
-            description = "A Buckler, a small, round, savage shield.";
+            description = tr("A Buckler, a small, round, savage shield.");
             break;
         case 1:
-            names = {"Tower Shield", "Tower Shield +1", "Tower Shield +2", "Tower Shield +3", "Tower Shield +4"};
+            names = {tr("Tower Shield"),
+                     tr("Tower Shield +1"),
+                     tr("Tower Shield +2"),
+                     tr("Tower Shield +3"),
+                     tr("Tower Shield +4")};
             colorizeNames(names, CC::fgRed(), CC::fgYellow());
-            description = "A large, robust heavy shield";
+            description = tr("A large, robust heavy shield");
             break;
         case 2:
-            names = {"Spiked Shield", "Spiked Shield +1", "Spiked Shield +2", "Spiked Shield +3", "Spiked Shield +4"};
+            names = {tr("Spiked Shield"),
+                     tr("Spiked Shield +1"),
+                     tr("Spiked Shield +2"),
+                     tr("Spiked Shield +3"),
+                     tr("Spiked Shield +4")};
             colorizeNames(names, CC::fgRed(), CC::fgLightGreen());
-            description = "A shield, with spikes, 'nuff saif.";
+            description = tr("A shield, with spikes, 'nuff saif.");
             break;
         case 3:
-            names = {"Metal Shield", "Metal Shield +1", "Metal Shield +2", "Metal Shield +3", "Metal Shield +4"};
+            names = {tr("Metal Shield"),
+                     tr("Metal Shield +1"),
+                     tr("Metal Shield +2"),
+                     tr("Metal Shield +3"),
+                     tr("Metal Shield +4")};
             colorizeNames(names, CC::fgLightCyan(), CC::fgCyan());
-            description = "A shield made of metal, for maximum protection";
+            description = tr("A shield made of metal, for maximum protection");
             break;
         case 4:
-            names = {"Elbow Shield", "Elbow Shield +1", "Elbow Shield +2", "Elbow Shield +3", "Elbow Shield +4"};
+            names = {tr("Elbow Shield"),
+                     tr("Elbow Shield +1"),
+                     tr("Elbow Shield +2"),
+                     tr("Elbow Shield +3"),
+                     tr("Elbow Shield +4")};
             colorizeNames(names, CC::fgLightYellow(), CC::fgYellow());
-            description = "A shield attached to your arm for better movement.";
+            description = tr("A shield attached to your arm for better movement.");
             break;
         }
         break;
@@ -463,9 +509,9 @@ std::pair<std::vector<std::string>, std::string> getRandomArmorNamesAndDescripti
     {
     case Ressources::Items::EQuality::eJunk:
     default:
-        names = {"Ripped T-Shirt", "White T-Shirt", "Fashionable T-Shirt"};
+        names = {tr("Ripped T-Shirt"), tr("White T-Shirt"), tr("Fashionable T-Shirt")};
         colorizeNames(names, CC::fgLightGray(), CC::ccReset());
-        description = "Looks like mere clothing, but should offer a little protection.";
+        description = tr("Looks like mere clothing, but should offer a little protection.");
         break;
     case Ressources::Items::EQuality::eFair:
     {
@@ -473,19 +519,19 @@ std::pair<std::vector<std::string>, std::string> getRandomArmorNamesAndDescripti
         {
         case 0:
         default:
-            names = {"Ripped Wolf Fur", "Repaired Wolf Fur", "Wolf Fur", "Fur of the Alpha Wolf"};
+            names = {tr("Ripped Wolf Fur"), tr("Repaired Wolf Fur"), tr("Wolf Fur"), tr("Fur of the Alpha Wolf")};
             colorizeNames(names, CC::fgDarkGray(), CC::fgLightGray());
-            description = "The fur of a wolf, perfect protection";
+            description = tr("The fur of a wolf, perfect protection");
             break;
         case 1:
-            names = {"Some Leather Sheets", "Leather Tunic", "Lether Clothes", "Leather Armor"};
+            names = {tr("Some Leather Sheets"), tr("Leather Tunic"), tr("Lether Clothes"), tr("Leather Armor")};
             colorizeNames(names, CC::fgRed(), CC::fgLightGreen());
-            description = "Good Sturdy Leather for good sturdy protection";
+            description = tr("Good Sturdy Leather for good sturdy protection");
             break;
         case 2:
-            names = {"Felt Shirt", "Felt Clothing", "Felt Jacket", "Felt Armor"};
+            names = {tr("Felt Shirt"), tr("Felt Clothing"), tr("Felt Jacket"), tr("Felt Armor")};
             colorizeNames(names, CC::fgCyan(), CC::fgLightBlue());
-            description = "Clothes made of felt. It can protect a pen, it can protect you";
+            description = tr("Clothes made of felt. It can protect a pen, it can protect you");
             break;
         }
         break;
@@ -497,29 +543,39 @@ std::pair<std::vector<std::string>, std::string> getRandomArmorNamesAndDescripti
         {
         case 0:
         default:
-            names = {"Chain Mail", "Chain Mail +1", "Chain Mail +2", "Chain Mail +3", "Chain Mail +4"};
+            names = {
+                tr("Chain Mail"), tr("Chain Mail +1"), tr("Chain Mail +2"), tr("Chain Mail +3"), tr("Chain Mail +4")};
             colorizeNames(names, CC::fgLightBlue(), CC::fgLightGray());
-            description = "A nice, handcrafted chain mail. good against swords and clubs.";
+            description = tr("A nice, handcrafted chain mail. good against swords and clubs.");
             break;
         case 1:
-            names = {"Plate Mail", "Plate Mail +1", "Plate Mail +2", "Plate Mail +3", "Plate Mail +4"};
+            names = {
+                tr("Plate Mail"), tr("Plate Mail +1"), tr("Plate Mail +2"), tr("Plate Mail +3"), tr("Plate Mail +4")};
             colorizeNames(names, CC::fgLightCyan(), CC::fgLightYellow());
-            description = "A knights' plate mail. Looks royal and protective";
+            description = tr("A knights' plate mail. Looks royal and protective");
             break;
         case 2:
-            names = {"Scale Armor", "Scale Armor +1", "Scale Armor +2", "Scale Armor +3", "Scale Armor +4"};
+            names = {tr("Scale Armor"),
+                     tr("Scale Armor +1"),
+                     tr("Scale Armor +2"),
+                     tr("Scale Armor +3"),
+                     tr("Scale Armor +4")};
             colorizeNames(names, CC::fgLightYellow(), CC::fgYellow());
-            description = "Clothes made of felt. It can protect a pen, it can protect you";
+            description = tr("Clothes made of felt. It can protect a pen, it can protect you");
             break;
         case 3:
-            names = {"Robe", "Robe +1", "Robe +2", "Robe +3", "Robe +4"};
+            names = {tr("Robe"), tr("Robe +1"), tr("Robe +2"), tr("Robe +3"), tr("Robe +4")};
             colorizeNames(names, CC::fgLightBlue(), CC::fgRed());
-            description = "Clothes made of felt. It can protect a pen, it can protect you";
+            description = tr("Clothes made of felt. It can protect a pen, it can protect you");
             break;
         case 4:
-            names = {"Spiked Armor", "Spiked Armor +1", "Spiked Armor +2", "Spiked Armor +3", "Spiked Armor +4"};
+            names = {tr("Spiked Armor"),
+                     tr("Spiked Armor +1"),
+                     tr("Spiked Armor +2"),
+                     tr("Spiked Armor +3"),
+                     tr("Spiked Armor +4")};
             colorizeNames(names, CC::fgCyan(), CC::fgGreen());
-            description = "A armor made of leather, with spikes.";
+            description = tr("A armor made of leather, with spikes.");
             break;
         }
         break;
@@ -553,49 +609,49 @@ std::pair<std::vector<std::string>, std::string> Ressources::Items::getRandomEqu
 
 std::string Ressources::Game::fiego()
 {
-    return std::format("{}Fiego{}", CC::fgLightGreen(), CC::ccReset());
+    return tr("{}Fiego{}", CC::fgLightGreen(), CC::ccReset());
 }
 
 std::string Ressources::Game::brock()
 {
-    return std::format("{}The B-{}Rock{}", CC::fgLightGray(), CC::fgDarkGray(), CC::ccReset());
+    return tr("{}The B-{}Rock{}", CC::fgLightGray(), CC::fgDarkGray(), CC::ccReset());
 }
 
 std::string Ressources::Game::princessLeila()
 {
-    return std::format("{}Princess {}{}", CC::fgLightMagenta(), leila(), CC::ccReset());
+    return tr("{}Princess {}{}", CC::fgLightMagenta(), leila(), CC::ccReset());
 }
 
 std::string Ressources::Game::leila()
 {
-    return std::format("{0}L{1}eila{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
+    return tr("{0}L{1}eila{2}", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
 }
 
 std::string Ressources::Game::fishingFritz()
 {
-    return std::format("F{0}ishing{1} F{0}ritz{2}", CC::fgBlue(), CC::fgWhite(), CC::ccReset());
+    return tr("F{0}ishing{1} F{0}ritz{2}", CC::fgBlue(), CC::fgWhite(), CC::ccReset());
 }
 
 std::string Ressources::Game::mobi()
 {
-    return std::format("{}Mo{}bi{}", CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+    return tr("{}Mo{}bi{}", CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
 }
 
 std::string Ressources::Game::darkMobi()
 {
-    return std::format("{}Dark {}", CC::fgDarkGray(), mobi());
+    return tr("{}Dark {}", CC::fgDarkGray(), mobi());
 }
 
 std::pair<std::string, std::string> Ressources::Rooms::getCapital()
 {
-    return std::make_pair(
-        "Drerachi, The Dream City",
-        "The capital of the land. Big houses, the Kings' Castle, a Kathedral, everything a glorious capital needs.");
+    return std::make_pair(tr("Drerachi, The Dream City"),
+                          tr("The capital of the land. Big houses, the Kings' Castle, a Kathedral, everything a "
+                             "glorious capital needs."));
 }
 
 std::string Ressources::Rooms::getCapitalRejection()
 {
-    return std::format(
+    return tr(
         "The {}Guard{} looks at you, and shakes his head. \"Not on the list!\", is all he says. \"What list?\" you "
         "ask. \"The one, you are not on.\". is the reply making clear, that people like you are not wanted here. You "
         "think about it for a short while, and realize, that you don't even have a name. so what should they even "
@@ -606,50 +662,50 @@ std::string Ressources::Rooms::getCapitalRejection()
 
 std::string Ressources::Game::kingJesster()
 {
-    return std::format("{}King {}Jes{}ster{}", CC::fgRed(), CC::fgLightGreen(), CC::fgRed(), CC::ccReset());
+    return tr("{}King {}Jes{}ster{}", CC::fgRed(), CC::fgLightGreen(), CC::fgRed(), CC::ccReset());
 }
 
 std::string Ressources::Game::leilasRibbon()
 {
-    return std::format("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
+    return tr("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
 }
 
 std::string Ressources::Game::piefke()
 {
-    return std::format("{0}Pi{1}ef{0}ke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+    return tr("{0}Pi{1}ef{0}ke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::schniefke()
 {
-    return std::format("{1}Sch{0}nie{1}fke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+    return tr("{1}Sch{0}nie{1}fke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::bimmel()
 {
-    return std::format("{0}Bi{1}mm{0}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+    return tr("{0}Bi{1}mm{0}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::bommel()
 {
-    return std::format("{1}Bo{0}mm{1}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+    return tr("{1}Bo{0}mm{1}el{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::horst()
 {
-    return std::format("{1}H{0}or{1}st{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
+    return tr("{1}H{0}or{1}st{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string Ressources::Game::bimmelchen()
 {
-    return std::format("{0}B{1}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
+    return tr("{0}B{1}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
 }
 
 std::string Ressources::Game::pimmelchen()
 {
-    return std::format("{1}P{0}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
+    return tr("{1}P{0}immelchen{2}", CC::fgLightBlue(), CC::fgLightMagenta(), CC::ccReset());
 }
 
 std::string Ressources::Game::dancingBard()
 {
-    return std::format("{}Dan{}cing {}Bard{}", CC::fgRed(), CC::fgLightRed(), CC::fgGreen(), CC::ccReset());
+    return tr("{}Dan{}cing {}Bard{}", CC::fgRed(), CC::fgLightRed(), CC::fgGreen(), CC::ccReset());
 }

@@ -19,6 +19,8 @@ public:
     static CMap::RoomFilter sandwichShopFilter();
 
 protected:
+    virtual std::string translatorModuleName() const override;
+
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 

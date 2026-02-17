@@ -1,9 +1,179 @@
 {
   "FileSpec": {
-    "DateTime": "2026-02-06 20:36:28",
+    "DateTime": "2026-02-16 19:56:06",
     "FileType": "Translation",
     "Name": "UrzasQuest TextRPG",
     "Version": 1
   },
-  "Translation": {}
+  "Translation": {
+    "FishRestaurant": [
+      {
+        "Source": "fried {}",        
+        "de": "frittierte {}"
+      },
+      {
+        "Source": "{} sashimi",
+        "de": "{} sashimi"
+      },
+      {
+        "Source": "{} bouillabaisse",
+        "de": "{} bouillabaisse"
+      },
+      {
+        "Source": "grilled {} filet",      
+        "de": "gegrilltes {} Filet"
+      },
+      {
+        "Source": "{}'s Inn",      
+        "de": "{}'s Taverne"
+      },
+      {
+        "Source": "Serving the best fresh fish since 833 ad. dragonis",        
+        "de": "Der beste frische Fisch seit 833 ad. dragonis"
+      },
+      {
+        "Source": "Dish of the day:",
+        "de": "Tagesessen:"
+      },
+      {
+        "Source": "You get a plate with a steaming hot fish meal, and it tastes amazing!",
+        "de": "Du bekommst einen Teller mit einer dampfend heißen Fischmahlzeit. Es schmeckt hervorragend!"
+      },
+      {
+        "Source": "The price for the dish of the day is: {} Gold. You are sure, that it is woth the prize, but you just cannot afford.",
+        "de": "Der Preis für das Tagesessen beträgt: {} Gold. Du bist überzeugt, dass es das auch wert ist, leider kannst du es dir nicht leisten."
+      },
+      {
+        "Source": "steamed {}",
+        "de": "gedämpfte {}"
+      }
+    ],
+    "FishingFritz": [
+      {
+        "Source": "Fishing fresh fish since 832 ad. dragonis",
+        "de": "Fischt frische Fische seit 832 ad. dragonis"
+      },
+      {
+        "Source": "{}'s fishing shop is an old, ramshackle hut. It is good, that the weather here is always sunny and clear, because this hut would probably collapse, when hit by a medium strong wind. Also, it will offer not much protection against rain, snow, or even cold.",
+        "de": "{}'s Anglerladen ist eine alte, baufällige Hütte. Es ist gut, dass das Wetter hier immer sonnig und klar ist, diese Hütte würde wahrscheinlich von der kleinsten Böe weggeblasen werden. Auch würde sie nicht besonders viel Schutz gegen Regen, Schnee oder Kälte bieten."
+      },
+      {
+        "Source": "There is a sign on the locked door reading:",
+        "de": "Ein Schild an der verschlossenen Tür zeigt:"
+      },
+      {
+        "Source": "\"Gone fishing, come back later\"",
+        "de": "\"Bin angeln, komme später wieder.\""
+      }
+    ],
+    "MenuActions": [
+      {
+        "Source": {
+          "MenuAction": "Fishing Fritz",
+          "MenuActionKey": 102
+        },
+        "de": {
+          "MenuAction": "Fischers Fritz",
+          "MenuActionKey": 102
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Restaurant",
+          "MenuActionKey": 82
+        },
+        "de": {
+          "MenuAction": "Restaurant",
+          "MenuActionKey": 82
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Go Fishing",
+          "MenuActionKey": 71
+        },
+        "de": {
+          "MenuAction": "Angeln",
+          "MenuActionKey": 71
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Ask for Information",
+          "MenuActionKey": 65
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Nach Informationen fragen",
+          "MenuActionKey": 65
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Enhance Equipment",
+          "MenuActionKey": 69
+        },
+        "de": {
+          "MenuAction": "Ausrüstung verbessern",
+          "MenuActionKey": 65
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Eat dish of the day (100 Gold)",
+          "MenuActionKey": 69
+        },
+        "de": {
+          "MenuAction": "Tagesessen bestellen (100 Gold)",
+          "MenuActionKey": 84
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Catch fish",
+          "MenuActionKey": 0
+        },
+        "de": {
+          "MenuAction": "Angeln",
+          "MenuActionKey": 0
+        }
+      }
+    ],
+    "Ressources": [
+      {
+        "Source": "{0}yellow {1}red {2}feathered {0}d{1}r{0}a{1}g{0}o{1}n {0}f{1}i{0}s{1}h{2}",
+        "de": "{0}gelb-{1}rot {2}gefiederter {0}D{1}r{0}a{1}c{0}h{1}en{0}f{1}i{0}s{1}ch{2}"
+      },
+      {
+        "Source": "{}Carp{}",
+        "Status": "untranslated",
+        "de": "{}Karpfen{}"
+      },
+      {
+        "Source": "{0}M{1}a{1}g{0}i{1}c{0}a{1}r{0}p{2}",
+        "Status": "untranslated",
+        "de": "{0}K{1}a{1}r{0}p{1}a{0}d{1}o{0}r{2}"
+      }
+    ],
+    "Room": [
+      {
+        "Source": "A small, idyllic fishing village, placed next to {0}, the lake which gave this little village its name. There is a tavern, famous for its fish meals, and {1} a legendary fisherman. Roumors say, that once in a while, you can eat {2} here, a delicacy that is so rare, because the {2} is extremely hard to catch.",
+        "de": "Ein kleines, idyllisches Fischerdorf, direkt neben {0}, der See, der dem Dörfchen seinen Namen gegeben hat. Es gibt eine Taverne, brühmt für ihre Fischgerichte und {1} einen legendären Angler. Gerüchte besagen, dass man dann und wann hier einen {2} essen kann, eine Delikatesse die sehr selten ist, weil der {2} extrem schwer zu fangen ist."
+      }
+    ],
+    "goFishing": [
+      {
+        "Source": "If you had a fishing rod, you could use it for fishing",        
+        "de": "Hättest du eine Angelrute, könntest du sie zum Angeln benutzen"
+      },
+      {
+        "Source": "If you had a boat, you could use it to get out into the lake and catch bigger and better fish.",        
+        "de": "Hättest du ein Boot, könntest du es benutzen um auf den See hinaus zu fahren um größere und bessere Fische zu fangen."
+      },
+      {
+        "Source": "unfortunately you have neither",
+        "de": "unglücklicherweise hast du weder noch"
+      }
+    ]
+  }
 }

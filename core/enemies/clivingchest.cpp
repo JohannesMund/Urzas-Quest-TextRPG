@@ -31,3 +31,8 @@ void CLivingChest::battleAction(bool&)
         CGameManagement::getPlayerInstance()->dealDamage(amount);
     }
 }
+
+std::string CLivingChest::translatorModuleName() const
+{
+    return std::string();
+}

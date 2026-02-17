@@ -37,6 +37,11 @@ CItem::ItemFilter CShield::equipmentTypeFilter() const
     return [](const CItem* item) -> bool { return dynamic_cast<const CShield*>(item) != nullptr; };
 }
 
+std::string CShield::translatorModuleName() const
+{
+    return std::string();
+}
+
 unsigned int CShield::shieldDamage() const
 {
     switch (_quality)

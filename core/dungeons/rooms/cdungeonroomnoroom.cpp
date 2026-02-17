@@ -26,3 +26,8 @@ bool CDungeonRoomNoRoom::isEmptyRoom() const
 {
     return true;
 }
+
+std::string CDungeonRoomNoRoom::translatorModuleName() const
+{
+    return std::string();
+}

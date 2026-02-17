@@ -27,20 +27,26 @@ void CFishingFritz::execute()
         CMenu menu(FishingVillageMakeRod::moduleName());
 
         CMenu::ActionList defaultActionList;
+        CMenuAction sellAction;
 
-        CMenuAction sellAction = menu.createAction({sellYourFish(), 'S'});
+        const auto val = fishValue();
+        if (val > 0)
+        {
+            sellAction = menu.createShopAction({"Sell your fish", 'S'}, val);
+        }
+
         CMenuAction askAction = menu.createAction({"Ask for Information", 'A'});
         CMenuAction enhanceAction = menu.createAction({"Enhance Equipment", 'E'});
 
         if (!isOpen())
         {
             Console::printLn(
-                std::format("{}'s fishing shop is an old, ramshackle hut. It is good, that the weather here is always "
-                            "sunny and clear, because this hut would probably collapse, when hit by a medium strong "
-                            "wind. Also, it will offer not much protection against rain, snow, or even cold.",
-                            Ressources::Game::fishingFritz()));
-            Console::printLn("There is a sign on the locked door reding:");
-            Console::printLn("\"Gone fishing, come back later\"", Console::EAlignment::eCenter);
+                tr("{}'s fishing shop is an old, ramshackle hut. It is good, that the weather here is always "
+                   "sunny and clear, because this hut would probably collapse, when hit by a medium strong "
+                   "wind. Also, it will offer not much protection against rain, snow, or even cold.",
+                   Ressources::Game::fishingFritz()));
+            Console::printLn(tr("There is a sign on the locked door reading:"));
+            Console::printLn(tr("\"Gone fishing, come back later\""), Console::EAlignment::eCenter);
         }
         else
         {
@@ -73,15 +79,24 @@ void CFishingFritz::execute()
         {
             enhance();
         }
-
     } while (input != CMenu::exit());
+}
+
+std::string CFishingFritz::translatorModuleName() const
+{
+    return FishingVillageFishLegend::moduleName();
+}
+
+std::string CFishingFritz::translatorObjectName() const
+{
+    return std::string(TagNames::FishingVille::fishingFritz);
 }
 
 void CFishingFritz::printHeader() const
 {
     Console::cls();
     Console::printLn(std::format("{}", Ressources::Game::fishingFritz()), Console::EAlignment::eCenter);
-    Console::printLn(std::format("Fishing fresh fish since 832 ad. dragonis", Ressources::Game::fishingFritz()),
+    Console::printLn(tr("Fishing fresh fish since 832 ad. dragonis", Ressources::Game::fishingFritz()),
                      Console::EAlignment::eCenter);
     Console::br();
 }
@@ -109,21 +124,20 @@ void CFishingFritz::checkFish()
     if (_firstVisit)
     {
         _firstVisit = false;
-        Console::printLn(
-            std::format("Straight to the point, you ask {} about everything: {}, {}, {}, you even show him you {} "
-                        "tattoo. You just make clear, that you need to know everything, no matter the cost.",
-                        Ressources::Game::fishingFritz(),
-                        Ressources::Game::urza(),
-                        Ressources::Game::fiego(),
-                        Ressources::Game::brock(),
-                        Ressources::Game::princessLeila()));
-        Console::printLn(std::format(
+        Console::printLn(tr("Straight to the point, you ask {} about everything: {}, {}, {}, you even show him you {} "
+                            "tattoo. You just make clear, that you need to know everything, no matter the cost.",
+                            Ressources::Game::fishingFritz(),
+                            Ressources::Game::urza(),
+                            Ressources::Game::fiego(),
+                            Ressources::Game::brock(),
+                            Ressources::Game::princessLeila()));
+        Console::printLn(tr(
             "{} looks at you suspicious and tells you, that he knows a lot, but not, wether he can trust you. the only "
             "people he can trust, are prople who are able to bring him {}. The legendary fish that can be caught in {}",
             Ressources::Game::fishingFritz(),
             FishingVillage::getFish(FishingVillage::EFishLevel::eLegend),
             FishingVillage::fishingVilleName()));
-        Console::printLn("looks, as if you have another task.");
+        Console::printLn(tr("looks, as if you have another task."));
         Console::confirmToContinue();
         return;
     }
@@ -132,33 +146,31 @@ void CFishingFritz::checkFish()
         CFish::fishRarityFilter(FishingVillage::EFishLevel::eLegend));
     if (!fishes.empty())
     {
-        Console::printLn(std::format("{} Smiles at you. Well he smiles more at the {} than he smiles at you. But at "
-                                     "least he smiles for the first time since... For the first time.",
-                                     Ressources::Game::fishingFritz(),
-                                     FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
+        Console::printLn(tr("{} Smiles at you. Well he smiles more at the {} than he smiles at you. But at "
+                            "least he smiles for the first time since... For the first time.",
+                            Ressources::Game::fishingFritz(),
+                            FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
         Console::printLn(
-            "Of course, he cannot pay you for the fish, but at least he is willing to give you information.");
-        Console::printLn(std::format("{0} is a legend. But {1} and {2} are heroes, and they surely can tell you more "
-                                     "about {0}. To find them, you should find {3}.",
-                                     Ressources::Game::urza(),
-                                     Ressources::Game::fiego(),
-                                     Ressources::Game::brock(),
-                                     Ressources::Game::darkMobi()));
-        Console::printLn(std::format("This adds another name to your list. How... frustrating, but maybe, this {} is "
-                                     "easier to find that the other guys. You will find out.",
-                                     Ressources::Game::darkMobi()));
+            tr("Of course, he cannot pay you for the fish, but at least he is willing to give you information."));
+        Console::printLn(tr("{0} is a legend. But {1} and {2} are heroes, and they surely can tell you more "
+                            "about {0}. To find them, you should find {3}.",
+                            Ressources::Game::urza(),
+                            Ressources::Game::fiego(),
+                            Ressources::Game::brock(),
+                            Ressources::Game::darkMobi()));
+        Console::printLn(tr("This adds another name to your list. How... frustrating, but maybe, this {} is "
+                            "easier to find that the other guys. You will find out.",
+                            Ressources::Game::darkMobi()));
 
         CGameManagement::getInventoryInstance()->removeItem(fishes.at(0));
-
         CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageFishLegend::moduleName());
     }
     else
     {
+        Console::printLn(tr("{} looks grumpy at you and shakes his head. No fish, no information. A deal is a deal.",
+                            Ressources::Game::fishingFritz()));
         Console::printLn(
-            std::format("{} looks grumpy at you and shakes his head. No fish, no information. A deal is a deal.",
-                        Ressources::Game::fishingFritz()));
-        Console::printLn(std::format("How hard can it be to catch a {}?",
-                                     FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
+            tr("How hard can it be to catch a {}?", FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
     }
     Console::confirmToContinue();
 }
@@ -173,21 +185,21 @@ void CFishingFritz::getInformation() const
 
     if (CGameManagement::getProgressionInstance()->moduleHintsAvailable())
     {
-        Console::printLn(std::format("{} thinks, but finally shakes his head. \"My informants have nothing right "
-                                     "now.\". Seems like you will have to come back later.",
-                                     Ressources::Game::fishingFritz()));
+        Console::printLn(tr("{} thinks, but finally shakes his head. \"My informants have nothing right "
+                            "now.\". Seems like you will have to come back later.",
+                            Ressources::Game::fishingFritz()));
     }
     else
     {
         Console::printLn(
-            std::format("{} looks at you conspirational. \"Indeed, I have new information for you. But this "
-                        "information is explosive! So explosive, that one of my informants died, delivering ist. you "
-                        "will understand, that i will have to charge you something to get it. It will cost you {}{} "
-                        "Gold{} to get this information.\"",
-                        Ressources::Game::fishingFritz(),
-                        CC::fgLightYellow(),
-                        informationCost,
-                        CC::ccReset()));
+            tr("{} looks at you conspirational. \"Indeed, I have new information for you. But this "
+               "information is explosive! So explosive, that one of my informants died, delivering ist. you "
+               "will understand, that i will have to charge you something to get it. It will cost you {}{} "
+               "Gold{} to get this information.\"",
+               Ressources::Game::fishingFritz(),
+               CC::fgLightYellow(),
+               informationCost,
+               CC::ccReset()));
 
         if (CGameManagement::getPlayerInstance()->gold() > informationCost)
         {
@@ -197,7 +209,7 @@ void CFishingFritz::getInformation() const
         else
         {
             Console::br();
-            Console::printLn("This seems to be a high price for some piece of information, so you reject.");
+            Console::printLn(tr("This seems to be a high price for some piece of information, so you reject."));
         }
     }
 
@@ -207,8 +219,8 @@ void CFishingFritz::getInformation() const
         auto hint = CGameManagement::getProgressionInstance()->getRandomHint();
         CGameManagement::getPlayerInstance()->spendGold(informationCost);
 
-        Console::printLn(std::format("{} closes the door, and gives you the hottst information he has available:",
-                                     Ressources::Game::fishingFritz()));
+        Console::printLn(tr("{} closes the door, and gives you the hottst information he has available:",
+                            Ressources::Game::fishingFritz()));
         Console::br();
         Console::printLn(hint, Console::EAlignment::eCenter);
         Console::br();
@@ -235,29 +247,10 @@ void CFishingFritz::enhance() const
     auto items = CGameManagement::getInventoryInstance()->getEnhancableEquipment();
     CInventory::EnhancableEquipmentList enhancableItems;
 
-    auto checkAndPrint = [&enhancableItems](CEquipment* item)
-    {
-        if (item == nullptr)
-        {
-            return;
-        }
-        int cost = item->upgradeCost();
-
-        if (cost <= CGameManagement::getPlayerInstance()->gold())
-        {
-            enhancableItems.push_back(item);
-            Console::printLn(std::format("[{:3}] {} ({} Gold)", enhancableItems.size(), item->name(), cost));
-        }
-        else
-        {
-            Console::printLn(std::format("[   ] {} ({} Gold)", item->name(), cost));
-        }
-    };
-
     for (auto& item : items)
     {
-        checkAndPrint(dynamic_cast<CFishingRod*>(item));
-        checkAndPrint(dynamic_cast<CBoat*>(item));
+        checkAndPrint(enhancableItems, dynamic_cast<CFishingRod*>(item));
+        checkAndPrint(enhancableItems, dynamic_cast<CBoat*>(item));
     }
 
     if (enhancableItems.size() > 0)
@@ -289,12 +282,12 @@ bool CFishingFritz::hasFish() const
     return CGameManagement::getInventoryInstance()->hasItem(CFish::fishFilter());
 }
 
-std::string CFishingFritz::sellYourFish() const
+int CFishingFritz::fishValue() const
 {
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFish::fishFilter());
     if (items.size() == 0)
     {
-        return "";
+        return 0;
     }
 
     unsigned int value = 0U;
@@ -303,5 +296,24 @@ std::string CFishingFritz::sellYourFish() const
         value += item->value();
     }
 
-    return std::format("Sell your fish ({} Gold)", value);
+    return value;
+}
+
+void CFishingFritz::checkAndPrint(CInventory::EnhancableEquipmentList& equipmentList, CEquipment* item) const
+{
+    if (item == nullptr)
+    {
+        return;
+    }
+    int cost = item->upgradeCost();
+
+    if (cost <= CGameManagement::getPlayerInstance()->gold())
+    {
+        equipmentList.push_back(item);
+        Console::printLn(tr("[{:3}] {} ({} Gold)", equipmentList.size(), item->name(), cost));
+    }
+    else
+    {
+        Console::printLn(tr("[   ] {} ({} Gold)", item->name(), cost));
+    }
 }

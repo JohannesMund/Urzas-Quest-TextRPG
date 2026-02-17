@@ -1,11 +1,12 @@
 #pragma once
 
 #include "cbattle.h"
+#include "ctranslatable.h"
 
 #include <optional>
 #include <string>
 
-class CEnemy
+class CEnemy : public CTranslatable
 {
 public:
     CEnemy();
@@ -41,6 +42,8 @@ public:
     void printBossBattleHeader() const;
 
 protected:
+    virtual std::string translatorObjectName() const override;
+
     unsigned int _level;
     int _hp;
     unsigned int _initiative;

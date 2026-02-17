@@ -38,6 +38,11 @@ bool CHealingWell::isSpecialRoom() const
     return true;
 }
 
+std::string CHealingWell::translatorModuleName() const
+{
+    return std::string();
+}
+
 char CHealingWell::getMapSymbol() const
 {
     return 'w';

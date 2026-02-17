@@ -8,4 +8,7 @@ public:
 
     virtual void spoilsOfWar() const override;
     virtual void battleAction(bool& endRound) override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

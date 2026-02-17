@@ -35,3 +35,8 @@ unsigned int CBoat::upgradeCost() const
 {
     return CEquipment::upgradeCost() * 5;
 }
+
+std::string CBoat::translatorModuleName() const
+{
+    return FishingVillageMakeBoat::moduleName();
+}

@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cctype>
 #include <format>
+#include <ranges>
 
 CMenu::CMenu() : CMenu(TagNames::Translator::core)
 {
@@ -24,7 +25,6 @@ void CMenu::addMenuGroup(const CMenu::ActionList& list1, const CMenu::ActionList
     }
 
     MenuGroup grp;
-
     for (const auto& a : list1)
     {
         grp.first.push_back(a);
@@ -40,6 +40,7 @@ void CMenu::addMenuGroup(const CMenu::ActionList& list1, const CMenu::ActionList
 
 CMenuAction CMenu::execute()
 {
+    resetNavs();
     for (const auto& group : _menu)
     {
         if (group.first.empty())
@@ -66,10 +67,9 @@ CMenuAction CMenu::execute()
     return findActionByInput();
 }
 
-CMenuAction CMenu::createAction(const Menu::MenuAction& action)
+CMenuAction CMenu::createAction(const Menu::MenuAction& action, const bool translate)
 {
-    Menu::MenuAction a = tr(action);
-
+    Menu::MenuAction a = translate ? tr(action) : action;
     if (a.key != 0 && isNavPossible(a.key))
     {
         const auto display = makeDisplayString(a.name, a.key);
@@ -89,9 +89,9 @@ CMenuAction CMenu::createAction(const Menu::MenuAction& action)
     return {};
 }
 
-CMenuAction CMenu::createShopAction(const Menu::MenuAction& action, const int cost)
+CMenuAction CMenu::createShopAction(const Menu::MenuAction& action, const int cost, const bool translate)
 {
-    return createAction({std::format("{} ({} Gold)", action.name, cost), action.key});
+    return createAction({std::format("{} ({} Gold)", action.name, cost), action.key}, translate);
 }
 
 void CMenu::clear()
@@ -220,7 +220,27 @@ void CMenu::addNav(const unsigned char c)
     }
 }
 
+void CMenu::resetNavs()
+{
+    _acceptableNavs.clear();
+    for (const auto& group : _menu)
+    {
+        for (const auto& a : group.first)
+        {
+            _acceptableNavs.push_back(a._key);
+        }
+        for (const auto& a : group.second)
+        {
+            _acceptableNavs.push_back(a._key);
+        }
+    }
+}
 Menu::MenuAction CMenu::tr(const Menu::MenuAction& action)
 {
     return CTranslator::tr(_moduleName, TagNames::Translator::menuActions, action);
+}
+
+Menu::MenuAction CMenu::tr(const std::string_view& moduleName, const Menu::MenuAction& action)
+{
+    return CTranslator::tr(moduleName, TagNames::Translator::menuActions, action);
 }

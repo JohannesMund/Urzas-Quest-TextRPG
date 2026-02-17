@@ -21,8 +21,8 @@ CFish::CFish(const FishingVillage::EFishLevel level) : CItem(TagNames::FishingVi
     _isBuyable = false;
 
     _fishLevel = level;
-    _description =
-        "A beautiful fish, caught by yourself. Can be sold for money. Money can be exchanged for goods and services.";
+    _description = tr(
+        "A beautiful fish, caught by yourself. Can be sold for money. Money can be exchanged for goods and services.");
 }
 
 FishingVillage::EFishLevel CFish::fishLevel() const
@@ -48,6 +48,11 @@ CItem::ItemFilter CFish::fishRarityFilter(const FishingVillage::EFishLevel level
     };
 }
 
+std::string CFish::translatorModuleName() const
+{
+    return FishingVillageFishLegend::moduleName();
+}
+
 nlohmann::json CFish::save() const
 {
     nlohmann::json o = CItem::save();
@@ -57,6 +62,6 @@ nlohmann::json CFish::save() const
 
 void CFish::load(const nlohmann::json& json)
 {
-    _fishLevel = json.value<FishingVillage::EFishLevel>(TagNames::FishingVille::fishLevel,
-                                                                  FishingVillage::EFishLevel::eCommon);
+    _fishLevel =
+        json.value<FishingVillage::EFishLevel>(TagNames::FishingVille::fishLevel, FishingVillage::EFishLevel::eCommon);
 }

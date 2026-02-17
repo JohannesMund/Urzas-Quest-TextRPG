@@ -14,7 +14,11 @@ constexpr std::string_view sourceLanguage = "en";
 namespace Config
 {
 
-constexpr bool superCowPowers = true;
+namespace Debug
+{
+constexpr bool superCowPowers = false;
+constexpr bool updateTranslations = false;
+} // namespace Debug
 
 constexpr unsigned int fieldWidth = 26;
 constexpr unsigned int fieldHeight = 10;

@@ -65,5 +65,5 @@ protected:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 
-    virtual std::string coreTr(const std::string_view& textId) const override;
+    virtual std::string translatorObjectName() const override;
 };

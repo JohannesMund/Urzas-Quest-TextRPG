@@ -19,6 +19,9 @@ public:
 
     virtual nlohmann::json save() const override;
 
+protected:
+    virtual std::string translatorModuleName() const override;
+
 private:
     void use();
 

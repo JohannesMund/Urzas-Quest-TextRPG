@@ -16,3 +16,8 @@ CItem::ItemFilter CJunkItem::junkItemFilter()
 {
     return [](const CItem* item) -> bool { return dynamic_cast<const CJunkItem*>(item) != nullptr; };
 }
+
+std::string CJunkItem::translatorModuleName() const
+{
+    return std::string();
+}

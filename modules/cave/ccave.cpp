@@ -87,6 +87,11 @@ bool CCave::isTaskPossible(const std::string_view& moduleName) const
     return CRoom::isTaskPossible(moduleName);
 }
 
+std::string CCave::translatorModuleName() const
+{
+    return Cave::moduleName();
+}
+
 nlohmann::json CCave::save() const
 {
     auto o = CRoom::save();

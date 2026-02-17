@@ -42,3 +42,8 @@ void CLakeOfTearsBoss::passiveBattleAction(EWho who)
         CGameManagement::getPlayerInstance()->dealDamage(dmg);
     }
 }
+
+std::string CLakeOfTearsBoss::translatorModuleName() const
+{
+    return LakeOfTears::moduleName();
+}

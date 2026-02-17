@@ -49,5 +49,7 @@ public:
     }
 
 protected:
+    virtual std::string translatorModuleName() const override;
+
     IngredientsList _ingredients;
 };

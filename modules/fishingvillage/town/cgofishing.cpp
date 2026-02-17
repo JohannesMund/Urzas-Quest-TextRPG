@@ -50,6 +50,16 @@ void CGoFishing::execute()
     } while (input != CMenu::exit());
 }
 
+std::string CGoFishing::translatorModuleName() const
+{
+    return FishingVillageFishLegend::moduleName();
+}
+
+std::string CGoFishing::translatorObjectName() const
+{
+    return std::string(TagNames::FishingVille::goFishing);
+}
+
 void CGoFishing::init()
 {
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFishingRod::fishingRodFilter());
@@ -81,31 +91,31 @@ void CGoFishing::printItemLevels()
 
     if (!haveFishingRod)
     {
-        Console::printLn("If you had a fishing rod, you could use it for fishing");
+        Console::printLn(tr("If you had a fishing rod, you could use it for fishing"));
     }
     if (!haveBoat)
     {
         Console::printLn(
-            "If you had a boat, you could use it to get out into the lake and catch bigger and better fish.");
+            tr("If you had a boat, you could use it to get out into the lake and catch bigger and better fish."));
     }
     Console::br();
     if (!haveFishingRod && !haveBoat)
     {
-        Console::printLn("unfortunately you have neither");
+        Console::printLn(tr("unfortunately you have neither"));
     }
     else
     {
         Console::printLn(
-            "You have what it takes, to catch at least something, so you could very well try to catch some fish.");
+            tr("You have what it takes, to catch at least something, so you could very well try to catch some fish."));
         std::string fishingRodString;
         if (haveFishingRod)
         {
-            fishingRodString = std::format("{} (Level {})", _fishingRod->name(), _fishingRod->level());
+            fishingRodString = tr("{} (Level {})", _fishingRod->name(), _fishingRod->level());
         }
         std::string boatString;
         if (haveBoat)
         {
-            boatString = std::format("{} (Level {})", _boat->name(), _boat->level());
+            boatString = tr("{} (Level {})", _boat->name(), _boat->level());
         }
         Console::br();
         Console::printLnWithSpacer(fishingRodString, boatString);
@@ -124,24 +134,24 @@ void CGoFishing::catchAFish()
 
     if (i < 25)
     {
-        Console::printLn(std::format("You catch nothing. But as a legendary {} you too would not let yourself beeing "
-                                     "caught by crappy equipment like yours.",
-                                     FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
+        Console::printLn(tr("You catch nothing. But as a legendary {} you too would not let yourself beeing "
+                            "caught by crappy equipment like yours.",
+                            FishingVillage::getFish(FishingVillage::EFishLevel::eLegend)));
     }
     else if (i < 50)
     {
         auto item = CGameManagement::getItemFactoryInstance()->makeLootItem();
-        Console::printLn(std::format("You sit there and wath the pose of your fishing rod, waiting for something to "
-                                     "happen... and wait, and sit, and sit, ant wait. and si... until all of a sudden "
-                                     "your fishing rod moves. You pull it in and see that you have caught a {}.",
-                                     item->name()));
-        Console::printLn("It is not a fish, but it is also not nothing.");
+        Console::printLn(tr("You sit there and wath the pose of your fishing rod, waiting for something to "
+                            "happen... and wait, and sit, and sit, ant wait. and si... until all of a sudden "
+                            "your fishing rod moves. You pull it in and see that you have caught a {}.",
+                            item->name()));
+        Console::printLn(tr("It is not a fish, but it is also not nothing."));
         CGameManagement::getInventoryInstance()->addItem(item);
     }
     else
     {
         auto fish = new CFish(rodLevel, boatLevel);
-        Console::printLn(std::format(
+        Console::printLn(tr(
             "You sit there and wath the pose of your fishing rod, waiting for something to "
             "happen... and wait, and sit, and sit, ant wait. and si... until all of a sudden "
             "your fishing rod moves. You try to pull it in, but it fights back. This time, there is actually a living "

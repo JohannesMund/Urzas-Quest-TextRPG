@@ -41,3 +41,8 @@ unsigned int CFishingRod::upgradeCost() const
 {
     return CEquipment::upgradeCost() * 2;
 }
+
+std::string CFishingRod::translatorModuleName() const
+{
+    return FishingVillageMakeRod::moduleName();
+}

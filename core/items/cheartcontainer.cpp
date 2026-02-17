@@ -23,3 +23,8 @@ void CHeartContainer::useFromInventory()
                      "empty. You feel a lot fitter.");
     CGameManagement::getPlayerInstance()->addMaxHp(1);
 }
+
+std::string CHeartContainer::translatorModuleName() const
+{
+    return std::string();
+}

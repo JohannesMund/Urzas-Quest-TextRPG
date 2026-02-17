@@ -78,7 +78,7 @@ bool CCompanion::fireDefaultAction() const
     return Randomizer::getRandom(Ressources::Companion::companionLevelCap + 2 - _level) == 0;
 }
 
-std::string CCompanion::coreTr(const std::string_view& textId) const
+std::string CCompanion::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, TagNames::Companion::companion, textId);
+    return std::string(TagNames::Companion::companion);
 }

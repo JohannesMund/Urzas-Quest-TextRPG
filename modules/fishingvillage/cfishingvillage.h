@@ -19,6 +19,8 @@ public:
     static CMap::RoomFilter fishingVillageFilter();
 
 private:
+    virtual std::string translatorModuleName() const override;
+
     void printHeader();
 
     virtual char getMapSymbol() const override;

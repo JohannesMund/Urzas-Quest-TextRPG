@@ -8,4 +8,7 @@ public:
     CPhoenixFeather();
 
     virtual void deathEffect() override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

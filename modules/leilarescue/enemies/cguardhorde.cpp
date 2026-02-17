@@ -2,6 +2,7 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
+#include "leilarescue/moduleressources.h"
 #include "randomizer.h"
 
 #include <format>
@@ -31,4 +32,9 @@ void CGuardHorde::spoilsOfWar() const
             } while (Randomizer::getRandom(2) == 0);
         }
     }
+}
+
+std::string CGuardHorde::translatorModuleName() const
+{
+    return LeilaRescue::moduleName();
 }

@@ -25,6 +25,13 @@ std::ofstream& CLog::makeEntry(const std::string_view& scope)
     return l._os;
 }
 
+void CLog::rollover()
+{
+    auto path = LocalDirectory::getLocalDirectoryPath();
+    path.append(Settings::logFileName);
+    std::filesystem::remove(path);
+}
+
 CLog::CLog()
 {
     auto path = LocalDirectory::getLocalDirectoryPath();

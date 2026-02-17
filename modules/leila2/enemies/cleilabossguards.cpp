@@ -60,3 +60,8 @@ void CLeilaBossGuards::passiveBattleAction(EWho who)
         CGameManagement::getPlayerInstance()->dealDamage(dmg);
     }
 }
+
+std::string CLeilaBossGuards::translatorModuleName() const
+{
+    return Leila2::moduleName();
+}

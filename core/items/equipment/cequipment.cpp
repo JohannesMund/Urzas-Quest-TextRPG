@@ -126,6 +126,11 @@ nlohmann::json CEquipment::save() const
     return o;
 }
 
+std::string CEquipment::translatorObjectName() const
+{
+    return std::string(TagNames::Translator::equipment);
+}
+
 bool CEquipment::doesEquipmentEffectFire() const
 {
     return Randomizer::getRandom(100) <= _level * 10;

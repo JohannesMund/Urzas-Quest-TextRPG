@@ -19,6 +19,9 @@ constexpr std::string_view boatPart = "BoatPart";
 constexpr std::string_view fish = "Fish";
 constexpr std::string_view fishingRod = "FishingRod";
 constexpr std::string_view fishingRodPart = "FishingRodPart";
+constexpr std::string_view fishingFritz = "FishingFritz";
+constexpr std::string_view fishRestaurant = "FishRestaurant";
+constexpr std::string_view goFishing = "goFishing";
 
 } // namespace FishingVille
 } // namespace TagNames
@@ -35,6 +38,8 @@ enum class EFishLevel
     eUltraRare,
     eLegend
 };
+
+std::string moduleName();
 
 static const unsigned int rodLevelCap = 5;
 static const unsigned int boatLevelCap = 5;

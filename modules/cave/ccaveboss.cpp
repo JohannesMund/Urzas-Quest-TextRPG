@@ -47,3 +47,8 @@ void CCaveBoss::battleAction(bool& endRound)
     }
     CEnemy::battleAction(endRound);
 }
+
+std::string CCaveBoss::translatorModuleName() const
+{
+    return Cave::moduleName();
+}

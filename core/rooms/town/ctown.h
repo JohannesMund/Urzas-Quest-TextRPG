@@ -27,6 +27,8 @@ public:
     static CMap::RoomFilter townFilter();
 
 protected:
+    virtual std::string translatorModuleName() const override;
+
     std::string _name;
     virtual char getMapSymbol() const override;
 

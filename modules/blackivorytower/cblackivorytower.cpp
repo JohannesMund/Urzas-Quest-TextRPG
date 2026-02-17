@@ -90,6 +90,11 @@ char CBlackIvoryTower::getMapSymbol() const
     return 'I';
 }
 
+std::string CBlackIvoryTower::translatorModuleName() const
+{
+    return BlackIvoryTower::moduleName();
+}
+
 nlohmann::json CBlackIvoryTower::save() const
 {
     auto o = CRoom::save();

@@ -11,4 +11,7 @@ public:
     static CItem::ItemFilter fishingRodFilter();
     virtual CItem::ItemFilter equipmentTypeFilter() const override;
     virtual unsigned int upgradeCost() const override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

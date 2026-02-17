@@ -74,3 +74,8 @@ std::string CLeilaEncounter::moduleName() const
 {
     return Leila::moduleName();
 }
+
+std::string CLeilaEncounter::translatorModuleName() const
+{
+    return Leila::moduleName();
+}

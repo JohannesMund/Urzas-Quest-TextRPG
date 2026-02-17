@@ -460,9 +460,14 @@ std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords, const EDirections 
     return roomAt(transposedCoords);
 }
 
-std::string CMap::coreTr(const std::string_view& textId) const
+std::string CMap::translatorObjectName() const
 {
-    return CTranslator::tr(TagNames::Translator::core, TagNames::Map::map, textId);
+    return std::string(TagNames::Map::map);
+}
+
+std::string CMap::translatorModuleName() const
+{
+    return std::string();
 }
 
 CMap::SRoomCoords CMap::getPlayerPosition() const

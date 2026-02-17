@@ -12,4 +12,7 @@ public:
     virtual std::string name() const override;
 
     virtual bool canBeExecuted(const EEncounterType& tp) const override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

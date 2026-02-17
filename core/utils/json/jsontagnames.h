@@ -13,6 +13,11 @@ constexpr std::string_view menuAction = "MenuAction";
 constexpr std::string_view menuActionKey = "MenuActionKey";
 constexpr std::string_view status = "Status";
 constexpr std::string_view untranslated = "untranslated";
+constexpr std::string_view incomplete = "incomplete";
+constexpr std::string_view ressources = "Ressources";
+constexpr std::string_view enemy = "Enemy";
+constexpr std::string_view equipment = "Equipment";
+constexpr std::string_view town = "Town";
 } // namespace Translator
 
 namespace Common
@@ -48,8 +53,10 @@ constexpr std::string_view name = TagNames::Common::name;
 namespace GameSettings
 {
 constexpr std::string_view gameSettings = "GameSettings";
+constexpr std::string_view debugSettings = "DebugSettings";
 
 constexpr std::string_view superCowPowers = "SuperCow";
+constexpr std::string_view updateTranslations = "UpdateTranslations";
 
 constexpr std::string_view fieldWidth = "FieldWidth";
 constexpr std::string_view fieldHeight = "FieldHeight";
@@ -57,7 +64,7 @@ constexpr std::string_view encounterChance = "EncounterChance";
 constexpr std::string_view fightChance = "FightChance";
 
 constexpr std::string_view numberOfTowns = "NumberOfTowns";
-constexpr std::string_view turnsUntilShopRefresh = "TurnsUntilShowRefresh";
+constexpr std::string_view turnsUntilShopRefresh = "TurnsUntilShopRefresh";
 constexpr std::string_view informationCost = "InformationCost";
 
 constexpr std::string_view maxHp = "MaxHp";
