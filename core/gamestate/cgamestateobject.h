@@ -34,10 +34,7 @@ public:
      * @return a json object with the state of the class
      */
     virtual nlohmann::json save() const = 0;
-    virtual void load(const nlohmann::json&)
-    {
-        return;
-    };
+    virtual void load(const nlohmann::json&) = 0;
 
     static std::string getObjectNameFromJson(const nlohmann::json& json);
     static void addObjectNameToJson(nlohmann::json& json, const CGameStateObject* object);

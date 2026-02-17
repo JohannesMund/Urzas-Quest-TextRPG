@@ -193,6 +193,7 @@ public:
     static ItemFilter deathEffectFilter();
 
     nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& o) override;
 
 protected:
     std::string _name;

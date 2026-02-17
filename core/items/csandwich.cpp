@@ -92,6 +92,15 @@ nlohmann::json CSandwich::save() const
     return o;
 }
 
+void CSandwich::load(const nlohmann::json& o)
+{
+    CItem::load(o);
+    for (auto i : o["ingredients"])
+    {
+        _ingredients.push_back(i);
+    }
+}
+
 std::string CSandwich::translatorModuleName() const
 {
     return std::string();

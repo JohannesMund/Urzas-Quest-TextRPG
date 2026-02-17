@@ -63,6 +63,12 @@ nlohmann::json CHealingPotion::save() const
     return o;
 }
 
+void CHealingPotion::load(const nlohmann::json& o)
+{
+    CItem::load(o);
+    _size = o["size"];
+}
+
 std::string CHealingPotion::translatorModuleName() const
 {
     return std::string();

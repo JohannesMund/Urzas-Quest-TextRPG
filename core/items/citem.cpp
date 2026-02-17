@@ -103,6 +103,26 @@ nlohmann::json CItem::save() const
     return o;
 }
 
+void CItem::load(const nlohmann::json& o)
+{
+
+    _name = o["name"];
+    _description = o["description"];
+
+    _isUsableFromInventory = o["isUsableFromInventory"];
+    _isUsableFromBattle = o["isUsableFromBattle"];
+
+    _hasDeathEffect = o["hasDeathEffect"];
+    _hasBattleEffect = o["hasBattleEffect"];
+    _hasBattleBuff = o["hasBattleBuff"];
+    _hasShieldingAction = o["hasShieldingAction"];
+
+    _isSellable = o["isSellable"];
+    _isBuyable = o["isBuyable"];
+    _value = o["value"];
+    _isConsumable = o["isConsumable"];
+}
+
 std::string CItem::translatorObjectName() const
 {
     return std::string(TagNames::Item::item);
