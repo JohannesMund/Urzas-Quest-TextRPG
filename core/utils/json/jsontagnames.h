@@ -64,7 +64,7 @@ constexpr std::string_view encounterChance = "EncounterChance";
 constexpr std::string_view fightChance = "FightChance";
 
 constexpr std::string_view numberOfTowns = "NumberOfTowns";
-constexpr std::string_view turnsUntilShopRefresh = "TurnsUntilShowRefresh";
+constexpr std::string_view turnsUntilShopRefresh = "TurnsUntilShopRefresh";
 constexpr std::string_view informationCost = "InformationCost";
 
 constexpr std::string_view maxHp = "MaxHp";

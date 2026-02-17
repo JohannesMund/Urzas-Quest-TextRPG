@@ -19,7 +19,7 @@
     "EncounterChance": 10,
     "FightChance": 15,
     "NumberOfTowns": 4,
-    "TurnsUntilShowRefresh": 100,
+    "TurnsUntilShopRefresh": 100,
     "InformationCost": 1000,
     "CurrentLanguage": "en"
   }
