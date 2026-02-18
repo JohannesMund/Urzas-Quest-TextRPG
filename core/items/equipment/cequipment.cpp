@@ -107,9 +107,7 @@ Ressources::Items::EType CEquipment::type() const
 
 nlohmann::json CEquipment::save() const
 {
-
     nlohmann::json o = CItem::save();
-
     nlohmann::json names = nlohmann::json::array();
 
     for (auto n : _namesByLevel)
@@ -124,6 +122,21 @@ nlohmann::json CEquipment::save() const
     o["quality"] = _quality;
 
     return o;
+}
+
+void CEquipment::load(const nlohmann::json& o)
+{
+    CItem::load(o);
+
+    for (auto n : o["namesByLevel"])
+    {
+        _namesByLevel.push_back(n);
+    }
+
+    _level = o["level"];
+    _levelCap = o["levelCap"];
+    _type = o["type"];
+    _quality = o["quality"];
 }
 
 std::string CEquipment::translatorObjectName() const

@@ -42,6 +42,7 @@ public:
     static IngredientsList getListOfAllIngredients();
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& o) override;
 
     bool operator==(const CSandwich& other) const
     {

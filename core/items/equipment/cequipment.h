@@ -45,6 +45,7 @@ public:
     Ressources::Items::EType type() const;
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& o) override;
 
 protected:
     virtual std::string translatorObjectName() const override;

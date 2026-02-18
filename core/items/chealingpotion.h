@@ -18,6 +18,7 @@ public:
     virtual void useFromBattle(CEnemy*) override;
 
     virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& o) override;
 
 protected:
     virtual std::string translatorModuleName() const override;

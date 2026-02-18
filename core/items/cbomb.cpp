@@ -74,6 +74,12 @@ nlohmann::json CBomb::save() const
     return o;
 }
 
+void CBomb::load(const nlohmann::json& o)
+{
+    CItem::load(o);
+    _size = o["size"];
+}
+
 std::string CBomb::translatorModuleName() const
 {
     return std::string();
