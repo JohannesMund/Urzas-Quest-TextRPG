@@ -3,7 +3,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CChurch::CChurch()
+CChurch::CChurch() : CTownModule(TagNames::TownModule::church)
 {
 }
 

@@ -1,16 +1,18 @@
 #pragma once
 
 #include "cinventory.h"
-#include "ctranslatable.h"
+#include "ctownmodule.h"
 
 #include <string>
 
-class CFishingFritz : public CTranslatable
+class CFishingFritz : public CTownModule
 {
 public:
     CFishingFritz();
+    void execute() override;
 
-    void execute();
+    nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& o) override;
 
 protected:
     virtual std::string translatorModuleName() const override;

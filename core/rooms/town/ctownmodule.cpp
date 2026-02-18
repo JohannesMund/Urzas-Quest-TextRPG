@@ -15,6 +15,15 @@ std::string CTownModule::translatorModuleName() const
     return std::string(TagNames::Translator::core);
 }
 
-CTownModule::CTownModule()
+nlohmann::json CTownModule::save() const
+{
+    return nlohmann::json();
+}
+
+void CTownModule::load(const nlohmann::json&)
+{
+}
+
+CTownModule::CTownModule(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }

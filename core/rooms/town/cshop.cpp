@@ -9,7 +9,7 @@
 #include <format>
 #include <map>
 
-CShop::CShop()
+CShop::CShop() : CTownModule(TagNames::TownModule::shop)
 {
     replaceShopItems();
 }

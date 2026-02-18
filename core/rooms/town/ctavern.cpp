@@ -6,7 +6,7 @@
 #include "randomizer.h"
 #include "ressources.h"
 
-CTavern::CTavern()
+CTavern::CTavern() : CTownModule(TagNames::TownModule::tavern)
 {
 }
 

@@ -3,7 +3,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CFarm::CFarm()
+CFarm::CFarm() : CTownModule(TagNames::TownModule::farm)
 {
 }
 

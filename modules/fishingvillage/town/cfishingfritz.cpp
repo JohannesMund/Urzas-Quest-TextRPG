@@ -12,7 +12,7 @@
 
 #include <format>
 
-CFishingFritz::CFishingFritz()
+CFishingFritz::CFishingFritz() : CTownModule(TagNames::FishingVille::fishingFritz)
 {
 }
 
@@ -80,6 +80,18 @@ void CFishingFritz::execute()
             enhance();
         }
     } while (input != CMenu::exit());
+}
+
+nlohmann::json CFishingFritz::save() const
+{
+    nlohmann::json o;
+    o["firstVisit"] = _firstVisit;
+    return o;
+}
+
+void CFishingFritz::load(const nlohmann::json& o)
+{
+    _firstVisit = o["firstVisit"];
 }
 
 std::string CFishingFritz::translatorModuleName() const

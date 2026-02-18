@@ -17,6 +17,10 @@ CFishingVillage::CFishingVillage() : CRoom(TagNames::FishingVille::fishingVille)
     _encounterType = CEncounter::EEncounterType::eNone;
     _isRandomTaskPossible = true;
     _showInFogOfWar = true;
+
+    _fishingFritz.setCityName(FishingVillage::fishingVilleName());
+    _fishRestaurant.setCityName(FishingVillage::fishingVilleName());
+    _goFishing.setCityName(FishingVillage::fishingVilleName());
 }
 
 void CFishingVillage::execute()
@@ -82,6 +86,31 @@ std::string CFishingVillage::fgColor() const
 CMap::RoomFilter CFishingVillage::fishingVillageFilter()
 {
     return [](const CRoom* room) { return dynamic_cast<const CFishingVillage*>(room) != nullptr; };
+}
+
+nlohmann::json CFishingVillage::save() const
+{
+    nlohmann::json o;
+    o[_fishingFritz.getObjectName()] = _fishingFritz.save();
+    o[_fishRestaurant.getObjectName()] = _fishRestaurant.save();
+    o[_goFishing.getObjectName()] = _goFishing.save();
+    return o;
+}
+
+void CFishingVillage::load(const nlohmann::json& o)
+{
+    if (o.contains(_fishingFritz.getObjectName()))
+    {
+        _fishingFritz.load(o[_fishingFritz.getObjectName()]);
+    }
+    if (o.contains(_fishRestaurant.getObjectName()))
+    {
+        _fishRestaurant.load(o[_fishRestaurant.getObjectName()]);
+    }
+    if (o.contains(_goFishing.getObjectName()))
+    {
+        _goFishing.load(o[_goFishing.getObjectName()]);
+    }
 }
 
 std::string CFishingVillage::translatorModuleName() const

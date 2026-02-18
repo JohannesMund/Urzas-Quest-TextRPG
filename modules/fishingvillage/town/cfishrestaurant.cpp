@@ -8,7 +8,7 @@
 
 #include <vector>
 
-CFishRestaurant::CFishRestaurant()
+CFishRestaurant::CFishRestaurant() : CTownModule(TagNames::FishingVille::fishRestaurant)
 {
 }
 

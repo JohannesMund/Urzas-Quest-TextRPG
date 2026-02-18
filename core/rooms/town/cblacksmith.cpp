@@ -4,7 +4,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CBlackSmith::CBlackSmith()
+CBlackSmith::CBlackSmith() : CTownModule(TagNames::TownModule::blacksmith)
 {
 }
 

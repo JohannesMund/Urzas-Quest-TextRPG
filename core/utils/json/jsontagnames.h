@@ -138,6 +138,15 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 constexpr std::string_view petIsDead = "PetIsDead";
 } // namespace Room
 
+namespace TownModule
+{
+constexpr std::string_view blacksmith = "BlackSmith";
+constexpr std::string_view church = "Church";
+constexpr std::string_view farm = "Farm";
+constexpr std::string_view shop = "Shop";
+constexpr std::string_view tavern = "Tavern";
+} // namespace TownModule
+
 namespace Task
 {
 constexpr std::string_view task = "Task";

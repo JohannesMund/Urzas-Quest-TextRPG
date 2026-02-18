@@ -19,6 +19,9 @@ public:
     static CMap::RoomFilter fishingVillageFilter();
 
 private:
+    nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& o) override;
+
     virtual std::string translatorModuleName() const override;
 
     void printHeader();

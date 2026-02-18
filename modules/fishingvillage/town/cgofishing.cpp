@@ -13,7 +13,7 @@
 
 #include <format>
 
-CGoFishing::CGoFishing()
+CGoFishing::CGoFishing() : CTownModule(TagNames::FishingVille::fishRestaurant)
 {
 }
 
