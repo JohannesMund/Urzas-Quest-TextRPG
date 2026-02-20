@@ -353,6 +353,30 @@ void CPlayer::removeSupportCompanionsByModuleName(const std::string_view& module
     }
 }
 
+bool CPlayer::hasSignificantOther() const
+{
+    return _significantOther != nullptr;
+}
+
+bool CPlayer::isSignificantOther(const CNpc* npc) const
+{
+    if (_significantOther == nullptr)
+    {
+        return false;
+    }
+    return _significantOther == npc;
+}
+
+CNpc* CPlayer::signigicantOther() const
+{
+    return _significantOther;
+}
+
+void CPlayer::setSignificantOther(CNpc* significantOther)
+{
+    _significantOther = significantOther;
+}
+
 nlohmann::json CPlayer::save() const
 {
     nlohmann::json json;

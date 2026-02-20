@@ -10,6 +10,7 @@
 #include "modules/leila/moduleressources.h"
 #include "modules/leila2/moduleressources.h"
 #include "modules/leilarescue/moduleressources.h"
+#include "modules/rabbithatch/moduleressources.h"
 #include "modules/ratfarm/moduleressources.h"
 #include "modules/rebellionhideout/moduleressources.h"
 #include "modules/sewer/moduleressources.h"
@@ -23,6 +24,9 @@ namespace ModuleRegister
 
 void registerModules(CGameProgression* progression)
 {
+
+    progression->registerModule(RabbitHatch::moduleInfo());
+
     /**
      * GamwStage: Start
      * Chapter 1

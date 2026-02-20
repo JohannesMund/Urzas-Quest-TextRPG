@@ -18,6 +18,7 @@ constexpr std::string_view ressources = "Ressources";
 constexpr std::string_view enemy = "Enemy";
 constexpr std::string_view equipment = "Equipment";
 constexpr std::string_view town = "Town";
+constexpr std::string_view npc = "NPC";
 } // namespace Translator
 
 namespace Common
@@ -160,6 +161,7 @@ constexpr std::string_view name = TagNames::Common::name;
 namespace Item
 {
 constexpr std::string_view item = "Item";
+
 namespace Equipment
 {
 constexpr std::string_view armor = "Armor";
@@ -167,13 +169,14 @@ constexpr std::string_view equipment = "Equipment";
 constexpr std::string_view shield = "Shield";
 constexpr std::string_view weapon = "Weapon";
 } // namespace Equipment
+
 namespace Story
 {
 constexpr std::string_view laylasRibbon = "LaylasRibbon";
 constexpr std::string_view shaggysSandwich = "ShaggysSandwich";
 constexpr std::string_view urzasGlasses = "UrzasGlasses";
-
 } // namespace Story
+
 constexpr std::string_view inventory = "Inventory";
 constexpr std::string_view bomb = "Bomb";
 constexpr std::string_view healingPotion = "HealingPotion";
@@ -183,5 +186,10 @@ constexpr std::string_view phoenixFeather = "PhoenixFeather";
 constexpr std::string_view sandwich = "Sandwich";
 constexpr std::string_view part = "Part";
 } // namespace Item
+
+namespace Npc
+{
+constexpr std::string_view sympathy = "Sympathy";
+}
 
 } // namespace TagNames

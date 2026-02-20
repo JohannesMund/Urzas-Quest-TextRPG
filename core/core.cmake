@@ -99,6 +99,8 @@ set(URZAS_QUEST_SOURCES_CORE
     core/dungeons/rooms/cdungeonroomnoroom.h core/dungeons/rooms/cdungeonroomnoroom.cpp
     core/dungeons/rooms/chealingwell.h core/dungeons/rooms/chealingwell.cpp
     core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp           
+
+    core/npc/cnpc.h core/npc/cnpc.cpp
 )
 
 set(CORE_RESSOURCE_DIR
@@ -116,12 +118,14 @@ set(CORE_INCLUDE_DIRS
     /core/items/equipment 
     /core/items/story 
     /core/menu
+    /core/npc
     /core/rooms 
     /core/rooms/town 
     /core/tasks 
     /core/utils 
     /core/utils/json
     /core/translator
+
 )
 
 

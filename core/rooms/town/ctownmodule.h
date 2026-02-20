@@ -11,7 +11,7 @@ public:
     void setCityName(const std::string& s);
 
     nlohmann::json save() const override;
-    virtual void load(const nlohmann::json& o) override;
+    virtual void load(const nlohmann::json&) override;
 
 protected:
     virtual std::string translatorObjectName() const override;
