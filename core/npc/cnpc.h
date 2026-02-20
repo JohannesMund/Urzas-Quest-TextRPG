@@ -15,6 +15,7 @@ public:
     virtual void interact() = 0;
     virtual void talk() = 0;
     virtual void thinkAbout() = 0;
+
     virtual std::string name() const = 0;
     virtual std::string describe() const = 0;
 
@@ -38,5 +39,6 @@ protected:
     virtual std::string translatorObjectName() const override;
     int _sympathy = 500;
 
+private:
     bool _female;
 };

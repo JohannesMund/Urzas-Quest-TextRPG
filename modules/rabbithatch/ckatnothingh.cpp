@@ -40,6 +40,31 @@ std::string CKatNothingH::name() const
 
 std::string CKatNothingH::describe() const
 {
+    if (_sympathy > 75)
+    {
+        return tr("{} s a friendly, really beautiful lady. She is an extraordinary {}cool{} "
+                  "and {}strong{} woman. She has beautiful brown eyes and a breathtaking. You could spend hoours and "
+                  "hours listening to her. Sometimes, you wish you where a rabbit.",
+                  RabbitHatch::katNothingH(),
+                  CC::fgCyan(),
+                  CC::ccReset(),
+                  CC::fgMagenta(),
+                  CC::ccReset());
+    }
+
+    if (_sympathy > 75)
+    {
+        return tr("{} s a nice woman, she is {}cool{} "
+                  "and {}strong{}, but her job as Head of the {} also adds some eco-hippie flare. You do not like her "
+                  "glasses.",
+                  RabbitHatch::katNothingH(),
+                  CC::fgCyan(),
+                  CC::ccReset(),
+                  CC::fgMagenta(),
+                  CC::ccReset(),
+                  RabbitHatch::rabbitHatchName());
+    }
+
     return tr(
         "{} s a friendly, pretty lady. she has a friendly, warm smile and seem to be an extraordinary {}cool{} "
         "and {}strong{} woman. She is Head of the {} so, obviously, she likes Rabbits. and damn, she is really pretty!",
