@@ -1,0 +1,36 @@
+#include "crabbithatchapple.h"
+#include "colorize.h"
+#include "rabbithatch/moduleressources.h"
+
+CRabbithatchApple::CRabbithatchApple() : CItem(TagNames::RabbitHatch::apple)
+{
+    _name = tr("{}A{}pple{}", CC::fgLightYellow(), CC::fgRed(), CC::ccReset());
+    _description = tr("A beautiful {}A{}pple{} just like the ones, {} described to you.",
+                      CC::fgLightYellow(),
+                      CC::fgRed(),
+                      CC::ccReset(),
+                      RabbitHatch::katNothingH());
+}
+
+void CRabbithatchApple::useFromInventory()
+{
+    Console::printLn(tr("You are a little hungry, so let's eat"));
+    use();
+}
+
+void CRabbithatchApple::useFromBattle(CEnemy*)
+{
+    Console::printLn(tr("You should not have time for lunch in the middle of a fight, but maybe this helps."));
+    use();
+}
+
+std::string CRabbithatchApple::translatorModuleName() const
+{
+    return std::string(RabbitHatch::moduleName());
+}
+
+void CRabbithatchApple::use()
+{
+    Console::printLn(tr("This is delicious. Sweet, refreshing, revitalizing"));
+    CGameManagement::getPlayerInstance()->addHp(Randomizer::getRandom(3) + 1);
+}

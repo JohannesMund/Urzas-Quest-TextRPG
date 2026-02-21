@@ -1,7 +1,10 @@
 #include "cnpc.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
 #include "jsontagnames.h"
+
+#include <math.h>
 
 CMenuAction CNpc::npcNav(CMenu& menu)
 {
@@ -10,6 +13,42 @@ CMenuAction CNpc::npcNav(CMenu& menu)
 
 CNpc::CNpc(const std::string_view& objectName, const bool isFemale) : CGameStateObject(objectName), _female(isFemale)
 {
+}
+
+void CNpc::interact()
+{
+    int turnsNotSeen = CGameManagement::getProgressionInstance()->turns() - _lastSeen;
+    _lastSeen = CGameManagement::getProgressionInstance()->turns();
+    if (_sympathy <= 500)
+    {
+        return;
+    }
+    if (turnsNotSeen > 50)
+    {
+        int estrangement = CGameManagement::getPlayerInstance()->isSignificantOther(this) ? floor(turnsNotSeen * -0.03)
+                                                                                          : floor(turnsNotSeen * -0.01);
+        estrange(estrangement);
+    }
+    breakUp();
+    Console::confirmToContinue();
+}
+
+void CNpc::askOut()
+{
+    if (!isSignificantOther())
+    {
+        CGameManagement::getPlayerInstance()->setSignificantOther(this);
+    }
+}
+
+void CNpc::breakUp()
+{
+    if (isSignificantOther() && _sympathy < 500)
+    {
+        Console::printLn(coreTr(
+            "It was a wonderful time you had with {} but both of you feel, that it is time to part ways.", name()));
+        CGameManagement::getPlayerInstance()->setSignificantOther(nullptr);
+    }
 }
 
 bool CNpc::addSympathy(const int i)
@@ -64,15 +103,31 @@ std::string CNpc::hisHer() const
     return _female ? coreTr("her") : coreTr("his");
 }
 
+bool CNpc::isSignificantOther() const
+{
+    return CGameManagement::getPlayerInstance()->isSignificantOther(this);
+}
+
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)
 {
-
     auto talkActionString = coreTr("Talk to {}", CC::unColorizeString(name()));
     auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
+    auto askOutActionString = coreTr("Ask {} for a date", CC::unColorizeString(name()));
 
     auto talkAction = menu.createAction({talkActionString, 'T'});
     auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
-    menu.addMenuGroup({talkAction, thinkAboutAction});
+    auto askOutAction = menu.createAction({askOutActionString, 'A'});
+
+    CMenu::ActionList actions;
+    actions.push_back(talkAction);
+    actions.push_back(thinkAboutAction);
+
+    if (_sympathy > 750)
+    {
+        actions.push_back(askOutAction);
+    }
+
+    menu.addMenuGroup(actions);
 
     auto input = menu.execute();
 
@@ -92,4 +147,15 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
 std::string CNpc::translatorObjectName() const
 {
     return std::string(TagNames::Translator::npc);
+}
+
+void CNpc::estrange(const int i)
+{
+    Console::printLn(
+        coreTr("{} and you have not seen for each other for quite a while. You feel a little estranged", name()));
+    addSympathy(i);
+    if (_sympathy < 500)
+    {
+        _sympathy = 500;
+    }
 }

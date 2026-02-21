@@ -9,7 +9,7 @@ CKatNothingH::CKatNothingH() : CNpc(TagNames::RabbitHatch::kat, true)
 
 void CKatNothingH::interact()
 {
-
+    CNpc::interact();
     CMenuAction input;
     do
     {
@@ -17,9 +17,8 @@ void CKatNothingH::interact()
 
         CMenu menu(RabbitHatch::moduleName());
         auto appleAction = menu.createAction({"Give her an Apple", 'G'});
-        auto foodAction = menu.createAction({"Donate Rabbit food", 'D'});
 
-        menu.addMenuGroup({appleAction, foodAction}, {CMenu::exit()});
+        menu.addMenuGroup({appleAction}, {CMenu::exit()});
         input = CNpc::executeNpcMenu(menu);
 
     } while (input != CMenu::exit());
@@ -42,9 +41,9 @@ std::string CKatNothingH::describe() const
 {
     if (_sympathy > 75)
     {
-        return tr("{} s a friendly, really beautiful lady. She is an extraordinary {}cool{} "
-                  "and {}strong{} woman. She has beautiful brown eyes and a breathtaking. You could spend hoours and "
-                  "hours listening to her. Sometimes, you wish you where a rabbit.",
+        return tr("{} s a friendly, really beautiful lady. She is an extraordinaryly {}cool{} "
+                  "and {}strong{} woman. She has beautiful eyes and a breathtaking smile. She is smart and funny. You "
+                  "could spend hoours and hours listening to her. Sometimes, you even wish you where a rabbit.",
                   RabbitHatch::katNothingH(),
                   CC::fgCyan(),
                   CC::ccReset(),
@@ -54,9 +53,8 @@ std::string CKatNothingH::describe() const
 
     if (_sympathy > 75)
     {
-        return tr("{} s a nice woman, she is {}cool{} "
-                  "and {}strong{}, but her job as Head of the {} also adds some eco-hippie flare. You do not like her "
-                  "glasses.",
+        return tr("{} is a nice woman, she is {}cool{} and {}strong{}, but her job as Head of the {} also adds some "
+                  "eco-hippie flare. You do not like her glasses.",
                   RabbitHatch::katNothingH(),
                   CC::fgCyan(),
                   CC::ccReset(),
@@ -65,15 +63,19 @@ std::string CKatNothingH::describe() const
                   RabbitHatch::rabbitHatchName());
     }
 
-    return tr(
-        "{} s a friendly, pretty lady. she has a friendly, warm smile and seem to be an extraordinary {}cool{} "
-        "and {}strong{} woman. She is Head of the {} so, obviously, she likes Rabbits. and damn, she is really pretty!",
-        RabbitHatch::katNothingH(),
-        CC::fgCyan(),
-        CC::ccReset(),
-        CC::fgMagenta(),
-        CC::ccReset(),
-        RabbitHatch::rabbitHatchName());
+    return tr("{} s a friendly, pretty lady. she has a friendly, warm smile and seem to be an extraordinary {}cool{} "
+              "and {}strong{} woman. She is Head of the {} so, obviously, she likes Rabbits. and damn, she is really "
+              "pretty! Her {}B{}oo{}ts{} are uber-cool",
+              RabbitHatch::katNothingH(),
+              CC::fgCyan(),
+              CC::ccReset(),
+              CC::fgMagenta(),
+              CC::ccReset(),
+              RabbitHatch::rabbitHatchName(),
+              CC::fgGreen(),
+              CC::fgYellow(),
+              CC::fgLightYellow(),
+              CC::ccReset());
 }
 
 std::string CKatNothingH::translatorModuleName() const

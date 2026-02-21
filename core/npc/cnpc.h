@@ -12,7 +12,9 @@ class CNpc : public CGameStateObject
 public:
     CNpc(const std::string_view& objectName, const bool isFemale);
 
-    virtual void interact() = 0;
+    virtual void interact();
+    virtual void askOut();
+    virtual void breakUp();
     virtual void talk() = 0;
     virtual void thinkAbout() = 0;
 
@@ -32,6 +34,7 @@ public:
 
     std::string heShe() const;
     std::string hisHer() const;
+    bool isSignificantOther() const;
 
 protected:
     CMenuAction executeNpcMenu(CMenu& menu);
@@ -40,5 +43,8 @@ protected:
     int _sympathy = 500;
 
 private:
+    void estrange(const int i);
+
     bool _female;
+    unsigned int _lastSeen = 0;
 };
