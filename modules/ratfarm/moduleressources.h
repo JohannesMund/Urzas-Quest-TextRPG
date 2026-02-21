@@ -11,8 +11,9 @@ namespace TagNames
 {
 namespace RatFarm
 {
-constexpr std::string_view ratFarm = ("RatFarm");
-constexpr std::string_view turnip = ("Turnip");
+constexpr std::string_view ratFarm = "RatFarm";
+constexpr std::string_view turnip = "Turnip";
+constexpr std::string_view ratfarmEnconter = "RatfarmEncounter";
 constexpr std::string_view size = TagNames::Common::size;
 } // namespace RatFarm
 } // namespace TagNames

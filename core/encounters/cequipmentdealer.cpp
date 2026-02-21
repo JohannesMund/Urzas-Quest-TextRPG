@@ -111,3 +111,8 @@ std::string CEquipmentDealer::translatorModuleName() const
 {
     return std::string();
 }
+
+std::string CEquipmentDealer::translatorObjectName() const
+{
+    return std::string(TagNames::Translator::equipmentDealer);
+}

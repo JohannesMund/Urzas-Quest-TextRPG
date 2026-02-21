@@ -4,6 +4,15 @@
 
 #include <format>
 
+namespace
+{
+template <typename... Args>
+std::string tr(const std::string_view& textId, Args&&... formatArgs)
+{
+    return CTranslator::tr(RabbitHatch::moduleName(), TagNames::Translator::ressources, textId, formatArgs...);
+}
+} // namespace
+
 Module::ModuleInfo RabbitHatch::moduleInfo()
 {
 
@@ -48,4 +57,19 @@ std::string RabbitHatch::katNothingH()
 std::string RabbitHatch::rabbitHatchName()
 {
     return std::format("{}Rabbit {}Hatch{}", CC::fgLightGray(), CC::fgYellow(), CC::ccReset());
+}
+
+std::string RabbitHatch::apple()
+{
+    return tr("{}A{}pple{}", CC::fgLightYellow(), CC::fgRed(), CC::ccReset());
+}
+
+std::string RabbitHatch::katsBoots()
+{
+    return tr("{}B{}oo{}ts{}", CC::fgGreen(), CC::fgYellow(), CC::fgLightYellow(), CC::ccReset());
+}
+
+std::string RabbitHatch::coolAndStrong()
+{
+    return tr("{}cool{} and {}strong{}", CC::fgCyan(), CC::ccReset(), CC::fgMagenta(), CC::ccReset());
 }

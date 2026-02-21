@@ -25,7 +25,7 @@ public:
     virtual void askOut();
     virtual void breakUp();
     virtual void talk() = 0;
-    virtual void thinkAbout() = 0;
+    void thinkAbout();
 
     virtual std::string name() const = 0;
     virtual std::string describe() const = 0;
@@ -52,6 +52,8 @@ protected:
 
     virtual std::string translatorObjectName() const override;
     int _sympathy = 500;
+
+    virtual void printHeader(const bool bFull = true) const = 0;
 
 private:
     void estrange(const int i);

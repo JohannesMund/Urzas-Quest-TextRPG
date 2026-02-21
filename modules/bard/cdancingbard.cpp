@@ -79,3 +79,8 @@ std::string CDancingBard::translatorModuleName() const
 {
     return Bard::moduleName();
 }
+
+std::string CDancingBard::translatorObjectName() const
+{
+    return std::string(TagNames::dancingBard);
+}

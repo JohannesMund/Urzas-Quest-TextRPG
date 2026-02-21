@@ -88,3 +88,8 @@ std::string CDeadHero::translatorModuleName() const
 {
     return std::string();
 }
+
+std::string CDeadHero::translatorObjectName() const
+{
+    return std::string(TagNames::Translator::deadHero);
+}

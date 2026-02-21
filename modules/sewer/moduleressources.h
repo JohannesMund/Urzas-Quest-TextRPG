@@ -11,7 +11,9 @@ namespace TagNames
 namespace Sewer
 {
 constexpr std::string_view sewer = "sewer";
-}
+constexpr std::string_view sewerEncounter = "SewerEncounter";
+constexpr std::string_view sewerBattleEncounter = "SewerBattleEncounter";
+} // namespace Sewer
 } // namespace TagNames
 
 namespace Sewer

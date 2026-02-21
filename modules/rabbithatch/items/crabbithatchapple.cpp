@@ -7,7 +7,7 @@
 
 CRabbithatchApple::CRabbithatchApple() : CItem(TagNames::RabbitHatch::apple)
 {
-    _name = tr("{}A{}pple{}", CC::fgLightYellow(), CC::fgRed(), CC::ccReset());
+    _name = RabbitHatch::apple();
     _description = tr("A beautiful {}A{}pple{} just like the ones, {} described to you.",
                       CC::fgLightYellow(),
                       CC::fgRed(),

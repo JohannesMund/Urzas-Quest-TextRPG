@@ -19,6 +19,10 @@ constexpr std::string_view enemy = "Enemy";
 constexpr std::string_view equipment = "Equipment";
 constexpr std::string_view town = "Town";
 constexpr std::string_view npc = "NPC";
+constexpr std::string_view deadHero = "DeadHero";
+constexpr std::string_view equipmentDealer = "EquipmentDealer";
+constexpr std::string_view battle = "Battle";
+constexpr std::string_view mysteriousChest = "MysteriousChest";
 } // namespace Translator
 
 namespace Common

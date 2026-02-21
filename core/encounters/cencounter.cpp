@@ -32,8 +32,3 @@ bool CEncounter::canBeExecuted(const EEncounterType& type) const
     }
     return !(_isSingleExecution && _hasBeenExecuted);
 }
-
-std::string CEncounter::translatorObjectName() const
-{
-    return name();
-}

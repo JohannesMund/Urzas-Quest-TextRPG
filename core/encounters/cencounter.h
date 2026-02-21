@@ -97,7 +97,4 @@ protected:
      * An Or-Conjunction of EEncounterType values, used to determin in what context an encounter can occur,
      */
     unsigned int _type;
-
-private:
-    virtual std::string translatorObjectName() const;
 };

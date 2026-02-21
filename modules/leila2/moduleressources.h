@@ -11,6 +11,8 @@ namespace Leila2
 {
 constexpr std::string_view goblinVillage = "goblinVillage";
 constexpr std::string_view leilaCaptial = "leilaCapital";
+constexpr std::string_view leila2Encounter = "leila2Encounter";
+constexpr std::string_view leila2GoblinEncounter = "leilaGoblinEncounter";
 } // namespace Leila2
 } // namespace TagNames
 

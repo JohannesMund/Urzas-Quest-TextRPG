@@ -8,7 +8,6 @@ public:
 
     virtual void interact() override;
     virtual void talk() override;
-    virtual void thinkAbout() override;
 
     virtual std::string name() const override;
     virtual std::string describe() const override;
@@ -21,6 +20,7 @@ protected:
 
 private:
     void registerAppleEncounter();
+    void giveApple();
     bool _appleEncounterRegistered = false;
-    void printHeader();
+    void printHeader(const bool bFull = true) const override;
 };

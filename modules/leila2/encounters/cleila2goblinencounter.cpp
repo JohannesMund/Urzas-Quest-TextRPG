@@ -67,3 +67,8 @@ std::string CLeila2GoblinEncounter::translatorModuleName() const
 {
     return Leila2::moduleName();
 }
+
+std::string CLeila2GoblinEncounter::translatorObjectName() const
+{
+    return std::string(TagNames::Leila2::leila2GoblinEncounter);
+}

@@ -29,12 +29,12 @@ void CRabbitHatch::execute()
 
 std::string CRabbitHatch::bgColor() const
 {
-    return CC::bgLightYellow();
+    return CC::bgDarkGray();
 }
 
 std::string CRabbitHatch::fgColor() const
 {
-    return CC::fgLightGreen();
+    return CC::fgLightYellow();
 }
 
 std::string CRabbitHatch::translatorModuleName() const

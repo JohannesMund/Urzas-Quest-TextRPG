@@ -18,6 +18,15 @@ constexpr std::string_view rabbitFood = "RabbitFood";
 
 class CRoom;
 class CItem;
+
+namespace TagNames
+{
+namespace RabbitHatch
+{
+constexpr std::string_view appleEncounter = "AppleTree";
+}
+} // namespace TagNames
+
 namespace RabbitHatch
 {
 Module::ModuleInfo moduleInfo();
@@ -25,5 +34,8 @@ std::string moduleName();
 
 std::string katNothingH();
 std::string rabbitHatchName();
+std::string apple();
+std::string katsBoots();
+std::string coolAndStrong();
 
 } // namespace RabbitHatch

@@ -13,6 +13,9 @@ namespace Cave
 constexpr std::string_view cave = "Cave";
 constexpr std::string_view caveBoss = "CaveBoss";
 constexpr std::string_view openCave = "openCave";
+constexpr std::string_view caveEncounter = "CaveEncounter";
+constexpr std::string_view caveBattleEncounter = "CaveBattleEncounter";
+
 constexpr std::string_view isOpen = TagNames::Common::isOpen;
 } // namespace Cave
 } // namespace TagNames

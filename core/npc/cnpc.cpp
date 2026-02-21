@@ -51,6 +51,38 @@ void CNpc::breakUp()
     }
 }
 
+void CNpc::thinkAbout()
+{
+    if (isSignificantOther())
+    {
+        Console::printLn(coreTr("{} is your {}", name(), _female ? coreTr("girlfriend") : coreTr("boyfriend")));
+    }
+    Console::printLn(coreTr("Your sympathy level is: {}/1000", _sympathy));
+    switch (sympathy())
+    {
+    case ESympathyLevel::eNeutral:
+    default:
+        Console::printLn(coreTr("You do not care about each other much."));
+        break;
+    case ESympathyLevel::eLike:
+        Console::printLn(coreTr("You like each other."));
+        break;
+    case ESympathyLevel::eLove:
+        Console::printLn(coreTr("This is pure and honest love."));
+        break;
+    case ESympathyLevel::eDislike:
+        Console::printLn(coreTr("You do not like each other too much."));
+        break;
+    case ESympathyLevel::ehate:
+        Console::printLn(coreTr("Its.... complicated."));
+        break;
+    }
+    if (isDatable())
+    {
+        Console::printLn(coreTr("You really should consider dating."));
+    }
+}
+
 bool CNpc::addSympathy(const int i)
 {
     int originalSympathy = _sympathy;
@@ -168,6 +200,7 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
     menu.addMenuGroup(actions);
 
     auto input = menu.execute();
+    printHeader(false);
 
     if (input == talkAction)
     {

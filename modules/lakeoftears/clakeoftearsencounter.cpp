@@ -68,3 +68,8 @@ std::string CLakeOfTearsEncounter::translatorModuleName() const
 {
     return LakeOfTears::moduleName();
 }
+
+std::string CLakeOfTearsEncounter::translatorObjectName() const
+{
+    return std::string(TagNames::LakeOfTears::lakeOfTearsEncounter);
+}

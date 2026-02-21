@@ -12,7 +12,7 @@ std::string CTranslatable::tr(const std::string_view& textId) const
 
 std::string CTranslatable::getTranslatorModuleName() const
 {
-    const auto moduleName = translatorModuleName();
+    auto moduleName = translatorModuleName();
     if (moduleName.empty())
     {
         assert(!"Modulename is empty, Translations on Modulescope need a moduleName");
