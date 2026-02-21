@@ -1,6 +1,9 @@
 #include "crabbithatchapple.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
+#include "console.h"
 #include "rabbithatch/moduleressources.h"
+#include "randomizer.h"
 
 CRabbithatchApple::CRabbithatchApple() : CItem(TagNames::RabbitHatch::apple)
 {
@@ -10,6 +13,11 @@ CRabbithatchApple::CRabbithatchApple() : CItem(TagNames::RabbitHatch::apple)
                       CC::fgRed(),
                       CC::ccReset(),
                       RabbitHatch::katNothingH());
+
+    _isConsumable = true;
+    _isUsableFromInventory = true;
+    _isUsableFromBattle = true;
+    _isSellable = true;
 }
 
 void CRabbithatchApple::useFromInventory()
@@ -22,6 +30,11 @@ void CRabbithatchApple::useFromBattle(CEnemy*)
 {
     Console::printLn(tr("You should not have time for lunch in the middle of a fight, but maybe this helps."));
     use();
+}
+
+CItem::ItemFilter CRabbithatchApple::aopleFilter()
+{
+    return [](const CItem* item) { return dynamic_cast<const CRabbithatchApple*>(item) != nullptr; };
 }
 
 std::string CRabbithatchApple::translatorModuleName() const

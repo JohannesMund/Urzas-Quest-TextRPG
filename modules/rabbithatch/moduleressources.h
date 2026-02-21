@@ -12,6 +12,7 @@ namespace RabbitHatch
 constexpr std::string_view rabbitHatch = "RabbitHatch";
 constexpr std::string_view kat = "KatNothingH";
 constexpr std::string_view apple = "Apple";
+constexpr std::string_view rabbitFood = "RabbitFood";
 } // namespace RabbitHatch
 } // namespace TagNames
 

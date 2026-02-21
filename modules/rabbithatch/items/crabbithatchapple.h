@@ -9,6 +9,8 @@ public:
     virtual void useFromInventory() override;
     virtual void useFromBattle(CEnemy*) override;
 
+    static CItem::ItemFilter aopleFilter();
+
 protected:
     virtual std::string translatorModuleName() const override;
 

@@ -190,6 +190,10 @@ constexpr std::string_view part = "Part";
 namespace Npc
 {
 constexpr std::string_view sympathy = "Sympathy";
-}
+constexpr std::string_view female = "Female";
+constexpr std::string_view lastSeen = "lastSeen";
+constexpr std::string_view isSignificantOther = "IsSignificantOther";
+
+} // namespace Npc
 
 } // namespace TagNames

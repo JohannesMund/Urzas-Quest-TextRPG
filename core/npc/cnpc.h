@@ -10,6 +10,15 @@ class CMenu;
 class CNpc : public CGameStateObject
 {
 public:
+    enum class ESympathyLevel
+    {
+        ehate = 0,
+        eDislike = 1,
+        eNeutral = 2,
+        eLike = 3,
+        eLove = 4,
+    };
+
     CNpc(const std::string_view& objectName, const bool isFemale);
 
     virtual void interact();
@@ -35,6 +44,8 @@ public:
     std::string heShe() const;
     std::string hisHer() const;
     bool isSignificantOther() const;
+    ESympathyLevel sympathy() const;
+    bool isDatable() const;
 
 protected:
     CMenuAction executeNpcMenu(CMenu& menu);

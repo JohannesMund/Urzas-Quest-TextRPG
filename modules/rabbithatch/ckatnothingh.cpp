@@ -1,8 +1,10 @@
 #include "ckatnothingh.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
+#include "rabbithatch/encounters/crabbithatchappletree.h"
 #include "rabbithatch/moduleressources.h"
-#
+
 CKatNothingH::CKatNothingH() : CNpc(TagNames::RabbitHatch::kat, true)
 {
 }
@@ -26,6 +28,7 @@ void CKatNothingH::interact()
 
 void CKatNothingH::talk()
 {
+    registerAppleEncounter();
 }
 
 void CKatNothingH::thinkAbout()
@@ -78,9 +81,33 @@ std::string CKatNothingH::describe() const
               CC::ccReset());
 }
 
+nlohmann::json CKatNothingH::save() const
+{
+    nlohmann::json o;
+    o["appleEncounterRegistered"] = _appleEncounterRegistered;
+    return o;
+}
+
+void CKatNothingH::load(const nlohmann::json& json)
+{
+    if (json["appleEncounterRegistered"] == true)
+    {
+        registerAppleEncounter();
+    }
+}
+
 std::string CKatNothingH::translatorModuleName() const
 {
     return RabbitHatch::moduleName();
+}
+
+void CKatNothingH::registerAppleEncounter()
+{
+    if (!_appleEncounterRegistered)
+    {
+        CGameManagement::getInstance()->registerEncounter(new CRabbitHatchAppleTree(this));
+        _appleEncounterRegistered = true;
+    }
 }
 
 void CKatNothingH::printHeader()

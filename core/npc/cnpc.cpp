@@ -85,12 +85,23 @@ nlohmann::json CNpc::save() const
 {
     nlohmann::json o;
     o[TagNames::Npc::sympathy] = _sympathy;
+    o[TagNames::Npc::female] = _female;
+    o[TagNames::Npc::lastSeen] = _lastSeen;
+    o[TagNames::Npc::isSignificantOther] = isSignificantOther();
+
     return o;
 }
 
 void CNpc::load(const nlohmann::json& json)
 {
     _sympathy = json[TagNames::Npc::sympathy];
+    _female = json[TagNames::Npc::female];
+    _lastSeen = json[TagNames::Npc::lastSeen];
+
+    if (json[TagNames::Npc::isSignificantOther])
+    {
+        CGameManagement::getPlayerInstance()->setSignificantOther(this);
+    }
 }
 
 std::string CNpc::heShe() const
@@ -106,6 +117,33 @@ std::string CNpc::hisHer() const
 bool CNpc::isSignificantOther() const
 {
     return CGameManagement::getPlayerInstance()->isSignificantOther(this);
+}
+
+CNpc::ESympathyLevel CNpc::sympathy() const
+{
+    if (_sympathy > 800)
+    {
+        return ESympathyLevel::eLove;
+    }
+    if (_sympathy > 600)
+    {
+        return ESympathyLevel::eLike;
+    }
+    if (_sympathy > 400)
+    {
+        return ESympathyLevel::eNeutral;
+    }
+    if (_sympathy > 200)
+    {
+        return ESympathyLevel::eDislike;
+    }
+
+    return ESympathyLevel::ehate;
+}
+
+bool CNpc::isDatable() const
+{
+    return _sympathy > 700;
 }
 
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)
