@@ -3,7 +3,7 @@
 #include "console.h"
 #include "rabbithatch/moduleressources.h"
 
-CRabbitHatch::CRabbitHatch() : CRoom(TagNames::RabbitHatch::rabbitHatch)
+CRabbitHatch::CRabbitHatch() : CRoom(TagNames::RabbitHatch::rabbitHatch), _slasher(&_kat)
 {
     _showInFogOfWar = true;
 }
@@ -17,13 +17,22 @@ void CRabbitHatch::execute()
     {
         printHeader();
         CMenu menu(RabbitHatch::moduleName());
+
         auto npcAction = _kat.npcNav(menu);
-        menu.addMenuGroup({npcAction}, {CMenu::exit()});
+        auto slasherAction = _slasher.townModuleNav(menu);
+
+        menu.addMenuGroup({npcAction, slasherAction}, {CMenu::exit()});
         input = menu.execute();
         if (input == npcAction)
         {
             _kat.interact();
         }
+
+        if (input == slasherAction)
+        {
+            _slasher.execute();
+        }
+
     } while (input != CMenu::exit());
 }
 

@@ -10,6 +10,7 @@ class CFishRestaurant : public CTownModule
 public:
     CFishRestaurant();
     void execute() override;
+    virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
 protected:
     virtual std::string translatorModuleName() const override;

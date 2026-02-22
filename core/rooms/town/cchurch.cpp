@@ -35,3 +35,8 @@ void CChurch::execute()
 
     } while (input != CMenu::exit());
 }
+
+CMenuAction CChurch::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Church"});
+}

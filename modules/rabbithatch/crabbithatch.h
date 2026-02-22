@@ -2,6 +2,7 @@
 
 #include "ckatnothingh.h"
 #include "croom.h"
+#include "town/slasher.h"
 
 class CRabbitHatch : public CRoom
 {
@@ -25,4 +26,5 @@ private:
     virtual void printHeader() const;
 
     CKatNothingH _kat;
+    CSlasher _slasher;
 };

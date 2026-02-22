@@ -50,6 +50,11 @@ void CGoFishing::execute()
     } while (input != CMenu::exit());
 }
 
+CMenuAction CGoFishing::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Go Fishing", 'G'});
+}
+
 std::string CGoFishing::translatorModuleName() const
 {
     return FishingVillageFishLegend::moduleName();

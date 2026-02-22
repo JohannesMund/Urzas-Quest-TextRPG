@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-CMenuAction CNpc::npcNav(CMenu& menu)
+CMenuAction CNpc::npcNav(CMenu& menu) const
 {
     return menu.createAction({CC::unColorizeString(name())}, false);
 }

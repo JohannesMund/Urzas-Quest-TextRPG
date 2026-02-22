@@ -11,7 +11,8 @@ class CShop : public CTownModule
 public:
     CShop();
     ~CShop();
-    void execute();
+    virtual void execute() override;
+    virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
 private:
     void sellJunk(CInventory::JunkItemList& junkItems);

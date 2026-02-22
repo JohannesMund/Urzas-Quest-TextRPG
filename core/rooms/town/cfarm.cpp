@@ -61,6 +61,11 @@ void CFarm::execute()
     } while (input != CMenu::exit());
 }
 
+CMenuAction CFarm::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Farm"});
+}
+
 void CFarm::train()
 {
     Console::printLn(coreTr("The farmer disappears with {} for a while and comes back. your {} looks different!",

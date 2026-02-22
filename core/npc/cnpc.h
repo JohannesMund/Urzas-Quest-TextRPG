@@ -30,7 +30,7 @@ public:
     virtual std::string name() const = 0;
     virtual std::string describe() const = 0;
 
-    virtual CMenuAction npcNav(CMenu& menu);
+    virtual CMenuAction npcNav(CMenu& menu) const;
     bool addSympathy(const int i);
 
     nlohmann::json save() const override;

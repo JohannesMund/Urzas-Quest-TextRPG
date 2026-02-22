@@ -84,6 +84,11 @@ void CShop::execute()
     } while (input != CMenu::exit());
 }
 
+CMenuAction CShop::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Shop"});
+}
+
 void CShop::sellJunk(CInventory::JunkItemList& junkItems)
 {
     for (auto j : junkItems)

@@ -33,9 +33,9 @@ void CFishingVillage::execute()
     {
         CMenu menu(FishingVillageMakeRod::moduleName());
 
-        CMenuAction fritzAction = menu.createAction({CC::unColorizeString(Ressources::Game::fishingFritz()), 'f'});
-        CMenuAction restaurantAction = menu.createAction({"Restaurant", 'R'});
-        CMenuAction fishingAction = menu.createAction({"Go Fishing", 'G'});
+        CMenuAction fritzAction = _fishingFritz.townModuleNav(menu);
+        CMenuAction restaurantAction = _fishRestaurant.townModuleNav(menu);
+        CMenuAction fishingAction = _goFishing.townModuleNav(menu);
 
         menu.addMenuGroup({fritzAction, restaurantAction, fishingAction});
 

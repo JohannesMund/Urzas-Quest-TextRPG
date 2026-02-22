@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cgamestateobject.h"
+#include "cmenu.h"
 
 #include <string>
 
@@ -12,6 +13,8 @@ public:
 
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json&) override;
+
+    virtual CMenuAction townModuleNav(CMenu& menu) const = 0;
 
 protected:
     virtual std::string translatorObjectName() const override;

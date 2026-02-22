@@ -10,6 +10,7 @@ class CFishingFritz : public CTownModule
 public:
     CFishingFritz();
     void execute() override;
+    virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json& o) override;

@@ -56,6 +56,11 @@ void CTavern::execute()
     } while (input != CMenu::exit());
 }
 
+CMenuAction CTavern::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Tavern"});
+}
+
 void CTavern::bountyHunt()
 {
     Console::printLn(

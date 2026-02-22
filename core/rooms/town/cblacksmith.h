@@ -8,6 +8,8 @@ public:
     CBlackSmith();
     virtual void execute() override;
 
+    virtual CMenuAction townModuleNav(CMenu& menu) const override;
+
 private:
     void enhanceItem();
 };

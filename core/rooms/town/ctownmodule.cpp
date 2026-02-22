@@ -24,6 +24,11 @@ void CTownModule::load(const nlohmann::json&)
 {
 }
 
+CMenuAction CTownModule::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Blacksmith"});
+}
+
 CTownModule::CTownModule(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }

@@ -34,6 +34,11 @@ void CBlackSmith::execute()
     } while (input != CMenu::exit());
 }
 
+CMenuAction CBlackSmith::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Blacksmith"});
+}
+
 void CBlackSmith::enhanceItem()
 {
     auto items = CGameManagement::getInventoryInstance()->getEnhancableEquipment();

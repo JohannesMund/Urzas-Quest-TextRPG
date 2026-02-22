@@ -6,7 +6,7 @@ class CRabbithatchFood : public CItem
 {
 public:
     CRabbithatchFood();
-    static CItem::ItemFilter fishFilter();
+    static CItem::ItemFilter rabbitFoodFilter();
 
 protected:
     virtual std::string translatorModuleName() const override;

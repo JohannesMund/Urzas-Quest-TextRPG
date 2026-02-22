@@ -82,6 +82,11 @@ void CFishingFritz::execute()
     } while (input != CMenu::exit());
 }
 
+CMenuAction CFishingFritz::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({CC::unColorizeString(Ressources::Game::fishingFritz()), 'f'});
+}
+
 nlohmann::json CFishingFritz::save() const
 {
     nlohmann::json o;
