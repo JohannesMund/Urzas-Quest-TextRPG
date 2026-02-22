@@ -1,29 +1,29 @@
-#include "crabbithatchappletree.h"
+#include "cappletree.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "console.h"
-#include "rabbithatch/ckatnothingh.h"
-#include "rabbithatch/items/crabbithatchapple.h"
-#include "rabbithatch/moduleressources.h"
+#include "rabbitfarm/ckatnothingh.h"
+#include "rabbitfarm/items/capple.h"
+#include "rabbitfarm/moduleressources.h"
 
-CRabbitHatchAppleTree::CRabbitHatchAppleTree(CKatNothingH* kat) : _kat(kat)
+CAppleTree::CAppleTree(CKatNothingH* kat) : _kat(kat)
 {
     _isSingleExecution = false;
     _type = CEncounter::eField;
 }
 
-void CRabbitHatchAppleTree::execute(const std::string_view&)
+void CAppleTree::execute(const std::string_view&)
 {
     CEncounter::execute();
     Console::br();
     Console::printLn(tr("This is one huge {0} tree. It is huge, majestic and full of beautiful {0}s. The {0}s look "
                         "ripe, fresh and juicy.",
-                        RabbitHatch::apple()));
+                        RabbitFarm::apple()));
     if (_kat->isSignificantOther())
     {
         Console::printLn(tr("You cannot help to think about your girlfried {}. She loves {}s. You should get her one.",
                             _kat->name(),
-                            RabbitHatch::apple()));
+                            RabbitFarm::apple()));
     }
     else
     {
@@ -38,18 +38,18 @@ void CRabbitHatchAppleTree::execute(const std::string_view&)
             Console::printLn(
                 tr("You remember {}. she is a relly nice lady, and she likes {}s. Maybe you can get one for her?",
                    _kat->name(),
-                   RabbitHatch::apple()));
+                   RabbitFarm::apple()));
         }
         else
         {
             Console::printLn(tr("You start thinking, wasn't there this rabbit lady? {} or whatever was their name? "
                                 "Didn't she tell you about {}s?",
                                 _kat->name(),
-                                RabbitHatch::apple()));
+                                RabbitFarm::apple()));
         }
     }
     Console::br();
-    CMenu menu(RabbitHatch::moduleName());
+    CMenu menu(RabbitFarm::moduleName());
     CMenuAction pickAction = menu.createAction({"Pick an Apple", 'P'});
 
     menu.addMenuGroup({pickAction}, {CMenu::exit()});
@@ -58,7 +58,7 @@ void CRabbitHatchAppleTree::execute(const std::string_view&)
     {
         if (_kat->isSignificantOther())
         {
-            Console::printLn(tr("You pick an {} for {}. She will love it.", RabbitHatch::apple(), _kat->name()));
+            Console::printLn(tr("You pick an {} for {}. She will love it.", RabbitFarm::apple(), _kat->name()));
         }
         else
         {
@@ -66,44 +66,44 @@ void CRabbitHatchAppleTree::execute(const std::string_view&)
             {
                 Console::printLn(tr("You select an extra beautiful, extra juicy {} for {}. You hope she will like it. "
                                     "You imagine her smile and her beautiful eyes, when you give it to her.",
-                                    RabbitHatch::apple(),
+                                    RabbitFarm::apple(),
                                     _kat->name()));
             }
             else
             {
-                Console::printLn(tr("An {} for the rabbit lady. She will like it", RabbitHatch::apple()));
+                Console::printLn(tr("An {} for the rabbit lady. She will like it", RabbitFarm::apple()));
             }
         }
-        CGameManagement::getInventoryInstance()->addItem(new CRabbithatchApple);
+        CGameManagement::getInventoryInstance()->addItem(new CApple);
     }
     else
     {
         Console::printLn(tr("{0}s are over estimated. And your pockets are full enough even without a rotting {0}",
-                            RabbitHatch::apple()));
+                            RabbitFarm::apple()));
     }
 }
 
-unsigned int CRabbitHatchAppleTree::encounterChance(const EEncounterType&, const std::string_view&) const
+unsigned int CAppleTree::encounterChance(const EEncounterType&, const std::string_view&) const
 {
     return 5;
 }
 
-std::string CRabbitHatchAppleTree::name() const
+std::string CAppleTree::name() const
 {
     return tr("Apple tree");
 }
 
-std::string CRabbitHatchAppleTree::moduleName() const
+std::string CAppleTree::moduleName() const
 {
-    return RabbitHatch::moduleName();
+    return RabbitFarm::moduleName();
 }
 
-std::string CRabbitHatchAppleTree::translatorModuleName() const
+std::string CAppleTree::translatorModuleName() const
 {
-    return RabbitHatch::moduleName();
+    return RabbitFarm::moduleName();
 }
 
-std::string CRabbitHatchAppleTree::translatorObjectName() const
+std::string CAppleTree::translatorObjectName() const
 {
-    return std::string(TagNames::RabbitHatch::appleEncounter);
+    return std::string(TagNames::RabbitFarm::appleEncounter);
 }

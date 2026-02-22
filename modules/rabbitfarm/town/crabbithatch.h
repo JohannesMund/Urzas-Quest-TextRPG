@@ -1,15 +1,16 @@
 #pragma once
 
 #include "ctownmodule.h"
-#include "rabbithatch/moduleressources.h"
+#include "rabbitfarm/moduleressources.h"
 
 #include <string>
 
 class CKatNothingH;
-class CSlasher : public CTownModule
+class CRabbit;
+class CRabbitHatch : public CTownModule
 {
 public:
-    CSlasher(CKatNothingH* kat);
+    CRabbitHatch(CKatNothingH* kat);
     void execute() override;
     virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
@@ -18,12 +19,11 @@ protected:
     virtual std::string translatorObjectName() const override;
 
 private:
-    void eat();
+    void donate();
+    void watch();
+    void talk();
     void deliverRabbit();
-    void ask();
-
-    void makeDishOfTheDay();
 
     CKatNothingH* _kat;
-    std::string _dishOfTheDay;
+    std::map<int, CRabbit*> _rabbits;
 };

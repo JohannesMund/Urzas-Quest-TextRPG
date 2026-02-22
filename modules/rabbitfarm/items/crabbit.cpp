@@ -1,10 +1,10 @@
 #include "crabbit.h"
 
-#include "rabbithatch/moduleressources.h"
+#include "rabbitfarm/moduleressources.h"
 
-CRabbit::CRabbit(const unsigned int uniqueId) : CItem(TagNames::RabbitHatch::rabbit), _uniqueId(uniqueId)
+CRabbit::CRabbit(const unsigned int uniqueId) : CItem(TagNames::RabbitFarm::rabbit), _uniqueId(uniqueId)
 {
-    _name = RabbitHatch::makeRabbitName();
+    _name = RabbitFarm::makeRabbitName();
     _description = tr("One particularly unique, rare Rabbit.");
 
     _isConsumable = false;
@@ -25,5 +25,5 @@ unsigned int CRabbit::uniqueId() const
 
 std::string CRabbit::translatorModuleName() const
 {
-    return RabbitHatch::moduleName();
+    return RabbitFarm::moduleName();
 }

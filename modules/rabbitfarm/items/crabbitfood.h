@@ -2,10 +2,10 @@
 
 #include <citem.h>
 
-class CRabbithatchFood : public CItem
+class CRabbitFood : public CItem
 {
 public:
-    CRabbithatchFood();
+    CRabbitFood();
     static CItem::ItemFilter rabbitFoodFilter();
 
 protected:

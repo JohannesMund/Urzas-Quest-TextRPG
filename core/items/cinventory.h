@@ -46,6 +46,8 @@ public:
     void removeItem(const std::string& name);
     void removeItem(CItem::ItemFilter filter);
 
+    std::optional<CItem*> takeItem(CItem* item);
+
     void print(const Scope& scope = Scope::eNone);
 
     ItemList getItemsWithBattleEffect() const;

@@ -1,18 +1,18 @@
-#include "crabbithatchapple.h"
+#include "capple.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
-#include "rabbithatch/moduleressources.h"
+#include "rabbitfarm/moduleressources.h"
 #include "randomizer.h"
 
-CRabbithatchApple::CRabbithatchApple() : CItem(TagNames::RabbitHatch::apple)
+CApple::CApple() : CItem(TagNames::RabbitFarm::apple)
 {
-    _name = RabbitHatch::apple();
+    _name = RabbitFarm::apple();
     _description = tr("A beautiful {}A{}pple{} just like the ones, {} described to you.",
                       CC::fgLightYellow(),
                       CC::fgRed(),
                       CC::ccReset(),
-                      RabbitHatch::katNothingH());
+                      RabbitFarm::katNothingH());
 
     _isConsumable = true;
     _isUsableFromInventory = true;
@@ -20,29 +20,29 @@ CRabbithatchApple::CRabbithatchApple() : CItem(TagNames::RabbitHatch::apple)
     _isSellable = true;
 }
 
-void CRabbithatchApple::useFromInventory()
+void CApple::useFromInventory()
 {
     Console::printLn(tr("You are a little hungry, so let's eat"));
     use();
 }
 
-void CRabbithatchApple::useFromBattle(CEnemy*)
+void CApple::useFromBattle(CEnemy*)
 {
     Console::printLn(tr("You should not have time for lunch in the middle of a fight, but maybe this helps."));
     use();
 }
 
-CItem::ItemFilter CRabbithatchApple::aopleFilter()
+CItem::ItemFilter CApple::aopleFilter()
 {
-    return [](const CItem* item) { return dynamic_cast<const CRabbithatchApple*>(item) != nullptr; };
+    return [](const CItem* item) { return dynamic_cast<const CApple*>(item) != nullptr; };
 }
 
-std::string CRabbithatchApple::translatorModuleName() const
+std::string CApple::translatorModuleName() const
 {
-    return std::string(RabbitHatch::moduleName());
+    return std::string(RabbitFarm::moduleName());
 }
 
-void CRabbithatchApple::use()
+void CApple::use()
 {
     Console::printLn(tr("This is delicious. Sweet, refreshing, revitalizing"));
     CGameManagement::getPlayerInstance()->addHp(Randomizer::getRandom(3) + 1);

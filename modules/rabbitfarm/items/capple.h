@@ -2,10 +2,10 @@
 
 #include <citem.h>
 
-class CRabbithatchApple : public CItem
+class CApple : public CItem
 {
 public:
-    CRabbithatchApple();
+    CApple();
     virtual void useFromInventory() override;
     virtual void useFromBattle(CEnemy*) override;
 

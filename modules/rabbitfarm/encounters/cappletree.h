@@ -3,10 +3,10 @@
 #include "cencounter.h"
 
 class CKatNothingH;
-class CRabbitHatchAppleTree : public CEncounter
+class CAppleTree : public CEncounter
 {
 public:
-    CRabbitHatchAppleTree(CKatNothingH* kat);
+    CAppleTree(CKatNothingH* kat);
 
     virtual void execute(const std::string_view& moduleName = {}) override;
     virtual unsigned int encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const override;

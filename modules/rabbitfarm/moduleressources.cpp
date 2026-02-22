@@ -1,6 +1,6 @@
 #include "moduleressources.h"
 #include "colorize.h"
-#include "rabbithatch/crabbithatch.h"
+#include "rabbitfarm/crabbitfarm.h"
 #include "randomizer.h"
 
 #include <format>
@@ -10,18 +10,17 @@ namespace
 template <typename... Args>
 std::string tr(const std::string_view& textId, Args&&... formatArgs)
 {
-    return CTranslator::tr(RabbitHatch::moduleName(), TagNames::Translator::ressources, textId, formatArgs...);
+    return CTranslator::tr(RabbitFarm::moduleName(), TagNames::Translator::ressources, textId, formatArgs...);
 }
 } // namespace
 
-Module::ModuleInfo RabbitHatch::moduleInfo()
+Module::ModuleInfo RabbitFarm::moduleInfo()
 {
-
     const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
     {
-        if (TagNames::RabbitHatch::rabbitHatch.compare(objectName) == 0)
+        if (TagNames::RabbitFarm::rabbitFarm.compare(objectName) == 0)
         {
-            return new CRabbitHatch();
+            return new CRabbitFarm();
         }
         return nullptr;
     };
@@ -29,17 +28,17 @@ Module::ModuleInfo RabbitHatch::moduleInfo()
     Module::ModuleInfo moduleInfo = Module::ModuleInfo();
 
     moduleInfo.moduleName = moduleName();
-    moduleInfo.translatorFile = "rabbithatch";
+    moduleInfo.translatorFile = "rabbitfarm";
     moduleInfo.gameStage = Module::EGameStage::eNone;
 
     moduleInfo.roomFactory = roomFactory;
 
-    moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CRabbitHatch()); };
+    moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CRabbitFarm()); };
 
     return moduleInfo;
 }
 
-std::string RabbitHatch::makeRabbitName()
+std::string RabbitFarm::makeRabbitName()
 {
     bool secondColor = (Randomizer::getRandom(3) == 1);
     bool thirdColor = (secondColor && (Randomizer::getRandom(5) == 1));
@@ -89,12 +88,12 @@ std::string RabbitHatch::makeRabbitName()
     return s;
 }
 
-std::string RabbitHatch::moduleName()
+std::string RabbitFarm::moduleName()
 {
-    return "RabbitHatch";
+    return std::string(TagNames::RabbitFarm::rabbitFarm);
 }
 
-std::string RabbitHatch::katNothingH()
+std::string RabbitFarm::katNothingH()
 {
     return std::format("{}K{}a{}t {}Nothing{}H{}",
                        CC::fgGreen(),
@@ -105,33 +104,33 @@ std::string RabbitHatch::katNothingH()
                        CC::ccReset());
 }
 
-std::string RabbitHatch::rabbitHatchName()
+std::string RabbitFarm::rabbitHatchName()
 {
     return std::format("{}Rabbit {}Hatch{}", CC::fgLightGray(), CC::fgYellow(), CC::ccReset());
 }
 
-std::string RabbitHatch::apple()
+std::string RabbitFarm::apple()
 {
     return tr("{}A{}pple{}", CC::fgLightYellow(), CC::fgRed(), CC::ccReset());
 }
 
-std::string RabbitHatch::katsBoots()
+std::string RabbitFarm::katsBoots()
 {
     return tr("{}B{}oo{}ts{}", CC::fgGreen(), CC::fgYellow(), CC::fgLightYellow(), CC::ccReset());
 }
 
-std::string RabbitHatch::coolAndStrong()
+std::string RabbitFarm::coolAndStrong()
 {
     return tr("{}cool{} and {}strong{}", CC::fgCyan(), CC::ccReset(), CC::fgMagenta(), CC::ccReset());
 }
 
-std::string RabbitHatch::slasher()
+std::string RabbitFarm::slasher()
 {
     return tr(
         "{0}R{1}abbit {2}S{1}linging {0}S{1}lasher{3}", CC::fgRed(), CC::fgBlack(), CC::fgMagenta(), CC::ccReset());
 }
 
-int RabbitHatch::rabbitRoastPrice()
+int RabbitFarm::rabbitRoastPrice()
 {
     return 1500;
 }

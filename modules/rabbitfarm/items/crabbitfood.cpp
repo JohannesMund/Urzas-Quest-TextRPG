@@ -1,9 +1,9 @@
-#include "crabbithatchfood.h"
+#include "crabbitfood.h"
+#include "capple.h"
 #include "colorize.h"
-#include "crabbithatchapple.h"
-#include "rabbithatch/moduleressources.h"
+#include "rabbitfarm/moduleressources.h"
 
-CRabbithatchFood::CRabbithatchFood() : CItem(TagNames::RabbitHatch::rabbitFood)
+CRabbitFood::CRabbitFood() : CItem(TagNames::RabbitFarm::rabbitFood)
 {
     _name = tr("{}Rabbit{} food{}", CC::fgLightGreen(), CC::fgGreen(), CC::ccReset());
     _description = tr("A Bag full of greens. Grass, a lot of clover (is there a four leaved one?) some herbs. A nice "
@@ -15,12 +15,12 @@ CRabbithatchFood::CRabbithatchFood() : CItem(TagNames::RabbitHatch::rabbitFood)
     _isSellable = false;
 }
 
-std::string CRabbithatchFood::translatorModuleName() const
+std::string CRabbitFood::translatorModuleName() const
 {
-    return std::string(RabbitHatch::moduleName());
+    return std::string(RabbitFarm::moduleName());
 }
 
-CItem::ItemFilter CRabbithatchFood::rabbitFoodFilter()
+CItem::ItemFilter CRabbitFood::rabbitFoodFilter()
 {
-    return [](const CItem* item) { return dynamic_cast<const CRabbithatchFood*>(item) != nullptr; };
+    return [](const CItem* item) { return dynamic_cast<const CRabbitFood*>(item) != nullptr; };
 }

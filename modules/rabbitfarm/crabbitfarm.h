@@ -2,13 +2,14 @@
 
 #include "ckatnothingh.h"
 #include "croom.h"
-#include "town/slasher.h"
+#include "town/crabbithatch.h"
+#include "town/cslasher.h"
 
-class CRabbitHatch : public CRoom
+class CRabbitFarm : public CRoom
 {
 
 public:
-    CRabbitHatch();
+    CRabbitFarm();
 
     virtual void execute() override;
 
@@ -27,4 +28,5 @@ private:
 
     CKatNothingH _kat;
     CSlasher _slasher;
+    CRabbitHatch _rabbitHatch;
 };
