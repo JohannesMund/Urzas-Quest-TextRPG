@@ -77,7 +77,6 @@ char CRabbitFarm::getMapSymbol() const
 void CRabbitFarm::printHeader() const
 {
     Console::cls();
-
     Console::printLn(RabbitFarm::rabbitFarmName(), Console::EAlignment::eCenter);
     Console::br();
     Console::printLn(tr("This is a nice place. A cozy farm, old, rusitc, romantic. A lot of rabbits hopping around, "
