@@ -1,9 +1,13 @@
 #include "crabbitmap.h"
 
+#include "cinventory.h"
 #include "console.h"
 #include "rabbitfarm/items/crabbit.h"
+#include "randomizer.h"
 
 #include <format>
+#include <nlohmann/json.hpp>
+#include <ranges>
 
 CRabbitMap::CRabbitMap()
 {
@@ -72,6 +76,16 @@ void CRabbitMap::add(CRabbit* rabbit)
     }
 }
 
+int CRabbitMap::getRandomFreeIndex() const
+{
+    std::vector<int> freeIds;
+    for (const auto& r : _rabbits | std::views::filter([](const auto p) { return p.second == nullptr; }))
+    {
+        freeIds.push_back(r.first);
+    }
+    return Randomizer::getRandomEntry(freeIds);
+}
+
 int CRabbitMap::min()
 {
     return 1;
@@ -85,4 +99,30 @@ int CRabbitMap::max()
 bool CRabbitMap::inRange(const int i)
 {
     return i >= min() && i <= 151;
+}
+
+nlohmann::json CRabbitMap::save() const
+{
+    auto o = nlohmann::json::array();
+    for (const auto& r : _rabbits)
+    {
+        if (r.second != nullptr)
+        {
+            o.push_back(r.second->save());
+        }
+    }
+    return o;
+}
+
+void CRabbitMap::load(const nlohmann::json& json)
+{
+    for (auto o : json)
+    {
+        auto it = CItemFactory::loadItemFromSavGame(o);
+        auto rabbit = static_cast<CRabbit*>(it);
+        if (rabbit != nullptr)
+        {
+            _rabbits[rabbit->uniqueId()] = rabbit;
+        }
+    }
 }

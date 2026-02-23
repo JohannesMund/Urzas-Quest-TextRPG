@@ -12,11 +12,11 @@ public:
     void roast();
     bool isRoasted() const;
 
-protected:
-    virtual std::string translatorModuleName() const override;
-
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 
 private:
     unsigned int _uniqueId;
