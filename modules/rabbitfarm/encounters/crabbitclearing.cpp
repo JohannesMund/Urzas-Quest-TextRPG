@@ -101,11 +101,6 @@ std::string CRabbitClearing::moduleName() const
     return RabbitFarm::moduleName();
 }
 
-std::string CRabbitClearing::translatorModuleName() const
-{
-    return RabbitFarm::moduleName();
-}
-
 std::string CRabbitClearing::translatorObjectName() const
 {
     return std::string(TagNames::RabbitFarm::rabbitClearingEncounter);

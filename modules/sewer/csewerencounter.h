@@ -14,6 +14,5 @@ public:
     virtual bool canBeExecuted(const EEncounterType& tp) const override;
 
 protected:
-    virtual std::string translatorModuleName() const override;
     virtual std::string translatorObjectName() const override;
 };

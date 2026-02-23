@@ -65,6 +65,14 @@ public:
     virtual std::string moduleName() const;
 
     /**
+     * @brief translatorModuleName
+     * override from CTranslatable
+     * overwrite to use a different modulename for translation
+     * @return moduleName
+     */
+    virtual std::string translatorModuleName() const override;
+
+    /**
      * @brief nameFilter
      * @param name
      * @return a name filter function to be used in std containers

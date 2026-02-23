@@ -82,11 +82,6 @@ bool CSewerEncounter::canBeExecuted(const EEncounterType& tp) const
     return false;
 }
 
-std::string CSewerEncounter::translatorModuleName() const
-{
-    return Sewer::moduleName();
-}
-
 std::string CSewerEncounter::translatorObjectName() const
 {
     return std::string(TagNames::Sewer::sewerEncounter);
