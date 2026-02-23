@@ -18,6 +18,11 @@ constexpr std::string_view ressources = "Ressources";
 constexpr std::string_view enemy = "Enemy";
 constexpr std::string_view equipment = "Equipment";
 constexpr std::string_view town = "Town";
+constexpr std::string_view npc = "NPC";
+constexpr std::string_view deadHero = "DeadHero";
+constexpr std::string_view equipmentDealer = "EquipmentDealer";
+constexpr std::string_view battle = "Battle";
+constexpr std::string_view mysteriousChest = "MysteriousChest";
 } // namespace Translator
 
 namespace Common
@@ -138,6 +143,15 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 constexpr std::string_view petIsDead = "PetIsDead";
 } // namespace Room
 
+namespace TownModule
+{
+constexpr std::string_view blacksmith = "BlackSmith";
+constexpr std::string_view church = "Church";
+constexpr std::string_view farm = "Farm";
+constexpr std::string_view shop = "Shop";
+constexpr std::string_view tavern = "Tavern";
+} // namespace TownModule
+
 namespace Task
 {
 constexpr std::string_view task = "Task";
@@ -151,6 +165,7 @@ constexpr std::string_view name = TagNames::Common::name;
 namespace Item
 {
 constexpr std::string_view item = "Item";
+
 namespace Equipment
 {
 constexpr std::string_view armor = "Armor";
@@ -158,13 +173,14 @@ constexpr std::string_view equipment = "Equipment";
 constexpr std::string_view shield = "Shield";
 constexpr std::string_view weapon = "Weapon";
 } // namespace Equipment
+
 namespace Story
 {
 constexpr std::string_view laylasRibbon = "LaylasRibbon";
 constexpr std::string_view shaggysSandwich = "ShaggysSandwich";
 constexpr std::string_view urzasGlasses = "UrzasGlasses";
-
 } // namespace Story
+
 constexpr std::string_view inventory = "Inventory";
 constexpr std::string_view bomb = "Bomb";
 constexpr std::string_view healingPotion = "HealingPotion";
@@ -174,5 +190,14 @@ constexpr std::string_view phoenixFeather = "PhoenixFeather";
 constexpr std::string_view sandwich = "Sandwich";
 constexpr std::string_view part = "Part";
 } // namespace Item
+
+namespace Npc
+{
+constexpr std::string_view sympathy = "Sympathy";
+constexpr std::string_view female = "Female";
+constexpr std::string_view lastSeen = "lastSeen";
+constexpr std::string_view isSignificantOther = "IsSignificantOther";
+
+} // namespace Npc
 
 } // namespace TagNames

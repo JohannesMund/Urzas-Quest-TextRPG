@@ -1,15 +1,16 @@
 #pragma once
 
-#include "ctranslatable.h"
+#include "ctownmodule.h"
 
 class CFishingRod;
 class CEquipment;
-class CGoFishing : public CTranslatable
+class CGoFishing : public CTownModule
 {
 public:
     CGoFishing();
 
-    void execute();
+    void execute() override;
+    virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
 protected:
     virtual std::string translatorModuleName() const override;

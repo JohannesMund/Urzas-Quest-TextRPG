@@ -50,3 +50,8 @@ std::string COpenCaveEncounter::translatorModuleName() const
 {
     return Cave::moduleName();
 }
+
+std::string COpenCaveEncounter::translatorObjectName() const
+{
+    return std::string(TagNames::Cave::caveEncounter);
+}

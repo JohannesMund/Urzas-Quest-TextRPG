@@ -15,6 +15,20 @@ std::string CTownModule::translatorModuleName() const
     return std::string(TagNames::Translator::core);
 }
 
-CTownModule::CTownModule()
+nlohmann::json CTownModule::save() const
+{
+    return nlohmann::json();
+}
+
+void CTownModule::load(const nlohmann::json&)
+{
+}
+
+CMenuAction CTownModule::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Blacksmith"});
+}
+
+CTownModule::CTownModule(const std::string_view& objectName) : CGameStateObject(objectName)
 {
 }

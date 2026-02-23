@@ -93,3 +93,8 @@ std::string CMysteriousChest::translatorModuleName() const
 {
     return std::string();
 }
+
+std::string CMysteriousChest::translatorObjectName() const
+{
+    return std::string(TagNames::Translator::mysteriousChest);
+}

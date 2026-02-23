@@ -2,6 +2,7 @@
 #include "cequipment.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
+#include "cnpc.h"
 #include "colorize.h"
 #include "console.h"
 #include "moduleressources.h"
@@ -252,6 +253,12 @@ void CShrineOfTheAncients::stats() const
     }
 
     progressString.append("]");
+
+    if (CGameManagement::getPlayerInstance()->hasSignificantOther())
+    {
+        Console::printLn(
+            tr("You share your adventures with {}", CGameManagement::getPlayerInstance()->signigicantOther()->name()));
+    }
 
     Console::printLnWithSpacer("Progress:", progressString);
     Console::printLnWithSpacer("Body count:",

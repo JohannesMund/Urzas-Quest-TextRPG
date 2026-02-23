@@ -8,7 +8,7 @@
 
 #include <vector>
 
-CFishRestaurant::CFishRestaurant()
+CFishRestaurant::CFishRestaurant() : CTownModule(TagNames::FishingVille::fishRestaurant)
 {
 }
 
@@ -54,6 +54,11 @@ void CFishRestaurant::execute()
         }
 
     } while (input != CMenu::exit());
+}
+
+CMenuAction CFishRestaurant::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Restaurant", 'R'});
 }
 
 std::string CFishRestaurant::translatorModuleName() const

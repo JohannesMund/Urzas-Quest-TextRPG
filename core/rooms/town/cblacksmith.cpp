@@ -4,7 +4,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CBlackSmith::CBlackSmith()
+CBlackSmith::CBlackSmith() : CTownModule(TagNames::TownModule::blacksmith)
 {
 }
 
@@ -32,6 +32,11 @@ void CBlackSmith::execute()
         }
 
     } while (input != CMenu::exit());
+}
+
+CMenuAction CBlackSmith::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Blacksmith"});
 }
 
 void CBlackSmith::enhanceItem()

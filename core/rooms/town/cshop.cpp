@@ -9,7 +9,7 @@
 #include <format>
 #include <map>
 
-CShop::CShop()
+CShop::CShop() : CTownModule(TagNames::TownModule::shop)
 {
     replaceShopItems();
 }
@@ -82,6 +82,11 @@ void CShop::execute()
         }
 
     } while (input != CMenu::exit());
+}
+
+CMenuAction CShop::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Shop"});
 }
 
 void CShop::sellJunk(CInventory::JunkItemList& junkItems)

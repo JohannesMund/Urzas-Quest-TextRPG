@@ -12,6 +12,7 @@ set(MODULE_LIST
     leilarescue 
     ratfarm 
     rebellionhideout 
+    rabbitfarm
     sewer 
     shrineoftheancients
 )

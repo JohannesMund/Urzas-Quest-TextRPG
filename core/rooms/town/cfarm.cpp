@@ -3,7 +3,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CFarm::CFarm()
+CFarm::CFarm() : CTownModule(TagNames::TownModule::farm)
 {
 }
 
@@ -59,6 +59,11 @@ void CFarm::execute()
         }
 
     } while (input != CMenu::exit());
+}
+
+CMenuAction CFarm::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Farm"});
 }
 
 void CFarm::train()

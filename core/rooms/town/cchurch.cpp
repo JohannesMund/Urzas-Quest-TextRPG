@@ -3,7 +3,7 @@
 #include "cmenu.h"
 #include "console.h"
 
-CChurch::CChurch()
+CChurch::CChurch() : CTownModule(TagNames::TownModule::church)
 {
 }
 
@@ -34,4 +34,9 @@ void CChurch::execute()
         }
 
     } while (input != CMenu::exit());
+}
+
+CMenuAction CChurch::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Church"});
 }

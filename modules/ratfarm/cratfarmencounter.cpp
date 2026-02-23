@@ -62,3 +62,8 @@ std::string CRatFarmEncounter::translatorModuleName() const
 {
     return RatFarm::moduleName();
 }
+
+std::string CRatFarmEncounter::translatorObjectName() const
+{
+    return std::string(TagNames::RatFarm::ratfarmEnconter);
+}

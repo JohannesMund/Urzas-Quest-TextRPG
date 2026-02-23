@@ -44,3 +44,8 @@ std::string CSewerBattleEncounter::translatorModuleName() const
 {
     return Sewer::moduleName();
 }
+
+std::string CSewerBattleEncounter::translatorObjectName() const
+{
+    return std::string(TagNames::Sewer::sewerBattleEncounter);
+}

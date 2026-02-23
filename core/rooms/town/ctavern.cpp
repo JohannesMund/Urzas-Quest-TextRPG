@@ -6,7 +6,7 @@
 #include "randomizer.h"
 #include "ressources.h"
 
-CTavern::CTavern()
+CTavern::CTavern() : CTownModule(TagNames::TownModule::tavern)
 {
 }
 
@@ -54,6 +54,11 @@ void CTavern::execute()
         }
 
     } while (input != CMenu::exit());
+}
+
+CMenuAction CTavern::townModuleNav(CMenu& menu) const
+{
+    return menu.createAction({"Tavern"});
 }
 
 void CTavern::bountyHunt()

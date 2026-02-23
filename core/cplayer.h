@@ -9,6 +9,7 @@
 
 class CEnemy;
 class CSupportCompanion;
+class CNpc;
 class CPlayer : public CGameStateObject
 {
     friend class CGameManagement;
@@ -46,6 +47,11 @@ public:
     void removeSupporCompanionsByName(const std::string_view& name);
     void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
 
+    bool hasSignificantOther() const;
+    bool isSignificantOther(const CNpc* npc) const;
+    CNpc* signigicantOther() const;
+    void setSignificantOther(CNpc* significantOther);
+
 private:
     CPlayer();
 
@@ -67,6 +73,8 @@ private:
 
     void removeAllSupportCompanions();
     std::vector<CSupportCompanion*> _supporters;
+
+    CNpc* _significantOther = nullptr;
 
 protected:
     virtual nlohmann::json save() const override;
