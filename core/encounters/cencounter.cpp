@@ -19,6 +19,11 @@ std::string CEncounter::moduleName() const
     return {};
 }
 
+std::string CEncounter::translatorModuleName() const
+{
+    return moduleName();
+}
+
 std::function<bool(const CEncounter*)> CEncounter::moduleNameFilter(const std::string_view& name)
 {
     return [&name](const CEncounter* encounter) { return encounter->moduleName().compare(name) == 0; };

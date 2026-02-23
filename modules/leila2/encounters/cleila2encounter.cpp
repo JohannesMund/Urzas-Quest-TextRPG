@@ -100,11 +100,6 @@ std::string CLeila2Encounter::moduleName() const
         "{1}Kidnapped {0}P{1}rincess{2}... Again!", CC::fgLightMagenta(), CC::fgLightBlue(), CC::ccReset());
 }
 
-std::string CLeila2Encounter::translatorModuleName() const
-{
-    return Leila2::moduleName();
-}
-
 std::string CLeila2Encounter::translatorObjectName() const
 {
     return std::string(TagNames::Leila2::leila2Encounter);

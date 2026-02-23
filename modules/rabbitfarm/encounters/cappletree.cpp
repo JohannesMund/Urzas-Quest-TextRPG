@@ -102,11 +102,6 @@ std::string CAppleTree::moduleName() const
     return RabbitFarm::moduleName();
 }
 
-std::string CAppleTree::translatorModuleName() const
-{
-    return RabbitFarm::moduleName();
-}
-
 std::string CAppleTree::translatorObjectName() const
 {
     return std::string(TagNames::RabbitFarm::appleEncounter);

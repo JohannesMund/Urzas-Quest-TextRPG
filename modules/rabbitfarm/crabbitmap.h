@@ -2,6 +2,7 @@
 
 #include <map>
 #include <nlohmann/json_fwd.hpp>
+#include <optional>
 
 class CRabbit;
 class CRabbitMap
