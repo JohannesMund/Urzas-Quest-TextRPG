@@ -14,7 +14,9 @@ public:
 
     CRabbit* get(const int index) const;
     void add(CRabbit* rabbit);
-    int getRandomFreeIndex() const;
+    std::optional<int> getRandomFreeIndex() const;
+    int count();
+    int countLiving();
 
     static int min();
     static int max();

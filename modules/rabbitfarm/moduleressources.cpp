@@ -130,6 +130,11 @@ std::string RabbitFarm::rabbitHatchName()
     return std::format("{}Rabbit {}Hatch{}", CC::fgLightGray(), CC::fgYellow(), CC::ccReset());
 }
 
+std::string RabbitFarm::rabbitFarmName()
+{
+    return std::format("{}Rabbit {}Farm{}", CC::fgLightYellow(), CC::fgLightGreen(), CC::ccReset());
+}
+
 std::string RabbitFarm::apple()
 {
     return tr("{}A{}pple{}", CC::fgLightYellow(), CC::fgRed(), CC::ccReset());

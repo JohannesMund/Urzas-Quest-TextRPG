@@ -136,6 +136,7 @@ void CSlasher::deliverRabbit()
     }
 
     _kat->addSympathy(-250);
+    _kat->breakUp();
 }
 
 void CSlasher::ask()

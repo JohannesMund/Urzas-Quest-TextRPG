@@ -12,4 +12,5 @@ set(URZAS_QUEST_SOURCES_MODULES ${URZAS_QUEST_SOURCES_MODULES}
     modules/rabbitfarm/town/crabbithatch.h modules/rabbitfarm/town/crabbithatch.cpp
 
     modules/rabbitfarm/encounters/cappletree.h modules/rabbitfarm/encounters/cappletree.cpp
+    modules/rabbitfarm/encounters/crabbitclearing.h modules/rabbitfarm/encounters/crabbitclearing.cpp
 )

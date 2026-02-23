@@ -1,12 +1,16 @@
 #include "crabbithatch.h"
 
-#include "../crabbitmap.h"
 #include "cgamemanagement.h"
 #include "console.h"
 #include "rabbitfarm/ckatnothingh.h"
+#include "rabbitfarm/crabbitmap.h"
+#include "rabbitfarm/encounters/crabbitclearing.h"
 #include "rabbitfarm/items/crabbit.h"
+#include "rabbitfarm/items/crabbitfood.h"
 #include "rabbitfarm/moduleressources.h"
 #include "randomizer.h"
+
+#include <nlohmann/json.hpp>
 
 CRabbitHatch::CRabbitHatch(CKatNothingH* kat, CRabbitMap* rabbits) :
     CTownModule(TagNames::RabbitFarm::rabbitFarm),
@@ -44,6 +48,13 @@ void CRabbitHatch::execute()
         {
             katList.push_back(rabbitAction);
         }
+
+        auto donateAction = menu.createAction({"Donate feed"});
+        if (CGameManagement::getInventoryInstance()->hasItem(CRabbitFood::rabbitFoodFilter()))
+        {
+            katList.push_back(donateAction);
+        }
+
         auto katAction = _kat->npcNav(menu);
         menu.addMenuGroup({askAction}, {katAction});
         menu.addMenuGroup(katList, {CMenu::exit()});
@@ -62,6 +73,10 @@ void CRabbitHatch::execute()
         {
             watch();
         }
+        if (input == donateAction)
+        {
+            donate();
+        }
         if (input == katAction)
         {
             _kat->interact();
@@ -79,6 +94,21 @@ CMenuAction CRabbitHatch::townModuleNav(CMenu& menu) const
     return menu.createAction({"Rabbit Hatch", 'R'});
 }
 
+nlohmann::json CRabbitHatch::save() const
+{
+    nlohmann::json o;
+    o["encounterRegistered"] = _clearingEncounterRegistered;
+    return 0;
+}
+
+void CRabbitHatch::load(const nlohmann::json& json)
+{
+    if (json["encounterRegistered"])
+    {
+        registerEncounter();
+    }
+}
+
 std::string CRabbitHatch::translatorModuleName() const
 {
     return std::string(RabbitFarm::moduleName());
@@ -91,6 +121,17 @@ std::string CRabbitHatch::translatorObjectName() const
 
 void CRabbitHatch::donate()
 {
+    Console::cls();
+    Console::printLn(
+        tr("\"Food for the food god\" you scream while running into the hat, carrying you bag of rabbit feed."));
+    Console::printLn(tr("{} looks at you a little confused. Obviously she does not get the reference. Obviously, she "
+                        "does not think that you are funny, but that you are  a very very strange man.",
+                        RabbitFarm::katNothingH()));
+    Console::printLn("But at least, she appreciates your generous food donation.");
+    auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CRabbitFood::rabbitFoodFilter());
+    Console::printLn(tr("You put your {} bags of rabbit foot into the donation container.", items.size()));
+    _kat->addSympathy(25 * items.size());
+    CGameManagement::getInventoryInstance()->removeItem(CRabbitFood::rabbitFoodFilter());
 }
 
 void CRabbitHatch::watch()
@@ -100,8 +141,37 @@ void CRabbitHatch::watch()
     {
         Console::cls();
         Console::printLn("You decide to visit the rabbits.");
+        if (_rabbits->countLiving() == 0)
+        {
+            Console::printLn(tr("It is a sad image, watching this empty rabbit hatch. All rabbits escaped. It will be "
+                                "a task for an especially brave and incredibly strong adventurer toget them back."));
+            Console::printLn(
+                tr("Surely, {} would love this especially brave and incredibly strong adventurer for doing this.",
+                   RabbitFarm::katNothingH()));
+            Console::printLn(tr("If only, you knew where to find a especially brave and incredibly strong adventurer"));
+            registerEncounter();
+        }
+        else if (_rabbits->countLiving() == CRabbitMap::max())
+        {
+            Console::printLn(
+                tr("All rabbits are found. Most of them are happily jumping around in the hatch. {} Loves it. She "
+                   "seems to be much more happy, and much more delighted, since all of her rabbits are back.",
+                   RabbitFarm::katNothingH()));
+            Console::printLn("ALso, you feek, that she sees you as a really brave and incredibly strong hero.");
+        }
+        else if (_rabbits->count() == CRabbitMap::max())
+        {
+            Console::printLn(tr("All rabbits are found. Most of them are happily jumping around in the hatch. Some are "
+                                "more... on the delicious side of things."));
+        }
+        else
+        {
+            Console::printLn(tr("There are rabbits, but there are still a lot of rabbits out there, hungry, freezing, "
+                                "alone... {} looks at you expectantly"));
+        }
+
         Console::br();
-        _rabbits->print(); /* code */
+        _rabbits->print();
         Console::br();
 
         CMenu menu;
@@ -113,12 +183,12 @@ void CRabbitHatch::watch()
         {
             watchOneRabbit();
         }
-
     } while (input == CMenu::exit());
 }
 
 void CRabbitHatch::ask()
 {
+    Console::cls();
     Console::printLn(tr("You ask {} about this strange arrangement. And he eagerly tells you the story.",
                         RabbitFarm::katNothingH()));
     Console::printLn(tr("Apperently, her mother and {}s father build all of that.", RabbitFarm::slasher()));
@@ -186,6 +256,15 @@ void CRabbitHatch::watchOneRabbit()
         }
     }
     Console::confirmToContinue();
+}
+
+void CRabbitHatch::registerEncounter()
+{
+    if (!_clearingEncounterRegistered)
+    {
+        CGameManagement::getInstance()->registerEncounter(new CRabbitClearing(_kat, _rabbits));
+        _clearingEncounterRegistered = true;
+    }
 }
 
 void CRabbitHatch::makeRabbitOfTheDay()

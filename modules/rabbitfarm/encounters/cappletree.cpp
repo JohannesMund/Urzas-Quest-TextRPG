@@ -83,9 +83,13 @@ void CAppleTree::execute(const std::string_view&)
     }
 }
 
-unsigned int CAppleTree::encounterChance(const EEncounterType&, const std::string_view&) const
+unsigned int CAppleTree::encounterChance(const EEncounterType& tp, const std::string_view&) const
 {
-    return 5;
+    if (tp == EEncounterType::eField)
+    {
+        return 5;
+    }
+    return 0;
 }
 
 std::string CAppleTree::name() const

@@ -76,14 +76,29 @@ void CRabbitMap::add(CRabbit* rabbit)
     }
 }
 
-int CRabbitMap::getRandomFreeIndex() const
+std::optional<int> CRabbitMap::getRandomFreeIndex() const
 {
     std::vector<int> freeIds;
     for (const auto& r : _rabbits | std::views::filter([](const auto p) { return p.second == nullptr; }))
     {
         freeIds.push_back(r.first);
     }
+    if (freeIds.empty())
+    {
+        return {};
+    }
     return Randomizer::getRandomEntry(freeIds);
+}
+
+int CRabbitMap::count()
+{
+    return std::count_if(_rabbits.begin(), _rabbits.end(), [](const auto r) { return r.second != nullptr; });
+}
+
+int CRabbitMap::countLiving()
+{
+    return std::count_if(
+        _rabbits.begin(), _rabbits.end(), [](const auto r) { return r.second != nullptr && !r.second->isRoasted(); });
 }
 
 int CRabbitMap::min()

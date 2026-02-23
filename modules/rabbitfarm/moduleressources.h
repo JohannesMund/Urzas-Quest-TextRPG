@@ -27,7 +27,9 @@ namespace TagNames
 namespace RabbitFarm
 {
 constexpr std::string_view appleEncounter = "AppleTree";
-}
+constexpr std::string_view rabbitClearingEncounter = "RabbitClearing";
+
+} // namespace RabbitFarm
 } // namespace TagNames
 
 namespace RabbitFarm
@@ -40,6 +42,7 @@ std::string moduleName();
 
 std::string katNothingH();
 std::string rabbitHatchName();
+std::string rabbitFarmName();
 std::string apple();
 std::string katsBoots();
 std::string coolAndStrong();
