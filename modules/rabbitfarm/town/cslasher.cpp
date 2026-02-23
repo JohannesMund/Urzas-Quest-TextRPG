@@ -25,7 +25,6 @@ void CSlasher::execute()
     do
     {
         Console::cls();
-
         Console::printLn(RabbitFarm::slasher(), Console::EAlignment::eCenter);
         Console::printLn(tr("The best rabbit roast since 825 ad. dragonis"), Console::EAlignment::eCenter);
         Console::br();
