@@ -9,9 +9,16 @@ public:
     static CItem::ItemFilter rabbitFilter();
     unsigned int uniqueId() const;
 
+    void roast();
+    bool isRoasted() const;
+
 protected:
     virtual std::string translatorModuleName() const override;
 
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
+
 private:
-    const unsigned int _uniqueId;
+    unsigned int _uniqueId;
+    bool _isRoasted = false;
 };

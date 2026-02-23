@@ -6,11 +6,13 @@
 #include <string>
 
 class CKatNothingH;
-class CRabbit;
+
+class CRabbitMap;
 class CRabbitHatch : public CTownModule
 {
 public:
-    CRabbitHatch(CKatNothingH* kat);
+    CRabbitHatch(CKatNothingH* kat, CRabbitMap* rabbits);
+
     void execute() override;
     virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
@@ -21,9 +23,14 @@ protected:
 private:
     void donate();
     void watch();
-    void talk();
+    void ask();
     void deliverRabbit();
+    void watchOneRabbit();
+
+    void makeRabbitOfTheDay();
 
     CKatNothingH* _kat;
-    std::map<int, CRabbit*> _rabbits;
+    CRabbitMap* _rabbits;
+
+    std::string _rabbitOfTheDay;
 };

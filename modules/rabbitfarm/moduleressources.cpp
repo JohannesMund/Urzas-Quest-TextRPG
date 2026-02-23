@@ -1,6 +1,9 @@
 #include "moduleressources.h"
 #include "colorize.h"
 #include "rabbitfarm/crabbitfarm.h"
+#include "rabbitfarm/items/capple.h"
+#include "rabbitfarm/items/crabbit.h"
+#include "rabbitfarm/items/crabbitfood.h"
 #include "randomizer.h"
 
 #include <format>
@@ -25,6 +28,23 @@ Module::ModuleInfo RabbitFarm::moduleInfo()
         return nullptr;
     };
 
+    const auto itemFactory = [](const std::string_view& objectName) -> CItem*
+    {
+        if (TagNames::RabbitFarm::rabbit.compare(objectName) == 0)
+        {
+            return new CRabbit(0);
+        }
+        if (TagNames::RabbitFarm::apple.compare(objectName) == 0)
+        {
+            return new CApple();
+        }
+        if (TagNames::RabbitFarm::rabbitFood.compare(objectName) == 0)
+        {
+            return new CRabbitFood();
+        }
+        return nullptr;
+    };
+
     Module::ModuleInfo moduleInfo = Module::ModuleInfo();
 
     moduleInfo.moduleName = moduleName();
@@ -32,6 +52,7 @@ Module::ModuleInfo RabbitFarm::moduleInfo()
     moduleInfo.gameStage = Module::EGameStage::eNone;
 
     moduleInfo.roomFactory = roomFactory;
+    moduleInfo.itemFactory = itemFactory;
 
     moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CRabbitFarm()); };
 

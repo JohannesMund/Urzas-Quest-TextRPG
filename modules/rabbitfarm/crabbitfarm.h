@@ -1,9 +1,10 @@
 #pragma once
 
 #include "ckatnothingh.h"
+#include "crabbitmap.h"
 #include "croom.h"
-#include "town/crabbithatch.h"
-#include "town/cslasher.h"
+#include "rabbitfarm/town/crabbithatch.h"
+#include "rabbitfarm/town/cslasher.h"
 
 class CRabbitFarm : public CRoom
 {
@@ -29,4 +30,6 @@ private:
     CKatNothingH _kat;
     CSlasher _slasher;
     CRabbitHatch _rabbitHatch;
+
+    CRabbitMap _rabbits;
 };

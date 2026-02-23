@@ -1,5 +1,6 @@
 #include "cslasher.h"
 
+#include "../crabbitmap.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorize.h"
@@ -9,7 +10,10 @@
 #include "rabbitfarm/moduleressources.h"
 #include "randomizer.h"
 
-CSlasher::CSlasher(CKatNothingH* kat) : CTownModule(RabbitFarm::rabbitHatchName()), _kat(kat)
+CSlasher::CSlasher(CKatNothingH* kat, CRabbitMap* rabbits) :
+    CTownModule(RabbitFarm::rabbitHatchName()),
+    _kat(kat),
+    _rabbits(rabbits)
 {
 }
 
@@ -25,7 +29,6 @@ void CSlasher::execute()
         Console::printLn(RabbitFarm::slasher(), Console::EAlignment::eCenter);
         Console::printLn(tr("The best rabbit roast since 825 ad. dragonis"), Console::EAlignment::eCenter);
         Console::br();
-        Console::br();
         Console::printLn(tr("Dish of the day:"), Console::EAlignment::eCenter);
         Console::printLn(std::format("~ {} ~", _dishOfTheDay), Console::EAlignment::eCenter);
         Console::br();
@@ -33,23 +36,23 @@ void CSlasher::execute()
         CMenu::ActionList slasherList;
         CMenu menu(RabbitFarm::moduleName());
 
-        auto askActionString = tr("Ask about {}", CC::unColorizeString(RabbitFarm::katNothingH()));
-        auto askAction = menu.createAction({askActionString});
-        slasherList.push_back(askAction);
-
-        auto eatAction = menu.createShopAction({"Eat Rabbit Roast"}, RabbitFarm::rabbitRoastPrice());
+        auto eatAction = menu.createShopAction({"Eat Roast"}, RabbitFarm::rabbitRoastPrice());
         if (CGameManagement::getPlayerInstance()->gold() >= RabbitFarm::rabbitRoastPrice())
         {
             slasherList.push_back(eatAction);
         }
 
-        auto rabbitAction = menu.createAction({"Deliver a rabbit"});
+        auto rabbitAction = menu.createAction({"Deliver rabbit"});
         if (CGameManagement::getInventoryInstance()->hasItem(CRabbit::rabbitFilter()))
         {
             slasherList.push_back(rabbitAction);
         }
 
+        auto askActionString = tr("Ask about {}", CC::unColorizeString(RabbitFarm::katNothingH()));
+        auto askAction = menu.createAction({askActionString});
+        menu.addMenuGroup({askAction});
         menu.addMenuGroup(slasherList, {CMenu::exit()});
+
         input = menu.execute();
 
         if (input == eatAction)
@@ -64,13 +67,17 @@ void CSlasher::execute()
         {
             ask();
         }
+        if (input != CMenu::exit())
+        {
+            Console::confirmToContinue();
+        }
 
     } while (input != CMenu::exit());
 }
 
 CMenuAction CSlasher::townModuleNav(CMenu& menu) const
 {
-    return menu.createAction({CC::unColorizeString(RabbitFarm::slasher())}, false);
+    return menu.createAction({CC::unColorizeString(RabbitFarm::slasher()), 'S'}, false);
 }
 
 std::string CSlasher::translatorModuleName() const
@@ -120,7 +127,14 @@ void CSlasher::deliverRabbit()
 
     CGameManagement::getPlayerInstance()->gainGold(2500);
     CGameManagement::getPlayerInstance()->addXp(25 + Randomizer::getRandom(250));
-    CGameManagement::getInventoryInstance()->removeItem(CRabbit::rabbitFilter());
+    auto item = CGameManagement::getInventoryInstance()->takeItem(rabbits.at(0));
+    if (item.has_value())
+    {
+        auto rabbit = dynamic_cast<CRabbit*>(*item);
+        rabbit->roast();
+        _rabbits->add(rabbit);
+    }
+
     _kat->addSympathy(-250);
 }
 
@@ -141,8 +155,14 @@ void CSlasher::ask()
                         RabbitFarm::katNothingH(),
                         RabbitFarm::apple(),
                         RabbitFarm::slasher()));
-    Console::printLn(tr("Unfortunately, {} does not want to go into too much detail about the curse"));
-    Console::printLn(tr("But, he tells you, that he is willing to pay generous gold for rabbits."));
+    Console::printLn(tr("Unfortunately, {} does not want to go into too much detail about the curse."));
+    Console::br();
+    Console::printLn(
+        tr("Important to know is, that the rabbits are gone at the moment. {} has to gather them back. And everybody "
+           "else can do so too. He is willing, to pay {}generous amounts of gold{} for a rabbit",
+           RabbitFarm::katNothingH(),
+           CC::fgYellow(),
+           CC::ccReset()));
 }
 
 void CSlasher::makeDishOfTheDay()

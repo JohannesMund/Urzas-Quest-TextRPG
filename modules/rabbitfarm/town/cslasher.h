@@ -6,10 +6,11 @@
 #include <string>
 
 class CKatNothingH;
+class CRabbitMap;
 class CSlasher : public CTownModule
 {
 public:
-    CSlasher(CKatNothingH* kat);
+    CSlasher(CKatNothingH* kat, CRabbitMap* rabbits);
     void execute() override;
     virtual CMenuAction townModuleNav(CMenu& menu) const override;
 
@@ -25,5 +26,6 @@ private:
     void makeDishOfTheDay();
 
     CKatNothingH* _kat;
+    CRabbitMap* _rabbits;
     std::string _dishOfTheDay;
 };

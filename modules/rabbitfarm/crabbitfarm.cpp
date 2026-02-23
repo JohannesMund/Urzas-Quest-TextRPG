@@ -3,7 +3,10 @@
 #include "console.h"
 #include "rabbitfarm/moduleressources.h"
 
-CRabbitFarm::CRabbitFarm() : CRoom(TagNames::RabbitFarm::rabbitFarm), _slasher(&_kat), _rabbitHatch(&_kat)
+CRabbitFarm::CRabbitFarm() :
+    CRoom(TagNames::RabbitFarm::rabbitFarm),
+    _slasher(&_kat, &_rabbits),
+    _rabbitHatch(&_kat, &_rabbits)
 {
     _showInFogOfWar = true;
 }
@@ -18,21 +21,20 @@ void CRabbitFarm::execute()
         printHeader();
         CMenu menu(RabbitFarm::moduleName());
 
-        auto npcAction = _kat.npcNav(menu);
         auto slasherAction = _slasher.townModuleNav(menu);
         auto hatchAction = _rabbitHatch.townModuleNav(menu);
 
-        menu.addMenuGroup({npcAction});
-        menu.addMenuGroup({slasherAction, hatchAction}, {CMenu::exit()});
-        input = menu.execute();
-        if (input == npcAction)
-        {
-            _kat.interact();
-        }
+        menu.addMenuGroup({hatchAction}, {CMenu::exit()});
+        menu.addMenuGroup({slasherAction});
 
+        input = menu.execute();
         if (input == slasherAction)
         {
             _slasher.execute();
+        }
+        if (input == hatchAction)
+        {
+            _rabbitHatch.execute();
         }
 
     } while (input != CMenu::exit());
