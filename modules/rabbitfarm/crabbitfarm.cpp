@@ -82,5 +82,5 @@ void CRabbitFarm::printHeader() const
     Console::br();
     Console::printLn(tr("This is a nice place. A cozy farm, old, rusitc, romantic. A lot of rabbits hopping around, "
                         "cute and normal rabbits, nothing special. "));
-    Console::printLn(tr("There is also a restaurant, which belongs to the {}. It seems a little out of place."))
+    Console::printLn(tr("There is also a restaurant, which belongs to the {}. It seems a little out of place."));
 }
