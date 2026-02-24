@@ -2,7 +2,7 @@
 
 #include "cgamemanagement.h"
 #include "console.h"
-#include "rabbitfarm/ckatnothingh.h"
+#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/crabbitmap.h"
 #include "rabbitfarm/encounters/crabbitclearing.h"
 #include "rabbitfarm/items/crabbit.h"
@@ -12,7 +12,7 @@
 
 #include <nlohmann/json.hpp>
 
-CRabbitHatch::CRabbitHatch(CKatNothingH* kat, CRabbitMap* rabbits) :
+CRabbitHatch::CRabbitHatch(CKatNottingH* kat, CRabbitMap* rabbits) :
     CTownModule(TagNames::RabbitFarm::rabbitFarm),
     _kat(kat),
     _rabbits(rabbits)
@@ -28,7 +28,7 @@ void CRabbitHatch::execute()
     do
     {
         Console::cls();
-        Console::printLn(tr("{}s famous rabbit farm", RabbitFarm::katNothingH()), Console::EAlignment::eCenter);
+        Console::printLn(tr("{}s famous rabbit farm", RabbitFarm::katNottingH()), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(tr("Rabbit of the day:"), Console::EAlignment::eCenter);
         Console::printLn(std::format("~ {} ~", _rabbitOfTheDay), Console::EAlignment::eCenter);
@@ -126,7 +126,7 @@ void CRabbitHatch::donate()
         tr("\"Food for the food god\" you scream while running into the hat, carrying you bag of rabbit feed."));
     Console::printLn(tr("{} looks at you a little confused. Obviously she does not get the reference. Obviously, she "
                         "does not think that you are funny, but that you are  a very very strange man.",
-                        RabbitFarm::katNothingH()));
+                        RabbitFarm::katNottingH()));
     Console::printLn("But at least, she appreciates your generous food donation.");
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CRabbitFood::rabbitFoodFilter());
     Console::printLn(tr("You put your {} bags of rabbit foot into the donation container.", items.size()));
@@ -147,7 +147,7 @@ void CRabbitHatch::watch()
                                 "a task for an especially brave and incredibly strong adventurer toget them back."));
             Console::printLn(
                 tr("Surely, {} would love this especially brave and incredibly strong adventurer for doing this.",
-                   RabbitFarm::katNothingH()));
+                   RabbitFarm::katNottingH()));
             Console::printLn(tr("If only, you knew where to find a especially brave and incredibly strong adventurer"));
             registerEncounter();
         }
@@ -156,7 +156,7 @@ void CRabbitHatch::watch()
             Console::printLn(
                 tr("All rabbits are found. Most of them are happily jumping around in the hatch. {} Loves it. She "
                    "seems to be much more happy, and much more delighted, since all of her rabbits are back.",
-                   RabbitFarm::katNothingH()));
+                   RabbitFarm::katNottingH()));
             Console::printLn("ALso, you feek, that she sees you as a really brave and incredibly strong hero.");
         }
         else if (_rabbits->count() == CRabbitMap::max())
@@ -190,7 +190,7 @@ void CRabbitHatch::ask()
 {
     Console::cls();
     Console::printLn(tr("You ask {} about this strange arrangement. And he eagerly tells you the story.",
-                        RabbitFarm::katNothingH()));
+                        RabbitFarm::katNottingH()));
     Console::printLn(tr("Apperently, her mother and {}s father build all of that.", RabbitFarm::slasher()));
     Console::printLn(tr("When she took over from her mother, she decided to continue the breeding of rabbits, but "
                         "protect them, rather than allowimg {} to cook them.",
@@ -251,7 +251,7 @@ void CRabbitHatch::watchOneRabbit()
         {
             Console::printLn(tr("Well, you are pretty sure, {} did an awesomne job to make the best roast he could",
                                 RabbitFarm::slasher()));
-            Console::printLn(tr("{} does not like that", RabbitFarm::katNothingH()));
+            Console::printLn(tr("{} does not like that", RabbitFarm::katNottingH()));
             _kat->addSympathy(-1);
         }
     }

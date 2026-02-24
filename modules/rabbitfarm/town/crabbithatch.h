@@ -6,12 +6,12 @@
 #include <nlohmann/json_fwd.hpp>
 #include <string>
 
-class CKatNothingH;
+class CKatNottingH;
 class CRabbitMap;
 class CRabbitHatch : public CTownModule
 {
 public:
-    CRabbitHatch(CKatNothingH* kat, CRabbitMap* rabbits);
+    CRabbitHatch(CKatNottingH* kat, CRabbitMap* rabbits);
 
     void execute() override;
     virtual CMenuAction townModuleNav(CMenu& menu) const override;
@@ -33,7 +33,7 @@ private:
     void registerEncounter();
     void makeRabbitOfTheDay();
 
-    CKatNothingH* _kat;
+    CKatNottingH* _kat;
     CRabbitMap* _rabbits;
 
     std::string _rabbitOfTheDay;

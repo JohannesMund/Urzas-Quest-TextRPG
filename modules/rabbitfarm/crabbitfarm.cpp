@@ -59,14 +59,14 @@ nlohmann::json CRabbitFarm::save() const
 {
     nlohmann::json o;
     o["RabbitMap"] = _rabbits.save();
-    o["KatNothingH"] = _kat.save();
+    o["KatNottingH"] = _kat.save();
     return o;
 }
 
 void CRabbitFarm::load(const nlohmann::json& json)
 {
     _rabbits.load(json["RabbitMap"]);
-    _kat.load(json["KatNothingH"]);
+    _kat.load(json["KatNottingH"]);
 }
 
 char CRabbitFarm::getMapSymbol() const

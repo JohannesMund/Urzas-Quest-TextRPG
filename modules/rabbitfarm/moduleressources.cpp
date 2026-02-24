@@ -114,9 +114,9 @@ std::string RabbitFarm::moduleName()
     return std::string(TagNames::RabbitFarm::rabbitFarm);
 }
 
-std::string RabbitFarm::katNothingH()
+std::string RabbitFarm::katNottingH()
 {
-    return std::format("{}K{}a{}t {}Nothing{}H{}",
+    return std::format("{}K{}a{}t {}Notting{}H{}",
                        CC::fgGreen(),
                        CC::fgLightYellow(),
                        CC::fgYellow(),

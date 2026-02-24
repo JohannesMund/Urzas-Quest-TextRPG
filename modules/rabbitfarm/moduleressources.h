@@ -11,7 +11,7 @@ namespace RabbitFarm
 {
 constexpr std::string_view rabbitFarm = "RabbitFarm";
 constexpr std::string_view rabbitHatch = "RabbitHatch";
-constexpr std::string_view kat = "KatNothingH";
+constexpr std::string_view kat = "KatNottingH";
 constexpr std::string_view apple = "Apple";
 constexpr std::string_view rabbitFood = "RabbitFood";
 constexpr std::string_view rabbit = "Rabbit";
@@ -40,7 +40,7 @@ std::string makeRabbitName();
 
 std::string moduleName();
 
-std::string katNothingH();
+std::string katNottingH();
 std::string rabbitHatchName();
 std::string rabbitFarmName();
 std::string apple();

@@ -2,10 +2,10 @@
 #include "cmenu.h"
 #include "cnpc.h"
 
-class CKatNothingH : public CNpc
+class CKatNottingH : public CNpc
 {
 public:
-    CKatNothingH();
+    CKatNottingH();
 
     virtual void interact() override;
     virtual void talk() override;

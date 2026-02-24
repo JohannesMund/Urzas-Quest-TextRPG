@@ -1,7 +1,7 @@
 set(URZAS_QUEST_SOURCES_MODULES ${URZAS_QUEST_SOURCES_MODULES}
     modules/rabbitfarm/moduleressources.h modules/rabbitfarm/moduleressources.cpp
     modules/rabbitfarm/crabbitfarm.h modules/rabbitfarm/crabbitfarm.cpp
-    modules/rabbitfarm/ckatnothingh.h modules/rabbitfarm/ckatnothingh.cpp
+    modules/rabbitfarm/ckatnottingh.h modules/rabbitfarm/ckatnottingh.cpp
     modules/rabbitfarm/crabbitmap.h modules/rabbitfarm/crabbitmap.cpp
 
     modules/rabbitfarm/items/crabbit.h modules/rabbitfarm/items/crabbit.cpp
