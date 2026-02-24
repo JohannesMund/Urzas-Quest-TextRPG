@@ -1,8 +1,10 @@
 #include "cnpc.h"
+#include "cflower.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
 #include "jsontagnames.h"
+#include "randomizer.h"
 
 #include <math.h>
 
@@ -21,10 +23,11 @@ void CNpc::interact()
 {
     auto turns = turnsNotSeen();
     setLastSeen();
-    if (_sympathy <= 500)
+    if (!isSignificantOther())
     {
         return;
     }
+
     if (turns > 50)
     {
         int estrangement =
@@ -75,14 +78,86 @@ void CNpc::thinkAbout()
     case ESympathyLevel::eDislike:
         Console::printLn(coreTr("You do not like each other too much."));
         break;
-    case ESympathyLevel::ehate:
+    case ESympathyLevel::eHate:
         Console::printLn(coreTr("Its.... complicated."));
         break;
     }
     if (isDatable())
     {
+        Console::br();
         Console::printLn(coreTr("You really should consider dating."));
     }
+    Console::br();
+}
+
+void CNpc::giftFlower()
+{
+    auto flowers = CGameManagement::getInventoryInstance()->getItemsByFilter(CFlower::flowerFilter());
+    if (!flowers.size())
+    {
+        Console::printLn(
+            coreTr("Well, this is emberrassing. You search your bag for flowers, but apperently you have none."));
+        Console::printLn(coreTr("{} looks dissapointed.", name()));
+        return;
+    }
+    auto oneFlower = dynamic_cast<CFlower*>(flowers.at(0));
+    if (oneFlower == nullptr)
+    {
+        Console::printLn(coreTr("Your flower crumbles to dust in your hand."));
+        Console::printLn(coreTr("{} looks dissapointed.", name()));
+        return;
+    }
+    Console::printLn(coreTr("You draw a {} out of your bag and hand it over to {}", oneFlower->name(), name()));
+    switch (sympathy())
+    {
+    case ESympathyLevel::eHate:
+        Console::printLn(coreTr(
+            "You and {}, this did not go together well up to now. {} accepts the flower anyway.", name(), heShe()));
+        break;
+    case ESympathyLevel::eDislike:
+        Console::printLn(coreTr(
+            "You and {}, are not frieds at all. {} accepts the flower anyway as a peace offer.", name(), heShe()));
+        break;
+    case ESympathyLevel::eNeutral:
+    default:
+        Console::printLn(coreTr("{} is surprised about your gift and {} takes it with a smile.", name(), heShe()));
+        break;
+    case ESympathyLevel::eLike:
+        Console::printLn(
+            coreTr("Your geasture hit the spot for {}. With a smile, {} accepts your gift.", name(), heShe()));
+        break;
+    case ESympathyLevel::eLove:
+        Console::printLn(
+            coreTr("A gift of love for {0}, {1} smiles as {1} taks your precious flower.", name(), heShe()));
+        break;
+    }
+
+    if (oneFlower->flowerType() == _favoriteFlower && oneFlower->flowerType() != _leastFavoriteFlower)
+    {
+        Console::printLn(coreTr("{}s are {}s favourite flowers. {} loves your gift.",
+                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                name(),
+                                heShe()));
+        addSympathy(20 + Randomizer::getRandom(30));
+    }
+    else if (oneFlower->flowerType() == _leastFavoriteFlower && oneFlower->flowerType() != _favoriteFlower)
+    {
+        Console::printLn(coreTr("{} hates {}s. {} accepts your gesture.",
+                                name(),
+                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                heShe()));
+        addSympathy(5 + Randomizer::getRandom(10));
+    }
+    else
+    {
+        Console::printLn(coreTr("{} like {}s. {} takes the flowers with a smile.",
+                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                name(),
+                                heShe()));
+        addSympathy(5 + Randomizer::getRandom(10));
+    }
+
+    CGameManagement::getInventoryInstance()->removeItem(oneFlower);
 }
 
 bool CNpc::addSympathy(const int i)
@@ -182,7 +257,7 @@ CNpc::ESympathyLevel CNpc::sympathy() const
         return ESympathyLevel::eDislike;
     }
 
-    return ESympathyLevel::ehate;
+    return ESympathyLevel::eHate;
 }
 
 bool CNpc::isDatable() const
@@ -220,24 +295,27 @@ std::string CNpc::notSeenString() const
 
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)
 {
-    auto talkActionString = coreTr("Talk to {}", CC::unColorizeString(name()));
-    auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
-    auto askOutActionString = coreTr("Ask {} for a date", CC::unColorizeString(name()));
+    const auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
+    const auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
+    menu.addMenuGroup({thinkAboutAction}, {CMenu::exit()});
 
-    auto talkAction = menu.createAction({talkActionString, 'T'});
-    auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
-    auto askOutAction = menu.createAction({askOutActionString, 'A'});
+    const auto talkAction = menu.createAction({"Talk", 'T'});
+    const auto askOutAction = menu.createAction({"Ask out", 'A'});
+    const auto giftFlowerAction = menu.createAction({"Gift a flower", 'G'});
 
     CMenu::ActionList actions;
     actions.push_back(talkAction);
-    actions.push_back(thinkAboutAction);
 
     if (_sympathy > 750)
     {
         actions.push_back(askOutAction);
     }
 
-    menu.addMenuGroup(actions);
+    if (CGameManagement::getInventoryInstance()->hasItem(CFlower::flowerFilter()))
+    {
+        actions.push_back(giftFlowerAction);
+    }
+    menu.addMenuGroup({actions});
 
     auto input = menu.execute();
     printHeader(false);
@@ -245,11 +323,19 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
     if (input == talkAction)
     {
         talk();
+        Console::confirmToContinue();
     }
 
     if (input == thinkAboutAction)
     {
         thinkAbout();
+        Console::confirmToContinue();
+    }
+
+    if (input == giftFlowerAction)
+    {
+        giftFlower();
+        Console::confirmToContinue();
     }
 
     return input;

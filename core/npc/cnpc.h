@@ -19,7 +19,7 @@ class CNpc : public CGameStateObject
 public:
     enum class ESympathyLevel
     {
-        ehate = 0,
+        eHate = 0,
         eDislike = 1,
         eNeutral = 2,
         eLike = 3,
@@ -68,6 +68,14 @@ public:
      * prints the relationship status
      */
     void thinkAbout();
+
+    /**
+     * @brief giftFlower
+     * gifts a flower
+     * @sa CFlower
+     * @sa CFlowerPatch
+     */
+    void giftFlower();
 
     /**
      * @brief name and description

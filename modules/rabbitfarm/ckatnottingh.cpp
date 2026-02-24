@@ -1,5 +1,5 @@
-#include "cgamemanagement.h"
 #include "ckatnottingh.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
 #include "rabbitfarm/encounters/cappletree.h"
@@ -28,20 +28,14 @@ void CKatNottingH::interact()
             katList.push_back(appleAction);
         }
 
-        menu.addMenuGroup(katList, {CMenu::exit()});
+        menu.addMenuGroup(katList);
         input = CNpc::executeNpcMenu(menu);
 
         if (input == appleAction)
         {
             giveApple();
-        }
-
-        if (input != CMenu::exit())
-        {
-            Console::br();
             Console::confirmToContinue();
         }
-
     } while (input != CMenu::exit());
 }
 
@@ -104,7 +98,7 @@ void CKatNottingH::talk()
                             RabbitFarm::katNottingH(),
                             RabbitFarm::apple()));
         break;
-    case CNpc::ESympathyLevel::ehate:
+    case CNpc::ESympathyLevel::eHate:
         Console::printLn(tr("All you can think of right now, is rabbit roast, but for sure, this hag will hav "
                             "something against it. Maybe she will trade of those rabbits for an {}?",
                             RabbitFarm::apple()));
@@ -123,6 +117,7 @@ void CKatNottingH::talk()
             Console::printLn(tr("You really should ask her out for a date someday"));
         }
     }
+    Console::br();
 }
 
 std::string CKatNottingH::name() const
@@ -229,6 +224,7 @@ void CKatNottingH::giveApple()
     }
 
     addSympathy(sympathy);
+    Console::br();
 }
 
 void CKatNottingH::printHeader(const bool bFull) const
@@ -237,6 +233,7 @@ void CKatNottingH::printHeader(const bool bFull) const
     Console::printLn(RabbitFarm::katNottingH(), Console::EAlignment::eCenter);
     if (bFull)
     {
+        Console::br();
         Console::printLn(describe(), Console::EAlignment::eCenter);
     }
     Console::br();

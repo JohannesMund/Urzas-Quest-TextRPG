@@ -64,28 +64,27 @@ void CRabbitHatch::execute()
         if (input == rabbitAction)
         {
             deliverRabbit();
+            Console::confirmToContinue();
         }
         if (input == askAction)
         {
             ask();
+            Console::confirmToContinue();
         }
         if (input == watchAction)
         {
             watch();
+            Console::confirmToContinue();
         }
         if (input == donateAction)
         {
             donate();
+            Console::confirmToContinue();
         }
         if (input == katAction)
         {
             _kat->interact();
         }
-        if (input != CMenu::exit())
-        {
-            Console::confirmToContinue();
-        }
-
     } while (input != CMenu::exit());
 }
 
@@ -255,7 +254,6 @@ void CRabbitHatch::watchOneRabbit()
             _kat->addSympathy(-1);
         }
     }
-    Console::confirmToContinue();
 }
 
 void CRabbitHatch::registerEncounter()

@@ -13,6 +13,10 @@ public:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& o) override;
 
+    Ressources::Items::EFlower flowerType() const;
+
+    static CItem::ItemFilter flowerFilter();
+
 protected:
     virtual std::string translatorModuleName() const override;
 

@@ -21,6 +21,16 @@ void CFlower::load(const nlohmann::json& o)
     _flowerType = o["flowerType"];
 }
 
+Ressources::Items::EFlower CFlower::flowerType() const
+{
+    return _flowerType;
+}
+
+CItem::ItemFilter CFlower::flowerFilter()
+{
+    return [](const CItem* item) { return dynamic_cast<const CFlower*>(item) != nullptr; };
+}
+
 std::string CFlower::translatorModuleName() const
 {
     return std::string();
