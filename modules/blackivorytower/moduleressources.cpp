@@ -3,6 +3,7 @@
 #include "cgamemanagement.h"
 #include "cgameprogression.h"
 #include "colorize.h"
+#include "cpinkfanta.h"
 #include "croom.h"
 #include "ressources.h"
 
@@ -26,6 +27,11 @@ std::string BlackIvoryTower::lunatics()
     return std::format("{}{}s{}", lunatic(), CC::fgLightCyan(), CC::ccReset());
 }
 
+std::string BlackIvoryTower::pinkFanta()
+{
+    return std::format("{0}P{1}ink {0}F{1}anta{2}", CC::fgLightMagenta(), CC::fgMagenta(), CC::ccReset());
+}
+
 std::string BlackIvoryTower::moduleName()
 {
     return "BlackIvoryTowerofLunatics";
@@ -43,6 +49,16 @@ Module::ModuleInfo BlackIvoryTower::moduleInfo()
         return nullptr;
     };
 
+    const auto itemFactory = [](const std::string_view& objectName) -> CItem*
+    {
+        if (TagNames::BlackIvoryTower::pinkFanta.compare(objectName) == 0)
+        {
+            return new CPinkFanta();
+        }
+
+        return nullptr;
+    };
+
     Module::ModuleInfo moduleInfo = Module::ModuleInfo();
 
     moduleInfo.moduleName = moduleName();
@@ -52,6 +68,7 @@ Module::ModuleInfo BlackIvoryTower::moduleInfo()
     moduleInfo.questLogFunction = []() { return std::format("Climb up the {}", darkIvoryTower()); };
     moduleInfo.initWorldMapFunction = [](std::vector<CRoom*>& rooms) { rooms.push_back(new CBlackIvoryTower()); };
     moduleInfo.roomFactory = roomFactory;
+    moduleInfo.itemFactory = itemFactory;
 
     return moduleInfo;
 }

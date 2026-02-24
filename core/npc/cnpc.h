@@ -3,35 +3,131 @@
 #include "cgamestateobject.h"
 #include "cmenu.h"
 #include "cmenuaction.h"
+#include "ressources.h"
 
 #include <nlohmann/json.hpp>
 
 class CMenu;
+/**
+ * @brief class CNpc
+ * represents an NPC
+ * @remark abstract class, needs to be implemented
+ */
+
 class CNpc : public CGameStateObject
 {
 public:
     enum class ESympathyLevel
     {
-        ehate = 0,
+        eHate = 0,
         eDislike = 1,
         eNeutral = 2,
         eLike = 3,
         eLove = 4,
     };
 
+    /**
+     * @brief Constructor
+     */
     CNpc(const std::string_view& objectName, const bool isFemale);
 
+    /**
+     * @brief Interaction functions
+     * @remark must be re-implemented, but called if not abstract because most of them alter the relation to the player
+     */
+
+    /**
+     * @brief interact
+     * interact with the npc
+     * @remark alters the relation to the player
+     */
     virtual void interact();
+
+    /**
+     * @brief ask Out
+     * ask the NPC for a Date.
+     * @remark makes the NPC the significant other
+     */
     virtual void askOut();
-    virtual void breakUp();
+
+    /**
+     * @brief talk
+     * implement to have conversations
+     */
     virtual void talk() = 0;
+
+    /**
+     * @brief breakUp
+     * removes NPC as significant other
+     * @remark performs necessary checks before
+     */
+    virtual void breakUp();
+
+    /**
+     * @brief thinkAbout
+     * prints the relationship status
+     */
     void thinkAbout();
 
+    /**
+     * @brief giftFlower
+     * gifts a flower
+     * @sa CFlower
+     * @sa CFlowerPatch
+     */
+    void giftFlower();
+
+    /**
+     * @brief name and description
+     * must be implemented
+     */
     virtual std::string name() const = 0;
     virtual std::string describe() const = 0;
 
+    /**
+     * @brief npcNac
+     * provides a nav to interact with the NPC
+     */
     virtual CMenuAction npcNav(CMenu& menu) const;
+
+    /**
+     * @brief addSympathy
+     * adds/removes sympathy
+     */
     bool addSympathy(const int i);
+
+    /**
+     * @brief estrange
+     * reduce sympathy through time
+     */
+    void estrange(const int i);
+
+    /**
+     * @brief estrange
+     * increase sympathy through time
+     */
+
+    void reconcile(const int i);
+
+    /**
+     * @brief gender related stuff
+     */
+    std::string heShe() const;
+    std::string hisHer() const;
+    std::string himHer() const;
+    std::string girlfriendBoyfriend() const;
+    std::string notSeenString() const;
+
+    /**
+     * @brief getter
+     */
+    bool isSignificantOther() const;
+    ESympathyLevel sympathy() const;
+    bool isDatable() const;
+
+    void setLastSeen(const int i);
+    void setLastSeen();
+    int turnsNotSeen() const;
 
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
@@ -40,12 +136,6 @@ public:
     {
         return getObjectName() == other->getObjectName();
     }
-
-    std::string heShe() const;
-    std::string hisHer() const;
-    bool isSignificantOther() const;
-    ESympathyLevel sympathy() const;
-    bool isDatable() const;
 
 protected:
     CMenuAction executeNpcMenu(CMenu& menu);
@@ -56,8 +146,9 @@ protected:
     virtual void printHeader(const bool bFull = true) const = 0;
 
 private:
-    void estrange(const int i);
-
     bool _female;
     unsigned int _lastSeen = 0;
+
+    Ressources::Items::EFlower _favoriteFlower;
+    Ressources::Items::EFlower _leastFavoriteFlower;
 };

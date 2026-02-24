@@ -107,7 +107,6 @@ std::vector<std::string> CGuardStuff::listMissingParts()
     {
         if (!has(i))
         {
-
             missingStuff.push_back(nameForPart(i));
         }
     }

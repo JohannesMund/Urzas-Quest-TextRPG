@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cfield.h"
+#include "cmobi.h"
 
 class CBlackIvoryTower : public CRoom
 {
@@ -33,4 +34,6 @@ private:
 
     bool _isOpen = false;
     bool _hadADoener = false;
+
+    CMobi _mobi;
 };

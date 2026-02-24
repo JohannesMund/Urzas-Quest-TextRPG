@@ -3,12 +3,12 @@
 #include "cencounter.h"
 #include "cmenuaction.h"
 
-class CKatNothingH;
+class CKatNottingH;
 class CRabbitMap;
 class CRabbitClearing : public CEncounter
 {
 public:
-    CRabbitClearing(CKatNothingH* kat, const CRabbitMap* rabbits);
+    CRabbitClearing(CKatNottingH* kat, const CRabbitMap* rabbits);
 
     virtual void execute(const std::string_view& moduleName = {}) override;
     virtual unsigned int encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const override;
@@ -18,6 +18,6 @@ public:
 private:
     virtual std::string translatorObjectName() const override;
 
-    CKatNothingH* _kat;
+    CKatNottingH* _kat;
     const CRabbitMap* _rabbits;
 };

@@ -2,11 +2,11 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "console.h"
-#include "rabbitfarm/ckatnothingh.h"
+#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/items/capple.h"
 #include "rabbitfarm/moduleressources.h"
 
-CAppleTree::CAppleTree(CKatNothingH* kat) : _kat(kat)
+CAppleTree::CAppleTree(CKatNottingH* kat) : _kat(kat)
 {
     _isSingleExecution = false;
     _type = CEncounter::eField;
@@ -27,13 +27,13 @@ void CAppleTree::execute(const std::string_view&)
     }
     else
     {
-        if (_kat->sympathy() >= CKatNothingH::ESympathyLevel::eLove)
+        if (_kat->sympathy() >= CKatNottingH::ESympathyLevel::eLove)
         {
             Console::printLn(tr("You cannot stop thinkung about {} her smile, her beautiful eyes, her bell-like "
                                 "laughter. You feel obligated to get something nice for her.",
                                 _kat->name()));
         }
-        else if (_kat->sympathy() >= CKatNothingH::ESympathyLevel::eLike)
+        else if (_kat->sympathy() >= CKatNottingH::ESympathyLevel::eLike)
         {
             Console::printLn(
                 tr("You remember {}. she is a relly nice lady, and she likes {}s. Maybe you can get one for her?",
@@ -62,7 +62,7 @@ void CAppleTree::execute(const std::string_view&)
         }
         else
         {
-            if (_kat->sympathy() >= CKatNothingH::ESympathyLevel::eLove)
+            if (_kat->sympathy() >= CKatNottingH::ESympathyLevel::eLove)
             {
                 Console::printLn(tr("You select an extra beautiful, extra juicy {} for {}. You hope she will like it. "
                                     "You imagine her smile and her beautiful eyes, when you give it to her.",

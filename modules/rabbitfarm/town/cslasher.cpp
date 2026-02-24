@@ -5,12 +5,12 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
-#include "rabbitfarm/ckatnothingh.h"
+#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/items/crabbit.h"
 #include "rabbitfarm/moduleressources.h"
 #include "randomizer.h"
 
-CSlasher::CSlasher(CKatNothingH* kat, CRabbitMap* rabbits) :
+CSlasher::CSlasher(CKatNottingH* kat, CRabbitMap* rabbits) :
     CTownModule(RabbitFarm::rabbitHatchName()),
     _kat(kat),
     _rabbits(rabbits)
@@ -47,7 +47,7 @@ void CSlasher::execute()
             slasherList.push_back(rabbitAction);
         }
 
-        auto askActionString = tr("Ask about {}", CC::unColorizeString(RabbitFarm::katNothingH()));
+        auto askActionString = tr("Ask about {}", CC::unColorizeString(RabbitFarm::katNottingH()));
         auto askAction = menu.createAction({askActionString});
         menu.addMenuGroup({askAction});
         menu.addMenuGroup(slasherList, {CMenu::exit()});
@@ -97,7 +97,7 @@ void CSlasher::eat()
                         _dishOfTheDay));
     Console::printLn(
         tr("Through the window, you can see {} through the window. She obeserves every bite you take from your dish.",
-           RabbitFarm::katNothingH()));
+           RabbitFarm::katNottingH()));
     Console::printLn(tr("Her gaze judges you silently."));
 
     CGameManagement::getPlayerInstance()->addXp(50 + Randomizer::getRandom(50));
@@ -143,16 +143,16 @@ void CSlasher::ask()
     Console::printLn(
         tr("You ask {} about this strange arrangement. And he eagerly tells you the story.", RabbitFarm::slasher()));
     Console::printLn(tr("Turns out, that his father was a famous chef, and {}s mother a exquisite rabbit breeder.",
-                        RabbitFarm::katNothingH()));
+                        RabbitFarm::katNottingH()));
     Console::printLn(tr("Together, they built this rabbit roast restaurant with attached rabbit farm. {}s mother bred "
                         "the rabbits, {}s father made the roast. The restaurant was booked months in advance, people "
                         "travelled through the whole country for a delicious sunday rabbit roast.",
-                        RabbitFarm::katNothingH(),
+                        RabbitFarm::katNottingH(),
                         RabbitFarm::slasher()));
     Console::printLn(tr("When it was the turn of the kids, to take over the businnes, {} had joined the {} crew, a "
                         "radical environmentalist group. She hired a witch, who put a curse on {}. When he takes a "
                         "single rabbit from the hatch, bad things will happen.",
-                        RabbitFarm::katNothingH(),
+                        RabbitFarm::katNottingH(),
                         RabbitFarm::apple(),
                         RabbitFarm::slasher()));
     Console::printLn(tr("Unfortunately, {} does not want to go into too much detail about the curse."));
@@ -160,7 +160,7 @@ void CSlasher::ask()
     Console::printLn(
         tr("Important to know is, that the rabbits are gone at the moment. {} has to gather them back. And everybody "
            "else can do so too. He is willing, to pay {}generous amounts of gold{} for a rabbit",
-           RabbitFarm::katNothingH(),
+           RabbitFarm::katNottingH(),
            CC::fgYellow(),
            CC::ccReset()));
 }

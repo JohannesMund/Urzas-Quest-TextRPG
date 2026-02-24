@@ -1,8 +1,10 @@
 #include "cnpc.h"
+#include "cflower.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
 #include "jsontagnames.h"
+#include "randomizer.h"
 
 #include <math.h>
 
@@ -13,20 +15,23 @@ CMenuAction CNpc::npcNav(CMenu& menu) const
 
 CNpc::CNpc(const std::string_view& objectName, const bool isFemale) : CGameStateObject(objectName), _female(isFemale)
 {
+    _favoriteFlower = Ressources::Items::getRandomFlowerType();
+    _leastFavoriteFlower = Ressources::Items::getRandomFlowerType();
 }
 
 void CNpc::interact()
 {
-    int turnsNotSeen = CGameManagement::getProgressionInstance()->turns() - _lastSeen;
-    _lastSeen = CGameManagement::getProgressionInstance()->turns();
-    if (_sympathy <= 500)
+    auto turns = turnsNotSeen();
+    setLastSeen();
+    if (!isSignificantOther())
     {
         return;
     }
-    if (turnsNotSeen > 50)
+
+    if (turns > 50)
     {
-        int estrangement = CGameManagement::getPlayerInstance()->isSignificantOther(this) ? floor(turnsNotSeen * -0.03)
-                                                                                          : floor(turnsNotSeen * -0.01);
+        int estrangement =
+            CGameManagement::getPlayerInstance()->isSignificantOther(this) ? floor(turns * 0.03) : floor(turns * 0.01);
         estrange(estrangement);
     }
     breakUp();
@@ -43,7 +48,7 @@ void CNpc::askOut()
 
 void CNpc::breakUp()
 {
-    if (isSignificantOther() && _sympathy < 500)
+    if (isSignificantOther() && sympathy() < ESympathyLevel::eNeutral)
     {
         Console::printLn(coreTr(
             "It was a wonderful time you had with {} but both of you feel, that it is time to part ways.", name()));
@@ -73,14 +78,86 @@ void CNpc::thinkAbout()
     case ESympathyLevel::eDislike:
         Console::printLn(coreTr("You do not like each other too much."));
         break;
-    case ESympathyLevel::ehate:
+    case ESympathyLevel::eHate:
         Console::printLn(coreTr("Its.... complicated."));
         break;
     }
     if (isDatable())
     {
+        Console::br();
         Console::printLn(coreTr("You really should consider dating."));
     }
+    Console::br();
+}
+
+void CNpc::giftFlower()
+{
+    auto flowers = CGameManagement::getInventoryInstance()->getItemsByFilter(CFlower::flowerFilter());
+    if (!flowers.size())
+    {
+        Console::printLn(
+            coreTr("Well, this is emberrassing. You search your bag for flowers, but apperently you have none."));
+        Console::printLn(coreTr("{} looks dissapointed.", name()));
+        return;
+    }
+    auto oneFlower = dynamic_cast<CFlower*>(flowers.at(0));
+    if (oneFlower == nullptr)
+    {
+        Console::printLn(coreTr("Your flower crumbles to dust in your hand."));
+        Console::printLn(coreTr("{} looks dissapointed.", name()));
+        return;
+    }
+    Console::printLn(coreTr("You draw a {} out of your bag and hand it over to {}", oneFlower->name(), name()));
+    switch (sympathy())
+    {
+    case ESympathyLevel::eHate:
+        Console::printLn(coreTr(
+            "You and {}, this did not go together well up to now. {} accepts the flower anyway.", name(), heShe()));
+        break;
+    case ESympathyLevel::eDislike:
+        Console::printLn(coreTr(
+            "You and {}, are not frieds at all. {} accepts the flower anyway as a peace offer.", name(), heShe()));
+        break;
+    case ESympathyLevel::eNeutral:
+    default:
+        Console::printLn(coreTr("{} is surprised about your gift and {} takes it with a smile.", name(), heShe()));
+        break;
+    case ESympathyLevel::eLike:
+        Console::printLn(
+            coreTr("Your geasture hit the spot for {}. With a smile, {} accepts your gift.", name(), heShe()));
+        break;
+    case ESympathyLevel::eLove:
+        Console::printLn(
+            coreTr("A gift of love for {0}, {1} smiles as {1} taks your precious flower.", name(), heShe()));
+        break;
+    }
+
+    if (oneFlower->flowerType() == _favoriteFlower && oneFlower->flowerType() != _leastFavoriteFlower)
+    {
+        Console::printLn(coreTr("{}s are {}s favourite flowers. {} loves your gift.",
+                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                name(),
+                                heShe()));
+        addSympathy(20 + Randomizer::getRandom(30));
+    }
+    else if (oneFlower->flowerType() == _leastFavoriteFlower && oneFlower->flowerType() != _favoriteFlower)
+    {
+        Console::printLn(coreTr("{} hates {}s. {} accepts your gesture.",
+                                name(),
+                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                heShe()));
+        addSympathy(5 + Randomizer::getRandom(10));
+    }
+    else
+    {
+        Console::printLn(coreTr("{} like {}s. {} takes the flowers with a smile.",
+                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                name(),
+                                heShe()));
+        addSympathy(5 + Randomizer::getRandom(10));
+    }
+
+    CGameManagement::getInventoryInstance()->removeItem(oneFlower);
 }
 
 bool CNpc::addSympathy(const int i)
@@ -120,7 +197,8 @@ nlohmann::json CNpc::save() const
     o[TagNames::Npc::female] = _female;
     o[TagNames::Npc::lastSeen] = _lastSeen;
     o[TagNames::Npc::isSignificantOther] = isSignificantOther();
-
+    o[TagNames::Npc::favouriteFlower] = _favoriteFlower;
+    o[TagNames::Npc::leastFavouriteFlower] = _leastFavoriteFlower;
     return o;
 }
 
@@ -129,6 +207,8 @@ void CNpc::load(const nlohmann::json& json)
     _sympathy = json[TagNames::Npc::sympathy];
     _female = json[TagNames::Npc::female];
     _lastSeen = json[TagNames::Npc::lastSeen];
+    _favoriteFlower = json[TagNames::Npc::favouriteFlower];
+    _leastFavoriteFlower = json[TagNames::Npc::leastFavouriteFlower];
 
     if (json[TagNames::Npc::isSignificantOther])
     {
@@ -144,6 +224,16 @@ std::string CNpc::heShe() const
 std::string CNpc::hisHer() const
 {
     return _female ? coreTr("her") : coreTr("his");
+}
+
+std::string CNpc::himHer() const
+{
+    return _female ? coreTr("her") : coreTr("him");
+}
+
+std::string CNpc::girlfriendBoyfriend() const
+{
+    return _female ? coreTr("girlfriend") : coreTr("boyfriend");
 }
 
 bool CNpc::isSignificantOther() const
@@ -170,7 +260,7 @@ CNpc::ESympathyLevel CNpc::sympathy() const
         return ESympathyLevel::eDislike;
     }
 
-    return ESympathyLevel::ehate;
+    return ESympathyLevel::eHate;
 }
 
 bool CNpc::isDatable() const
@@ -178,26 +268,57 @@ bool CNpc::isDatable() const
     return _sympathy > 700;
 }
 
+void CNpc::setLastSeen(const int i)
+{
+    _lastSeen = i;
+}
+
+void CNpc::setLastSeen()
+{
+    _lastSeen = CGameManagement::getProgressionInstance()->turns();
+}
+
+int CNpc::turnsNotSeen() const
+{
+    return CGameManagement::getProgressionInstance()->turns() - _lastSeen;
+}
+
+std::string CNpc::notSeenString() const
+{
+    if (turnsNotSeen() > 100)
+    {
+        return coreTr("a long time");
+    }
+    if (turnsNotSeen() > 50)
+    {
+        return coreTr("quite some time");
+    }
+    return coreTr("a while");
+}
+
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)
 {
-    auto talkActionString = coreTr("Talk to {}", CC::unColorizeString(name()));
-    auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
-    auto askOutActionString = coreTr("Ask {} for a date", CC::unColorizeString(name()));
+    const auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
+    const auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
+    menu.addMenuGroup({thinkAboutAction}, {CMenu::exit()});
 
-    auto talkAction = menu.createAction({talkActionString, 'T'});
-    auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
-    auto askOutAction = menu.createAction({askOutActionString, 'A'});
+    const auto talkAction = menu.createAction({"Talk", 'T'});
+    const auto askOutAction = menu.createAction({"Ask out", 'A'});
+    const auto giftFlowerAction = menu.createAction({"Gift a flower", 'G'});
 
     CMenu::ActionList actions;
     actions.push_back(talkAction);
-    actions.push_back(thinkAboutAction);
 
     if (_sympathy > 750)
     {
         actions.push_back(askOutAction);
     }
 
-    menu.addMenuGroup(actions);
+    if (CGameManagement::getInventoryInstance()->hasItem(CFlower::flowerFilter()))
+    {
+        actions.push_back(giftFlowerAction);
+    }
+    menu.addMenuGroup({actions});
 
     auto input = menu.execute();
     printHeader(false);
@@ -205,11 +326,19 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
     if (input == talkAction)
     {
         talk();
+        Console::confirmToContinue();
     }
 
     if (input == thinkAboutAction)
     {
         thinkAbout();
+        Console::confirmToContinue();
+    }
+
+    if (input == giftFlowerAction)
+    {
+        giftFlower();
+        Console::confirmToContinue();
     }
 
     return input;
@@ -225,8 +354,10 @@ void CNpc::estrange(const int i)
     Console::printLn(
         coreTr("{} and you have not seen for each other for quite a while. You feel a little estranged", name()));
     addSympathy(i);
-    if (_sympathy < 500)
-    {
-        _sympathy = 500;
-    }
+}
+
+void CNpc::reconcile(const int i)
+{
+    Console::printLn(coreTr("You feel so much closer to {} now.", name()));
+    addSympathy(i * -1);
 }

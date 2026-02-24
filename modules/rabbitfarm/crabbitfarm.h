@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ckatnothingh.h"
+#include "ckatnottingh.h"
 #include "crabbitmap.h"
 #include "croom.h"
 #include "rabbitfarm/town/crabbithatch.h"
@@ -27,7 +27,7 @@ private:
     virtual char getMapSymbol() const override;
     virtual void printHeader() const;
 
-    CKatNothingH _kat;
+    CKatNottingH _kat;
     CSlasher _slasher;
     CRabbitHatch _rabbitHatch;
 

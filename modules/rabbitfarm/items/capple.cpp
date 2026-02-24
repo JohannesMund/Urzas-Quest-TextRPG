@@ -12,7 +12,7 @@ CApple::CApple() : CItem(TagNames::RabbitFarm::apple)
                       CC::fgLightYellow(),
                       CC::fgRed(),
                       CC::ccReset(),
-                      RabbitFarm::katNothingH());
+                      RabbitFarm::katNottingH());
 
     _isConsumable = true;
     _isUsableFromInventory = true;

@@ -81,7 +81,7 @@ unsigned int CDeadHero::encounterChance(const EEncounterType&, const std::string
 
 std::string CDeadHero::name() const
 {
-    return "Dead Hero";
+    return coreTr("Dead Hero");
 }
 
 std::string CDeadHero::translatorModuleName() const

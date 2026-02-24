@@ -3,13 +3,13 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "console.h"
-#include "rabbitfarm/ckatnothingh.h"
+#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/crabbitmap.h"
 #include "rabbitfarm/items/crabbit.h"
 #include "rabbitfarm/items/crabbitfood.h"
 #include "rabbitfarm/moduleressources.h"
 
-CRabbitClearing::CRabbitClearing(CKatNothingH* kat, const CRabbitMap* rabbits) : _kat(kat), _rabbits(rabbits)
+CRabbitClearing::CRabbitClearing(CKatNottingH* kat, const CRabbitMap* rabbits) : _kat(kat), _rabbits(rabbits)
 {
 }
 
@@ -19,7 +19,7 @@ void CRabbitClearing::execute(const std::string_view&)
     Console::br();
     Console::printLn(tr("A sunny clearing in the middle of a small forest. It is calm and nice here. Some trees and "
                         "bushes, juicy green grass and herbs. a paradise for rabbits. {} would love beeing here.",
-                        RabbitFarm::katNothingH()));
+                        RabbitFarm::katNottingH()));
     CMenu menu(RabbitFarm::moduleName());
     auto foodAction = menu.createAction({"Gather feed"});
     auto catchAction = menu.createAction({"Catch rabbit"});
@@ -39,11 +39,11 @@ void CRabbitClearing::execute(const std::string_view&)
                             rabbit->name()));
         Console::printLn(tr("It feels mayestic to see such a rare animal in its natural hebitat. This must be one of "
                             "{}s rabbits. She would probably really like to get this one back.",
-                            RabbitFarm::katNothingH()));
+                            RabbitFarm::katNottingH()));
         Console::printLn(tr("Also {} would like to have it. The mony is good for sure, but {} would not like that. "
                             "But, Will she ever notice?",
                             RabbitFarm::slasher(),
-                            RabbitFarm::katNothingH()));
+                            RabbitFarm::katNottingH()));
         menu.addMenuGroup({catchAction});
     }
 
@@ -53,7 +53,7 @@ void CRabbitClearing::execute(const std::string_view&)
     {
         Console::br();
         Console::printLn(
-            tr("{} would really like to have this one back. You are sure she knows.", RabbitFarm::katNothingH()));
+            tr("{} would really like to have this one back. You are sure she knows.", RabbitFarm::katNottingH()));
         _kat->addSympathy(-1);
     }
     if (rabbit != nullptr && input != catchAction)
@@ -76,7 +76,7 @@ void CRabbitClearing::execute(const std::string_view&)
         Console::printLn(tr(
             "A little feed for thw rabbits cannot hurt. Even if you do not bring a rabbit, you can bring some feed for "
             "the little guys. {} will like it.",
-            RabbitFarm::katNothingH()));
+            RabbitFarm::katNottingH()));
         Console::printLn(tr("You collect a big bag of grass, herbs and even some clover."));
         CGameManagement::getInventoryInstance()->addItem(new CRabbitFood);
     }

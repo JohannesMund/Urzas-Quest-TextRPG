@@ -83,15 +83,19 @@ set(URZAS_QUEST_SOURCES_CORE
     core/items/cbomb.h core/items/cbomb.cpp
     core/items/csandwich.h core/items/csandwich.cpp
 
-    core/items/story/cshaggyssandwich.h core/items/story/cshaggyssandwich.cpp
+    core/items/story/cshaggyssandwich.h core/items/story/cshaggyssandwich.cpp   
     core/items/story/curzasglasses.h core/items/story/curzasglasses.cpp
     core/items/story/claylasribbon.h core/items/story/claylasribbon.cpp
+
+    core/items/npc/cflower.h core/items/npc/cflower.cpp
 
     core/encounters/cencounter.h core/encounters/cencounter.cpp
     core/encounters/cbattleencounter.h core/encounters/cbattleencounter.cpp
     core/encounters/cdeadhero.h core/encounters/cdeadhero.cpp
     core/encounters/cmysteriouschest.h core/encounters/cmysteriouschest.cpp
     core/encounters/cequipmentdealer.h core/encounters/cequipmentdealer.cpp
+    
+    core/encounters/npc/cloveletter.h core/encounters/npc/cloveletter.cpp
 
     core/dungeons/cdungeon.h core/dungeons/cdungeon.cpp
     core/dungeons/cdungeonmap.h core/dungeons/cdungeonmap.cpp
@@ -112,11 +116,13 @@ set(CORE_INCLUDE_DIRS
     /core/dungeons 
     /core/dungeons/rooms
     /core/encounters
+    /core/encounters/npc
     /core/enemies 
     /core/gamestate 
     /core/items 
     /core/items/equipment 
     /core/items/story 
+    /core/items/npc 
     /core/menu
     /core/npc
     /core/rooms 
