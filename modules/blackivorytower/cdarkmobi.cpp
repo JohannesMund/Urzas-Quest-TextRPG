@@ -9,7 +9,7 @@
 CDarkMobi::CDarkMobi()
 {
     _name = Ressources::Game::darkMobi();
-    _weapon = "poisonous tongue";
+    _weapon = tr("poisonous tongue");
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;
@@ -25,7 +25,7 @@ void CDarkMobi::battleAction(bool& endRound)
 {
     if (Randomizer::getRandom(3) == 0)
     {
-        Console::printLn("Cut your live into pieces!");
+        Console::printLn(tr("Cut your live into pieces!"));
         CGameManagement::getPlayerInstance()->dealDamage(2);
         endRound = true;
     }

@@ -11,6 +11,8 @@ namespace BlackIvoryTower
 {
 constexpr std::string_view blackIvoryTower = "BlackIvoryTower";
 constexpr std::string_view hadADoener = "HadADoener";
+constexpr std::string_view pinkFanta = "PinkFanta";
+constexpr std::string_view mobi = "Mobi";
 constexpr std::string_view isOpen = TagNames::Common::isOpen;
 } // namespace BlackIvoryTower
 } // namespace TagNames
@@ -28,5 +30,7 @@ std::string darkIvoryTower();
 
 std::string lunatic();
 std::string lunatics();
+
+std::string pinkFanta();
 
 } // namespace BlackIvoryTower
