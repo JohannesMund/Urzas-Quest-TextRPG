@@ -197,7 +197,8 @@ nlohmann::json CNpc::save() const
     o[TagNames::Npc::female] = _female;
     o[TagNames::Npc::lastSeen] = _lastSeen;
     o[TagNames::Npc::isSignificantOther] = isSignificantOther();
-
+    o[TagNames::Npc::favouriteFlower] = _favoriteFlower;
+    o[TagNames::Npc::leastFavouriteFlower] = _leastFavoriteFlower;
     return o;
 }
 
@@ -206,6 +207,8 @@ void CNpc::load(const nlohmann::json& json)
     _sympathy = json[TagNames::Npc::sympathy];
     _female = json[TagNames::Npc::female];
     _lastSeen = json[TagNames::Npc::lastSeen];
+    _favoriteFlower = json[TagNames::Npc::favouriteFlower];
+    _leastFavoriteFlower = json[TagNames::Npc::leastFavouriteFlower];
 
     if (json[TagNames::Npc::isSignificantOther])
     {

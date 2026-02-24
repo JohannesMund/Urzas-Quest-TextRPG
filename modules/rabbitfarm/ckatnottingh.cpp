@@ -161,13 +161,14 @@ CMenuAction CKatNottingH::npcNav(CMenu& menu) const
 
 nlohmann::json CKatNottingH::save() const
 {
-    nlohmann::json o;
+    nlohmann::json o = CNpc::save();
     o["appleEncounterRegistered"] = _appleEncounterRegistered;
     return o;
 }
 
 void CKatNottingH::load(const nlohmann::json& json)
 {
+    CNpc::load(json);
     if (json["appleEncounterRegistered"] == true)
     {
         registerAppleEncounter();

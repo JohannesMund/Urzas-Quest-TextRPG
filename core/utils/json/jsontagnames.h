@@ -203,6 +203,8 @@ constexpr std::string_view sympathy = "Sympathy";
 constexpr std::string_view female = "Female";
 constexpr std::string_view lastSeen = "lastSeen";
 constexpr std::string_view isSignificantOther = "IsSignificantOther";
+constexpr std::string_view favouriteFlower = "FavouriteFlower";
+constexpr std::string_view leastFavouriteFlower = "LeastFavouriteFlower";
 
 } // namespace Npc
 
