@@ -79,6 +79,73 @@ std::pair<std::string, std::string> Ressources::Items::getRandomJunkItems()
     return items.at(Randomizer::getRandom((unsigned int)items.size()));
 }
 
+Ressources::Items::EFlower Ressources::Items::getRandomFlowerType()
+{
+    std::vector<EFlower> flowers;
+    for (auto i : FlowerIterator())
+    {
+        flowers.push_back(i);
+    }
+
+    return Randomizer::getRandomEntry(flowers);
+}
+
+std::string Ressources::Items::flower2String(const EFlower& flower)
+{
+    switch (flower)
+    {
+    case EFlower::eRose:
+        return CC::colorizeString(tr("Rose"), CC::fgRed(), CC::fgLightRed());
+    case EFlower::eCornFlower:
+        return CC::colorizeString(tr("Cornflower"), CC::fgLightCyan(), CC::fgBlue());
+    case EFlower::ePrimeRose:
+        return CC::colorizeString(tr("Primerose"), CC::fgYellow(), CC::fgLightYellow());
+    case EFlower::eTulip:
+        return CC::colorizeString(tr("Tulip"), CC::fgMagenta(), CC::fgLightRed());
+    case EFlower::eSunflower:
+        return CC::colorizeString(tr("Sunflower"), CC::fgYellow(), CC::fgLightRed());
+    case EFlower::eCarnationFlower:
+        return CC::colorizeString(tr("Carnationflower"), CC::fgLightMagenta(), CC::fgWhite());
+    case EFlower::ePansy:
+        return CC::colorizeString(tr("Pansy"), CC::fgBlack(), CC::fgBlue());
+    case EFlower::eDaisy:
+        return CC::colorizeString(tr("Daisy"), CC::fgYellow(), CC::fgWhite());
+    case EFlower::eOrchid:
+        return CC::colorizeString(tr("Orchid"), CC::fgMagenta(), CC::fgLightMagenta());
+    case EFlower::eUnknown:
+    default:
+        return CC::colorizeString(tr("Blob From outer space"), CC::fgGreen(), CC::fgLightRed());
+    }
+}
+
+int Ressources::Items::flower2Value(const EFlower& flower)
+{
+    switch (flower)
+    {
+    case EFlower::eRose:
+        return 10;
+    case EFlower::eCornFlower:
+        return 3;
+    case EFlower::ePrimeRose:
+        return 1;
+    case EFlower::eTulip:
+        return 7;
+    case EFlower::eSunflower:
+        return 8;
+    case EFlower::eCarnationFlower:
+        return 2;
+    case EFlower::ePansy:
+        return 2;
+    case EFlower::eDaisy:
+        return 1;
+    case EFlower::eOrchid:
+        return 18;
+    case EFlower::eUnknown:
+    default:
+        return 10000;
+    }
+}
+
 std::string Ressources::Enemies::getRandomEnemyName()
 {
     return Randomizer::getRandomStringFromVector({tr("Bob, the Cowboy"),

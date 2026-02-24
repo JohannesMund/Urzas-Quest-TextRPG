@@ -2,6 +2,7 @@
 #include "carmor.h"
 #include "cbomb.h"
 #include "cequipment.h"
+#include "cflower.h"
 #include "cgamemanagement.h"
 #include "chealingpotion.h"
 #include "cheartcontainer.h"
@@ -192,6 +193,10 @@ CItem* CItemFactory::loadItemFromSavGame(const nlohmann::json& json)
     else if (CGameStateObject::compareObjectName(TagNames::Item::sandwich, json))
     {
         newItem = new CSandwich({});
+    }
+    else if (CGameStateObject::compareObjectName(TagNames::Item::Npc::flower, json))
+    {
+        newItem = new CFlower({});
     }
     else
     {

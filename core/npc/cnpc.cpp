@@ -13,20 +13,22 @@ CMenuAction CNpc::npcNav(CMenu& menu) const
 
 CNpc::CNpc(const std::string_view& objectName, const bool isFemale) : CGameStateObject(objectName), _female(isFemale)
 {
+    _favoriteFlower = Ressources::Items::getRandomFlowerType();
+    _leastFavoriteFlower = Ressources::Items::getRandomFlowerType();
 }
 
 void CNpc::interact()
 {
-    int turnsNotSeen = CGameManagement::getProgressionInstance()->turns() - _lastSeen;
-    _lastSeen = CGameManagement::getProgressionInstance()->turns();
+    auto turns = turnsNotSeen();
+    setLastSeen();
     if (_sympathy <= 500)
     {
         return;
     }
-    if (turnsNotSeen > 50)
+    if (turns > 50)
     {
-        int estrangement = CGameManagement::getPlayerInstance()->isSignificantOther(this) ? floor(turnsNotSeen * -0.03)
-                                                                                          : floor(turnsNotSeen * -0.01);
+        int estrangement =
+            CGameManagement::getPlayerInstance()->isSignificantOther(this) ? floor(turns * 0.03) : floor(turns * 0.01);
         estrange(estrangement);
     }
     breakUp();
@@ -43,7 +45,7 @@ void CNpc::askOut()
 
 void CNpc::breakUp()
 {
-    if (isSignificantOther() && _sympathy < 500)
+    if (isSignificantOther() && sympathy() < ESympathyLevel::eNeutral)
     {
         Console::printLn(coreTr(
             "It was a wonderful time you had with {} but both of you feel, that it is time to part ways.", name()));
@@ -146,6 +148,16 @@ std::string CNpc::hisHer() const
     return _female ? coreTr("her") : coreTr("his");
 }
 
+std::string CNpc::himHer() const
+{
+    return _female ? coreTr("her") : coreTr("him");
+}
+
+std::string CNpc::girlfriendBoyfriend() const
+{
+    return _female ? coreTr("girlfriend") : coreTr("boyfriend");
+}
+
 bool CNpc::isSignificantOther() const
 {
     return CGameManagement::getPlayerInstance()->isSignificantOther(this);
@@ -176,6 +188,34 @@ CNpc::ESympathyLevel CNpc::sympathy() const
 bool CNpc::isDatable() const
 {
     return _sympathy > 700;
+}
+
+void CNpc::setLastSeen(const int i)
+{
+    _lastSeen = i;
+}
+
+void CNpc::setLastSeen()
+{
+    _lastSeen = CGameManagement::getProgressionInstance()->turns();
+}
+
+int CNpc::turnsNotSeen() const
+{
+    return CGameManagement::getProgressionInstance()->turns() - _lastSeen;
+}
+
+std::string CNpc::notSeenString() const
+{
+    if (turnsNotSeen() > 100)
+    {
+        return coreTr("a long time");
+    }
+    if (turnsNotSeen() > 50)
+    {
+        return coreTr("quite some time");
+    }
+    return coreTr("a while");
 }
 
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)
@@ -225,8 +265,10 @@ void CNpc::estrange(const int i)
     Console::printLn(
         coreTr("{} and you have not seen for each other for quite a while. You feel a little estranged", name()));
     addSympathy(i);
-    if (_sympathy < 500)
-    {
-        _sympathy = 500;
-    }
+}
+
+void CNpc::reconcile(const int i)
+{
+    Console::printLn(coreTr("You feel so much closer to {} now.", name()));
+    addSympathy(i * -1);
 }

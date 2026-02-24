@@ -1,5 +1,4 @@
-#ifndef CURZASGLASSES_H
-#define CURZASGLASSES_H
+#pragma once
 
 #include "citem.h"
 
@@ -12,5 +11,3 @@ public:
 protected:
     virtual std::string translatorModuleName() const override;
 };
-
-#endif // CURZASGLASSES_H

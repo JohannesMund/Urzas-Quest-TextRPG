@@ -20,6 +20,7 @@ constexpr std::string_view equipment = "Equipment";
 constexpr std::string_view town = "Town";
 constexpr std::string_view npc = "NPC";
 constexpr std::string_view deadHero = "DeadHero";
+constexpr std::string_view loveLetter = "LoveLetter";
 constexpr std::string_view equipmentDealer = "EquipmentDealer";
 constexpr std::string_view battle = "Battle";
 constexpr std::string_view mysteriousChest = "MysteriousChest";
@@ -180,6 +181,11 @@ constexpr std::string_view laylasRibbon = "LaylasRibbon";
 constexpr std::string_view shaggysSandwich = "ShaggysSandwich";
 constexpr std::string_view urzasGlasses = "UrzasGlasses";
 } // namespace Story
+
+namespace Npc
+{
+constexpr std::string_view flower = "flower";
+}
 
 constexpr std::string_view inventory = "Inventory";
 constexpr std::string_view bomb = "Bomb";

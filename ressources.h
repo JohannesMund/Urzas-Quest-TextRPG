@@ -1,5 +1,7 @@
 #pragma once
 
+#include "enumiterator.h"
+
 #include <string>
 #include <vector>
 
@@ -65,6 +67,20 @@ enum class EQuality
     eAwesomne
 };
 
+enum class EFlower
+{
+    eRose,
+    eCornFlower,
+    ePrimeRose,
+    eTulip,
+    eSunflower,
+    eCarnationFlower,
+    ePansy,
+    eDaisy,
+    eOrchid,
+    eUnknown
+};
+
 std::string sock();
 std::string otherSock();
 
@@ -72,6 +88,12 @@ std::pair<std::vector<std::string>, std::string> getRandomEquipmentNamesAndDescr
                                                                                        const EQuality quality);
 
 std::pair<std::string, std::string> getRandomJunkItems();
+
+typedef EnumIterator<EFlower, EFlower::eRose, EFlower::eUnknown> FlowerIterator;
+
+EFlower getRandomFlowerType();
+std::string flower2String(const EFlower& flower);
+int flower2Value(const EFlower& flower);
 
 } // namespace Items
 

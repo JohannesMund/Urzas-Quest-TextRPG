@@ -3,6 +3,7 @@
 #include "cdeadhero.h"
 #include "cequipmentdealer.h"
 #include "cgamemanagement.h"
+#include "cloveletter.h"
 #include "cmysteriouschest.h"
 #include "console.h"
 #include "moduleregister.h"
@@ -21,6 +22,7 @@ void CGameProgression::initEncounters()
     CGameManagement::getInstance()->registerEncounter(new CDeadHero());
     CGameManagement::getInstance()->registerEncounter(new CBattleEncounter());
     CGameManagement::getInstance()->registerEncounter(new CEquipmentDealer());
+    CGameManagement::getInstance()->registerEncounter(new CLoveLetter());
 }
 
 void CGameProgression::initModules()
@@ -175,7 +177,8 @@ bool CGameProgression::isModuleQuestAccepted(const std::string_view& moduleName)
 {
     return std::count_if(_moduleQuests.begin(),
                          _moduleQuests.end(),
-                         [moduleName](const ModuleQuest& quest) {
+                         [moduleName](const ModuleQuest& quest)
+                         {
                              return ModuleQuest::moduleQuestNameFilter(moduleName)(quest) &&
                                     ModuleQuest::moduleQuestAcceptedFilter()(quest);
                          }) != 0;
