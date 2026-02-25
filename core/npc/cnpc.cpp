@@ -234,16 +234,6 @@ std::string CNpc::girlfriendBoyfriend() const
     return _gender == Core::EGender::eFemale ? coreTr("girlfriend") : coreTr("boyfriend");
 }
 
-std::string CNpc::himHer() const
-{
-    return _female ? coreTr("her") : coreTr("him");
-}
-
-std::string CNpc::girlfriendBoyfriend() const
-{
-    return _female ? coreTr("girlfriend") : coreTr("boyfriend");
-}
-
 bool CNpc::isSignificantOther() const
 {
     return CGameManagement::getPlayerInstance()->isSignificantOther(this);
