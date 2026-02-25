@@ -33,7 +33,6 @@ void CNpc::interact()
         estrange(estrangement);
     }
     breakUp();
-    Console::confirmToContinue();
 }
 
 void CNpc::askOut()

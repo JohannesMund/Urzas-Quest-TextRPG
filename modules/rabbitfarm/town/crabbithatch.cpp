@@ -67,12 +67,10 @@ void CRabbitHatch::execute()
         if (input == askAction)
         {
             ask();
-            Console::confirmToContinue();
         }
         if (input == watchAction)
         {
             watch();
-            Console::confirmToContinue();
         }
         if (input == donateAction)
         {
