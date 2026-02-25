@@ -1,6 +1,7 @@
 set(URZAS_QUEST_SOURCES_CORE	
 	core/core.cmake
 	core/ressources/core.json
+    core/core.h
         
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp

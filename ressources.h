@@ -9,6 +9,7 @@ namespace Ressources
 {
 namespace Game
 {
+
 std::string urza();
 std::string whoTheFuckIsUrza();
 std::string urzaWhoTheFuckIsUrza();

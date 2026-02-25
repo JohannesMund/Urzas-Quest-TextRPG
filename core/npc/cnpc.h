@@ -3,6 +3,7 @@
 #include "cgamestateobject.h"
 #include "cmenu.h"
 #include "cmenuaction.h"
+#include "core.h"
 #include "ressources.h"
 
 #include <nlohmann/json.hpp>
@@ -29,7 +30,7 @@ public:
     /**
      * @brief Constructor
      */
-    CNpc(const std::string_view& objectName, const bool isFemale);
+    CNpc(const std::string_view& objectName, const Core::EGender gender);
 
     /**
      * @brief Interaction functions
@@ -146,7 +147,7 @@ protected:
     virtual void printHeader(const bool bFull = true) const = 0;
 
 private:
-    bool _female;
+    Core::EGender _gender;
     unsigned int _lastSeen = 0;
 
     Ressources::Items::EFlower _favoriteFlower;
