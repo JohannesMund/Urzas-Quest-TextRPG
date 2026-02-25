@@ -232,10 +232,10 @@ void CRabbitHatch::deliverRabbit()
                         RabbitFarm::katNottingH()));
 
     auto item = CGameManagement::getInventoryInstance()->takeItem(rabbits.at(0));
-    if (item.has_value())
+    if (!item.has_value())
     {
-        auto rabbit = dynamic_cast<CRabbit*>(*item);
-        _rabbits->add(rabbit);
+        Console::printLn(tr("The rabbit is dead, lets cover up this quickly."));
+        return;
     }
 
     _kat->addSympathy(50);
