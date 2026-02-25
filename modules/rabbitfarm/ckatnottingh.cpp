@@ -2,12 +2,13 @@
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
+#include "core.h"
 #include "rabbitfarm/encounters/cappletree.h"
 #include "rabbitfarm/items/capple.h"
 #include "rabbitfarm/moduleressources.h"
 #include "randomizer.h"
 
-CKatNottingH::CKatNottingH() : CNpc(TagNames::RabbitFarm::kat, true)
+CKatNottingH::CKatNottingH() : CNpc(TagNames::RabbitFarm::kat, Core::EGender::eFemale)
 {
 }
 
@@ -18,7 +19,6 @@ void CKatNottingH::interact()
     do
     {
         printHeader();
-
         CMenu menu(RabbitFarm::moduleName());
         auto appleAction = menu.createAction({"Give her an Apple", 'G'});
 

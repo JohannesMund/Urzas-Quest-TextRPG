@@ -1,6 +1,8 @@
 #include "cplayer.h"
+#include "carmor.h"
 #include "ccompanion.h"
 #include "cenemy.h"
+#include "cequipment.h"
 #include "cgamemanagement.h"
 #include "citem.h"
 #include "cmenu.h"
@@ -8,7 +10,9 @@
 #include "companionfactory.h"
 #include "console.h"
 #include "csavefile.h"
+#include "cshield.h"
 #include "csupportcompanion.h"
+#include "cweapon.h"
 #include "randomizer.h"
 #include "ressources.h"
 #include "translator/ctranslator.h"
@@ -430,6 +434,25 @@ std::string CPlayer::translatorModuleName() const
     return std::string();
 }
 
+std::optional<std::string> CPlayer::getEquipmentName(const Ressources::Items::EType tp) const
+{
+
+    auto items = CGameManagement::getInventoryInstance()->getEquipment();
+    if (items.size() == 0)
+    {
+        return {};
+    }
+
+    auto it = std::find_if(items.begin(), items.end(), [tp](const auto& i) { return i->type() == tp; });
+
+    if (it == items.end())
+    {
+        return {};
+    }
+
+    return (*it)->name();
+}
+
 void CPlayer::removeAllSupportCompanions()
 {
     std::for_each(_supporters.begin(),
@@ -441,6 +464,36 @@ void CPlayer::removeAllSupportCompanions()
                   });
 
     _supporters.clear();
+}
+
+std::string CPlayer::weaponName() const
+{
+    auto name = getEquipmentName(Ressources::Items::EType::eWeapon);
+    if (name.has_value())
+    {
+        name.value();
+    }
+    return coreTr("bare hand");
+}
+
+std::string CPlayer::shieldName() const
+{
+    auto name = getEquipmentName(Ressources::Items::EType::eShield);
+    if (name.has_value())
+    {
+        name.value();
+    }
+    return coreTr("your face");
+}
+
+std::string CPlayer::armorName() const
+{
+    auto name = getEquipmentName(Ressources::Items::EType::eArmor);
+    if (name.has_value())
+    {
+        name.value();
+    }
+    return coreTr("Undershirt");
 }
 
 unsigned int CPlayer::xpForNextLevel() const

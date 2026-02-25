@@ -116,23 +116,23 @@ std::string RabbitFarm::moduleName()
 
 std::string RabbitFarm::katNottingH()
 {
-    return std::format("{}K{}a{}t {}Notting{}H{}",
-                       CC::fgGreen(),
-                       CC::fgLightYellow(),
-                       CC::fgYellow(),
-                       CC::fgDarkGray(),
-                       CC::fgWhite(),
-                       CC::ccReset());
+    return tr("{}K{}a{}t {}Notting{}H{}",
+              CC::fgGreen(),
+              CC::fgLightYellow(),
+              CC::fgYellow(),
+              CC::fgDarkGray(),
+              CC::fgWhite(),
+              CC::ccReset());
 }
 
 std::string RabbitFarm::rabbitHatchName()
 {
-    return std::format("{}Rabbit {}Hatch{}", CC::fgLightGray(), CC::fgYellow(), CC::ccReset());
+    return tr("{}Rabbit {}Hatch{}", CC::fgLightGray(), CC::fgYellow(), CC::ccReset());
 }
 
 std::string RabbitFarm::rabbitFarmName()
 {
-    return std::format("{}Rabbit {}Farm{}", CC::fgLightYellow(), CC::fgLightGreen(), CC::ccReset());
+    return tr("{}Rabbit {}Farm{}", CC::fgLightYellow(), CC::fgLightGreen(), CC::ccReset());
 }
 
 std::string RabbitFarm::apple()

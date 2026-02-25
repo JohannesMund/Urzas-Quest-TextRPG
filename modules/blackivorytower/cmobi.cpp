@@ -2,8 +2,9 @@
 
 #include "blackivorytower/moduleressources.h"
 #include "colorize.h"
+#include "core.h"
 
-CMobi::CMobi() : CNpc(TagNames::BlackIvoryTower::mobi, true)
+CMobi::CMobi() : CNpc(TagNames::BlackIvoryTower::mobi, Core::EGender::eFemale)
 {
 }
 
