@@ -13,7 +13,9 @@ CMenuAction CNpc::npcNav(CMenu& menu) const
     return menu.createAction({CC::unColorizeString(name())}, false);
 }
 
-CNpc::CNpc(const std::string_view& objectName, const bool isFemale) : CGameStateObject(objectName), _female(isFemale)
+CNpc::CNpc(const std::string_view& objectName, const Core::EGender gender) :
+    CGameStateObject(objectName),
+    _gender(gender)
 {
     _favoriteFlower = Ressources::Items::getRandomFlowerType();
     _leastFavoriteFlower = Ressources::Items::getRandomFlowerType();
@@ -60,7 +62,7 @@ void CNpc::thinkAbout()
 {
     if (isSignificantOther())
     {
-        Console::printLn(coreTr("{} is your {}", name(), _female ? coreTr("girlfriend") : coreTr("boyfriend")));
+        Console::printLn(coreTr("{} is your {}", name(), girlfriendBoyfriend()));
     }
     Console::printLn(coreTr("Your sympathy level is: {}/1000", _sympathy));
     switch (sympathy())
@@ -194,7 +196,7 @@ nlohmann::json CNpc::save() const
 {
     nlohmann::json o;
     o[TagNames::Npc::sympathy] = _sympathy;
-    o[TagNames::Npc::female] = _female;
+    o[TagNames::Npc::gender] = _gender;
     o[TagNames::Npc::lastSeen] = _lastSeen;
     o[TagNames::Npc::isSignificantOther] = isSignificantOther();
     o[TagNames::Npc::favouriteFlower] = _favoriteFlower;
@@ -205,7 +207,7 @@ nlohmann::json CNpc::save() const
 void CNpc::load(const nlohmann::json& json)
 {
     _sympathy = json[TagNames::Npc::sympathy];
-    _female = json[TagNames::Npc::female];
+    _gender = json[TagNames::Npc::gender];
     _lastSeen = json[TagNames::Npc::lastSeen];
     _favoriteFlower = json[TagNames::Npc::favouriteFlower];
     _leastFavoriteFlower = json[TagNames::Npc::leastFavouriteFlower];
@@ -218,22 +220,22 @@ void CNpc::load(const nlohmann::json& json)
 
 std::string CNpc::heShe() const
 {
-    return _female ? coreTr("she") : coreTr("he");
+    return _gender == Core::EGender::eFemale ? coreTr("she") : coreTr("he");
 }
 
 std::string CNpc::hisHer() const
 {
-    return _female ? coreTr("her") : coreTr("his");
+    return _gender == Core::EGender::eFemale ? coreTr("her") : coreTr("his");
 }
 
 std::string CNpc::himHer() const
 {
-    return _female ? coreTr("her") : coreTr("him");
+    return _gender == Core::EGender::eFemale ? coreTr("her") : coreTr("him");
 }
 
 std::string CNpc::girlfriendBoyfriend() const
 {
-    return _female ? coreTr("girlfriend") : coreTr("boyfriend");
+    return _gender == Core::EGender::eFemale ? coreTr("girlfriend") : coreTr("boyfriend");
 }
 
 bool CNpc::isSignificantOther() const
