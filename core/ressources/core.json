@@ -1,6 +1,6 @@
 {
   "FileSpec": {
-    "DateTime": "2026-02-13 07:34:56",
+    "DateTime": "2026-02-25 22:44:00",
     "FileType": "Translation",
     "Name": "UrzasQuest TextRPG",
     "Version": 1
@@ -30,6 +30,43 @@
       {
         "Source": "Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now have a shiny new armor to protect you.",
         "de": "Warum einen wertvollen Gegenstand verschwenden, wenn er dich schützen kann. Du nimmst das T-Shirt und rüstest es aus. Du bist nun ein Held in glänzender Rüstung, die dich beschüten wird."
+      }
+    ],
+    "DeadHero": [
+      {
+        "Source": "Dead Hero",
+        "Status": "untranslated",
+        "de": "Dead Hero"
+      },
+      {
+        "Source": "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you.",
+        "Status": "untranslated",
+        "de": "Making your way through the world of adventure, you find a body, lying next to a tree. It seems to be a hero, just like you. He wears the same {} as you, and he wears the same {} as you. But, he was not as lucky as you."
+      },
+      {
+        "Source": "He is dead. Definitely dead. He lies in a puddle of his own blood, the limbs broken, all his treasure gone (if he even had som treasure at all). All of his treasure?",
+        "Status": "untranslated",
+        "de": "He is dead. Definitely dead. He lies in a puddle of his own blood, the limbs broken, all his treasure gone (if he even had som treasure at all). All of his treasure?"
+      },
+      {
+        "Source": "Maybe, just maybe you should have a look.",
+        "Status": "untranslated",
+        "de": "Maybe, just maybe you should have a look."
+      },
+      {
+        "Source": "You approach the body, and one thing is for sure: This guy is dead. The opponent must have had enormous claws (or a Nokia 3210). But one thing survived the fight. His shirt seems pretty unharmed. It could be very usefull for you too.",
+        "Status": "untranslated",
+        "de": "You approach the body, and one thing is for sure: This guy is dead. The opponent must have had enormous claws (or a Nokia 3210). But one thing survived the fight. His shirt seems pretty unharmed. It could be very usefull for you too."
+      },
+      {
+        "Source": "You wonder, if you should take it.",
+        "Status": "untranslated",
+        "de": "You wonder, if you should take it."
+      },
+      {
+        "Source": "Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now have a shiny new armor to protect you.",
+        "Status": "untranslated",
+        "de": "Why waste a valuable item, when it can protect you? You take the T-shirt and equip it. You now have a shiny new armor to protect you."
       }
     ],
     "Inventory": [
@@ -856,7 +893,7 @@
     ],
     "Town": [
       {
-        "Source": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air.",        
+        "Source": "The Blacksmith in town. It is hot, it is dirty, the sound of a hammer hitting an anvil fills the air.",
         "de": "Die Schmiede der Stadt. Es ist heiß, es ist schmutzig, der Krach eines Hammers, der auf einem Amboss trommelt tönt durch die Luft."
       },
       {
@@ -880,7 +917,7 @@
         "de": "Der Priester spricht seine Gebete und ein göttliches Licht umgiebt dich. Deine Wunden schließen sich, deine Schmerzen verschwinden."
       },
       {
-        "Source": "You are fully healed.",       
+        "Source": "You are fully healed.",
         "de": "Du wurdest vollständig geheilt."
       },
       {
