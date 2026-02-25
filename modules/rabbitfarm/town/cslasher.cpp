@@ -134,6 +134,9 @@ void CSlasher::deliverRabbit()
         _rabbits->add(rabbit);
     }
 
+    Console::printLn(tr("Through the window, you can see {}, watching your deal with disgust. You should probably not "
+                        "visit her too soon.",
+                        RabbitFarm::katNottingH()));
     _kat->addSympathy(-250);
     _kat->breakUp();
 }

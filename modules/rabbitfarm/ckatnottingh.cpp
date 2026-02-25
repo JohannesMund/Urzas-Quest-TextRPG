@@ -45,15 +45,17 @@ void CKatNottingH::talk()
 
     if (isSignificantOther())
     {
-        Console::printLn(tr("it is always a pleasure to spend time with {0} at the {1} it feels like home for you, {0} "
-                            "feels like home for you. You talk about your adventures, the {1} and all the rest.",
-                            RabbitFarm::katNottingH(),
-                            RabbitFarm::rabbitHatchName()));
         Console::printLn(
-            tr("While admiring her {} are the best, and for sure, you need to get a extraordinary beautiful {} "
-               "for your next visit. Also, another date would be great, don't you think?",
-               RabbitFarm::katsBoots(),
-               RabbitFarm::apple()));
+            tr("it is always a pleasure to spend time with {0} at the {1} it feels like home for you, {0} "
+               "feels like home for you. You talk about your adventures, rabbits, the {1} and all the rest.",
+               RabbitFarm::katNottingH(),
+               RabbitFarm::rabbitHatchName()));
+        Console::printLn(tr("You spend a beautiful day at the {}, but your adventures are calling. A kingdom does not "
+                            "save itelf. You feel sad as you have to leave, but for sure, you will bring the most "
+                            "beautiful {} you can find, the next time you visit {}. The sooner the better.",
+                            RabbitFarm::rabbitHatchName(),
+                            RabbitFarm::apple(),
+                            RabbitFarm::katNottingH()));
         addSympathy(10);
     }
 
@@ -64,7 +66,7 @@ void CKatNottingH::talk()
         Console::printLn(
             tr("{0} and you have a nice, long talk. You talk about rabbits, and the {1}, what it means to care for all "
                "those little rabbits. You enjoy {0}s company. She is a nice lady, with an engaging personality. And "
-               "she's pretty. Peally pretty.",
+               "she's pretty. Really pretty.",
                RabbitFarm::katNottingH(),
                RabbitFarm::rabbitHatchName()));
         Console::printLn(tr("Turns out, she likes {}s a lot. Maybe you can get her some?", RabbitFarm::apple()));
@@ -73,7 +75,7 @@ void CKatNottingH::talk()
     case CNpc::ESympathyLevel::eLike:
         Console::printLn(
             tr("You like beeing in the {1} and you like beeing with {0}. You never liked her glasses too much, but the "
-               "more you are talking, the more you realize the beatiful eys behind the glasses. You talk about "
+               "more you are talking, the more you realize the beatiful eyes behind the glasses. You talk about "
                "everything and nothing, it does not seem to matter, what matters more, is beeing together with her. "
                "The more you talk, the more beautiful {0} becomes.",
                RabbitFarm::katNottingH(),
@@ -83,7 +85,7 @@ void CKatNottingH::talk()
         break;
     case CNpc::ESympathyLevel::eLove:
         Console::printLn(tr(
-            "{}, beautiful and nice. {} hit your life like a bombshell. You talk for a long time. you listen to every "
+            "{}, beautiful and nice. {} hits your life like a bombshell. You talk for a long time. you listen to every "
             "word she says. you enjoy her smile, every even so small contact. You simply enjoy beeing with her.",
             RabbitFarm::coolAndStrong(),
             RabbitFarm::katNottingH()));
@@ -109,7 +111,7 @@ void CKatNottingH::talk()
         if (CGameManagement::getPlayerInstance()->hasSignificantOther())
         {
             Console::printLn(tr(
-                "You catch yourself think about asking her outfor a date, but {} will probably not like that too much",
+                "You catch yourself think about asking her out for a date, but {} will probably not like that too much",
                 CGameManagement::getPlayerInstance()->signigicantOther()->name()));
         }
         else
@@ -129,7 +131,7 @@ std::string CKatNottingH::describe() const
 {
     if (_sympathy > 75)
     {
-        return tr("{} s a friendly, really beautiful lady. She is an extraordinaryly {} woman. She has beautiful eyes "
+        return tr("{} is a friendly, really beautiful lady. She is an extraordinaryly {} woman. She has beautiful eyes "
                   "and a breathtaking smile. She is smart and funny. You "
                   "could spend hoours and hours listening to her. Sometimes, you even wish you where a rabbit.",
                   RabbitFarm::katNottingH(),

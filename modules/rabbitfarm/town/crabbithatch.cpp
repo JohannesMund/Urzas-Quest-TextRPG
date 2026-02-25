@@ -217,6 +217,20 @@ void CRabbitHatch::deliverRabbit()
         Console::printLn(tr("Turns out, you do not have a rabbit. You better go now."));
         return;
     }
+
+    Console::printLn(tr("You remember, that you found one of the rabbits. Proudly, you reach under your {} and present "
+                        "your finding. It is a:",
+                        CGameManagement::getPlayerInstance()->armorName()));
+
+    Console::br();
+    Console::printLn(rabbits.at(0)->name(), Console::EAlignment::eCenter);
+    Console::printLn(rabbits.at(0)->description(), Console::EAlignment::eCenter);
+    Console::br();
+
+    Console::printLn(tr("And this rabbit is definitely not burmt. You realize, that this was oddly specific, but you "
+                        "can see the smile on {}s face. She is very happy to get this rabbit back.",
+                        RabbitFarm::katNottingH()));
+
     auto item = CGameManagement::getInventoryInstance()->takeItem(rabbits.at(0));
     if (!item.has_value())
     {
@@ -224,22 +238,6 @@ void CRabbitHatch::deliverRabbit()
         return;
     }
 
-    auto rabbit = dynamic_cast<CRabbit*>(*item);
-
-    Console::printLn(tr("You remember, that you found one of the rabbits. Proudly, you reach under your {} and present "
-                        "your finding. It is a:",
-                        CGameManagement::getPlayerInstance()->armorName()));
-
-    Console::br();
-    Console::printLn(rabbit->name(), Console::EAlignment::eCenter);
-    Console::printLn(rabbit->description(), Console::EAlignment::eCenter);
-    Console::br();
-
-    Console::printLn(tr("And this rabbit is definitely not burmt. You realize, that this was oddly specific, but you "
-                        "can see the smile on {}s face. She is very happy to get this rabbit back.",
-                        RabbitFarm::katNottingH()));
-
-    _rabbits->add(rabbit);
     _kat->addSympathy(50);
     Console::confirmToContinue();
 }

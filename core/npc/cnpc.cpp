@@ -25,10 +25,6 @@ void CNpc::interact()
 {
     auto turns = turnsNotSeen();
     setLastSeen();
-    if (!isSignificantOther())
-    {
-        return;
-    }
 
     if (turns > 50)
     {
@@ -363,9 +359,19 @@ std::string CNpc::translatorObjectName() const
 
 void CNpc::estrange(const int i)
 {
-    Console::printLn(
-        coreTr("{} and you have not seen for each other for quite a while. You feel a little estranged", name()));
-    addSympathy(i);
+    if (_sympathy > 500)
+    {
+        Console::printLn(
+            coreTr("{} and you have not seen for each other for quite a while. You feel a little estranged", name()));
+        addSympathy(i * -1);
+        _sympathy = std::max(500, _sympathy);
+    }
+    if (_sympathy < 500)
+    {
+        Console::printLn(coreTr("{} and you have not seen for each other for quite a while. Old grudges fade", name()));
+        addSympathy(i);
+        _sympathy = std::min(500, _sympathy);
+    }
 }
 
 void CNpc::reconcile(const int i)
