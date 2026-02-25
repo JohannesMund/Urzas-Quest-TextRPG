@@ -74,7 +74,6 @@ void CRabbitHatch::execute()
         if (input == watchAction)
         {
             watch();
-            Console::confirmToContinue();
         }
         if (input == donateAction)
         {
@@ -182,7 +181,7 @@ void CRabbitHatch::watch()
         {
             watchOneRabbit();
         }
-    } while (input == CMenu::exit());
+    } while (input != CMenu::exit());
 }
 
 void CRabbitHatch::ask()

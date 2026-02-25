@@ -1,9 +1,265 @@
 {
   "FileSpec": {
-    "DateTime": "2026-02-06 20:36:28",
+    "DateTime": "2026-02-25 15:36:34",
     "FileType": "Translation",
     "Name": "UrzasQuest TextRPG",
     "Version": 1
   },
-  "Translation": {}
+  "Translation": {
+    "Item": [
+      {
+        "Source": "One particularly unique, rare Rabbit.",
+        "Status": "untranslated",
+        "de": "One particularly unique, rare Rabbit."
+      }
+    ],
+    "MenuActions": [
+      {
+        "Source": {
+          "MenuAction": "Rabbit Hatch",
+          "MenuActionKey": 82
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Rabbit Hatch",
+          "MenuActionKey": 82
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Ask about Rabbit Slinging Slasher",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Ask about Rabbit Slinging Slasher",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Watch rabbits",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Watch rabbits",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Deliver rabbit",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Deliver rabbit",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Donate feed",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Donate feed",
+          "MenuActionKey": 0
+        }
+      },
+      {
+        "Source": {
+          "MenuAction": "Kat NottingH",
+          "MenuActionKey": 0
+        },
+        "Status": "untranslated",
+        "de": {
+          "MenuAction": "Kat OhneH",
+          "MenuActionKey": 0
+        }
+      }
+    ],
+    "RabbitHatch": [
+      {
+        "Source": "{}s famous rabbit farm",
+        "Status": "untranslated",
+        "de": "{}s famous rabbit farm"
+      },
+      {
+        "Source": "Rabbit of the day:",
+        "Status": "untranslated",
+        "de": "Rabbit of the day:"
+      },
+      {
+        "Source": "Ask about {}",
+        "Status": "untranslated",
+        "de": "Ask about {}"
+      },
+      {
+        "Source": "It is a sad image, watching this empty rabbit hatch. All rabbits escaped. It will be a task for an especially brave and incredibly strong adventurer toget them back.",
+        "Status": "untranslated",
+        "de": "It is a sad image, watching this empty rabbit hatch. All rabbits escaped. It will be a task for an especially brave and incredibly strong adventurer toget them back."
+      },
+      {
+        "Source": "Surely, {} would love this especially brave and incredibly strong adventurer for doing this.",
+        "Status": "untranslated",
+        "de": "Surely, {} would love this especially brave and incredibly strong adventurer for doing this."
+      },
+      {
+        "Source": "If only, you knew where to find a especially brave and incredibly strong adventurer",
+        "Status": "untranslated",
+        "de": "If only, you knew where to find a especially brave and incredibly strong adventurer"
+      },
+      {
+        "Source": "You ask {} about this strange arrangement. And he eagerly tells you the story.",
+        "Status": "untranslated",
+        "de": "You ask {} about this strange arrangement. And he eagerly tells you the story."
+      },
+      {
+        "Source": "Apperently, her mother and {}s father build all of that.",
+        "Status": "untranslated",
+        "de": "Apperently, her mother and {}s father build all of that."
+      },
+      {
+        "Source": "When she took over from her mother, she decided to continue the breeding of rabbits, but protect them, rather than allowimg {} to cook them.",
+        "Status": "untranslated",
+        "de": "When she took over from her mother, she decided to continue the breeding of rabbits, but protect them, rather than allowimg {} to cook them."
+      },
+      {
+        "Source": "A nice environmentalist witch put a curse on {}, so whenever he tries to get a rabbit from the hatch, {}lightning will strike him while taking a dump{}.",
+        "Status": "untranslated",
+        "de": "A nice environmentalist witch put a curse on {}, so whenever he tries to get a rabbit from the hatch, {}lightning will strike him while taking a dump{}."
+      },
+      {
+        "Source": "In return, {} hired some dude, who let all of her rabbits free. She tries to find them desperately but she surely needs help, finding all of the {}{}{} rabbits. She cannot pay you much, but turns out that the way into the heart of this lady is through the rabbits.",
+        "Status": "untranslated",
+        "de": "In return, {} hired some dude, who let all of her rabbits free. She tries to find them desperately but she surely needs help, finding all of the {}{}{} rabbits. She cannot pay you much, but turns out that the way into the heart of this lady is through the rabbits."
+      }
+    ],
+    "Ressources": [
+      {
+        "Source": "{0}R{1}abbit {2}S{1}linging {0}S{1}lasher{3}",
+        "de": "{0}H{1}asen {2}h{1}assender {0}Z{1}erhacker{3}"
+      },
+      {
+        "Source": "{}light gray{}",
+        "Status": "untranslated",
+        "de": "{}light gray{}"
+      },
+      {
+        "Source": "{}dark gray{}",
+        "Status": "untranslated",
+        "de": "{}dark gray{}"
+      },
+      {
+        "Source": "{}black{}",
+        "Status": "untranslated",
+        "de": "{}black{}"
+      },
+      {
+        "Source": "white",
+        "Status": "untranslated",
+        "de": "white"
+      },
+      {
+        "Source": "{}red{}",
+        "Status": "untranslated",
+        "de": "{}red{}"
+      },
+      {
+        "Source": "{}blue{}",
+        "Status": "untranslated",
+        "de": "{}blue{}"
+      },
+      {
+        "Source": "striped",
+        "Status": "untranslated",
+        "de": "striped"
+      },
+      {
+        "Source": "spotted",
+        "Status": "untranslated",
+        "de": "spotted"
+      },
+      {
+        "Source": "speckled",
+        "Status": "untranslated",
+        "de": "speckled"
+      },
+      {
+        "Source": "smoked",
+        "Status": "untranslated",
+        "de": "smoked"
+      },
+      {
+        "Source": "smeared",
+        "Status": "untranslated",
+        "de": "smeared"
+      },
+      {
+        "Source": "{}fire{}",
+        "Status": "untranslated",
+        "de": "{}fire{}"
+      },
+      {
+        "Source": "i{}c{}e",
+        "Status": "untranslated",
+        "de": "i{}c{}e"
+      },
+      {
+        "Source": "{}dragon{}",
+        "Status": "untranslated",
+        "de": "{}dragon{}"
+      },
+      {
+        "Source": "{}wolf{}",
+        "Status": "untranslated",
+        "de": "{}wolf{}"
+      },
+      {
+        "Source": "{0}d{1}r{0}a{1}g{0}o{1}n{2}",
+        "Status": "untranslated",
+        "de": "{0}d{1}r{0}a{1}g{0}o{1}n{2}"
+      },
+      {
+        "Source": "Rabbit",
+        "Status": "untranslated",
+        "de": "Rabbit"
+      },
+      {
+        "Source": "Hare",
+        "Status": "untranslated",
+        "de": "Hare"
+      },
+      {
+        "Source": "Cony",
+        "Status": "untranslated",
+        "de": "Cony"
+      },
+      {
+        "Source": "Bunny",
+        "Status": "untranslated",
+        "de": "Bunny"
+      },
+      {
+        "Source": "Buck",
+        "Status": "untranslated",
+        "de": "Buck"
+      }
+    ],
+    "Room": [
+      {
+        "Source": "This is a nice place. A cozy farm, old, rusitc, romantic. A lot of rabbits hopping around, cute and normal rabbits, nothing special. ",
+        "Status": "untranslated",
+        "de": "This is a nice place. A cozy farm, old, rusitc, romantic. A lot of rabbits hopping around, cute and normal rabbits, nothing special. "
+      },
+      {
+        "Source": "There is also a restaurant, which belongs to the {}. It seems a little out of place.",
+        "Status": "untranslated",
+        "de": "There is also a restaurant, which belongs to the {}. It seems a little out of place."
+      }
+    ]
+  }
 }
