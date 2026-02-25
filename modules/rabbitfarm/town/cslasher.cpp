@@ -66,10 +66,6 @@ void CSlasher::execute()
         {
             ask();
         }
-        if (input != CMenu::exit())
-        {
-            Console::confirmToContinue();
-        }
 
     } while (input != CMenu::exit());
 }
@@ -103,6 +99,7 @@ void CSlasher::eat()
     CGameManagement::getPlayerInstance()->addXp(50 + Randomizer::getRandom(50));
     CGameManagement::getPlayerInstance()->fullHeal();
     _kat->addSympathy(-25);
+    Console::confirmToContinue();
 }
 
 void CSlasher::deliverRabbit()
@@ -139,6 +136,7 @@ void CSlasher::deliverRabbit()
                         RabbitFarm::katNottingH()));
     _kat->addSympathy(-250);
     _kat->breakUp();
+    Console::confirmToContinue();
 }
 
 void CSlasher::ask()
@@ -166,6 +164,7 @@ void CSlasher::ask()
            RabbitFarm::katNottingH(),
            CC::fgYellow(),
            CC::ccReset()));
+    Console::confirmToContinue();
 }
 
 void CSlasher::makeDishOfTheDay()
