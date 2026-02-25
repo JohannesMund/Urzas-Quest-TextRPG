@@ -62,18 +62,22 @@ void CRabbitHatch::execute()
         if (input == rabbitAction)
         {
             deliverRabbit();
+            Console::confirmToContinue();
         }
         if (input == askAction)
         {
             ask();
+            Console::confirmToContinue();
         }
         if (input == watchAction)
         {
             watch();
+            Console::confirmToContinue();
         }
         if (input == donateAction)
         {
             donate();
+            Console::confirmToContinue();
         }
         if (input == katAction)
         {
