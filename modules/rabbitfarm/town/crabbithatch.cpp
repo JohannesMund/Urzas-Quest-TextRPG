@@ -22,8 +22,6 @@ CRabbitHatch::CRabbitHatch(CKatNottingH* kat, CRabbitMap* rabbits) :
 void CRabbitHatch::execute()
 {
     makeRabbitOfTheDay();
-    CGameManagement::getInventoryInstance()->addItem(new CRabbit(Randomizer::getRandom(150)));
-
     CMenuAction input;
     do
     {
@@ -64,12 +62,10 @@ void CRabbitHatch::execute()
         if (input == rabbitAction)
         {
             deliverRabbit();
-            Console::confirmToContinue();
         }
         if (input == askAction)
         {
             ask();
-            Console::confirmToContinue();
         }
         if (input == watchAction)
         {
@@ -78,7 +74,6 @@ void CRabbitHatch::execute()
         if (input == donateAction)
         {
             donate();
-            Console::confirmToContinue();
         }
         if (input == katAction)
         {
@@ -130,6 +125,7 @@ void CRabbitHatch::donate()
     Console::printLn(tr("You put your {} bags of rabbit foot into the donation container.", items.size()));
     _kat->addSympathy(25 * items.size());
     CGameManagement::getInventoryInstance()->removeItem(CRabbitFood::rabbitFoodFilter());
+    Console::confirmToContinue();
 }
 
 void CRabbitHatch::watch()
@@ -206,6 +202,7 @@ void CRabbitHatch::ask()
                         _rabbits->max(),
                         CC::ccReset()));
     Console::br();
+    Console::confirmToContinue();
 }
 
 void CRabbitHatch::deliverRabbit()
@@ -216,14 +213,31 @@ void CRabbitHatch::deliverRabbit()
         Console::printLn(tr("Turns out, you do not have a rabbit. You better go now."));
         return;
     }
-
     auto item = CGameManagement::getInventoryInstance()->takeItem(rabbits.at(0));
-    if (item.has_value())
+    if (!item.has_value())
     {
-        auto rabbit = dynamic_cast<CRabbit*>(*item);
-        _rabbits->add(rabbit);
+        Console::printLn(tr("The rabbit is dead, lets cover up this quickly."));
+        return;
     }
+
+    auto rabbit = dynamic_cast<CRabbit*>(*item);
+
+    Console::printLn(tr("You remember, that you found one of the rabbits. Proudly, you reach under your {} and present "
+                        "your finding. It is a:",
+                        CGameManagement::getPlayerInstance()->armorName()));
+
+    Console::br();
+    Console::printLn(rabbit->name(), Console::EAlignment::eCenter);
+    Console::printLn(rabbit->description(), Console::EAlignment::eCenter);
+    Console::br();
+
+    Console::printLn(tr("And this rabbit is definitely not burmt. You realize, that this was oddly specific, but you "
+                        "can see the smile on {}s face. She is very happy to get this rabbit back.",
+                        RabbitFarm::katNottingH()));
+
+    _rabbits->add(rabbit);
     _kat->addSympathy(50);
+    Console::confirmToContinue();
 }
 
 void CRabbitHatch::watchOneRabbit()
@@ -233,7 +247,6 @@ void CRabbitHatch::watchOneRabbit()
     if (input.has_value())
     {
         auto r = _rabbits->get(*input);
-
         Console::br();
         if (r == nullptr)
         {

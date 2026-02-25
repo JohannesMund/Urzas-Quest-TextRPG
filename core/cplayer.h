@@ -2,6 +2,7 @@
 
 #include "cbattle.h"
 #include "cgamestateobject.h"
+#include "ressources.h"
 
 #include <optional>
 #include <string>
@@ -52,6 +53,14 @@ public:
     CNpc* signigicantOther() const;
     void setSignificantOther(CNpc* significantOther);
 
+    std::string weaponName() const;
+    std::string shieldName() const;
+    std::string armorName() const;
+
+protected:
+    virtual nlohmann::json save() const override;
+    virtual void load(const nlohmann::json& json) override;
+
 private:
     CPlayer();
 
@@ -76,11 +85,8 @@ private:
 
     CNpc* _significantOther = nullptr;
 
-protected:
-    virtual nlohmann::json save() const override;
-    virtual void load(const nlohmann::json& json) override;
-
-private:
     virtual std::string translatorObjectName() const override;
     virtual std::string translatorModuleName() const override;
+
+    std::optional<std::string> getEquipmentName(const Ressources::Items::EType tp) const;
 };
