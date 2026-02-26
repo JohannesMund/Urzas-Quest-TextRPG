@@ -15,6 +15,7 @@ set(MODULE_LIST
     rabbitfarm
     sewer 
     shrineoftheancients
+    wonderlamp
 )
 
 set(URZAS_QUEST_SOURCES_MODULES modules/moduleinfo.h)

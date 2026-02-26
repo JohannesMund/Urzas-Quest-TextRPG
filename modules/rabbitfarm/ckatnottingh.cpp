@@ -23,7 +23,7 @@ void CKatNottingH::interact()
         auto appleAction = menu.createAction({"Give her an Apple", 'G'});
 
         CMenu::ActionList katList;
-        if (CGameManagement::getInventoryInstance()->hasItem(CApple::aopleFilter()))
+        if (CGameManagement::getInventoryInstance()->hasItem(CApple::appleFilter()))
         {
             katList.push_back(appleAction);
         }
@@ -193,7 +193,7 @@ void CKatNottingH::registerAppleEncounter()
 
 void CKatNottingH::giveApple()
 {
-    auto apples = CGameManagement::getInventoryInstance()->getItemsByFilter(CApple::aopleFilter());
+    auto apples = CGameManagement::getInventoryInstance()->getItemsByFilter(CApple::appleFilter());
     if (!apples.size())
     {
         Console::printLn(tr("Well, this is emberrassing. You search your bag for {}s, but apperently you have none.",

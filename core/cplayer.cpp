@@ -471,7 +471,7 @@ std::string CPlayer::weaponName() const
     auto name = getEquipmentName(Ressources::Items::EType::eWeapon);
     if (name.has_value())
     {
-        name.value();
+        return name.value();
     }
     return coreTr("bare hand");
 }
@@ -481,7 +481,7 @@ std::string CPlayer::shieldName() const
     auto name = getEquipmentName(Ressources::Items::EType::eShield);
     if (name.has_value())
     {
-        name.value();
+        return name.value();
     }
     return coreTr("your face");
 }
@@ -491,7 +491,7 @@ std::string CPlayer::armorName() const
     auto name = getEquipmentName(Ressources::Items::EType::eArmor);
     if (name.has_value())
     {
-        name.value();
+        return name.value();
     }
     return coreTr("Undershirt");
 }
