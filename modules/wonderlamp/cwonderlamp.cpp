@@ -53,12 +53,30 @@ void CWonderLamp::useFromInventory()
     do
     {
         Console::cls();
-        Console::printLn(tr("Your wonderful {}. You want to rub it.", WonderLamp::wonderlamp()));
+        Console::printLn(
+            tr("Your wonderful {}. You want to rub it. You always want to rub ist, but you also want to care about "
+               "this precious artifact. It probably needs some cleaning, and a little repair now and then.",
+               WonderLamp::wonderlamp()));
 
         CMenu menu(WonderLamp::moduleName());
-        const auto rubAction = menu.createAction({"Rub"});
-        menu.addMenuGroup({rubAction}, {CMenu::exit()});
+        const auto rubAction = menu.createAction({"Rub", 'R'});
+        const auto examineAction = menu.createAction({"Examine", 'E'});
+        menu.addMenuGroup({rubAction, examineAction}, {CMenu::exit()});
         input = menu.execute();
+
+        if (input == examineAction)
+        {
+            if (_wasted)
+            {
+                Console::printLn(tr("You take a close look at your {}. It is dirty, it is broken and most important: "
+                                    "it is empty. it is a worthless piece of trash. You do not bother to clean it.",
+                                    WonderLamp::wonderlamp()));
+            }
+            else
+            {
+                examine();
+            }
+        }
 
         if (input == rubAction)
         {
@@ -132,6 +150,10 @@ void CWonderLamp::rubTheLamp()
             _djinn->interact();
         }
     } while (input != CMenu::exit());
+}
+
+void CWonderLamp::examine()
+{
 }
 
 void CWonderLamp::useWish()

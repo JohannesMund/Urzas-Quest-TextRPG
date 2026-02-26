@@ -1,6 +1,7 @@
 #include "moduleressources.h"
 #include "colorize.h"
 #include "ctranslator.h"
+#include "cwonderlamp.h"
 
 #include <string>
 
@@ -15,11 +16,23 @@ std::string tr(const std::string_view& textId, Args&&... formatArgs)
 
 Module::ModuleInfo WonderLamp::moduleInfo()
 {
+    const auto itemFactory = [](const std::string_view& objectName) -> CItem*
+    {
+        if (TagNames::WonderLamp::wonderlamp.compare(objectName) == 0)
+        {
+            return new CWonderLamp();
+        }
+
+        return nullptr;
+    };
+
     Module::ModuleInfo moduleInfo = Module::ModuleInfo();
 
     moduleInfo.moduleName = moduleName();
     moduleInfo.translatorFile = "wonderlamp";
     moduleInfo.gameStage = Module::EGameStage::eNone;
+
+    moduleInfo.itemFactory = itemFactory;
 
     return moduleInfo;
 }

@@ -22,6 +22,7 @@ protected:
 
 private:
     void rubTheLamp();
+    void examine();
 
     void useWish();
     void adjustWishes();
