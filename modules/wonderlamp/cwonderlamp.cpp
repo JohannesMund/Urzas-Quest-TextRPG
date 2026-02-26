@@ -66,29 +66,12 @@ void CWonderLamp::useFromInventory()
 
         if (input == examineAction)
         {
-            if (_wasted)
-            {
-                Console::printLn(tr("You take a close look at your {}. It is dirty, it is broken and most important: "
-                                    "it is empty. it is a worthless piece of trash. You do not bother to clean it.",
-                                    WonderLamp::wonderlamp()));
-            }
-            else
-            {
-                examine();
-            }
+            examine();
         }
 
         if (input == rubAction)
         {
-            if (_wasted)
-            {
-                Console::printLn(tr("You rub and rub, but nothing happens. But you can try to rub again."));
-            }
-            else
-            {
-                input = CMenu::exit();
-                rubTheLamp();
-            }
+            rubTheLamp();
         }
     } while (input != CMenu::exit());
 }
@@ -127,6 +110,14 @@ std::string CWonderLamp::translatorModuleName() const
 
 void CWonderLamp::rubTheLamp()
 {
+    if (_wasted)
+    {
+        Console::printLn(tr("You rub and rub, but nothing happens. But you can try to rub again."));
+        Console::br();
+        Console::confirmToContinue();
+        return;
+    }
+
     CMenuAction input;
     do
     {
@@ -154,6 +145,15 @@ void CWonderLamp::rubTheLamp()
 
 void CWonderLamp::examine()
 {
+    if (_wasted)
+    {
+        Console::printLn(tr("You take a close look at your {}. It is dirty, it is broken and most important: "
+                            "it is empty. it is a worthless piece of trash. You do not bother to clean it.",
+                            WonderLamp::wonderlamp()));
+        Console::br();
+        Console::confirmToContinue();
+        return;
+    }
 }
 
 void CWonderLamp::useWish()
