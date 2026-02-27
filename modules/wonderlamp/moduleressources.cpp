@@ -1,7 +1,9 @@
 #include "moduleressources.h"
 #include "colorize.h"
 #include "ctranslator.h"
-#include "cwonderlamp.h"
+#include "items/cgem.h"
+#include "items/cwonderlamp.h"
+#include "randomizer.h"
 
 #include <string>
 
@@ -21,6 +23,10 @@ Module::ModuleInfo WonderLamp::moduleInfo()
         if (TagNames::WonderLamp::wonderlamp.compare(objectName) == 0)
         {
             return new CWonderLamp();
+        }
+        if (TagNames::WonderLamp::gem.compare(objectName) == 0)
+        {
+            return new CGem();
         }
 
         return nullptr;
@@ -52,6 +58,18 @@ std::string WonderLamp::genie()
 std::string WonderLamp::wonderlamp()
 {
     return tr("{0}Wo{1}nd{0}er{1}la{0}mp{2}", CC::fgYellow(), CC::fgLightYellow(), CC::ccReset());
+}
+
+std::string WonderLamp::getRandomGem()
+{
+    return Randomizer::getRandomStringFromVector({
+        tr("{}Ruby{}", CC::fgRed(), CC::ccReset()),
+        tr("{}Saphire{}", CC::fgBlue(), CC::ccReset()),
+        tr("{}Emerald{}", CC::fgGreen(), CC::ccReset()),
+        tr("{}Diamond{}", CC::fgWhite(), CC::ccReset()),
+        tr("{}Topaz{}", CC::fgYellow(), CC::ccReset()),
+        tr("{}Amethyst{}", CC::fgLightBlue(), CC::ccReset()),
+    });
 }
 
 std::string WonderLamp::djinn()

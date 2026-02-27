@@ -37,6 +37,7 @@ public:
 
     CRoom* currentRoom() const;
     std::vector<CRoom*> roomsMatchingFilter(CMap::RoomFilter filter) const;
+    static int now();
 
     void printHUD();
 

@@ -24,12 +24,18 @@ private:
     void rubTheLamp();
     void examine();
 
+    void replaceGem();
+    void clean();
+
     void useWish();
     void adjustWishes();
     void destroy();
+    bool needsCleaning();
 
     bool _wasted = false;
     int _wishesLeft = 3;
 
     CBasicDjinn* _djinn;
+    int _lastCaredFor = 0;
+    bool _missingGem = false;
 };

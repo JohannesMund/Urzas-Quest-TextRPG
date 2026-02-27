@@ -3,11 +3,11 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "console.h"
-#include "npc/cgenie.h"
-#include "npc/cjeannie.h"
-#include "npc/djinnfactory.h"
 #include "randomizer.h"
+#include "wonderlamp/items/cgem.h"
 #include "wonderlamp/moduleressources.h"
+#include "wonderlamp/npc/cgenie.h"
+#include "wonderlamp/npc/djinnfactory.h"
 
 #include <nlohmann/json.hpp>
 
@@ -20,6 +20,7 @@ CWonderLamp::CWonderLamp() : CItem(TagNames::WonderLamp::wonderlamp)
     _isUsableFromBattle = true;
     _isSellable = false;
     _value = 10;
+    _lastCaredFor = CGameManagement::now();
 
     if (Randomizer::getRandomEntry<Core::EGender>({Core::EGender::eFemale, Core::EGender::eMale}) ==
         Core::EGender::eFemale)
@@ -154,6 +155,109 @@ void CWonderLamp::examine()
         Console::confirmToContinue();
         return;
     }
+
+    CMenuAction input;
+
+    do
+    {
+        CMenu menu(WonderLamp::moduleName());
+
+        auto cleanAction = menu.createAction({"Clean", 'C'});
+        auto replaceAction = menu.createAction({"Replace missing gem", 'R'});
+
+        CMenu::ActionList careList;
+
+        if (needsCleaning())
+        {
+            Console::printLn(tr("You can see, that your {} is loved and used often. The polish is getting dull and "
+                                "some scratches appear"));
+            const auto decay = CGameManagement::now() - _lastCaredFor;
+            _missingGem = _missingGem || Randomizer::getRandom(decay) > 50;
+            careList.push_back(cleanAction);
+        }
+
+        if (_missingGem)
+        {
+            Console::printLn(
+                tr("Turns out, there is a gem missing on your {}. You should replace it.", WonderLamp::wonderlamp()));
+            if (CGameManagement::getInventoryInstance()->hasItem(CGem::CGem::gemFilter()))
+            {
+                careList.push_back(replaceAction);
+            }
+            else
+            {
+                tr("Unfortunately, you do not have gems, so you should keep your eyes open.");
+            }
+        }
+
+        menu.addMenuGroup(careList, {CMenu::exit()});
+        input = menu.execute();
+
+        if (input == cleanAction)
+        {
+            clean();
+        }
+        if (input == replaceAction)
+        {
+            replaceGem();
+        }
+
+    } while (input == CMenu::exit());
+}
+
+void CWonderLamp::replaceGem()
+{
+    if (!CGameManagement::getInventoryInstance()->hasItem(CGem::gemFilter()))
+    {
+        Console::printLn(tr("You dont have a gem. maybe later."));
+        return;
+    }
+
+    auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CGem::gemFilter());
+    if (items.size() == 0)
+    {
+        Console::printLn(tr("You dont have a gem. maybe later."));
+        return;
+    }
+
+    auto gem = items[0];
+    Console::printLn(tr("There is a gap on your {} where the gem fell of. You decide to replace it with a beautiful "
+                        "{}. Looks like new.",
+                        WonderLamp::wonderlamp(),
+                        gem->name()));
+    Console::printLn(tr("{} seems to like the new gem.", _djinn->name()));
+    _djinn->addSympathy(25 + Randomizer::getRandom(25));
+    if (needsCleaning())
+    {
+        Console::br();
+        Console::printLn(
+            tr("The {} might be new, and it sparkles beautifully. But your {} should use another cleaning.",
+               gem->name(),
+               WonderLamp::wonderlamp()));
+    }
+    CGameManagement::getInventoryInstance()->removeItem(gem);
+
+    Console::br();
+    Console::confirmToContinue();
+}
+
+void CWonderLamp::clean()
+{
+    Console::printLn(tr("You take some time, and clean your {}. Carefully you remove dirt, polish out the scratches "
+                        "and let the gems shine again.",
+                        WonderLamp::wonderlamp()));
+    if (_missingGem)
+    {
+        Console::printLn(tr("Speaking of shiny gems, one is missing, you should replace it soon."));
+    }
+
+    Console::br();
+    Console::printLn(tr("Finally, the home of {} is nice and clean again", _djinn->name()));
+    _djinn->addSympathy(5 + Randomizer::getRandom(20));
+
+    _lastCaredFor = CGameManagement::now();
+    Console::br();
+    Console::confirmToContinue();
 }
 
 void CWonderLamp::useWish()
@@ -186,4 +290,10 @@ void CWonderLamp::destroy()
     _isUsableFromBattle = false;
     _isSellable = true;
     _description = tr("An old, rusy lamp. This one is junk.");
+}
+
+bool CWonderLamp::needsCleaning()
+{
+    const auto decay = CGameManagement::now() - _lastCaredFor;
+    return decay > 25;
 }

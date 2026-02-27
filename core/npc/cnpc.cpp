@@ -272,12 +272,12 @@ void CNpc::setLastSeen(const int i)
 
 void CNpc::setLastSeen()
 {
-    _lastSeen = CGameManagement::getProgressionInstance()->turns();
+    _lastSeen = CGameManagement::now();
 }
 
 int CNpc::turnsNotSeen() const
 {
-    return CGameManagement::getProgressionInstance()->turns() - _lastSeen;
+    return CGameManagement::now() - _lastSeen;
 }
 
 std::string CNpc::notSeenString() const

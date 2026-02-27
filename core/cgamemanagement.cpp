@@ -178,6 +178,11 @@ std::vector<CRoom*> CGameManagement::roomsMatchingFilter(CMap::RoomFilter filter
     return _map.roomsMatchingFilter(filter);
 }
 
+int CGameManagement::now()
+{
+    return getProgressionInstance()->turns();
+}
+
 CPlayer* CGameManagement::getPlayer()
 {
     return &_player;

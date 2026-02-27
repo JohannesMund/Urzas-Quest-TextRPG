@@ -46,6 +46,7 @@ void CDungeon::dungeonLoop()
 {
     while (true)
     {
+        CGameManagement::getProgressionInstance()->increaseTurns();
         if (!_map->isMapRevealed() && _mapRoom != nullptr && _mapRoom->isMapRevealed())
         {
             _map->reveal();
