@@ -80,6 +80,8 @@ public:
     void useDeathAction(CItem* item);
 
     ItemList getItemsByFilter(CItem::ItemFilter filter) const;
+    CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
+
     template <typename T>
     std::optional<T*> getFirstItemByFilter(CItem::ItemFilter filter) const
     {
@@ -97,8 +99,6 @@ public:
 
         return item;
     }
-
-    CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
 
     bool hasItem(CItem::ItemFilter filter) const;
 

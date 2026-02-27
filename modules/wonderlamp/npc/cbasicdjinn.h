@@ -11,7 +11,7 @@ public:
     static CBasicDjinn* loadFromJson(const nlohmann::json& json);
 
     CBasicDjinn(const Core::EGender gender);
-    virtual ~CBasicDjinn() {};
+    virtual ~CBasicDjinn(){};
 
     virtual void interact() override;
     virtual void talk() override = 0;
@@ -29,4 +29,6 @@ protected:
 
 private:
     void printHeader(const bool bFull = true) const override = 0;
+    void giftGem();
+    void visitBottle();
 };
