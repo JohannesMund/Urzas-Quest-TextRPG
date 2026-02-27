@@ -10,6 +10,7 @@ namespace TagNames
 namespace WonderLamp
 {
 constexpr std::string_view wonderlamp = "Wonderlamp";
+constexpr std::string_view findWonderlamp = "FindWonderlamp";
 constexpr std::string_view djinn = "Djinn";
 constexpr std::string_view genie = "Genie";
 constexpr std::string_view jeannie = "Jeannie";
@@ -31,6 +32,7 @@ std::string djinn();
 std::string jeannie();
 std::string genie();
 std::string wonderlamp();
+std::string wonderLampEncounter();
 
 std::string getRandomGem();
 

@@ -9,6 +9,7 @@
 #include "wonderlamp/npc/cgenie.h"
 #include "wonderlamp/npc/djinnfactory.h"
 
+#include <math.h>
 #include <nlohmann/json.hpp>
 
 CWonderLamp::CWonderLamp() : CItem(TagNames::WonderLamp::wonderlamp)
@@ -20,7 +21,7 @@ CWonderLamp::CWonderLamp() : CItem(TagNames::WonderLamp::wonderlamp)
     _isUsableFromBattle = true;
     _isSellable = false;
     _value = 10;
-    _lastCaredFor = CGameManagement::now();
+    _lastCaredFor = std::max(1U, CGameManagement::now() - Randomizer::getRandom(50));
 
     if (Randomizer::getRandomEntry<Core::EGender>({Core::EGender::eFemale, Core::EGender::eMale}) ==
         Core::EGender::eFemale)

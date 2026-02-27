@@ -1,4 +1,6 @@
 #include "moduleressources.h"
+#include "cfindwonderlamp.h"
+#include "cgamemanagement.h"
 #include "colorize.h"
 #include "ctranslator.h"
 #include "items/cgem.h"
@@ -38,6 +40,7 @@ Module::ModuleInfo WonderLamp::moduleInfo()
     moduleInfo.translatorFile = "wonderlamp";
     moduleInfo.gameStage = Module::EGameStage::eNone;
 
+    moduleInfo.initFunction = []() { CGameManagement::getInstance()->registerEncounter(new CFindWonderLamp()); };
     moduleInfo.itemFactory = itemFactory;
 
     return moduleInfo;
@@ -58,6 +61,11 @@ std::string WonderLamp::genie()
 std::string WonderLamp::wonderlamp()
 {
     return tr("{0}Wo{1}nd{0}er{1}la{0}mp{2}", CC::fgYellow(), CC::fgLightYellow(), CC::ccReset());
+}
+
+std::string WonderLamp::wonderLampEncounter()
+{
+    return tr("A pile of rubbish in a dark allay");
 }
 
 std::string WonderLamp::getRandomGem()
