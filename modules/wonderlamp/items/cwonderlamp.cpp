@@ -223,18 +223,17 @@ void CWonderLamp::replaceGem()
         return;
     }
 
-    auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CGem::gemFilter());
-    if (items.size() == 0)
+    auto gem = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CGem>(CGem::gemFilter());
+    if (!gem.has_value())
     {
         Console::printLn(tr("You dont have a gem. maybe later."));
         return;
     }
 
-    auto gem = items[0];
     Console::printLn(tr("There is a gap on your {} where the gem fell of. You decide to replace it with a beautiful "
                         "{}. Looks like new.",
                         WonderLamp::wonderlamp(),
-                        gem->name()));
+                        gem.value()->name()));
     Console::printLn(tr("{} seems to like the new gem.", _djinn->name()));
     _djinn->addSympathy(25 + Randomizer::getRandom(25));
     if (needsCleaning())
@@ -242,10 +241,10 @@ void CWonderLamp::replaceGem()
         Console::br();
         Console::printLn(
             tr("The {} might be new, and it sparkles beautifully. But your {} should use another cleaning.",
-               gem->name(),
+               gem.value()->name(),
                WonderLamp::wonderlamp()));
     }
-    CGameManagement::getInventoryInstance()->removeItem(gem);
+    CGameManagement::getInventoryInstance()->removeItem(gem.value());
 
     Console::br();
     Console::confirmToContinue();

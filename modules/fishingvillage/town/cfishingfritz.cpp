@@ -159,9 +159,9 @@ void CFishingFritz::checkFish()
         return;
     }
 
-    auto fishes = CGameManagement::getInventoryInstance()->getItemsByFilter(
+    auto fish = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CFish>(
         CFish::fishRarityFilter(FishingVillage::EFishLevel::eLegend));
-    if (!fishes.empty())
+    if (fish.has_value())
     {
         Console::printLn(tr("{} Smiles at you. Well he smiles more at the {} than he smiles at you. But at "
                             "least he smiles for the first time since... For the first time.",
@@ -179,7 +179,7 @@ void CFishingFritz::checkFish()
                             "easier to find that the other guys. You will find out.",
                             Ressources::Game::darkMobi()));
 
-        CGameManagement::getInventoryInstance()->removeItem(fishes.at(0));
+        CGameManagement::getInventoryInstance()->removeItem(fish.value());
         CGameManagement::getProgressionInstance()->reportModuleFinished(FishingVillageFishLegend::moduleName());
     }
     else
@@ -246,15 +246,15 @@ void CFishingFritz::getInformation() const
 }
 void CFishingFritz::sell() const
 {
-    auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFish::fishFilter());
-    if (items.size() == 0)
+    auto fishes = CGameManagement::getInventoryInstance()->getItemsByFilter(CFish::fishFilter());
+    if (fishes.size() == 0)
     {
         return;
     };
-    for (const auto& item : items)
+    for (const auto& fish : fishes)
     {
-        CGameManagement::getPlayerInstance()->gainGold(item->value());
-        CGameManagement::getInventoryInstance()->removeItem(item);
+        CGameManagement::getPlayerInstance()->gainGold(fish->value());
+        CGameManagement::getInventoryInstance()->removeItem(fish);
     }
     Console::confirmToContinue();
 }

@@ -193,16 +193,15 @@ void CKatNottingH::registerAppleEncounter()
 
 void CKatNottingH::giveApple()
 {
-    auto apples = CGameManagement::getInventoryInstance()->getItemsByFilter(CApple::appleFilter());
-    if (!apples.size())
+    auto apple = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CApple>(CApple::appleFilter());
+    if (!apple.has_value())
     {
         Console::printLn(tr("Well, this is emberrassing. You search your bag for {}s, but apperently you have none.",
                             RabbitFarm::apple()));
         Console::printLn(tr("{} looks dissapointed.", RabbitFarm::katNottingH()));
         return;
     }
-    auto oneApple = apples.at(0);
-    CGameManagement::getInventoryInstance()->removeItem(oneApple);
+    CGameManagement::getInventoryInstance()->removeItem(apple.value());
 
     auto sympathy = 10 + Randomizer::getRandom(40);
     if (sympathy > 45)

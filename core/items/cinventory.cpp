@@ -101,18 +101,6 @@ void CInventory::removeItem(CItem::ItemFilter filter)
     }
 }
 
-std::optional<CItem*> CInventory::takeItem(CItem* item)
-{
-    auto it = std::remove_if(_inventory.begin(), _inventory.end(), [item](CItem* i) { return i == item; });
-    if (it != _inventory.end())
-    {
-        auto ret = *it;
-        _inventory.erase(it, _inventory.end());
-        return ret;
-    }
-    return {};
-}
-
 void CInventory::print(const Scope& scope)
 {
     Console::printLn(coreTr("You look through your backpack and find the following:"));

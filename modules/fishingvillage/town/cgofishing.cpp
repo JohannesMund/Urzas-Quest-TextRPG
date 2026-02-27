@@ -67,24 +67,17 @@ std::string CGoFishing::translatorObjectName() const
 
 void CGoFishing::init()
 {
-    auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CFishingRod::fishingRodFilter());
-    if (items.size())
+    auto rod =
+        CGameManagement::getInventoryInstance()->getFirstItemByFilter<CFishingRod>(CFishingRod::fishingRodFilter());
+    if (rod.has_value())
     {
-        auto rod = dynamic_cast<CFishingRod*>(items.at(0));
-        if (rod != nullptr)
-        {
-            _fishingRod = rod;
-        }
+        _fishingRod = rod.value();
     }
 
-    items = CGameManagement::getInventoryInstance()->getItemsByFilter(CBoat::boatFilter());
-    if (items.size())
+    auto boat = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CBoat>(CBoat::boatFilter());
+    if (boat.has_value())
     {
-        auto boat = dynamic_cast<CBoat*>(items.at(0));
-        if (boat != nullptr)
-        {
-            _boat = boat;
-        }
+        _boat = boat.value();
     }
 }
 
