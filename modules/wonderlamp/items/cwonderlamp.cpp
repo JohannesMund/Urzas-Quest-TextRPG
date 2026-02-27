@@ -90,17 +90,26 @@ CItem::ItemFilter CWonderLamp::wonderlampFilter()
 nlohmann::json CWonderLamp::save() const
 {
     nlohmann::json json = CItem::save();
+
     json["Wasted"] = _wasted;
-    json["wishesLeft"] = _wishesLeft;
+    json["WishesLeft"] = _wishesLeft;
+    json["MissingGem"] = _missingGem;
+    json["LastCaredFor"] = _lastCaredFor;
+
     json["Djinn"] = _djinn->save();
+
     return json;
 }
 
 void CWonderLamp::load(const nlohmann::json& json)
 {
     CItem::load(json);
+
     _wasted = json["Wasted"];
-    _wishesLeft = json["wishesLeft"];
+    _wishesLeft = json["WishesLeft"];
+    _missingGem = json["MissingGem"];
+    _lastCaredFor = json["LastCaredFor"];
+
     _djinn = Djinn::loadFromJson(json["Djinn"]);
 }
 
