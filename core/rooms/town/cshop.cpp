@@ -28,8 +28,7 @@ CShop::~CShop()
 
 void CShop::execute()
 {
-    if (CGameManagement::getProgressionInstance()->turns() - _turns >
-        CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
+    if (CGameManagement::now() - _turns > CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
     {
         replaceShopItems();
     }
@@ -203,7 +202,7 @@ void CShop::sellItem(CItem* item, const unsigned int stock)
 
 void CShop::replaceShopItems()
 {
-    _turns = CGameManagement::getProgressionInstance()->turns();
+    _turns = CGameManagement::now();
     for (auto i : _shopItems)
     {
         delete i;

@@ -1,6 +1,6 @@
 {
   "FileSpec": {
-    "DateTime": "2026-02-25 15:36:34",
+    "DateTime": "2026-02-25 22:44:10",
     "FileType": "Translation",
     "Name": "UrzasQuest TextRPG",
     "Version": 1
@@ -146,107 +146,100 @@
       {
         "Source": "{}light gray{}",
         "Status": "untranslated",
-        "de": "{}light gray{}"
+        "de": "{}hellgrau{}"
       },
       {
         "Source": "{}dark gray{}",
-        "Status": "untranslated",
-        "de": "{}dark gray{}"
+        "de": "{}dunkelgrau{}"
       },
       {
         "Source": "{}black{}",
-        "Status": "untranslated",
-        "de": "{}black{}"
+        "de": "{}achwarz{}"
       },
       {
         "Source": "white",
-        "Status": "untranslated",
-        "de": "white"
+        "de": "weiss"
       },
       {
         "Source": "{}red{}",
-        "Status": "untranslated",
-        "de": "{}red{}"
+        "de": "{}rot{}"
       },
       {
         "Source": "{}blue{}",
-        "Status": "untranslated",
-        "de": "{}blue{}"
+        "de": "{}blau{}"
       },
       {
         "Source": "striped",
-        "Status": "untranslated",
-        "de": "striped"
+        "de": "gestreiftes"
       },
       {
         "Source": "spotted",
-        "Status": "untranslated",
-        "de": "spotted"
+        "de": "geflecktes"
       },
       {
         "Source": "speckled",
-        "Status": "untranslated",
-        "de": "speckled"
+        "de": "gepunktetes"
       },
       {
         "Source": "smoked",
-        "Status": "untranslated",
-        "de": "smoked"
+        "de": "schlieriges"
       },
       {
         "Source": "smeared",
-        "Status": "untranslated",
-        "de": "smeared"
+        "de": "geschmiertes"
       },
       {
         "Source": "{}fire{}",
-        "Status": "untranslated",
-        "de": "{}fire{}"
+        "de": "{}Feuer - {}"
       },
       {
         "Source": "i{}c{}e",
-        "Status": "untranslated",
-        "de": "i{}c{}e"
+        "de": "E{}i{}s - "
       },
       {
         "Source": "{}dragon{}",
         "Status": "untranslated",
-        "de": "{}dragon{}"
+        "de": "{}Drachen - {}"
       },
       {
         "Source": "{}wolf{}",
-        "Status": "untranslated",
-        "de": "{}wolf{}"
+        "de": "{}Wolfs -{}"
       },
       {
         "Source": "{0}d{1}r{0}a{1}g{0}o{1}n{2}",
-        "Status": "untranslated",
-        "de": "{0}d{1}r{0}a{1}g{0}o{1}n{2}"
+        "de": "{0}d{1}r{0}a{1}ch{0}e{1}n{2}"
       },
       {
         "Source": "Rabbit",
-        "Status": "untranslated",
-        "de": "Rabbit"
+        "de": "Hase"
       },
       {
         "Source": "Hare",
-        "Status": "untranslated",
-        "de": "Hare"
+        "de": "Kaninchen"
       },
       {
         "Source": "Cony",
-        "Status": "untranslated",
-        "de": "Cony"
+        "de": "Kanin"
       },
       {
         "Source": "Bunny",
-        "Status": "untranslated",
-        "de": "Bunny"
+        "de": "Häschen"
       },
       {
         "Source": "Buck",
-        "Status": "untranslated",
-        "de": "Buck"
+        "de": "Klopfer"
+      },
+      {
+        "Source": "{}Rabbit {}Hatch{}",
+        "de": "{}Hasen{}stall{}"
+      },
+      {
+        "Source": "{}Rabbit {}Farm{}",
+        "de": "{}Hasen{}farm{}"
+      },
+      {
+        "Source": "{}K{}a{}t {}Notting{}H{}",
+        "de": "{}K{}a{}t {}Ohne{}H{}"
       }
     ],
     "Room": [

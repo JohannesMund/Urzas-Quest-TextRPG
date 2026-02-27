@@ -9,7 +9,7 @@ public:
     virtual void useFromInventory() override;
     virtual void useFromBattle(CEnemy*) override;
 
-    static CItem::ItemFilter aopleFilter();
+    static CItem::ItemFilter appleFilter();
 
 protected:
     virtual std::string translatorModuleName() const override;

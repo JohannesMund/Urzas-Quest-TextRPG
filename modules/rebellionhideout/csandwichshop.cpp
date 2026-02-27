@@ -31,8 +31,7 @@ CSandwichShop::CSandwichShop() : CRoom(TagNames::RebellionHideout::rebellionHide
 void CSandwichShop::execute()
 {
     CRoom::execute();
-    if (CGameManagement::getProgressionInstance()->turns() - _turns >
-        CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
+    if (CGameManagement::now() - _turns > CGameManagement::getGameSettingsInstance()->turnsUntilShopRefresh())
     {
         replaceSandwichOfTheDay();
     }
@@ -572,7 +571,7 @@ char CSandwichShop::getMapSymbol() const
 
 void CSandwichShop::replaceSandwichOfTheDay()
 {
-    _turns = CGameManagement::getProgressionInstance()->turns();
+    _turns = CGameManagement::now();
     for (auto i : _sandwiches)
     {
         if (_playerOwnsShop)

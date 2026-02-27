@@ -89,22 +89,16 @@ void CNpc::thinkAbout()
 
 void CNpc::giftFlower()
 {
-    auto flowers = CGameManagement::getInventoryInstance()->getItemsByFilter(CFlower::flowerFilter());
-    if (!flowers.size())
+    auto flower = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CFlower>(CFlower::flowerFilter());
+    if (!flower.has_value())
     {
         Console::printLn(
             coreTr("Well, this is emberrassing. You search your bag for flowers, but apperently you have none."));
         Console::printLn(coreTr("{} looks dissapointed.", name()));
         return;
     }
-    auto oneFlower = dynamic_cast<CFlower*>(flowers.at(0));
-    if (oneFlower == nullptr)
-    {
-        Console::printLn(coreTr("Your flower crumbles to dust in your hand."));
-        Console::printLn(coreTr("{} looks dissapointed.", name()));
-        return;
-    }
-    Console::printLn(coreTr("You draw a {} out of your bag and hand it over to {}", oneFlower->name(), name()));
+
+    Console::printLn(coreTr("You draw a {} out of your bag and hand it over to {}", flower.value()->name(), name()));
     switch (sympathy())
     {
     case ESympathyLevel::eHate:
@@ -129,32 +123,32 @@ void CNpc::giftFlower()
         break;
     }
 
-    if (oneFlower->flowerType() == _favoriteFlower && oneFlower->flowerType() != _leastFavoriteFlower)
+    if (flower.value()->flowerType() == _favoriteFlower && flower.value()->flowerType() != _leastFavoriteFlower)
     {
         Console::printLn(coreTr("{}s are {}s favourite flowers. {} loves your gift.",
-                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                Ressources::Items::flower2String(flower.value()->flowerType()),
                                 name(),
                                 heShe()));
         addSympathy(20 + Randomizer::getRandom(30));
     }
-    else if (oneFlower->flowerType() == _leastFavoriteFlower && oneFlower->flowerType() != _favoriteFlower)
+    else if (flower.value()->flowerType() == _leastFavoriteFlower && flower.value()->flowerType() != _favoriteFlower)
     {
         Console::printLn(coreTr("{} hates {}s. {} accepts your gesture.",
                                 name(),
-                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                Ressources::Items::flower2String(flower.value()->flowerType()),
                                 heShe()));
         addSympathy(5 + Randomizer::getRandom(10));
     }
     else
     {
         Console::printLn(coreTr("{} like {}s. {} takes the flowers with a smile.",
-                                Ressources::Items::flower2String(oneFlower->flowerType()),
+                                Ressources::Items::flower2String(flower.value()->flowerType()),
                                 name(),
                                 heShe()));
         addSympathy(5 + Randomizer::getRandom(10));
     }
 
-    CGameManagement::getInventoryInstance()->removeItem(oneFlower);
+    CGameManagement::getInventoryInstance()->removeItem(flower.value());
 }
 
 bool CNpc::addSympathy(const int i)
@@ -272,12 +266,12 @@ void CNpc::setLastSeen(const int i)
 
 void CNpc::setLastSeen()
 {
-    _lastSeen = CGameManagement::getProgressionInstance()->turns();
+    _lastSeen = CGameManagement::now();
 }
 
 int CNpc::turnsNotSeen() const
 {
-    return CGameManagement::getProgressionInstance()->turns() - _lastSeen;
+    return CGameManagement::now() - _lastSeen;
 }
 
 std::string CNpc::notSeenString() const

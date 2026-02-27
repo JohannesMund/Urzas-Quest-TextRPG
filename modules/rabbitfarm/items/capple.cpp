@@ -32,7 +32,7 @@ void CApple::useFromBattle(CEnemy*)
     use();
 }
 
-CItem::ItemFilter CApple::aopleFilter()
+CItem::ItemFilter CApple::appleFilter()
 {
     return [](const CItem* item) { return dynamic_cast<const CApple*>(item) != nullptr; };
 }

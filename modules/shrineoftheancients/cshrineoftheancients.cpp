@@ -265,7 +265,7 @@ void CShrineOfTheAncients::stats() const
                                std::format("{}", CGameManagement::getProgressionInstance()->bodyCount()));
     Console::printLnWithSpacer("Genocides committed:",
                                std::format("{}", CGameManagement::getProgressionInstance()->genocideCount()));
-    Console::printLnWithSpacer("Turns:", std::format("{}", CGameManagement::getProgressionInstance()->turns()));
+    Console::printLnWithSpacer("Turns:", std::format("{}", CGameManagement::now()));
 
     Console::br();
     auto equipment = CGameManagement::getInventoryInstance()->getEquipment();

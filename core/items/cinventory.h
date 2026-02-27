@@ -46,7 +46,24 @@ public:
     void removeItem(const std::string& name);
     void removeItem(CItem::ItemFilter filter);
 
-    std::optional<CItem*> takeItem(CItem* item);
+    template <typename T>
+    std::optional<T*> takeFirstItem(CItem::ItemFilter filter)
+    {
+        auto it = std::find_if(_inventory.begin(), _inventory.end(), filter);
+        if (it != _inventory.end())
+        {
+            auto item = static_cast<T*>(*it);
+            if (item == nullptr)
+            {
+                return {};
+            }
+
+            it = std::remove(_inventory.begin(), _inventory.end(), *it);
+            _inventory.erase(it, _inventory.end());
+            return item;
+        }
+        return {};
+    }
 
     void print(const Scope& scope = Scope::eNone);
 
@@ -64,6 +81,24 @@ public:
 
     ItemList getItemsByFilter(CItem::ItemFilter filter) const;
     CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
+
+    template <typename T>
+    std::optional<T*> getFirstItemByFilter(CItem::ItemFilter filter) const
+    {
+        const auto items = getItemsByFilter(filter);
+        if (items.size() == 0)
+        {
+            return {};
+        }
+
+        auto item = static_cast<T*>(items.at(0));
+        if (item == nullptr)
+        {
+            return {};
+        }
+
+        return item;
+    }
 
     bool hasItem(CItem::ItemFilter filter) const;
 

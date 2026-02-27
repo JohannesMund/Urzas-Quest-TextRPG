@@ -104,8 +104,8 @@ void CSlasher::eat()
 
 void CSlasher::deliverRabbit()
 {
-    auto rabbits = CGameManagement::getInventoryInstance()->getItemsByFilter(CRabbit::rabbitFilter());
-    if (!rabbits.size())
+    auto rabbit = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CRabbit>(CRabbit::rabbitFilter());
+    if (!rabbit.has_value())
     {
         Console::printLn(tr("Turns out, you do not have a rabbit. You better go now."));
         return;
@@ -113,7 +113,7 @@ void CSlasher::deliverRabbit()
 
     Console::printLn(tr("Your {} looks too delicious to not be a sunday roast. If there is one person in this land, "
                         "who can make a worty dish out of it, that it is {}.",
-                        rabbits.at(0)->name(),
+                        rabbit.value()->name(),
                         RabbitFarm::slasher()));
     Console::printLn(tr("You hand over your rabbit. {} smiles especially evil. You hear a \"{}M{}uahahaha{}\" - sound",
                         RabbitFarm::slasher(),
@@ -123,13 +123,10 @@ void CSlasher::deliverRabbit()
 
     CGameManagement::getPlayerInstance()->gainGold(2500);
     CGameManagement::getPlayerInstance()->addXp(25 + Randomizer::getRandom(250));
-    auto item = CGameManagement::getInventoryInstance()->takeItem(rabbits.at(0));
-    if (item.has_value())
-    {
-        auto rabbit = dynamic_cast<CRabbit*>(*item);
-        rabbit->roast();
-        _rabbits->add(rabbit);
-    }
+
+    rabbit.value()->roast();
+    _rabbits->add(rabbit.value());
+    CGameManagement::getInventoryInstance()->removeItem(rabbit.value());
 
     Console::printLn(tr("Through the window, you can see {}, watching your deal with disgust. You should probably not "
                         "visit her too soon.",
