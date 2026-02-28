@@ -43,6 +43,7 @@ void CDjinnCompanion::postBattle(CEnemy* enemy)
            _djinn->name(),
            enemy->name()));
     CGameManagement::getPlayerInstance()->removeSupporCompanionsByName(_djinn->name(), false);
+    leaveText();
 }
 
 int CDjinnCompanion::shield(const int i)
