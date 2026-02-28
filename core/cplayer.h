@@ -45,8 +45,8 @@ public:
     unsigned int damage() const;
 
     void addSupportCompanion(CSupportCompanion* support);
-    void removeSupporCompanionsByName(const std::string_view& name);
-    void removeSupportCompanionsByModuleName(const std::string_view& moduleName);
+    void removeSupporCompanionsByName(const std::string_view& name, const bool bDelete = true);
+    void removeSupportCompanionsByModuleName(const std::string_view& moduleName, const bool bDelete = true);
 
     bool hasSignificantOther() const;
     bool isSignificantOther(const CNpc* npc) const;

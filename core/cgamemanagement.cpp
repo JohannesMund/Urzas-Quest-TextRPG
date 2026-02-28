@@ -382,7 +382,6 @@ void CGameManagement::init()
     _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
     _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
     _inventory.addItem(CGameManagement::getItemFactoryInstance()->makeLootItem());
-
     std::vector<CRoom*> rooms;
 
     _progression.initEncounters();
