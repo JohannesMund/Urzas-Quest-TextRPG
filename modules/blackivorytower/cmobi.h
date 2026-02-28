@@ -14,8 +14,6 @@ public:
     virtual std::string name() const override;
     virtual std::string describe() const override;
 
-    virtual CMenuAction npcNav(CMenu& menu) const override;
-
 protected:
     virtual std::string translatorModuleName() const override;
 

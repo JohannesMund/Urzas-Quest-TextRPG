@@ -27,8 +27,8 @@ void CLeilaTask::execute()
 
     CMenu menu(Leila::moduleName());
 
-    CMenuAction attackAction = menu.createAction({"Attack"});
-    CMenuAction notYetAction = menu.createAction({"Not yet"});
+    auto attackAction = menu.createAction({"Attack"});
+    auto notYetAction = menu.createAction({"Not yet"});
 
     menu.addMenuGroup({attackAction, notYetAction});
     if (menu.execute() == notYetAction)

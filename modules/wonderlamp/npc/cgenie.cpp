@@ -20,9 +20,9 @@ std::string CGenie::describe() const
     return std::string();
 }
 
-CMenuAction CGenie::npcNav(CMenu& menu) const
+std::string CGenie::colorize(const std::string_view& s) const
 {
-    return menu.createAction({CC::unColorizeString(WonderLamp::genie())});
+    return WonderLamp::colorizeGenie(s);
 }
 
 void CGenie::printHeader(const bool) const

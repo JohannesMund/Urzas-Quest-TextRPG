@@ -8,7 +8,7 @@
 
 #include <math.h>
 
-CMenuAction CNpc::npcNav(CMenu& menu) const
+const CMenuAction CNpc::npcNav(CMenu& menu) const
 {
     return menu.createAction({CC::unColorizeString(name())}, false);
 }
@@ -289,13 +289,13 @@ std::string CNpc::notSeenString() const
 
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)
 {
-    const auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
-    const auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
+    auto thinkAboutActionString = coreTr("Think about {}", CC::unColorizeString(name()));
+    auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
     menu.addMenuGroup({thinkAboutAction}, {CMenu::exit()});
 
-    const auto talkAction = menu.createAction({"Talk", 'T'});
-    const auto askOutAction = menu.createAction({"Ask out", 'A'});
-    const auto giftFlowerAction = menu.createAction({"Gift a flower", 'G'});
+    auto talkAction = menu.createAction({"Talk", 'T'});
+    auto askOutAction = menu.createAction({"Ask out", 'A'});
+    auto giftFlowerAction = menu.createAction({"Gift a flower", 'G'});
 
     CMenu::ActionList actions;
     actions.push_back(talkAction);

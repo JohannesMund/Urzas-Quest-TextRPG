@@ -11,7 +11,7 @@ CBlackSmith::CBlackSmith() : CTownModule(TagNames::TownModule::blacksmith)
 void CBlackSmith::execute()
 {
     CMenu menu;
-    CMenuAction enhanceAction = menu.createAction({"Enhance Item"});
+    auto enhanceAction = menu.createAction({"Enhance Item"});
     menu.addMenuGroup({enhanceAction}, {CMenu::exit()});
     CMenuAction input;
 

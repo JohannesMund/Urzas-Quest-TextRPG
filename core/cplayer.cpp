@@ -242,11 +242,11 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
     while (true)
     {
         CMenu menu;
-        CMenuAction rockAction = menu.createAction({"Rock"});
-        CMenuAction paperAction = menu.createAction({"Paper"});
-        CMenuAction scissorsAction = menu.createAction({"Scissors"});
-        CMenuAction lizardAction = menu.createAction({"Lizard"});
-        CMenuAction spockAction = menu.createAction({"Spock"});
+        auto rockAction = menu.createAction({"Rock"});
+        auto paperAction = menu.createAction({"Paper"});
+        auto scissorsAction = menu.createAction({"Scissors"});
+        auto lizardAction = menu.createAction({"Lizard"});
+        auto spockAction = menu.createAction({"Spock"});
 
         CMenu::ActionList weapons = {rockAction, paperAction, scissorsAction};
         if (enemy->hasExtendedWeaponChoice())
@@ -255,8 +255,8 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
             weapons.push_back(spockAction);
         }
 
-        CMenuAction inventoryAction = menu.createAction({"Inventory"});
-        CMenuAction winAction = menu.createAction({"Win"});
+        auto inventoryAction = menu.createAction({"Inventory"});
+        auto winAction = menu.createAction({"Win"});
 
         CMenu::ActionList tools;
         tools.push_back(inventoryAction);

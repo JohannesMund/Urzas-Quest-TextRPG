@@ -110,8 +110,8 @@ void CInventory::print(const Scope& scope)
     {
         Console::hr();
         CMenu menu;
-        CMenuAction useAction = menu.createAction({"Use Item"});
-        CMenuAction viewAction = menu.createAction({"View Item"});
+        auto useAction = menu.createAction({"Use Item"});
+        auto viewAction = menu.createAction({"View Item"});
 
         menu.addMenuGroup({useAction, viewAction}, {CMenu::exit()});
         input = menu.execute();

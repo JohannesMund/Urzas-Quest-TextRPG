@@ -156,11 +156,6 @@ std::string CKatNottingH::describe() const
               RabbitFarm::katsBoots());
 }
 
-CMenuAction CKatNottingH::npcNav(CMenu& menu) const
-{
-    return menu.createAction({CC::unColorizeString(RabbitFarm::katNottingH())});
-}
-
 nlohmann::json CKatNottingH::save() const
 {
     nlohmann::json o = CNpc::save();

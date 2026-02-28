@@ -41,7 +41,7 @@ public:
      * Displays the menu, wait for the user input, return the selected action
      * @return the selected action
      */
-    CMenuAction execute();
+    const CMenuAction execute();
 
     /**
      * @brief createAction Creates an action
@@ -54,13 +54,13 @@ public:
      * @remark the key might be changed by the menu. never compare the key after execute, always compare the action.
      * @return the new action
      */
-    CMenuAction createAction(const Menu::MenuAction& action, const bool translate = true);
+    const CMenuAction createAction(const Menu::MenuAction& action, const bool translate = true);
     /**
      * @brief overload
      * @remark uses createAction to create a shop action (i.e. Buy (100 Gold)
      * @param[in] cost the number to be added in the brackets
      */
-    CMenuAction createShopAction(const Menu::MenuAction& action, const int cost, const bool translate = true);
+    const CMenuAction createShopAction(const Menu::MenuAction& action, const int cost, const bool translate = true);
 
     /**
      * @brief clear
@@ -74,7 +74,7 @@ public:
      * @sa noAction()
      * @return the selection of the player
      */
-    static CMenuAction executeYesNoMenu();
+    static const CMenuAction executeYesNoMenu();
 
     /**
      * @brief executeAcceptRejectMenu execute a menu with Accept/Reject
@@ -82,36 +82,36 @@ public:
      * @sa rejectAction()
      * @return the selection of the player
      */
-    static CMenuAction executeAcceptRejectMenu();
+    static const CMenuAction executeAcceptRejectMenu();
 
     /**
      * @brief yesAction Predefined Action "[Y]es"
      */
-    static CMenuAction yes();
+    static const CMenuAction yes();
     /**
      * @brief noAction Predefined Action "[N]o"
      */
-    static CMenuAction no();
+    static const CMenuAction no();
 
     /**
      * @brief acceptAction Predefined Action "[A]ccept"
      */
-    static CMenuAction accept();
+    static const CMenuAction accept();
 
     /**
      * @brief rejectAction Predefined Action "[R]eject"
      */
-    static CMenuAction reject();
+    static const CMenuAction reject();
 
     /**
      * @brief exitAction Predefined Action "E[x]it"
      */
-    static CMenuAction exit();
+    static const CMenuAction exit();
 
     /**
      * @brief exitAction Predefined Action "[R]eturn"
      */
-    static CMenuAction ret();
+    static const CMenuAction ret();
 
     /**
      * @brief translation for MenuActions
@@ -120,7 +120,7 @@ public:
     static Menu::MenuAction tr(const std::string_view& moduleName, const Menu::MenuAction& action);
 
 private:
-    CMenuAction findActionByInput() const;
+    const CMenuAction findActionByInput() const;
     std::string halfGroup2String(const ActionList& l) const;
 
     bool isNavPossible(const unsigned char c) const;

@@ -10,7 +10,7 @@ CChurch::CChurch() : CTownModule(TagNames::TownModule::church)
 void CChurch::execute()
 {
     CMenu menu;
-    CMenuAction blessingAction = menu.createAction({"Get Blessing", 'b'});
+    auto blessingAction = menu.createAction({"Get Blessing", 'b'});
     menu.addMenuGroup({blessingAction}, {CMenu::exit()});
 
     CMenuAction input;

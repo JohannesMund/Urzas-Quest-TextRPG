@@ -61,9 +61,12 @@ void CWonderLamp::useFromInventory()
                WonderLamp::wonderlamp()));
 
         CMenu menu(WonderLamp::moduleName());
-        const auto rubAction = menu.createAction({"Rub", 'R'});
-        const auto examineAction = menu.createAction({"Examine", 'E'});
-        menu.addMenuGroup({rubAction, examineAction}, {CMenu::exit()});
+        auto rubAction = menu.createAction({"Rub", 'R'});
+        auto examineAction = menu.createAction({"Examine", 'E'});
+
+        CMenu::ActionList bottleList = {rubAction, examineAction};
+
+        menu.addMenuGroup(bottleList, {CMenu::exit()});
         input = menu.execute();
 
         if (input == examineAction)
@@ -144,12 +147,26 @@ void CWonderLamp::rubTheLamp()
         Console::br();
         Console::printLn(tr("You have {} wishes left.", _wishesLeft));
         CMenu menu(WonderLamp::moduleName());
-        const auto djinnAction = _djinn->npcNav(menu);
-        menu.addMenuGroup({djinnAction}, {CMenu::exit()});
+        auto djinnAction = _djinn->npcNav(menu);
+        auto visitAction = menu.createAction({"Visit Bottle", 'V'});
+
+        menu.addMenuGroup({}, {djinnAction});
+        CMenu::ActionList djinnList;
+
+        if (_djinn->sympathy() >= CNpc::ESympathyLevel::eLike)
+        {
+            djinnList.push_back(visitAction);
+        }
+
+        menu.addMenuGroup({djinnList}, {CMenu::exit()});
         input = menu.execute();
         if (input == djinnAction)
         {
             _djinn->interact();
+        }
+        if (input == visitAction)
+        {
+            visitBottle();
         }
     } while (input != CMenu::exit());
 }
@@ -174,8 +191,14 @@ void CWonderLamp::examine()
 
         auto cleanAction = menu.createAction({"Clean", 'C'});
         auto replaceAction = menu.createAction({"Replace missing gem", 'R'});
+        auto stealAction = menu.createAction({"Steal Gem", 'S'});
 
         CMenu::ActionList careList;
+
+        if (!_missingGem)
+        {
+            careList.push_back(stealAction);
+        }
 
         if (needsCleaning())
         {
@@ -211,8 +234,16 @@ void CWonderLamp::examine()
         {
             replaceGem();
         }
+        if (input == stealAction)
+        {
+            stealGem();
+        }
 
     } while (input == CMenu::exit());
+}
+
+void CWonderLamp::visitBottle()
+{
 }
 
 void CWonderLamp::replaceGem()
@@ -248,6 +279,10 @@ void CWonderLamp::replaceGem()
 
     Console::br();
     Console::confirmToContinue();
+}
+
+void CWonderLamp::stealGem()
+{
 }
 
 void CWonderLamp::clean()

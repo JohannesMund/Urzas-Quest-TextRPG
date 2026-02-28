@@ -60,7 +60,7 @@ void CBlackIvoryTower::execute()
 
     CMenuAction input;
     CMenu menu(BlackIvoryTower::moduleName());
-    CMenuAction climbAction = menu.createAction({"Climb"});
+    auto climbAction = menu.createAction({"Climb"});
     menu.addMenuGroup({climbAction}, {CMenu::exit()});
 
     do
@@ -125,9 +125,9 @@ void CBlackIvoryTower::climb()
 
         CMenu menu(BlackIvoryTower::moduleName());
 
-        CMenuAction downAction = menu.createAction({"Down", 'd'});
-        CMenuAction upAction = menu.createAction({"Up", 'u'});
-        CMenuAction officeAction = menu.createAction({"Visit Office", 'V'});
+        auto downAction = menu.createAction({"Down", 'd'});
+        auto upAction = menu.createAction({"Up", 'u'});
+        auto officeAction = menu.createAction({"Visit Office", 'V'});
 
         CMenu::ActionList downActionList = {downAction};
         CMenu::ActionList upActionList = {};
@@ -226,8 +226,8 @@ void CBlackIvoryTower::executeTopOffice()
         Console::printLn(tr("With fear in his eyes and a shaking voice, he offers you a free döner."));
 
         CMenu menu(BlackIvoryTower::moduleName());
-        CMenuAction doenerAction = menu.createAction({"Have a Döner", 'H'});
-        const auto mobiAction = _mobi.npcNav(menu);
+        auto doenerAction = menu.createAction({"Have a Döner", 'H'});
+        auto mobiAction = _mobi.npcNav(menu);
 
         menu.addMenuGroup({mobiAction});
         menu.addMenuGroup({doenerAction}, {CMenu::exit()});

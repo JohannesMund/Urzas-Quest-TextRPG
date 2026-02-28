@@ -35,8 +35,8 @@ void CFishingFritz::execute()
             sellAction = menu.createShopAction({"Sell your fish", 'S'}, val);
         }
 
-        CMenuAction askAction = menu.createAction({"Ask for Information", 'A'});
-        CMenuAction enhanceAction = menu.createAction({"Enhance Equipment", 'E'});
+        auto askAction = menu.createAction({"Ask for Information", 'A'});
+        auto enhanceAction = menu.createAction({"Enhance Equipment", 'E'});
 
         if (!isOpen())
         {

@@ -23,8 +23,10 @@ protected:
 private:
     void rubTheLamp();
     void examine();
+    void visitBottle();
 
     void replaceGem();
+    void stealGem();
     void clean();
 
     void useWish();

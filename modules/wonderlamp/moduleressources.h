@@ -29,8 +29,13 @@ Module::ModuleInfo moduleInfo();
 std::string moduleName();
 
 std::string djinn();
+
+std::string colorizeJeannie(const std::string_view& s);
 std::string jeannie();
+
+std::string colorizeGenie(const std::string_view& s);
 std::string genie();
+
 std::string wonderlamp();
 std::string wonderLampEncounter();
 
