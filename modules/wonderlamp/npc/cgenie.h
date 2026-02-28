@@ -12,7 +12,8 @@ public:
     virtual std::string name() const override;
     virtual std::string describe() const override;
 
-    virtual CMenuAction npcNav(CMenu& menu) const override;
+protected:
+    virtual std::string colorize(const std::string_view& s) const override;
 
 private:
     void printHeader(const bool bFull = true) const override;

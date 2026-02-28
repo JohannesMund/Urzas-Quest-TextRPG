@@ -89,7 +89,7 @@ public:
      * @brief npcNac
      * provides a nav to interact with the NPC
      */
-    virtual CMenuAction npcNav(CMenu& menu) const;
+    virtual const CMenuAction npcNav(CMenu& menu) const;
 
     /**
      * @brief addSympathy

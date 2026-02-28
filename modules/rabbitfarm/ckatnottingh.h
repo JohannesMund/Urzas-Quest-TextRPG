@@ -13,8 +13,6 @@ public:
     virtual std::string name() const override;
     virtual std::string describe() const override;
 
-    virtual CMenuAction npcNav(CMenu& menu) const override;
-
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 

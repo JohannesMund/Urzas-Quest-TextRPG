@@ -4,6 +4,7 @@
 #include <nlohmann/json_fwd.hpp>
 
 class CBasicDjinn;
+class CDjinnCompanion;
 class CWonderLamp : public CItem
 {
 public:
@@ -23,19 +24,22 @@ protected:
 private:
     void rubTheLamp();
     void examine();
+    void visitBottle();
 
     void replaceGem();
+    void stealGem();
     void clean();
 
     void useWish();
-    void adjustWishes();
+    void adjustWishes(const bool print = false);
     void destroy();
     bool needsCleaning();
 
     bool _wasted = false;
     int _wishesLeft = 3;
-
-    CBasicDjinn* _djinn;
     int _lastCaredFor = 0;
     bool _missingGem = false;
+
+    CBasicDjinn* _djinn;
+    CDjinnCompanion* _djinnCompanion;
 };

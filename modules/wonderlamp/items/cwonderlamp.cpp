@@ -4,6 +4,7 @@
 #include "cmenu.h"
 #include "console.h"
 #include "randomizer.h"
+#include "wonderlamp/companion/cdjinncompanion.h"
 #include "wonderlamp/items/cgem.h"
 #include "wonderlamp/moduleressources.h"
 #include "wonderlamp/npc/cgenie.h"
@@ -32,25 +33,28 @@ CWonderLamp::CWonderLamp() : CItem(TagNames::WonderLamp::wonderlamp)
     {
         _djinn = new CGenie();
     }
+    _djinnCompanion = new CDjinnCompanion(_djinn);
 }
 
 CWonderLamp::~CWonderLamp()
 {
-    if (_djinn == nullptr)
+    if (_djinn != nullptr)
     {
-        return;
-    }
-    if (_djinn->isSignificantOther())
-    {
-        CGameManagement::getPlayerInstance()->setSignificantOther(nullptr);
-    }
+        if (_djinn->isSignificantOther())
+        {
+            CGameManagement::getPlayerInstance()->setSignificantOther(nullptr);
+        }
 
-    delete _djinn;
+        delete _djinn;
+    }
+    if (_djinnCompanion != nullptr)
+    {
+        delete _djinnCompanion;
+    }
 }
 
 void CWonderLamp::useFromInventory()
 {
-    adjustWishes();
     CMenuAction input;
     do
     {
@@ -61,9 +65,12 @@ void CWonderLamp::useFromInventory()
                WonderLamp::wonderlamp()));
 
         CMenu menu(WonderLamp::moduleName());
-        const auto rubAction = menu.createAction({"Rub", 'R'});
-        const auto examineAction = menu.createAction({"Examine", 'E'});
-        menu.addMenuGroup({rubAction, examineAction}, {CMenu::exit()});
+        auto rubAction = menu.createAction({"Rub", 'R'});
+        auto examineAction = menu.createAction({"Examine", 'E'});
+
+        CMenu::ActionList bottleList = {rubAction, examineAction};
+
+        menu.addMenuGroup(bottleList, {CMenu::exit()});
         input = menu.execute();
 
         if (input == examineAction)
@@ -80,7 +87,14 @@ void CWonderLamp::useFromInventory()
 
 void CWonderLamp::useFromBattle(CEnemy*)
 {
+
+    Console::printLn(tr("Rough times require the big guns. You rub your {} and call {} to help you in battle.",
+                        WonderLamp::wonderlamp(),
+                        _djinn->name()));
     useWish();
+    Console::printLn(tr("{} joins you in battle.", _djinn->name()));
+
+    CGameManagement::getPlayerInstance()->addSupportCompanion(_djinnCompanion);
 }
 
 CItem::ItemFilter CWonderLamp::wonderlampFilter()
@@ -111,7 +125,7 @@ void CWonderLamp::load(const nlohmann::json& json)
     _missingGem = json["MissingGem"];
     _lastCaredFor = json["LastCaredFor"];
 
-    _djinn = Djinn::loadFromJson(json["Djinn"]);
+    _djinn->load(json);
 }
 
 std::string CWonderLamp::translatorModuleName() const
@@ -142,14 +156,30 @@ void CWonderLamp::rubTheLamp()
                _djinn->heShe(),
                _djinn->hisHer()));
         Console::br();
-        Console::printLn(tr("You have {} wishes left.", _wishesLeft));
+        adjustWishes();
+
         CMenu menu(WonderLamp::moduleName());
-        const auto djinnAction = _djinn->npcNav(menu);
-        menu.addMenuGroup({djinnAction}, {CMenu::exit()});
+
+        auto djinnAction = _djinn->npcNav(menu);
+        menu.addMenuGroup({}, {djinnAction});
+
+        CMenu::ActionList djinnList;
+
+        auto visitAction = menu.createAction({"Visit Bottle", 'V'});
+        if (_djinn->sympathy() >= CNpc::ESympathyLevel::eLike)
+        {
+            djinnList.push_back(visitAction);
+        }
+
+        menu.addMenuGroup({djinnList}, {CMenu::exit()});
         input = menu.execute();
         if (input == djinnAction)
         {
             _djinn->interact();
+        }
+        if (input == visitAction)
+        {
+            visitBottle();
         }
     } while (input != CMenu::exit());
 }
@@ -174,6 +204,7 @@ void CWonderLamp::examine()
 
         auto cleanAction = menu.createAction({"Clean", 'C'});
         auto replaceAction = menu.createAction({"Replace missing gem", 'R'});
+        auto stealAction = menu.createAction({"Steal Gem", 'S'});
 
         CMenu::ActionList careList;
 
@@ -199,6 +230,13 @@ void CWonderLamp::examine()
                 tr("Unfortunately, you do not have gems, so you should keep your eyes open.");
             }
         }
+        else
+        {
+            Console::printLn(
+                tr("This {} is loaded with gems. They are worth a fortune. This could be really helpful "
+                   "solving the one or the other financial crisis. One gem more or less... No one will notice."));
+            careList.push_back(stealAction);
+        }
 
         menu.addMenuGroup(careList, {CMenu::exit()});
         input = menu.execute();
@@ -211,8 +249,16 @@ void CWonderLamp::examine()
         {
             replaceGem();
         }
+        if (input == stealAction)
+        {
+            stealGem();
+        }
 
     } while (input == CMenu::exit());
+}
+
+void CWonderLamp::visitBottle()
+{
 }
 
 void CWonderLamp::replaceGem()
@@ -250,6 +296,10 @@ void CWonderLamp::replaceGem()
     Console::confirmToContinue();
 }
 
+void CWonderLamp::stealGem()
+{
+}
+
 void CWonderLamp::clean()
 {
     Console::printLn(tr("You take some time, and clean your {}. Carefully you remove dirt, polish out the scratches "
@@ -271,24 +321,48 @@ void CWonderLamp::clean()
 
 void CWonderLamp::useWish()
 {
-    adjustWishes();
     _wishesLeft--;
-    if (_wishesLeft <= 0)
-    {
-        destroy();
-    }
+    Console::printLn(tr("You use up one of your wishes."));
+    adjustWishes(true);
 }
 
-void CWonderLamp::adjustWishes()
+void CWonderLamp::adjustWishes(const bool print)
 {
-    if (_djinn->sympathy() > CNpc::ESympathyLevel::eNeutral)
+    if (_djinn->sympathy() >= CNpc::ESympathyLevel::eLike)
     {
+        if (print)
+        {
+            Console::printLn(
+                tr("...but appearently, this this wish does not count towards your wishes. {} explaines it to "
+                   "you in detail, but your knowledge in genie-law leaves... well, room for improvement.",
+                   _djinn->name()));
+            Console::printLn(tr("Turns out, you are back to your full wishes, and you do not question it."));
+        }
+
         _wishesLeft = 3;
     }
 
     if (_djinn->sympathy() == CNpc::ESympathyLevel::eHate)
     {
-        _wishesLeft = 1;
+        if (print)
+        {
+            Console::printLn(tr("{} explains alot, reciting genie-law and this service also counts as wish, and all of "
+                                "this is totally confusing.",
+                                _djinn->name()));
+        }
+
+        _wishesLeft = std::min(_wishesLeft, 1);
+    }
+
+    Console::printLn(tr("You have {} wishes left", _wishesLeft));
+
+    if (_wishesLeft <= 0)
+    {
+        Console::printLn(tr("This is it, you habe no wishes left. {} will leave you forever. Your {} is now a "
+                            "worthless piece of junk.",
+                            _djinn->name(),
+                            WonderLamp::wonderlamp()));
+        destroy();
     }
 }
 

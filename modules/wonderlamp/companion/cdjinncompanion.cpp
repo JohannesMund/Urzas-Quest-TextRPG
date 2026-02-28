@@ -42,12 +42,8 @@ void CDjinnCompanion::postBattle(CEnemy* enemy)
         tr("The battle is done, {} bows in front of you after {} has been defeated and your wish has been fulfilled.",
            _djinn->name(),
            enemy->name()));
-    if (_djinn->sympathy() > CNpc::ESympathyLevel::eNeutral)
-    {
-        Console::printLn("But turns out, that bending the rules is a thing, and this battle does not count towards "
-                         "your wishes left.");
-    }
-    CGameManagement::getPlayerInstance()->removeSupporCompanionsByName(_djinn->name());
+    CGameManagement::getPlayerInstance()->removeSupporCompanionsByName(_djinn->name(), false);
+    leaveText();
 }
 
 int CDjinnCompanion::shield(const int i)

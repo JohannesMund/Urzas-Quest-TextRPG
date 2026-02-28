@@ -21,14 +21,9 @@ void CBasicDjinn::interact()
         printHeader();
 
         CMenu menu;
-        const auto visitAction = menu.createAction({"Visit Bottle", 'V'});
         const auto giftGemAction = menu.createAction({"Gift Gem", 'G'});
 
         CMenu::ActionList djinnList;
-        if (sympathy() >= CNpc::ESympathyLevel::eLike)
-        {
-            djinnList.push_back(visitAction);
-        }
 
         if (CGameManagement::getInventoryInstance()->hasItem(CGem::gemFilter()))
         {
@@ -36,11 +31,6 @@ void CBasicDjinn::interact()
         }
         menu.addMenuGroup(djinnList);
         input = executeNpcMenu(menu);
-
-        if (input == visitAction)
-        {
-            visitBottle();
-        }
 
         if (input == giftGemAction)
         {
@@ -65,9 +55,5 @@ std::string CBasicDjinn::translatorModuleName() const
 }
 
 void CBasicDjinn::giftGem()
-{
-}
-
-void CBasicDjinn::visitBottle()
 {
 }

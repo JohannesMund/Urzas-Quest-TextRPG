@@ -21,7 +21,7 @@ std::function<bool(const CSupportCompanion*)> CSupportCompanion::companionModule
 
 std::function<bool(const CSupportCompanion*)> CSupportCompanion::companionNameFilter(const std::string_view& name)
 {
-    return [&name](const CSupportCompanion* companion) { return companion->_moduleName.compare(name) == 0; };
+    return [&name](const CSupportCompanion* companion) { return companion->name().compare(name) == 0; };
 }
 
 std::function<bool(CSupportCompanion*)> CSupportCompanion::filterAndRemoveByModuleName(
@@ -31,6 +31,7 @@ std::function<bool(CSupportCompanion*)> CSupportCompanion::filterAndRemoveByModu
     {
         if (companionModuleNameFilter(moduleName)(c))
         {
+            c->leaveText();
             delete c;
             return true;
         }
@@ -44,6 +45,7 @@ std::function<bool(CSupportCompanion*)> CSupportCompanion::filterAndRemoveByName
     {
         if (companionNameFilter(name)(c))
         {
+            c->leaveText();
             delete c;
             return true;
         }

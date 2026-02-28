@@ -47,8 +47,8 @@ void CShop::execute()
         CMenu menu;
 
         CMenuAction junkAction;
-        CMenuAction buyAction = menu.createAction({"Buy items"});
-        CMenuAction sellAction = menu.createAction({"Sell items"});
+        auto buyAction = menu.createAction({"Buy items"});
+        auto sellAction = menu.createAction({"Sell items"});
 
         auto junkItems = CGameManagement::getInventoryInstance()->getJunkItems();
         if (junkItems.size())

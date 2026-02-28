@@ -50,13 +50,22 @@ std::string WonderLamp::moduleName()
     return std::string(TagNames::WonderLamp::wonderlamp);
 }
 
+std::string WonderLamp::colorizeJeannie(const std::string_view& s)
+{
+    return CC::colorizeString(s, CC::fgMagenta(), CC::fgLightMagenta());
+}
+
 std::string WonderLamp::jeannie()
 {
-    return tr("{0}B{1}ewitching {0}J{1}eannie{2}", CC::fgMagenta(), CC::fgLightMagenta(), CC::ccReset());
+    return std::format("{} {}", colorizeJeannie(tr("Bewitching")), colorizeJeannie(tr("Jeanny")));
+}
+std::string WonderLamp::colorizeGenie(const std::string_view& s)
+{
+    return CC::colorizeString(s, CC::fgMagenta(), CC::fgLightMagenta());
 }
 std::string WonderLamp::genie()
 {
-    return tr("{0}C{1}harming {0}G{1}enie{2}", CC::fgBlue(), CC::fgLightBlue(), CC::ccReset());
+    return std::format("{} {}", colorizeGenie(tr("Charming")), colorizeGenie(tr("Genie")));
 }
 std::string WonderLamp::wonderlamp()
 {

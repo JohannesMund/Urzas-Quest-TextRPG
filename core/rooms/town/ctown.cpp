@@ -37,11 +37,11 @@ void CTown::execute()
         Console::hr();
 
         CMenu menu;
-        CMenuAction blacksmithAction = _blackSmith.townModuleNav(menu);
-        CMenuAction churchAction = _church.townModuleNav(menu);
-        CMenuAction tavernAction = _tavern.townModuleNav(menu);
-        CMenuAction shopAction = _shop.townModuleNav(menu);
-        CMenuAction farmAction = _farm.townModuleNav(menu);
+        auto blacksmithAction = _blackSmith.townModuleNav(menu);
+        auto churchAction = _church.townModuleNav(menu);
+        auto tavernAction = _tavern.townModuleNav(menu);
+        auto shopAction = _shop.townModuleNav(menu);
+        auto farmAction = _farm.townModuleNav(menu);
 
         CMenu::ActionList navs = {blacksmithAction, churchAction, tavernAction, shopAction};
 

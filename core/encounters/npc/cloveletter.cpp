@@ -55,11 +55,11 @@ void CLoveLetter::execute(const std::string_view& moduleName)
                significantOther->heShe()));
 
     CMenu menu(moduleName);
-    const auto replyAction = menu.createAction({"Reply", 'R'});
-    const auto goAction = menu.createAction({"Go away", 'G'});
+    auto replyAction = menu.createAction({"Reply", 'R'});
+    auto goAction = menu.createAction({"Go away", 'G'});
 
     menu.addMenuGroup({replyAction}, {goAction});
-    const auto input = menu.execute();
+    auto input = menu.execute();
 
     Console::br();
     if (input == replyAction)

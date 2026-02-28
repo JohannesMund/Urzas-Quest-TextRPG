@@ -22,8 +22,8 @@ void CLeilaEncounter::execute(const std::string_view&)
     Console::printLn("Do you want to help?");
 
     CMenu menu(Leila::moduleName());
-    CMenuAction helpAction = menu.createAction({"Help"});
-    CMenuAction ignoreAction = menu.createAction({"Ignore"});
+    auto helpAction = menu.createAction({"Help"});
+    auto ignoreAction = menu.createAction({"Ignore"});
     menu.addMenuGroup({helpAction, ignoreAction});
     if (menu.execute() == ignoreAction)
     {

@@ -50,7 +50,7 @@ void CAppleTree::execute(const std::string_view&)
     }
     Console::br();
     CMenu menu(RabbitFarm::moduleName());
-    CMenuAction pickAction = menu.createAction({"Pick an Apple", 'P'});
+    auto pickAction = menu.createAction({"Pick an Apple", 'P'});
 
     menu.addMenuGroup({pickAction}, {CMenu::exit()});
 

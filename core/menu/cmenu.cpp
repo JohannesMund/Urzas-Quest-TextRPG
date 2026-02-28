@@ -38,7 +38,7 @@ void CMenu::addMenuGroup(const CMenu::ActionList& list1, const CMenu::ActionList
     _menu.push_back(grp);
 }
 
-CMenuAction CMenu::execute()
+const CMenuAction CMenu::execute()
 {
     resetNavs();
     for (const auto& group : _menu)
@@ -67,7 +67,7 @@ CMenuAction CMenu::execute()
     return findActionByInput();
 }
 
-CMenuAction CMenu::createAction(const Menu::MenuAction& action, const bool translate)
+const CMenuAction CMenu::createAction(const Menu::MenuAction& action, const bool translate)
 {
     Menu::MenuAction a = translate ? tr(action) : action;
     if (a.key != 0 && isNavPossible(a.key))
@@ -89,7 +89,7 @@ CMenuAction CMenu::createAction(const Menu::MenuAction& action, const bool trans
     return {};
 }
 
-CMenuAction CMenu::createShopAction(const Menu::MenuAction& action, const int cost, const bool translate)
+const CMenuAction CMenu::createShopAction(const Menu::MenuAction& action, const int cost, const bool translate)
 {
     return createAction({std::format("{} ({} Gold)", action.name, cost), action.key}, translate);
 }
@@ -100,51 +100,51 @@ void CMenu::clear()
     _acceptableNavs.clear();
 }
 
-CMenuAction CMenu::executeYesNoMenu()
+const CMenuAction CMenu::executeYesNoMenu()
 {
     CMenu menu;
     menu.addMenuGroup({CMenu::yes(), CMenu::no()});
     return menu.execute();
 }
 
-CMenuAction CMenu::executeAcceptRejectMenu()
+const CMenuAction CMenu::executeAcceptRejectMenu()
 {
     CMenu menu;
     menu.addMenuGroup({CMenu::accept(), CMenu::reject()});
     return menu.execute();
 }
 
-CMenuAction CMenu::yes()
+const CMenuAction CMenu::yes()
 {
     return CMenuAction("Yes", "[Y]es", 'y');
 }
 
-CMenuAction CMenu::no()
+const CMenuAction CMenu::no()
 {
     return CMenuAction("No", "[N]o", 'n');
 }
 
-CMenuAction CMenu::exit()
+const CMenuAction CMenu::exit()
 {
     return CMenuAction("Exit", "E[x]it", 'x');
 }
 
-CMenuAction CMenu::accept()
+const CMenuAction CMenu::accept()
 {
     return CMenuAction("Accept", "[A]ccept", 'a');
 }
 
-CMenuAction CMenu::reject()
+const CMenuAction CMenu::reject()
 {
     return CMenuAction("Reject", "[R]eject", 'r');
 }
 
-CMenuAction CMenu::ret()
+const CMenuAction CMenu::ret()
 {
     return CMenuAction("Return", "[R]eturn", 'r');
 }
 
-CMenuAction CMenu::findActionByInput() const
+const CMenuAction CMenu::findActionByInput() const
 {
     auto input = Console::getAcceptableInput(_acceptableNavs);
     for (const auto& group : _menu)

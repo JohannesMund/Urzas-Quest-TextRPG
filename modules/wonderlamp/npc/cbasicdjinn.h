@@ -19,16 +19,14 @@ public:
     virtual std::string name() const override = 0;
     virtual std::string describe() const override = 0;
 
-    virtual CMenuAction npcNav(CMenu& menu) const override = 0;
-
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 
 protected:
     virtual std::string translatorModuleName() const override;
+    virtual std::string colorize(const std::string_view& s) const = 0;
 
 private:
     void printHeader(const bool bFull = true) const override = 0;
     void giftGem();
-    void visitBottle();
 };

@@ -20,9 +20,9 @@ std::string CJeannie::describe() const
     return std::string();
 }
 
-CMenuAction CJeannie::npcNav(CMenu& menu) const
+std::string CJeannie::colorize(const std::string_view& s) const
 {
-    return menu.createAction({CC::unColorizeString(WonderLamp::genie())});
+    return WonderLamp::colorizeJeannie(s);
 }
 
 void CJeannie::printHeader(const bool) const

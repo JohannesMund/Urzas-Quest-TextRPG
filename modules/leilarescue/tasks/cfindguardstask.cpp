@@ -196,8 +196,8 @@ void CFindGuardsTask::fightBossMonster()
     Console::printLn("But seriously, is that really \"Flea-eater\"?");
 
     CMenu menu(LeilaRescue::moduleName());
-    CMenuAction checkAction = menu.createAction({"Check"});
-    CMenuAction retreatAction = menu.createAction({"Retreat"});
+    auto checkAction = menu.createAction({"Check"});
+    auto retreatAction = menu.createAction({"Retreat"});
     menu.addMenuGroup({checkAction, retreatAction});
     Console::br();
 
