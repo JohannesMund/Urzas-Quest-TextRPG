@@ -35,6 +35,11 @@ private:
     void destroy();
     bool needsCleaning();
 
+    void spendTimeInside();
+    void playGuessTheNumber();
+    void playLudo();
+    void playCards();
+
     bool _wasted = false;
     int _wishesLeft = 3;
     int _lastCaredFor = 0;
