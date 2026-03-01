@@ -197,7 +197,6 @@ void CWonderLamp::examine()
     }
 
     CMenuAction input;
-
     do
     {
         CMenu menu(WonderLamp::moduleName());
@@ -259,16 +258,70 @@ void CWonderLamp::examine()
 
 void CWonderLamp::visitBottle()
 {
+    CMenuAction input;
+    do
+    {
+        Console::cls();
+        Console::printLn(tr("You ask {} to visit him, and {} happily aggrees. With the known \"Slurp\" noise, you "
+                            "materialize inside the magic bottle.",
+                            _djinn->name(),
+                            _djinn->heShe()));
+        Console::printLn(tr("The inside of the {} is cozy, richly decorated and just a little kitschy. There is a "
+                            "comfortable sofa for you to sit on.",
+                            WonderLamp::wonderlamp()));
+        if (needsCleaning())
+        {
+            Console::printLn(
+                tr("But, this place could use some cleaning. You remember, that it has been a while, since "
+                   "you last cared for the {}, maybe it is about time.",
+                   WonderLamp::wonderlamp()));
+        }
+
+        if (_missingGem)
+        {
+            Console::printLn(tr("The place could be more magical, but the mafic is channeled through the gems on the "
+                                "outside of the {}. "
+                                "You should have a look, whether everything is in order with those gems.",
+                                WonderLamp::wonderlamp()));
+        }
+        Console::printLn(
+            tr("You take a seat on the sofa together with {}, and you ask yourselfs, how to spend your time together.",
+               _djinn->name()));
+
+        CMenu menu(WonderLamp::moduleName());
+        auto guessTheNumberAction = menu.createAction({"Play \"Guess the Number\"", 'G'});
+        auto ludoAction = menu.createAction({"Play \"Ludo\"", 'L'});
+        auto cozyCardsAction = menu.createAction({"Play a Cozy cardgame", 'C'});
+        CMenu::ActionList games = {guessTheNumberAction, ludoAction, cozyCardsAction};
+
+        auto spendTimeAction = menu.createAction({"Spend some time", 'S'});
+        menu.addMenuGroup(games);
+        menu.addMenuGroup({spendTimeAction}, {CMenu::exit()});
+        input = menu.execute();
+
+        if (input == spendTimeAction)
+        {
+            spendTimeInside();
+        }
+
+        if (input == guessTheNumberAction)
+        {
+            playGuessTheNumber();
+        }
+        if (input == ludoAction)
+        {
+            playLudo();
+        }
+        if (input == cozyCardsAction)
+        {
+            playCards();
+        }
+
+    } while (input == CMenu::exit());
 }
 
 void CWonderLamp::replaceGem()
 {
-    if (!CGameManagement::getInventoryInstance()->hasItem(CGem::gemFilter()))
-    {
-        Console::printLn(tr("You dont have a gem. maybe later."));
-        return;
-    }
-
     auto gem = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CGem>(CGem::gemFilter());
     if (!gem.has_value())
     {
@@ -276,7 +329,8 @@ void CWonderLamp::replaceGem()
         return;
     }
 
-    Console::printLn(tr("There is a gap on your {} where the gem fell of. You decide to replace it with a beautiful "
+    Console::printLn(tr("There is a gap on your {} where the gem fell of (or has been acidentally fallen of). You "
+                        "decide to replace it with a beautiful "
                         "{}. Looks like new.",
                         WonderLamp::wonderlamp(),
                         gem.value()->name()));
@@ -298,6 +352,16 @@ void CWonderLamp::replaceGem()
 
 void CWonderLamp::stealGem()
 {
+    Console::printLn(tr("Ok, not the nicest move, to steal from {}s home, but you need the money. Gems fall of here "
+                        "and than, it was an accident, nobody will notice.",
+                        _djinn->name()));
+    Console::printLn(tr("You snitch off one of the gems and put it into your pocket."));
+    CGameManagement::getInventoryInstance()->addItem(new CGem());
+    _djinn->addSympathy((Randomizer::getRandom(50) * -1) - 25);
+    _missingGem = true;
+    Console::printLn(tr("Turns out, {} noticed.", _djinn->heShe()));
+    Console::br();
+    Console::confirmToContinue();
 }
 
 void CWonderLamp::clean()
@@ -379,4 +443,189 @@ bool CWonderLamp::needsCleaning()
 {
     const auto decay = CGameManagement::now() - _lastCaredFor;
     return decay > 25;
+}
+
+void CWonderLamp::spendTimeInside()
+{
+    Console::printLn(
+        tr("You spend sone time together with {0} inside the {1}. {0} is a wonderful host, offers you a drink and some "
+           "food. the {1} is a spacial place full of magic and mysteries, and {0} shows you some of them."));
+    Console::printLn(
+        tr("You spend your time chatting and laughing and enjoying yourselfs. You need to repeat that soon."));
+    _djinn->addSympathy(Randomizer::getRandom(5) + 3);
+    Console::br();
+    Console::confirmToContinue();
+}
+
+void CWonderLamp::playGuessTheNumber()
+{
+    const auto playerGuesses = Randomizer::getRandomEntry<bool>({true, false});
+
+    Console::printLn(tr("You decide to play a game of \"Guess the number\"."));
+    if (playerGuesses)
+    {
+        Console::printLn(tr("A fun little game, where {} thinks of a number and you have to guess it."));
+        Console::printLn(
+            tr("Who knows, maybe after hanging out with {}, you learnd some mind-reading tricks.", _djinn->name()));
+        Console::br();
+        Console::printLn(tr("Guess a number between 1-10:"));
+    }
+    else
+    {
+        Console::printLn(tr("A fun little game, where you think of a number and {} has to guess it."));
+        Console::printLn(tr("Playing mind-reading games agains a mind-reading Djinn, what could go wrong?"));
+        Console::br();
+        Console::printLn(tr("Select a number between 1-10 to think of:"));
+    }
+    auto input = Console::getNumberInputWithEcho(1, 10);
+
+    if (!input.has_value())
+    {
+        Console::printLn(tr("This is too weird. Playing aginst a mind-reader is dumb. You forfeit and quit the game."));
+        Console::printLn(tr("{} looks disapointed."));
+        _djinn->addSympathy((Randomizer::getRandom(10) * -1) - 5);
+        Console::br();
+        Console::confirmToContinue();
+        return;
+    }
+
+    bool magicOutcome = playerGuesses ? Randomizer::getRandom(10) == 0 : Randomizer::getRandom(2) == 0;
+    const unsigned int firstNumber = input.value();
+    const auto otherNumber = Randomizer::getRandom(9) + 1;
+
+    if (playerGuesses)
+    {
+        if (magicOutcome)
+        {
+            Console::printLn(tr("Just before you want to say your number, you feel a magical ispriration."));
+            if (firstNumber == otherNumber)
+            {
+                Console::printLn(
+                    tr("You now know, that you guessed right, and full of confidence you state your number: {}.",
+                       otherNumber));
+            }
+            else
+            {
+                Console::printLn(
+                    tr("You know the number, and full of confidence you state your number: {}.", otherNumber));
+            }
+            Console::printLn(tr("{} is really impressed.", _djinn->name()));
+            _djinn->addSympathy(Randomizer::getRandom(20) + 5);
+        }
+        else
+        {
+            Console::printLn(tr("You state your number: {}.", firstNumber));
+            Console::printLn(tr("{} choose: {}.", _djinn->name(), otherNumber));
+
+            if (firstNumber == otherNumber)
+            {
+                Console::printLn(tr("{}You guessed right!{}", CC::fgYellow(), CC::ccReset()));
+                Console::printLn(tr("Probably a lucky break, but {} looks surprised,", _djinn->name()));
+                _djinn->addSympathy(Randomizer::getRandom(5) + 5);
+            }
+            else
+            {
+                Console::printLn(tr("{}You guessed wrong!{}", CC::fgRed(), CC::ccReset()));
+                Console::printLn(tr("{} does not look surprised,", _djinn->name()));
+                _djinn->addSympathy(Randomizer::getRandom(5) + 5);
+            }
+        }
+    }
+    else
+    {
+        if (magicOutcome)
+        {
+            Console::printLn(
+                tr("Before you even state your number, {} says: {}, {} eyes looking deeply into your mind.",
+                   _djinn->name(),
+                   firstNumber,
+                   _djinn->hisHer()));
+            Console::printLn(tr("Turns out, you are just a mere human, and should not play mind-reading games with a "
+                                "mind-reader. Or should you?"));
+            Console::printLn(tr("Nevertheless, {} looks a little disapointed.", _djinn->name()));
+            _djinn->addSympathy(-1);
+        }
+        else
+        {
+            Console::printLn(tr("{} states {} number: {}.", _djinn->name(), _djinn->hisHer(), otherNumber));
+            Console::printLn(tr("You choose: {}.", _djinn->name(), firstNumber));
+
+            if (firstNumber == otherNumber)
+            {
+                Console::printLn(tr("{}{} guessed right!{}", CC::fgRed(), _djinn->name(), CC::ccReset()));
+                Console::printLn(tr("Anyway, {} looks surprised, you shielded your mind better, than {} thought",
+                                    _djinn->name(),
+                                    _djinn->heShe()));
+                _djinn->addSympathy(Randomizer::getRandom(5) + 5);
+            }
+            else
+            {
+                Console::printLn(tr("{}{} guessed wrong!{}", CC::fgYellow(), _djinn->name(), CC::ccReset()));
+                Console::printLn(
+                    tr("{} does not look surprised and impressed, {} had no chance to read your mind", _djinn->name()));
+                _djinn->addSympathy(Randomizer::getRandom(10) + 5);
+            }
+        }
+    }
+    Console::br();
+    Console::confirmToContinue();
+}
+
+void CWonderLamp::playLudo()
+{
+    Console::printLn(
+        tr("You decide to play a game of Ludo with {}. Tt is a relaxing match, it is fun and it is a little exciting.",
+           _djinn->name()));
+
+    const auto outcome = Randomizer::getRandom(9);
+
+    if (outcome == 0)
+    {
+        Console::printLn(tr("Until it isnt. When the tides turn towards {0}s side, you start to get angry. Eventually "
+                            "you lose it all and before the game even ends, you throw over the board, throw around the "
+                            "game pieces and rant towards {0}.",
+                            _djinn->name()));
+        Console::printLn(
+            tr("Losing is surely not one of the core-competencies of a big strong hero. What a baby you are!"));
+        _djinn->addSympathy((Randomizer::getRandom(25) * -1) - 5);
+    }
+    else if (outcome == 1)
+    {
+        Console::printLn(
+            tr("Until it isnt. When the tides turn towards your side, {0} starts to get angry. Eventually "
+               "{1} losees it all and before the game even ends, {1} throws over the board, throws around the "
+               "game pieces and screams towards you.",
+               _djinn->name(),
+               _djinn->heShe()));
+        Console::printLn(
+            tr("Losing is surely not one of the core-competencies of a _djinn. What a baby {} is!", _djinn->heShe()));
+        _djinn->addSympathy((Randomizer::getRandom(25) * -1) - 5);
+    }
+    else if (outcome > 1)
+    {
+        Console::printLn(tr("In the end, it was really enjoyable for both of you"));
+        if (outcome <= 5)
+        {
+            Console::printLn(tr("More for {} though, {} wins the game.", _djinn->name(), _djinn->heShe()));
+        }
+        else
+        {
+            Console::printLn(tr("More for you though, you win the game."));
+        }
+        _djinn->addSympathy(Randomizer::getRandom(10) + 5);
+    }
+    Console::printLn("you should consider to play again.");
+    Console::br();
+    Console::confirmToContinue();
+}
+
+void CWonderLamp::playCards()
+{
+    Console::printLn(
+        tr("You and {} spend some time and play a cozy game of cards. While playing you are chatting, laughing, "
+           "having fun. just some nice, cozy quality time together.",
+           _djinn->name()));
+    _djinn->addSympathy(Randomizer::getRandom(5) + 1);
+    Console::br();
+    Console::confirmToContinue();
 }
