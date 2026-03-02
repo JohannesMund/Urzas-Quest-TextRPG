@@ -4,6 +4,7 @@
 #include "cmenu.h"
 #include "console.h"
 #include "core.h"
+#include "randomizer.h"
 #include "wonderlamp/items/cgem.h"
 #include "wonderlamp/moduleressources.h"
 
@@ -42,11 +43,12 @@ void CBasicDjinn::interact()
 
 nlohmann::json CBasicDjinn::save() const
 {
-    return nlohmann::json();
+    return CNpc::save();
 }
 
-void CBasicDjinn::load(const nlohmann::json&)
+void CBasicDjinn::load(const nlohmann::json& json)
 {
+    CNpc::load(json);
 }
 
 std::string CBasicDjinn::translatorModuleName() const
@@ -56,4 +58,39 @@ std::string CBasicDjinn::translatorModuleName() const
 
 void CBasicDjinn::giftGem()
 {
+    auto gem = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CGem>(CGem::gemFilter());
+    if (!gem.has_value())
+    {
+        Console::printLn(tr("Turns out, you dont have a gem."));
+        return;
+    }
+
+    CGameManagement::getInventoryInstance()->removeItem(gem.value());
+
+    auto sympathy = 10 + Randomizer::getRandom(40);
+    if (sympathy > 45)
+    {
+        Console::printLn(tr("Djinns love gems, more than everything else. {0} eyes are shining, when {1} sees the "
+                            "valuable {2}. {1} takes the gem, and puts it into {3} treasury.",
+                            name(),
+                            heShe(),
+                            gem.value()->name(),
+                            hisHer()));
+    }
+    else if (sympathy > 25)
+    {
+        Console::printLn(
+            tr("{0} seems to like your {1}. {2} appreciates your gift.", name(), gem.value()->name(), heShe()));
+    }
+    else
+    {
+        Console::printLn(tr("{0} thanks you politely, and puts your {1} into {2} treasury. It is small, and not very "
+                            "clear, but it is the gesture that counts, you guess.",
+                            name(),
+                            gem.value()->name(),
+                            hisHer()));
+    }
+
+    addSympathy(sympathy);
+    Console::br();
 }
