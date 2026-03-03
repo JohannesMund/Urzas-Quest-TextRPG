@@ -14,7 +14,4 @@ public:
 
 protected:
     virtual std::string colorize(const std::string_view& s) const override;
-
-private:
-    void printHeader(const bool bFull = true) const override;
 };

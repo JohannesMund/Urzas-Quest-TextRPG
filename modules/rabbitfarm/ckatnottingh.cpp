@@ -129,7 +129,7 @@ std::string CKatNottingH::name() const
 
 std::string CKatNottingH::describe() const
 {
-    if (_sympathy > 75)
+    if (_sympathy > 60)
     {
         return tr("{} is a friendly, really beautiful lady. She is an extraordinaryly {} woman. She has beautiful eyes "
                   "and a breathtaking smile. She is smart and funny. You "
@@ -138,7 +138,7 @@ std::string CKatNottingH::describe() const
                   RabbitFarm::coolAndStrong());
     }
 
-    if (_sympathy > 75)
+    if (_sympathy < 40)
     {
         return tr("{} is a nice woman, she is {}, but her job as Head of the {} also adds some "
                   "eco-hippie flare. You do not like her glasses.",

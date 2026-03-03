@@ -56,6 +56,18 @@ std::string CBasicDjinn::translatorModuleName() const
     return std::string(WonderLamp::moduleName());
 }
 
+void CBasicDjinn::printHeader(const bool bFull) const
+{
+    Console::cls();
+    Console::printLn(name(), Console::EAlignment::eCenter);
+    if (bFull)
+    {
+        Console::br();
+        Console::printLn(describe(), Console::EAlignment::eCenter);
+    }
+    Console::br();
+}
+
 void CBasicDjinn::giftGem()
 {
     auto gem = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CGem>(CGem::gemFilter());
