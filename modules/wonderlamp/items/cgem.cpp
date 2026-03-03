@@ -1,11 +1,12 @@
 #include "cgem.h"
+#include "randomizer.h"
 #include "wonderlamp/moduleressources.h"
 
 CGem::CGem() : CItem(TagNames::WonderLamp::gem)
 {
     _isSellable = true;
     _isBuyable = false;
-    _value = 500;
+    _value = Randomizer::getRandom(500) + 250;
 
     _name = WonderLamp::getRandomGem();
     _description = tr("A beautiful {}, looks like the ones on your {}", _name, WonderLamp::wonderlamp());
