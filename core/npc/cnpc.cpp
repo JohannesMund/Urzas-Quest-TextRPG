@@ -4,6 +4,7 @@
 #include "colorize.h"
 #include "console.h"
 #include "jsontagnames.h"
+#include "npcinteractions/cdateinteraction.h"
 #include "npcinteractions/cflowerinteraction.h"
 #include "randomizer.h"
 
@@ -18,8 +19,8 @@ CNpc::CNpc(const std::string_view& objectName, const Core::EGender gender) :
     CGameStateObject(objectName),
     _gender(gender)
 {
-
     _interactions.push_back(new CFlowerInteraction(this));
+    _interactions.push_back(new CDateInteraction(this));
 }
 
 CNpc::~CNpc()
@@ -42,14 +43,6 @@ void CNpc::interact()
         estrange(estrangement);
     }
     breakUp();
-}
-
-void CNpc::askOut()
-{
-    if (!isSignificantOther())
-    {
-        CGameManagement::getPlayerInstance()->setSignificantOther(this);
-    }
 }
 
 void CNpc::breakUp()
@@ -236,27 +229,20 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
     menu.addMenuGroup({thinkAboutAction}, {CMenu::exit()});
 
     auto talkAction = menu.createAction({"Talk", 'T'});
-    auto askOutAction = menu.createAction({"Ask out", 'A'});
 
     CMenu::ActionList actions;
-    CMenu::ActionList npcInteractions;
     actions.push_back(talkAction);
-
-    if (_sympathy > 750)
-    {
-        actions.push_back(askOutAction);
-    }
-
-    menu.addMenuGroup({actions});
 
     for (const auto interaction : _interactions)
     {
         if (interaction->interactionAvailable())
         {
             auto nav = interaction->nav(menu);
-            npcInteractions.push_back(nav);
+            actions.push_back(nav);
         }
     }
+
+    menu.addMenuGroup({actions});
 
     auto input = menu.execute();
     printHeader(false);

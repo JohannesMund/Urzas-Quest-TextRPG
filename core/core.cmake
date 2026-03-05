@@ -108,6 +108,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/npc/cnpc.h core/npc/cnpc.cpp
     core/npc/cnpcinteraction.h core/npc/cnpcinteraction.cpp
     core/npc/npcinteractions/cflowerinteraction.h core/npc/npcinteractions/cflowerinteraction.cpp
+    core/npc/npcinteractions/cdateinteraction.h core/npc/npcinteractions/cdateinteraction.cpp
 )
 
 set(CORE_RESSOURCE_DIR

@@ -82,6 +82,7 @@ void CFlowerInteraction::executeInteraction()
 
 bool CFlowerInteraction::interactionAvailable() const
 {
+    CGameManagement::getInventoryInstance()->addItem(new CFlower());
     return CGameManagement::getInventoryInstance()->hasItem(CFlower::flowerFilter());
 }
 

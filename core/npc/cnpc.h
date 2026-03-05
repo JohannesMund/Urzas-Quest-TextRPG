@@ -47,13 +47,6 @@ public:
     virtual void interact();
 
     /**
-     * @brief ask Out
-     * ask the NPC for a Date.
-     * @remark makes the NPC the significant other
-     */
-    virtual void askOut();
-
-    /**
      * @brief talk
      * implement to have conversations
      */
@@ -71,14 +64,6 @@ public:
      * prints the relationship status
      */
     void thinkAbout();
-
-    /**
-     * @brief giftFlower
-     * gifts a flower
-     * @sa CFlower
-     * @sa CFlowerPatch
-     */
-    void giftFlower();
 
     /**
      * @brief name and description
