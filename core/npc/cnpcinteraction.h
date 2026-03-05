@@ -9,8 +9,8 @@ class CMenu;
 class CNpcInteraction : public CGameStateObject
 {
 public:
-    CNpcInteraction(CNpc* npc);
-    virtual ~CNpcInteraction() {};
+    CNpcInteraction(CNpc* npc, const std::string_view& objectName);
+    virtual ~CNpcInteraction(){};
 
     bool checkNav(const CMenuAction& nav) const;
     CMenuAction nav(CMenu& menu);

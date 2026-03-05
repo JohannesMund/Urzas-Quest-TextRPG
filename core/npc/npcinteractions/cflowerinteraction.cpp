@@ -6,7 +6,7 @@
 #include "console.h"
 #include "randomizer.h"
 
-CFlowerInteraction::CFlowerInteraction(CNpc* npc) : CNpcInteraction(npc)
+CFlowerInteraction::CFlowerInteraction(CNpc* npc) : CNpcInteraction(npc, TagNames::NpcInteractions::flower)
 {
     _favoriteFlower = Ressources::Items::getRandomFlowerType();
     _leastFavoriteFlower = Ressources::Items::getRandomFlowerType();
@@ -89,15 +89,15 @@ bool CFlowerInteraction::interactionAvailable() const
 nlohmann::json CFlowerInteraction::save() const
 {
     auto o = CNpcInteraction::save();
-    o[TagNames::Npc::favouriteFlower] = _favoriteFlower;
-    o[TagNames::Npc::leastFavouriteFlower] = _leastFavoriteFlower;
+    o[TagNames::NpcInteractions::favouriteFlower] = _favoriteFlower;
+    o[TagNames::NpcInteractions::leastFavouriteFlower] = _leastFavoriteFlower;
     return o;
 }
 
 void CFlowerInteraction::load(const nlohmann::json& json)
 {
-    _favoriteFlower = json[TagNames::Npc::favouriteFlower];
-    _leastFavoriteFlower = json[TagNames::Npc::leastFavouriteFlower];
+    _favoriteFlower = json[TagNames::NpcInteractions::favouriteFlower];
+    _leastFavoriteFlower = json[TagNames::NpcInteractions::leastFavouriteFlower];
 }
 
 void CFlowerInteraction::makeNav(CMenu& menu)

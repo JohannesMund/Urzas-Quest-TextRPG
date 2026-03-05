@@ -204,9 +204,16 @@ constexpr std::string_view sympathy = "Sympathy";
 constexpr std::string_view gender = "Gender";
 constexpr std::string_view lastSeen = "lastSeen";
 constexpr std::string_view isSignificantOther = "IsSignificantOther";
+constexpr std::string_view interactions = "Interactions";
+} // namespace Npc
+
+namespace NpcInteractions
+{
+constexpr std::string_view flower = "Flower";
+constexpr std::string_view date = "Date";
 constexpr std::string_view favouriteFlower = "FavouriteFlower";
 constexpr std::string_view leastFavouriteFlower = "LeastFavouriteFlower";
 
-} // namespace Npc
+} // namespace NpcInteractions
 
 } // namespace TagNames

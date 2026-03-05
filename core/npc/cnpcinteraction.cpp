@@ -5,7 +5,9 @@
 
 #include <nlohmann/json.hpp>
 
-CNpcInteraction::CNpcInteraction(CNpc* npc) : CGameStateObject(TagNames::Translator::npcInteraction), _npc(npc)
+CNpcInteraction::CNpcInteraction(CNpc* npc, const std::string_view& objectName) :
+    CGameStateObject(objectName),
+    _npc(npc)
 {
 }
 

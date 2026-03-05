@@ -3,7 +3,7 @@
 #include "cgamemanagement.h"
 #include "cnpc.h"
 
-CDateInteraction::CDateInteraction(CNpc* npc) : CNpcInteraction(npc)
+CDateInteraction::CDateInteraction(CNpc* npc) : CNpcInteraction(npc, TagNames::NpcInteractions::date)
 {
 }
 void CDateInteraction::executeInteraction()

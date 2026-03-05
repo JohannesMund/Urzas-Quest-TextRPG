@@ -19,8 +19,8 @@ CNpc::CNpc(const std::string_view& objectName, const Core::EGender gender) :
     CGameStateObject(objectName),
     _gender(gender)
 {
-    _interactions.push_back(new CFlowerInteraction(this));
-    _interactions.push_back(new CDateInteraction(this));
+    addInteraction(new CFlowerInteraction(this));
+    addInteraction(new CDateInteraction(this));
 }
 
 CNpc::~CNpc()
@@ -127,6 +127,13 @@ nlohmann::json CNpc::save() const
     o[TagNames::Npc::lastSeen] = _lastSeen;
     o[TagNames::Npc::isSignificantOther] = isSignificantOther();
 
+    for (const auto& interaction : _interactions)
+    {
+        auto i = interaction->save();
+        i[TagNames::Common::objectName] = interaction->getObjectName();
+        o[TagNames::Npc::interactions].push_back(i);
+    }
+
     return o;
 }
 
@@ -139,6 +146,23 @@ void CNpc::load(const nlohmann::json& json)
     if (json[TagNames::Npc::isSignificantOther])
     {
         CGameManagement::getPlayerInstance()->setSignificantOther(this);
+    }
+
+    for (const auto& interaction : json[TagNames::Npc::interactions])
+    {
+        if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::flower, interaction))
+        {
+            auto flowerInteraction = new CFlowerInteraction(this);
+            flowerInteraction->load(interaction);
+            addInteraction(flowerInteraction);
+        }
+
+        if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::flower, interaction))
+        {
+            auto dateInteraction = new CDateInteraction(this);
+            dateInteraction->load(interaction);
+            addInteraction(dateInteraction);
+        }
     }
 }
 
