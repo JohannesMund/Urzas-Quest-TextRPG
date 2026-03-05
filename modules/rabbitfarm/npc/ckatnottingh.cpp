@@ -1,4 +1,5 @@
 #include "ckatnottingh.h"
+#include "cappleinteraction.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
@@ -10,6 +11,7 @@
 
 CKatNottingH::CKatNottingH() : CNpc(TagNames::RabbitFarm::kat, Core::EGender::eFemale)
 {
+    addInteraction(new CAppleInteraction(this));
 }
 
 void CKatNottingH::interact()
@@ -20,29 +22,13 @@ void CKatNottingH::interact()
     {
         printHeader();
         CMenu menu(RabbitFarm::moduleName());
-        auto appleAction = menu.createAction({"Give her an Apple", 'G'});
-
-        CMenu::ActionList katList;
-        if (CGameManagement::getInventoryInstance()->hasItem(CApple::appleFilter()))
-        {
-            katList.push_back(appleAction);
-        }
-
-        menu.addMenuGroup(katList);
         input = CNpc::executeNpcMenu(menu);
 
-        if (input == appleAction)
-        {
-            giveApple();
-            Console::confirmToContinue();
-        }
     } while (input != CMenu::exit());
 }
 
 void CKatNottingH::talk()
 {
-    registerAppleEncounter();
-
     if (isSignificantOther())
     {
         Console::printLn(
@@ -159,69 +145,17 @@ std::string CKatNottingH::describe() const
 nlohmann::json CKatNottingH::save() const
 {
     nlohmann::json o = CNpc::save();
-    o["appleEncounterRegistered"] = _appleEncounterRegistered;
     return o;
 }
 
 void CKatNottingH::load(const nlohmann::json& json)
 {
     CNpc::load(json);
-    if (json["appleEncounterRegistered"] == true)
-    {
-        registerAppleEncounter();
-    }
 }
 
 std::string CKatNottingH::translatorModuleName() const
 {
     return RabbitFarm::moduleName();
-}
-
-void CKatNottingH::registerAppleEncounter()
-{
-    if (!_appleEncounterRegistered)
-    {
-        CGameManagement::getInstance()->registerEncounter(new CAppleTree(this));
-        _appleEncounterRegistered = true;
-    }
-}
-
-void CKatNottingH::giveApple()
-{
-    auto apple = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CApple>(CApple::appleFilter());
-    if (!apple.has_value())
-    {
-        Console::printLn(tr("Well, this is emberrassing. You search your bag for {}s, but apperently you have none.",
-                            RabbitFarm::apple()));
-        Console::printLn(tr("{} looks dissapointed.", RabbitFarm::katNottingH()));
-        return;
-    }
-    CGameManagement::getInventoryInstance()->removeItem(apple.value());
-
-    auto sympathy = 10 + Randomizer::getRandom(40);
-    if (sympathy > 45)
-    {
-        Console::printLn(
-            tr("{}s Eyes are gleaming, when she sees you {}. This must be the most beautiful apple she has ever seen",
-               RabbitFarm::katNottingH(),
-               RabbitFarm::apple()));
-    }
-    else if (sympathy > 25)
-    {
-        Console::printLn(tr("{0} seems to like your {1}. You think, this is a beautiful {1}.",
-                            RabbitFarm::katNottingH(),
-                            RabbitFarm::apple()));
-    }
-    else
-    {
-        Console::printLn(tr(
-            "{0} thanks you politely, and puts your {1} to her other {1}s. It is the gesture that counts, you guess.",
-            RabbitFarm::katNottingH(),
-            RabbitFarm::apple()));
-    }
-
-    addSympathy(sympathy);
-    Console::br();
 }
 
 void CKatNottingH::printHeader(const bool bFull) const

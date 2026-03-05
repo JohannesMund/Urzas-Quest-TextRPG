@@ -20,8 +20,5 @@ protected:
     virtual std::string translatorModuleName() const override;
 
 private:
-    void registerAppleEncounter();
-    void giveApple();
-    bool _appleEncounterRegistered = false;
     void printHeader(const bool bFull = true) const override;
 };

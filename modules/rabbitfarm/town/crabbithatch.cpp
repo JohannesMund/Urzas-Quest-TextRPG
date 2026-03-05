@@ -2,12 +2,12 @@
 
 #include "cgamemanagement.h"
 #include "console.h"
-#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/crabbitmap.h"
 #include "rabbitfarm/encounters/crabbitclearing.h"
 #include "rabbitfarm/items/crabbit.h"
 #include "rabbitfarm/items/crabbitfood.h"
 #include "rabbitfarm/moduleressources.h"
+#include "rabbitfarm/npc/ckatnottingh.h"
 #include "randomizer.h"
 
 #include <nlohmann/json.hpp>
