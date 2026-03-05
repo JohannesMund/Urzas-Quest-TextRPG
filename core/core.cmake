@@ -106,6 +106,8 @@ set(URZAS_QUEST_SOURCES_CORE
     core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp           
 
     core/npc/cnpc.h core/npc/cnpc.cpp
+    core/npc/cnpcinteraction.h core/npc/cnpcinteraction.cpp
+    core/npc/npcinteractions/cflowerinteraction.h core/npc/npcinteractions/cflowerinteraction.cpp
 )
 
 set(CORE_RESSOURCE_DIR
@@ -123,7 +125,8 @@ set(CORE_INCLUDE_DIRS
     /core/items 
     /core/items/equipment 
     /core/items/story 
-    /core/items/npc 
+    /core/items/npc
+    /core/items/npc/npcinteractions
     /core/menu
     /core/npc
     /core/rooms 

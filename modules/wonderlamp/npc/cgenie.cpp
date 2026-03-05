@@ -86,7 +86,7 @@ std::string CGenie::describe() const
 {
     if (_sympathy > 60)
     {
-        return tr("{} is a handsomw, mysterious man. he has long, black hair, her clothes look like taken directly "
+        return tr("{} is a handsome, mysterious man. he has long, black hair, her clothes look like taken directly "
                   "from the fairy tales. The upper body is naked, of course.  He is really handsome, there must be a "
                   "gym inside this bottle.",
                   name());

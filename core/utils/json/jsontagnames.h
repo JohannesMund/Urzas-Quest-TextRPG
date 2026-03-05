@@ -12,6 +12,7 @@ constexpr std::string_view source = "Source";
 constexpr std::string_view menuAction = "MenuAction";
 constexpr std::string_view menuActionKey = "MenuActionKey";
 constexpr std::string_view status = "Status";
+constexpr std::string_view npcInteraction = "NpcInteraction";
 constexpr std::string_view untranslated = "untranslated";
 constexpr std::string_view incomplete = "incomplete";
 constexpr std::string_view ressources = "Ressources";
