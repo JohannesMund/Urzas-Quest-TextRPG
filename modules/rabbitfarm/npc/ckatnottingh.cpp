@@ -144,13 +144,22 @@ std::string CKatNottingH::describe() const
 
 nlohmann::json CKatNottingH::save() const
 {
-    nlohmann::json o = CNpc::save();
-    return o;
+    return CNpc::save();
 }
 
 void CKatNottingH::load(const nlohmann::json& json)
 {
     CNpc::load(json);
+
+    for (const auto& interaction : json[TagNames::Npc::interactions])
+    {
+        if (CGameStateObject::compareObjectName(TagNames::RabbitFarm::appleInteraction, interaction))
+        {
+            auto appleInteraction = new CAppleInteraction(this);
+            appleInteraction->load(interaction);
+            addInteraction(appleInteraction);
+        }
+    }
 }
 
 std::string CKatNottingH::translatorModuleName() const
