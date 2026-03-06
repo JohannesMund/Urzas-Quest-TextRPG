@@ -3,16 +3,19 @@
 #include "cmenu.h"
 #include "cnpc.h"
 
+class CEnemy;
 class CMobi : public CNpc
 {
 public:
     CMobi();
 
     virtual void interact() override;
-    virtual void talk() override;
+    virtual void talk();
 
     virtual std::string name() const override;
     virtual std::string describe() const override;
+
+    virtual CEnemy* enemy() const override;
 
 protected:
     virtual std::string translatorModuleName() const override;

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ckatnottingh.h"
 #include "crabbitmap.h"
 #include "croom.h"
+#include "npc/ckatnottingh.h"
 #include "rabbitfarm/town/crabbithatch.h"
 #include "rabbitfarm/town/cslasher.h"
 

@@ -5,7 +5,7 @@
 class CDarkMobi : public CEnemy
 {
 public:
-    CDarkMobi();
+    CDarkMobi(const bool isDeadly = true);
 
     virtual void spoilsOfWar() const override;
     virtual void battleAction(bool& endRound) override;
@@ -13,4 +13,5 @@ public:
 
 protected:
     virtual std::string translatorModuleName() const override;
+    const bool _isDeadly;
 };

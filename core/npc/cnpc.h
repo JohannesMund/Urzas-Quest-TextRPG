@@ -9,6 +9,8 @@
 #include <nlohmann/json.hpp>
 
 class CMenu;
+class CNpcInteraction;
+class CEnemy;
 /**
  * @brief class CNpc
  * represents an NPC
@@ -31,6 +33,7 @@ public:
      * @brief Constructor
      */
     CNpc(const std::string_view& objectName, const Core::EGender gender);
+    ~CNpc();
 
     /**
      * @brief Interaction functions
@@ -45,19 +48,6 @@ public:
     virtual void interact();
 
     /**
-     * @brief ask Out
-     * ask the NPC for a Date.
-     * @remark makes the NPC the significant other
-     */
-    virtual void askOut();
-
-    /**
-     * @brief talk
-     * implement to have conversations
-     */
-    virtual void talk() = 0;
-
-    /**
      * @brief breakUp
      * removes NPC as significant other
      * @remark performs necessary checks before
@@ -69,14 +59,6 @@ public:
      * prints the relationship status
      */
     void thinkAbout();
-
-    /**
-     * @brief giftFlower
-     * gifts a flower
-     * @sa CFlower
-     * @sa CFlowerPatch
-     */
-    void giftFlower();
 
     /**
      * @brief name and description
@@ -138,6 +120,8 @@ public:
         return getObjectName() == other->getObjectName();
     }
 
+    virtual CEnemy* enemy() const;
+
 protected:
     CMenuAction executeNpcMenu(CMenu& menu);
 
@@ -145,11 +129,10 @@ protected:
     int _sympathy = 500;
 
     virtual void printHeader(const bool bFull = true) const = 0;
+    void addInteraction(CNpcInteraction* interaction);
 
 private:
     Core::EGender _gender;
     unsigned int _lastSeen = 0;
-
-    Ressources::Items::EFlower _favoriteFlower;
-    Ressources::Items::EFlower _leastFavoriteFlower;
+    std::vector<CNpcInteraction*> _interactions;
 };

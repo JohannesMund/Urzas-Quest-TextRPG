@@ -1,6 +1,7 @@
 #include "cmobi.h"
 
 #include "blackivorytower/moduleressources.h"
+#include "cdarkmobi.h"
 #include "colorize.h"
 #include "core.h"
 
@@ -26,6 +27,11 @@ std::string CMobi::name() const
 std::string CMobi::describe() const
 {
     return std::string();
+}
+
+CEnemy* CMobi::enemy() const
+{
+    return new CDarkMobi(false);
 }
 
 std::string CMobi::translatorModuleName() const

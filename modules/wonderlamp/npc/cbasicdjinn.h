@@ -11,10 +11,9 @@ public:
     static CBasicDjinn* loadFromJson(const nlohmann::json& json);
 
     CBasicDjinn(const Core::EGender gender);
-    virtual ~CBasicDjinn(){};
+    virtual ~CBasicDjinn() {};
 
     virtual void interact() override;
-    virtual void talk() override = 0;
 
     virtual std::string name() const override = 0;
     virtual std::string describe() const override = 0;
@@ -27,6 +26,5 @@ protected:
     virtual std::string colorize(const std::string_view& s) const = 0;
 
 private:
-    void printHeader(const bool bFull = true) const override = 0;
-    void giftGem();
+    void printHeader(const bool bFull = true) const override;
 };

@@ -2,11 +2,11 @@
 
 #include "cencounter.h"
 
-class CKatNottingH;
+class CNpc;
 class CAppleTree : public CEncounter
 {
 public:
-    CAppleTree(CKatNottingH* kat);
+    CAppleTree(CNpc* kat);
 
     virtual void execute(const std::string_view& moduleName = {}) override;
     virtual unsigned int encounterChance(const EEncounterType& tp, const std::string_view& moduleName) const override;
@@ -16,5 +16,5 @@ public:
 private:
     virtual std::string translatorObjectName() const override;
 
-    const CKatNottingH* _kat;
+    const CNpc* _kat;
 };

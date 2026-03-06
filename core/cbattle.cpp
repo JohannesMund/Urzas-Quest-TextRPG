@@ -10,7 +10,7 @@
 
 #include <format>
 
-CBattle::CBattle() : CBattle(new CMobEnemy)
+CBattle::CBattle() : CBattle(new CMobEnemy())
 {
 }
 

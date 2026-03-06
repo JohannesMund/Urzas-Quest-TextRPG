@@ -7,14 +7,11 @@ class CJeannie : public CBasicDjinn
 public:
     CJeannie();
 
-    virtual void talk() override;
-
     virtual std::string name() const override;
     virtual std::string describe() const override;
 
+    virtual void load(const nlohmann::json& json) override;
+
 protected:
     virtual std::string colorize(const std::string_view& s) const override;
-
-private:
-    void printHeader(const bool bFull = true) const override;
 };

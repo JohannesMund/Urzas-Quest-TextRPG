@@ -40,6 +40,7 @@ public:
     std::optional<CBattle::EWeapons> peek();
 
     void printBossBattleHeader() const;
+    void printTrainingBattleHeader() const;
 
 protected:
     virtual std::string translatorObjectName() const override;

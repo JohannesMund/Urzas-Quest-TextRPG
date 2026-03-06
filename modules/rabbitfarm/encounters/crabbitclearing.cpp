@@ -3,11 +3,11 @@
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "console.h"
-#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/crabbitmap.h"
 #include "rabbitfarm/items/crabbit.h"
 #include "rabbitfarm/items/crabbitfood.h"
 #include "rabbitfarm/moduleressources.h"
+#include "rabbitfarm/npc/ckatnottingh.h"
 
 CRabbitClearing::CRabbitClearing(CKatNottingH* kat, const CRabbitMap* rabbits) : _kat(kat), _rabbits(rabbits)
 {

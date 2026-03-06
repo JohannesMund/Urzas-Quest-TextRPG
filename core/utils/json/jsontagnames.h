@@ -12,6 +12,7 @@ constexpr std::string_view source = "Source";
 constexpr std::string_view menuAction = "MenuAction";
 constexpr std::string_view menuActionKey = "MenuActionKey";
 constexpr std::string_view status = "Status";
+constexpr std::string_view npcInteraction = "NpcInteraction";
 constexpr std::string_view untranslated = "untranslated";
 constexpr std::string_view incomplete = "incomplete";
 constexpr std::string_view ressources = "Ressources";
@@ -203,9 +204,17 @@ constexpr std::string_view sympathy = "Sympathy";
 constexpr std::string_view gender = "Gender";
 constexpr std::string_view lastSeen = "lastSeen";
 constexpr std::string_view isSignificantOther = "IsSignificantOther";
+constexpr std::string_view interactions = "Interactions";
+} // namespace Npc
+
+namespace NpcInteractions
+{
+constexpr std::string_view flower = "Flower";
+constexpr std::string_view date = "Date";
+constexpr std::string_view battle = "Battle";
 constexpr std::string_view favouriteFlower = "FavouriteFlower";
 constexpr std::string_view leastFavouriteFlower = "LeastFavouriteFlower";
 
-} // namespace Npc
+} // namespace NpcInteractions
 
 } // namespace TagNames

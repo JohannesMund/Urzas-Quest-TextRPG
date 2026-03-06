@@ -64,6 +64,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/enemies/clivingchest.h core/enemies/clivingchest.cpp    
     core/enemies/ctwoenemies.h core/enemies/ctwoenemies.cpp
     core/enemies/cenemyhorde.h core/enemies/cenemyhorde.cpp
+    core/enemies/cnpcenemy.h core/enemies/cnpcenemy.cpp
 
     core/tasks/taskfactory.h core/tasks/taskfactory.cpp
     core/tasks/ctask.h core/tasks/ctask.cpp
@@ -106,6 +107,12 @@ set(URZAS_QUEST_SOURCES_CORE
     core/dungeons/rooms/cdungeonmaproom.h core/dungeons/rooms/cdungeonmaproom.cpp           
 
     core/npc/cnpc.h core/npc/cnpc.cpp
+    core/npc/cnpcinteraction.h core/npc/cnpcinteraction.cpp
+    core/npc/npcinteractions/cflowerinteraction.h core/npc/npcinteractions/cflowerinteraction.cpp
+    core/npc/npcinteractions/cdateinteraction.h core/npc/npcinteractions/cdateinteraction.cpp
+    core/npc/npcinteractions/ctalkinteraction.h core/npc/npcinteractions/ctalkinteraction.cpp
+    core/npc/npcinteractions/cbattleinteraction.h core/npc/npcinteractions/cbattleinteraction.cpp
+    
 )
 
 set(CORE_RESSOURCE_DIR
@@ -123,9 +130,10 @@ set(CORE_INCLUDE_DIRS
     /core/items 
     /core/items/equipment 
     /core/items/story 
-    /core/items/npc 
+    /core/items/npc    
     /core/menu
     /core/npc
+    /core/npc/npcinteractions
     /core/rooms 
     /core/rooms/town 
     /core/tasks 

@@ -5,9 +5,9 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
-#include "rabbitfarm/ckatnottingh.h"
 #include "rabbitfarm/items/crabbit.h"
 #include "rabbitfarm/moduleressources.h"
+#include "rabbitfarm/npc/ckatnottingh.h"
 #include "randomizer.h"
 
 CSlasher::CSlasher(CKatNottingH* kat, CRabbitMap* rabbits) :
