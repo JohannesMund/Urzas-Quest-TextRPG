@@ -252,10 +252,7 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
     auto thinkAboutAction = menu.createAction({thinkAboutActionString, 'i'});
     menu.addMenuGroup({thinkAboutAction}, {CMenu::exit()});
 
-    auto talkAction = menu.createAction({"Talk", 'T'});
-
     CMenu::ActionList actions;
-    actions.push_back(talkAction);
 
     for (const auto interaction : _interactions)
     {
@@ -277,13 +274,6 @@ CMenuAction CNpc::executeNpcMenu(CMenu& menu)
     if (it != _interactions.end())
     {
         (*it)->executeInteraction();
-        Console::confirmToContinue();
-        return input;
-    }
-
-    if (input == talkAction)
-    {
-        talk();
         Console::confirmToContinue();
         return input;
     }

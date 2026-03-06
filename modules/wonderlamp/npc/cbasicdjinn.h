@@ -14,7 +14,6 @@ public:
     virtual ~CBasicDjinn() {};
 
     virtual void interact() override;
-    virtual void talk() override = 0;
 
     virtual std::string name() const override = 0;
     virtual std::string describe() const override = 0;
@@ -28,5 +27,4 @@ protected:
 
 private:
     void printHeader(const bool bFull = true) const override;
-    void giftGem();
 };

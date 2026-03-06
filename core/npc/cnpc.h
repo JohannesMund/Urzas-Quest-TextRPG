@@ -47,12 +47,6 @@ public:
     virtual void interact();
 
     /**
-     * @brief talk
-     * implement to have conversations
-     */
-    virtual void talk() = 0;
-
-    /**
      * @brief breakUp
      * removes NPC as significant other
      * @remark performs necessary checks before

@@ -16,6 +16,9 @@ constexpr std::string_view genie = "Genie";
 constexpr std::string_view jeannie = "Jeannie";
 constexpr std::string_view djinnCompanion = "DjinnCompanion";
 constexpr std::string_view gem = "Gem";
+constexpr std::string_view gemInteractiom = "GemInteraction";
+constexpr std::string_view genieTalkInteraction = "GenieTalkInteraction";
+constexpr std::string_view jeannieTalkInteraction = "JeannieTalkInteraction";
 
 } // namespace WonderLamp
 } // namespace TagNames

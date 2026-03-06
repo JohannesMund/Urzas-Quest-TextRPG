@@ -9,7 +9,7 @@ public:
     CMobi();
 
     virtual void interact() override;
-    virtual void talk() override;
+    virtual void talk();
 
     virtual std::string name() const override;
     virtual std::string describe() const override;

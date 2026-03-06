@@ -5,7 +5,8 @@ set(URZAS_QUEST_SOURCES_MODULES ${URZAS_QUEST_SOURCES_MODULES}
 
     modules/rabbitfarm/npc/ckatnottingh.h modules/rabbitfarm/npc/ckatnottingh.cpp
     modules/rabbitfarm/npc/cappleinteraction.h modules/rabbitfarm/npc/cappleinteraction.cpp
-
+    modules/rabbitfarm/npc/ckattalkinteraction.h modules/rabbitfarm/npc/ckattalkinteraction.cpp
+    
     modules/rabbitfarm/items/crabbit.h modules/rabbitfarm/items/crabbit.cpp
     modules/rabbitfarm/items/capple.h modules/rabbitfarm/items/capple.cpp
     modules/rabbitfarm/items/crabbitfood.h modules/rabbitfarm/items/crabbitfood.cpp

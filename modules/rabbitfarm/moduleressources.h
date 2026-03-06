@@ -18,6 +18,7 @@ constexpr std::string_view rabbit = "Rabbit";
 constexpr std::string_view slasher = "Slasher";
 constexpr std::string_view appleEncounter = "AppleTree";
 constexpr std::string_view appleInteraction = "AppleInteraction";
+constexpr std::string_view talkInteraction = "TalkInteraction";
 constexpr std::string_view rabbitClearingEncounter = "RabbitClearing";
 } // namespace RabbitFarm
 } // namespace TagNames

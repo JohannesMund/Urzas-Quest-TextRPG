@@ -109,6 +109,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/npc/cnpcinteraction.h core/npc/cnpcinteraction.cpp
     core/npc/npcinteractions/cflowerinteraction.h core/npc/npcinteractions/cflowerinteraction.cpp
     core/npc/npcinteractions/cdateinteraction.h core/npc/npcinteractions/cdateinteraction.cpp
+    core/npc/npcinteractions/ctalkinteraction.h core/npc/npcinteractions/ctalkinteraction.cpp
 )
 
 set(CORE_RESSOURCE_DIR
@@ -126,10 +127,10 @@ set(CORE_INCLUDE_DIRS
     /core/items 
     /core/items/equipment 
     /core/items/story 
-    /core/items/npc
-    /core/items/npc/npcinteractions
+    /core/items/npc    
     /core/menu
     /core/npc
+    /core/npc/npcinteractions
     /core/rooms 
     /core/rooms/town 
     /core/tasks 

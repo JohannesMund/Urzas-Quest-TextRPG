@@ -8,7 +8,6 @@ public:
     CKatNottingH();
 
     virtual void interact() override;
-    virtual void talk() override;
 
     virtual std::string name() const override;
     virtual std::string describe() const override;
