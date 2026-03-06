@@ -6,7 +6,7 @@
 #include "randomizer.h"
 #include "ressources.h"
 
-CDarkMobi::CDarkMobi()
+CDarkMobi::CDarkMobi(const bool isDeadly) : _isDeadly(isDeadly)
 {
     _name = Ressources::Game::darkMobi();
     _weapon = tr("poisonous tongue");
@@ -34,6 +34,21 @@ void CDarkMobi::battleAction(bool& endRound)
 
 void CDarkMobi::postBattle()
 {
+    if (!_isDeadly)
+    {
+        if (CGameManagement::getPlayerInstance()->isDead())
+        {
+            Console::printLn(tr("{} laughes at you, while you are winding yourself in the dust below her feet, but "
+                                "eventuallay, she helps you up.",
+                                _name));
+        }
+        else
+        {
+            Console::printLn(tr("The Battle is over {} and you heal your wounds and go for a drink.", _name));
+        }
+
+        CGameManagement::getPlayerInstance()->fullHeal();
+    }
 }
 
 std::string CDarkMobi::translatorModuleName() const

@@ -1,5 +1,6 @@
 #include "cnpc.h"
 #include "cgamemanagement.h"
+#include "cnpcenemy.h"
 #include "cnpcinteraction.h"
 #include "colorize.h"
 #include "console.h"
@@ -244,6 +245,11 @@ std::string CNpc::notSeenString() const
         return coreTr("quite some time");
     }
     return coreTr("a while");
+}
+
+CEnemy* CNpc::enemy() const
+{
+    return new CNpcEnemy(this);
 }
 
 CMenuAction CNpc::executeNpcMenu(CMenu& menu)

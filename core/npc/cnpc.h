@@ -10,6 +10,7 @@
 
 class CMenu;
 class CNpcInteraction;
+class CEnemy;
 /**
  * @brief class CNpc
  * represents an NPC
@@ -118,6 +119,8 @@ public:
     {
         return getObjectName() == other->getObjectName();
     }
+
+    virtual CEnemy* enemy() const;
 
 protected:
     CMenuAction executeNpcMenu(CMenu& menu);

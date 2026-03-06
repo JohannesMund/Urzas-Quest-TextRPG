@@ -211,6 +211,7 @@ namespace NpcInteractions
 {
 constexpr std::string_view flower = "Flower";
 constexpr std::string_view date = "Date";
+constexpr std::string_view battle = "Battle";
 constexpr std::string_view favouriteFlower = "FavouriteFlower";
 constexpr std::string_view leastFavouriteFlower = "LeastFavouriteFlower";
 

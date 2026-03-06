@@ -52,13 +52,13 @@ void CEnemy::spoilsOfWar() const
 
     if (Randomizer::getRandom(2) == 0)
     {
-        Console::printLn("Your enemy seems to be rich. At least he has a bag of gold.");
+        Console::printLn(coreTr("Your enemy seems to be rich. At least he has a bag of gold."));
         CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 33) + _level * 25);
     }
 
     if (Randomizer::getRandom(3) < 2)
     {
-        Console::printLn("This one collected stuff, you grab what you can.");
+        Console::printLn(coreTr("This one collected stuff, you grab what you can."));
         do
         {
             CGameManagement::getInventoryInstance()->addLootItem();
@@ -119,7 +119,7 @@ void CEnemy::dealDamage(const int i)
     {
         return;
     }
-    Console::printLn(std::format("You hit the enemy for {}{} damage{}.", CC::fgLightBlue(), i, CC::ccReset()));
+    Console::printLn(coreTr("You hit the enemy for {}{} damage{}.", CC::fgLightBlue(), i, CC::ccReset()));
     addHp(damage * -1);
 }
 
@@ -136,7 +136,15 @@ std::optional<CBattle::EWeapons> CEnemy::peek()
 void CEnemy::printBossBattleHeader() const
 {
     Console::cls();
-    Console::printLn("Boss Battle", Console::EAlignment::eCenter);
+    Console::printLn(coreTr("Boss Battle"), Console::EAlignment::eCenter);
+    Console::printLn(name(), Console::EAlignment::eCenter);
+    Console::br();
+}
+
+void CEnemy::printTrainingBattleHeader() const
+{
+    Console::cls();
+    Console::printLn(coreTr("Training Battle"), Console::EAlignment::eCenter);
     Console::printLn(name(), Console::EAlignment::eCenter);
     Console::br();
 }

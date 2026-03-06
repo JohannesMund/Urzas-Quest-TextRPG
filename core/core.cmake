@@ -64,6 +64,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/enemies/clivingchest.h core/enemies/clivingchest.cpp    
     core/enemies/ctwoenemies.h core/enemies/ctwoenemies.cpp
     core/enemies/cenemyhorde.h core/enemies/cenemyhorde.cpp
+    core/enemies/cnpcenemy.h core/enemies/cnpcenemy.cpp
 
     core/tasks/taskfactory.h core/tasks/taskfactory.cpp
     core/tasks/ctask.h core/tasks/ctask.cpp
@@ -110,6 +111,8 @@ set(URZAS_QUEST_SOURCES_CORE
     core/npc/npcinteractions/cflowerinteraction.h core/npc/npcinteractions/cflowerinteraction.cpp
     core/npc/npcinteractions/cdateinteraction.h core/npc/npcinteractions/cdateinteraction.cpp
     core/npc/npcinteractions/ctalkinteraction.h core/npc/npcinteractions/ctalkinteraction.cpp
+    core/npc/npcinteractions/cbattleinteraction.h core/npc/npcinteractions/cbattleinteraction.cpp
+    
 )
 
 set(CORE_RESSOURCE_DIR
