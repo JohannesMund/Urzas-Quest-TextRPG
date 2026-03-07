@@ -1,7 +1,7 @@
 #include "cbasicdjinn.h"
 
 #include "cgamemanagement.h"
-#include "cgeminteraction.h"
+#include "cgiftinteraction.h"
 #include "cmenu.h"
 #include "console.h"
 #include "core.h"
@@ -11,7 +11,7 @@
 
 CBasicDjinn::CBasicDjinn(const Core::EGender gender) : CNpc(TagNames::WonderLamp::djinn, gender)
 {
-    addInteraction(new CGemInteraction(this));
+    addInteraction(new CGiftInteraction(this, CGem::gemFilter()));
 }
 
 void CBasicDjinn::interact()
@@ -37,16 +37,6 @@ nlohmann::json CBasicDjinn::save() const
 void CBasicDjinn::load(const nlohmann::json& json)
 {
     CNpc::load(json);
-
-    for (const auto& interaction : json[TagNames::Npc::interactions])
-    {
-        if (CGameStateObject::compareObjectName(TagNames::WonderLamp::gemInteractiom, interaction))
-        {
-            auto gemInteraction = new CGemInteraction(this);
-            gemInteraction->load(interaction);
-            addInteraction(gemInteraction);
-        }
-    }
 }
 
 std::string CBasicDjinn::translatorModuleName() const

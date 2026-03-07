@@ -43,9 +43,7 @@ void CGenie::load(const nlohmann::json& json)
     {
         if (CGameStateObject::compareObjectName(TagNames::WonderLamp::genieTalkInteraction, interaction))
         {
-            auto talkInteraction = new CGenieTalkInteraction(this);
-            talkInteraction->load(interaction);
-            addInteraction(talkInteraction);
+            loadInteraction<CGenieTalkInteraction>(interaction);
         }
     }
 }

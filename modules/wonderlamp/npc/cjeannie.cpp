@@ -43,9 +43,7 @@ void CJeannie::load(const nlohmann::json& json)
     {
         if (CGameStateObject::compareObjectName(TagNames::WonderLamp::jeannieTalkInteraction, interaction))
         {
-            auto talkInteraction = new CJeannieTalkInteraction(this);
-            talkInteraction->load(interaction);
-            addInteraction(talkInteraction);
+            loadInteraction<CJeannieTalkInteraction>(interaction);
         }
     }
 }

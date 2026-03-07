@@ -131,8 +131,22 @@ protected:
     virtual void printHeader(const bool bFull = true) const = 0;
     void addInteraction(CNpcInteraction* interaction);
 
+    template <typename T>
+    void loadInteraction(nlohmann::json json)
+    {
+        for (auto interactionObject : _interactions)
+        {
+            auto interaction = static_cast<T*>(interactionObject);
+            if (interaction != nullptr)
+            {
+                interaction->load(json);
+            }
+        }
+    }
+
 private:
     Core::EGender _gender;
     unsigned int _lastSeen = 0;
     std::vector<CNpcInteraction*> _interactions;
+    void clearInteractions();
 };

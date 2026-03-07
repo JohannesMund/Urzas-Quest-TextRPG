@@ -112,7 +112,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/npc/npcinteractions/cdateinteraction.h core/npc/npcinteractions/cdateinteraction.cpp
     core/npc/npcinteractions/ctalkinteraction.h core/npc/npcinteractions/ctalkinteraction.cpp
     core/npc/npcinteractions/cbattleinteraction.h core/npc/npcinteractions/cbattleinteraction.cpp
-    
+    core/npc/npcinteractions/cgiftinteraction.h core/npc/npcinteractions/cgiftinteraction.cpp
 )
 
 set(CORE_RESSOURCE_DIR

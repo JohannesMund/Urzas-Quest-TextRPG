@@ -1,6 +1,6 @@
 #include "ckatnottingh.h"
-#include "cappleinteraction.h"
 #include "cgamemanagement.h"
+#include "cgiftinteraction.h"
 #include "ckattalkinteraction.h"
 #include "colorize.h"
 #include "console.h"
@@ -12,7 +12,7 @@
 
 CKatNottingH::CKatNottingH() : CNpc(TagNames::RabbitFarm::kat, Core::EGender::eFemale)
 {
-    addInteraction(new CAppleInteraction(this));
+    addInteraction(new CGiftInteraction(this, CApple::appleFilter()));
     addInteraction(new CKatTalkInteraction(this));
 }
 
@@ -74,17 +74,9 @@ void CKatNottingH::load(const nlohmann::json& json)
 
     for (const auto& interaction : json[TagNames::Npc::interactions])
     {
-        if (CGameStateObject::compareObjectName(TagNames::RabbitFarm::appleInteraction, interaction))
-        {
-            auto appleInteraction = new CAppleInteraction(this);
-            appleInteraction->load(interaction);
-            addInteraction(appleInteraction);
-        }
         if (CGameStateObject::compareObjectName(TagNames::RabbitFarm::talkInteraction, interaction))
         {
-            auto talkInteraction = new CKatTalkInteraction(this);
-            talkInteraction->load(interaction);
-            addInteraction(talkInteraction);
+            loadInteraction<CTalkInteraction>(json);
         }
     }
 }

@@ -1,19 +1,20 @@
 #pragma once
 
-#pragma once
-
+#include "citem.h"
 #include "cnpcinteraction.h"
-class CNpc;
-class CMenu;
-class CGemInteraction : public CNpcInteraction
+#include "ressources.h"
+
+class CGiftInteraction : public CNpcInteraction
 {
 public:
-    CGemInteraction(CNpc* npc);
+    CGiftInteraction(CNpc* npc, CItem::ItemFilter itemFilter);
 
     virtual void executeInteraction() override;
     virtual bool interactionAvailable() const override;
 
 protected:
     virtual void makeNav(CMenu& menu) override;
-    virtual std::string translatorModuleName() const override;
+
+private:
+    const CItem::ItemFilter _itemFilter;
 };
