@@ -311,11 +311,21 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
     case 9:
     default:
     {
-        Console::printLn(tr("Here we go, One of the {} is guarding this floor. He attacks directly, when he sees you!",
-                            BlackIvoryTower::lunatics()));
-        CLunatic lunatic;
-        CBattle battle(&lunatic);
-        battle.fight();
+        if (!_isOpen || _mobi.sympathy() <= CNpc::ESympathyLevel::eHate)
+        {
+            Console::printLn(
+                tr("Here we go, One of the {} is guarding this floor. He attacks directly, when he sees you!",
+                   BlackIvoryTower::lunatics()));
+            CLunatic lunatic;
+            CBattle battle(&lunatic);
+            battle.fight();
+        }
+        else
+        {
+            Console::printLn(tr("You encounter of the {}. He is pretty beaten up, and dares to attack you. good job "
+                                "you have done here.",
+                                BlackIvoryTower::lunatics()));
+        }
     }
     break;
     }
