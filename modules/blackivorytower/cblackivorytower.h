@@ -27,11 +27,15 @@ private:
     void climb();
 
     void executeTopOffice();
+    void executeTopOfficeAfterQuest();
     void executeStairs(const unsigned int stage);
 
     void printHeader(const unsigned int stage) const;
+    void slapLunatic();
+    void donateDoener();
 
     bool _isOpen = false;
+    const int _doenerPrice = 600;
 
     CMobi _mobi;
 };

@@ -183,7 +183,7 @@ void CBlackIvoryTower::executeTopOffice()
         _isOpen = true;
         CGameManagement::getProgressionInstance()->reportModuleFinished(BlackIvoryTower::moduleName());
         Console::printLn(
-            tr("You task was to talk to {0}, not to kill her, so you let her live, and you start talking. As "
+            tr("Your task was to talk to {0}, not to kill her, so you let her live, and you start talking. As "
                "expected, {0} is not very excited about the death of her {1}, but she is a former member of "
                "the rebellion, and still well-disposed towards {2} and {3}, since they have a common past together",
                Ressources::Game::darkMobi(),
@@ -211,28 +211,51 @@ void CBlackIvoryTower::executeTopOffice()
     }
     else
     {
-        Console::printLn(tr("{0} is here, and as promised, {0} opened a Döner shop here in her tower. You did "
-                            "not climb the stairs for nothing, A big barbecue skewer with a huge chunk of "
-                            "meat is slowly spinning over a fire, it smells like barbecue and garlic.",
-                            Ressources::Game::mobi()));
-        Console::printLn(tr(
-            "Behind the counter is one of {}s {}. This guy looks pretty beaten up, his body is covered with scratches "
-            "and wounds, he wears bandages and has a black eye. When he sees you, he looks pretty scared. You cannot "
-            "stop thinking, that you have seen him before.",
-            Ressources::Game::mobi(),
-            BlackIvoryTower::lunatics()));
-        Console::printLn(tr("With fear in his eyes and a shaking voice, he offers you a free döner."));
+        executeTopOfficeAfterQuest();
+    }
+}
 
-        CMenu menu(BlackIvoryTower::moduleName());
-        auto mobiAction = _mobi.npcNav(menu);
+void CBlackIvoryTower::executeTopOfficeAfterQuest()
+{
+    Console::printLn(tr("{0} is here, and as promised, {0} opened a Döner shop here in her tower. You did "
+                        "not climb the stairs for nothing, A big barbecue skewer with a huge chunk of "
+                        "meat is slowly spinning over a fire, it smells like barbecue and garlic.",
+                        Ressources::Game::mobi()));
+    Console::printLn(
+        tr("Behind the counter is one of {}s {}. This guy looks pretty beaten up, his body is covered with scratches "
+           "and wounds, he wears bandages and has a black eye. When he sees you, he looks pretty scared. You cannot "
+           "stop thinking, that you have seen him before.",
+           Ressources::Game::mobi(),
+           BlackIvoryTower::lunatics()));
+    Console::printLn(tr("With fear in his eyes and a shaking voice, he offers you a free döner."));
 
-        menu.addMenuGroup({mobiAction}, {CMenu::exit()});
-        const auto input = menu.execute();
+    CMenu menu(BlackIvoryTower::moduleName());
+    auto mobiAction = _mobi.npcNav(menu);
 
-        if (input == mobiAction)
-        {
-            _mobi.interact();
-        }
+    CMenu::ActionList lunaticActions;
+    const auto slapLunaticActionString = tr("Slap {}", CC::unColorizeString(BlackIvoryTower::lunatic()));
+    auto slapLunaticAction = menu.createAction({slapLunaticActionString, 'S'});
+    lunaticActions.push_back(slapLunaticAction);
+
+    const auto donteDoenerAction = menu.createShopAction({"Donate Doener", 'D'}, _doenerPrice);
+
+    if (CGameManagement::getPlayerInstance()->gold() >= _doenerPrice)
+    {
+        lunaticActions.push_back(donteDoenerAction);
+    }
+
+    menu.addMenuGroup(lunaticActions);
+    menu.addMenuGroup({mobiAction}, {CMenu::exit()});
+
+    const auto input = menu.execute();
+
+    if (input == mobiAction)
+    {
+        _mobi.interact();
+    }
+    if (input == slapLunaticAction)
+    {
+        slapLunatic();
     }
 }
 
@@ -313,6 +336,8 @@ void CBlackIvoryTower::printHeader(const unsigned int stage) const
         {
             Console::printLn(tr("{}'s Döner", Ressources::Game::mobi()), Console::EAlignment::eCenter);
             Console::printLn(tr("Einmal essen niemals vergessen"), Console::EAlignment::eCenter);
+            Console::printLn(tr("large Döner: {}{} Gold{}", CC::fgYellow(), _doenerPrice, CC::ccReset()),
+                             Console::EAlignment::eCenter);
         }
         else
         {
@@ -324,4 +349,31 @@ void CBlackIvoryTower::printHeader(const unsigned int stage) const
         Console::printLn(tr("Floor {}", stage), Console::EAlignment::eCenter);
     }
     Console::br();
+}
+
+void CBlackIvoryTower::slapLunatic()
+{
+    Console::printLn(
+        tr("{}s {} look poor, anxious and shaky. The deserve it. It was them, who attacked you previously. You decide "
+           "to select one of the, one who is looking especially anxious and extra beaten up, and smack him in his "
+           "face. The {} collapses, crying. His eyes quietly ask the question; \"Why?\"",
+           Ressources::Game::mobi(),
+           BlackIvoryTower::lunatics(),
+           BlackIvoryTower::lunatic()));
+    Console::printLn(tr("{} watches you, full of disgust.", Ressources::Game::mobi()));
+    _mobi.addSympathy((Randomizer::getRandom(50) * -1) - 15);
+    Console::confirmToContinue();
+}
+
+void CBlackIvoryTower::donateDoener()
+{
+    Console::printLn(tr("{}s {} look poor, anxious and shaky. They might be your enemies before, but you feel, they do "
+                        "not deserve that destiny any longer. As an offer of peace, you decide to buy a Döner and give "
+                        "it to one of the poor guys.",
+                        Ressources::Game::mobi(),
+                        BlackIvoryTower::lunatics()));
+    CGameManagement::getPlayerInstance()->spendGold(_doenerPrice);
+    Console::printLn(tr("{} sees your gesture, and appreciates it.", Ressources::Game::mobi()));
+    _mobi.addSympathy(Randomizer::getRandom(10) + 5);
+    Console::confirmToContinue();
 }
