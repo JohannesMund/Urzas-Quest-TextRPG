@@ -4,5 +4,7 @@ set(URZAS_QUEST_SOURCES_MODULES ${URZAS_QUEST_SOURCES_MODULES}
     modules/blackivorytower/clunatic.h modules/blackivorytower/clunatic.cpp
     modules/blackivorytower/cdarkmobi.h modules/blackivorytower/cdarkmobi.cpp
     modules/blackivorytower/cpinkfanta.h modules/blackivorytower/cpinkfanta.cpp
-    modules/blackivorytower/cmobi.h modules/blackivorytower/cmobi.cpp
+    
+    modules/blackivorytower/npc/cmobi.h modules/blackivorytower/npc/cmobi.cpp
+    modules/blackivorytower/npc/cdoenerinteraction.h modules/blackivorytower/npc/cdoenerinteraction.cpp
 )

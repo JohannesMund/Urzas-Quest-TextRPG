@@ -15,8 +15,8 @@ public:
     bool checkNav(const CMenuAction& nav) const;
     CMenuAction nav(CMenu& menu);
 
-    virtual void executeInteraction() = 0;
-    virtual bool interactionAvailable() const = 0;
+    virtual void executeInteraction();
+    virtual bool interactionAvailable() const;
 
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
@@ -28,6 +28,9 @@ protected:
     CNpc* _npc = nullptr;
     CMenuAction _nav;
 
+    const int _cooldown = 50;
+
 private:
     virtual void makeNav(CMenu& menu) = 0;
+    int _lastExecuted;
 };

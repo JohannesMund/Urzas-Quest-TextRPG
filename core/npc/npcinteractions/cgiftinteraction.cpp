@@ -12,6 +12,7 @@ CGiftInteraction::CGiftInteraction(CNpc* npc, CItem::ItemFilter itemFilter) :
 }
 void CGiftInteraction::executeInteraction()
 {
+    CNpcInteraction::executeInteraction();
     auto item = CGameManagement::getInventoryInstance()->getFirstBasicItemByFilter(_itemFilter);
     if (!item.has_value())
     {
@@ -51,7 +52,7 @@ void CGiftInteraction::executeInteraction()
 
 bool CGiftInteraction::interactionAvailable() const
 {
-    return CGameManagement::getInventoryInstance()->hasItem(_itemFilter);
+    return CNpcInteraction::interactionAvailable() && CGameManagement::getInventoryInstance()->hasItem(_itemFilter);
 }
 
 void CGiftInteraction::makeNav(CMenu& menu)

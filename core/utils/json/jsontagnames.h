@@ -209,6 +209,7 @@ constexpr std::string_view interactions = "Interactions";
 
 namespace NpcInteractions
 {
+constexpr std::string_view cooldown = "Cooldown";
 constexpr std::string_view flower = "Flower";
 constexpr std::string_view date = "Date";
 constexpr std::string_view battle = "Battle";

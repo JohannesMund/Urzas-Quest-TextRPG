@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cfield.h"
-#include "cmobi.h"
+#include "npc/cmobi.h"
 
 class CBlackIvoryTower : public CRoom
 {
@@ -30,10 +30,8 @@ private:
     void executeStairs(const unsigned int stage);
 
     void printHeader(const unsigned int stage) const;
-    void haveADoener();
 
     bool _isOpen = false;
-    bool _hadADoener = false;
 
     CMobi _mobi;
 };

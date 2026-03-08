@@ -14,6 +14,7 @@ CFlowerInteraction::CFlowerInteraction(CNpc* npc) : CNpcInteraction(npc, TagName
 
 void CFlowerInteraction::executeInteraction()
 {
+    CNpcInteraction::executeInteraction();
     auto flower = CGameManagement::getInventoryInstance()->getFirstItemByFilter<CFlower>(CFlower::flowerFilter());
     if (!flower.has_value())
     {
@@ -82,8 +83,8 @@ void CFlowerInteraction::executeInteraction()
 
 bool CFlowerInteraction::interactionAvailable() const
 {
-    CGameManagement::getInventoryInstance()->addItem(new CFlower());
-    return CGameManagement::getInventoryInstance()->hasItem(CFlower::flowerFilter());
+    return CNpcInteraction::interactionAvailable() &&
+           CGameManagement::getInventoryInstance()->hasItem(CFlower::flowerFilter());
 }
 
 nlohmann::json CFlowerInteraction::save() const
