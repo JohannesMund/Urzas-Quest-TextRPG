@@ -3,6 +3,7 @@
 #include "blackivorytower/moduleressources.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
+#include "cnpc.h"
 #include "console.h"
 
 CDoenerInteraction::CDoenerInteraction(CNpc* npc) : CNpcInteraction(npc, BlackIvoryTower::moduleName())
@@ -41,6 +42,8 @@ void CDoenerInteraction::executeInteraction()
     }
 
     _hadADoener = true;
+    Console::printLn(tr("Having a Döner with {} is always a pleasure", Ressources::Game::mobi()));
+    _npc->addSympathy(25);
     CGameManagement::getPlayerInstance()->addHp(1);
 }
 
