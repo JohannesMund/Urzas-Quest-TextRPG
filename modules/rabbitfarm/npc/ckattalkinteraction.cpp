@@ -5,10 +5,9 @@
 #include "console.h"
 #include "rabbitfarm/moduleressources.h"
 
-CKatTalkInteraction::CKatTalkInteraction(CNpc* npc) :
-    CTalkInteraction(npc, TagNames::RabbitFarm::talkInteraction),
-    _cooldown(25)
+CKatTalkInteraction::CKatTalkInteraction(CNpc* npc) : CTalkInteraction(npc, TagNames::RabbitFarm::talkInteraction)
 {
+    _cooldown = 25;
 }
 
 void CKatTalkInteraction::executeInteraction()

@@ -5,8 +5,9 @@
 #include "cmenu.h"
 #include "console.h"
 
-CDoenerInteraction::CDoenerInteraction(CNpc* npc) : CNpcInteraction(npc, BlackIvoryTower::moduleName()), _cooldown(25)
+CDoenerInteraction::CDoenerInteraction(CNpc* npc) : CNpcInteraction(npc, BlackIvoryTower::moduleName())
 {
+    _cooldown = 25;
 }
 
 void CDoenerInteraction::executeInteraction()

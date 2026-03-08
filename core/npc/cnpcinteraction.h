@@ -28,7 +28,7 @@ protected:
     CNpc* _npc = nullptr;
     CMenuAction _nav;
 
-    const int _cooldown = 50;
+    int _cooldown = 50;
 
 private:
     virtual void makeNav(CMenu& menu) = 0;
