@@ -37,6 +37,7 @@ public:
     void setTask(CTask* task);
     CTask* takeTask();
     virtual bool isTaskPossible(const std::string_view& = {}) const;
+    virtual bool canBeReplaced() const;
     bool hasTask() const;
 
     virtual bool isSpecialRoom() const;

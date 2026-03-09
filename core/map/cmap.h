@@ -82,6 +82,7 @@ public:
     CRoom* currentRoom() const;
 
     void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+    void replaceRandomRoom(CRoom* newRoom);
 
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;

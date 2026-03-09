@@ -57,6 +57,11 @@ bool CRoom::isTaskPossible(const std::string_view&) const
     return _isRandomTaskPossible && !hasTask();
 }
 
+bool CRoom::canBeReplaced() const
+{
+    return false;
+}
+
 bool CRoom::hasTask() const
 {
     return _task != nullptr;

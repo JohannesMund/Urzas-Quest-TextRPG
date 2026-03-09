@@ -12,6 +12,7 @@ public:
     virtual std::string bgColor() const override;
 
     static CMap::RoomFilter fieldFilter();
+    virtual bool canBeReplaced() const override;
 
 protected:
     virtual std::string translatorModuleName() const override;

@@ -386,6 +386,41 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     possibleRooms.at(0)->setTask(task);
 }
 
+void CMap::replaceRandomRoom(CRoom* newRoom)
+{
+    std::vector<CRoom*> possibleRooms;
+    for (const auto& row : _map)
+    {
+        for (auto& room : row)
+        {
+
+            if (room->canBeReplaced())
+            {
+                possibleRooms.push_back(room);
+            }
+        }
+    }
+
+    if (possibleRooms.size() == 0)
+    {
+        return;
+    }
+
+    std::shuffle(
+        possibleRooms.begin(), possibleRooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
+    auto roomToBeReplaced = possibleRooms.at(0);
+
+    for (auto& row : _map)
+    {
+        if (std::find(row.begin(), row.end(), roomToBeReplaced) != row.end())
+        {
+            std::replace(row.begin(), row.end(), roomToBeReplaced, newRoom);
+            delete roomToBeReplaced;
+            return;
+        }
+    }
+}
+
 nlohmann::json CMap::save() const
 {
     nlohmann::json mapState;

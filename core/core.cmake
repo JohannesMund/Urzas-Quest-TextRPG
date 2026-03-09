@@ -5,10 +5,11 @@ set(URZAS_QUEST_SOURCES_CORE
         
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
-    core/cplayer.h core/cplayer.cpp
-    core/cmap.h core/cmap.cpp
+    core/cplayer.h core/cplayer.cpp    
     core/cbattle.h core/cbattle.cpp
         
+    core/map/cmap.h core/map/cmap.cpp
+
     core/gamestate/cgamestateobject.h core/gamestate/cgamestateobject.cpp
     core/gamestate/cgamesettings.h core/gamestate/cgamesettings.cpp    
     core/gamestate/csavefile.h core/gamestate/csavefile.cpp     
@@ -131,6 +132,7 @@ set(CORE_INCLUDE_DIRS
     /core/items/equipment 
     /core/items/story 
     /core/items/npc    
+    /core/map
     /core/menu
     /core/npc
     /core/npc/npcinteractions
