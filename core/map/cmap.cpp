@@ -3,6 +3,7 @@
 #include "ccapital.h"
 #include "cgamemanagement.h"
 #include "cinjuredpet.h"
+#include "clog.h"
 #include "colorize.h"
 #include "console.h"
 #include "croom.h"
@@ -259,7 +260,6 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
 
         if (line == 2)
         {
-
             cout << string{left ? bottom ? " " : "_" : "|"};
             cout << string{bottom ? "  " : "__"};
         }
@@ -378,6 +378,7 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
 
     if (possibleRooms.size() == 0)
     {
+        CLog::error() << "CMap: trying to a task on a room, but no room available" << std::endl << std::flush;
         return;
     }
 
@@ -393,7 +394,6 @@ void CMap::replaceRandomRoom(CRoom* newRoom)
     {
         for (auto& room : row)
         {
-
             if (room->canBeReplaced())
             {
                 possibleRooms.push_back(room);
@@ -403,6 +403,7 @@ void CMap::replaceRandomRoom(CRoom* newRoom)
 
     if (possibleRooms.size() == 0)
     {
+        CLog::error() << "CMap: trying to replace a room, but no replaceable room available" << std::endl << std::flush;
         return;
     }
 
