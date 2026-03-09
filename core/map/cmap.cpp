@@ -20,11 +20,11 @@
 #include <iostream>
 #include <random>
 
-const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eNorth, "North"},
-                                                                {EDirections::eSouth, "South"},
-                                                                {EDirections::eWest, "West"},
-                                                                {EDirections::eEast, "East"},
-                                                                {EDirections::eNone, "None"}};
+const std::map<Core::EDirections, std::string> CMap::_dirMap = {{Core::EDirections::eNorth, "North"},
+                                                                {Core::EDirections::eSouth, "South"},
+                                                                {Core::EDirections::eWest, "West"},
+                                                                {Core::EDirections::eEast, "East"},
+                                                                {Core::EDirections::eNone, "None"}};
 
 CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject(TagNames::Map::map)
 {
@@ -95,7 +95,7 @@ void CMap::init(std::vector<CRoom*>& rooms)
     }
 }
 
-CMap::EDirections CMap::string2Direction(const std::string_view s)
+Core::EDirections CMap::string2Direction(const std::string_view s)
 {
     auto it = std::find_if(_dirMap.begin(), _dirMap.end(), [&s](const auto p) { return p.second == s; });
     if (it != _dirMap.end())
@@ -103,15 +103,15 @@ CMap::EDirections CMap::string2Direction(const std::string_view s)
         return it->first;
     }
 
-    return EDirections::eNone;
+    return Core::EDirections::eNone;
 }
 
-std::string_view CMap::direction2String(const EDirections d)
+std::string_view CMap::direction2String(const Core::EDirections d)
 {
     return _dirMap.at(d);
 }
 
-void CMap::setStartingPosition(const SRoomCoords& coords)
+void CMap::setStartingPosition(const Map::SRoomCoords& coords)
 {
     if (coordsValid(coords))
     {
@@ -119,28 +119,28 @@ void CMap::setStartingPosition(const SRoomCoords& coords)
     }
 }
 
-void CMap::movePlayer(const EDirections dir)
+void CMap::movePlayer(const Core::EDirections dir)
 {
-    if (dir == EDirections::eNone)
+    if (dir == Core::EDirections::eNone)
     {
         return;
     }
 
-    SRoomCoords coords(_playerPosition);
+    Map::SRoomCoords coords(_playerPosition);
 
-    if (dir == EDirections::eNorth)
+    if (dir == Core::EDirections::eNorth)
     {
         coords.y--;
     }
-    if (dir == EDirections::eEast)
+    if (dir == Core::EDirections::eEast)
     {
         coords.x++;
     }
-    if (dir == EDirections::eSouth)
+    if (dir == Core::EDirections::eSouth)
     {
         coords.y++;
     }
-    if (dir == EDirections::eWest)
+    if (dir == Core::EDirections::eWest)
     {
         coords.x--;
     }
@@ -151,7 +151,7 @@ void CMap::movePlayer(const EDirections dir)
     }
 }
 
-bool CMap::coordsValid(const SRoomCoords& coords) const
+bool CMap::coordsValid(const Map::SRoomCoords& coords) const
 {
     if (coords.x < 0 || coords.x >= _map.at(0).size())
     {
@@ -166,12 +166,12 @@ bool CMap::coordsValid(const SRoomCoords& coords) const
     return true;
 }
 
-bool CMap::navAvailable(const EDirections dir) const
+bool CMap::navAvailable(const Core::EDirections dir) const
 {
     return navAvailable(_playerPosition, dir);
 }
 
-bool CMap::navAvailable(const SRoomCoords& coords, const EDirections dir) const
+bool CMap::navAvailable(const Map::SRoomCoords& coords, const Core::EDirections dir) const
 {
     auto room = roomAt(coords);
     if (!room.has_value() || *room == nullptr)
@@ -190,13 +190,13 @@ bool CMap::navAvailable(const SRoomCoords& coords, const EDirections dir) const
 
     switch (dir)
     {
-    case EDirections::eNorth:
+    case Core::EDirections::eNorth:
         return (*room)->north() && (*nextRoom)->south();
-    case EDirections::eEast:
+    case Core::EDirections::eEast:
         return (*room)->east() && (*nextRoom)->west();
-    case EDirections::eSouth:
+    case Core::EDirections::eSouth:
         return (*room)->south() && (*nextRoom)->north();
-    case EDirections::eWest:
+    case Core::EDirections::eWest:
         return (*room)->west() && (*nextRoom)->east();
     default:
         return false;
@@ -205,7 +205,7 @@ bool CMap::navAvailable(const SRoomCoords& coords, const EDirections dir) const
     return false;
 }
 
-void CMap::printRoom(const SRoomCoords& coords, const int line)
+void CMap::printRoom(const Map::SRoomCoords& coords, const int line)
 {
     using namespace std;
 
@@ -216,15 +216,15 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
         return;
     }
 
-    bool left = navAvailable(coords, EDirections::eWest);
-    bool bottom = navAvailable(coords, EDirections::eSouth);
+    bool left = navAvailable(coords, Core::EDirections::eWest);
+    bool bottom = navAvailable(coords, Core::EDirections::eSouth);
 
     if ((*room)->seen() == false)
     {
-        const auto roomLeft = roomAt(coords, EDirections::eWest);
+        const auto roomLeft = roomAt(coords, Core::EDirections::eWest);
         bool leftSeen = roomLeft.has_value() && *roomLeft != nullptr && (*roomLeft)->seen();
 
-        const auto roomBottom = roomAt(coords, EDirections::eSouth);
+        const auto roomBottom = roomAt(coords, Core::EDirections::eSouth);
         bool bottomSeen = roomBottom.has_value() && *roomBottom != nullptr && (*roomBottom)->seen();
 
         if (line == 1)
@@ -319,7 +319,7 @@ void CMap::printMap()
     }
 }
 
-std::string CMap::mapSymbol(const SRoomCoords& coords)
+std::string CMap::mapSymbol(const Map::SRoomCoords& coords)
 {
     if (coords == _playerPosition)
     {
@@ -474,12 +474,12 @@ void CMap::load(const nlohmann::json& json)
     }
 }
 
-std::optional<CRoom*> CMap::roomAt(const EDirections dir) const
+std::optional<CRoom*> CMap::roomAt(const Core::EDirections dir) const
 {
     return roomAt(_playerPosition, dir);
 }
 
-std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords) const
+std::optional<CRoom*> CMap::roomAt(const Map::SRoomCoords& coords) const
 {
     if (!coordsValid(coords))
     {
@@ -489,9 +489,9 @@ std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords) const
     return _map.at(coords.y).at(coords.x);
 }
 
-std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords, const EDirections dir) const
+std::optional<CRoom*> CMap::roomAt(const Map::SRoomCoords& coords, const Core::EDirections dir) const
 {
-    SRoomCoords transposedCoords(coords);
+    Map::SRoomCoords transposedCoords(coords);
     transposedCoords.transpose(dir);
     return roomAt(transposedCoords);
 }
@@ -506,7 +506,7 @@ std::string CMap::translatorModuleName() const
     return std::string();
 }
 
-CMap::SRoomCoords CMap::getPlayerPosition() const
+Map::SRoomCoords CMap::getPlayerPosition() const
 {
     return _playerPosition;
 }

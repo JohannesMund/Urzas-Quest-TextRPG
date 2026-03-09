@@ -5,6 +5,7 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "core.h"
 #include "cplayer.h"
 #include "croom.h"
 
@@ -60,26 +61,26 @@ void CDungeon::dungeonLoop()
         CMenu menu;
         CMenu::ActionList navs;
 
-        auto northAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eNorth))});
-        if (_map->navAvailable(CMap::EDirections::eNorth))
+        auto northAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eNorth))});
+        if (_map->navAvailable(Core::EDirections::eNorth))
         {
             navs.push_back(northAction);
         }
 
-        auto eastAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eEast))});
-        if (_map->navAvailable(CMap::EDirections::eEast))
+        auto eastAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eEast))});
+        if (_map->navAvailable(Core::EDirections::eEast))
         {
             navs.push_back(eastAction);
         }
 
-        auto southAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eSouth))});
-        if (_map->navAvailable(CMap::EDirections::eSouth))
+        auto southAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eSouth))});
+        if (_map->navAvailable(Core::EDirections::eSouth))
         {
             navs.push_back(southAction);
         }
 
-        auto westAction = menu.createAction({std::string(CMap::direction2String(CMap::EDirections::eWest))});
-        if (_map->navAvailable(CMap::EDirections::eWest))
+        auto westAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eWest))});
+        if (_map->navAvailable(Core::EDirections::eWest))
         {
             navs.push_back(westAction);
         }
@@ -110,22 +111,22 @@ void CDungeon::dungeonLoop()
 
             if (input == northAction)
             {
-                _map->movePlayer(CMap::EDirections::eNorth);
+                _map->movePlayer(Core::EDirections::eNorth);
                 break;
             }
             if (input == eastAction)
             {
-                _map->movePlayer(CMap::EDirections::eEast);
+                _map->movePlayer(Core::EDirections::eEast);
                 break;
             }
             if (input == southAction)
             {
-                _map->movePlayer(CMap::EDirections::eSouth);
+                _map->movePlayer(Core::EDirections::eSouth);
                 break;
             }
             if (input == westAction)
             {
-                _map->movePlayer(CMap::EDirections::eWest);
+                _map->movePlayer(Core::EDirections::eWest);
                 break;
             }
 

@@ -3,6 +3,7 @@
 #include "cdungeonroom.h"
 #include "cdungeonroomnoroom.h"
 #include "chealingwell.h"
+#include "core.h"
 #include "croom.h"
 #include "randomizer.h"
 
@@ -29,7 +30,7 @@ void CDungeonMap::init(std::vector<CRoom*>& rooms)
     fillWithNoRooms();
 }
 
-void CDungeonMap::makeNextRoom(const SRoomCoords coords, std::vector<CRoom*>& rooms)
+void CDungeonMap::makeNextRoom(const Map::SRoomCoords coords, std::vector<CRoom*>& rooms)
 {
     _map.at(coords.y).at(coords.x) = rooms.at(rooms.size() - 1);
     rooms.pop_back();
@@ -39,9 +40,9 @@ void CDungeonMap::makeNextRoom(const SRoomCoords coords, std::vector<CRoom*>& ro
         return;
     }
 
-    std::vector<SRoomCoords> possibilities;
+    std::vector<Map::SRoomCoords> possibilities;
     for (const auto dir :
-         {CMap::EDirections::eEast, CMap::EDirections::eSouth, CMap::EDirections::eWest, CMap::EDirections::eNorth})
+         {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
     {
         auto transposedCoords(coords);
         transposedCoords.transpose(dir);
@@ -75,7 +76,7 @@ CDungeonRoom* CDungeonMap::makeNoRoom() const
     return new CDungeonRoomNoRoom();
 }
 
-CMap::SRoomCoords CDungeonMap::getRandomRoomCoords(const bool noSpecialRooms, const bool notPlayerPosition)
+Map::SRoomCoords CDungeonMap::getRandomRoomCoords(const bool noSpecialRooms, const bool notPlayerPosition)
 {
     unsigned int roomCount = _populatedRoomCount;
     if (noSpecialRooms)
@@ -107,7 +108,7 @@ CMap::SRoomCoords CDungeonMap::getRandomRoomCoords(const bool noSpecialRooms, co
                 continue;
             }
 
-            if ((SRoomCoords{y, x} == _playerPosition) && notPlayerPosition)
+            if ((Map::SRoomCoords{y, x} == _playerPosition) && notPlayerPosition)
             {
                 continue;
             }
@@ -192,7 +193,7 @@ void CDungeonMap::moveTasks()
         return;
     }
 
-    std::vector<CMap::SRoomCoords> newPositions;
+    std::vector<Map::SRoomCoords> newPositions;
     for (auto coords : _movingTasks)
     {
         auto room = roomAt(coords);
@@ -207,9 +208,9 @@ void CDungeonMap::moveTasks()
             continue;
         }
 
-        std::vector<CMap::EDirections> possibilities;
+        std::vector<Core::EDirections> possibilities;
         for (auto dir :
-             {CMap::EDirections::eEast, CMap::EDirections::eSouth, CMap::EDirections::eWest, CMap::EDirections::eNorth})
+             {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
         {
             auto newRoom = roomAt(coords, dir);
             if (!newRoom.has_value())

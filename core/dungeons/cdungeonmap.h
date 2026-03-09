@@ -110,9 +110,9 @@ protected:
     CDungeonRoom* makeNoRoom() const;
 
 private:
-    CMap::SRoomCoords getRandomRoomCoords(const bool noSpecialRooms = true, const bool notPlayerPosition = true);
+    Map::SRoomCoords getRandomRoomCoords(const bool noSpecialRooms = true, const bool notPlayerPosition = true);
 
-    void makeNextRoom(const CMap::SRoomCoords coords, std::vector<CRoom*>& rooms);
+    void makeNextRoom(const Map::SRoomCoords coords, std::vector<CRoom*>& rooms);
 
     void fillWithNoRooms();
 
@@ -121,5 +121,5 @@ private:
     bool _isMapRevealed = false;
     bool _isExitAvailable = false;
 
-    std::vector<CMap::SRoomCoords> _movingTasks;
+    std::vector<Map::SRoomCoords> _movingTasks;
 };

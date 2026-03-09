@@ -8,75 +8,36 @@
 #include <vector>
 
 #include "cgamestateobject.h"
+#include "core.h"
+#include "sroomcoords.h"
 
 class CRoom;
 class CTask;
 class CMap : public CGameStateObject
 {
 public:
-    enum class EDirections
-    {
-        eNone,
-        eNorth,
-        eEast,
-        eSouth,
-        eWest
-    };
-
-    static const std::map<EDirections, std::string> _dirMap;
+    static const std::map<Core::EDirections, std::string> _dirMap;
 
     using RoomFilter = std::function<bool(const CRoom* room)>;
 
-    struct SRoomCoords
-    {
-        unsigned int x;
-        unsigned int y;
-
-        bool operator==(const SRoomCoords& other) const
-        {
-            return x == other.x && y == other.y;
-        }
-
-        void transpose(const EDirections dir)
-        {
-            switch (dir)
-            {
-            case EDirections::eNorth:
-                y--;
-                break;
-            case EDirections::eEast:
-                x++;
-                break;
-            case EDirections::eSouth:
-                y++;
-                break;
-            case EDirections::eWest:
-                x--;
-                break;
-            default:
-                break;
-            }
-        }
-    };
-
-    static EDirections string2Direction(const std::string_view s);
-    static std::string_view direction2String(const EDirections d);
+    static Core::EDirections string2Direction(const std::string_view s);
+    static std::string_view direction2String(const Core::EDirections d);
 
     CMap(const unsigned int width, const unsigned int height);
     ~CMap();
 
     virtual void init(std::vector<CRoom*>& rooms);
 
-    void setStartingPosition(const SRoomCoords& coords);
-    void movePlayer(const EDirections dir);
-    SRoomCoords getPlayerPosition() const;
-    bool coordsValid(const SRoomCoords& coords) const;
-    bool navAvailable(const EDirections dir) const;
-    bool navAvailable(const SRoomCoords& coords, const EDirections dir) const;
+    void setStartingPosition(const Map::SRoomCoords& coords);
+    void movePlayer(const Core::EDirections dir);
+    Map::SRoomCoords getPlayerPosition() const;
+    bool coordsValid(const Map::SRoomCoords& coords) const;
+    bool navAvailable(const Core::EDirections dir) const;
+    bool navAvailable(const Map::SRoomCoords& coords, const Core::EDirections dir) const;
 
-    void printRoom(const SRoomCoords& coords, const int line);
+    void printRoom(const Map::SRoomCoords& coords, const int line);
     void printMap();
-    std::string mapSymbol(const SRoomCoords& coords);
+    std::string mapSymbol(const Map::SRoomCoords& coords);
 
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
@@ -89,11 +50,11 @@ public:
 
 protected:
     std::vector<std::vector<CRoom*>> _map;
-    std::optional<CRoom*> roomAt(const EDirections dir) const;
-    std::optional<CRoom*> roomAt(const SRoomCoords& coords) const;
-    std::optional<CRoom*> roomAt(const SRoomCoords& coords, const EDirections dir) const;
+    std::optional<CRoom*> roomAt(const Core::EDirections dir) const;
+    std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords) const;
+    std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords, const Core::EDirections dir) const;
 
-    SRoomCoords _playerPosition;
+    Map::SRoomCoords _playerPosition;
 
     static const std::string saveObjectName;
     virtual std::string translatorObjectName() const override;

@@ -1,6 +1,7 @@
 #pragma once
 #include "cencounter.h"
 #include "cmap.h"
+#include "core.h"
 #include "ctask.h"
 #include "roomfactory.h"
 
@@ -15,7 +16,7 @@ public:
     CRoom(const std::string_view& objectName);
     virtual ~CRoom();
 
-    void blockPath(const CMap::EDirections dir, const bool block);
+    void blockPath(const Core::EDirections dir, const bool block);
 
     bool north() const;
     bool east() const;
