@@ -56,7 +56,7 @@ public:
      * @remark room will be deleted automatically
      * @param room the room to add
      */
-    void addSpecificRoom(CDungeonRoom* room);
+    void addSpecificRoom(CRoom* room);
 
     /**
      * @brief addTask

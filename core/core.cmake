@@ -9,7 +9,11 @@ set(URZAS_QUEST_SOURCES_CORE
     core/cbattle.h core/cbattle.cpp
         
     core/map/cmap.h core/map/cmap.cpp
+    core/map/cmapgrid.h core/map/cmapgrid.cpp
+    core/map/cmapgriditerator.h 
+    core/map/cmapgridregister.h
     core/map/sroomcoords.h core/map/sroomcoords.cpp
+
 
     core/gamestate/cgamestateobject.h core/gamestate/cgamestateobject.cpp
     core/gamestate/cgamesettings.h core/gamestate/cgamesettings.cpp    

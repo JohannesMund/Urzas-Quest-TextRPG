@@ -17,4 +17,10 @@ enum class EDirections
     eWest
 };
 
+enum class EAlignment
+{
+    eHorizontal,
+    eVertical
+};
+
 } // namespace Core

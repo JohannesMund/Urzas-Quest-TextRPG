@@ -16,7 +16,7 @@ CDungeonMap::CDungeonMap(const unsigned int width, const unsigned int height) : 
 
 void CDungeonMap::init(std::vector<CRoom*>& rooms)
 {
-    _populatedRoomCount = static_cast<unsigned int>(std::ceil((_map.size() * _map.at(0).size()) / 2));
+    _populatedRoomCount = static_cast<unsigned int>(std::ceil((_map.count()) / 2));
 
     while (rooms.size() < _populatedRoomCount)
     {
@@ -32,7 +32,7 @@ void CDungeonMap::init(std::vector<CRoom*>& rooms)
 
 void CDungeonMap::makeNextRoom(const Map::SRoomCoords coords, std::vector<CRoom*>& rooms)
 {
-    _map.at(coords.y).at(coords.x) = rooms.at(rooms.size() - 1);
+    _map.push(coords, rooms.at(rooms.size() - 1));
     rooms.pop_back();
 
     if (rooms.empty())
@@ -91,46 +91,35 @@ Map::SRoomCoords CDungeonMap::getRandomRoomCoords(const bool noSpecialRooms, con
     auto targetRoom = Randomizer::getRandom(roomCount);
 
     auto counter = 0U;
-    for (unsigned int x = 0; x < _map.size(); x++)
+    for (const auto room : _map | std::views::filter([](const auto& room) { return !room->isEmptyRoom(); }) |
+                               std::views::filter([noSpecialRooms](const auto& room)
+                                                  { return !room->isSpecialRoom() || !noSpecialRooms; }))
     {
-        auto line = _map.at(x);
 
-        for (unsigned int y = 0; y < line.size(); y++)
+        const auto coords = _map.coordsOf(room);
+        if (!coords.has_value())
         {
-            auto room = _map.at(x).at(y);
-            if (room->isEmptyRoom())
-            {
-                continue;
-            }
-
-            if (room->isSpecialRoom() && noSpecialRooms)
-            {
-                continue;
-            }
-
-            if ((Map::SRoomCoords{y, x} == _playerPosition) && notPlayerPosition)
-            {
-                continue;
-            }
-
-            if (counter == targetRoom)
-            {
-                return {y, x};
-            }
-            counter++;
+            continue;
         }
+        if ((*coords == _playerPosition) && notPlayerPosition)
+        {
+            continue;
+        }
+
+        if (counter == targetRoom)
+        {
+            return *coords;
+        }
+        counter++;
     }
     return {};
 }
 
 void CDungeonMap::reveal()
 {
-    for (auto& l : _map)
+    for (auto& room : _map)
     {
-        for (auto& r : l)
-        {
-            r->setSeen(true);
-        }
+        room->setSeen(true);
     }
     _isMapRevealed = true;
 }
@@ -142,21 +131,11 @@ unsigned int CDungeonMap::roomCount() const
 
 unsigned int CDungeonMap::seenRooms() const
 {
-    int count = 0;
-    for (const auto& line : _map)
-    {
-        for (const auto& room : line)
-        {
-            if (room->seen())
-            {
-                count++;
-            }
-        }
-    }
-    return count;
+
+    return std::count_if(_map.begin(), _map.end(), [](const auto& room) { return room->seen(); });
 }
 
-void CDungeonMap::addSpecificRoom(CDungeonRoom* room)
+void CDungeonMap::addSpecificRoom(CRoom* room)
 {
     auto coords = getRandomRoomCoords();
     if (!coordsValid(coords))
@@ -164,8 +143,8 @@ void CDungeonMap::addSpecificRoom(CDungeonRoom* room)
         return;
     }
 
-    delete _map.at(coords.y).at(coords.x);
-    _map.at(coords.y).at(coords.x) = room;
+    delete _map.at(coords);
+    _map.push(coords, room);
     _specialRoomCount++;
 }
 
@@ -262,16 +241,5 @@ void CDungeonMap::setExitAvailable()
 
 void CDungeonMap::fillWithNoRooms()
 {
-    for (unsigned int x = 0; x < _map.size(); x++)
-    {
-        auto line = _map.at(x);
-
-        for (unsigned int y = 0; y < line.size(); y++)
-        {
-            if (_map.at(x).at(y) == nullptr)
-            {
-                _map.at(x).at(y) = makeNoRoom();
-            }
-        }
-    }
+    std::replace(_map.begin(), _map.end(), (CDungeonRoom*)nullptr, makeNoRoom());
 }

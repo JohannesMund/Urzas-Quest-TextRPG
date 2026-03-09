@@ -15,5 +15,11 @@ struct SRoomCoords
     }
 
     void transpose(const Core::EDirections dir);
+
+    void transpose(const Core::EAlignment dir, const bool min);
+
+    void inc(const Core::EAlignment dir);
+
+    void dec(const Core::EAlignment dir);
 };
 } // namespace Map

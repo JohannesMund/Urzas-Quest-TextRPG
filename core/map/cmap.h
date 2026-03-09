@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "cgamestateobject.h"
+#include "cmapgrid.h"
 #include "core.h"
 #include "sroomcoords.h"
 
@@ -49,7 +50,7 @@ public:
     virtual void load(const nlohmann::json& json) override;
 
 protected:
-    std::vector<std::vector<CRoom*>> _map;
+    CMapGrid<CRoom*> _map;
     std::optional<CRoom*> roomAt(const Core::EDirections dir) const;
     std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords) const;
     std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords, const Core::EDirections dir) const;
