@@ -4,6 +4,12 @@
 
 namespace Map
 {
+
+/**
+ * @brief SRoomCoords A Struct representing coordinates
+ * used in the whole Map-context
+ */
+
 struct SRoomCoords
 {
     unsigned int x;
@@ -15,11 +21,9 @@ struct SRoomCoords
     }
 
     void transpose(const Core::EDirections dir);
-
     void transpose(const Core::EAlignment dir, const bool min);
 
     void inc(const Core::EAlignment dir);
-
     void dec(const Core::EAlignment dir);
 };
 } // namespace Map

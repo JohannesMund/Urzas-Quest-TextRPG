@@ -2,9 +2,8 @@
 #include "croom.h"
 
 /**
- * @brief Register für unser Battlefield Grid
- * @sa cbattlefieldgrid.h
- * Jeder der CBattleFieldGrid mit template aufrufen möchte, muss das hier registrieren.
+ * @brief Register for the Map Grid
+ * @sa cmapgrid.h
  */
 
 template class CMapGrid<CRoom*>;

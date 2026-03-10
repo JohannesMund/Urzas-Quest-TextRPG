@@ -6,8 +6,8 @@
 
 /**
  * @brief The TGridSize struct
- * für die Größe bauen wir uns eine Struktur
- * @remark wir könnten QSize nehmen, aber wir wollen lieber size_t als Datentyp und noch die Zählfunktion drin haben.
+ * A struct for the size
+ * @remark nice to have to see if it is valid or count the fields..
  */
 
 struct TGridSize
@@ -25,31 +25,16 @@ struct TGridSize
 };
 
 /**
- * @brief The CBattleFieldGrid class
- * Wir bauen uns einen eigenen, 2 dimensionalen Container
- * @remark Das Template wäre nicht wirklich notwendig, da wir den Container nur für einen typ brauchen, aber so können
- * wir Temaplates üben uns sehen ein paar tolle Fallstricke.
- * @remark Reden wir über Fallstricke bei Templates.
- * Templatisierte Klassen sind etwas zickig. Der Compiler verzögert das Compilieren, so lange wie es geht, da er ja die
- * möglichen Aufrufe kennen muss. das führt am ende dazu, dass die Klasse eventuell noch nicht kompiliert ist, wenn sie
- * gebraucht wird. Um das zu umgehen, gibt es zwei Möglichleiten:
- * Option 1: Am Ende der Implementierung instantiiert man einach jeden möglichem Aufruf. Das machen wir hier so. Wir
- * erfinden den header
- * @sa cbattlefieldgridregister.h
- * und inkludieren ihn am ende der Implementierung. Jeder, der diesen Container nutzen möchte, trägt sich da ein.
- * Option 2: Wir implementieren alles im Header
- * @sa cmapgriditerator
+ * @brief The CMapGrid class
+ * a two dimensional container.
+ * also provides an intator so we can use std::ranges to iterate and filter.
  */
 template <class TValueType>
 class CMapGrid
 {
 public:
     /**
-     * Typdefinitionen für die Iteratoren
-     * @remark Ja, wir bauen uns eigene Iteratoren. Damit diese einfacher zu handhaben sind, definieren wir Typen.
-     * @remark Damit wir unseren Container in den STD-Algorithmen und in einer FOREACH Schleife verwenden können,
-     * benötigen wir begin- und end- Funktionen, die passende Iteratoren zurückgeben. Beide müssen auch als const
-     * vorliegen, damit die Iteratoren auch in konstanten Funktionen benutzt werden können.
+     * Typdefs for iterators
      */
     using Iterator = CMapGridIterator<TValueType, std::vector<std::vector<TValueType>>>;
     using ConstIterator =
@@ -57,7 +42,7 @@ public:
 
     /**
      * @brief begin
-     * @return der Begin-Iterator
+     * @return the begin-iterator
      */
     Iterator begin()
     {
@@ -66,9 +51,7 @@ public:
 
     /**
      * @brief end
-     * @return der Ende-Iterator
-     * @remark Achtung! end() zeigt immer HINTER das Ende des Containers, ist also ungültig! Das ist bei Iteratoren
-     * Konvention. Der Versuch den end() - Iterator zu dereferenzieren endet in einem Crash.
+     * @return the end-Iterator
      */
     Iterator end()
     {
@@ -77,7 +60,7 @@ public:
 
     /**
      * @brief begin
-     * @return der const Begin-Iterator
+     * @return the const begin-Iterator
      */
     ConstIterator begin() const
     {
@@ -86,8 +69,7 @@ public:
 
     /**
      * @brief end
-     * @return der const end-Iterator
-     * @remark Auch hier, zeigt hinter das Ende des Containers.
+     * @return the const end-Iterator
      */
     ConstIterator end() const
     {
@@ -95,25 +77,31 @@ public:
     }
 
     /**
-     * @brief CBattleFieldGrid
-     * Ein Standardkonstruktor
+     * @brief CMapGrid
+     * A explicit default contstructor, needed for the iterators
      */
     CMapGrid() = default;
 
     /**
      * @brief resize
-     * Um das push_back zu implementieren wie wir es implementiert haben muss der Container seine Dimensionen kennen.
-     * @param sz die größe des Containers
-     * @remark Es findet kein resize der Vektoren statt!
-     * @remark Die bestehenden Vektoren werden einfach geleert.
+     * gives the container size
+     * does not create elements at all
+     * @remark everything is cleared
+     * @remark needed for push_back
      */
     void resize(const TGridSize& sz);
 
     /**
      * @brief size
-     * @return Getter für die Größe
+     * @return Getter for the size
+     * @remark returns the intended size
      */
     TGridSize size() const;
+
+    /**
+     * @brief count
+     * @return the actual count of elements
+     */
     unsigned int count() const;
 
     /**
@@ -125,22 +113,28 @@ public:
 
     /**
      * @brief at
-     * Gibt den Wert an gegebenen Koordinaten zurück
-     * @param coords Koordinaten des Wertes
-     * @return der Wert an den gegebenen Koordinaten
-     * @remark Es findet  keine Zugriffsprüfung statt
+     * returns the value at coords
+     * @param coords coordinates ot the value
+     * @remark no access check
      */
     TValueType at(const Map::SRoomCoords coords) const;
+
+    /**
+     * @brief coordsOf
+     * returns the coords of a value if the value exists in the container
+     */
     std::optional<Map::SRoomCoords> coordsOf(const TValueType& val);
+
+    /**
+     * @brief push
+     * adds a value at coords
+     * @remark no access check
+     */
     void push(const Map::SRoomCoords coords, TValueType& val);
 
     /**
      * @brief push_back
-     * schiebt einen wert in das Grid.
-     * @param val
-     * @return die Koordinaten, an denen der Wert eingefügt wurde
-     * @remark Es wird geprüft ob das Grid voll ist. In dem Falle ist das Optional leer.
-     * @sa resize
+     * adds a value to the end of the container.
      */
     std::optional<Map::SRoomCoords> push_back(const TValueType& val);
 

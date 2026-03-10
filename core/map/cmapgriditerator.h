@@ -5,18 +5,11 @@
 #include <vector>
 
 /**
- * @brief The CBattleFieldGridIterator class
- * Wir bauen uns einen Iterator für einen 2 dimensionalen Vektor
- * @remark Ist es sinnvoll einen Container zu erfinden, und einen Iterator dafür zu bauen, wenn sich das mit STL
- * Containern umsetzen ließe? - NEIN!
- * Ist es einfacher einen Container zu erfinden, und einen Iterator dafür zu bauen, wenn sich das mit STL
- * Containern umsetzen ließe? - Um Gottes Willen, NEIN!
- * Machen wir es trotzdem? - FUCK YEAH!
- * Warum? - Weil wir es können!
- * @remark - Wir implementieren alles in den Header. Das ist nicht schön, aber wir haben eine Template Klasse, und
- * müssen den Compiler zwingen die Klasse kompiliert zu haben, wenn wir sie Brauchen. Das ist eine Möglichkeit, die
- * andere Option findet sich im Container.
- * @sa CBattleFieldGrid
+ * @brief The CMapIterator class
+ * An iterator for a 2-dimensional vector
+ * @remark There might be easier ways to do this, but this ways we can iterate the map like a vector without having to
+ * think about every single access.
+ * @sa CMapGrid
  */
 
 template <typename TIteratorType, class TContainerType>
@@ -24,9 +17,7 @@ struct CMapGridIterator
 {
 public:
     /**
-     * @remark Diese definitionen sind notwendig, damit der Compiler das ganze Konstrukt als Iterator nutzen kann
-     * Wie bauen einen Random Access Iterator, man kann also in beide Richtungen iterieren und auch frei hin- und
-     * herspringem.
+     * @remark Some definitions.
      */
 
     using iterator_category = std::random_access_iterator_tag;
@@ -36,15 +27,14 @@ public:
     using reference = TIteratorType&;
 
     /**
-     * für die Bessere Lesbarkeit
-     * der self_type ist nicht notwendig.
+     * for readability
      */
     using self_type = CMapGridIterator;
 
     /**
-     * @brief CBattleFieldGridIterator
-     * Im Konstruktor bekommt der Iterator einen Zeiger auf das Grid, und eine Startposition
-     * @param vv Zeiger auf den Container
+     * @brief CMapGridIterator
+     * Constructor for the iterator
+     * @param vv points to the container
      * @param outer y-Pos
      * @param inner x-Pos
      */
@@ -58,10 +48,8 @@ public:
 
     CMapGridIterator() = default;
     /**
-     * Ab hier Standard. Alle Iteratoren müssen die folgenden Operatoren implementieren. Die Zugriffsopteratoren (* und
-     * ->) müssen const und nicht-const vorhanden sein. Aufpassen beim Lesen, *this benutzt den ersten *-Operatore zum
-     * dereferenzieren des Wertes. (Also das, was der Iterator landläufig so macht.) Natürlich implementieren wir den
-     * Zugriff nur einmal und benutzen ihn dann.
+     * default from hereon
+     * @remark everything must be const and not const
      */
 
     reference operator*()
@@ -85,9 +73,7 @@ public:
     }
 
     /**
-     * Inkrement und Dekrement jeweils als Postfix und als Prefix
-     * Auch hier wieder einmal implementieren und dann nutzen.
-     * Wir greifen auch auf den reference operator zurück
+     * Increment und Decrement as Postfix and as Prefix
      */
     self_type& operator++()
     {
@@ -152,20 +138,14 @@ public:
     }
 
     /**
-     * Und weil wir es wissen wollten und einen Random Access Iterator gebaut haben (sozusagen die Königin Mutter der
-     * Iteratoren), müssen wir auch arithmetische Operatoren haben.
+     * For Random Access iterators (the god-mother of iterators) we need arithmetic operato2rs
      */
 
-    // Man beachte die Typen, hier geht es um den Abstand zwischen zwei Iteratoren
-    // z.B.: int i = Iterator1 - Iterator2;
     inline difference_type operator-(const self_type& rhs) const
     {
         return (_innerIndex + _outerIndex) - (rhs._innerIndex + rhs._outerIndex);
     }
 
-    // Alle weiteren Operatoren schieben in die ein- oder andere Richtung
-
-    // z.B.: Iterator1 = Iterator2 + 5;
     inline self_type operator+(const difference_type rhs) const
     {
         if (rhs < 0)
@@ -189,7 +169,6 @@ public:
         return it;
     }
 
-    // z.B.: Iterator1 = Iterator2 - 5;
     inline self_type operator-(const difference_type rhs) const
     {
         if (rhs < 0)
@@ -224,7 +203,7 @@ public:
     }
 
     /**
-     * Und zu guter Letzt muss der Kram noch vergleichbar sein.
+     * and a little comparison
      */
 
     bool operator==(self_type const& other) const
@@ -256,7 +235,7 @@ public:
 
     /**
      * @brief x
-     * der Iterator soll auch seine Position verraten
+     * Access to x-coord
      * @return x-coordinate
      */
     size_t x() const
@@ -266,7 +245,7 @@ public:
 
     /**
      * @brief y
-     * der Iterator soll auch seine Position verraten
+     * Access to y-coord
      * @return y-coordinate
      */
     size_t y() const
@@ -276,7 +255,7 @@ public:
 
     /**
      * @brief begin
-     * Statische Funktion, die den begin() Iterator für einen Container zurückgibt
+     * begin for iteration
      */
     static self_type begin(TContainerType* vv)
     {
@@ -287,7 +266,7 @@ public:
 
     /**
      * @brief end
-     * Statische Funktion, die den end() Iterator für einen Container zurückgibt
+     * end for iterations
      */
     static self_type end(TContainerType* vv)
     {
@@ -297,55 +276,26 @@ public:
     }
 
 private:
-    /**
-     * Hilfsfunktionen
-     * Wir missbrauchen das Iteratorkonzept ein wenig.
-     * Normalerweise hat ein Iterator einen Zeiger und schubst den hin- oder her. Wir bewegen uns in einem
-     * 2-dimensionalen Container und beachten die Grenzen.
-     */
-
-    /**
-     * @brief numericSize
-     * Die Anzahl an Elementen im Container
-     */
     size_t numericSize() const
     {
         return height() * width();
     }
 
-    /**
-     * @brief width
-     * Breite des Containers
-     */
     size_t width() const
     {
         return _vectorOfVectors->size() ? _vectorOfVectors->at(0).size() : 0;
     }
 
-    /**
-     * @brief height
-     * @return Höhe des Containers
-     */
     size_t height() const
     {
         return _vectorOfVectors->size();
     }
 
-    /**
-     * @brief numericIndex
-     * Die Elemente sind zählbar, wir zählen zeilenweise.
-     * Also können wir auch einen eindeutigen Index bestimmen.
-     */
     size_t numericIndex() const
     {
         return (_outerIndex * width()) + _innerIndex;
     }
 
-    /**
-     * @brief begin
-     * Setzt this auf begin()
-     * @remark nur für den internen Gebrauch
-     */
     self_type& begin()
     {
         _innerIndex = 0;
@@ -353,11 +303,6 @@ private:
         return *this;
     }
 
-    /**
-     * @brief end
-     * Setzt this auf end()
-     * @remark nur für den internen Gebrauch
-     */
     self_type& end()
     {
         _innerIndex = 0;
