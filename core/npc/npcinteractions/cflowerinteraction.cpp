@@ -97,6 +97,11 @@ nlohmann::json CFlowerInteraction::save() const
 
 void CFlowerInteraction::load(const nlohmann::json& json)
 {
+
+    Console::printLn("We Are A Flower!");
+    Console::printLn(json.dump());
+
+    CNpcInteraction::load(json);
     _favoriteFlower = json[TagNames::NpcInteractions::favouriteFlower];
     _leastFavoriteFlower = json[TagNames::NpcInteractions::leastFavouriteFlower];
 }

@@ -122,7 +122,7 @@ namespace Map
 {
 constexpr std::string_view map = "Map";
 constexpr std::string_view playerPosition = "PlayerPosition";
-constexpr std::string_view roomMatrix = "RoomMatrix";
+constexpr std::string_view rooms = "Rooms";
 } // namespace Map
 
 namespace Room

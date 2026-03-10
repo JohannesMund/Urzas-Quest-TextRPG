@@ -331,11 +331,12 @@ CRoom* CMap::currentRoom() const
 void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
 {
     std::vector<CRoom*> possibleRooms;
-    for (const auto& room :
-         _map | std::views::filter(filter) |
-             std::views::filter([task](const auto& room) { return room->isTaskPossible(task->moduleName()); }))
+    for (const auto& room : _map | std::views::filter(filter))
     {
-        possibleRooms.push_back(room);
+        if (room->isTaskPossible(task->moduleName()))
+        {
+            possibleRooms.push_back(room);
+        }
     }
 
     if (possibleRooms.size() == 0)
@@ -388,7 +389,7 @@ nlohmann::json CMap::save() const
         CSaveFile::addGameObject(rooms, room);
     }
 
-    mapState[TagNames::Map::roomMatrix] = rooms;
+    mapState[TagNames::Map::rooms] = rooms;
     return mapState;
 }
 
@@ -402,10 +403,10 @@ void CMap::load(const nlohmann::json& json)
         _playerPosition.y = json[TagNames::Map::playerPosition].value<unsigned int>(TagNames::Common::y, 0);
     }
 
-    if (json.contains(TagNames::Map::roomMatrix))
+    if (json.contains(TagNames::Map::rooms))
     {
         _map.clear();
-        for (auto room : json[TagNames::Map::roomMatrix])
+        for (auto room : json[TagNames::Map::rooms])
         {
             auto r = RoomFactory::loadRoomFromSaveGame(room);
             if (r != nullptr)

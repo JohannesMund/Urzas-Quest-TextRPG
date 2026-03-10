@@ -71,7 +71,6 @@ nlohmann::json CKatNottingH::save() const
 void CKatNottingH::load(const nlohmann::json& json)
 {
     CNpc::load(json);
-
     for (const auto& interaction : json[TagNames::Npc::interactions])
     {
         if (CGameStateObject::compareObjectName(TagNames::RabbitFarm::talkInteraction, interaction))

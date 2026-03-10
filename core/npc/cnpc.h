@@ -132,14 +132,17 @@ protected:
     void addInteraction(CNpcInteraction* interaction);
 
     template <typename T>
-    void loadInteraction(nlohmann::json json)
+    void loadInteraction(const nlohmann::json& json)
     {
         for (auto interactionObject : _interactions)
         {
-            auto interaction = static_cast<T*>(interactionObject);
-            if (interaction != nullptr)
+            if (compareObjectName(interactionObject, json))
             {
-                interaction->load(json);
+                auto interaction = static_cast<T*>(interactionObject);
+                if (interaction != nullptr)
+                {
+                    interaction->load(json);
+                }
             }
         }
     }
