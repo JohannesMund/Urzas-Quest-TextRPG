@@ -68,12 +68,6 @@ public:
     void addTask(CTask* task, const bool isMovingTask = false);
 
     /**
-     * @brief moveTasks
-     * moves all tasks that are added as moving tasks 1 field if possible
-     */
-    void moveTasks();
-
-    /**
      * @brief isMapRevealed
      * @return  true, if the map has been revealed
      */
@@ -120,6 +114,4 @@ private:
     unsigned int _specialRoomCount = 0;
     bool _isMapRevealed = false;
     bool _isExitAvailable = false;
-
-    std::vector<Map::SRoomCoords> _movingTasks;
 };

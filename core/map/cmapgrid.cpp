@@ -2,6 +2,11 @@
 #include <assert.h>
 
 template <class TValueType>
+CMapGrid<TValueType>::~CMapGrid()
+{
+}
+
+template <class TValueType>
 void CMapGrid<TValueType>::resize(const TGridSize& sz)
 {
     clear();

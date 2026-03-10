@@ -1,5 +1,4 @@
 #include "cdungeonmap.h"
-#include "cdungeonmaproom.h"
 #include "cdungeonroom.h"
 #include "cdungeonroomnoroom.h"
 #include "chealingwell.h"
@@ -89,6 +88,7 @@ Map::SRoomCoords CDungeonMap::getRandomRoomCoords(const bool noSpecialRooms, con
         roomCount--;
     }
 
+    Randomizer::init();
     auto targetRoom = Randomizer::getRandom(roomCount);
 
     auto counter = 0U;
@@ -150,78 +150,7 @@ void CDungeonMap::addSpecificRoom(CRoom* room)
 
 void CDungeonMap::addTask(CTask* task, const bool isMovingTask)
 {
-    auto coords = getRandomRoomCoords();
-    auto room = roomAt(coords);
-
-    if (!room.has_value())
-    {
-        return;
-    }
-
-    (*room)->setTask(task);
-    if (isMovingTask)
-    {
-        _movingTasks.push_back(coords);
-    }
-}
-
-void CDungeonMap::moveTasks()
-{
-    if (_movingTasks.empty())
-    {
-        return;
-    }
-
-    std::vector<Map::SRoomCoords> newPositions;
-    for (auto coords : _movingTasks)
-    {
-        auto room = roomAt(coords);
-
-        if (!room.has_value())
-        {
-            continue;
-        }
-
-        if (!(*room)->hasTask())
-        {
-            continue;
-        }
-
-        std::vector<Core::EDirections> possibilities;
-        for (auto dir :
-             {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
-        {
-            auto newRoom = roomAt(coords, dir);
-            if (!newRoom.has_value())
-            {
-                continue;
-            }
-
-            if ((*newRoom)->isTaskPossible())
-            {
-                possibilities.push_back(dir);
-            }
-        }
-
-        if (possibilities.empty())
-        {
-            newPositions.push_back(coords);
-            continue;
-        }
-
-        std::shuffle(
-            possibilities.begin(), possibilities.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
-
-        auto dir = possibilities.at(0);
-        auto newRoom = roomAt(coords, dir);
-
-        (*newRoom)->setTask((*room)->takeTask());
-        auto newCoords = coords;
-        newCoords.transpose(dir);
-        newPositions.push_back(newCoords);
-    }
-
-    _movingTasks = newPositions;
+    CMap::setTaskToRandomRoom(task, isMovingTask, CDungeonRoom::dungeonRoomFilter());
 }
 
 bool CDungeonMap::isMapRevealed() const
@@ -241,5 +170,9 @@ void CDungeonMap::setExitAvailable()
 
 void CDungeonMap::fillWithNoRooms()
 {
-    std::replace(_map.begin(), _map.end(), (CDungeonRoom*)nullptr, makeNoRoom());
+    for (auto& room : _map)
+    {
+        if (room == nullptr)
+            room = makeNoRoom();
+    }
 }

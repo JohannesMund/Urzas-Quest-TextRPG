@@ -36,7 +36,10 @@ CMap::~CMap()
 {
     for (auto& room : _map)
     {
-        delete room;
+        if (room != nullptr)
+        {
+            delete room;
+        }
     }
 }
 
@@ -328,7 +331,7 @@ CRoom* CMap::currentRoom() const
     return roomAt(_playerPosition).value();
 }
 
-void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
+void CMap::setTaskToRandomRoom(CTask* task, const bool isMovingTask, RoomFilter filter)
 {
     std::vector<CRoom*> possibleRooms;
     for (const auto& room : _map | std::views::filter(filter))
@@ -348,6 +351,11 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     std::shuffle(
         possibleRooms.begin(), possibleRooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
     possibleRooms.at(0)->setTask(task);
+
+    if (isMovingTask)
+    {
+        _movingTasks.push_back(_map.coordsOf(possibleRooms.at(0)).value());
+    }
 }
 
 void CMap::replaceRandomRoom(CRoom* newRoom)
@@ -390,6 +398,15 @@ nlohmann::json CMap::save() const
     }
 
     mapState[TagNames::Map::rooms] = rooms;
+
+    for (const auto coord : _movingTasks)
+    {
+        nlohmann::json o;
+        o[TagNames::Common::x] = coord.x;
+        o[TagNames::Common::y] = coord.y;
+        mapState[TagNames::Map::movingTasks].push_back(o);
+    }
+
     return mapState;
 }
 
@@ -406,13 +423,20 @@ void CMap::load(const nlohmann::json& json)
     if (json.contains(TagNames::Map::rooms))
     {
         _map.clear();
-        for (auto room : json[TagNames::Map::rooms])
+        for (const auto& room : json[TagNames::Map::rooms])
         {
             auto r = RoomFactory::loadRoomFromSaveGame(room);
             if (r != nullptr)
             {
                 _map.push_back(r);
             }
+        }
+    }
+    if (json.contains(TagNames::Map::movingTasks))
+    {
+        for (const auto& coord : json[TagNames::Map::movingTasks])
+        {
+            _movingTasks.push_back({coord[TagNames::Common::x], coord[TagNames::Common::y]});
         }
     }
 }
@@ -447,6 +471,76 @@ std::string CMap::translatorObjectName() const
 std::string CMap::translatorModuleName() const
 {
     return std::string();
+}
+
+void CMap::moveTasks()
+{
+    _moveCycle++;
+    if (_moveCycle > 2)
+    {
+        _moveCycle = 0;
+        return;
+    }
+    if (_moveCycle != 0)
+    {
+        return;
+    }
+
+    if (_movingTasks.empty())
+    {
+        return;
+    }
+
+    std::vector<Map::SRoomCoords> newPositions;
+    for (auto coords : _movingTasks)
+    {
+        auto room = roomAt(coords);
+
+        if (!room.has_value())
+        {
+            continue;
+        }
+
+        if (!(*room)->hasTask())
+        {
+            continue;
+        }
+
+        std::vector<Core::EDirections> possibilities;
+        for (auto dir :
+             {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
+        {
+            auto newRoom = roomAt(coords, dir);
+            if (!newRoom.has_value())
+            {
+                continue;
+            }
+
+            if ((*newRoom)->isTaskPossible())
+            {
+                possibilities.push_back(dir);
+            }
+        }
+
+        if (possibilities.empty())
+        {
+            newPositions.push_back(coords);
+            continue;
+        }
+
+        std::shuffle(
+            possibilities.begin(), possibilities.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
+
+        auto dir = possibilities.at(0);
+        auto newRoom = roomAt(coords, dir);
+
+        (*newRoom)->setTask((*room)->takeTask());
+        auto newCoords = coords;
+        newCoords.transpose(dir);
+        newPositions.push_back(newCoords);
+    }
+
+    _movingTasks = newPositions;
 }
 
 Map::SRoomCoords CMap::getPlayerPosition() const

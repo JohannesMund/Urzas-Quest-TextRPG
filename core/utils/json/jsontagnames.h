@@ -123,6 +123,8 @@ namespace Map
 constexpr std::string_view map = "Map";
 constexpr std::string_view playerPosition = "PlayerPosition";
 constexpr std::string_view rooms = "Rooms";
+constexpr std::string_view movingTasks = "MovingTasks";
+
 } // namespace Map
 
 namespace Room

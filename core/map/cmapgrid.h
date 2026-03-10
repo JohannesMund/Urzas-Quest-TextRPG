@@ -82,6 +82,8 @@ public:
      */
     CMapGrid() = default;
 
+    ~CMapGrid();
+
     /**
      * @brief resize
      * gives the container size

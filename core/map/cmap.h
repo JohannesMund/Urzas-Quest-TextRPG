@@ -25,7 +25,7 @@ public:
     static std::string_view direction2String(const Core::EDirections d);
 
     CMap(const unsigned int width, const unsigned int height);
-    ~CMap();
+    virtual ~CMap();
 
     virtual void init(std::vector<CRoom*>& rooms);
 
@@ -43,11 +43,15 @@ public:
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+    void setTaskToRandomRoom(
+        CTask* task, const bool isMovingTask, RoomFilter filter = [](const CRoom*) { return true; });
+
     void replaceRandomRoom(CRoom* newRoom);
 
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
+
+    void moveTasks();
 
 protected:
     CMapGrid<CRoom*> _map;
@@ -60,4 +64,8 @@ protected:
     static const std::string saveObjectName;
     virtual std::string translatorObjectName() const override;
     virtual std::string translatorModuleName() const override;
+
+private:
+    std::vector<Map::SRoomCoords> _movingTasks;
+    int _moveCycle = 0;
 };

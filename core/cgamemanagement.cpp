@@ -67,17 +67,17 @@ CGameSettings* CGameManagement::getGameSettingsInstance()
 
 void CGameManagement::placeTask(CTask* task, CMap::RoomFilter filter)
 {
-    _map.setTaskToRandomRoom(task, filter);
+    _map.setTaskToRandomRoom(task, false, filter);
 }
 
 void CGameManagement::placeTaskOnField(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, CField::fieldFilter());
+    _map.setTaskToRandomRoom(task, false, CField::fieldFilter());
 }
 
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, CTown::townFilter());
+    _map.setTaskToRandomRoom(task, false, CTown::townFilter());
 }
 
 void CGameManagement::loadGameSettings()
@@ -217,6 +217,8 @@ void CGameManagement::printHUD()
 void CGameManagement::executeTurn()
 {
     _progression.increaseTurns();
+    _map.moveTasks();
+
     Console::cls();
 
     _map.currentRoom()->execute();
