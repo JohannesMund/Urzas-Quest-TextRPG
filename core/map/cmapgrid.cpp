@@ -9,13 +9,34 @@ void CMapGrid<TValueType>::resize(const TGridSize& sz)
 }
 
 template <class TValueType>
-TGridSize CMapGrid<TValueType>::size() const
+void CMapGrid<TValueType>::resizeAndFill(const TGridSize& sz, TValueType val)
+{
+    resize(sz);
+    while (actualSize().height < sz.height)
+    {
+        std::vector<TValueType> line;
+        while (line.size() < sz.width)
+        {
+            line.push_back(val);
+        }
+        _grid.push_back(line);
+    }
+}
+
+template <class TValueType>
+TGridSize CMapGrid<TValueType>::actualSize() const
 {
     if (_grid.size() == 0)
     {
         return {0, 0};
     }
     return {_grid.at(0).size(), _grid.size()};
+}
+
+template <class TValueType>
+TGridSize CMapGrid<TValueType>::virtualSize() const
+{
+    return _sz;
 }
 
 template <class TValueType>

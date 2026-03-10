@@ -5,7 +5,6 @@
 #include "cgamemanagement.h"
 #include "cgiftinteraction.h"
 #include "cnpcenemy.h"
-#include "cnpcinteraction.h"
 #include "colorize.h"
 #include "console.h"
 #include "jsontagnames.h"

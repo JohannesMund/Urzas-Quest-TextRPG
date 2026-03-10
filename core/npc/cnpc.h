@@ -3,13 +3,13 @@
 #include "cgamestateobject.h"
 #include "cmenu.h"
 #include "cmenuaction.h"
+#include "cnpcinteraction.h"
 #include "core.h"
 #include "ressources.h"
 
 #include <nlohmann/json.hpp>
 
 class CMenu;
-class CNpcInteraction;
 class CEnemy;
 /**
  * @brief class CNpc

@@ -130,12 +130,12 @@ void CMap::movePlayer(const Core::EDirections dir)
 
 bool CMap::coordsValid(const Map::SRoomCoords& coords) const
 {
-    if (coords.x < 0 || coords.x >= _map.size().width)
+    if (coords.x < 0 || coords.x >= _map.virtualSize().width)
     {
         return false;
     }
 
-    if (coords.y < 0 || coords.y >= _map.size().height)
+    if (coords.y < 0 || coords.y >= _map.virtualSize().height)
     {
         return false;
     }
@@ -246,12 +246,12 @@ void CMap::printRoom(const Map::SRoomCoords& coords, const int line)
 
 void CMap::printMap()
 {
-    if (!_map.size())
+    if (!_map.virtualSize())
     {
         return;
     }
 
-    for (unsigned int x = 0; x < _map.size().width; x++)
+    for (unsigned int x = 0; x < _map.actualSize().width; x++)
     {
         auto room = roomAt({x, 0});
         if (room.has_value() && room != nullptr && (*room)->seen())
@@ -272,16 +272,16 @@ void CMap::printMap()
     }
     std::cout << std::endl;
 
-    for (unsigned int y = 0; y < _map.size().height; y++)
+    for (unsigned int y = 0; y < _map.actualSize().height; y++)
     {
         for (auto i : {1, 2})
         {
-            for (unsigned int x = 0; x < _map.size().width; x++)
+            for (unsigned int x = 0; x < _map.actualSize().width; x++)
             {
                 printRoom({x, y}, i);
             }
 
-            auto room = roomAt({(unsigned)_map.size().width - 1, y});
+            auto room = roomAt({(unsigned)_map.actualSize().width - 1, y});
             if (room.has_value() && room != nullptr && (*room)->seen())
             {
                 std::cout << "|" << std::endl;

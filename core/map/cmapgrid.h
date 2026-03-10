@@ -90,13 +90,15 @@ public:
      * @remark needed for push_back
      */
     void resize(const TGridSize& sz);
+    void resizeAndFill(const TGridSize& sz, TValueType val);
 
     /**
      * @brief size
      * @return Getter for the size
      * @remark returns the intended size
      */
-    TGridSize size() const;
+    TGridSize actualSize() const;
+    TGridSize virtualSize() const;
 
     /**
      * @brief count
