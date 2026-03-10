@@ -20,10 +20,11 @@ struct SRoomCoords
         return x == other.x && y == other.y;
     }
 
+    /**
+     * @brief transpose
+     * move 1 unit in a certain direction
+     * @param[in] dir direction
+     */
     void transpose(const Core::EDirections dir);
-    void transpose(const Core::EAlignment dir, const bool min);
-
-    void inc(const Core::EAlignment dir);
-    void dec(const Core::EAlignment dir);
 };
 } // namespace Map
