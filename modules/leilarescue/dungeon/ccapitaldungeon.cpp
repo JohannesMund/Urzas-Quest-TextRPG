@@ -58,7 +58,7 @@ void CCapitalDungeon::makeBossAvailable()
     if ((_map->seenRooms() > ((_map->roomCount() * 3) / 4)))
     {
         _bossAwake = true;
-        _map->addTask(new CCapitalDungeonBossTask(&_bossDefeated), true);
+        _map->addTaskToDungeonRoom(new CCapitalDungeonBossTask(&_bossDefeated));
     }
 }
 

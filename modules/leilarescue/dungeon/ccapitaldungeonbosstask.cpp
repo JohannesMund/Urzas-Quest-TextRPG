@@ -36,6 +36,11 @@ void CCapitalDungeonBossTask::execute()
     }
 }
 
+bool CCapitalDungeonBossTask::isMovable() const
+{
+    return true;
+}
+
 std::string CCapitalDungeonBossTask::translatorModuleName() const
 {
     return LeilaRescue::moduleName();

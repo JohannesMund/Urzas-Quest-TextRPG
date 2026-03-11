@@ -43,8 +43,7 @@ public:
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
     CRoom* currentRoom() const;
 
-    void setTaskToRandomRoom(
-        CTask* task, const bool isMovingTask, RoomFilter filter = [](const CRoom*) { return true; });
+    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
 
     void replaceRandomRoom(CRoom* newRoom);
 

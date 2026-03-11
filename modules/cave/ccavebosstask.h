@@ -8,6 +8,8 @@ public:
 
     virtual void execute() override;
 
+    virtual bool isMovable() const override;
+
 private:
     bool* _bossDefeated;
 };

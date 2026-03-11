@@ -36,7 +36,7 @@ void CCaveDungeon::loopHook()
             Console::confirmToContinue();
             Console::br();
 
-            _map->addTask(new CCaveBossTask(&_bossDefeated), true);
+            _map->addTaskToDungeonRoom(new CCaveBossTask(&_bossDefeated));
             _bossAwake = true;
         }
     }

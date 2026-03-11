@@ -148,9 +148,9 @@ void CDungeonMap::addSpecificRoom(CRoom* room)
     _specialRoomCount++;
 }
 
-void CDungeonMap::addTask(CTask* task, const bool isMovingTask)
+void CDungeonMap::addTaskToDungeonRoom(CTask* task)
 {
-    CMap::setTaskToRandomRoom(task, isMovingTask, CDungeonRoom::dungeonRoomFilter());
+    CMap::setTaskToRandomRoom(task, CDungeonRoom::dungeonRoomFilter());
 }
 
 bool CDungeonMap::isMapRevealed() const

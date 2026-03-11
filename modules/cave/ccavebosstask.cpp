@@ -32,3 +32,8 @@ void CCaveBossTask::execute()
         CGameManagement::getProgressionInstance()->reportModuleFinished(Cave::moduleName());
     }
 }
+
+bool CCaveBossTask::isMovable() const
+{
+    return true;
+}

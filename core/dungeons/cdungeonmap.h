@@ -59,13 +59,12 @@ public:
     void addSpecificRoom(CRoom* room);
 
     /**
-     * @brief addTask
+     * @brief addTaskToDungeonRoom
      * Adds a Task to a random room
      * @param task the task to be added
-     * @param isMovingTask if true, the task will move when moveTasks is called
      * @sa moveTasks()
      */
-    void addTask(CTask* task, const bool isMovingTask = false);
+    void addTaskToDungeonRoom(CTask* task);
 
     /**
      * @brief isMapRevealed

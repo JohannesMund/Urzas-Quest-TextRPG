@@ -23,6 +23,11 @@ std::string CTask::moduleName() const
     return {};
 }
 
+bool CTask::isMovable() const
+{
+    return false;
+}
+
 nlohmann::json CTask::save() const
 {
     nlohmann::json j;

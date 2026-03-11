@@ -317,7 +317,6 @@ std::string CMap::mapSymbol(const Map::SRoomCoords& coords)
 std::vector<CRoom*> CMap::roomsMatchingFilter(RoomFilter filter) const
 {
     std::vector<CRoom*> rooms;
-
     for (const auto& room : _map | std::views::filter(filter))
     {
         rooms.push_back(room);
@@ -331,7 +330,7 @@ CRoom* CMap::currentRoom() const
     return roomAt(_playerPosition).value();
 }
 
-void CMap::setTaskToRandomRoom(CTask* task, const bool isMovingTask, RoomFilter filter)
+void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
 {
     std::vector<CRoom*> possibleRooms;
     for (const auto& room : _map | std::views::filter(filter))
@@ -352,7 +351,7 @@ void CMap::setTaskToRandomRoom(CTask* task, const bool isMovingTask, RoomFilter 
         possibleRooms.begin(), possibleRooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
     possibleRooms.at(0)->setTask(task);
 
-    if (isMovingTask)
+    if (task->isMovable())
     {
         _movingTasks.push_back(_map.coordsOf(possibleRooms.at(0)).value());
     }

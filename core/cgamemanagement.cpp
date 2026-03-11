@@ -67,17 +67,17 @@ CGameSettings* CGameManagement::getGameSettingsInstance()
 
 void CGameManagement::placeTask(CTask* task, CMap::RoomFilter filter)
 {
-    _map.setTaskToRandomRoom(task, false, filter);
+    _map.setTaskToRandomRoom(task, filter);
 }
 
 void CGameManagement::placeTaskOnField(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, false, CField::fieldFilter());
+    _map.setTaskToRandomRoom(task, CField::fieldFilter());
 }
 
 void CGameManagement::placeTaskOnTown(CTask* task)
 {
-    _map.setTaskToRandomRoom(task, false, CTown::townFilter());
+    _map.setTaskToRandomRoom(task, CTown::townFilter());
 }
 
 void CGameManagement::loadGameSettings()
