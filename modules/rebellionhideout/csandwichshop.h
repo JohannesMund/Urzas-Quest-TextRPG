@@ -2,6 +2,7 @@
 
 #include "croom.h"
 #include "csandwich.h"
+#include "rebellionhideout/town/chideout.h"
 
 #include <map>
 #include <vector>
@@ -39,7 +40,6 @@ private:
     void deliverIngredients();
     void makeASandwich();
     void observe();
-    void talkToRebellion();
 
     int countIngredients();
 
@@ -58,4 +58,6 @@ private:
 
     std::vector<CSandwich*> _sandwiches;
     std::map<CSandwich::EIngredients, int> _ingredientStore;
+
+    CHideout _hideout;
 };

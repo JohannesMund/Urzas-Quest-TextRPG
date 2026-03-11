@@ -5,6 +5,15 @@
 
 #include <format>
 
+namespace
+{
+template <typename... Args>
+std::string tr(const std::string_view& textId, Args&&... formatArgs)
+{
+    return CTranslator::tr(SandwichShop::moduleName(), TagNames::Translator::ressources, textId, formatArgs...);
+}
+} // namespace
+
 Module::ModuleInfo SandwichShop::moduleInfo()
 {
     const auto roomFactory = [](const std::string_view& objectName) -> CRoom*
@@ -55,17 +64,27 @@ Module::ModuleInfo RebellionHideout::moduleInfo()
 
 std::string SandwichShop::moduleName()
 {
-    return "SandwichShop";
+    return tr("SandwichShop");
+}
+
+std::string SandwichShop::rebellionHideoutName()
+{
+    return tr("{}Homebase {}of the {}R{}}ebellion{}",
+              CC::fgGreen(),
+              CC::fgDarkGray(),
+              CC::fgRed(),
+              CC::fgDarkGray(),
+              CC::ccReset());
 }
 
 std::string SandwichShop::sandwichShopName()
 {
-    return std::format("{}<-SOOP{}WAY->{}", CC::fgLightYellow(), CC::fgGreen(), CC::ccReset());
+    return tr("{}<-SOOP{}WAY->{}", CC::fgLightYellow(), CC::fgGreen(), CC::ccReset());
 }
 
 std::string SandwichShop::mrSoop()
 {
-    return std::format("{}Mr. {}Soop{}", CC::fgGreen(), CC::fgLightYellow(), CC::ccReset());
+    return tr("{}Mr. {}Soop{}", CC::fgGreen(), CC::fgLightYellow(), CC::ccReset());
 }
 
 std::string RebellionHideout::moduleName()

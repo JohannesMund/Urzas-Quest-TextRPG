@@ -36,6 +36,7 @@ namespace SandwichShop
 Module::ModuleInfo moduleInfo();
 std::string moduleName();
 
+std::string rebellionHideoutName();
 std::string sandwichShopName();
 std::string mrSoop();
 
