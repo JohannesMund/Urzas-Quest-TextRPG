@@ -6,7 +6,6 @@
 #include "cgameprogression.h"
 #include "citemfactory.h"
 #include "cmenu.h"
-#include "cmysteriouschest.h"
 #include "companionfactory.h"
 #include "console.h"
 #include "croom.h"
@@ -15,7 +14,6 @@
 #include "ctown.h"
 #include "exceptions.h"
 #include "randomizer.h"
-#include "rebellionhideout/cbagofingredients.h"
 #include "json/jsonexceptions.h"
 
 #include <format>

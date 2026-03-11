@@ -1,10 +1,10 @@
 #include "ccannibalhorde.h"
-#include "../../rebellionhideout/cbagofingredients.h"
 #include "cgamemanagement.h"
 #include "colorize.h"
 #include "console.h"
 #include "leilarescue/moduleressources.h"
 #include "randomizer.h"
+#include "rebellionhideout/items/cbagofingredients.h"
 
 #include <format>
 

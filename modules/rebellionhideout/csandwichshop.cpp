@@ -1,5 +1,4 @@
 #include "csandwichshop.h"
-#include "cbagofingredients.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorize.h"
@@ -7,6 +6,7 @@
 #include "csandwich.h"
 #include "csavefile.h"
 #include "cshaggyssandwich.h"
+#include "items/cbagofingredients.h"
 #include "moduleressources.h"
 
 #include <format>
@@ -441,12 +441,10 @@ void CSandwichShop::observe()
     CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(RebellionHideout::moduleName());
     CGameManagement::getProgressionInstance()->reportModuleFinished(RebellionHideout::moduleName());
 
-    Console::printLn(
-        "You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
-        "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich shop "
-        "even "
-        "has an employees bathroom, you have no employees), but the toilet is pushed aside, and two guys "
-        "appear. They seem to be hungry, and immediately rush to the sandwiches.");
+    Console::printLn("You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
+                     "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich "
+                     "shop even has an employees bathroom, you have no employees), but the toilet is pushed aside, and "
+                     "two guys appear. They seem to be hungry, and immediately rush to the sandwiches.");
     Console::printLn(
         std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
                     "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
@@ -538,14 +536,11 @@ void CSandwichShop::talkToRebellion()
     else
     {
         Console::printLn(std::format(
-            "As you arrive, {} and {} are brainstorming the next actions, the rebellion will take. They are a "
-            "little "
+            "As you arrive, {} and {} are brainstorming the next actions, the rebellion will take. They are a little "
             "bit uncreative right now, all they come up with is kidnapping {} over and over again. As much as you "
             "would appreciate her beeing around, as much you don't want to kidnap her without any good reason to "
-            "do "
-            "so, so they make clear, that you dont approve any kidnapping operations for now. With this option out "
-            "of "
-            "the way, There seems nothing to be done for now.",
+            "do so, so they make clear, that you dont approve any kidnapping operations for now. With this option out "
+            "of the way, There seems nothing to be done for now.",
             Ressources::Game::fiego(),
             Ressources::Game::brock(),
             Ressources::Game::leila()));
