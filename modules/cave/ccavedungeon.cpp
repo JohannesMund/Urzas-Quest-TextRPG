@@ -25,22 +25,7 @@ void CCaveDungeon::loopHook()
         _map->setExitAvailable();
     }
 
-    if (_bossAwake)
-    {
-        if (!_bossDefeated)
-        {
-            _moveCycle++;
-            if (_moveCycle > 2)
-            {
-                _moveCycle = 0;
-            }
-            if (_moveCycle == 0)
-            {
-                _map->moveTasks();
-            }
-        }
-    }
-    else
+    if (!_bossAwake)
     {
         if ((_map->seenRooms() > ((_map->roomCount() * 3) / 4)))
         {
@@ -51,7 +36,7 @@ void CCaveDungeon::loopHook()
             Console::confirmToContinue();
             Console::br();
 
-            _map->addTask(new CCaveBossTask(&_bossDefeated), true);
+            _map->addTaskToDungeonRoom(new CCaveBossTask(&_bossDefeated));
             _bossAwake = true;
         }
     }

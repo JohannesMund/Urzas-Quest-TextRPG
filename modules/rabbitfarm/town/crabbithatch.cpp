@@ -218,7 +218,7 @@ void CRabbitHatch::deliverRabbit()
         Console::printLn(tr("Turns out, you do not have a rabbit. You better go now."));
         return;
     }
-
+    _rabbits->add(rabbit.value());
     Console::printLn(tr("You remember, that you found one of the rabbits. Proudly, you reach under your {} and present "
                         "your finding. It is a:",
                         CGameManagement::getPlayerInstance()->armorName()));

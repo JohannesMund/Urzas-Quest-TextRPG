@@ -1,7 +1,7 @@
 #include "moduleressources.h"
 #include "colorize.h"
-#include "rebellionhideout/cbagofingredients.h"
 #include "rebellionhideout/csandwichshop.h"
+#include "rebellionhideout/items/cbagofingredients.h"
 
 #include <format>
 

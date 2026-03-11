@@ -128,6 +128,7 @@ private:
     void initWorldMap(std::vector<CRoom*>& rooms) const;
 
     void progressToStage(Module::EGameStage stage);
+    void setNewStage(Module::EGameStage stage);
 
     void reRegisterModule(const std::string_view& name, const Module::EGameStage neededForStage);
 

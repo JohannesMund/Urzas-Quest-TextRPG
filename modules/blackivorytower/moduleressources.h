@@ -10,6 +10,7 @@ namespace TagNames
 namespace BlackIvoryTower
 {
 constexpr std::string_view blackIvoryTower = "BlackIvoryTower";
+constexpr std::string_view doener = "DoenerInteraction";
 constexpr std::string_view hadADoener = "HadADoener";
 constexpr std::string_view pinkFanta = "PinkFanta";
 constexpr std::string_view mobi = "Mobi";

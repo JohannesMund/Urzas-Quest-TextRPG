@@ -1,5 +1,6 @@
 #include "cnpcinteraction.h"
 
+#include "cgamemanagement.h"
 #include "cmenu.h"
 #include "cnpc.h"
 
@@ -22,13 +23,26 @@ CMenuAction CNpcInteraction::nav(CMenu& menu)
     return _nav;
 }
 
-nlohmann::json CNpcInteraction::save() const
+void CNpcInteraction::executeInteraction()
 {
-    return nlohmann::json();
+    _lastExecuted = CGameManagement::getProgressionInstance()->turns();
 }
 
-void CNpcInteraction::load(const nlohmann::json&)
+bool CNpcInteraction::interactionAvailable() const
 {
+    return (CGameManagement::now() - _lastExecuted) > _cooldown;
+}
+
+nlohmann::json CNpcInteraction::save() const
+{
+    nlohmann::json json;
+    json[TagNames::NpcInteractions::cooldown] = _cooldown;
+    return json;
+}
+
+void CNpcInteraction::load(const nlohmann::json& json)
+{
+    _cooldown = json[TagNames::NpcInteractions::cooldown];
 }
 
 std::string CNpcInteraction::translatorObjectName() const

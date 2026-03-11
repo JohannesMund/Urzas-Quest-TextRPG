@@ -3,6 +3,7 @@
 #include "ccapital.h"
 #include "cgamemanagement.h"
 #include "cinjuredpet.h"
+#include "clog.h"
 #include "colorize.h"
 #include "console.h"
 #include "croom.h"
@@ -18,39 +19,26 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include <ranges>
 
-const std::map<CMap::EDirections, std::string> CMap::_dirMap = {{EDirections::eNorth, "North"},
-                                                                {EDirections::eSouth, "South"},
-                                                                {EDirections::eWest, "West"},
-                                                                {EDirections::eEast, "East"},
-                                                                {EDirections::eNone, "None"}};
+const std::map<Core::EDirections, std::string> CMap::_dirMap = {{Core::EDirections::eNorth, "North"},
+                                                                {Core::EDirections::eSouth, "South"},
+                                                                {Core::EDirections::eWest, "West"},
+                                                                {Core::EDirections::eEast, "East"},
+                                                                {Core::EDirections::eNone, "None"}};
 
 CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject(TagNames::Map::map)
 {
-
-    for (unsigned int x = 0; x < height; x++)
-    {
-        std::vector<CRoom*> row;
-
-        for (unsigned int y = 0; y < width; y++)
-        {
-            row.push_back(nullptr);
-        }
-
-        _map.push_back(row);
-    }
+    _map.resize({width, height});
 }
 
 CMap::~CMap()
 {
-    for (auto& line : _map)
+    for (auto& room : _map)
     {
-        for (auto& room : line)
+        if (room != nullptr)
         {
-            if (room != nullptr)
-            {
-                delete room;
-            }
+            delete room;
         }
     }
 }
@@ -59,6 +47,9 @@ void CMap::init(std::vector<CRoom*>& rooms)
 {
     rooms.push_back(RoomFactory::makeInjuredPet());
     rooms.push_back(RoomFactory::makeCapital());
+
+    auto startingRoom = new CStartingRoom();
+    rooms.push_back(startingRoom);
 
     const auto numberOfTowns = CGameManagement::getGameSettingsInstance()->numberOfTowns();
     const auto fieldWidth = CGameManagement::getGameSettingsInstance()->fieldWidth();
@@ -69,32 +60,22 @@ void CMap::init(std::vector<CRoom*>& rooms)
         rooms.push_back(RoomFactory::makeTown());
     }
 
-    while (rooms.size() < (fieldWidth * fieldHeight) - 1)
+    while (rooms.size() < (fieldWidth * fieldHeight))
     {
         rooms.push_back(RoomFactory::makeRoom());
     }
 
     std::shuffle(rooms.begin(), rooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
 
-    for (unsigned int iRow = 0; iRow < _map.size(); iRow++)
+    for (const auto room : rooms)
     {
-        auto row = _map.at(iRow);
-        for (unsigned int iCol = 0; iCol < row.size(); iCol++)
-        {
-            if (iRow == _playerPosition.y && iCol == _playerPosition.x)
-            {
-                row.at(iCol) = new CStartingRoom();
-                continue;
-            }
-
-            row.at(iCol) = rooms.at(rooms.size() - 1);
-            rooms.pop_back();
-        }
-        _map.at(iRow) = row;
+        _map.push_back(room);
     }
+
+    _playerPosition = _map.coordsOf(startingRoom).value();
 }
 
-CMap::EDirections CMap::string2Direction(const std::string_view s)
+Core::EDirections CMap::string2Direction(const std::string_view s)
 {
     auto it = std::find_if(_dirMap.begin(), _dirMap.end(), [&s](const auto p) { return p.second == s; });
     if (it != _dirMap.end())
@@ -102,15 +83,15 @@ CMap::EDirections CMap::string2Direction(const std::string_view s)
         return it->first;
     }
 
-    return EDirections::eNone;
+    return Core::EDirections::eNone;
 }
 
-std::string_view CMap::direction2String(const EDirections d)
+std::string_view CMap::direction2String(const Core::EDirections d)
 {
     return _dirMap.at(d);
 }
 
-void CMap::setStartingPosition(const SRoomCoords& coords)
+void CMap::setStartingPosition(const Map::SRoomCoords& coords)
 {
     if (coordsValid(coords))
     {
@@ -118,28 +99,28 @@ void CMap::setStartingPosition(const SRoomCoords& coords)
     }
 }
 
-void CMap::movePlayer(const EDirections dir)
+void CMap::movePlayer(const Core::EDirections dir)
 {
-    if (dir == EDirections::eNone)
+    if (dir == Core::EDirections::eNone)
     {
         return;
     }
 
-    SRoomCoords coords(_playerPosition);
+    Map::SRoomCoords coords(_playerPosition);
 
-    if (dir == EDirections::eNorth)
+    if (dir == Core::EDirections::eNorth)
     {
         coords.y--;
     }
-    if (dir == EDirections::eEast)
+    if (dir == Core::EDirections::eEast)
     {
         coords.x++;
     }
-    if (dir == EDirections::eSouth)
+    if (dir == Core::EDirections::eSouth)
     {
         coords.y++;
     }
-    if (dir == EDirections::eWest)
+    if (dir == Core::EDirections::eWest)
     {
         coords.x--;
     }
@@ -150,14 +131,14 @@ void CMap::movePlayer(const EDirections dir)
     }
 }
 
-bool CMap::coordsValid(const SRoomCoords& coords) const
+bool CMap::coordsValid(const Map::SRoomCoords& coords) const
 {
-    if (coords.x < 0 || coords.x >= _map.at(0).size())
+    if (coords.x < 0 || coords.x >= _map.virtualSize().width)
     {
         return false;
     }
 
-    if (coords.y < 0 || coords.y >= _map.size())
+    if (coords.y < 0 || coords.y >= _map.virtualSize().height)
     {
         return false;
     }
@@ -165,12 +146,12 @@ bool CMap::coordsValid(const SRoomCoords& coords) const
     return true;
 }
 
-bool CMap::navAvailable(const EDirections dir) const
+bool CMap::navAvailable(const Core::EDirections dir) const
 {
     return navAvailable(_playerPosition, dir);
 }
 
-bool CMap::navAvailable(const SRoomCoords& coords, const EDirections dir) const
+bool CMap::navAvailable(const Map::SRoomCoords& coords, const Core::EDirections dir) const
 {
     auto room = roomAt(coords);
     if (!room.has_value() || *room == nullptr)
@@ -189,13 +170,13 @@ bool CMap::navAvailable(const SRoomCoords& coords, const EDirections dir) const
 
     switch (dir)
     {
-    case EDirections::eNorth:
+    case Core::EDirections::eNorth:
         return (*room)->north() && (*nextRoom)->south();
-    case EDirections::eEast:
+    case Core::EDirections::eEast:
         return (*room)->east() && (*nextRoom)->west();
-    case EDirections::eSouth:
+    case Core::EDirections::eSouth:
         return (*room)->south() && (*nextRoom)->north();
-    case EDirections::eWest:
+    case Core::EDirections::eWest:
         return (*room)->west() && (*nextRoom)->east();
     default:
         return false;
@@ -204,7 +185,7 @@ bool CMap::navAvailable(const SRoomCoords& coords, const EDirections dir) const
     return false;
 }
 
-void CMap::printRoom(const SRoomCoords& coords, const int line)
+void CMap::printRoom(const Map::SRoomCoords& coords, const int line)
 {
     using namespace std;
 
@@ -215,15 +196,15 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
         return;
     }
 
-    bool left = navAvailable(coords, EDirections::eWest);
-    bool bottom = navAvailable(coords, EDirections::eSouth);
+    bool left = navAvailable(coords, Core::EDirections::eWest);
+    bool bottom = navAvailable(coords, Core::EDirections::eSouth);
 
     if ((*room)->seen() == false)
     {
-        const auto roomLeft = roomAt(coords, EDirections::eWest);
+        const auto roomLeft = roomAt(coords, Core::EDirections::eWest);
         bool leftSeen = roomLeft.has_value() && *roomLeft != nullptr && (*roomLeft)->seen();
 
-        const auto roomBottom = roomAt(coords, EDirections::eSouth);
+        const auto roomBottom = roomAt(coords, Core::EDirections::eSouth);
         bool bottomSeen = roomBottom.has_value() && *roomBottom != nullptr && (*roomBottom)->seen();
 
         if (line == 1)
@@ -259,7 +240,6 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
 
         if (line == 2)
         {
-
             cout << string{left ? bottom ? " " : "_" : "|"};
             cout << string{bottom ? "  " : "__"};
         }
@@ -269,12 +249,12 @@ void CMap::printRoom(const SRoomCoords& coords, const int line)
 
 void CMap::printMap()
 {
-    if (!_map.size())
+    if (!_map.virtualSize())
     {
         return;
     }
 
-    for (unsigned int x = 0; x < _map.at(0).size(); x++)
+    for (unsigned int x = 0; x < _map.actualSize().width; x++)
     {
         auto room = roomAt({x, 0});
         if (room.has_value() && room != nullptr && (*room)->seen())
@@ -295,18 +275,16 @@ void CMap::printMap()
     }
     std::cout << std::endl;
 
-    for (unsigned int y = 0; y < _map.size(); y++)
+    for (unsigned int y = 0; y < _map.actualSize().height; y++)
     {
-        auto line = _map.at(y);
-
         for (auto i : {1, 2})
         {
-            for (unsigned int x = 0; x < line.size(); x++)
+            for (unsigned int x = 0; x < _map.actualSize().width; x++)
             {
                 printRoom({x, y}, i);
             }
 
-            auto room = roomAt({(unsigned)line.size() - 1, y});
+            auto room = roomAt({(unsigned)_map.actualSize().width - 1, y});
             if (room.has_value() && room != nullptr && (*room)->seen())
             {
                 std::cout << "|" << std::endl;
@@ -319,7 +297,7 @@ void CMap::printMap()
     }
 }
 
-std::string CMap::mapSymbol(const SRoomCoords& coords)
+std::string CMap::mapSymbol(const Map::SRoomCoords& coords)
 {
     if (coords == _playerPosition)
     {
@@ -339,16 +317,11 @@ std::string CMap::mapSymbol(const SRoomCoords& coords)
 std::vector<CRoom*> CMap::roomsMatchingFilter(RoomFilter filter) const
 {
     std::vector<CRoom*> rooms;
-    for (const auto& row : _map)
+    for (const auto& room : _map | std::views::filter(filter))
     {
-        for (const auto& room : row)
-        {
-            if (filter(room))
-            {
-                rooms.push_back(room);
-            }
-        }
+        rooms.push_back(room);
     }
+
     return rooms;
 }
 
@@ -360,30 +333,54 @@ CRoom* CMap::currentRoom() const
 void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
 {
     std::vector<CRoom*> possibleRooms;
-    for (const auto& row : _map)
+    for (const auto& room : _map | std::views::filter(filter))
     {
-        for (auto& room : row)
+        if (room->isTaskPossible(task->moduleName()))
         {
-            if (!filter(room))
-            {
-                continue;
-            }
-
-            if (room->isTaskPossible(task->moduleName()))
-            {
-                possibleRooms.push_back(room);
-            }
+            possibleRooms.push_back(room);
         }
     }
 
     if (possibleRooms.size() == 0)
     {
+        CLog::error() << "CMap: trying to a task on a room, but no room available" << std::endl << std::flush;
         return;
     }
 
     std::shuffle(
         possibleRooms.begin(), possibleRooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
     possibleRooms.at(0)->setTask(task);
+
+    if (task->isMovable())
+    {
+        _movingTasks.push_back(_map.coordsOf(possibleRooms.at(0)).value());
+    }
+}
+
+void CMap::replaceRandomRoom(CRoom* newRoom)
+{
+    std::vector<CRoom*> possibleRooms;
+    for (const auto& room : _map | std::views::filter([](const auto& room) { return room->canBeReplaced(); }))
+    {
+        possibleRooms.push_back(room);
+    }
+
+    if (possibleRooms.size() == 0)
+    {
+        CLog::error() << "CMap: trying to replace a room, but no replaceable room available" << std::endl << std::flush;
+        return;
+    }
+
+    std::shuffle(
+        possibleRooms.begin(), possibleRooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
+    auto roomToBeReplaced = possibleRooms.at(0);
+
+    if (std::find(_map.begin(), _map.end(), roomToBeReplaced) != _map.end())
+    {
+        std::replace(_map.begin(), _map.end(), roomToBeReplaced, newRoom);
+        delete roomToBeReplaced;
+        return;
+    }
 }
 
 nlohmann::json CMap::save() const
@@ -394,18 +391,21 @@ nlohmann::json CMap::save() const
 
     nlohmann::json rooms = nlohmann::json::array();
 
-    for (auto row : _map)
+    for (auto room : _map)
     {
-        nlohmann::json rowArray = nlohmann::json::array();
-        for (auto room : row)
-        {
-            CSaveFile::addGameObject(rowArray, room);
-        }
-
-        rooms.push_back(rowArray);
+        CSaveFile::addGameObject(rooms, room);
     }
 
-    mapState[TagNames::Map::roomMatrix] = rooms;
+    mapState[TagNames::Map::rooms] = rooms;
+
+    for (const auto coord : _movingTasks)
+    {
+        nlohmann::json o;
+        o[TagNames::Common::x] = coord.x;
+        o[TagNames::Common::y] = coord.y;
+        mapState[TagNames::Map::movingTasks].push_back(o);
+    }
+
     return mapState;
 }
 
@@ -419,43 +419,45 @@ void CMap::load(const nlohmann::json& json)
         _playerPosition.y = json[TagNames::Map::playerPosition].value<unsigned int>(TagNames::Common::y, 0);
     }
 
-    if (json.contains(TagNames::Map::roomMatrix))
+    if (json.contains(TagNames::Map::rooms))
     {
         _map.clear();
-        for (auto row : json[TagNames::Map::roomMatrix])
+        for (const auto& room : json[TagNames::Map::rooms])
         {
-            std::vector<CRoom*> mapRow;
-            for (auto room : row)
+            auto r = RoomFactory::loadRoomFromSaveGame(room);
+            if (r != nullptr)
             {
-                auto r = RoomFactory::loadRoomFromSaveGame(room);
-                if (r != nullptr)
-                {
-                    mapRow.push_back(r);
-                }
+                _map.push_back(r);
             }
-            _map.push_back(mapRow);
+        }
+    }
+    if (json.contains(TagNames::Map::movingTasks))
+    {
+        for (const auto& coord : json[TagNames::Map::movingTasks])
+        {
+            _movingTasks.push_back({coord[TagNames::Common::x], coord[TagNames::Common::y]});
         }
     }
 }
 
-std::optional<CRoom*> CMap::roomAt(const EDirections dir) const
+std::optional<CRoom*> CMap::roomAt(const Core::EDirections dir) const
 {
     return roomAt(_playerPosition, dir);
 }
 
-std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords) const
+std::optional<CRoom*> CMap::roomAt(const Map::SRoomCoords& coords) const
 {
     if (!coordsValid(coords))
     {
         return {};
     }
 
-    return _map.at(coords.y).at(coords.x);
+    return _map.at(coords);
 }
 
-std::optional<CRoom*> CMap::roomAt(const SRoomCoords& coords, const EDirections dir) const
+std::optional<CRoom*> CMap::roomAt(const Map::SRoomCoords& coords, const Core::EDirections dir) const
 {
-    SRoomCoords transposedCoords(coords);
+    Map::SRoomCoords transposedCoords(coords);
     transposedCoords.transpose(dir);
     return roomAt(transposedCoords);
 }
@@ -470,7 +472,77 @@ std::string CMap::translatorModuleName() const
     return std::string();
 }
 
-CMap::SRoomCoords CMap::getPlayerPosition() const
+void CMap::moveTasks()
+{
+    _moveCycle++;
+    if (_moveCycle > 2)
+    {
+        _moveCycle = 0;
+        return;
+    }
+    if (_moveCycle != 0)
+    {
+        return;
+    }
+
+    if (_movingTasks.empty())
+    {
+        return;
+    }
+
+    std::vector<Map::SRoomCoords> newPositions;
+    for (auto coords : _movingTasks)
+    {
+        auto room = roomAt(coords);
+
+        if (!room.has_value())
+        {
+            continue;
+        }
+
+        if (!(*room)->hasTask())
+        {
+            continue;
+        }
+
+        std::vector<Core::EDirections> possibilities;
+        for (auto dir :
+             {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
+        {
+            auto newRoom = roomAt(coords, dir);
+            if (!newRoom.has_value())
+            {
+                continue;
+            }
+
+            if ((*newRoom)->isTaskPossible())
+            {
+                possibilities.push_back(dir);
+            }
+        }
+
+        if (possibilities.empty())
+        {
+            newPositions.push_back(coords);
+            continue;
+        }
+
+        std::shuffle(
+            possibilities.begin(), possibilities.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
+
+        auto dir = possibilities.at(0);
+        auto newRoom = roomAt(coords, dir);
+
+        (*newRoom)->setTask((*room)->takeTask());
+        auto newCoords = coords;
+        newCoords.transpose(dir);
+        newPositions.push_back(newCoords);
+    }
+
+    _movingTasks = newPositions;
+}
+
+Map::SRoomCoords CMap::getPlayerPosition() const
 {
     return _playerPosition;
 }

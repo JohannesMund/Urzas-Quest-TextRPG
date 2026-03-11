@@ -13,6 +13,8 @@ public:
 
     virtual bool isSpecialRoom() const override;
 
+    static CMap::RoomFilter dungeonRoomFilter();
+
 protected:
     virtual std::string translatorModuleName() const override;
 

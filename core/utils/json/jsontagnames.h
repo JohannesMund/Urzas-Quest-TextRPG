@@ -122,7 +122,9 @@ namespace Map
 {
 constexpr std::string_view map = "Map";
 constexpr std::string_view playerPosition = "PlayerPosition";
-constexpr std::string_view roomMatrix = "RoomMatrix";
+constexpr std::string_view rooms = "Rooms";
+constexpr std::string_view movingTasks = "MovingTasks";
+
 } // namespace Map
 
 namespace Room
@@ -209,9 +211,11 @@ constexpr std::string_view interactions = "Interactions";
 
 namespace NpcInteractions
 {
+constexpr std::string_view cooldown = "Cooldown";
 constexpr std::string_view flower = "Flower";
 constexpr std::string_view date = "Date";
 constexpr std::string_view battle = "Battle";
+constexpr std::string_view gift = "Gift";
 constexpr std::string_view favouriteFlower = "FavouriteFlower";
 constexpr std::string_view leastFavouriteFlower = "LeastFavouriteFlower";
 

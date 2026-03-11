@@ -16,6 +16,7 @@ bool CBattleInteraction::interactionAvailable() const
 
 void CBattleInteraction::executeInteraction()
 {
+    CNpcInteraction::executeInteraction();
     auto enemy = _npc->enemy();
     CBattle battle(enemy);
     battle.fight();

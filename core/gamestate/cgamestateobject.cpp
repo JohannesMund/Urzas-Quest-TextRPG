@@ -37,3 +37,8 @@ bool CGameStateObject::compareObjectName(const std::string_view& objectName, con
     }
     return name.compare(objectName) == 0;
 }
+
+bool CGameStateObject::compareObjectName(const CGameStateObject* object, const nlohmann::json& json)
+{
+    return compareObjectName(object->getObjectName(), json);
+}

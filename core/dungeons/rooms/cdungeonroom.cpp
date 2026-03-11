@@ -22,6 +22,11 @@ bool CDungeonRoom::isSpecialRoom() const
     return false;
 }
 
+CMap::RoomFilter CDungeonRoom::dungeonRoomFilter()
+{
+    return [](const CRoom* room) { return dynamic_cast<const CDungeonRoom*>(room) != nullptr; };
+}
+
 std::string CDungeonRoom::translatorModuleName() const
 {
     return std::string();

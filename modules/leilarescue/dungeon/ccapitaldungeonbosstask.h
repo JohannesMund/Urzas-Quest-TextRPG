@@ -8,6 +8,8 @@ public:
 
     virtual void execute() override;
 
+    virtual bool isMovable() const override;
+
 protected:
     virtual std::string translatorModuleName() const override;
 

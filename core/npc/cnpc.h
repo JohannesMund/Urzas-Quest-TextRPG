@@ -3,13 +3,13 @@
 #include "cgamestateobject.h"
 #include "cmenu.h"
 #include "cmenuaction.h"
+#include "cnpcinteraction.h"
 #include "core.h"
 #include "ressources.h"
 
 #include <nlohmann/json.hpp>
 
 class CMenu;
-class CNpcInteraction;
 class CEnemy;
 /**
  * @brief class CNpc
@@ -131,8 +131,25 @@ protected:
     virtual void printHeader(const bool bFull = true) const = 0;
     void addInteraction(CNpcInteraction* interaction);
 
+    template <typename T>
+    void loadInteraction(const nlohmann::json& json)
+    {
+        for (auto interactionObject : _interactions)
+        {
+            if (compareObjectName(interactionObject, json))
+            {
+                auto interaction = static_cast<T*>(interactionObject);
+                if (interaction != nullptr)
+                {
+                    interaction->load(json);
+                }
+            }
+        }
+    }
+
 private:
     Core::EGender _gender;
     unsigned int _lastSeen = 0;
     std::vector<CNpcInteraction*> _interactions;
+    void clearInteractions();
 };

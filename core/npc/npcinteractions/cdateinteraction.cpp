@@ -8,6 +8,7 @@ CDateInteraction::CDateInteraction(CNpc* npc) : CNpcInteraction(npc, TagNames::N
 }
 void CDateInteraction::executeInteraction()
 {
+    CNpcInteraction::executeInteraction();
     if (!_npc->isSignificantOther())
     {
         CGameManagement::getPlayerInstance()->setSignificantOther(_npc);
@@ -16,7 +17,8 @@ void CDateInteraction::executeInteraction()
 
 bool CDateInteraction::interactionAvailable() const
 {
-    return _npc->isDatable();
+
+    return CNpcInteraction::interactionAvailable() && _npc->isDatable();
 }
 
 void CDateInteraction::makeNav(CMenu& menu)

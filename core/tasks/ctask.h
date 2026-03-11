@@ -75,6 +75,13 @@ public:
      */
     virtual std::string moduleName() const;
 
+    /**
+     * @brief isMovable
+     * is the task movable?
+     * @remark overwrite to return true, to create a movable task
+     */
+    virtual bool isMovable() const;
+
 protected:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json&) override;

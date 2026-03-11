@@ -5,10 +5,15 @@ set(URZAS_QUEST_SOURCES_CORE
         
     core/cgamemanagement.h core/cgamemanagement.cpp
     core/cgameprogression.h core/cgameprogression.cpp
-    core/cplayer.h core/cplayer.cpp
-    core/cmap.h core/cmap.cpp
+    core/cplayer.h core/cplayer.cpp    
     core/cbattle.h core/cbattle.cpp
         
+    core/map/cmap.h core/map/cmap.cpp
+    core/map/cmapgrid.h core/map/cmapgrid.cpp
+    core/map/sroomcoords.h core/map/sroomcoords.cpp
+    core/map/cmapgriditerator.h 
+    core/map/cmapgridregister.h
+    
     core/gamestate/cgamestateobject.h core/gamestate/cgamestateobject.cpp
     core/gamestate/cgamesettings.h core/gamestate/cgamesettings.cpp    
     core/gamestate/csavefile.h core/gamestate/csavefile.cpp     
@@ -112,7 +117,7 @@ set(URZAS_QUEST_SOURCES_CORE
     core/npc/npcinteractions/cdateinteraction.h core/npc/npcinteractions/cdateinteraction.cpp
     core/npc/npcinteractions/ctalkinteraction.h core/npc/npcinteractions/ctalkinteraction.cpp
     core/npc/npcinteractions/cbattleinteraction.h core/npc/npcinteractions/cbattleinteraction.cpp
-    
+    core/npc/npcinteractions/cgiftinteraction.h core/npc/npcinteractions/cgiftinteraction.cpp
 )
 
 set(CORE_RESSOURCE_DIR
@@ -131,6 +136,7 @@ set(CORE_INCLUDE_DIRS
     /core/items/equipment 
     /core/items/story 
     /core/items/npc    
+    /core/map
     /core/menu
     /core/npc
     /core/npc/npcinteractions

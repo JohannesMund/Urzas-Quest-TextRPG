@@ -1,12 +1,13 @@
 #include "cnpc.h"
+#include "cbattleinteraction.h"
+#include "cdateinteraction.h"
+#include "cflowerinteraction.h"
 #include "cgamemanagement.h"
+#include "cgiftinteraction.h"
 #include "cnpcenemy.h"
-#include "cnpcinteraction.h"
 #include "colorize.h"
 #include "console.h"
 #include "jsontagnames.h"
-#include "npcinteractions/cdateinteraction.h"
-#include "npcinteractions/cflowerinteraction.h"
 #include "randomizer.h"
 
 #include <math.h>
@@ -26,10 +27,7 @@ CNpc::CNpc(const std::string_view& objectName, const Core::EGender gender) :
 
 CNpc::~CNpc()
 {
-    for (auto interaction : _interactions)
-    {
-        delete interaction;
-    }
+    clearInteractions();
 }
 
 void CNpc::interact()
@@ -153,16 +151,21 @@ void CNpc::load(const nlohmann::json& json)
     {
         if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::flower, interaction))
         {
-            auto flowerInteraction = new CFlowerInteraction(this);
-            flowerInteraction->load(interaction);
-            addInteraction(flowerInteraction);
+            loadInteraction<CFlowerInteraction>(interaction);
         }
 
-        if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::flower, interaction))
+        if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::date, interaction))
         {
-            auto dateInteraction = new CDateInteraction(this);
-            dateInteraction->load(interaction);
-            addInteraction(dateInteraction);
+            loadInteraction<CDateInteraction>(interaction);
+        }
+
+        if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::battle, interaction))
+        {
+            loadInteraction<CBattleInteraction>(interaction);
+        }
+        if (CGameStateObject::compareObjectName(TagNames::NpcInteractions::gift, interaction))
+        {
+            loadInteraction<CGiftInteraction>(interaction);
         }
     }
 }
@@ -302,6 +305,14 @@ std::string CNpc::translatorObjectName() const
 void CNpc::addInteraction(CNpcInteraction* interaction)
 {
     _interactions.push_back(interaction);
+}
+
+void CNpc::clearInteractions()
+{
+    for (auto interaction : _interactions)
+    {
+        delete interaction;
+    }
 }
 
 void CNpc::estrange(const int i)

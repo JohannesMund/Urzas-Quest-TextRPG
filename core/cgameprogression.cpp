@@ -306,20 +306,7 @@ bool CGameProgression::canProgress()
 
 void CGameProgression::progressToStage(Module::EGameStage stage)
 {
-    for (const auto& module :
-         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
-    {
-        module.deInitFunction();
-        unregisterModuleHintsByModuleName(module.moduleName);
-    }
-
-    _currentStage = stage;
-
-    for (const auto& module :
-         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
-    {
-        module.initFunction();
-    }
+    setNewStage(stage);
 
     Console::cls(false);
     Console::hr();
@@ -407,6 +394,24 @@ void CGameProgression::progressToStage(Module::EGameStage stage)
     Console::confirmToContinue();
 }
 
+void CGameProgression::setNewStage(Module::EGameStage stage)
+{
+    for (const auto& module :
+         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
+    {
+        module.deInitFunction();
+        unregisterModuleHintsByModuleName(module.moduleName);
+    }
+
+    _currentStage = stage;
+
+    for (const auto& module :
+         _registeredModules | std::views::filter(Module::ModuleInfo::moduleRegisterStageFilter(_currentStage)))
+    {
+        module.initFunction();
+    }
+}
+
 void CGameProgression::reRegisterModule(const std::string_view& name, const Module::EGameStage neededForStage)
 {
     unFinishModule(name);
@@ -477,7 +482,7 @@ void CGameProgression::load(const nlohmann::json& json)
     _currentStage = json.value<Module::EGameStage>(TagNames::Progression::currentStage, Module::EGameStage::eStart);
     for (auto s : gameStageIterator())
     {
-        progressToStage(s);
+        setNewStage(s);
         if (s >= _currentStage)
         {
             break;

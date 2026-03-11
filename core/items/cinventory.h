@@ -82,8 +82,7 @@ public:
     ItemList getItemsByFilter(CItem::ItemFilter filter) const;
     CompressedItemMap getCompressedItemMap(CItem::ItemFilter filter) const;
 
-    template <typename T>
-    std::optional<T*> getFirstItemByFilter(CItem::ItemFilter filter) const
+    std::optional<CItem*> getFirstBasicItemByFilter(CItem::ItemFilter filter) const
     {
         const auto items = getItemsByFilter(filter);
         if (items.size() == 0)
@@ -91,7 +90,19 @@ public:
             return {};
         }
 
-        auto item = static_cast<T*>(items.at(0));
+        return items.at(0);
+    }
+
+    template <typename T>
+    std::optional<T*> getFirstItemByFilter(CItem::ItemFilter filter) const
+    {
+        auto it = getFirstBasicItemByFilter(filter);
+        if (!it.has_value())
+        {
+            return {};
+        }
+
+        auto item = static_cast<T*>(it.value());
         if (item == nullptr)
         {
             return {};

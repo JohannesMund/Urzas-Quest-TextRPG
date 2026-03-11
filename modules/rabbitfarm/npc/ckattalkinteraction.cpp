@@ -7,10 +7,12 @@
 
 CKatTalkInteraction::CKatTalkInteraction(CNpc* npc) : CTalkInteraction(npc, TagNames::RabbitFarm::talkInteraction)
 {
+    _cooldown = 25;
 }
 
 void CKatTalkInteraction::executeInteraction()
 {
+    CNpcInteraction::executeInteraction();
     if (_npc->isSignificantOther())
     {
         Console::printLn(

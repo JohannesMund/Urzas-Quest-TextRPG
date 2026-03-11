@@ -90,7 +90,7 @@ CMap::RoomFilter CFishingVillage::fishingVillageFilter()
 
 nlohmann::json CFishingVillage::save() const
 {
-    nlohmann::json o;
+    nlohmann::json o = CRoom::save();
     o[_fishingFritz.getObjectName()] = _fishingFritz.save();
     o[_fishRestaurant.getObjectName()] = _fishRestaurant.save();
     o[_goFishing.getObjectName()] = _goFishing.save();
@@ -99,6 +99,7 @@ nlohmann::json CFishingVillage::save() const
 
 void CFishingVillage::load(const nlohmann::json& o)
 {
+    CRoom::load(o);
     if (o.contains(_fishingFritz.getObjectName()))
     {
         _fishingFritz.load(o[_fishingFritz.getObjectName()]);

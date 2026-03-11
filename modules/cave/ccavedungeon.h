@@ -13,5 +13,4 @@ public:
 private:
     bool _bossAwake = false;
     bool _bossDefeated = false;
-    unsigned int _moveCycle = 0;
 };

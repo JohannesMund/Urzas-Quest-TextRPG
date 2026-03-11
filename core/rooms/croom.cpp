@@ -57,6 +57,11 @@ bool CRoom::isTaskPossible(const std::string_view&) const
     return _isRandomTaskPossible && !hasTask();
 }
 
+bool CRoom::canBeReplaced() const
+{
+    return false;
+}
+
 bool CRoom::hasTask() const
 {
     return _task != nullptr;
@@ -122,20 +127,20 @@ std::string CRoom::translatorObjectName() const
     return std::string(TagNames::Room::room);
 }
 
-void CRoom::blockPath(const CMap::EDirections dir, const bool block)
+void CRoom::blockPath(const Core::EDirections dir, const bool block)
 {
     switch (dir)
     {
-    case CMap::EDirections::eNorth:
+    case Core::EDirections::eNorth:
         _pathNorth = !block;
         break;
-    case CMap::EDirections::eEast:
+    case Core::EDirections::eEast:
         _pathEast = !block;
         break;
-    case CMap::EDirections::eSouth:
+    case Core::EDirections::eSouth:
         _pathSouth = !block;
         break;
-    case CMap::EDirections::eWest:
+    case Core::EDirections::eWest:
         _pathWest = !block;
         break;
     default:

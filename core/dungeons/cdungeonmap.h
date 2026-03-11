@@ -56,22 +56,15 @@ public:
      * @remark room will be deleted automatically
      * @param room the room to add
      */
-    void addSpecificRoom(CDungeonRoom* room);
+    void addSpecificRoom(CRoom* room);
 
     /**
-     * @brief addTask
+     * @brief addTaskToDungeonRoom
      * Adds a Task to a random room
      * @param task the task to be added
-     * @param isMovingTask if true, the task will move when moveTasks is called
      * @sa moveTasks()
      */
-    void addTask(CTask* task, const bool isMovingTask = false);
-
-    /**
-     * @brief moveTasks
-     * moves all tasks that are added as moving tasks 1 field if possible
-     */
-    void moveTasks();
+    void addTaskToDungeonRoom(CTask* task);
 
     /**
      * @brief isMapRevealed
@@ -110,9 +103,9 @@ protected:
     CDungeonRoom* makeNoRoom() const;
 
 private:
-    CMap::SRoomCoords getRandomRoomCoords(const bool noSpecialRooms = true, const bool notPlayerPosition = true);
+    Map::SRoomCoords getRandomRoomCoords(const bool noSpecialRooms = true, const bool notPlayerPosition = true);
 
-    void makeNextRoom(const CMap::SRoomCoords coords, std::vector<CRoom*>& rooms);
+    void makeNextRoom(const Map::SRoomCoords coords, std::vector<CRoom*>& rooms);
 
     void fillWithNoRooms();
 
@@ -120,6 +113,4 @@ private:
     unsigned int _specialRoomCount = 0;
     bool _isMapRevealed = false;
     bool _isExitAvailable = false;
-
-    std::vector<CMap::SRoomCoords> _movingTasks;
 };
