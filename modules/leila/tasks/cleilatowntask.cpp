@@ -3,8 +3,9 @@
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "ctattooparlor.h"
 #include "ctown.h"
-#include "moduleressources.h"
+#include "leila/moduleressources.h"
 #include "ressources.h"
 #include <format>
 
@@ -38,16 +39,19 @@ void CLeilaTownTask::execute()
     Console::printLn(
         "Your search ends in a very dark and very shady corner of the town, where you wake up in "
         "the gutter with a terrible headache and not the slightest idea, what braught you there. Your Money is "
-        "gone. But you have a new tatoo. It reads:");
+        "gone. But you have a new tattoo. It reads:");
 
-    Console::printLn(Ressources::Game::leilasTatoo(), Console::EAlignment::eCenter);
-    CGameManagement::getPlayerInstance()->addTatoo(Ressources::Game::leilasTatoo());
+    Console::printLn(Ressources::Game::leilastattoo(), Console::EAlignment::eCenter);
+    CGameManagement::getPlayerInstance()->addtattoo(Ressources::Game::leilastattoo());
 
     Console::printLn("Whatever that means.");
     Console::br();
 
     CGameManagement::getPlayerInstance()->loseGold(CGameManagement::getPlayerInstance()->gold());
     CGameManagement::getProgressionInstance()->reportModuleFinished(Leila::moduleName());
+
+    CGameManagement::getInstance()->placeTaskOnField(new CTattooParlor());
+
     _isFinished = true;
 }
 

@@ -1,9 +1,9 @@
 #include "cleilaencounter.h"
 #include "cgamemanagement.h"
-#include "cleilatask.h"
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "leila/tasks/cleilatask.h"
 #include "moduleressources.h"
 
 #include <format>

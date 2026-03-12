@@ -12,7 +12,7 @@
 
 #include <math.h>
 
-std::string CNpc::tatoo() const
+std::string CNpc::tattoo() const
 {
     return std::format("{0}<3{1} {2} {0}<3{1}", CC::fgLightRed(), CC::ccReset(), name());
 }

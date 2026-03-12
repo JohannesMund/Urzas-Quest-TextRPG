@@ -49,7 +49,7 @@ CEnemy* CMobi::enemy() const
     return new CDarkMobi(false);
 }
 
-std::string CMobi::tatoo() const
+std::string CMobi::tattoo() const
 {
     return std::format(
         "{0}Döner {1}m{2}acht {1}s{2}chöner{3}", CC::fgYellow(), CC::fgMagenta(), CC::fgWhite(), CC::ccReset());

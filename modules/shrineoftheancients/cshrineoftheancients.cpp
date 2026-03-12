@@ -223,7 +223,7 @@ void CShrineOfTheAncients::firstVisitLearnedAboutCult()
     }
 
     Console::printLn(std::format("You tell the old man about what you learned, about the chapel you found and about {} "
-                                 "and {}. You skip the part with your new {}tatoo{}.",
+                                 "and {}. You skip the part with your new {}tattoo{}.",
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock(),
                                  CC::fgLightMagenta(),
@@ -261,15 +261,15 @@ void CShrineOfTheAncients::stats() const
         Console::printLn(
             tr("You share your adventures with {}", CGameManagement::getPlayerInstance()->signigicantOther()->name()));
     }
-    if (CGameManagement::getPlayerInstance()->hasTatoo())
+    if (CGameManagement::getPlayerInstance()->hastattoo())
     {
-        Console::printLn(tr("You have w beautiful tatoo reading {}", CGameManagement::getPlayerInstance()->tatoo()));
+        Console::printLn(tr("You have w beautiful tattoo reading {}", CGameManagement::getPlayerInstance()->tattoo()));
 
         if (CGameManagement::getPlayerInstance()->hasSignificantOther() &&
-            CGameManagement::getPlayerInstance()->tatoo() !=
-                CGameManagement::getPlayerInstance()->signigicantOther()->tatoo())
+            CGameManagement::getPlayerInstance()->tattoo() !=
+                CGameManagement::getPlayerInstance()->signigicantOther()->tattoo())
         {
-            Console::printLn(tr("{} probably does not like your tatoo",
+            Console::printLn(tr("{} probably does not like your tattoo",
                                 CGameManagement::getPlayerInstance()->signigicantOther()->name()));
         }
     }

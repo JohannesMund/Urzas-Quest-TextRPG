@@ -66,11 +66,12 @@ void CLeila2Encounter::execute(const std::string_view&)
         "You promise her, that this will not happen again, because this time, you will be the one escorting her to the "
         "capital. You feel brave and heroic and she does not seem to be very impressed.");
     Console::br();
-    Console::printLn(std::format(
-        "Eventually, she sees your tatoo. {}\"What does that mean?\"{}, she asks. \"Probably, that it is a bad idea to "
-        "get black-out drunk in the darkes and shadiest area of the city\", is your bitter reply.",
-        CC::fgLightMagenta(),
-        CC::ccReset()));
+    Console::printLn(
+        std::format("Eventually, she sees your tattoo. {}\"What does that mean?\"{}, she asks. \"Probably, that it is "
+                    "a bad idea to "
+                    "get black-out drunk in the darkes and shadiest area of the city\", is your bitter reply.",
+                    CC::fgLightMagenta(),
+                    CC::ccReset()));
     Console::printLn(std::format("During the kidnapping, she lost her {0}, the {0} gifted to her by her grandmother. "
                                  "Sha cannot return home without this {0}.",
                                  Ressources::Game::leilasRibbon()));

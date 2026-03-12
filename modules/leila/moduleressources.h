@@ -20,4 +20,8 @@ namespace Leila
 {
 std::string moduleName();
 Module::ModuleInfo moduleInfo();
+
+std::string inky();
+std::string inkystattooParlor();
+
 } // namespace Leila

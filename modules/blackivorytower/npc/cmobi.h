@@ -14,7 +14,7 @@ public:
 
     virtual std::string name() const override;
     virtual std::string describe() const override;
-    virtual std::string tatoo() const override;
+    virtual std::string tattoo() const override;
 
     virtual CEnemy* enemy() const override;
 
