@@ -39,8 +39,10 @@ void CLeilaTownTask::execute()
         "Your search ends in a very dark and very shady corner of the town, where you wake up in "
         "the gutter with a terrible headache and not the slightest idea, what braught you there. Your Money is "
         "gone. But you have a new tatoo. It reads:");
-    Console::printLn(std::format("{} {}is geila{}", Ressources::Game::leila(), CC::fgLightMagenta(), CC::ccReset()),
-                     Console::EAlignment::eCenter);
+
+    Console::printLn(Ressources::Game::leilasTatoo(), Console::EAlignment::eCenter);
+    CGameManagement::getPlayerInstance()->addTatoo(Ressources::Game::leilasTatoo());
+
     Console::printLn("Whatever that means.");
     Console::br();
 

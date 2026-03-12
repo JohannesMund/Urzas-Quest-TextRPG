@@ -499,6 +499,30 @@ std::string CPlayer::armorName() const
     return coreTr("Undershirt");
 }
 
+void CPlayer::addTatoo(const std::string_view& tatoo)
+{
+    _tatooHistory.push_back(std::string(tatoo));
+}
+
+std::string_view CPlayer::tatoo() const
+{
+    if (!hasTatoo())
+    {
+        return {};
+    }
+    return _tatooHistory.back();
+}
+
+bool CPlayer::hasTatoo() const
+{
+    return _tatooHistory.size() > 0;
+}
+
+const std::vector<std::string>* CPlayer::tatooHistory() const
+{
+    return &_tatooHistory;
+}
+
 unsigned int CPlayer::xpForNextLevel() const
 {
     return (_level * 75) * _level * 5;

@@ -86,6 +86,7 @@ void CShrineOfTheAncients::visit()
         break;
     case Module::EGameStage::eLearnedAboutCult:
     case Module::EGameStage::eFoundCult:
+    case Module::EGameStage::eRescuedLeila:
     case Module::EGameStage::eFoundUrza:
     case Module::EGameStage::eFinale:
         Console::printLn(
@@ -116,6 +117,7 @@ void CShrineOfTheAncients::firstVisit()
         firstVisitLearnedAboutCult();
         break;
     case Module::EGameStage::eFoundCult:
+    case Module::EGameStage::eRescuedLeila:
     case Module::EGameStage::eFoundUrza:
     case Module::EGameStage::eFinale:
         Console::printLn("Not implemented");
@@ -221,7 +223,7 @@ void CShrineOfTheAncients::firstVisitLearnedAboutCult()
     }
 
     Console::printLn(std::format("You tell the old man about what you learned, about the chapel you found and about {} "
-                                 "and {}. You skip the part with your new {}tattoo{}.",
+                                 "and {}. You skip the part with your new {}tatoo{}.",
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock(),
                                  CC::fgLightMagenta(),
@@ -258,6 +260,18 @@ void CShrineOfTheAncients::stats() const
     {
         Console::printLn(
             tr("You share your adventures with {}", CGameManagement::getPlayerInstance()->signigicantOther()->name()));
+    }
+    if (CGameManagement::getPlayerInstance()->hasTatoo())
+    {
+        Console::printLn(tr("You have w beautiful tatoo reading {}", CGameManagement::getPlayerInstance()->tatoo()));
+
+        if (CGameManagement::getPlayerInstance()->hasSignificantOther() &&
+            CGameManagement::getPlayerInstance()->tatoo() !=
+                CGameManagement::getPlayerInstance()->signigicantOther()->tatoo())
+        {
+            Console::printLn(tr("{} probably does not like your tatoo",
+                                CGameManagement::getPlayerInstance()->signigicantOther()->name()));
+        }
     }
 
     Console::printLnWithSpacer("Progress:", progressString);

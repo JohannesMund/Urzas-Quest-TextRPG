@@ -39,6 +39,8 @@ std::string bgLightMagenta();
 std::string bgLightCyan();
 std::string bgWhite();
 
+std::string modStrikeThrough();
+
 std::string ccReset();
 std::string ccInvert();
 

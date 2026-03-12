@@ -1,12 +1,13 @@
 #include "chideout.h"
-#include "../moduleressources.h"
 #include "cgamemanagement.h"
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
 #include "randomizer.h"
+#include "rebellionhideout/moduleressources.h"
+#include "ressources.h"
 
-CHideout::CHideout() : CTownModule(SandwichShop::sandwichShopName())
+CHideout::CHideout() : CTownModule(SandwichShop::sandwichShopName()), _piefke(Ressources::Game::piefke())
 {
 }
 
@@ -34,14 +35,23 @@ void CHideout::execute()
         CMenu menu(SandwichShop::moduleName());
 
         CMenuAction talkAction = menu.createAction({"Talk to Rebellion", 'T'});
+        CMenuAction piefkeAction = _piefke.npcNav(menu);
+
+        if (CGameManagement::getProgressionInstance()->currentGameStage() > Module::EGameStage::eFoundCult)
+        {
+            menu.addMenuGroup({}, {piefkeAction});
+        }
 
         menu.addMenuGroup({talkAction}, {CMenu::exit()});
-
         input = menu.execute();
 
         if (input == talkAction)
         {
             talkToRebellion();
+        }
+        if (input == piefkeAction)
+        {
+            _piefke.interact();
         }
 
     } while (input != CMenu::exit());

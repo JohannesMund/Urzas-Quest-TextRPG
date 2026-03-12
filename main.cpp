@@ -20,6 +20,7 @@ void printTitle()
     Console::printLn(" \\____/|_|  /___\\__,_|___/  \\___\\_\\__,_|\\___||___/\\___|", Console::EAlignment::eCenter);
     Console::printLn("~or~", Console::EAlignment::eCenter);
     Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
+
     Console::hr();
 }
 

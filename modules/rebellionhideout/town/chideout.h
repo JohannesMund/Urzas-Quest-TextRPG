@@ -1,7 +1,9 @@
 #pragma once
 
+#include "cgamemanagement.h"
 #include "ctownmodule.h"
 #include "rebellionhideout/moduleressources.h"
+#include "rebellionhideout/npc/cguardnpc.h"
 
 #include <string>
 
@@ -18,4 +20,6 @@ protected:
 
 private:
     void talkToRebellion();
+
+    CGuardNpc _piefke;
 };

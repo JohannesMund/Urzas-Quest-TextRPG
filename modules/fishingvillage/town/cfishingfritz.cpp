@@ -142,7 +142,7 @@ void CFishingFritz::checkFish()
     {
         _firstVisit = false;
         Console::printLn(tr("Straight to the point, you ask {} about everything: {}, {}, {}, you even show him you {} "
-                            "tattoo. You just make clear, that you need to know everything, no matter the cost.",
+                            "tatoo. You just make clear, that you need to know everything, no matter the cost.",
                             Ressources::Game::fishingFritz(),
                             Ressources::Game::urza(),
                             Ressources::Game::fiego(),

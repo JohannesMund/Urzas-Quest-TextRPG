@@ -4,19 +4,16 @@
 #include "cnpc.h"
 
 class CEnemy;
-class CMobi : public CNpc
+class CGuardNpc : public CNpc
 {
 public:
-    CMobi();
+    CGuardNpc(const std::string_view& name);
 
     virtual void interact() override;
     virtual void talk();
 
     virtual std::string name() const override;
     virtual std::string describe() const override;
-    virtual std::string tatoo() const override;
-
-    virtual CEnemy* enemy() const override;
 
     nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
@@ -25,7 +22,6 @@ protected:
     virtual std::string translatorModuleName() const override;
 
 private:
-    void giveFanta();
-
     void printHeader(const bool bFull = true) const override;
+    std::string _name;
 };

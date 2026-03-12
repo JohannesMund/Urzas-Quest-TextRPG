@@ -737,6 +737,11 @@ std::string Ressources::Game::leilasRibbon()
     return tr("{}R{}i{}bbon{}", CC::fgMagenta(), CC::fgWhite(), CC::fgLightMagenta(), CC::ccReset());
 }
 
+std::string Ressources::Game::leilasTatoo()
+{
+    return tr("{} {}is geila{}", Ressources::Game::leila(), CC::fgLightMagenta(), CC::ccReset());
+}
+
 std::string Ressources::Game::piefke()
 {
     return tr("{0}Pi{1}ef{0}ke{2}", CC::fgBlue(), CC::fgYellow(), CC::ccReset());

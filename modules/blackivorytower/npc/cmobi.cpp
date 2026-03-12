@@ -9,6 +9,8 @@
 #include "colorize.h"
 #include "core.h"
 
+#include <format>
+
 CMobi::CMobi() : CNpc(TagNames::BlackIvoryTower::mobi, Core::EGender::eFemale)
 {
     addInteraction(new CGiftInteraction(this, CPinkFanta::pinkFantaFilter()));
@@ -34,7 +36,7 @@ void CMobi::talk()
 
 std::string CMobi::name() const
 {
-    return std::string();
+    return Ressources::Game::mobi();
 }
 
 std::string CMobi::describe() const
@@ -47,9 +49,16 @@ CEnemy* CMobi::enemy() const
     return new CDarkMobi(false);
 }
 
+std::string CMobi::tatoo() const
+{
+    return std::format(
+        "{0}Döner {1}m{2}acht {1}s{2}chöner{3}", CC::fgYellow(), CC::fgMagenta(), CC::fgWhite(), CC::ccReset());
+}
+
 nlohmann::json CMobi::save() const
 {
-    return nlohmann::json();
+
+    return CNpc::save();
 }
 
 void CMobi::load(const nlohmann::json& json)

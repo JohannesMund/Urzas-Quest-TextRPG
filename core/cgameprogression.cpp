@@ -362,7 +362,7 @@ void CGameProgression::progressToStage(Module::EGameStage stage)
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
+        Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tatoo remover.",
                                      Ressources::Game::princessLeila()),
                          Console::EAlignment::eCenter);
         break;
