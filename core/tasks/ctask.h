@@ -82,6 +82,8 @@ public:
      */
     virtual bool isMovable() const;
 
+    virtual char mapSymbol() const;
+
 protected:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json&) override;

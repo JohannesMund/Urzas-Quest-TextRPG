@@ -10,6 +10,8 @@ public:
     virtual void execute() override;
     virtual bool isMovable() const override;
 
+    virtual char mapSymbol() const override;
+
 private:
     void tattooParlor();
     void askForRemoval();

@@ -28,6 +28,11 @@ bool CTask::isMovable() const
     return false;
 }
 
+char CTask::mapSymbol() const
+{
+    return '!';
+}
+
 nlohmann::json CTask::save() const
 {
     nlohmann::json j;

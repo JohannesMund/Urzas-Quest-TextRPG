@@ -187,7 +187,7 @@ char CRoom::mapSymbol() const
 {
     if (hasTask())
     {
-        return '!';
+        return _task->mapSymbol();
     }
     return getMapSymbol();
 }

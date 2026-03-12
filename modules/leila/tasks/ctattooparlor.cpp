@@ -44,6 +44,11 @@ bool CTattooParlor::isMovable() const
     return true;
 }
 
+char CTattooParlor::mapSymbol() const
+{
+    return '+';
+}
+
 void CTattooParlor::tattooParlor()
 {
     Console::cls();
