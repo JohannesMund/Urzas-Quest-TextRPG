@@ -56,7 +56,7 @@ Module::ModuleInfo Leila::moduleInfo()
 
 std::string Leila::inky()
 {
-    return tr("{}I{}nky{}", CC::fgWhite(), CC::fgDarkGray(), CC::ccReset());
+    return tr("{}I{}nky{}", CC::fgWhite(), CC::fgBlack(), CC::ccReset());
 }
 
 std::string Leila::inkystattooParlor()

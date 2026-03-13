@@ -145,10 +145,12 @@ void CTattooParlor::coverUp()
     }
 
     Console::printLn(tr("{} takes his time and thoroughly adds your new tattoo to your arm, while carfully using "
-                        "hidden lines and dots to cover the old ones. The new Tatoo now reads:",
+                        "hidden lines and dots to cover the old ones.",
                         Leila::inky()));
     CGameManagement::getPlayerInstance()->addtattoo(newTattoo);
     CGameManagement::getPlayerInstance()->addHp(-1);
+    Console::printLn(tr("The new Tatoo now reads:"));
+    printTattoos();
     Console::printLn(
         tr("The whole procedure hurt and you will probably have some fun with it the next days. Even though this tatoo "
            "has been done with more care and professionality than your first one. You are happy with the result."));
@@ -157,9 +159,11 @@ void CTattooParlor::coverUp()
 void CTattooParlor::printTattoos()
 {
     const auto tattooHistory = *CGameManagement::getPlayerInstance()->tattooHistory();
+    unsigned int counter = 0;
     for (const auto& tattoo : tattooHistory)
     {
-        if (tattoo.compare(tattooHistory.back()) == 0)
+        counter++;
+        if (counter >= tattooHistory.size())
         {
             Console::printLn(tattoo, Console::EAlignment::eCenter);
         }

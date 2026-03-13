@@ -165,7 +165,7 @@ std::string CC::bgWhite()
 
 std::string CC::modStrikeThrough()
 {
-    return "\33[9m";
+    return "\33[009m";
 }
 
 std::string CC::ccReset()
