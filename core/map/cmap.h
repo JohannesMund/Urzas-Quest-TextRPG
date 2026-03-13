@@ -65,6 +65,5 @@ protected:
     virtual std::string translatorModuleName() const override;
 
 private:
-    std::vector<Map::SRoomCoords> _movingTasks;
-    int _moveCycle = 0;
+    void moveTask(CRoom* room);
 };

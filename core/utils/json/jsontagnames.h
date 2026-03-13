@@ -124,7 +124,6 @@ namespace Map
 constexpr std::string_view map = "Map";
 constexpr std::string_view playerPosition = "PlayerPosition";
 constexpr std::string_view rooms = "Rooms";
-constexpr std::string_view movingTasks = "MovingTasks";
 
 } // namespace Map
 
@@ -163,7 +162,7 @@ constexpr std::string_view task = "Task";
 constexpr std::string_view bountyHunt = "BountyHunt";
 constexpr std::string_view finished = "Finished";
 constexpr std::string_view autoExecute = "AutoExecute";
-constexpr std::string_view movable = "Movable";
+constexpr std::string_view movement = "Movement";
 constexpr std::string_view reward = "Reward";
 constexpr std::string_view name = TagNames::Common::name;
 } // namespace Task

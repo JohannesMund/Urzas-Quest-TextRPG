@@ -26,6 +26,14 @@ class CTask : public CGameStateObject
     friend void TaskFactory::saveTaskToSaveGame(const CTask* task, nlohmann::json& json);
 
 public:
+    enum class ETaskMovement
+    {
+        eNone = 0,
+        eSlow = 1,
+        eMedium = 2,
+        eFast = 3,
+    };
+
     /**
      * @brief CTask Constructor
      */
@@ -80,7 +88,7 @@ public:
      * is the task movable?
      * @remark overwrite to return true, to create a movable task
      */
-    virtual bool isMovable() const;
+    virtual ETaskMovement taskMovement() const;
 
     virtual char mapSymbol() const;
 
@@ -90,7 +98,7 @@ protected:
 
     bool _isFinished = false;
     bool _isAutoExecute = true;
-    bool _isMovable = false;
+    ETaskMovement _taskMovement = ETaskMovement::eNone;
 
     virtual std::string translatorObjectName() const override;
     virtual std::string translatorModuleName() const override;

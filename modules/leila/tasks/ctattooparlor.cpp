@@ -10,7 +10,7 @@
 CTattooParlor::CTattooParlor() : CTask(TagNames::Leila::tatooParlor)
 {
     _isAutoExecute = true;
-    _isMovable = true;
+    _taskMovement = ETaskMovement::eMedium;
 }
 
 void CTattooParlor::execute()

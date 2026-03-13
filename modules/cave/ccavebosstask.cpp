@@ -7,6 +7,7 @@
 
 CCaveBossTask::CCaveBossTask(bool* bossDefeated) : CTask(TagNames::Cave::caveBoss), _bossDefeated(bossDefeated)
 {
+    _taskMovement = ETaskMovement::eMedium;
 }
 
 void CCaveBossTask::execute()
@@ -31,9 +32,4 @@ void CCaveBossTask::execute()
         _isFinished = true;
         CGameManagement::getProgressionInstance()->reportModuleFinished(Cave::moduleName());
     }
-}
-
-bool CCaveBossTask::isMovable() const
-{
-    return true;
 }

@@ -351,11 +351,6 @@ void CMap::setTaskToRandomRoom(CTask* task, RoomFilter filter)
     std::shuffle(
         possibleRooms.begin(), possibleRooms.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
     possibleRooms.at(0)->setTask(task);
-
-    if (task->isMovable())
-    {
-        _movingTasks.push_back(_map.coordsOf(possibleRooms.at(0)).value());
-    }
 }
 
 void CMap::replaceRandomRoom(CRoom* newRoom)
@@ -399,14 +394,6 @@ nlohmann::json CMap::save() const
 
     mapState[TagNames::Map::rooms] = rooms;
 
-    for (const auto coord : _movingTasks)
-    {
-        nlohmann::json o;
-        o[TagNames::Common::x] = coord.x;
-        o[TagNames::Common::y] = coord.y;
-        mapState[TagNames::Map::movingTasks].push_back(o);
-    }
-
     return mapState;
 }
 
@@ -430,13 +417,6 @@ void CMap::load(const nlohmann::json& json)
             {
                 _map.push_back(r);
             }
-        }
-    }
-    if (json.contains(TagNames::Map::movingTasks))
-    {
-        for (const auto& coord : json[TagNames::Map::movingTasks])
-        {
-            _movingTasks.push_back({coord[TagNames::Common::x], coord[TagNames::Common::y]});
         }
     }
 }
@@ -473,66 +453,78 @@ std::string CMap::translatorModuleName() const
     return std::string();
 }
 
+void CMap::moveTask(CRoom* room)
+{
+    auto coords = _map.coordsOf(room);
+    if (!coords.has_value())
+    {
+        return;
+    }
+
+    if (!room->hasTask())
+    {
+        return;
+    }
+
+    std::vector<Core::EDirections> possibilities;
+    for (auto dir :
+         {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
+    {
+        auto newRoom = roomAt(*coords, dir);
+        if (!newRoom.has_value())
+        {
+            continue;
+        }
+
+        if ((*newRoom)->isTaskPossible())
+        {
+            possibilities.push_back(dir);
+        }
+    }
+
+    if (possibilities.empty())
+    {
+        return;
+    }
+
+    std::shuffle(
+        possibilities.begin(), possibilities.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
+
+    auto dir = possibilities.at(0);
+    auto newRoom = roomAt(*coords, dir);
+    if (newRoom.has_value())
+    {
+        (*newRoom)->setTask((room)->takeTask());
+    }
+}
+
 void CMap::moveTasks()
 {
-    _moveCycle++;
-    if (_moveCycle > 2)
+    static unsigned int moveCycle = 0;
+    if (moveCycle > 5)
     {
-        _moveCycle = 0;
+        moveCycle = 0;
     }
-    if (_moveCycle != 0)
+    moveCycle++;
+
+    for (auto room : _map | std::views::filter(CRoom::roomWithMovingTasksTaskFilter()))
     {
-        return;
-    }
-
-    auto roomsWithMovingTasks = roomsMatchingFilter(CRoom::roomWithMovingTasksTaskFilter());
-    if (roomsWithMovingTasks.empty())
-    {
-        return;
-    }
-
-    for (auto room : roomsWithMovingTasks)
-    {
-        auto coords = _map.coordsOf(room);
-        if (!coords.has_value())
+        switch (room->taskMovement())
         {
-            continue;
-        }
-
-        if (!room->hasTask())
-        {
-            continue;
-        }
-
-        std::vector<Core::EDirections> possibilities;
-        for (auto dir :
-             {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
-        {
-            auto newRoom = roomAt(*coords, dir);
-            if (!newRoom.has_value())
-            {
-                continue;
-            }
-
-            if ((*newRoom)->isTaskPossible())
-            {
-                possibilities.push_back(dir);
-            }
-        }
-
-        if (possibilities.empty())
-        {
-            continue;
-        }
-
-        std::shuffle(
-            possibilities.begin(), possibilities.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
-
-        auto dir = possibilities.at(0);
-        auto newRoom = roomAt(*coords, dir);
-        if (newRoom.has_value())
-        {
-            (*newRoom)->setTask((room)->takeTask());
+        case CTask::ETaskMovement::eNone:
+        default:
+            break;
+        case CTask::ETaskMovement::eSlow:
+            if (moveCycle == 3)
+                moveTask(room);
+            break;
+        case CTask::ETaskMovement::eMedium:
+            if (moveCycle == 1 || moveCycle == 4)
+                moveTask(room);
+        case CTask::ETaskMovement::eFast:
+            if (moveCycle == 0 || moveCycle == 2 || moveCycle == 4)
+                moveTask(room);
+            break;
         }
     }
 }

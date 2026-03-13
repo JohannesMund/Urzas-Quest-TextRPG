@@ -9,6 +9,7 @@ CCapitalDungeonBossTask::CCapitalDungeonBossTask(bool* bossDefeated) :
     CTask(TagNames::LeilaRescue::dungeonBoss),
     _bossDefeated(bossDefeated)
 {
+    _taskMovement = ETaskMovement::eFast;
 }
 
 void CCapitalDungeonBossTask::execute()
@@ -34,11 +35,6 @@ void CCapitalDungeonBossTask::execute()
         CGameManagement::getPlayerInstance()->removeSupportCompanionsByModuleName(LeilaRescue::moduleName());
         CGameManagement::getProgressionInstance()->reportModuleFinished(LeilaRescue::moduleName());
     }
-}
-
-bool CCapitalDungeonBossTask::isMovable() const
-{
-    return true;
 }
 
 std::string CCapitalDungeonBossTask::translatorModuleName() const

@@ -67,6 +67,15 @@ bool CRoom::hasTask() const
     return _task != nullptr;
 }
 
+CTask::ETaskMovement CRoom::taskMovement() const
+{
+    if (!hasTask())
+    {
+        return CTask::ETaskMovement::eNone;
+    }
+    return _task->taskMovement();
+}
+
 bool CRoom::isSpecialRoom() const
 {
     return false;
@@ -79,7 +88,8 @@ bool CRoom::isEmptyRoom() const
 
 CMap::RoomFilter CRoom::roomWithMovingTasksTaskFilter()
 {
-    return [](const CRoom* room) { return room->hasTask() && room->_task->isMovable(); };
+    return [](const CRoom* room)
+    { return room->hasTask() && room->_task->taskMovement() != CTask::ETaskMovement::eNone; };
 }
 
 void CRoom::executeTask()
