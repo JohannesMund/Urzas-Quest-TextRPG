@@ -239,6 +239,26 @@ void CShrineOfTheAncients::stats() const
     Console::printLn("You take some time to think about yourself:");
     Console::br();
 
+    if (CGameManagement::getPlayerInstance()->hasSignificantOther())
+    {
+        Console::printLnWithSpacer(tr("You share your adventures with:"),
+                                   CGameManagement::getPlayerInstance()->signigicantOther()->name());
+    }
+    if (CGameManagement::getPlayerInstance()->hastattoo())
+    {
+        Console::printLnWithSpacer(tr("You have a beautiful tattoo reading:"),
+                                   std::string(CGameManagement::getPlayerInstance()->tattoo()));
+
+        if (CGameManagement::getPlayerInstance()->hasSignificantOther() &&
+            CGameManagement::getPlayerInstance()->tattoo() !=
+                CGameManagement::getPlayerInstance()->signigicantOther()->tattoo())
+        {
+            Console::printLn(tr("{} probably does not like your tattoo",
+                                CGameManagement::getPlayerInstance()->signigicantOther()->name()));
+        }
+    }
+    Console::br();
+
     auto progress = CGameManagement::getProgressionInstance()->progress();
     std::string progressString = "[";
 
@@ -255,24 +275,6 @@ void CShrineOfTheAncients::stats() const
     }
 
     progressString.append("]");
-
-    if (CGameManagement::getPlayerInstance()->hasSignificantOther())
-    {
-        Console::printLn(
-            tr("You share your adventures with {}", CGameManagement::getPlayerInstance()->signigicantOther()->name()));
-    }
-    if (CGameManagement::getPlayerInstance()->hastattoo())
-    {
-        Console::printLn(tr("You have w beautiful tattoo reading {}", CGameManagement::getPlayerInstance()->tattoo()));
-
-        if (CGameManagement::getPlayerInstance()->hasSignificantOther() &&
-            CGameManagement::getPlayerInstance()->tattoo() !=
-                CGameManagement::getPlayerInstance()->signigicantOther()->tattoo())
-        {
-            Console::printLn(tr("{} probably does not like your tattoo",
-                                CGameManagement::getPlayerInstance()->signigicantOther()->name()));
-        }
-    }
 
     Console::printLnWithSpacer("Progress:", progressString);
     Console::printLnWithSpacer("Body count:",
