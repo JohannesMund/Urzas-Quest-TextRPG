@@ -215,7 +215,6 @@ void CGameManagement::printHUD()
 void CGameManagement::executeTurn()
 {
     _progression.increaseTurns();
-    _map.moveTasks();
 
     Console::cls();
 

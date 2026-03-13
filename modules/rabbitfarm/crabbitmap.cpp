@@ -11,7 +11,7 @@
 
 CRabbitMap::CRabbitMap()
 {
-    for (int i = min(); i <= max(); i++)
+    for (auto i = min(); i <= max(); i++)
     {
         _rabbits.emplace(i, nullptr);
     }
@@ -31,7 +31,7 @@ CRabbitMap::~CRabbitMap()
 void CRabbitMap::print()
 {
     std::string line;
-    for (int i = min(); i <= max(); i++)
+    for (auto i = min(); i <= max(); i++)
     {
         auto r = _rabbits.at(i);
 
@@ -67,6 +67,23 @@ CRabbit* CRabbitMap::get(const int index) const
     return nullptr;
 }
 
+CRabbit* CRabbitMap::getRandom()
+{
+    std::vector<CRabbit*> rabbits;
+    for (const auto& r : _rabbits | std::views::filter([](const auto p) { return p.second != nullptr; }))
+    {
+        rabbits.push_back(r.second);
+    }
+
+    if (rabbits.empty())
+    {
+        return nullptr;
+    }
+
+    Randomizer::init();
+    return Randomizer::getRandomEntry(rabbits);
+}
+
 void CRabbitMap::add(CRabbit* rabbit)
 {
     auto index = rabbit->uniqueId();
@@ -87,31 +104,32 @@ std::optional<int> CRabbitMap::getRandomFreeIndex() const
     {
         return {};
     }
+    Randomizer::init();
     return Randomizer::getRandomEntry(freeIds);
 }
 
-int CRabbitMap::count()
+size_t CRabbitMap::count()
 {
     return std::count_if(_rabbits.begin(), _rabbits.end(), [](const auto r) { return r.second != nullptr; });
 }
 
-int CRabbitMap::countLiving()
+size_t CRabbitMap::countLiving()
 {
     return std::count_if(
         _rabbits.begin(), _rabbits.end(), [](const auto r) { return r.second != nullptr && !r.second->isRoasted(); });
 }
 
-int CRabbitMap::min()
+size_t CRabbitMap::min()
 {
-    return 1;
+    return 1U;
 }
 
-int CRabbitMap::max()
+size_t CRabbitMap::max()
 {
-    return 151;
+    return 151U;
 }
 
-bool CRabbitMap::inRange(const int i)
+bool CRabbitMap::inRange(const size_t i)
 {
     return i >= min() && i <= 151;
 }

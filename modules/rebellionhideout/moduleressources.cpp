@@ -64,7 +64,7 @@ Module::ModuleInfo RebellionHideout::moduleInfo()
 
 std::string SandwichShop::moduleName()
 {
-    return tr("SandwichShop");
+    return "SandwichShop";
 }
 
 std::string SandwichShop::rebellionHideoutName()

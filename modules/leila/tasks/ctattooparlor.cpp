@@ -54,7 +54,7 @@ void CTattooParlor::tattooParlor()
     Console::cls();
     Console::printLn(tr(
         "Inside the {}tent{} everything looks like you would expect from a tattoo parlor, even though the only other "
-        "tattoo parlor you have seen, well you have not really seen. You memories are blurry,  at best. ",
+        "tattoo parlor you have seen, well you have not really seen. You memories are blurry, at best.",
         CC::fgBlack(),
         CC::ccReset()));
     Console::printLn(tr("On the other hand, the looks of {} surprise you. You expected a fully tattooed, grim dark "

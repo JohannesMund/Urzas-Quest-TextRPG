@@ -8,6 +8,7 @@
 
 class CKatNottingH;
 class CRabbitMap;
+class CRabbit;
 class CRabbitHatch : public CTownModule
 {
 public:
@@ -31,11 +32,12 @@ private:
     void watchOneRabbit();
 
     void registerEncounter();
-    void makeRabbitOfTheDay();
+    void makeRabbitOfTheMonth();
 
     CKatNottingH* _kat;
     CRabbitMap* _rabbits;
 
-    std::string _rabbitOfTheDay;
+    CRabbit* _rabbitOfTheMonth = nullptr;
+    int _rabbitOfTheMonthDate;
     bool _clearingEncounterRegistered = false;
 };

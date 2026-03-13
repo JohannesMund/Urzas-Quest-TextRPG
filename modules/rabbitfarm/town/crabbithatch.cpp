@@ -21,7 +21,7 @@ CRabbitHatch::CRabbitHatch(CKatNottingH* kat, CRabbitMap* rabbits) :
 
 void CRabbitHatch::execute()
 {
-    makeRabbitOfTheDay();
+    makeRabbitOfTheMonth();
     CGameManagement::getInventoryInstance()->addItem(new CRabbit(Randomizer::getRandom(149) + 1));
     CMenuAction input;
     do
@@ -29,8 +29,18 @@ void CRabbitHatch::execute()
         Console::cls();
         Console::printLn(tr("{}s famous rabbit farm", RabbitFarm::katNottingH()), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(tr("Rabbit of the day:"), Console::EAlignment::eCenter);
-        Console::printLn(std::format("~ {} ~", _rabbitOfTheDay), Console::EAlignment::eCenter);
+        Console::printLn(tr("Rabbit of the month:"), Console::EAlignment::eCenter);
+
+        if (_rabbitOfTheMonth != nullptr)
+        {
+            Console::printLn(std::format("~ {} ~", _rabbitOfTheMonth->name()), Console::EAlignment::eCenter);
+        }
+        else
+        {
+            Console::printLn(tr("~ No rabbits  ~"), Console::EAlignment::eCenter);
+            Console::printLn(tr("~ We are as disappointed, as you are ~"), Console::EAlignment::eCenter);
+        }
+
         Console::br();
 
         CMenu::ActionList katList;
@@ -273,7 +283,18 @@ void CRabbitHatch::registerEncounter()
     }
 }
 
-void CRabbitHatch::makeRabbitOfTheDay()
+void CRabbitHatch::makeRabbitOfTheMonth()
 {
-    _rabbitOfTheDay = RabbitFarm::makeRabbitName();
+    const bool timeForANewRabbit = (_rabbitOfTheMonthDate < (CGameManagement::now() - 30));
+
+    if (!timeForANewRabbit && _rabbitOfTheMonth != nullptr)
+    {
+        return;
+    }
+
+    if (_rabbits->count() == 0)
+    {
+        return;
+    }
+    _rabbitOfTheMonth = _rabbits->getRandom();
 }

@@ -109,6 +109,11 @@ std::string RabbitFarm::makeRabbitName()
     return s;
 }
 
+std::string RabbitFarm::anyRabbit()
+{
+    return tr("Any Rabbit");
+}
+
 std::string RabbitFarm::moduleName()
 {
     return std::string(TagNames::RabbitFarm::rabbitFarm);
