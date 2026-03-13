@@ -61,3 +61,8 @@ Menu::MenuAction CLeilaTownTask::taskNav() const
         CC::unColorizeString(std::format("Ask about {} and {}", Ressources::Game::fiego(), Ressources::Game::brock()));
     return CMenu::tr(Leila::moduleName(), {navText});
 }
+
+std::string CLeilaTownTask::translatorModuleName() const
+{
+    return Leila::moduleName();
+}

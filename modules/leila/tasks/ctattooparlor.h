@@ -8,9 +8,11 @@ public:
     CTattooParlor();
 
     virtual void execute() override;
-    virtual bool isMovable() const override;
 
     virtual char mapSymbol() const override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 
 private:
     void tattooParlor();

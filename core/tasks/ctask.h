@@ -90,6 +90,7 @@ protected:
 
     bool _isFinished = false;
     bool _isAutoExecute = true;
+    bool _isMovable = false;
 
     virtual std::string translatorObjectName() const override;
     virtual std::string translatorModuleName() const override;

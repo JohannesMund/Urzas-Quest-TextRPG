@@ -7,9 +7,10 @@
 #include "console.h"
 #include "leila/moduleressources.h"
 
-CTattooParlor::CTattooParlor() : CTask(Leila::moduleName())
+CTattooParlor::CTattooParlor() : CTask(TagNames::Leila::tatooParlor)
 {
     _isAutoExecute = true;
+    _isMovable = true;
 }
 
 void CTattooParlor::execute()
@@ -39,14 +40,14 @@ void CTattooParlor::execute()
     }
 }
 
-bool CTattooParlor::isMovable() const
-{
-    return true;
-}
-
 char CTattooParlor::mapSymbol() const
 {
     return '+';
+}
+
+std::string CTattooParlor::translatorModuleName() const
+{
+    return Leila::moduleName();
 }
 
 void CTattooParlor::tattooParlor()

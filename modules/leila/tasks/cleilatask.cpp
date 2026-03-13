@@ -65,3 +65,8 @@ void CLeilaTask::execute()
     CGameManagement::getInstance()->placeTaskOnTown(new CLeilaTownTask);
     _isFinished = true;
 }
+
+std::string CLeilaTask::translatorModuleName() const
+{
+    return Leila::moduleName();
+}

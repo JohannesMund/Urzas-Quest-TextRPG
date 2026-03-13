@@ -12,6 +12,7 @@ namespace Leila
 constexpr std::string_view leila = "LeilaTask";
 constexpr std::string_view leilaEncounter = "LeilaEncounter";
 constexpr std::string_view leilaTown = "LeilaTownTask";
+constexpr std::string_view tatooParlor = "TatooParlor";
 
 } // namespace Leila
 } // namespace TagNames

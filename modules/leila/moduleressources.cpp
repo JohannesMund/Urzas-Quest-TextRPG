@@ -6,6 +6,7 @@
 #include "ressources.h"
 #include "tasks/cleilatask.h"
 #include "tasks/cleilatowntask.h"
+#include "tasks/ctattooparlor.h"
 
 #include <format>
 
@@ -29,6 +30,10 @@ Module::ModuleInfo Leila::moduleInfo()
         if (TagNames::Leila::leilaTown.compare(objectName) == 0)
         {
             return new CLeilaTownTask();
+        }
+        if (TagNames::Leila::tatooParlor.compare(objectName) == 0)
+        {
+            return new CTattooParlor();
         }
         return nullptr;
     };

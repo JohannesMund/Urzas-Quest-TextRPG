@@ -77,6 +77,11 @@ bool CRoom::isEmptyRoom() const
     return false;
 }
 
+CMap::RoomFilter CRoom::roomWithMovingTasksTaskFilter()
+{
+    return [](const CRoom* room) { return room->hasTask() && room->_task->isMovable(); };
+}
+
 void CRoom::executeTask()
 {
     _task->execute();

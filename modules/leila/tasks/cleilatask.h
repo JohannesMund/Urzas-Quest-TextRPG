@@ -8,4 +8,7 @@ public:
     CLeilaTask();
 
     virtual void execute() override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };

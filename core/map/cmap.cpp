@@ -1,3 +1,4 @@
+
 #include "cmap.h"
 #include "cave/ccave.h"
 #include "ccapital.h"
@@ -478,29 +479,27 @@ void CMap::moveTasks()
     if (_moveCycle > 2)
     {
         _moveCycle = 0;
-        return;
     }
     if (_moveCycle != 0)
     {
         return;
     }
 
-    if (_movingTasks.empty())
+    auto roomsWithMovingTasks = roomsMatchingFilter(CRoom::roomWithMovingTasksTaskFilter());
+    if (roomsWithMovingTasks.empty())
     {
         return;
     }
 
-    std::vector<Map::SRoomCoords> newPositions;
-    for (auto coords : _movingTasks)
+    for (auto room : roomsWithMovingTasks)
     {
-        auto room = roomAt(coords);
-
-        if (!room.has_value())
+        auto coords = _map.coordsOf(room);
+        if (!coords.has_value())
         {
             continue;
         }
 
-        if (!(*room)->hasTask())
+        if (!room->hasTask())
         {
             continue;
         }
@@ -509,7 +508,7 @@ void CMap::moveTasks()
         for (auto dir :
              {Core::EDirections::eEast, Core::EDirections::eSouth, Core::EDirections::eWest, Core::EDirections::eNorth})
         {
-            auto newRoom = roomAt(coords, dir);
+            auto newRoom = roomAt(*coords, dir);
             if (!newRoom.has_value())
             {
                 continue;
@@ -523,7 +522,6 @@ void CMap::moveTasks()
 
         if (possibilities.empty())
         {
-            newPositions.push_back(coords);
             continue;
         }
 
@@ -531,15 +529,12 @@ void CMap::moveTasks()
             possibilities.begin(), possibilities.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
 
         auto dir = possibilities.at(0);
-        auto newRoom = roomAt(coords, dir);
-
-        (*newRoom)->setTask((*room)->takeTask());
-        auto newCoords = coords;
-        newCoords.transpose(dir);
-        newPositions.push_back(newCoords);
+        auto newRoom = roomAt(*coords, dir);
+        if (newRoom.has_value())
+        {
+            (*newRoom)->setTask((room)->takeTask());
+        }
     }
-
-    _movingTasks = newPositions;
 }
 
 Map::SRoomCoords CMap::getPlayerPosition() const

@@ -402,6 +402,12 @@ nlohmann::json CPlayer::save() const
     }
     json[TagNames::Player::supporters] = supporters;
 
+    json[TagNames::Player::tattoos] = nlohmann::json::array();
+    for (auto t : _tattooHistory)
+    {
+        json[TagNames::Player::tattoos].push_back(t);
+    }
+
     return json;
 }
 
@@ -414,7 +420,7 @@ void CPlayer::load(const nlohmann::json& json)
     _xp = json.value<unsigned int>(TagNames::Player::xp, 0);
     _initiative = json.value<unsigned int>(TagNames::Player::initiative, 1);
 
-    if (json.contains("supporters") and json["supporters"].is_array())
+    if (json.contains(TagNames::Player::supporters) && json[TagNames::Player::supporters].is_array())
     {
         for (auto s : json[TagNames::Player::supporters])
         {
@@ -423,6 +429,14 @@ void CPlayer::load(const nlohmann::json& json)
             {
                 _supporters.push_back(c);
             }
+        }
+    }
+
+    if (json.contains(TagNames::Player::tattoos) && json[TagNames::Player::tattoos].is_array())
+    {
+        for (auto s : json[TagNames::Player::tattoos])
+        {
+            _tattooHistory.push_back(s);
         }
     }
 }

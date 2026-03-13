@@ -102,6 +102,7 @@ constexpr std::string_view gold = TagNames::Common::gold;
 constexpr std::string_view xp = "Pp";
 constexpr std::string_view initiative = "Initiative";
 constexpr std::string_view supporters = "Supporters";
+constexpr std::string_view tattoos = "TatooHistory";
 constexpr std::string_view name = TagNames::Common::name;
 constexpr std::string_view level = TagNames::Common::level;
 } // namespace Player
@@ -162,6 +163,7 @@ constexpr std::string_view task = "Task";
 constexpr std::string_view bountyHunt = "BountyHunt";
 constexpr std::string_view finished = "Finished";
 constexpr std::string_view autoExecute = "AutoExecute";
+constexpr std::string_view movable = "Movable";
 constexpr std::string_view reward = "Reward";
 constexpr std::string_view name = TagNames::Common::name;
 } // namespace Task

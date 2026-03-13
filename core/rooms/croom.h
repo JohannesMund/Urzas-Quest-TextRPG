@@ -44,6 +44,8 @@ public:
     virtual bool isSpecialRoom() const;
     virtual bool isEmptyRoom() const;
 
+    static CMap::RoomFilter roomWithMovingTasksTaskFilter();
+
 protected:
     virtual char getMapSymbol() const = 0;
 
