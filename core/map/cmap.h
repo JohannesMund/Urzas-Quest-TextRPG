@@ -17,8 +17,6 @@ class CTask;
 class CMap : public CGameStateObject
 {
 public:
-    static const std::map<Core::EDirections, std::string> _dirMap;
-
     using RoomFilter = std::function<bool(const CRoom* room)>;
 
     static Core::EDirections string2Direction(const std::string_view s);
@@ -32,6 +30,11 @@ public:
     void setStartingPosition(const Map::SRoomCoords& coords);
     void movePlayer(const Core::EDirections dir);
     Map::SRoomCoords getPlayerPosition() const;
+
+    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
+    void replaceRandomRoom(CRoom* newRoom);
+    void moveTasks();
+
     bool coordsValid(const Map::SRoomCoords& coords) const;
     bool navAvailable(const Core::EDirections dir) const;
     bool navAvailable(const Map::SRoomCoords& coords, const Core::EDirections dir) const;
@@ -41,16 +44,11 @@ public:
     std::string mapSymbol(const Map::SRoomCoords& coords);
 
     std::vector<CRoom*> roomsMatchingFilter(RoomFilter filter) const;
+
     CRoom* currentRoom() const;
-
-    void setTaskToRandomRoom(CTask* task, RoomFilter filter = [](const CRoom*) { return true; });
-
-    void replaceRandomRoom(CRoom* newRoom);
 
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
-
-    void moveTasks();
 
 protected:
     CMapGrid<CRoom*> _map;
@@ -59,6 +57,7 @@ protected:
     std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords, const Core::EDirections dir) const;
 
     Map::SRoomCoords _playerPosition;
+    static const std::map<Core::EDirections, std::string> _dirMap;
 
     static const std::string saveObjectName;
     virtual std::string translatorObjectName() const override;
