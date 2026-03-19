@@ -135,8 +135,16 @@ public:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
 
+    /**
+     * @brief converts direction to string and vice versa
+     */
+    static Core::EDirections string2Direction(const std::string_view s);
+    static std::string_view direction2String(const Core::EDirections d);
+
 protected:
     CMapGrid<CRoom*> _map;
+    static const std::map<Core::EDirections, std::string> _dirMap;
+
     std::optional<CRoom*> roomAt(const Core::EDirections dir) const;
     std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords) const;
     std::optional<CRoom*> roomAt(const Map::SRoomCoords& coords, const Core::EDirections dir) const;
