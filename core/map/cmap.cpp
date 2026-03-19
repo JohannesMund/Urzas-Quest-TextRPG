@@ -22,12 +22,6 @@
 #include <random>
 #include <ranges>
 
-const std::map<Core::EDirections, std::string> CMap::_dirMap = {{Core::EDirections::eNorth, "North"},
-                                                                {Core::EDirections::eSouth, "South"},
-                                                                {Core::EDirections::eWest, "West"},
-                                                                {Core::EDirections::eEast, "East"},
-                                                                {Core::EDirections::eNone, "None"}};
-
 CMap::CMap(const unsigned int width, const unsigned int height) : CGameStateObject(TagNames::Map::map)
 {
     _map.resize({width, height});
@@ -74,22 +68,6 @@ void CMap::init(std::vector<CRoom*>& rooms)
     }
 
     _playerPosition = _map.coordsOf(startingRoom).value();
-}
-
-Core::EDirections CMap::string2Direction(const std::string_view s)
-{
-    auto it = std::find_if(_dirMap.begin(), _dirMap.end(), [&s](const auto p) { return p.second == s; });
-    if (it != _dirMap.end())
-    {
-        return it->first;
-    }
-
-    return Core::EDirections::eNone;
-}
-
-std::string_view CMap::direction2String(const Core::EDirections d)
-{
-    return _dirMap.at(d);
 }
 
 void CMap::setStartingPosition(const Map::SRoomCoords& coords)

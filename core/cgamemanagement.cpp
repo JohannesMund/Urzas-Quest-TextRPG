@@ -227,25 +227,25 @@ void CGameManagement::executeTurn()
         CMenu menu;
         CMenu::ActionList navs;
 
-        auto northAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eNorth))});
+        auto northAction = menu.createAction({std::string(Core::direction2String(Core::EDirections::eNorth))});
         if (_map.navAvailable(Core::EDirections::eNorth))
         {
             navs.push_back(northAction);
         }
 
-        auto eastAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eEast))});
+        auto eastAction = menu.createAction({std::string(Core::direction2String(Core::EDirections::eEast))});
         if (_map.navAvailable(Core::EDirections::eEast))
         {
             navs.push_back(eastAction);
         }
 
-        auto southAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eSouth))});
+        auto southAction = menu.createAction({std::string(Core::direction2String(Core::EDirections::eSouth))});
         if (_map.navAvailable(Core::EDirections::eSouth))
         {
             navs.push_back(southAction);
         }
 
-        auto westAction = menu.createAction({std::string(CMap::direction2String(Core::EDirections::eWest))});
+        auto westAction = menu.createAction({std::string(Core::direction2String(Core::EDirections::eWest))});
         if (_map.navAvailable(Core::EDirections::eWest))
         {
             navs.push_back(westAction);

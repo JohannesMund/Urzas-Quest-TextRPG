@@ -86,7 +86,7 @@ public:
 
     /**
      * @brief resize
-     * gives the container size
+     * returns the container size
      * does not create elements at all
      * @remark everything is cleared
      * @remark needed for push_back
