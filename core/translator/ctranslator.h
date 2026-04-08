@@ -6,6 +6,7 @@
 #include <map>
 #include <nlohmann/json.hpp>
 #include <string>
+#include <format>
 
 /**
  * @brief The CTranslator class provides translation of strings throughout the whole program
