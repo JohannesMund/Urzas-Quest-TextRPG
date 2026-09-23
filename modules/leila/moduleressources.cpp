@@ -1,13 +1,23 @@
 #include "moduleressources.h"
 #include "cgamemanagement.h"
 #include "cleilaencounter.h"
-#include "cleilatask.h"
-#include "cleilatowntask.h"
 #include "colorize.h"
 #include "ctask.h"
 #include "ressources.h"
+#include "tasks/cleilatask.h"
+#include "tasks/cleilatowntask.h"
+#include "tasks/ctattooparlor.h"
 
 #include <format>
+
+namespace
+{
+template <typename... Args>
+std::string tr(const std::string_view& textId, Args&&... formatArgs)
+{
+    return CTranslator::tr(Leila::moduleName(), TagNames::Translator::ressources, textId, formatArgs...);
+}
+} // namespace
 
 Module::ModuleInfo Leila::moduleInfo()
 {
@@ -20,6 +30,10 @@ Module::ModuleInfo Leila::moduleInfo()
         if (TagNames::Leila::leilaTown.compare(objectName) == 0)
         {
             return new CLeilaTownTask();
+        }
+        if (TagNames::Leila::tatooParlor.compare(objectName) == 0)
+        {
+            return new CTattooParlor();
         }
         return nullptr;
     };
@@ -38,6 +52,16 @@ Module::ModuleInfo Leila::moduleInfo()
     moduleInfo.taskFactory = taskFactory;
 
     return moduleInfo;
+}
+
+std::string Leila::inky()
+{
+    return tr("{}I{}nky{}", CC::fgWhite(), CC::fgBlack(), CC::ccReset());
+}
+
+std::string Leila::inkystattooParlor()
+{
+    return tr("{}s Wandering tattoo parlor", inky());
 }
 
 std::string Leila::moduleName()

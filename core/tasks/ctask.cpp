@@ -23,23 +23,30 @@ std::string CTask::moduleName() const
     return {};
 }
 
-bool CTask::isMovable() const
+CTask::ETaskMovement CTask::taskMovement() const
 {
-    return false;
+    return _taskMovement;
+}
+
+char CTask::mapSymbol() const
+{
+    return '!';
 }
 
 nlohmann::json CTask::save() const
 {
-    nlohmann::json j;
-    j[TagNames::Task::finished] = _isFinished;
-    j[TagNames::Task::autoExecute] = _isAutoExecute;
-    return j;
+    nlohmann::json json;
+    json[TagNames::Task::finished] = _isFinished;
+    json[TagNames::Task::autoExecute] = _isAutoExecute;
+    json[TagNames::Task::movement] = _taskMovement;
+    return json;
 }
 
 void CTask::load(const nlohmann::json& json)
 {
     _isFinished = json.value<bool>(TagNames::Task::finished, false);
     _isAutoExecute = json.value<bool>(TagNames::Task::autoExecute, false);
+    _taskMovement = json.value<ETaskMovement>(TagNames::Task::movement, ETaskMovement::eNone);
 }
 
 std::string CTask::translatorObjectName() const

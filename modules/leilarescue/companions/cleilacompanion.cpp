@@ -21,7 +21,7 @@ std::string CLeilaCompanion::name() const
 
 void CLeilaCompanion::preBattle(CEnemy*)
 {
-    Console::printLn(std::format(
+    Console::printLn(tr(
         "Like Lois and Clark, like Bonny and Clyde, like Romeo and Juliet. You and {} fight together, side by side.",
         name()));
 }
@@ -30,12 +30,12 @@ void CLeilaCompanion::battleAction(CEnemy* enemy, bool&)
 {
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} attacks the enemy and deals 1 damage.", name()));
+        Console::printLn(tr("{} attacks the enemy and deals 1 damage.", name()));
         enemy->dealDamage(1);
     }
     else
     {
-        Console::printLn(std::format("{} holds his weapon and looks dangerous.", name()));
+        Console::printLn(tr("{} holds his weapon and looks dangerous.", name()));
     }
 }
 
@@ -43,22 +43,21 @@ void CLeilaCompanion::postBattle(CEnemy*)
 {
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} cares a little bit for your wouds", name()));
+        Console::printLn(tr("{} cares a little bit for your wouds", name()));
         CGameManagement::getPlayerInstance()->addHp(1);
     }
     else
     {
-        Console::printLn(std::format("{} looks victorious.", name()));
+        Console::printLn(tr("{} looks victorious.", name()));
     }
 }
 
 void CLeilaCompanion::joinText() const
 {
-    Console::printLn(std::format("Your dreams come true, {} decides to join forces with you!", name()));
+    Console::printLn(tr("Your dreams come true, {} decides to join forces with you!", name()));
 }
 
 void CLeilaCompanion::leaveText() const
 {
-    Console::printLn(
-        std::format("After some great time together, {} leaves your side to return to the Rebellion", name()));
+    Console::printLn(tr("After some great time together, {} leaves your side to return to the Rebellion", name()));
 }

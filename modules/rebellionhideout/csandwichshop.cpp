@@ -49,9 +49,10 @@ void CSandwichShop::execute()
         auto makeAction = menu.createAction({"Make a sandwich", 'M'});
         auto deliverAction = menu.createAction({"Deliver ingredients", 'D'});
         auto observeAction = menu.createAction({"Observe, who buys your sandwiches", 'O'});
-        auto rebellionAction = menu.createAction({"Talk to the rebellion", 'T'});
         auto revolutionaryAction = menu.createAction({"View revolutionary thoughts", 'V'});
         auto eatAction = menu.createShopAction({"Eat Sandwich of the Day"}, _sandwiches.at(0)->buyValue());
+
+        auto rebellionAction = _hideout.townModuleNav(menu);
 
         CMenu::ActionList actions;
 
@@ -110,7 +111,7 @@ void CSandwichShop::execute()
         }
         if (input == rebellionAction)
         {
-            talkToRebellion();
+            _hideout.execute();
         }
         if (input == revolutionaryAction)
         {
@@ -162,12 +163,14 @@ nlohmann::json CSandwichShop::save() const
         CSaveFile::addGameObject(sandwiches, s);
     }
     o[TagNames::RebellionHideout::itemGeneratorsRegistered] = _itemGeneratorsRegistered;
+    o[TagNames::RebellionHideout::rebellionHideout] = _hideout.save();
 
     return o;
 }
 
 void CSandwichShop::load(const nlohmann::json& json)
 {
+    CRoom::load(json);
     _turns = json.value<unsigned long>(TagNames::RebellionHideout::turns, 0);
     _goldAvailable = json.value<int>(TagNames::RebellionHideout::gold, 0);
     _playerOwnsShop = json.value<bool>(TagNames::RebellionHideout::playerOwnsShot, 0);
@@ -189,36 +192,36 @@ void CSandwichShop::load(const nlohmann::json& json)
         registerItemGenerators();
     }
 
-    CRoom::load(json);
+    _hideout.load(json[TagNames::RebellionHideout::rebellionHideout]);
 }
 
 void CSandwichShop::printHeader()
 {
     Console::cls();
     Console::printLn(std::format("{}", SandwichShop::sandwichShopName()), Console::EAlignment::eCenter);
-    Console::printLn("Ye olde Sandwich Shoppe, est. 489 ad. dragonis", Console::EAlignment::eCenter);
+    Console::printLn(tr("Ye olde Sandwich Shoppe, est. 489 ad. dragonis"), Console::EAlignment::eCenter);
     Console::br();
 
     if (!_playerOwnsShop)
     {
         Console::printLn(
-            std::format("The Sandwich shop is run by {}, an old man with a dream, who once started this shop "
-                        "to make the perfect sandwich, but after years and years of making and selling "
-                        "sandwiches lost all of his spirits. His sandwiches are still great though, but he reduced the "
-                        "menu to one single sandwich of the day, written on the sign next to the counter",
-                        SandwichShop::mrSoop()));
+            tr("The Sandwich shop is run by {}, an old man with a dream, who once started this shop "
+               "to make the perfect sandwich, but after years and years of making and selling "
+               "sandwiches lost all of his spirits. His sandwiches are still great though, but he reduced the "
+               "menu to one single sandwich of the day, written on the sign next to the counter",
+               SandwichShop::mrSoop()));
     }
     else
     {
-        Console::printLn("Here you are, your very own sandwich shop.");
+        Console::printLn(tr("Here you are, your very own sandwich shop."));
     }
 
     if (!_playerDiscoveredHideout)
     {
         Console::printLn(
-            "On one of the walls, you can see a blackboard. This board does not contain the menu, as one "
-            "would expect, but a collection of hand written notes and pamphlets. A big headline tells you, "
-            "what can be found there, it reads. \"Revolutionary Thoughts\"");
+            tr("On one of the walls, you can see a blackboard. This board does not contain the menu, as one "
+               "would expect, but a collection of hand written notes and pamphlets. A big headline tells you, "
+               "what can be found there, it reads. \"Revolutionary Thoughts\""));
     }
 
     Console::br();
@@ -226,13 +229,12 @@ void CSandwichShop::printHeader()
 
 void CSandwichShop::showSandwichOfTheDay()
 {
-    Console::printLn(std::format("Sandwiche{} of the day:", _sandwiches.size() == 0 ? "" : "s"),
-                     Console::EAlignment::eCenter);
+    Console::printLn(tr("Sandwiche{} of the day:", _sandwiches.size() == 0 ? "" : "s"), Console::EAlignment::eCenter);
     Console::br();
 
     if (_sandwiches.size() == 0)
     {
-        Console::printLn("SOLD OUT", Console::EAlignment::eCenter);
+        Console::printLn(tr("SOLD OUT"), Console::EAlignment::eCenter);
         Console::br();
     }
     else
@@ -267,17 +269,13 @@ void CSandwichShop::checkForShaggysSandwich()
     {
         sandwich = list.at(0)->name();
 
-        Console::printLn(std::format(
-            "As soon as you enter, you realize, that {0} acts stange, he snoops around your bag, he seems nervous "
-            "and "
-            "shakey. Eventually, he grabs into your bag and picks {1}. His eyes start to sparkle. \"This is it, "
-            "this "
+        Console::printLn(tr(
+            "As soon as you enter, you realize, that {0} acts stange, he snoops around your bag, he seems nervous and "
+            "shakey. Eventually, he grabs into your bag and picks {1}. His eyes start to sparkle. \"This is it, this "
             "is {1}, the legendary sandwich, the perfect sandwich. I searched for this my whole life, no i finally "
             "found it! The only reason, i opened this sandwich shop was to find this sandwich!\" {0} literally has "
-            "little hearts in his eyes, when i takes your {1} and runs to the exit. \"Ever wanted to own a "
-            "Sandwich "
-            "shop?\" he asks you before he leaves. \"its yours!\" are the last words  you hear from him. Guess, "
-            "you "
+            "little hearts in his eyes, when i takes your {1} and runs to the exit. \"Ever wanted to own a Sandwich "
+            "shop?\" he asks you before he leaves. \"its yours!\" are the last words  you hear from him. Guess, you "
             "are proud owner of a sandwich shop now.",
             SandwichShop::mrSoop(),
             sandwich));
@@ -288,10 +286,10 @@ void CSandwichShop::checkForShaggysSandwich()
         CGameManagement::getProgressionInstance()->reportModuleFinished(SandwichShop::moduleName());
         CGameManagement::getProgressionInstance()->registerModuleHint(
             RebellionHideout::moduleName(),
-            std::format("You want to know where {} and {} are hiding? Are you really that blind? Did you ever woner "
-                        "who is buying you crappy sandwiches?",
-                        Ressources::Game::fiego(),
-                        Ressources::Game::brock()));
+            tr("You want to know where {} and {} are hiding? Are you really that blind? Did you ever woner "
+               "who is buying you crappy sandwiches?",
+               Ressources::Game::fiego(),
+               Ressources::Game::brock()));
         registerItemGenerators();
     }
 }
@@ -300,14 +298,13 @@ void CSandwichShop::checkForSoldSandwiches()
 {
     if (_goldAvailable > 0)
     {
-        Console::printLn(
-            std::format("While you were away, sandwiches have been sold and you earned {}{} Gold{}. This always "
-                        "happens. You wonder who is selling the sandwiches, there seems to be no staff here. at "
-                        "least you hired nobody. Even more you wonder who is buying your sandwiches, and who is "
-                        "honest enough to pay, with no staff on duty. One day, you will have to check for that.",
-                        CC::fgLightYellow(),
-                        _goldAvailable,
-                        CC::ccReset()));
+        Console::printLn(tr("While you were away, sandwiches have been sold and you earned {}{} Gold{}. This always "
+                            "happens. You wonder who is selling the sandwiches, there seems to be no staff here. at "
+                            "least you hired nobody. Even more you wonder who is buying your sandwiches, and who is "
+                            "honest enough to pay, with no staff on duty. One day, you will have to check for that.",
+                            CC::fgLightYellow(),
+                            _goldAvailable,
+                            CC::ccReset()));
         CGameManagement::getPlayerInstance()->gainGold(_goldAvailable);
         _goldAvailable = 0;
         Console::br();
@@ -327,37 +324,38 @@ bool CSandwichShop::seenRebellionHideoutHint()
 void CSandwichShop::revolutionaryThoughts()
 {
     Console::cls();
-    Console::printLn("The board is full of various notes with random thoughts, pieces of information or just rants "
-                     "against the king. The sense for revolution seems to be strong in this land.");
+    Console::printLn(tr("The board is full of various notes with random thoughts, pieces of information or just rants "
+                        "against the king. The sense for revolution seems to be strong in this land."));
 
     if (CGameManagement::getProgressionInstance()->areModuleQuestsAvailable())
     {
         auto quest = CGameManagement::getProgressionInstance()->getRandomQuest();
 
-        Console::printLn("On note catches your attention:");
+        Console::printLn(tr("On note catches your attention:"));
         Console::br();
         Console::printLn(quest.questText, Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("Do you accept this task?");
+        Console::printLn(tr("Do you accept this task?"));
         Console::br();
         if (CMenu::executeAcceptRejectMenu() == CMenu::accept())
         {
             Console::br();
-            Console::printLn(std::format(
-                "For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
-                Ressources::Game::princessLeila()));
+            Console::printLn(
+                tr("For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
+                   Ressources::Game::princessLeila()));
             CGameManagement::getProgressionInstance()->acceptModuleQuest(quest.moduleName);
         }
         else
         {
             Console::br();
-            Console::printLn("Revolution is not exactly your cup of ale, so you decide to leave the revolution for the "
-                             "revolutionaries.");
+            Console::printLn(
+                tr("Revolution is not exactly your cup of ale, so you decide to leave the revolution for the "
+                   "revolutionaries."));
         }
     }
     else
     {
-        Console::printLn("But even after several closer looks, you cannot find anything of interest there.");
+        Console::printLn(tr("But even after several closer looks, you cannot find anything of interest there."));
     }
     Console::br();
     Console::confirmToContinue();
@@ -375,9 +373,9 @@ void CSandwichShop::deliverIngredients()
     {
         auto ingredients = dynamic_cast<const CBagOfIngredients*>(bag)->getIngredients();
 
-        Console::printLn(std::format("You open a {} and put {} into your stroage.",
-                                     bag->name(),
-                                     CBagOfIngredients::ingredients2String(ingredients)));
+        Console::printLn(tr("You open a {} and put {} into your stroage.",
+                            bag->name(),
+                            CBagOfIngredients::ingredients2String(ingredients)));
         Console::br();
         for (const auto& i : ingredients)
         {
@@ -393,7 +391,7 @@ void CSandwichShop::makeASandwich()
     if (countIngredients() <= 0)
     {
         Console::br();
-        Console::printLn("You have no ingredients available to make a sandwich");
+        Console::printLn(tr("You have no ingredients available to make a sandwich"));
         Console::br();
         Console::confirmToContinue();
         return;
@@ -405,11 +403,11 @@ void CSandwichShop::makeASandwich()
     {
         Console::cls();
         Console::br();
-        Console::printLn("Make a sandwich", Console::EAlignment::eCenter);
+        Console::printLn(tr("Make a sandwich"), Console::EAlignment::eCenter);
         Console::br();
         if (ingredients.size() > 0)
         {
-            Console::printLn(std::format("Selected Ingredients: {}", CSandwich::ingredients2String(ingredients)));
+            Console::printLn(tr("Selected Ingredients: {}", CSandwich::ingredients2String(ingredients)));
         }
 
         CSandwich::IngredientsList availableIngredients;
@@ -441,111 +439,55 @@ void CSandwichShop::observe()
     CGameManagement::getProgressionInstance()->unregisterModuleHintsByModuleName(RebellionHideout::moduleName());
     CGameManagement::getProgressionInstance()->reportModuleFinished(RebellionHideout::moduleName());
 
-    Console::printLn("You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
-                     "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich "
-                     "shop even has an employees bathroom, you have no employees), but the toilet is pushed aside, and "
-                     "two guys appear. They seem to be hungry, and immediately rush to the sandwiches.");
     Console::printLn(
-        std::format("They put the money into the money box and start eating. \"The new guy really makes awesomne "
-                    "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
-                    SandwichShop::mrSoop()));
+        tr("You decide, to hide in your sandwich shop, and see, who is buying you sandwiches. As soon as the "
+           "sun sets, you hear a rumbling, coming from the employees bathroom (you wonder, why this sandwich "
+           "shop even has an employees bathroom, you have no employees), but the toilet is pushed aside, and "
+           "two guys appear. They seem to be hungry, and immediately rush to the sandwiches."));
+    Console::printLn(tr("They put the money into the money box and start eating. \"The new guy really makes awesomne "
+                        "sandwiches\" - \"Yeah, so much better than {}, this guy really is a sandwich legend.\"",
+                        SandwichShop::mrSoop()));
     Console::br();
-    Console::printLn("A little bit proud, that they call you a sandwich legend, you leave your hideout. \"Who are you "
-                     "two, and why are you hiding in my sandwich store?\"");
     Console::printLn(
-        std::format("A little bit shocked, the two guys stop eating and introduce themselves. \"My name is {} and "
-                    "this is {}\" says the first guy \"We are the leaders of the rebellion\", says the other.",
-                    Ressources::Game::fiego(),
-                    Ressources::Game::brock()));
+        tr("A little bit proud, that they call you a sandwich legend, you leave your hideout. \"Who are you "
+           "two, and why are you hiding in my sandwich store?\""));
+    Console::printLn(tr("A little bit shocked, the two guys stop eating and introduce themselves. \"My name is {} and "
+                        "this is {}\" says the first guy \"We are the leaders of the rebellion\", says the other.",
+                        Ressources::Game::fiego(),
+                        Ressources::Game::brock()));
+    Console::printLn(tr("\"Sou you are the guys who kidnapped {0} repeatedly?\" you ask. \"So you are the one, who "
+                        "intercepted our plans to abduct {0} repeatedly?\" answer the two rebellion leaders.",
+                        Ressources::Game::princessLeila()));
     Console::printLn(
-        std::format("\"Sou you are the guys who kidnapped {0} repeatedly?\" you ask. \"So you are the one, who "
-                    "intercepted our plans to abduct {0} repeatedly?\" answer the two rebellion leaders.",
-                    Ressources::Game::princessLeila()));
-    Console::printLn("After some laughing, you decide to work together. You provide them with food and support, they "
-                     "will not abduct any princess, without your approval.");
+        tr("After some laughing, you decide to work together. You provide them with food and support, they "
+           "will not abduct any princess, without your approval."));
     Console::confirmToContinue();
 
     Console::printLn(
-        std::format("The rest of the night is spent, talking about the rebellion. Both, {0} and {1} think, that {2} is "
-                    "more a clown, than a king, and after you saw {2}, you agree with the. They also seem to know a "
-                    "lot more about {3}, but they always put you of to \"another time\" as soon as {3} is mentioned.",
-                    Ressources::Game::fiego(),
-                    Ressources::Game::brock(),
-                    Ressources::Game::kingJesster(),
-                    Ressources::Game::urza()));
-    Console::printLn(std::format(
-        "You are also very surprised to hear, that the {} you saw at the beginning of your adventure is actually a "
-        "minion of {}, who travels through the land, making propaganda for the king and against the {} - cults.",
-        Ressources::Game::dancingBard(),
-        Ressources::Game::kingJesster(),
-        Ressources::Game::urza()));
+        tr("The rest of the night is spent, talking about the rebellion. Both, {0} and {1} think, that {2} is "
+           "more a clown, than a king, and after you saw {2}, you agree with the. They also seem to know a "
+           "lot more about {3}, but they always put you of to \"another time\" as soon as {3} is mentioned.",
+           Ressources::Game::fiego(),
+           Ressources::Game::brock(),
+           Ressources::Game::kingJesster(),
+           Ressources::Game::urza()));
+    Console::printLn(
+        tr("You are also very surprised to hear, that the {} you saw at the beginning of your adventure is actually a "
+           "minion of {}, who travels through the land, making propaganda for the king and against the {} - cults.",
+           Ressources::Game::dancingBard(),
+           Ressources::Game::kingJesster(),
+           Ressources::Game::urza()));
     Console::br();
     Console::printLn(
-        std::format("Funny story: {} and {} where part of the rebellion too, but had to leave, because their constant "
-                    "crying did not add anything to the whole deal. \"You met them?\" {} asks you surprised. \"How are "
-                    "they?\" - \"Well, at least this time, they stopped crying for once\", you answer, making clear, "
-                    "that you will not carry that topic out any more.",
-                    Ressources::Game::bimmelchen(),
-                    Ressources::Game::pimmelchen(),
-                    Ressources::Game::fiego()));
+        tr("Funny story: {} and {} where part of the rebellion too, but had to leave, because their constant "
+           "crying did not add anything to the whole deal. \"You met them?\" {} asks you surprised. \"How are "
+           "they?\" - \"Well, at least this time, they stopped crying for once\", you answer, making clear, "
+           "that you will not carry that topic out any more.",
+           Ressources::Game::bimmelchen(),
+           Ressources::Game::pimmelchen(),
+           Ressources::Game::fiego()));
     Console::br();
-    Console::printLn(
-        std::format("{} and {} look at you, stunned.", Ressources::Game::fiego(), Ressources::Game::brock()));
-    Console::confirmToContinue();
-}
-
-void CSandwichShop::talkToRebellion()
-{
-    Console::printLn(std::format(
-        "You enter the employees bathroom (which is, as you know now, not totally necessary, since you still don't "
-        "have any employees but you have a rebellion base in your shop, and with big rebellion bases comes big "
-        "responsibility.), move away the toilet and enter the stairway to the hidden office of {} and {}.",
-        Ressources::Game::fiego(),
-        Ressources::Game::brock()));
-
-    if (CGameManagement::getProgressionInstance()->areModuleQuestsAvailable())
-    {
-        auto quest = CGameManagement::getProgressionInstance()->getRandomQuest();
-
-        Console::printLn(std::format(
-            "As you arrive, {} and {} start rummaging in their papers and eventually pull out a crumpled sheet. "
-            "There is a job to be done for the glory of the rebellion. You take a look at the "
-            "paper and read the instruction:",
-            Ressources::Game::fiego(),
-            Ressources::Game::brock()));
-        Console::br();
-        Console::printLn(quest.questText, Console::EAlignment::eCenter);
-        Console::br();
-        Console::printLn("Do you accept this task?");
-        Console::br();
-        if (CMenu::executeAcceptRejectMenu() == CMenu::accept())
-        {
-            Console::br();
-            Console::printLn(std::format(
-                "For the well-being of the land! For the rebellion! For {}! You accept the task, and leave.",
-                Ressources::Game::princessLeila()));
-            CGameManagement::getProgressionInstance()->acceptModuleQuest(quest.moduleName);
-        }
-        else
-        {
-            Console::br();
-            Console::printLn("Not today, the whole rebellion thing is still somehow suspisous to you. what are they "
-                             "doing in the basement of you shop anyway?");
-        }
-    }
-    else
-    {
-        Console::printLn(std::format(
-            "As you arrive, {} and {} are brainstorming the next actions, the rebellion will take. They are a little "
-            "bit uncreative right now, all they come up with is kidnapping {} over and over again. As much as you "
-            "would appreciate her beeing around, as much you don't want to kidnap her without any good reason to "
-            "do so, so they make clear, that you dont approve any kidnapping operations for now. With this option out "
-            "of the way, There seems nothing to be done for now.",
-            Ressources::Game::fiego(),
-            Ressources::Game::brock(),
-            Ressources::Game::leila()));
-    }
-
+    Console::printLn(tr("{} and {} look at you, stunned.", Ressources::Game::fiego(), Ressources::Game::brock()));
     Console::confirmToContinue();
 }
 

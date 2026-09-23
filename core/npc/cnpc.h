@@ -66,6 +66,7 @@ public:
      */
     virtual std::string name() const = 0;
     virtual std::string describe() const = 0;
+    virtual std::string tattoo() const;
 
     /**
      * @brief npcNac

@@ -70,26 +70,27 @@ void CShrineOfTheAncients::load(const nlohmann::json& json)
 
 void CShrineOfTheAncients::visit()
 {
-    Console::printLn(std::format("Once again, you approach the {}.", ancientShrine()));
+    Console::printLn(tr("Once again, you approach the {}.", ancientShrine()));
     switch (CGameManagement::getProgressionInstance()->currentGameStage())
     {
     case Module::EGameStage::eNone:
     case Module::EGameStage::eStart:
     case Module::EGameStage::eSeenBard:
-        Console::printLn("And as before, the old man does not even realize, that "
-                         "you are there.");
+        Console::printLn(tr("And as before, the old man does not even realize, that "
+                            "you are there."));
         break;
     case Module::EGameStage::eProvenAsHero:
-        Console::printLn("This time, the old man stands directly next to the "
-                         "entry, and smiles at you. Obviousely, "
-                         "your are still no hero.");
+        Console::printLn(tr("This time, the old man stands directly next to the "
+                            "entry, and smiles at you. Obviousely, "
+                            "your are still no hero."));
         break;
     case Module::EGameStage::eLearnedAboutCult:
     case Module::EGameStage::eFoundCult:
+    case Module::EGameStage::eRescuedLeila:
     case Module::EGameStage::eFoundUrza:
     case Module::EGameStage::eFinale:
         Console::printLn(
-            "This time, grampa stands in the opened gate. He smiles, but you are probably still not ready.");
+            tr("This time, grampa stands in the opened gate. He smiles, but you are probably still not ready."));
         break;
     }
 }
@@ -116,9 +117,10 @@ void CShrineOfTheAncients::firstVisit()
         firstVisitLearnedAboutCult();
         break;
     case Module::EGameStage::eFoundCult:
+    case Module::EGameStage::eRescuedLeila:
     case Module::EGameStage::eFoundUrza:
     case Module::EGameStage::eFinale:
-        Console::printLn("Not implemented");
+        Console::printLn(tr("Not implemented"));
         Console::confirmToContinue();
         break;
     }
@@ -126,33 +128,33 @@ void CShrineOfTheAncients::firstVisit()
 
 void CShrineOfTheAncients::firstVisitStart()
 {
-    Console::printLn("There is something really strange before you. Something "
-                     "like a shrine. A hoary shrine. This must "
-                     "be a Shrine of the ancients.");
-    Console::printLn("How you know? Surely because of your deep knowledget of "
-                     "ancient religious history. And, of "
-                     "course, the sign next to the gate reading:");
+    Console::printLn(tr("There is something really strange before you. Something "
+                        "like a shrine. A hoary shrine. This must "
+                        "be a Shrine of the ancients."));
+    Console::printLn(tr("How you know? Surely because of your deep knowledget of "
+                        "ancient religious history. And, of "
+                        "course, the sign next to the gate reading:"));
     Console::printLn(ancientShrine());
-    Console::printLn("Do you want to have a look?");
+    Console::printLn(tr("Do you want to have a look?"));
 
     if (CMenu::executeYesNoMenu() == CMenu::no())
     {
-        Console::printLn("You probably have seen enough, and leave this place.");
+        Console::printLn(tr("You probably have seen enough, and leave this place."));
         return;
     }
-    Console::printLn("You go closer, and can see an old man, praying in the shrine. He does "
-                     "not even give you a single "
-                     "glance, and completely ignores you. Well, time to leave for now.");
+    Console::printLn(tr("You go closer, and can see an old man, praying in the shrine. He does "
+                        "not even give you a single "
+                        "glance, and completely ignores you. Well, time to leave for now."));
 }
 
 void CShrineOfTheAncients::firstVisitSeenBard()
 {
-    Console::printLn(std::format("As you apporach the {}, you see, something is "
-                                 "different this time. The old man "
-                                 "stands at the gate and looks at you.",
-                                 ancientShrine()));
-    Console::printLn("As you come closer, he asks, if you have any questions.");
-    Console::printLn("What should you ask him?");
+    Console::printLn(tr("As you apporach the {}, you see, something is "
+                        "different this time. The old man "
+                        "stands at the gate and looks at you.",
+                        ancientShrine()));
+    Console::printLn(tr("As you come closer, he asks, if you have any questions."));
+    Console::printLn(tr("What should you ask him?"));
     Console::br();
 
     CMenu menu(Shrine::moduleName());
@@ -160,31 +162,31 @@ void CShrineOfTheAncients::firstVisitSeenBard()
     menu.addMenuGroup({askAboutUrza}, {menu.createAction({"Nothing"})});
     if (menu.execute() == askAboutUrza)
     {
-        Console::printLn("\"No, not this time\", you think to yourself, and leave.");
+        Console::printLn(tr("\"No, not this time\", you think to yourself, and leave."));
     }
     Console::br();
-    Console::printLn(std::format("You ask the question, that is lurkin around "
-                                 "your head for so long now: {}?",
-                                 Ressources::Game::whoTheFuckIsUrza()));
+    Console::printLn(tr("You ask the question, that is lurkin around "
+                        "your head for so long now: {}?",
+                        Ressources::Game::whoTheFuckIsUrza()));
     Console::printLn(
-        std::format("The old man smiles, and replies: \"So, you want to know about {}?", Ressources::Game::urza()));
-    Console::printLn("This is dangerous knowledge, nowadays. To get an answer to "
-                     "this question, you first have to become a hero!\"");
-    Console::printLn("This was the most underwhelming answer you have ever heard "
-                     "in your live, since you asked the "
-                     "beautiful farmers daughter to go for the dance when you "
-                     "was 8 years old.");
-    Console::printLn("But your wanted to become a hero anyway, so you will have "
-                     "to come back later.");
+        tr("The old man smiles, and replies: \"So, you want to know about {}?", Ressources::Game::urza()));
+    Console::printLn(tr("This is dangerous knowledge, nowadays. To get an answer to "
+                        "this question, you first have to become a hero!\""));
+    Console::printLn(tr("This was the most underwhelming answer you have ever heard "
+                        "in your live, since you asked the "
+                        "beautiful farmers daughter to go for the dance when you "
+                        "was 8 years old."));
+    Console::printLn(tr("But your wanted to become a hero anyway, so you will have "
+                        "to come back later."));
 }
 
 void CShrineOfTheAncients::firstVisitProvenAsHero()
 {
-    Console::printLn(std::format("Back to the {}. This time, the old man seems "
-                                 "to await you and smiles at you.",
-                                 ancientShrine()));
-    Console::printLn("As you come closer, he asks, if you have any questions.");
-    Console::printLn("And you have only one question in you mind?");
+    Console::printLn(tr("Back to the {}. This time, the old man seems "
+                        "to await you and smiles at you.",
+                        ancientShrine()));
+    Console::printLn(tr("As you come closer, he asks, if you have any questions."));
+    Console::printLn(tr("And you have only one question in you mind?"));
     Console::br();
 
     CMenu menu(Shrine::moduleName());
@@ -192,24 +194,24 @@ void CShrineOfTheAncients::firstVisitProvenAsHero()
     menu.addMenuGroup({askAboutUrza}, {menu.createAction({"Nothing"})});
     if (menu.execute() == askAboutUrza)
     {
-        Console::printLn("Maybe, proven to be a hero is enough.");
+        Console::printLn(tr("Maybe, proven to be a hero is enough."));
     }
     Console::br();
-    Console::printLn(std::format("The old man smiles wisely, and replies: \"{0} "
-                                 "was important, and {0} is important!",
-                                 Ressources::Game::urza()));
-    Console::printLn("Find the people, who still believe in Urza!\"");
-    Console::printLn("And again, you are not much smarter than before, but you "
-                     "know what to look for.");
+    Console::printLn(tr("The old man smiles wisely, and replies: \"{0} "
+                        "was important, and {0} is important!",
+                        Ressources::Game::urza()));
+    Console::printLn(tr("Find the people, who still believe in Urza!\""));
+    Console::printLn(tr("And again, you are not much smarter than before, but you "
+                        "know what to look for."));
 }
 
 void CShrineOfTheAncients::firstVisitLearnedAboutCult()
 {
     Console::printLn(
-        std::format("The old man stands in the opened gate to the {}. He awaits you, but he will not yet let you in.",
-                    ancientShrine()));
-    Console::printLn("He asks you about your search.");
-    Console::printLn("Do you want to tell him??");
+        tr("The old man stands in the opened gate to the {}. He awaits you, but he will not yet let you in.",
+           ancientShrine()));
+    Console::printLn(tr("He asks you about your search."));
+    Console::printLn(tr("Do you want to tell him??"));
     Console::br();
 
     CMenu menu(Shrine::moduleName());
@@ -217,24 +219,44 @@ void CShrineOfTheAncients::firstVisitLearnedAboutCult()
     menu.addMenuGroup({menu.createAction({"Sure thing!"})}, {notYetAction});
     if (menu.execute() == notYetAction)
     {
-        Console::printLn("Maybe next time.");
+        Console::printLn(tr("Maybe next time."));
     }
 
-    Console::printLn(std::format("You tell the old man about what you learned, about the chapel you found and about {} "
-                                 "and {}. You skip the part with your new {}tattoo{}.",
-                                 Ressources::Game::fiego(),
-                                 Ressources::Game::brock(),
-                                 CC::fgLightMagenta(),
-                                 CC::ccReset()));
+    Console::printLn(tr("You tell the old man about what you learned, about the chapel you found and about {} "
+                        "and {}. You skip the part with your new {}tattoo{}.",
+                        Ressources::Game::fiego(),
+                        Ressources::Game::brock(),
+                        CC::fgLightMagenta(),
+                        CC::ccReset()));
     Console::printLn(
-        "When the old man hears about the two revolutionaries, his face brightens even more. \"Find them!\" he says.");
-    Console::printLn("Thats it, not much, but again, you know what to do.");
+        tr("When the old man hears about the two revolutionaries, his face brightens even more. \"Find them!\" he says."));
+    Console::printLn(tr("Thats it, not much, but again, you know what to do."));
 }
 
 void CShrineOfTheAncients::stats() const
 {
     Console::cls();
-    Console::printLn("You take some time to think about yourself:");
+    Console::printLn(tr("You take some time to think about yourself:"));
+    Console::br();
+
+    if (CGameManagement::getPlayerInstance()->hasSignificantOther())
+    {
+        Console::printLnWithSpacer(tr("You share your adventures with:"),
+                                   CGameManagement::getPlayerInstance()->signigicantOther()->name());
+    }
+    if (CGameManagement::getPlayerInstance()->hastattoo())
+    {
+        Console::printLnWithSpacer(tr("You have a beautiful tattoo reading:"),
+                                   std::string(CGameManagement::getPlayerInstance()->tattoo()));
+
+        if (CGameManagement::getPlayerInstance()->hasSignificantOther() &&
+            CGameManagement::getPlayerInstance()->tattoo() !=
+                CGameManagement::getPlayerInstance()->signigicantOther()->tattoo())
+        {
+            Console::printLn(tr("{} probably does not like your tattoo",
+                                CGameManagement::getPlayerInstance()->signigicantOther()->name()));
+        }
+    }
     Console::br();
 
     auto progress = CGameManagement::getProgressionInstance()->progress();
@@ -254,25 +276,19 @@ void CShrineOfTheAncients::stats() const
 
     progressString.append("]");
 
-    if (CGameManagement::getPlayerInstance()->hasSignificantOther())
-    {
-        Console::printLn(
-            tr("You share your adventures with {}", CGameManagement::getPlayerInstance()->signigicantOther()->name()));
-    }
-
-    Console::printLnWithSpacer("Progress:", progressString);
-    Console::printLnWithSpacer("Body count:",
+    Console::printLnWithSpacer(tr("Progress:"), progressString);
+    Console::printLnWithSpacer(tr("Body count:"),
                                std::format("{}", CGameManagement::getProgressionInstance()->bodyCount()));
-    Console::printLnWithSpacer("Genocides committed:",
+    Console::printLnWithSpacer(tr("Genocides committed:"),
                                std::format("{}", CGameManagement::getProgressionInstance()->genocideCount()));
-    Console::printLnWithSpacer("Turns:", std::format("{}", CGameManagement::now()));
+    Console::printLnWithSpacer(tr("Turns:"), std::format("{}", CGameManagement::now()));
 
     Console::br();
     auto equipment = CGameManagement::getInventoryInstance()->getEquipment();
     for (auto e : equipment)
     {
         Console::printLnWithSpacer(std::format("{}:", e->typeName()),
-                                   std::format("{} (Level {})", e->name(), e->level()));
+                                   tr("{} (Level {})", e->name(), e->level()));
     }
 
     auto quests = CGameManagement::getProgressionInstance()->getQuestLog();
@@ -280,7 +296,7 @@ void CShrineOfTheAncients::stats() const
     {
         Console::br();
         Console::hr();
-        Console::printLn("You current Quests:");
+        Console::printLn(tr("You current Quests:"));
         Console::br();
 
         for (const auto& q : quests)

@@ -79,7 +79,7 @@ void CLoveLetter::execute(const std::string_view& moduleName)
         const auto sympathy = 10 + Randomizer::getRandom(40);
         if (sympathy > 40)
         {
-            Console::printLn("Writing this letter felt awesomne, your letter surely hit the spot.");
+            Console::printLn(coreTr("Writing this letter felt awesomne, your letter surely hit the spot."));
         }
 
         significantOther->reconcile(sympathy);

@@ -7,13 +7,14 @@
 
 CCaveBossTask::CCaveBossTask(bool* bossDefeated) : CTask(TagNames::Cave::caveBoss), _bossDefeated(bossDefeated)
 {
+    _taskMovement = ETaskMovement::eMedium;
 }
 
 void CCaveBossTask::execute()
 {
     CCaveBoss boss;
     boss.printBossBattleHeader();
-    Console::printLn("There he is, you encounter the boss of this cave");
+    Console::printLn(tr("There he is, you encounter the boss of this cave"));
     Console::br();
     Console::confirmToContinue();
 
@@ -24,16 +25,11 @@ void CCaveBossTask::execute()
     {
         Console::confirmToContinue();
         Console::br();
-        Console::printLn("Finished! time to leave this hellhole.");
+        Console::printLn(tr("Finished! time to leave this hellhole."));
         Console::br();
 
         *_bossDefeated = true;
         _isFinished = true;
         CGameManagement::getProgressionInstance()->reportModuleFinished(Cave::moduleName());
     }
-}
-
-bool CCaveBossTask::isMovable() const
-{
-    return true;
 }

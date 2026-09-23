@@ -12,6 +12,11 @@
 
 #include <math.h>
 
+std::string CNpc::tattoo() const
+{
+    return std::format("{0}<3{1} {2} {0}<3{1}", CC::fgLightRed(), CC::ccReset(), name());
+}
+
 const CMenuAction CNpc::npcNav(CMenu& menu) const
 {
     return menu.createAction({CC::unColorizeString(name())}, false);

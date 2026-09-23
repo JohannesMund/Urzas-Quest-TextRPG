@@ -57,6 +57,11 @@ public:
     std::string shieldName() const;
     std::string armorName() const;
 
+    void addtattoo(const std::string_view& tattoo);
+    bool hastattoo() const;
+    std::string_view tattoo() const;
+    const std::vector<std::string>* tattooHistory() const;
+
 protected:
     virtual nlohmann::json save() const override;
     virtual void load(const nlohmann::json& json) override;
@@ -89,4 +94,5 @@ private:
     virtual std::string translatorModuleName() const override;
 
     std::optional<std::string> getEquipmentName(const Ressources::Items::EType tp) const;
+    std::vector<std::string> _tattooHistory;
 };

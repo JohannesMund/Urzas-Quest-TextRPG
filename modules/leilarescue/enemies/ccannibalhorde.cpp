@@ -11,8 +11,8 @@
 CCannibalHorde::CCannibalHorde() : CEnemyHorde(25)
 {
     _level = std::max(1U, CGameManagement::getPlayerInstance()->level() - 2);
-    _name = std::format("C{}a{}nnibal{}", CC::fgYellow(), CC::fgWhite(), CC::ccReset());
-    _weapon = "Kitchen knives";
+    _name = tr("C{}a{}nnibal{}", CC::fgYellow(), CC::fgWhite(), CC::ccReset());
+    _weapon = tr("Kitchen knives");
 }
 
 void CCannibalHorde::spoilsOfWar() const
@@ -22,7 +22,7 @@ void CCannibalHorde::spoilsOfWar() const
         CGameManagement::getPlayerInstance()->addXp(basicXP(_level));
     }
 
-    Console::printLn("The guys know one thing, food.");
+    Console::printLn(tr("The guys know one thing, food."));
     for (auto i = 0U; i < _count; i++)
     {
         if (Randomizer::getRandom(3) < 2)
@@ -33,8 +33,8 @@ void CCannibalHorde::spoilsOfWar() const
             } while (Randomizer::getRandom(2) == 0);
         }
     }
-    Console::printLn("You probably don't want to know the whereabouts of some of the food items, but all this stuff "
-                     "will make some great sandwiches.");
+    Console::printLn(tr("You probably don't want to know the whereabouts of some of the food items, but all this stuff "
+                        "will make some great sandwiches."));
 }
 
 void CCannibalHorde::postBattle()

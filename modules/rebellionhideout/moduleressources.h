@@ -19,6 +19,7 @@ constexpr std::string_view sandwiches = "Sandwiches";
 constexpr std::string_view ingredientStore = "IngredientStore";
 constexpr std::string_view ingredient = "Ingredient";
 constexpr std::string_view itemGeneratorsRegistered = "ItemGeneratorsRegistered";
+constexpr std::string_view guardNpc = "GuardNpc";
 constexpr std::string_view count = TagNames::Common::count;
 } // namespace RebellionHideout
 } // namespace TagNames
@@ -36,6 +37,7 @@ namespace SandwichShop
 Module::ModuleInfo moduleInfo();
 std::string moduleName();
 
+std::string rebellionHideoutName();
 std::string sandwichShopName();
 std::string mrSoop();
 

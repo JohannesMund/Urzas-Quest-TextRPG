@@ -40,7 +40,7 @@ void CEnemyHorde::battleAction(bool&)
 
         if (Randomizer::getRandom(3) == 0)
         {
-            Console::printLn(std::format("While you are fighting, another {} hits you.", _name));
+            Console::printLn(coreTr("While you are fighting, another {} hits you.", _name));
             _attacks++;
         }
     }
@@ -79,7 +79,7 @@ unsigned int CEnemyHorde::damage() const
 
 std::string CEnemyHorde::name() const
 {
-    return std::format("A horde of {}s", _name);
+    return coreTr("A horde of {}s", _name);
 }
 
 void CEnemyHorde::removeDeadEnemies()

@@ -310,12 +310,12 @@ std::optional<CItem*> CInventory::selectItemFromInventory(const Scope& scope)
     {
         if (scope == Scope::eList)
         {
-            Console::printLn(std::format("    {} (x{})", item.second->name(), item.first));
+            Console::printLn(coreTr("    {} (x{})", item.second->name(), item.first));
         }
         else
         {
             usableItems.push_back(item.second);
-            Console::printLn(std::format("[{:3}] {} (x{})", usableItems.size(), item.second->name(), item.first));
+            Console::printLn(coreTr("[{:3}] {} (x{})", usableItems.size(), item.second->name(), item.first));
         }
     }
 

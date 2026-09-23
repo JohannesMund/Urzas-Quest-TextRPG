@@ -19,7 +19,7 @@ CFishingRod::CFishingRod() :
                     CC::fgLightGray(),
                     CC::fgYellow(),
                     CC::ccReset())};
-    _description = "It's a fishing rod. used for fishing, and... no, fishing only";
+    _description = tr("It's a fishing rod. used for fishing, and... no, fishing only");
 }
 
 std::string CFishingRod::typeName() const

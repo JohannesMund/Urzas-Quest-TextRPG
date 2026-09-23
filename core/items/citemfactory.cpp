@@ -19,6 +19,7 @@
 #include "randomizer.h"
 #include "translator/ctranslator.h"
 #include "json/jsonexceptions.h"
+#include "json/jsontagnames.h"
 
 #include <algorithm>
 #include <nlohmann/json.hpp>
@@ -213,7 +214,9 @@ CItem* CItemFactory::loadItemFromSavGame(const nlohmann::json& json)
         }
         catch (const Json::CJsonException& e)
         {
-            Console::printErr("Load item error", e.what());
+            Console::printErr(
+                CTranslator::tr(TagNames::Translator::core, TagNames::Translator::factory, "Load item error"),
+                e.what());
             delete newItem;
             return nullptr;
         }

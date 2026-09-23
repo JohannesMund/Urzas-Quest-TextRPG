@@ -28,7 +28,7 @@ void CHealerCompanion::preBattle(CEnemy*)
     {
         return;
     }
-    Console::printLn(std::format("{} tries to look dangerous but it does not work. At least it is cute", name()));
+    Console::printLn(coreTr("{} tries to look dangerous but it does not work. At least it is cute", name()));
 }
 
 void CHealerCompanion::battleAction(CEnemy*, bool&)
@@ -43,12 +43,12 @@ void CHealerCompanion::postBattle(CEnemy*)
     }
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} cares a little bit for your wouds", name()));
+        Console::printLn(coreTr("{} cares a little bit for your wouds", name()));
         CGameManagement::getPlayerInstance()->addHp(1);
     }
     else
     {
-        Console::printLn(std::format("{} looks victorious.", name()));
+        Console::printLn(coreTr("{} looks victorious.", name()));
     }
 }
 

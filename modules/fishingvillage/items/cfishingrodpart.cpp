@@ -15,18 +15,18 @@ CFishingRodPart::CFishingRodPart() : CJunkItem(TagNames::FishingVille::fishingRo
 
         _part = EPart::eRod;
         _name = nameForPart(_part);
-        _description = "A long, straight, elastic stick. perfect for building a fishing rod";
+        _description = tr("A long, straight, elastic stick. perfect for building a fishing rod");
         break;
     case 1:
 
         _part = EPart::eThread;
         _name = nameForPart(_part);
-        _description = "A very long, very strong thread. This will make an awesomne fishing line.";
+        _description = tr("A very long, very strong thread. This will make an awesomne fishing line.");
         break;
     case 2:
         _part = EPart::eHook;
         _name = nameForPart(_part);
-        _description = "Some wire. with a little work, this will be your fishing hook";
+        _description = tr("Some wire. with a little work, this will be your fishing hook");
         break;
     };
 

@@ -22,6 +22,7 @@ enum class EGameStage
     eProvenAsHero,
     eLearnedAboutCult,
     eFoundCult,
+    eRescuedLeila,
     eFoundUrza,
     eFinale
 };

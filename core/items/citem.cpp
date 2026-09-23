@@ -16,7 +16,7 @@ CItem::CItem(const std::string_view& objectName) : CGameStateObject(objectName)
 void CItem::view()
 {
     Console::hr();
-    Console::printLn(format("You decide to take a look at: {}", _name));
+    Console::printLn(coreTr("You decide to take a look at: {}", _name));
     Console::printLn(description());
 }
 

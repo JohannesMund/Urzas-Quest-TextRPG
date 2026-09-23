@@ -61,7 +61,7 @@ void CDeadHero::execute(const std::string_view& moduleName)
         Console::br();
         Console::printLn(
             coreTr("Better safe than sorry is the motto of this adventure. You leave the poor guy be, and leave."));
-        Console::printLn("You feel, that this is the last time, you have seen him");
+        Console::printLn(coreTr("You feel, that this is the last time, you have seen him"));
         return;
     }
     Console::br();

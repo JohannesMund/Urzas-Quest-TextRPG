@@ -22,11 +22,11 @@ CGuardStuff::CGuardStuff()
     _name = nameForPart(_part);
     if (_part == EPart::eUnknown)
     {
-        _description = "A totally random item related to guards and stuff. Just Random Guard Stuff";
+        _description = tr("A totally random item related to guards and stuff. Just Random Guard Stuff");
     }
     else
     {
-        _description = std::format(
+        _description = tr(
             "A highly appreciated and well-known symbol of guard-ship. No guard is a real guard without his {}",
             nameForPart(_part));
     }

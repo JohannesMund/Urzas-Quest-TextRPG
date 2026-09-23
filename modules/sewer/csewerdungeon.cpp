@@ -9,6 +9,11 @@ CSewerDungeon::CSewerDungeon()
 {
 }
 
+std::string CSewerDungeon::translatorModuleName() const
+{
+    return Sewer::moduleName();
+}
+
 void CSewerDungeon::execute()
 {
     CSewerBattleEncounter* encounter = new CSewerBattleEncounter();
@@ -29,9 +34,9 @@ void CSewerDungeon::loopHook()
         if ((_map->seenRooms() > ((_map->roomCount() * 3) / 4)))
         {
             Console::br();
-            Console::printLn("After wandering around in this stinking hell hole of a dungeon, you have a pretty good "
-                             "idea where to go to. There is this one region, where you always heard the quit whimping "
-                             "of children. There you should go.");
+            Console::printLn(tr("After wandering around in this stinking hell hole of a dungeon, you have a pretty good "
+                                "idea where to go to. There is this one region, where you always heard the quit whimping "
+                                "of children. There you should go."));
             Console::confirmToContinue();
             Console::br();
 

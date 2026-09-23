@@ -124,7 +124,7 @@ void CFishingVillage::printHeader()
     Console::cls();
 
     Console::printLn(FishingVillage::fishingVilleName(), Console::EAlignment::eCenter);
-    Console::printLn("Local recreation area", Console::EAlignment::eCenter);
+    Console::printLn(tr("Local recreation area"), Console::EAlignment::eCenter);
     Console::br();
 
     Console::printLn(tr(

@@ -7,7 +7,9 @@
 #include "cscarymonstercompanion.h"
 #include "csupportcompanion.h"
 #include "ressources.h"
+#include "translator/ctranslator.h"
 #include "json/jsonexceptions.h"
+#include "json/jsontagnames.h"
 
 #include <nlohmann/json.hpp>
 
@@ -41,7 +43,9 @@ CCompanion* CompanionFactory::loadCompanionFromSaveGame(const nlohmann::json& js
         }
         catch (const Json::CJsonException& e)
         {
-            Console::printErr("Load companion error:", e.what());
+            Console::printErr(
+                CTranslator::tr(TagNames::Translator::core, TagNames::Translator::factory, "Load companion error:"),
+                e.what());
             delete newCompanion;
             return nullptr;
         }
@@ -63,7 +67,9 @@ CSupportCompanion* CompanionFactory::loadSupportCompanionFromSaveGame(const nloh
         }
         catch (const Json::CJsonException& e)
         {
-            Console::printErr("Load companion error", e.what());
+            Console::printErr(
+                CTranslator::tr(TagNames::Translator::core, TagNames::Translator::factory, "Load companion error"),
+                e.what());
             delete newCompanion;
         }
     }

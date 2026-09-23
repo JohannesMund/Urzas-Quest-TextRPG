@@ -9,7 +9,7 @@
 CLeilaBossOrks::CLeilaBossOrks() : CTwoEnemies(Leila2::mork(), Leila2::gork())
 {
     _name = "";
-    _weapon = "Trunk and Rock";
+    _weapon = tr("Trunk and Rock");
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;
@@ -22,7 +22,7 @@ void CLeilaBossOrks::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
 
-    Console::printLn("Those two collected quite a fortune.");
+    Console::printLn(tr("Those two collected quite a fortune."));
 
     CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 200) +
                                                    _level * (Randomizer::getRandom(65) + 1));
@@ -40,11 +40,11 @@ void CLeilaBossOrks::passiveBattleAction(EWho who)
     {
         if (who == CTwoEnemies::EWho::eEnemy1)
         {
-            Console::printLn(std::format("{} attacks you", _name1));
+            Console::printLn(tr("{} attacks you", _name1));
         }
         else
         {
-            Console::printLn(std::format("{} attacks you", _name2));
+            Console::printLn(tr("{} attacks you", _name2));
         }
 
         CGameManagement::getPlayerInstance()->dealDamage(dmg);
@@ -53,7 +53,7 @@ void CLeilaBossOrks::passiveBattleAction(EWho who)
 
 std::string CLeilaBossOrks::name() const
 {
-    return std::format("{} and {} from {}Ork{}", _name1, _name2, CC::fgLightGreen(), CC::ccReset());
+    return tr("{} and {} from {}Ork{}", _name1, _name2, CC::fgLightGreen(), CC::ccReset());
 }
 
 std::string CLeilaBossOrks::translatorModuleName() const

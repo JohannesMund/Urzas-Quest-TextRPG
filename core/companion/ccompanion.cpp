@@ -45,13 +45,13 @@ void CCompanion::evolve()
 
     if (_level == 1)
     {
-        Console::printLn(std::format(
+        Console::printLn(coreTr(
             "Finally, you found a friend! Your first friend ever! you pet your little {} and continue your journey.",
             newName));
     }
     else
     {
-        Console::printLn(std::format("Your {} evolved into a {}", oldName, newName));
+        Console::printLn(coreTr("Your {} evolved into a {}", oldName, newName));
     }
 }
 

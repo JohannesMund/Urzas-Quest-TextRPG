@@ -17,6 +17,7 @@ std::string urzaWhoTheFuckIsUrza();
 std::string princessLeila();
 std::string leila();
 std::string leilasRibbon();
+std::string leilastattoo();
 
 std::string piefke();
 std::string schniefke();

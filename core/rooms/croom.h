@@ -40,9 +40,12 @@ public:
     virtual bool isTaskPossible(const std::string_view& = {}) const;
     virtual bool canBeReplaced() const;
     bool hasTask() const;
+    CTask::ETaskMovement taskMovement() const;
 
     virtual bool isSpecialRoom() const;
     virtual bool isEmptyRoom() const;
+
+    static CMap::RoomFilter roomWithMovingTasksTaskFilter();
 
 protected:
     virtual char getMapSymbol() const = 0;

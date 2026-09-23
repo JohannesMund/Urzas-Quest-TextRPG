@@ -61,9 +61,9 @@ void CUrzasGlasses::battleBuff(CEnemy* enemy, bool& endRound)
         std::shuffle(
             notSelected.begin(), notSelected.end(), std::default_random_engine(Randomizer::getRandomEngineSeed()));
 
-        Console::printLn(std::format("The magic of {} tell you, that your enemy does not choose {}",
-                                     _name,
-                                     CBattle::weapon2String(notSelected.at(0))));
+        Console::printLn(coreTr("The magic of {} tell you, that your enemy does not choose {}",
+                                _name,
+                                CBattle::weapon2String(notSelected.at(0))));
     }
 }
 

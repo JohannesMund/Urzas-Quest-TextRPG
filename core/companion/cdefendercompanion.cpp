@@ -27,7 +27,7 @@ void CDefenderCompanion::preBattle(CEnemy*)
     {
         return;
     }
-    Console::printLn(std::format("{} tries to look dangerous but it does not work. At least it is cute", name()));
+    Console::printLn(coreTr("{} tries to look dangerous but it does not work. At least it is cute", name()));
 }
 
 void CDefenderCompanion::battleAction(CEnemy*, bool&)
@@ -40,7 +40,7 @@ void CDefenderCompanion::postBattle(CEnemy*)
     {
         return;
     }
-    Console::printLn(std::format("{} looks victorious.", name()));
+    Console::printLn(coreTr("{} looks victorious.", name()));
 }
 
 int CDefenderCompanion::shield(const int i)
@@ -51,7 +51,7 @@ int CDefenderCompanion::shield(const int i)
     }
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} jumps between you and the enemy and protects you.", name()));
+        Console::printLn(coreTr("{} jumps between you and the enemy and protects you.", name()));
         return i - 1;
     }
 

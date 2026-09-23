@@ -14,14 +14,14 @@ CWeapon::CWeapon(const Ressources::Items::EQuality quality) :
 
 void CWeapon::battleEffect(CEnemy* enemy)
 {
-    Console::printLn(std::format("You draw your {} at {} and try to look dangerous.", name(), enemy->name()));
+    Console::printLn(coreTr("You draw your {} at {} and try to look dangerous.", name(), enemy->name()));
 }
 
 void CWeapon::battleBuff(CEnemy* enemy, bool& endRound)
 {
     if (doesEquipmentEffectFire())
     {
-        Console::printLn(std::format("Your {} deals some extra damage", name()));
+        Console::printLn(coreTr("Your {} deals some extra damage", name()));
         enemy->dealDamage(extraDamage());
         endRound = true;
     }
@@ -29,7 +29,7 @@ void CWeapon::battleBuff(CEnemy* enemy, bool& endRound)
 
 std::string CWeapon::typeName() const
 {
-    return "Weapon";
+    return coreTr("Weapon");
 }
 
 CItem::ItemFilter CWeapon::equipmentTypeFilter() const

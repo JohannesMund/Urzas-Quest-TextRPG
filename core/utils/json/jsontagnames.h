@@ -25,6 +25,9 @@ constexpr std::string_view loveLetter = "LoveLetter";
 constexpr std::string_view equipmentDealer = "EquipmentDealer";
 constexpr std::string_view battle = "Battle";
 constexpr std::string_view mysteriousChest = "MysteriousChest";
+constexpr std::string_view gameManagement = "GameManagement";
+constexpr std::string_view factory = "Factory";
+constexpr std::string_view console = "Console";
 } // namespace Translator
 
 namespace Common
@@ -102,6 +105,7 @@ constexpr std::string_view gold = TagNames::Common::gold;
 constexpr std::string_view xp = "Pp";
 constexpr std::string_view initiative = "Initiative";
 constexpr std::string_view supporters = "Supporters";
+constexpr std::string_view tattoos = "TatooHistory";
 constexpr std::string_view name = TagNames::Common::name;
 constexpr std::string_view level = TagNames::Common::level;
 } // namespace Player
@@ -123,7 +127,6 @@ namespace Map
 constexpr std::string_view map = "Map";
 constexpr std::string_view playerPosition = "PlayerPosition";
 constexpr std::string_view rooms = "Rooms";
-constexpr std::string_view movingTasks = "MovingTasks";
 
 } // namespace Map
 
@@ -147,6 +150,11 @@ constexpr std::string_view isOpen = TagNames::Common::isOpen;
 constexpr std::string_view petIsDead = "PetIsDead";
 } // namespace Room
 
+namespace Dungeon
+{
+constexpr std::string_view dungeon = "Dungeon";
+} // namespace Dungeon
+
 namespace TownModule
 {
 constexpr std::string_view blacksmith = "BlackSmith";
@@ -162,6 +170,7 @@ constexpr std::string_view task = "Task";
 constexpr std::string_view bountyHunt = "BountyHunt";
 constexpr std::string_view finished = "Finished";
 constexpr std::string_view autoExecute = "AutoExecute";
+constexpr std::string_view movement = "Movement";
 constexpr std::string_view reward = "Reward";
 constexpr std::string_view name = TagNames::Common::name;
 } // namespace Task

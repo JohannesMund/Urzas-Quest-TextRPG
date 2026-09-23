@@ -17,14 +17,14 @@ CRatFarmTask::CRatFarmTask() : CTask(TagNames::RatFarm::ratFarm)
 
 void CRatFarmTask::execute()
 {
-    Console::printLn(std::format(
+    Console::printLn(tr(
         "Here you are, the {0} farm, with the {0} house of lady {0}. you are a little hungry, maybe one of the"
         "{0}s would help now, but all of a sudden, you realize, that {0}s are not a thing for lady {0}.",
         RatFarm::getCarrot()));
-    Console::printLn(std::format(
+    Console::printLn(tr(
         "But this is not what matters now, the {} farm is rat-infected, and you have the job to solve this.",
         RatFarm::getTurnip()));
-    Console::printLn("Ready for the battle?");
+    Console::printLn(tr("Ready for the battle?"));
 
     if (CMenu::executeYesNoMenu() == CMenu::yes())
     {
@@ -32,7 +32,7 @@ void CRatFarmTask::execute()
     }
     else
     {
-        Console::printLn("Seeing the rat swarm, you decide, that you are not. maybe later.");
+        Console::printLn(tr("Seeing the rat swarm, you decide, that you are not. maybe later."));
         return;
     }
 }
@@ -50,14 +50,14 @@ void CRatFarmTask::battle()
             return;
         }
 
-        Console::printLn(std::format("This was rat number {}, but there are more rats to go.", i + 1));
+        Console::printLn(tr("This was rat number {}, but there are more rats to go.", i + 1));
         Console::confirmToContinue();
     }
 
     Console::cls();
     CRatFarmRatBoss ratBoss;
     ratBoss.printBossBattleHeader();
-    Console::printLn("After defeating the swarm of rats, the boss of the rats appear.");
+    Console::printLn(tr("After defeating the swarm of rats, the boss of the rats appear."));
     Console::br();
     Console::confirmToContinue();
 
@@ -65,20 +65,20 @@ void CRatFarmTask::battle()
     battle.fight();
 
     Console::confirmToContinue();
-    Console::printLn("Thats it! Your first genocide! What a milestone!");
-    Console::printLn(std::format("Lady {0} runs toward you and starts thanking you for rescuing her {0} house in {0} "
-                                 "vale, and starts stuffing {1} into your pocket",
-                                 RatFarm::getCarrot(),
-                                 RatFarm::getTurnip()));
-    Console::printLn(std::format("You are pondering what is worse, the rats, or the {0}s. You decide, not to think "
-                                 "about this any more, and get away, as long you are able to carry all those {0}s",
-                                 RatFarm::getTurnip()));
-    Console::printLn(std::format("\"May {} bless you!\", is the last thing you hear from lady {}.",
-                                 Ressources::Game::urza(),
-                                 RatFarm::getCarrot()));
-    Console::printLn(std::format("Again, this {} dude. {}??? well you will have to find out.",
-                                 Ressources::Game::urza(),
-                                 Ressources::Game::whoTheFuckIsUrza()));
+    Console::printLn(tr("Thats it! Your first genocide! What a milestone!"));
+    Console::printLn(tr("Lady {0} runs toward you and starts thanking you for rescuing her {0} house in {0} "
+                        "vale, and starts stuffing {1} into your pocket",
+                        RatFarm::getCarrot(),
+                        RatFarm::getTurnip()));
+    Console::printLn(tr("You are pondering what is worse, the rats, or the {0}s. You decide, not to think "
+                        "about this any more, and get away, as long you are able to carry all those {0}s",
+                        RatFarm::getTurnip()));
+    Console::printLn(tr("\"May {} bless you!\", is the last thing you hear from lady {}.",
+                        Ressources::Game::urza(),
+                        RatFarm::getCarrot()));
+    Console::printLn(tr("Again, this {} dude. {}??? well you will have to find out.",
+                        Ressources::Game::urza(),
+                        Ressources::Game::whoTheFuckIsUrza()));
 
     RatFarm::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 7);
     CGameManagement::getProgressionInstance()->reportModuleFinished(RatFarm::moduleName());

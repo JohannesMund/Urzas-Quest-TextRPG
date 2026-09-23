@@ -29,13 +29,13 @@ CItem::ItemFilter CPinkFanta::pinkFantaFilter()
 
 void CPinkFanta::useFromInventory()
 {
-    Console::printLn("You open the bottle, and swallow it in one draw. Healing potions are disgusting!");
+    Console::printLn(tr("You open the bottle, and swallow it in one draw. Healing potions are disgusting!"));
     use();
 }
 
 void CPinkFanta::useFromBattle(CEnemy*)
 {
-    Console::printLn("It is in the middle of a hot fight, but you need healing.");
+    Console::printLn(tr("It is in the middle of a hot fight, but you need healing."));
     use();
 }
 

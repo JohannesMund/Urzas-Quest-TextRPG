@@ -614,7 +614,7 @@ void CWonderLamp::playLudo()
         }
         _djinn->addSympathy(Randomizer::getRandom(10) + 5);
     }
-    Console::printLn("you should consider to play again.");
+    Console::printLn(tr("you should consider to play again."));
     Console::br();
     Console::confirmToContinue();
 }

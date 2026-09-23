@@ -11,7 +11,7 @@
 CLeilaBoss::CLeilaBoss() : CTwoEnemies(Ressources::Game::piefke(), Ressources::Game::schniefke())
 {
     _name = "";
-    _weapon = "Sword and Pike";
+    _weapon = tr("Sword and Pike");
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;
@@ -25,13 +25,13 @@ void CLeilaBoss::spoilsOfWar() const
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
 
-    Console::printLn(std::format("{} and {} realize, that they will not stand a chance and run away", _name1, _name2));
-    Console::printLn(std::format("\"{} will not like that!\" - \"{} Neither, but their punishment is better, than "
+    Console::printLn(tr("{} and {} realize, that they will not stand a chance and run away", _name1, _name2));
+    Console::printLn(tr("\"{} will not like that!\" - \"{} Neither, but their punishment is better, than "
                                  "dealing with this monster!\"",
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock()));
 
-    Console::printLn(std::format("Crime seems to be well paid.", CC::fgBlue(), CC::fgYellow(), CC::ccReset()));
+    Console::printLn(tr("Crime seems to be well paid."));
 
     CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) +
                                                    _level * (Randomizer::getRandom(65) + 1));
@@ -51,11 +51,11 @@ void CLeilaBoss::passiveBattleAction(EWho who)
     {
         if (who == CTwoEnemies::EWho::eEnemy1)
         {
-            Console::printLn(std::format("{} attacks you", _name1));
+            Console::printLn(tr("{} attacks you", _name1));
         }
         else
         {
-            Console::printLn(std::format("{} attacks you", _name2));
+            Console::printLn(tr("{} attacks you", _name2));
         }
 
         CGameManagement::getPlayerInstance()->dealDamage(dmg);

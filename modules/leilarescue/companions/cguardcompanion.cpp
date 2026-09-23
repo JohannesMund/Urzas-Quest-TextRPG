@@ -33,7 +33,7 @@ std::string CGuardCompanion::type() const
 
 void CGuardCompanion::preBattle(CEnemy* enemy)
 {
-    Console::printLn(std::format("{} stays at your side in your battle against {}.", name(), enemy->name()));
+    Console::printLn(tr("{} stays at your side in your battle against {}.", name(), enemy->name()));
 }
 
 void CGuardCompanion::battleAction(CEnemy* enemy, bool&)
@@ -44,18 +44,18 @@ void CGuardCompanion::battleAction(CEnemy* enemy, bool&)
     }
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} attacks the enemy and deals 1 damage.", name()));
+        Console::printLn(tr("{} attacks the enemy and deals 1 damage.", name()));
         enemy->dealDamage(1);
     }
     else
     {
-        Console::printLn(std::format("{} holds his weapon and looks dangerous.", name()));
+        Console::printLn(tr("{} holds his weapon and looks dangerous.", name()));
     }
 }
 
 void CGuardCompanion::postBattle(CEnemy* enemy)
 {
-    Console::printLn(std::format("{} taunts the defeated {}.", name(), enemy->name()));
+    Console::printLn(tr("{} taunts the defeated {}.", name(), enemy->name()));
 }
 
 int CGuardCompanion::shield(const int i)
@@ -66,7 +66,7 @@ int CGuardCompanion::shield(const int i)
     }
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} raises his shield to protect you.", name()));
+        Console::printLn(tr("{} raises his shield to protect you.", name()));
         return i - 1;
     }
 
@@ -75,14 +75,14 @@ int CGuardCompanion::shield(const int i)
 
 void CGuardCompanion::joinText() const
 {
-    Console::printLn(std::format(
+    Console::printLn(tr(
         "After rescuing him, {} swears alligience to you, and joins you on your hunt for the rest of the guards",
         name()));
 }
 
 void CGuardCompanion::leaveText() const
 {
-    Console::printLn(std::format("The job is done, as a new member of the rebellion {} leaves you to return to the "
-                                 "rebellion hindeout and do rebellion things.",
-                                 name()));
+    Console::printLn(tr("The job is done, as a new member of the rebellion {} leaves you to return to the "
+                        "rebellion hindeout and do rebellion things.",
+                        name()));
 }

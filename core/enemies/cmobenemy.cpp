@@ -78,6 +78,6 @@ std::string CMobEnemy::translatorModuleName() const
 
 void CMobEnemy::specialAttack()
 {
-    Console::printLn("Special Attack!");
+    Console::printLn(coreTr("Special Attack!"));
     CGameManagement::getPlayerInstance()->dealDamage(1);
 }

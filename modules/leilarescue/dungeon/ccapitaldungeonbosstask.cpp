@@ -9,13 +9,14 @@ CCapitalDungeonBossTask::CCapitalDungeonBossTask(bool* bossDefeated) :
     CTask(TagNames::LeilaRescue::dungeonBoss),
     _bossDefeated(bossDefeated)
 {
+    _taskMovement = ETaskMovement::eFast;
 }
 
 void CCapitalDungeonBossTask::execute()
 {
     CGuardHorde boss;
     boss.printBossBattleHeader();
-    Console::printLn("The guards attack");
+    Console::printLn(tr("The guards attack"));
     Console::br();
     Console::confirmToContinue();
 
@@ -26,7 +27,7 @@ void CCapitalDungeonBossTask::execute()
     {
         Console::confirmToContinue();
         Console::br();
-        Console::printLn("Finished!");
+        Console::printLn(tr("Finished!"));
         Console::br();
 
         *_bossDefeated = true;
@@ -34,11 +35,6 @@ void CCapitalDungeonBossTask::execute()
         CGameManagement::getPlayerInstance()->removeSupportCompanionsByModuleName(LeilaRescue::moduleName());
         CGameManagement::getProgressionInstance()->reportModuleFinished(LeilaRescue::moduleName());
     }
-}
-
-bool CCapitalDungeonBossTask::isMovable() const
-{
-    return true;
 }
 
 std::string CCapitalDungeonBossTask::translatorModuleName() const

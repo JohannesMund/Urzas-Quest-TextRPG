@@ -3,7 +3,9 @@
 #include "cgamemanagement.h"
 #include "console.h"
 #include "ctask.h"
+#include "translator/ctranslator.h"
 #include "json/jsonexceptions.h"
+#include "json/jsontagnames.h"
 
 CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
 {
@@ -27,7 +29,9 @@ CTask* TaskFactory::loadTaskFromSaveGame(const nlohmann::json& json)
         }
         catch (const Json::CJsonException& e)
         {
-            Console::printErr("Load task error", e.what());
+            Console::printErr(
+                CTranslator::tr(TagNames::Translator::core, TagNames::Translator::factory, "Load task error"),
+                e.what());
             delete newTask;
             return nullptr;
         }

@@ -37,9 +37,9 @@ void CBlackIvoryTower::execute()
     {
         CUrzasGlasses glasses;
         Console::printLn(
-            "You walk around the tower several time, but there seems to be no entry. You continue to walk and walk "
-            "and walk und still walk until you get dizzy and decide, that this tower probably has no entry. Or you "
-            "cannot see the entry. If only you had some seeing entries support item...");
+            tr("You walk around the tower several time, but there seems to be no entry. You continue to walk and walk "
+               "and walk und still walk until you get dizzy and decide, that this tower probably has no entry. Or you "
+               "cannot see the entry. If only you had some seeing entries support item..."));
 
         if (!CGameManagement::getInventoryInstance()->hasItem(CItem::nameFilter(glasses.name())))
         {
@@ -65,8 +65,8 @@ void CBlackIvoryTower::execute()
 
     do
     {
-        Console::printLn("You enter through the only enty, and the inside is totally boring. You will have to climb "
-                         "the tower, up to the top. There seems to be no elevator. Fun! Fun! Fun!");
+        Console::printLn(tr("You enter through the only enty, and the inside is totally boring. You will have to climb "
+                            "the tower, up to the top. There seems to be no elevator. Fun! Fun! Fun!"));
 
         input = menu.execute();
         if (input == climbAction)
@@ -158,7 +158,7 @@ void CBlackIvoryTower::climb()
 void CBlackIvoryTower::executeTopOffice()
 {
     printHeader(BlackIvoryTower::towerHeight);
-    Console::printLn("Finally, the top floor!");
+    Console::printLn(tr("Finally, the top floor!"));
     Console::printLn(
         tr("The winding stair case seemed like forever! This is the office in the top floor. Obviously, the "
            "office of {}. It is stuffed with books and papers, there is a big desk in front of the window. "
@@ -298,7 +298,7 @@ void CBlackIvoryTower::executeStairs(const unsigned int stage)
         CGameManagement::getPlayerInstance()->addHp(Randomizer::getRandom(5) + 5);
         break;
     case 1:
-        Console::printLn(("Wow, you find something usable!"));
+        Console::printLn(tr("Wow, you find something usable!"));
         CGameManagement::getInventoryInstance()->addShopItem();
         break;
     case 2:

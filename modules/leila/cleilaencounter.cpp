@@ -1,9 +1,9 @@
 #include "cleilaencounter.h"
 #include "cgamemanagement.h"
-#include "cleilatask.h"
 #include "cmenu.h"
 #include "colorize.h"
 #include "console.h"
+#include "leila/tasks/cleilatask.h"
 #include "moduleressources.h"
 
 #include <format>
@@ -16,10 +16,10 @@ CLeilaEncounter::CLeilaEncounter()
 
 void CLeilaEncounter::execute(const std::string_view&)
 {
-    Console::printLn("Next to the road, there is a broken cart, probably involved into a heavy accident. An injured, "
-                     "armored guard lies there and needs help.");
+    Console::printLn(tr("Next to the road, there is a broken cart, probably involved into a heavy accident. An injured, "
+                     "armored guard lies there and needs help."));
     Console::br();
-    Console::printLn("Do you want to help?");
+    Console::printLn(tr("Do you want to help?"));
 
     CMenu menu(Leila::moduleName());
     auto helpAction = menu.createAction({"Help"});
@@ -27,33 +27,33 @@ void CLeilaEncounter::execute(const std::string_view&)
     menu.addMenuGroup({helpAction, ignoreAction});
     if (menu.execute() == ignoreAction)
     {
-        Console::printLn("You dont feel very heroic today. Maybe another time, you are sure, you will see this exact "
-                         "scene again (especially, if this event is story-relevant.");
+        Console::printLn(tr("You dont feel very heroic today. Maybe another time, you are sure, you will see this exact "
+                         "scene again (especially, if this event is story-relevant."));
         return;
     }
 
-    Console::printLn("Well, time for work, you go to the crashed cart, and help the injured guard. His injuries are "
-                     "not only from the crash, this guy has been heavily beaten up.");
-    Console::printLn(std::format(
+    Console::printLn(tr("Well, time for work, you go to the crashed cart, and help the injured guard. His injuries are "
+                     "not only from the crash, this guy has been heavily beaten up."));
+    Console::printLn(tr(
         "You ask him what happened, and he tells you, that he was guaring {} and they got ambushed by highwaymen. The "
         "usual story, log on the street, cart crashes, guard is beaten up, princess is kidnapped.",
         Ressources::Game::princessLeila()));
-    Console::printLn("Since this guy is seriously injured and the princess should be rescued soon (is she hot?) it is "
-                     "up to you, to do the job.");
+    Console::printLn(tr("Since this guy is seriously injured and the princess should be rescued soon (is she hot?) it is "
+                     "up to you, to do the job."));
     Console::br();
-    Console::printLn("Will you do it?");
+    Console::printLn(tr("Will you do it?"));
 
     menu.clear();
     menu.addMenuGroup({menu.createAction({"Hell Yeah!"}), CMenu::no()});
     if (menu.execute() == CMenu::no())
     {
-        Console::printLn("You dont feel very heroic today, and usually, princesses in need are not very hot. Maybe "
+        Console::printLn(tr("You dont feel very heroic today, and usually, princesses in need are not very hot. Maybe "
                          "another time, you are sure, you will see this exact "
-                         "scene again (especially, if this event is story-relevant.");
+                         "scene again (especially, if this event is story-relevant."));
         return;
     }
 
-    Console::printLn("This a job for... ok, you need a name, it is a job for you, lets go.");
+    Console::printLn(tr("This a job for... ok, you need a name, it is a job for you, lets go."));
 
     CGameManagement::getInstance()->placeTaskOnField(new CLeilaTask());
 

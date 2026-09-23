@@ -31,6 +31,7 @@ namespace RabbitFarm
 Module::ModuleInfo moduleInfo();
 
 std::string makeRabbitName();
+std::string anyRabbit();
 
 std::string moduleName();
 

@@ -27,7 +27,7 @@ void CFishRestaurant::execute()
                          Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(tr("Dish of the day:"), Console::EAlignment::eCenter);
-        Console::printLn(std::format("~ {} ~", _dishOfTheDay), Console::EAlignment::eCenter);
+        Console::printLn(tr("~ {} ~", _dishOfTheDay), Console::EAlignment::eCenter);
         Console::br();
 
         CMenu menu(FishingVillageMakeRod::moduleName());

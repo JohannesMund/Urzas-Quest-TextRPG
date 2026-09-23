@@ -8,7 +8,9 @@
 #include "croom.h"
 #include "cstartingroom.h"
 #include "ctown.h"
+#include "translator/ctranslator.h"
 #include "json/jsonexceptions.h"
+#include "json/jsontagnames.h"
 
 #include <iostream>
 #include <nlohmann/json.hpp>
@@ -52,7 +54,9 @@ CRoom* RoomFactory::loadRoomFromSaveGame(const nlohmann::json& json)
         }
         catch (const Json::CJsonException& e)
         {
-            Console::printErr("Load room error", e.what());
+            Console::printErr(
+                CTranslator::tr(TagNames::Translator::core, TagNames::Translator::factory, "Load room error"),
+                e.what());
             delete newRoom;
             return nullptr;
         }

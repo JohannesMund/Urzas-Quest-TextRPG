@@ -9,16 +9,16 @@
 
 CHealingPotion::CHealingPotion(const PotionSize& size) : CItem(TagNames::Item::healingPotion)
 {
-    std::string name = "Potion of Healing";
-    _description = "A fancy flask, made of glass with a shimmering, deep-red potion with shiny pink clouds inside. "
-                   "Everything is moving magically, this MUST be a healing potion. Oh, and there is a lable stating "
-                   "\"Potion of Healing\"";
+    std::string sizePrefix;
+    std::string descriptionSuffix;
+
+    _description = coreTr("A fancy flask, made of glass with a shimmering, deep-red potion with shiny pink clouds inside. Everything is moving magically, this MUST be a healing potion. Oh, and there is a lable stating \"Potion of Healing\"");
 
     switch (size)
     {
     case PotionSize::S:
-        name = "Small " + name;
-        _description.append("\nThe bottle is tiny and not completely full.");
+        sizePrefix = "Small ";
+        descriptionSuffix = coreTr("\nThe bottle is tiny and not completely full.");
         _value = 50;
         break;
     case PotionSize::M:
@@ -26,15 +26,25 @@ CHealingPotion::CHealingPotion(const PotionSize& size) : CItem(TagNames::Item::h
         _value = 75;
         break;
     case PotionSize::L:
-        name = "Large " + name;
-        _description.append("\nThe bottle is pretty big.");
+        sizePrefix = "Large ";
+        descriptionSuffix = coreTr("\nThe bottle is pretty big.");
         _value = 150;
         break;
     case PotionSize::XL:
-        name = "Huge " + name;
-        _description.append("\nTHe bottle is huge, and filled to the brim.");
+        sizePrefix = "Huge ";
+        descriptionSuffix = coreTr("\nTHe bottle is huge, and filled to the brim.");
         _value = 500;
         break;
+    }
+
+    std::string name = coreTr("Potion of Healing");
+    if (!sizePrefix.empty())
+    {
+        name = sizePrefix + name;
+    }
+    if (!descriptionSuffix.empty())
+    {
+        _description.append(descriptionSuffix);
     }
     _name = std::format("{}{}{}", CC::fgLightBlue(), name, CC::ccReset());
     _size = size;
@@ -46,13 +56,13 @@ CHealingPotion::CHealingPotion(const PotionSize& size) : CItem(TagNames::Item::h
 
 void CHealingPotion::useFromInventory()
 {
-    Console::printLn("You open the bottle, and swallow it in one draw. Healing potions are disgusting!");
+    Console::printLn(coreTr("You open the bottle, and swallow it in one draw. Healing potions are disgusting!"));
     use();
 }
 
 void CHealingPotion::useFromBattle(CEnemy*)
 {
-    Console::printLn("It is in the middle of a hot fight, but you need healing.");
+    Console::printLn(coreTr("It is in the middle of a hot fight, but you need healing."));
     use();
 }
 
@@ -80,7 +90,7 @@ void CHealingPotion::use()
     switch (_size)
     {
     case PotionSize::S:
-        Console::printLn("Fortunately, it is not much, You feel a little refreshed!");
+        Console::printLn(coreTr("Fortunately, it is not much, You feel a little refreshed!"));
         hp = 1;
         break;
     case PotionSize::M:
@@ -88,11 +98,11 @@ void CHealingPotion::use()
         hp = Randomizer::getRandom(2) + 1;
         break;
     case PotionSize::L:
-        Console::printLn("Sooo much potion! But it was worth it, you feel really very refreshed!");
+        Console::printLn(coreTr("Sooo much potion! But it was worth it, you feel really very refreshed!"));
         hp = Randomizer::getRandom(9) + 1;
         break;
     case PotionSize::XL:
-        Console::printLn("You are flooded by a burst of life! you feel like a new born!");
+        Console::printLn(coreTr("You are flooded by a burst of life! you feel like a new born!"));
         hp = 99999;
         break;
     }

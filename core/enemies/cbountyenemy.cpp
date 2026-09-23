@@ -18,7 +18,7 @@ CBountyEnemy::CBountyEnemy(const std::string& name) : CEnemy()
 void CBountyEnemy::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 200);
-    Console::printLn("Obviously, crime does pay off.");
+    Console::printLn(coreTr("Obviously, crime does pay off."));
     CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) + _level * 33);
 
     auto amount = Randomizer::getRandom(2);

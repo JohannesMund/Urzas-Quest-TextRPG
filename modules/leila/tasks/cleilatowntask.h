@@ -11,4 +11,7 @@ public:
     virtual void execute() override;
 
     virtual Menu::MenuAction taskNav() const override;
+
+protected:
+    virtual std::string translatorModuleName() const override;
 };
