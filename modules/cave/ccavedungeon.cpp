@@ -4,9 +4,15 @@
 #include "ccavedungeonmap.h"
 #include "cgamemanagement.h"
 #include "console.h"
+#include "moduleressources.h"
 
 CCaveDungeon::CCaveDungeon() : CDungeon()
 {
+}
+
+std::string CCaveDungeon::translatorModuleName() const
+{
+    return Cave::moduleName();
 }
 
 void CCaveDungeon::execute()
@@ -30,9 +36,9 @@ void CCaveDungeon::loopHook()
         if ((_map->seenRooms() > ((_map->roomCount() * 3) / 4)))
         {
             Console::br();
-            Console::printLn("Now, that you have a good overview over the dungeon, you realize, that you are not alone "
-                             "with the mobs here. Whenever you move, someone else is moving as well. And this someone "
-                             "else is big, and with big i mean BIG, like B-I-G!");
+            Console::printLn(tr("Now, that you have a good overview over the dungeon, you realize, that you are not alone "
+                                "with the mobs here. Whenever you move, someone else is moving as well. And this someone "
+                                "else is big, and with big i mean BIG, like B-I-G!"));
             Console::confirmToContinue();
             Console::br();
 

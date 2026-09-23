@@ -25,6 +25,9 @@ constexpr std::string_view loveLetter = "LoveLetter";
 constexpr std::string_view equipmentDealer = "EquipmentDealer";
 constexpr std::string_view battle = "Battle";
 constexpr std::string_view mysteriousChest = "MysteriousChest";
+constexpr std::string_view gameManagement = "GameManagement";
+constexpr std::string_view factory = "Factory";
+constexpr std::string_view console = "Console";
 } // namespace Translator
 
 namespace Common
@@ -146,6 +149,11 @@ constexpr std::string_view name = TagNames::Common::name;
 constexpr std::string_view isOpen = TagNames::Common::isOpen;
 constexpr std::string_view petIsDead = "PetIsDead";
 } // namespace Room
+
+namespace Dungeon
+{
+constexpr std::string_view dungeon = "Dungeon";
+} // namespace Dungeon
 
 namespace TownModule
 {

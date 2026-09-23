@@ -15,7 +15,7 @@ CArmor::CArmor(const Ressources::Items::EQuality quality) :
 
 void CArmor::battleEffect(CEnemy* enemy)
 {
-    Console::printLn(std::format(
+    Console::printLn(coreTr(
         "You feel confident, that your {} will protect you from the furious attacks of {}", name(), enemy->name()));
 }
 
@@ -29,7 +29,7 @@ int CArmor::shield(const unsigned int i)
 
     if (Randomizer::getRandom(100) <= _level * 10)
     {
-        Console::printLn(std::format("Your armor absorbs {} damage", shieldAmount));
+        Console::printLn(coreTr("Your armor absorbs {} damage", shieldAmount));
         return std::max(i - shieldAmount, 0U);
     }
 
@@ -38,7 +38,7 @@ int CArmor::shield(const unsigned int i)
 
 std::string CArmor::typeName() const
 {
-    return "Armor";
+    return coreTr("Armor");
 }
 
 CItem::ItemFilter CArmor::equipmentTypeFilter() const

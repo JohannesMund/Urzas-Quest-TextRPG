@@ -11,6 +11,8 @@ public:
     virtual void loopHook() override;
 
 private:
+    virtual std::string translatorModuleName() const override;
+
     bool _bossDefeated = false;
     bool _bossAwake = false;
 };

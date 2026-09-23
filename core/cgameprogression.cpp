@@ -58,7 +58,7 @@ std::vector<std::string> CGameProgression::getQuestLog() const
         }
         if (isModuleFinished(m.moduleName))
         {
-            log = std::format("[{}Done{}] {}", CC::fgLightGreen(), CC::ccReset(), log);
+            log = std::format("[{}{}{}] {}", CC::fgLightGreen(), coreTr("Done"), CC::ccReset(), log);
         }
         else
         {
@@ -315,72 +315,72 @@ void CGameProgression::progressToStage(Module::EGameStage stage)
     case Module::EGameStage::eStart:
         return;
     case Module::EGameStage::eSeenBard:
-        Console::printLn("Chapter 1", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Chapter 1"), Console::EAlignment::eCenter);
         Console::hr();
-        Console::printLn("You have seen quite some things, since you awoke in this strange world.",
+        Console::printLn(coreTr("You have seen quite some things, since you awoke in this strange world."),
                          Console::EAlignment::eCenter);
-        Console::printLn("At least, you have 2 things:", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("At least, you have 2 things:"), Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("The matching {} for the {},", Ressources::Items::otherSock(), Ressources::Items::sock()),
+            coreTr("The matching {} for the {},", Ressources::Items::otherSock(), Ressources::Items::sock()),
             Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("and you have a task. You cannot stop thinking about the song of the {} and the question:",
+            coreTr("and you have a task. You cannot stop thinking about the song of the {} and the question:",
                         Bard::encounterName()),
             Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("You will have to find out.", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("You will have to find out."), Console::EAlignment::eCenter);
         break;
     case Module::EGameStage::eProvenAsHero:
-        Console::printLn("Chapter 2", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Chapter 2"), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("Now you know, what it means to be a hero. You have proven yourself worthy.",
+        Console::printLn(coreTr("Now you know, what it means to be a hero. You have proven yourself worthy."),
                          Console::EAlignment::eCenter);
         Console::printLn(
-            std::format("But also you learnd, that {} is a huge thing here, which brings you back, to your question:",
+            coreTr("But also you learnd, that {} is a huge thing here, which brings you back, to your question:",
                         Ressources::Game::urza()),
             Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn("Well, you are getting closer.", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Well, you are getting closer."), Console::EAlignment::eCenter);
         break;
     case Module::EGameStage::eLearnedAboutCult:
-        Console::printLn("Chapter 3", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Chapter 3"), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(
-            std::format("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()),
+            coreTr("Urza {0} is a huge thing, and the cult of {0} as well.", Ressources::Game::urza()),
             Console::EAlignment::eCenter);
         Console::br();
 
-        Console::printLn("But where there was one question, ther are now three:", Console::EAlignment::eCenter);
-        Console::printLn(std::format("who the hell is {}?", Ressources::Game::fiego()), Console::EAlignment::eCenter);
-        Console::printLn(std::format("who in the world is {}?", Ressources::Game::brock()),
+        Console::printLn(coreTr("But where there was one question, ther are now three:"), Console::EAlignment::eCenter);
+        Console::printLn(coreTr("who the hell is {}?", Ressources::Game::fiego()), Console::EAlignment::eCenter);
+        Console::printLn(coreTr("who in the world is {}?", Ressources::Game::brock()),
                          Console::EAlignment::eCenter);
-        Console::printLn("And of course:", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("And of course:"), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(std::format("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
+        Console::printLn(coreTr("But your goal is clearer than before: Marry {}, or find a good tattoo remover.",
                                      Ressources::Game::princessLeila()),
                          Console::EAlignment::eCenter);
         break;
     case Module::EGameStage::eFoundCult:
-        Console::printLn("Chapter 4", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Chapter 4"), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(std::format("Here you are. Proud Memner of the Rebellion.", Ressources::Game::urza()),
+        Console::printLn(coreTr("Here you are. Proud Memner of the Rebellion."),
                          Console::EAlignment::eCenter);
         Console::br();
 
-        Console::printLn("Now you only have to find out:", Console::EAlignment::eCenter);
-        Console::printLn("Why do we rebel?", Console::EAlignment::eCenter);
-        Console::printLn("Against whom do we rebel?", Console::EAlignment::eCenter);
-        Console::printLn("of course:", Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Now you only have to find out:"), Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Why do we rebel?"), Console::EAlignment::eCenter);
+        Console::printLn(coreTr("Against whom do we rebel?"), Console::EAlignment::eCenter);
+        Console::printLn(coreTr("of course:"), Console::EAlignment::eCenter);
         Console::br();
         Console::printLn(Ressources::Game::whoTheFuckIsUrza(), Console::EAlignment::eCenter);
         Console::br();
-        Console::printLn(std::format("And last not least, is ist right to kidnap {}, and when do we do it?",
+        Console::printLn(coreTr("And last not least, is ist right to kidnap {}, and when do we do it?",
                                      Ressources::Game::princessLeila()),
                          Console::EAlignment::eCenter);
         break;

@@ -10,7 +10,7 @@ CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem(TagNames::RatFarm
 {
     std::string name;
 
-    _description = std::format(
+    _description = tr(
         "A {0} from the famous {1} farm in {1} ville, harvested by lady {1}. Probably the best {0} in the world.",
         RatFarm::getTurnip(),
         RatFarm::getCarrot());
@@ -18,8 +18,8 @@ CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem(TagNames::RatFarm
     switch (size)
     {
     case TurnipSize::S:
-        _name = std::format("half-eaten {}", RatFarm::getTurnip());
-        _description.append(" This one is half-eaten by a rat. delicious!");
+        _name = tr("half-eaten {}", RatFarm::getTurnip());
+        _description.append(tr(" This one is half-eaten by a rat. delicious!"));
         _value = 5;
         break;
     case TurnipSize::M:
@@ -28,8 +28,8 @@ CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem(TagNames::RatFarm
         _value = 15;
         break;
     case TurnipSize::L:
-        _name = std::format("Big {}", RatFarm::getTurnip());
-        _description.append(" This one is big and beautiful!");
+        _name = tr("Big {}", RatFarm::getTurnip());
+        _description.append(tr(" This one is big and beautiful!"));
         _value = 25;
         break;
     }
@@ -43,13 +43,13 @@ CRatFarmTurnip::CRatFarmTurnip(const TurnipSize& size) : CItem(TagNames::RatFarm
 
 void CRatFarmTurnip::useFromInventory()
 {
-    Console::printLn("You are a little hungry, so let's eat");
+    Console::printLn(tr("You are a little hungry, so let's eat"));
     use();
 }
 
 void CRatFarmTurnip::useFromBattle(CEnemy*)
 {
-    Console::printLn("You should not have time for lunch in the middle of a fight, but maybe this helps.");
+    Console::printLn(tr("You should not have time for lunch in the middle of a fight, but maybe this helps."));
     use();
 }
 
@@ -76,7 +76,7 @@ void CRatFarmTurnip::use()
     switch (_size)
     {
     case TurnipSize::S:
-        Console::printLn("Was good for the rat, is good for you!");
+        Console::printLn(tr("Was good for the rat, is good for you!"));
         hp = 1;
         break;
     case TurnipSize::M:
@@ -84,7 +84,7 @@ void CRatFarmTurnip::use()
         hp = 2;
         break;
     case TurnipSize::L:
-        Console::printLn("Actually, this is pretty tasty!");
+        Console::printLn(tr("Actually, this is pretty tasty!"));
         hp = 3;
         break;
     }

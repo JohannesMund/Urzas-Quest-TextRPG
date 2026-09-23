@@ -34,7 +34,7 @@ CBagOfIngredients::CBagOfIngredients(const EBagSize size) :
         break;
     }
 
-    _name = std::format("{} Bag of Sandwich Ingredients", bagSize);
+    _name = tr("{} Bag of Sandwich Ingredients", bagSize);
 }
 
 CBagOfIngredients* CBagOfIngredients::makeShopItem()

@@ -12,24 +12,24 @@ CBomb::CBomb(const BombSize& size) : CItem(TagNames::Item::bomb)
     switch (size)
     {
     case BombSize::S:
-        name = "Fire cracker";
-        _description.append("A pretty little fire creacker.");
+        name = coreTr("Fire cracker");
+        _description = coreTr("A pretty little fire creacker.");
         _value = 50;
         break;
     case BombSize::M:
     default:
-        name = "Cherry bomb";
-        _description.append("two little cherries, one big boOOM.");
+        name = coreTr("Cherry bomb");
+        _description = coreTr("two little cherries, one big boOOM.");
         _value = 100;
         break;
     case BombSize::L:
-        name = "Pirate bomb";
-        _description.append("Lig in the pirate movies, big, and... bomby.");
+        name = coreTr("Pirate bomb");
+        _description = coreTr("Lig in the pirate movies, big, and... bomby.");
         _value = 250;
         break;
     case BombSize::XL:
-        name = "tactical nuclear bomb";
-        _description.append("Nukelear, it is pronounced nukelear");
+        name = coreTr("tactical nuclear bomb");
+        _description = coreTr("Nukelear, it is pronounced nukelear");
         _value = 500;
         break;
     }
@@ -43,7 +43,7 @@ CBomb::CBomb(const BombSize& size) : CItem(TagNames::Item::bomb)
 
 void CBomb::useFromBattle(CEnemy* enemy)
 {
-    Console::printLn(std::format("You throw {} at {}. The Boom is spectacular!", _name, enemy->name()));
+    Console::printLn(coreTr("You throw {} at {}. The Boom is spectacular!", _name, enemy->name()));
 
     unsigned int damage;
     switch (_size)
@@ -63,7 +63,7 @@ void CBomb::useFromBattle(CEnemy* enemy)
         break;
     }
 
-    Console::printLn(std::format("{} is hit for {} damage.", enemy->name(), damage));
+    Console::printLn(coreTr("{} is hit for {} damage.", enemy->name(), damage));
     enemy->dealDamage(damage);
 }
 

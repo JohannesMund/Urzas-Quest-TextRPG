@@ -68,7 +68,7 @@ void CEquipment::enhance()
         return;
     }
 
-    Console::printLn(std::format("your {} has been upgraded to to a {}", nameByLevel(_level), nameByLevel(_level + 1)));
+    Console::printLn(coreTr("your {} has been upgraded to to a {}", nameByLevel(_level), nameByLevel(_level + 1)));
     _level++;
 }
 

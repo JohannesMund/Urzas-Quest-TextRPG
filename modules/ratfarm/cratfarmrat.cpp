@@ -7,8 +7,8 @@
 CRatFarmRat::CRatFarmRat()
 {
 
-    _name = "Rat";
-    _weapon = "Teeth";
+    _name = tr("Rat");
+    _weapon = tr("Teeth");
 
     _level = CGameManagement::getPlayerInstance()->level();
     _initiative = 5;

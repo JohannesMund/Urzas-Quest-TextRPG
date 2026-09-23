@@ -27,17 +27,17 @@ void CCave::execute()
         if (CGameManagement::getProgressionInstance()->isModuleFinished(Cave::moduleName()))
         {
             Console::printLn(
-                std::format("You remember this cave, you remember {} who lurked inside this cave. You also "
-                            "remember, that this guy should no longer be a problem. Or is he? ",
-                            Cave::getColoredBossString()));
-            Console::printLn("Do you want to have a look, whether there is another Boss?");
+                tr("You remember this cave, you remember {} who lurked inside this cave. You also "
+                   "remember, that this guy should no longer be a problem. Or is he? ",
+                   Cave::getColoredBossString()));
+            Console::printLn(tr("Do you want to have a look, whether there is another Boss?"));
             initDungeon();
         }
         else
         {
-            Console::printLn("After all your battles and Adventures, you feel confident enought to enter this dark, "
-                             "mysterious cave.");
-            Console::printLn("Do you dare to enter?");
+            Console::printLn(tr("After all your battles and Adventures, you feel confident enought to enter this dark, "
+                                "mysterious cave."));
+            Console::printLn(tr("Do you dare to enter?"));
             initDungeon();
         }
     }
@@ -45,12 +45,12 @@ void CCave::execute()
     else
     {
         Console::printLn(
-            std::format("On a small hill, there is the entry to a cave. A deep, {}dark {}cave{}. You have a look and "
-                        "all you can see is black. A Disgusting smell and strange noises come out of the cave. You "
-                        "decide, that you are not enough of a hero to enter this hell hole.",
-                        CC::fgLightGray(),
-                        CC::fgDarkGray(),
-                        CC::ccReset()));
+            tr("On a small hill, there is the entry to a cave. A deep, {}dark {}cave{}. You have a look and "
+               "all you can see is black. A Disgusting smell and strange noises come out of the cave. You "
+               "decide, that you are not enough of a hero to enter this hell hole.",
+               CC::fgLightGray(),
+               CC::fgDarkGray(),
+               CC::ccReset()));
         Console::br();
         Console::confirmToContinue();
         Console::br();

@@ -18,26 +18,26 @@ CLakeOfTearsTask::CLakeOfTearsTask(const unsigned int steps) : CTask(TagNames::L
 
 void CLakeOfTearsTask::execute()
 {
-    Console::printLn("You follow the stream upward, und test the water from time to time. the longer you follow the "
-                     "river, the saltier the water becomes.");
+    Console::printLn(tr("You follow the stream upward, und test the water from time to time. the longer you follow the "
+                     "river, the saltier the water becomes."));
     Console::br();
     auto rnd = Randomizer::getRandom(10);
 
     switch (rnd)
     {
     case 0:
-        Console::printLn("While testing the water, you find something hidden under a lily pad.");
+        Console::printLn(tr("While testing the water, you find something hidden under a lily pad."));
         CGameManagement::getInventoryInstance()->addShopItem();
         break;
     case 1:
     case 2:
-        Console::printLn("Some poor guy lost his purse here. Probably the disgusting water let him lower his guards");
+        Console::printLn(tr("Some poor guy lost his purse here. Probably the disgusting water let him lower his guards"));
         CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(100) * 2 + 123);
         break;
     case 3:
     case 4:
     case 5:
-        Console::printLn("There is something in the bushes");
+        Console::printLn(tr("There is something in the bushes"));
         CGameManagement::getInventoryInstance()->addLootItem();
         break;
     case 6:
@@ -84,7 +84,7 @@ void CLakeOfTearsTask::load(const nlohmann::json& json)
 void CLakeOfTearsTask::battle(const EEnemy enemyType)
 {
 
-    Console::printLn("Suddenly, you are attacked!");
+    Console::printLn(tr("Suddenly, you are attacked!"));
     Console::confirmToContinue();
 
     CMobEnemy enemy;

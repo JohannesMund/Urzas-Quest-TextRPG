@@ -25,7 +25,7 @@ void CTwoEnemies::preBattleAction()
     }
 
     _lastHp = _hp;
-    Console::printLn("Who do you attack?");
+    Console::printLn(coreTr("Who do you attack?"));
     CMenu menu;
     auto enemy1Action = menu.createAction({_name1, '1'});
     auto enemy2Action = menu.createAction({_name2, '2'});
@@ -69,7 +69,7 @@ void CTwoEnemies::postBattleAction()
             if (_hp1 <= 0)
             {
                 CGameManagement::getProgressionInstance()->increaseBodyCount();
-                Console::printLn(std::format("You defeated {}", _name1));
+                Console::printLn(coreTr("You defeated {}", _name1));
             }
         }
         else
@@ -78,7 +78,7 @@ void CTwoEnemies::postBattleAction()
             if (_hp2 <= 0)
             {
                 CGameManagement::getProgressionInstance()->increaseBodyCount();
-                Console::printLn(std::format("You defeated {}", _name2));
+                Console::printLn(coreTr("You defeated {}", _name2));
             }
         }
     }
@@ -86,5 +86,5 @@ void CTwoEnemies::postBattleAction()
 
 std::string CTwoEnemies::name() const
 {
-    return std::format("{} and {}", _name1, _name2);
+    return coreTr("{} and {}", _name1, _name2);
 }

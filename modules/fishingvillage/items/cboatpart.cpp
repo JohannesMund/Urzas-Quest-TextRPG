@@ -15,19 +15,19 @@ CBoatPart::CBoatPart() : CJunkItem(TagNames::FishingVille::boatPart)
 
         _part = EPart::eBoard;
         _name = nameForPart(_part);
-        _description = "A long, straight, board.";
+        _description = tr("A long, straight, board.");
         break;
     case 1:
 
         _part = EPart::eNail;
         _name = nameForPart(_part);
 
-        _description = "A nail, made to fix a board to another board.";
+        _description = tr("A nail, made to fix a board to another board.");
         break;
     case 2:
         _part = EPart::eRope;
         _name = nameForPart(_part);
-        _description = "Rope, stong and sturdy.";
+        _description = tr("Rope, stong and sturdy.");
         break;
     };
 

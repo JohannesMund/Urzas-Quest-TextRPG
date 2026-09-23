@@ -4,11 +4,21 @@
 #include "defaultsettings.h"
 #include "globals.h"
 #include "ressources.h"
+#include "translator/ctranslator.h"
+#include "json/jsontagnames.h"
 
 #include <algorithm>
 #include <format>
 #include <iostream>
 #include <string>
+
+namespace
+{
+std::string consoleTr(const std::string_view& textId)
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Translator::console, textId);
+}
+} // namespace
 
 #ifdef _USE_WINDOWS
 #include <conio.h>
@@ -20,7 +30,7 @@
 using namespace std;
 void Console::confirmToContinue()
 {
-    cout << "[Press [c] to Continue]";
+    cout << consoleTr("[Press [c] to Continue]");
     getAcceptableInput("c");
     cout << endl;
 }
@@ -177,14 +187,18 @@ void Console::printLn(const std::string_view& text, const EAlignment align, cons
 void Console::printErr(const std::string_view& title, const std::string_view& text)
 {
     printLn(title);
-    printLn(std::format("Error: {}{}{}", CC::fgRed(), text, CC::ccReset()));
+    printLn(std::format("{}: {}{}{}", consoleTr("Error"), CC::fgRed(), text, CC::ccReset()));
     Console::confirmToContinue();
 }
 
 std::optional<int> Console::getNumberInputWithEcho(const int min, const int max)
 {
 
-    cout << std::format("[Enter number between {} and {} (or 'x' to cancel)] ", min, max);
+    cout << CTranslator::tr(TagNames::Translator::core,
+                            TagNames::Translator::console,
+                            "[Enter number between {} and {} (or 'x' to cancel)] ",
+                            min,
+                            max);
 
     while (true)
     {

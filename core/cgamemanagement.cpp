@@ -12,13 +12,23 @@
 #include "csavefile.h"
 #include "ctask.h"
 #include "ctown.h"
+#include "ctranslator.h"
 #include "exceptions.h"
 #include "randomizer.h"
 #include "json/jsonexceptions.h"
+#include "json/jsontagnames.h"
 
 #include <format>
 #include <iostream>
 #include <string>
+
+namespace
+{
+std::string gmTr(const std::string_view& textId)
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Translator::gameManagement, textId);
+}
+} // namespace
 #include <vector>
 
 CGameManagement* _instance = nullptr;
@@ -273,8 +283,8 @@ void CGameManagement::executeTurn()
         {
             Console::cls(false);
             Console::hr();
-            Console::printLn("Quit game", Console::EAlignment::eCenter);
-            Console::printLn("Do you want to save your progress?", Console::EAlignment::eCenter);
+            Console::printLn(gmTr("Quit game"), Console::EAlignment::eCenter);
+            Console::printLn(gmTr("Do you want to save your progress?"), Console::EAlignment::eCenter);
             Console::hr();
 
             CMenu quitGameMenu;
@@ -361,16 +371,16 @@ void CGameManagement::handlePlayerDeath()
     }
 
     Console::printLn("      _____      ", Console::EAlignment::eCenter);
-    Console::printLn(" ____|R.I.P|____ ", Console::EAlignment::eCenter);
-    Console::printLn("|   Here lies   |", Console::EAlignment::eCenter);
-    Console::printLn("|____ Player____|", Console::EAlignment::eCenter);
+    Console::printLn(std::format(" ____|{}|____ ", gmTr("R.I.P")), Console::EAlignment::eCenter);
+    Console::printLn(std::format("|   {}   |", gmTr("Here lies")), Console::EAlignment::eCenter);
+    Console::printLn(std::format("|____ {}____|", gmTr("Player")), Console::EAlignment::eCenter);
     Console::printLn("     |     |     ", Console::EAlignment::eCenter);
     Console::printLn("     |     |     ", Console::EAlignment::eCenter);
     Console::printLn("     |     |     ", Console::EAlignment::eCenter);
     Console::printLn("     |_____|     ", Console::EAlignment::eCenter);
 
-    Console::printLn("- He died the way he lived -", Console::EAlignment::eCenter);
-    Console::printLn(" - naked and alone -", Console::EAlignment::eCenter);
+    Console::printLn(std::format("- {} -", gmTr("He died the way he lived")), Console::EAlignment::eCenter);
+    Console::printLn(std::format(" - {} -", gmTr("naked and alone")), Console::EAlignment::eCenter);
 }
 
 void CGameManagement::init()
@@ -451,7 +461,7 @@ bool CGameManagement::load()
     }
     catch (Json::CJsonException& e)
     {
-        Console::printErr("Error Loading Savegame", e.what());
+        Console::printErr(gmTr("Error Loading Savegame"), e.what());
         return false;
     }
     return true;
@@ -468,8 +478,8 @@ bool CGameManagement::save()
     {
         Console::cls(false);
         Console::hr();
-        Console::printLn("A save game exists.", Console::EAlignment::eCenter);
-        Console::printLn("Overwrite?", Console::EAlignment::eCenter);
+        Console::printLn(gmTr("A save game exists."), Console::EAlignment::eCenter);
+        Console::printLn(gmTr("Overwrite?"), Console::EAlignment::eCenter);
         Console::hr();
 
         if (CMenu::executeYesNoMenu() != CMenu::yes())

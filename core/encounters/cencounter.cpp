@@ -9,7 +9,7 @@ CEncounter::CEncounter()
 
 void CEncounter::execute(const std::string_view&)
 {
-    Console::printLn("Encounter", Console::EAlignment::eCenter);
+    Console::printLn(coreTr("Encounter"), Console::EAlignment::eCenter);
     Console::printLn(name(), Console::EAlignment::eCenter);
     Console::br();
 }

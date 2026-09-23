@@ -14,14 +14,14 @@ CShield::CShield(const Ressources::Items::EQuality quality) :
 
 void CShield::battleEffect(CEnemy*)
 {
-    Console::printLn(std::format("You raise your {} to protect you.", name()));
+    Console::printLn(coreTr("You raise your {} to protect you.", name()));
 }
 
 void CShield::battleBuff(CEnemy* enemy, bool& endRound)
 {
     if (doesEquipmentEffectFire())
     {
-        Console::printLn(std::format("Your {} reflects some damage from the enemy attack", name()));
+        Console::printLn(coreTr("Your {} reflects some damage from the enemy attack", name()));
         enemy->dealDamage(shieldDamage());
         endRound = true;
     }
@@ -29,7 +29,7 @@ void CShield::battleBuff(CEnemy* enemy, bool& endRound)
 
 std::string CShield::typeName() const
 {
-    return "Shield";
+    return coreTr("Shield");
 }
 
 CItem::ItemFilter CShield::equipmentTypeFilter() const

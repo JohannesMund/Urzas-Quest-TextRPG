@@ -9,8 +9,8 @@
 
 CGoblinHorde::CGoblinHorde() : CEnemyHorde(25)
 {
-    _name = std::format("{}G{}reenskin{}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());
-    _weapon = "sticks, rocks and sharp teeth";
+    _name = tr("{}G{}reenskin{}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());
+    _weapon = tr("sticks, rocks and sharp teeth");
 }
 
 void CGoblinHorde::spoilsOfWar() const
@@ -20,7 +20,7 @@ void CGoblinHorde::spoilsOfWar() const
         CGameManagement::getPlayerInstance()->addXp(basicXP(_level));
     }
 
-    Console::printLn("As expected, not much can be gained from them.");
+    Console::printLn(tr("As expected, not much can be gained from them."));
     for (auto i = 0U; i < _count; i++)
     {
         if (Randomizer::getRandom(3) < 2)

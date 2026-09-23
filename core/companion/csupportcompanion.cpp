@@ -77,12 +77,12 @@ int CSupportCompanion::shield(const int i)
 
 void CSupportCompanion::joinText() const
 {
-    Console::printLn(std::format("{} joins you", name()));
+    Console::printLn(coreTr("{} joins you", name()));
 }
 
 void CSupportCompanion::leaveText() const
 {
-    Console::printLn(std::format("{} leaves you", name()));
+    Console::printLn(coreTr("{} leaves you", name()));
 }
 
 nlohmann::json CSupportCompanion::save() const

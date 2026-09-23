@@ -30,7 +30,7 @@ bool CBountyHunt::isHuntActive()
 
 void CBountyHunt::execute()
 {
-    Console::printLn(std::format("Finally, you found you bounty! {} is there, counting his riches and doing evil "
+    Console::printLn(coreTr("Finally, you found you bounty! {} is there, counting his riches and doing evil "
                                  "things, he does not expect you. You draw your weapon and charge!",
                                  _name));
 
@@ -41,15 +41,15 @@ void CBountyHunt::execute()
 
     if (bounty.isDead())
     {
-        Console::printLn("This is the end of the criminal master mind. The world us safe again. But, for how long?");
+        Console::printLn(coreTr("This is the end of the criminal master mind. The world us safe again. But, for how long?"));
         CGameManagement::getPlayerInstance()->gainGold(_reward);
-        Console::printLn("You grab your reward, and continue your adventure.");
+        Console::printLn(coreTr("You grab your reward, and continue your adventure."));
     }
     else
     {
-        Console::printLn("You failed miserably!");
-        Console::printLn("At least you survived. Bounty hunter does not seem to be the fitting job choice for you. "
-                         "Maybe bus driver would be better. Are there busses here in this wordl?");
+        Console::printLn(coreTr("You failed miserably!"));
+        Console::printLn(coreTr("At least you survived. Bounty hunter does not seem to be the fitting job choice for you. "
+                         "Maybe bus driver would be better. Are there busses here in this wordl?"));
     }
 
     Console::br();

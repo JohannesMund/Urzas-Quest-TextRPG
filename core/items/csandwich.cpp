@@ -3,6 +3,8 @@
 #include "colorize.h"
 #include "console.h"
 #include "randomizer.h"
+#include "translator/ctranslator.h"
+#include "json/jsontagnames.h"
 
 #include <format>
 
@@ -21,38 +23,51 @@ CSandwich::CSandwich(const CSandwich::IngredientsList& ingredients, const std::s
     }
 }
 
+namespace
+{
+std::string sandwichTr(const std::string_view& textId)
+{
+    return CTranslator::tr(TagNames::Translator::core, TagNames::Item::item, textId);
+}
+} // namespace
+
 std::string CSandwich::ingredient2String(const EIngredients ingredient)
 {
     switch (ingredient)
     {
     case EIngredients::eSalami:
+        // Note: keeping original color pattern for visual consistency (not translated, see decorative letter-coloring)
         return std::format("{0}S{1}a{0}l{1}a{0}m{1}i{2}", CC::fgLightRed(), CC::fgWhite(), CC::ccReset());
     case EIngredients::ePeperoni:
+        // Note: keeping original color pattern for visual consistency (not translated, see decorative letter-coloring)
         return std::format("{0}P{1}e{0}p{1}e{0}r{1}o{0}n{1}i{2}", CC::fgRed(), CC::fgYellow(), CC::ccReset());
     case EIngredients::eHam:
-        return std::format("{}Ham{}", CC::fgLightMagenta(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgLightMagenta(), sandwichTr("Ham"), CC::ccReset());
     case EIngredients::eBacon:
+        // Note: keeping original color pattern for visual consistency (not translated, see decorative letter-coloring)
         return std::format("{0}B{1}a{0}c{1}o{0}n{2}", CC::fgRed(), CC::fgWhite(), CC::ccReset());
     case EIngredients::eMortardella:
+        // Note: keeping original color pattern for visual consistency (not translated, see decorative letter-coloring)
         return std::format("{0}Mo{1}rt{0}ad{1}el{0}la{1}", CC::fgLightMagenta(), CC::fgLightGray(), CC::ccReset());
     case EIngredients::eCheddar:
-        return std::format("{}Cheddar{}", CC::fgYellow(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgYellow(), sandwichTr("Cheddar"), CC::ccReset());
     case EIngredients::eEmmental:
-        return std::format("{}Emmental{}", CC::fgLightYellow(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgLightYellow(), sandwichTr("Emmental"), CC::ccReset());
     case EIngredients::eGouda:
-        return std::format("{}Gouda{}", CC::fgLightGray(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgLightGray(), sandwichTr("Gouda"), CC::ccReset());
     case EIngredients::eMozzarella:
-        return std::format("{}Mozzarella{}", CC::fgWhite(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgWhite(), sandwichTr("Mozzarella"), CC::ccReset());
     case EIngredients::eLettuce:
-        return std::format("{}Lettuce{}", CC::fgLightGreen(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgLightGreen(), sandwichTr("Lettuce"), CC::ccReset());
     case EIngredients::eTomato:
-        return std::format("{}Tomato{}", CC::fgRed(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgRed(), sandwichTr("Tomato"), CC::ccReset());
     case EIngredients::ePickles:
+        // Note: keeping original color pattern for visual consistency (not translated, see decorative letter-coloring)
         return std::format("{0}P{1}i{0}c{1}k{0}l{1}e{0}s{2}", CC::fgGreen(), CC::fgLightGreen(), CC::ccReset());
     case EIngredients::eOlives:
-        return std::format("{}Olives{}", CC::fgGreen(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgGreen(), sandwichTr("Olives"), CC::ccReset());
     default:
-        return std::format("{0}Whatever {1}that{0} is{2}", CC::fgLightMagenta(), CC::fgGreen(), CC::ccReset());
+        return std::format("{}{}{}", CC::fgLightMagenta(), sandwichTr("Whatever that is"), CC::ccReset());
     };
 }
 
@@ -108,42 +123,43 @@ std::string CSandwich::translatorModuleName() const
 
 std::string CSandwich::description() const
 {
-    std::string desc = "A ";
+    std::string sizeDesc;
     if (_ingredients.size() < 2)
     {
-        desc.append("tiny ");
+        sizeDesc = coreTr("A tiny sandwich with: ");
     }
     else if (_ingredients.size() < 5)
     {
-        desc.append("small ");
+        sizeDesc = coreTr("A small sandwich with: ");
     }
     else if (_ingredients.size() < 8)
     {
-        desc.append("medium ");
+        sizeDesc = coreTr("A medium sandwich with: ");
     }
     else if (_ingredients.size() < 12)
     {
-        desc.append("big ");
+        sizeDesc = coreTr("A big sandwich with: ");
     }
     else
     {
-        desc.append("huge, enormous, gigantic ");
+        sizeDesc = coreTr("A huge, enormous, gigantic sandwich with: ");
     }
-    desc.append("sandwich with: ");
+
+    std::string desc = sizeDesc;
     desc.append(ingredients2String(_ingredients));
-    desc.append(".");
+    desc.append(coreTr("."));
     return desc;
 }
 
 void CSandwich::useFromInventory()
 {
-    Console::printLn("The sandwich tastes awesomne and restores your live spirit.");
+    Console::printLn(coreTr("The sandwich tastes awesomne and restores your live spirit."));
     unsigned int hp = 0;
     for (auto i : _ingredients)
     {
         if (i == EIngredients::eUnknown)
         {
-            Console::printLn(std::format("Eating this {} is a real experience!", ingredient2String(i)));
+            Console::printLn(coreTr("Eating this {} is a real experience!", ingredient2String(i)));
             CGameManagement::getPlayerInstance()->addXp(Randomizer::getRandom(150) + 50);
         }
         hp += Randomizer::getRandom(3);

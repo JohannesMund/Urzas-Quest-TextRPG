@@ -23,7 +23,7 @@ unsigned int CBattleEncounter::encounterChance(const EEncounterType&, const std:
 
 std::string CBattleEncounter::name() const
 {
-    return "Battle";
+    return coreTr("Battle");
 }
 
 std::string CBattleEncounter::translatorObjectName() const

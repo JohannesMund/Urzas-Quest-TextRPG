@@ -23,7 +23,7 @@ void CRatFarmRatBoss::battleAction(bool& endRound)
 {
     if (Randomizer::getRandom(3) == 0)
     {
-        Console::printLn("You get hit by the tail.");
+        Console::printLn(tr("You get hit by the tail."));
         CGameManagement::getPlayerInstance()->dealDamage(1);
         endRound = true;
     }
@@ -33,7 +33,7 @@ void CRatFarmRatBoss::battleAction(bool& endRound)
 void CRatFarmRatBoss::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(CEnemy::basicXP(_level) * 3);
-    Console::printLn("You will be surprised, what you find!");
+    Console::printLn(tr("You will be surprised, what you find!"));
     RatFarm::TurnipFactory::addTurnips(Randomizer::getRandom(5) + 5);
 }
 

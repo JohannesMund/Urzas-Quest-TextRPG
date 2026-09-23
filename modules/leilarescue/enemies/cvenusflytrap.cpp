@@ -18,10 +18,10 @@ CVenusFlyTrap::CVenusFlyTrap() : CEnemy()
 void CVenusFlyTrap::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 200);
-    Console::printLn("For such an ugly, savage beeing, this guy has quite some money.");
+    Console::printLn(tr("For such an ugly, savage beeing, this guy has quite some money."));
     CGameManagement::getPlayerInstance()->gainGold(Randomizer::getRandom(_level * 100) + _level * 33);
 
-    Console::printLn("Going through his bag, you find some more or less usefull items.");
+    Console::printLn(tr("Going through his bag, you find some more or less usefull items."));
     auto amount = Randomizer::getRandom(3) + 1;
     for (auto i = 0U; i <= amount; i++)
     {
@@ -41,7 +41,7 @@ void CVenusFlyTrap::battleAction(bool& endRound)
 {
     if (Randomizer::getRandom(3) == 0)
     {
-        Console::printLn("You get hit with a mighty splash.");
+        Console::printLn(tr("You get hit with a mighty splash."));
         CGameManagement::getPlayerInstance()->dealDamage(2);
         endRound = true;
     }

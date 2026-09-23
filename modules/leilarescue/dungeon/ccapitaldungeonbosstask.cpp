@@ -16,7 +16,7 @@ void CCapitalDungeonBossTask::execute()
 {
     CGuardHorde boss;
     boss.printBossBattleHeader();
-    Console::printLn("The guards attack");
+    Console::printLn(tr("The guards attack"));
     Console::br();
     Console::confirmToContinue();
 
@@ -27,7 +27,7 @@ void CCapitalDungeonBossTask::execute()
     {
         Console::confirmToContinue();
         Console::br();
-        Console::printLn("Finished!");
+        Console::printLn(tr("Finished!"));
         Console::br();
 
         *_bossDefeated = true;

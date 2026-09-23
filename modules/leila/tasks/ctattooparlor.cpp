@@ -66,7 +66,7 @@ void CTattooParlor::tattooParlor()
                         "arm and see your history of tattoos:",
                         Leila::inky()));
     printTattoos();
-    Console::printLn("You wonder whether it is time to get rid of those.");
+    Console::printLn(tr("You wonder whether it is time to get rid of those."));
 
     CMenu menu(Leila::moduleName());
     auto tattooAction = menu.createAction({"Ask for removal", 'A'});

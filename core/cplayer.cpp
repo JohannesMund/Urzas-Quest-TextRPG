@@ -34,13 +34,13 @@ CPlayer::CPlayer() : CGameStateObject(TagNames::Player::player)
 void CPlayer::print() const
 {
 
-    auto playerString = std::format("{}HP: {}/{} {}Gold: {}", CC::fgGreen(), _hp, _maxHp, CC::fgLightYellow(), _gold);
-    auto playerExperience = std::format("Level: {} Experience: {}/{}", _level, _xp, xpForNextLevel());
+    auto playerString = coreTr("{}HP: {}/{} {}Gold: {}", CC::fgGreen(), _hp, _maxHp, CC::fgLightYellow(), _gold);
+    auto playerExperience = coreTr("Level: {} Experience: {}/{}", _level, _xp, xpForNextLevel());
 
     if (CGameManagement::getCompanionInstance()->hasCompanion())
     {
         auto companionString = CGameManagement::getCompanionInstance()->name();
-        auto companionExperience = std::format("Level: {}", CGameManagement::getCompanionInstance()->level());
+        auto companionExperience = coreTr("Level: {}", CGameManagement::getCompanionInstance()->level());
         Console::printLnWithSpacer(playerString, companionString);
         Console::printLnWithSpacer(playerExperience, companionExperience);
     }
@@ -55,19 +55,19 @@ void CPlayer::print() const
 
 void CPlayer::spendGold(const unsigned int i)
 {
-    Console::printLn(std::format("You {}spent {} gold{}.", CC::fgLightYellow(), i, CC::ccReset()));
+    Console::printLn(coreTr("You {}spent {} gold{}.", CC::fgLightYellow(), i, CC::ccReset()));
     addGold(i * -1);
 }
 
 void CPlayer::loseGold(const unsigned int i)
 {
-    Console::printLn(std::format("You {}lost {} gold{}.", CC::fgRed(), i, CC::ccReset()));
+    Console::printLn(coreTr("You {}lost {} gold{}.", CC::fgRed(), i, CC::ccReset()));
     addGold(i * -1);
 }
 
 void CPlayer::gainGold(const unsigned int i)
 {
-    Console::printLn(std::format("You {}gained {} gold{}.", CC::fgLightYellow(), i, CC::ccReset()));
+    Console::printLn(coreTr("You {}gained {} gold{}.", CC::fgLightYellow(), i, CC::ccReset()));
     addGold(i);
 }
 
@@ -90,12 +90,12 @@ void CPlayer::addHp(const int i)
     _hp += i;
     if (_hp >= _maxHp)
     {
-        Console::printLn(std::format("{}You are fully healed.{}", CC::fgLightGreen(), CC::ccReset()));
+        Console::printLn(coreTr("{}You are fully healed.{}", CC::fgLightGreen(), CC::ccReset()));
         _hp = _maxHp;
         return;
     }
 
-    Console::printLn(std::format("You {} {} Hitpoints.", lostOrGained(i), std::abs(i)));
+    Console::printLn(coreTr("You {} {} Hitpoints.", lostOrGained(i), std::abs(i)));
 
     if (_hp <= 0)
     {
@@ -129,7 +129,7 @@ void CPlayer::dealDamage(const int i, const bool bNoShield)
     }
     else
     {
-        Console::printLn("Your shield cannot help you this time.");
+        Console::printLn(coreTr("Your shield cannot help you this time."));
     }
     addHp(damage * -1);
 }
@@ -147,7 +147,7 @@ void CPlayer::addMaxHp(const int i)
     {
         _hp = _maxHp;
     }
-    Console::printLn(std::format(
+    Console::printLn(coreTr(
         "Your maximum Hitpoints have been {}, you now have {}/{} HP", increasedOrDecreased(i), _hp, _maxHp));
 }
 
@@ -168,7 +168,7 @@ int CPlayer::gold() const
 
 void CPlayer::addXp(const int i)
 {
-    Console::printLn(std::format("You {} {} Experience.", lostOrGained(i), std::abs(i)));
+    Console::printLn(coreTr("You {} {} Experience.", lostOrGained(i), std::abs(i)));
 
     auto xpAvailable = i;
     do
@@ -190,7 +190,7 @@ void CPlayer::addXp(const int i)
 void CPlayer::levelUp()
 {
     Console::hr();
-    Console::printLn(std::format("{}You gained one level{}", CC::fgLightYellow(), CC::ccReset()),
+    Console::printLn(coreTr("{}You gained one level{}", CC::fgLightYellow(), CC::ccReset()),
                      Console::EAlignment::eCenter);
     Console::br();
     _level++;
@@ -297,7 +297,7 @@ std::optional<CBattle::EWeapons> CPlayer::battleAction(CEnemy* enemy, bool& endR
         }
         if (input == winAction)
         {
-            Console::printLn("You use your godlike Powers.");
+            Console::printLn(coreTr("You use your godlike Powers."));
             enemy->dealDamage(9999);
             endRound = true;
             return {};
@@ -544,11 +544,20 @@ unsigned int CPlayer::xpForNextLevel() const
 
 std::string CPlayer::increasedOrDecreased(const int i)
 {
-    return i < 0 ? "decreased" : "increased";
+    return i < 0 ? CTranslator::tr(TagNames::Translator::core, TagNames::Player::player, "decreased")
+                 : CTranslator::tr(TagNames::Translator::core, TagNames::Player::player, "increased");
 }
 
 std::string CPlayer::lostOrGained(const int i)
 {
-    return i < 0 ? std::format("{}lost{}", CC::fgRed(), CC::ccReset())
-                 : std::format("{}gained{}", CC::fgLightGreen(), CC::ccReset());
+    return i < 0 ? CTranslator::tr(TagNames::Translator::core,
+                                   TagNames::Player::player,
+                                   "{}lost{}",
+                                   CC::fgRed(),
+                                   CC::ccReset())
+                 : CTranslator::tr(TagNames::Translator::core,
+                                   TagNames::Player::player,
+                                   "{}gained{}",
+                                   CC::fgLightGreen(),
+                                   CC::ccReset());
 }

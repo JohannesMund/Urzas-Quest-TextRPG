@@ -23,28 +23,28 @@ void CLeilaTownTask::execute()
         townName = town->name();
     }
 
-    Console::printLn(std::format("{} is a good place for gathering information. You ask around for information about "
+    Console::printLn(tr("{} is a good place for gathering information. You ask around for information about "
                                  "{} and {} and people are more willing to answer you.",
                                  townName,
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock()));
-    Console::printLn("Both are not regarded as evil villains, more like leader of the resistance. Probably people dont "
-                     "know, that they kidnap innocent princesses.");
-    Console::printLn(std::format("You hear the name {0} here and there, but usually the talk ends at that point. At "
+    Console::printLn(tr("Both are not regarded as evil villains, more like leader of the resistance. Probably people dont "
+                     "know, that they kidnap innocent princesses."));
+    Console::printLn(tr("You hear the name {0} here and there, but usually the talk ends at that point. At "
                                  "least you learn, that {1} and {2} are pro-{0}.",
                                  Ressources::Game::urza(),
                                  Ressources::Game::fiego(),
                                  Ressources::Game::brock()));
 
-    Console::printLn(
+    Console::printLn(tr(
         "Your search ends in a very dark and very shady corner of the town, where you wake up in "
         "the gutter with a terrible headache and not the slightest idea, what braught you there. Your Money is "
-        "gone. But you have a new tattoo. It reads:");
+        "gone. But you have a new tattoo. It reads:"));
 
     Console::printLn(Ressources::Game::leilastattoo(), Console::EAlignment::eCenter);
     CGameManagement::getPlayerInstance()->addtattoo(Ressources::Game::leilastattoo());
 
-    Console::printLn("Whatever that means.");
+    Console::printLn(tr("Whatever that means."));
     Console::br();
 
     CGameManagement::getPlayerInstance()->loseGold(CGameManagement::getPlayerInstance()->gold());

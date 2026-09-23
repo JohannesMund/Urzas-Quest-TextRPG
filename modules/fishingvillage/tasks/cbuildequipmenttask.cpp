@@ -42,19 +42,19 @@ Menu::MenuAction CBuildEquipmentTask::taskNav() const
 
 void CBuildEquipmentTask::buildBoat()
 {
-    Console::printLn("For better fish, you need a boat. Using a boat you can get out onto the lake and catch better "
-                     "fish from the deeper waters.");
+    Console::printLn(tr("For better fish, you need a boat. Using a boat you can get out onto the lake and catch better "
+                        "fish from the deeper waters."));
 
-    Console::printLn(std::format("{} will build you one boat for free, if you bring hin the following items:",
-                                 Ressources::Game::fishingFritz()));
+    Console::printLn(tr("{} will build you one boat for free, if you bring hin the following items:",
+                        Ressources::Game::fishingFritz()));
 
-    Console::printLn(std::format("{0}x {1}, {0}x {2} and {0}x {3}",
-                                 FishingVillage::necessaryBoatParts,
-                                 CBoatPart::nameForPart(CBoatPart::EPart::eBoard),
-                                 CBoatPart::nameForPart(CBoatPart::EPart::eNail),
-                                 CBoatPart::nameForPart(CBoatPart::EPart::eRope)));
+    Console::printLn(tr("{0}x {1}, {0}x {2} and {0}x {3}",
+                        FishingVillage::necessaryBoatParts,
+                        CBoatPart::nameForPart(CBoatPart::EPart::eBoard),
+                        CBoatPart::nameForPart(CBoatPart::EPart::eNail),
+                        CBoatPart::nameForPart(CBoatPart::EPart::eRope)));
     Console::br();
-    Console::printLn("You have:");
+    Console::printLn(tr("You have:"));
 
     unsigned int partsComplete = 0;
     for (const auto& part : {CBoatPart::EPart::eBoard, CBoatPart::EPart::eNail, CBoatPart::EPart::eRope})
@@ -69,16 +69,16 @@ void CBuildEquipmentTask::buildBoat()
                 partsComplete++;
             }
         }
-        Console::printLn(std::format("{}: {}", CBoatPart::nameForPart(part), count));
+        Console::printLn(tr("{}: {}", CBoatPart::nameForPart(part), count));
     }
     Console::br();
     if (partsComplete >= 3)
     {
         CBoat* boat = new CBoat();
         Console::printLn(
-            std::format("{} taks your parts, and starts working. After s short while, he gives you your brand new {}.",
-                        Ressources::Game::fishingFritz(),
-                        boat->name()));
+            tr("{} taks your parts, and starts working. After s short while, he gives you your brand new {}.",
+               Ressources::Game::fishingFritz(),
+               boat->name()));
 
         for (const auto& part : {CBoatPart::EPart::eBoard, CBoatPart::EPart::eNail, CBoatPart::EPart::eRope})
         {
@@ -98,26 +98,26 @@ void CBuildEquipmentTask::buildBoat()
     }
     else
     {
-        Console::printLn("This is not enough, you will have to find more");
+        Console::printLn(tr("This is not enough, you will have to find more"));
     }
 }
 
 void CBuildEquipmentTask::buildRod()
 {
-    Console::printLn("You want to get into the fishing businnes, and thos guy seems to be exactly the right one to ask "
-                     "how. He tells you about fishes, fishing rods, baits, boars and the weather, but after all, the "
-                     "first thing you need is a fishing rod.");
+    Console::printLn(tr("You want to get into the fishing businnes, and thos guy seems to be exactly the right one to ask "
+                        "how. He tells you about fishes, fishing rods, baits, boars and the weather, but after all, the "
+                        "first thing you need is a fishing rod."));
 
-    Console::printLn(std::format("{} will build you one fishing rod for free, if you bring hin the following items:",
-                                 Ressources::Game::fishingFritz()));
+    Console::printLn(tr("{} will build you one fishing rod for free, if you bring hin the following items:",
+                        Ressources::Game::fishingFritz()));
 
-    Console::printLn(std::format("{0}x {1}, {0}x {2} and {0}x {3}",
-                                 FishingVillage::necessaryRodParts,
-                                 CFishingRodPart::nameForPart(CFishingRodPart::EPart::eRod),
-                                 CFishingRodPart::nameForPart(CFishingRodPart::EPart::eThread),
-                                 CFishingRodPart::nameForPart(CFishingRodPart::EPart::eHook)));
+    Console::printLn(tr("{0}x {1}, {0}x {2} and {0}x {3}",
+                        FishingVillage::necessaryRodParts,
+                        CFishingRodPart::nameForPart(CFishingRodPart::EPart::eRod),
+                        CFishingRodPart::nameForPart(CFishingRodPart::EPart::eThread),
+                        CFishingRodPart::nameForPart(CFishingRodPart::EPart::eHook)));
     Console::br();
-    Console::printLn("You have:");
+    Console::printLn(tr("You have:"));
 
     unsigned int partsComplete = 0;
     for (const auto& part :
@@ -133,16 +133,16 @@ void CBuildEquipmentTask::buildRod()
                 partsComplete++;
             }
         }
-        Console::printLn(std::format("{}: {}", CFishingRodPart::nameForPart(part), count));
+        Console::printLn(tr("{}: {}", CFishingRodPart::nameForPart(part), count));
     }
     Console::br();
     if (partsComplete >= 3)
     {
         CFishingRod* rod = new CFishingRod();
         Console::printLn(
-            std::format("{} taks your parts, and starts working. After s short while, he gives you your brand new {}.",
-                        Ressources::Game::fishingFritz(),
-                        rod->name()));
+            tr("{} taks your parts, and starts working. After s short while, he gives you your brand new {}.",
+               Ressources::Game::fishingFritz(),
+               rod->name()));
 
         for (const auto& part :
              {CFishingRodPart::EPart::eRod, CFishingRodPart::EPart::eThread, CFishingRodPart::EPart::eHook})
@@ -162,6 +162,6 @@ void CBuildEquipmentTask::buildRod()
     }
     else
     {
-        Console::printLn("This is not enough, you will have to find more");
+        Console::printLn(tr("This is not enough, you will have to find more"));
     }
 }

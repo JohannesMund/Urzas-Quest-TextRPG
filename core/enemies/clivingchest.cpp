@@ -8,8 +8,8 @@
 
 CLivingChest::CLivingChest()
 {
-    _name = "Living Chest";
-    _weapon = "Lick 'a tongue";
+    _name = coreTr("Living Chest");
+    _weapon = coreTr("Lick 'a tongue");
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 1;
@@ -25,7 +25,7 @@ void CLivingChest::battleAction(bool&)
 {
     if (Randomizer::getRandom(std::max(10 - _level, 2U)) == 0)
     {
-        Console::printLn(std::format("The {} of {} is totally unpredictable.", _weapon, _name));
+        Console::printLn(coreTr("The {} of {} is totally unpredictable.", _weapon, _name));
 
         unsigned int amount = static_cast<unsigned int>(std::ceil(_level / 2));
         CGameManagement::getPlayerInstance()->dealDamage(amount);

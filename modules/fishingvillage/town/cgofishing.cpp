@@ -37,7 +37,7 @@ void CGoFishing::execute()
     {
         Console::cls();
         Console::printLn(
-            "There is a long jetty with some boats. You can walk down the jetty and try fishing yourself.");
+            tr("There is a long jetty with some boats. You can walk down the jetty and try fishing yourself."));
 
         printItemLevels();
 

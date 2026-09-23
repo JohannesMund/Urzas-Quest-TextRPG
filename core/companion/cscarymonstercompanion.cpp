@@ -29,12 +29,12 @@ void CScaryMonsterCompanion::preBattle(CEnemy* enemy)
     }
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("{} scares {} so much, that it hurts itself.", name(), enemy->name()));
+        Console::printLn(coreTr("{} scares {} so much, that it hurts itself.", name(), enemy->name()));
         enemy->dealDamage(1);
     }
     else
     {
-        Console::printLn(std::format("{} tries to look dangerous but it does not work. At least it is cute", name()));
+        Console::printLn(coreTr("{} tries to look dangerous but it does not work. At least it is cute", name()));
     }
 }
 
@@ -47,12 +47,12 @@ void CScaryMonsterCompanion::battleAction(CEnemy* enemy, bool&)
 
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("Your {} attacks the enemy and deals 1 damage.", name()));
+        Console::printLn(coreTr("Your {} attacks the enemy and deals 1 damage.", name()));
         enemy->dealDamage(1);
     }
     else
     {
-        Console::printLn(std::format("Your {} jumps around the enemy and plans it's next attack.", name()));
+        Console::printLn(coreTr("Your {} jumps around the enemy and plans it's next attack.", name()));
     }
 }
 
@@ -65,7 +65,7 @@ void CScaryMonsterCompanion::postBattle(CEnemy*)
 
     if (_level > 0)
     {
-        Console::printLn(std::format("{} looks victorious.", name()));
+        Console::printLn(coreTr("{} looks victorious.", name()));
     }
 }
 

@@ -28,7 +28,7 @@ void CAttackerCompanion::preBattle(CEnemy*)
     {
         return;
     }
-    Console::printLn(std::format("{} tries to look dangerous but it does not work. At least it is cute", name()));
+    Console::printLn(coreTr("{} tries to look dangerous but it does not work. At least it is cute", name()));
 }
 
 void CAttackerCompanion::battleAction(CEnemy* enemy, bool&)
@@ -39,12 +39,12 @@ void CAttackerCompanion::battleAction(CEnemy* enemy, bool&)
     }
     if (fireDefaultAction())
     {
-        Console::printLn(std::format("Your {} attacks the enemy and deals 1 damage.", name()));
+        Console::printLn(coreTr("Your {} attacks the enemy and deals 1 damage.", name()));
         enemy->dealDamage(1);
     }
     else
     {
-        Console::printLn(std::format("Your {} jumps around the enemy and plans it's next attack.", name()));
+        Console::printLn(coreTr("Your {} jumps around the enemy and plans it's next attack.", name()));
     }
 }
 
@@ -54,7 +54,7 @@ void CAttackerCompanion::postBattle(CEnemy*)
     {
         return;
     }
-    Console::printLn(std::format("{} looks victorious.", name()));
+    Console::printLn(coreTr("{} looks victorious.", name()));
 }
 
 int CAttackerCompanion::shield(const int i)

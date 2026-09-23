@@ -8,9 +8,15 @@
 #include "core.h"
 #include "cplayer.h"
 #include "croom.h"
+#include "json/jsontagnames.h"
 
 CDungeon::CDungeon()
 {
+}
+
+std::string CDungeon::translatorObjectName() const
+{
+    return std::string(TagNames::Dungeon::dungeon);
 }
 
 void CDungeon::setDungeonMap(CDungeonMap* map)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cdungeonmap.h"
+#include "ctranslatable.h"
 
 class CRoom;
 class CDungeonMapRoom;
@@ -12,7 +13,7 @@ class CDungeonMapRoom;
  * must be derieved to be used.
  */
 
-class CDungeon
+class CDungeon : public CTranslatable
 {
 public:
     /**
@@ -79,4 +80,7 @@ protected:
 
     CDungeonMap* _map;
     CDungeonMapRoom* _mapRoom = nullptr;
+
+private:
+    virtual std::string translatorObjectName() const override;
 };

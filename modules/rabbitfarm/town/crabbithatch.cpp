@@ -131,7 +131,7 @@ void CRabbitHatch::donate()
     Console::printLn(tr("{} looks at you a little confused. Obviously she does not get the reference. Obviously, she "
                         "does not think that you are funny, but that you are  a very very strange man.",
                         RabbitFarm::katNottingH()));
-    Console::printLn("But at least, she appreciates your generous food donation.");
+    Console::printLn(tr("But at least, she appreciates your generous food donation."));
 
     auto items = CGameManagement::getInventoryInstance()->getItemsByFilter(CRabbitFood::rabbitFoodFilter());
 
@@ -149,7 +149,7 @@ void CRabbitHatch::watch()
     do
     {
         Console::cls();
-        Console::printLn("You decide to visit the rabbits.");
+        Console::printLn(tr("You decide to visit the rabbits."));
         if (_rabbits->countLiving() == 0)
         {
             Console::printLn(tr("It is a sad image, watching this empty rabbit hatch. All rabbits escaped. It will be "
@@ -166,7 +166,7 @@ void CRabbitHatch::watch()
                 tr("All rabbits are found. Most of them are happily jumping around in the hatch. {} Loves it. She "
                    "seems to be much more happy, and much more delighted, since all of her rabbits are back.",
                    RabbitFarm::katNottingH()));
-            Console::printLn("ALso, you feek, that she sees you as a really brave and incredibly strong hero.");
+            Console::printLn(tr("ALso, you feek, that she sees you as a really brave and incredibly strong hero."));
         }
         else if (_rabbits->count() == CRabbitMap::max())
         {

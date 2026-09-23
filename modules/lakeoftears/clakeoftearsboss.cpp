@@ -10,7 +10,7 @@
 CLakeOfTearsBoss::CLakeOfTearsBoss() : CTwoEnemies(Ressources::Game::bimmelchen(), Ressources::Game::pimmelchen())
 {
     _name = "";
-    _weapon = "Crocodile Tears of Despair";
+    _weapon = tr("Crocodile Tears of Despair");
     _extendedWeaponChoice = true;
 
     _level = CGameManagement::getPlayerInstance()->level() + 2;
@@ -23,7 +23,7 @@ void CLakeOfTearsBoss::spoilsOfWar() const
 {
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
     CGameManagement::getPlayerInstance()->addXp(_level * 400);
-    Console::printLn("As expected they have nothing. You feel sad, dirty and just want to go.");
+    Console::printLn(tr("As expected they have nothing. You feel sad, dirty and just want to go."));
 }
 
 void CLakeOfTearsBoss::passiveBattleAction(EWho who)
@@ -33,11 +33,11 @@ void CLakeOfTearsBoss::passiveBattleAction(EWho who)
     {
         if (who == CTwoEnemies::EWho::eEnemy1)
         {
-            Console::printLn(std::format("{} attacks you", _name1));
+            Console::printLn(tr("{} attacks you", _name1));
         }
         else
         {
-            Console::printLn(std::format("{} attacks you", _name2));
+            Console::printLn(tr("{} attacks you", _name2));
         }
         CGameManagement::getPlayerInstance()->dealDamage(dmg);
     }
